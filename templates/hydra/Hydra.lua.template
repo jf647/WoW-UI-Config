@@ -1,0 +1,10 @@
+
+HydraTrustList = {
+[% FOR realm IN hydra.keys -%]
+    ["[% realm %]"] = {
+[% FOR char IN hydra.$realm.keys -%]
+        ["[% char %]"] = "[% char %]",
+[% END -%]
+    },
+[% END -%]
+}

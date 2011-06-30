@@ -1,0 +1,65 @@
+
+Kong_Profiles = {
+[% FOR realm IN kong.keys -%]
+[% FOR char IN kong.$realm.keys -%]
+    ["[% kong.$realm.$char.profilename %]"] = {
+        ["Groups"] = {},
+        ["Frames"] = {
+[% FOR frame IN kong.$realm.$char.frames -%]
+            {
+                ["TriggerDefaults"] = {
+                    ["alphaIn"] = [% frame.alpha.visible %],
+                    ["alphaOut"] = [% frame.alpha.hidden %],
+[% IF frame.exists('delay') -%]
+                    ["secondsIn"] = [% frame.delay.in %],
+                    ["secondsOut"] = [% frame.delay.out %],
+[% END -%]
+                },
+                ["index"] = "[\"[% frame.name %]\"]",
+                ["mouseover"] = {},
+[% IF frame.exists('overridealpha') -%]
+                ["overrideAlpha"] = true,
+[% END -%]
+[% IF frame.exists('vehicle') -%]
+                ["vehicle"] = {},
+[% END -%]
+[% IF frame.exists('combat') -%]
+                ["combat"] = {},
+[% ELSIF frame.exists('nocombat') -%]
+                ["nocombat"] = {},
+[% END -%]
+[% IF frame.exists('casting') -%]
+                ["casting"] = {},
+[% END -%]
+[% IF frame.exists('condition') -%]
+                ["macro"] = {
+                    ["condition"] = "[[% frame.condition %]]",
+[% IF frame.exists('condition_alpha') -%]
+[% IF frame.condition_alpha.exists('visible') -%]
+                    ["alphaIn"] = [% frame.condition_alpha.visible %],
+[% END -%]
+[% IF frame.condition_alpha.exists('hidden') -%]
+                    ["alphaOut"] = [% frame.condition_alpha.hidden %],
+[% END -%]
+[% END -%]
+                },
+[% END -%]
+            }, -- [[% loop.count %]]
+[% END -%]
+        },
+        ["version"] = "1.2b",
+[% IF kong.$realm.$char.exists('groups') -%]
+        ["Groups"] = {
+[% FOR group IN kong.$realm.$char.groups -%]
+            ["[% group.name %]"] = {
+[% FOR frame IN group.frames -%]
+                ["[\"[% frame %]\"]"] = 0,
+[% END -%]
+            },
+[% END -%]
+        },
+[% END -%]
+    },
+[% END -%]
+[% END -%]
+}

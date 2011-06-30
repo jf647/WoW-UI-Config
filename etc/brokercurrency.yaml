@@ -1,0 +1,44 @@
+---
+templates:
+    perchar:
+        currency:
+            input: $TEMPLATEDIR/brokercurrency/Broker_Currency.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Broker_Currency.lua
+perchar_criteria:
+    addons:
+        - Broker_Currency
+currencies:
+    pve:
+        include:
+            - everyone
+    pvp:
+        include:
+            - pvp
+    tournament:
+        include:
+            - goal:ArgentTournament
+    jewelcrafting:
+        include:
+            - prof:Jewelcrafting:475+
+    nrjewelcrafting:
+        level: 65
+        include:
+            - noexall(goal:NorthrendJewelcrafting)
+            - prof:Jewelcrafting:375+
+        exclude:
+            - prof:Jewelcrafting:450+
+    cooking:
+        include:
+            - prof:Cooking
+        exclude:
+            - prof:InactiveCooking
+    nrcooking:
+        level: 65
+        include:
+            - noexall(goal:NorthrendCooking)
+            - prof:Cooking:350+
+        exclude:
+            - prof:Cooking:425+
+    summary:
+        include:
+            - banker

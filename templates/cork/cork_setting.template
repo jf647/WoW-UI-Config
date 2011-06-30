@@ -1,0 +1,1 @@
+[% IF 'boolean' == setting.type %][% IF setting.value %]true[% ELSE %]false[% END %][% ELSIF 'number' == setting.type %][% setting.value %][% ELSIF 'string' == setting.type %]"[% setting.value %]"[% END -%]

@@ -1,0 +1,2200 @@
+---
+interval: 0.2
+anchor:
+    x: 210
+    y: -100
+    point: TOPLEFT
+    relativePoint: TOPLEFT
+groupspacing: 30
+groupscale:
+  '0': 2.0
+  '1': 1.8
+  '2': 1.7
+  '3': 1.6
+  '4': 1.5
+  '5': 1.4
+  '6': 1.3
+  '7': 1.2
+maxpergroup: 7
+perchar_criteria:
+  addons:
+  - TellMeWhen
+templates:
+  global:
+    tmw:
+      input: $TEMPLATEDIR/tmw/TellMeWhen.lua.template
+      output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/TellMeWhen.lua
+  perchar:
+    tmw:
+      input: $TEMPLATEDIR/tmw/TellMeWhen_perchar.lua
+      output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/TellMeWhen.lua
+conditions:
+  solo:
+    type: GROUP
+  party:
+    Type: GROUP
+    Level: 1
+  instance:
+    Type: INSTANCE
+    Level: 3
+    Operator: '>='
+  raid:
+    Type: GROUP
+    Level: 2
+  holy_power_3:
+    Level:  3
+    Operator: ==
+    Type: HOLY_POWER
+    Unit: player
+  hp_lt_100_pct:
+    Level:  100
+    Operator: <
+    Type: HEALTH
+    Unit: player
+  hp_le_50_pct:
+    Level:  50
+    Operator: '<='
+    Type: HEALTH
+    Unit: player
+  hp_le_75_pct:
+    Level:  75
+    Operator: '<='
+    Type: HEALTH
+    Unit: player
+  mp_lt_100_pct:
+    Level:  100
+    Operator: <
+    Type: MANA
+    Unit: player
+  mp_le_75_pct:
+    Level:  75
+    Operator: '<='
+    Type: MANA
+    Unit: player
+  pet_hp_le_75_pct:
+    Level:  75
+    Operator: '<='
+    Type: HEALTH
+    Unit: pet
+  target_hp_le_25_pct:
+    Level:  25
+    Operator: <=
+    Type: HEALTH
+    Unit: target
+  target_is_boss:
+    Type: CLASSIFICATION
+    Unit: target
+    Operator: ==
+    Level: 5
+groupscale:
+  '0': 2.0
+  '1': 1.8
+  '2': 1.7
+  '3': 1.6
+  '4': 1.5
+  '5': 1.4
+  '6': 1.3
+  '7': 1.2
+filtergroups:
+  any:
+    members:
+    - Flask of the Draconic Mind
+    - Flask of Flowing Water
+    - Flask of the Winds
+    - Flask of Titanic Strength
+    - Draconic Mind or Flowing Water
+    - Enhanced Strength
+    - Enhanced Intellect
+    - Enhanced Agility
+    - Enhanced Strength or Steelskin
+    - Enhanced Strength or Titanic Strength
+    - Enhanced Intellect or Draconic Mind
+    - Enhanced Intellect or Draconic Mind or Flowing Water
+    - Enhanced Agility or Winds
+    - Enhanced Strength or Steelskin or Stoneblood
+    - Flask of Endless Rage
+    - Pure Mojo or Frost Wyrm
+    - Flask of the North
+    - Lifeblood
+    - Endless Mana Potion
+    - Endless Healing Potion
+    - Corrupted Egg Shell
+    - Well Fed
+    criteria:
+      include:
+      - everyone
+  deathknight:
+    members:
+    - Army of the Dead
+    - Raise Dead
+    - Anti-Magic Shell
+    - Mind Freeze
+    - Vampiric Blood
+    - Dark Transformation
+    - Anti-Magic Zone
+    - Summon Gargoyle
+    - Icebound Fortitude
+    - Pillar Of Frost
+    - Rune Tap
+    - Dancing Rune Weapon
+    - Blood Shield Missing
+    - Death Grip
+    - Bone Shield
+    criteria:
+      include:
+      - class:Death Knight
+  druid:
+    members:
+    - Lacerate
+    - Pulverize
+    - Free Mangle
+    - Swiftmend
+    - Nature's Swiftness
+    - Wild Growth
+    - Tree of Life
+    - Skull Bash Bear
+    - Skull Bash Cat
+    - Survival Instincts
+    - Frenzied Regeneration
+    - Starfall
+    - Solar Beam
+    - Force of Nature
+    - Typhoon
+    - Innervate
+    - Rebirth
+    - Tranquility
+    - ReducedPhysicalDone
+    - ReducedArmor
+    - Insect Swarm Missing
+    - Revitalize
+    criteria:
+      include:
+      - class:Druid
+  healers:
+    members:
+    - Aura of the Blue Dragon
+    - Inner Eye
+    - Dead Winds
+    criteria:
+      include:
+      - role:Healer
+  hunter:
+    members:
+    - Mend Pet Missing
+    - Focus Fire
+    - Silencing Shot
+    - Readiness
+    - Bestial Wrath
+    - Intimidation
+    - Kill Command
+    - Rapid Fire
+    - Master's Call
+    - Kill Shot
+    - Explosive Shot
+    - Black Arrow Missing
+    - Camouflage
+    - Sting Missing
+    - Hunter's Mark Missing
+    - Aspect of the Pack
+    criteria:
+      include:
+      - class:Hunter
+  mage:
+    members:
+    - Mana Shield
+    - Presence of Mind
+    - Arcane Power
+    - Icy Veins
+    - Cold Snap
+    - Invisibility
+    - Mirror Image
+    - Counterspell
+    - Evocation
+    - Mana Gem
+    - Combustion
+    - Dragon's Breath
+    - Blast Wave
+    - Living Bomb Missing
+    - Ring of Frost
+    - Flame Orb
+    - Frozen Target
+    - Ice Barrier
+    - Freeze
+    criteria:
+      include:
+      - class:Mage
+  paladin:
+    members:
+    - Word of Glory
+    - Crusader Aura
+    - Holy Radiance
+    - Rebuke
+    - Divine Protection
+    - Divine Guardian
+    - Guardian of Ancient Kings
+    - Ardent Defender
+    - Zealotry
+    - Avenging Wrath
+    - Lay on Hands
+    - Beacon Missing on Focus
+    - Divine Favor
+    - Aura Mastery
+    - Holy Shock
+    - Best Use of 3HP
+    - Judgements of the Pure
+    - WoG 3HP
+    - Holy Shield
+    criteria:
+      include:
+      - class:Paladin
+  priest:
+    members:
+    - Chakra Missing
+    - Prayer of Mending
+    - Desperate Prayer
+    - 'Power Word: Barrier'
+    - Lightwell
+    - Holy Word
+    - Guardian Spirit
+    - Penance
+    - Circle of Healing
+    - Power Infusion
+    - Pain Suppression
+    - Dispersion
+    - 'Shadow Word: Death'
+    - Vampiric Touch Missing
+    - Archangel
+    - Dark Archangel
+    - Inner Focus
+    - Inner Focus ToT
+    - Shadowfiend
+    - Fade
+    - Leap of Faith
+    - Rapture
+    - Holy Fire
+    criteria:
+      include:
+      - class:Priest
+  racials:
+    members:
+    - GotN Meta
+    - Goblin Rockets
+    - Berserking
+    criteria:
+      include:
+      - race:Draenei
+      - race:Goblin
+      - race:Troll
+  rogue:
+    members:
+    - Rupture Missing
+    - Recuperate
+    - Kick
+    - Slice and Dice
+    - Vanish
+    - Cloak of Shadows
+    - Evasion
+    - Tricks of the Trade
+    - ReducedArmor
+    - Redirect
+    - Vendetta
+    - Cold Blood
+    - Killing Spree
+    criteria:
+      include:
+      - class:Rogue
+  shaman:
+    members:
+    - Tremor Totem
+    - Spirit Link Totem
+    - Mana Tide Totem
+    - Spiritwalker's Grace
+    - Riptide
+    - Nature's Swiftness
+    - Focused Insight
+    - Shamanistic Rage
+    - Feral Spirit
+    - Searing Totem Missing
+    - Shock Usable
+    - Lava Burst
+    - Flame Shock Missing
+    - Thunderstorm
+    - Lightning Shield 6 to 9 Charges
+    - Elemental Mastery
+    - Unleash Elements
+    - Healing Rains
+    criteria:
+      include:
+      - class:Shaman
+  warlock:
+    members:
+    - Metamorphosis
+    - Demonic Empowerment
+    - Curse Missing
+    - Bane Missing
+    - Corruption
+    - Immolate
+    - Haunt Missing
+    - Unstable Affliction
+    - ReducedPhysicalDone
+    - Drain Soul
+    - Spell Lock
+    - Hand of Guldan Missing
+    - Felstorm
+    - Decimation
+    - Health Funnel
+    - Demon Soul
+    criteria:
+      include:
+      - class:Warlock
+  warrior:
+    members:
+    - Enraged Regeneration
+    - Last Stand
+    - Shield Wall
+    - Pummel
+    - Deadly Calm
+    - Bladestorm
+    - Throwdown
+    - Rend Missing
+    - Execute
+    - Charge
+    - Victory Rush
+    - ReducedAttackSpeed
+    - ReducedPhysicalDone
+    - ReducedArmor
+    - Heroic Strike
+    - Overpower
+    - Intervene
+    - Colossus Smash
+    - Mortal Strike
+    - Revenge
+    - Shockwave
+    - Thunderstruck
+    - Sword and Board
+    - Sunder Armor
+    - Rallying Cry
+    - Thunder Clap
+    - Heroic Leap
+    - Shield Block
+    criteria:
+      include:
+      - class:Warrior
+icons:
+  DK Frost Rotation:
+    no_filter_group_ok: 1
+    type: Meta
+    Icons:
+      - Plague Strike if BP Missing
+      - Howling Blast if FF Missing
+      - Death Strike if HP Below 50
+      - Obliterate if DDoooo
+      - Obliterate if ooFFUU
+      - Frost Strike if RP Capped
+      - Howling Blast if Rime Up
+      - Obliterate if KM Up
+      - Obliterate
+      - Frost Strike
+  Blood Plague Missing:
+    no_filter_group_ok: 1
+    type: Debuff
+    Unit: target
+    spell: Blood Plague
+    missing: 1
+  Frost Fever Missing:
+    no_filter_group_ok: 1
+    type: Debuff
+    Unit: target
+    spell: Frost Fever
+    missing: 1
+  Howling Blast if FF Missing:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Howling Blast
+    conditions:
+      - icon:Frost Fever Missing
+  Plague Strike if BP Missing:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Plague Strike
+    conditions:
+      - icon:Blood Plague Missing
+  Killing Machine:
+    no_filter_group_ok: 1
+    type: Buff
+  Freezing Fog:
+    no_filter_group_ok: 1
+    type: Buff
+  Obliterate if KM Up:
+    no_filter_group_ok: 1
+    Alpha: 1
+    spell: Obliterate
+    type: Cooldown::Spell
+    conditions:
+      - icon:Killing Machine
+  Howling Blast if Rime Up:
+    no_filter_group_ok: 1
+    Alpha: 1
+    type: Cooldown::Spell
+    spell: Howling Blast
+    conditions:
+      - icon:Freezing Fog
+  Obliterate if ooFFUU:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Obliterate
+    conditions:
+      - Type: RUNES
+        Runes: [ ~, ~, 1, 1, 1, 1]
+  Obliterate:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+  Obliterate if DDoooo:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Obliterate
+    conditions:
+      - Type: RUNES
+        Runes: [ ~, ~, ~, ~, ~, ~, 1, 1 ]
+  Frost Strike if RP Capped:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Frost Strike
+    conditions:
+      - Type: RUNIC_POWER
+        Operator: '>='
+        Level: 80
+  Frost Strike:
+    no_filter_group_ok:
+    type: Cooldown::Spell
+    ManaCheck: 1
+  Death Strike if HP Below 50:
+    no_filter_group_ok: 1
+    Alpha: 1
+    type: Cooldown::Spell
+    spell: Death Strike
+    conditions:
+      - hp_le_50_pct
+  Anti-Magic Shell:
+    combat: in
+    criteria:
+      level: 68
+    type: Cooldown::Spell::Def::ShortCD
+  Anti-Magic Zone:
+    IgnoreRunes: 1
+    combat: in
+    criteria:
+      include:
+      - spec:Unholy
+      level: 49
+    type: Cooldown::Spell::Def::LongCD
+  Arcane Power:
+    combat: in
+    criteria:
+      include:
+      - spec:Arcane
+      level: 69
+    type: Cooldown::Spell::Off::LongCD
+  Archangel:
+    combat: in
+    conditions:
+      - Type: BUFFSTACKS
+        Checked: 1
+        Operator: '>='
+        Name: Evangelism
+        Level: 4
+    criteria:
+      include:
+      - all(spec:Discipline;subspec:Archangel)
+      level: 23
+    type: Cooldown::Spell::ShortCD
+  Ardent Defender:
+    combat: in
+    criteria:
+      include:
+      - spec:Protection
+      level: 69
+    type: Cooldown::Spell::Def::LongCD
+  Army of the Dead:
+    IgnoreRunes: 1
+    combat: in
+    criteria:
+      level: 80
+    type: Cooldown::Spell::Off::LongCD
+  Aspect of the Pack:
+    Alpha: 1
+    combat: in
+    criteria:
+      level: 56
+    type: Buff
+  Aura Mastery:
+    combat: in
+    criteria:
+      include:
+      - spec:Holy
+      level: 49
+    type: Cooldown::Spell::Def::LongCD
+  Aura of the Blue Dragon:
+    Alpha: 1
+    combat: in
+    criteria:
+      include:
+      - all(role:Healer;item:DMC_BD)
+    type: Buff
+  Avenging Wrath:
+    combat: in
+    criteria:
+      level: 72
+    type: Cooldown::Spell::Off::LongCD
+  Bane Missing:
+    Unit: target
+    combat: in
+    criteria:
+      level: 12
+    missing: 1
+    spell: 980;603
+    type: Debuff
+  Beacon Missing on Focus:
+    Unit: focus
+    conditions:
+      - Type: EXISTS
+        Unit: focus
+    criteria:
+      include:
+      - spec:Holy
+      level: 39
+    missing: 1
+    spell: Beacon of Light
+    type: Buff
+  Bestial Wrath:
+    combat: in
+    criteria:
+      include:
+      - spec:Beast Mastery
+      level: 69
+    type: Cooldown::Spell::Off::ShortCD
+  Black Arrow:
+    no_filter_group_ok: 1
+    ManaCheck: 1
+    type: Cooldown::Spell
+  Black Arrow Missing:
+    Unit: target
+    combat: in
+    conditions:
+    - icon:Black Arrow
+    criteria:
+      include:
+      - spec:Survival
+      level: 69
+    missing: 1
+    spell: Black Arrow
+    type: Debuff
+  Bladestorm:
+    combat: in
+    criteria:
+      include:
+      - spec:Arms
+      level: 69
+    type: Cooldown::Spell::Off::LongCD
+  Blast Wave:
+    combat: in
+    criteria:
+      include:
+      - spec:Fire
+      level: 29
+    type: Cooldown::Spell::Off::ShortCD
+  Berserking:
+    combat: in
+    criteria:
+      include:
+      - race:Troll
+    type: Cooldown::Spell::Off::LongCD
+  Blood Shield Missing:
+    combat: in
+    criteria:
+      include:
+      - spec:Blood
+      level: 80
+    missing: 1
+    spell: 77535
+    type: Buff
+  Camouflage:
+    conditions:
+      - instance
+    type: Cooldown::Spell::ShortCD
+  Chakra Missing:
+    combat: in
+    criteria:
+      include:
+      - spec:Holy
+      level: 51
+    missing: 1
+    spell: 81206;81208
+    type: Buff
+  Charge:
+    combat: in
+    criteria:
+      level: 3
+    type: Cooldown::Spell::Off::ShortCD
+  Heroic Leap:
+    combat: in
+    criteria:
+      level: 85
+    type: Cooldown::Spell::ShortCD
+  Circle of Healing:
+    combat: in
+    criteria:
+      include:
+      - spec:Holy
+      level: 59
+    type: Cooldown::Spell::Def::ShortCD
+  Cloak of Shadows:
+    combat: in
+    criteria:
+      level: 58
+    type: Cooldown::Spell::Def::ShortCD
+  Cold Blood:
+    combat: in
+    criteria:
+      include:
+      - spec:Assassination
+      level: 29
+    type: Cooldown::Spell::Off::LongCD
+  Cold Snap:
+    combat: in
+    criteria:
+      include:
+      - spec:Frost
+      level: 39
+    type: Cooldown::Spell::Off::LongCD
+  Colossus Smash:
+    combat: in
+    criteria:
+      include:
+      - spec:Arms
+      - spec:Fury
+      level: 81
+    type: Cooldown::Spell::Off::ShortCD
+  Combustion:
+    combat: in
+    criteria:
+      include:
+      - spec:Fire
+      level: 39
+    type: Cooldown::Spell::Off::LongCD
+  Corrupted Egg Shell:
+    conditions:
+    - mp_le_75_pct
+    criteria:
+      include:
+      - all(specusesmana;item:Corrupted Egg Shell)
+    OnlyEquipped: 1
+    type: Cooldown::Item::Def::LongCD
+  Corruption:
+    Unit: target
+    combat: in
+    criteria:
+      include:
+      - spec:Affliction
+      - spec:Demonology
+      level: 4
+    missing: 1
+    type: Debuff
+  Counterspell:
+    combat: in
+    criteria:
+      level: 9
+    type: Cooldown::Spell::Off::ShortCD
+  Crusader Aura:
+    Alpha: 1
+    combat: in
+    criteria:
+      level: 62
+    type: Buff
+  Curse Missing:
+    Unit: target
+    combat: in
+    conditions:
+      - target_is_boss
+    criteria:
+      level: 16
+    missing: 1
+    spell: 702;1490
+    type: Debuff
+  Dancing Rune Weapon:
+    IgnoreRunes: 1
+    combat: in
+    criteria:
+      include:
+      - spec:Blood
+      level: 69
+    type: Cooldown::Spell::Off::LongCD
+  Dark Archangel:
+    combat: in
+    conditions:
+      - Type: BUFFSTACKS
+        Checked: 1
+        Operator: '>='
+        Name: Dark Evangelism
+        Level: 4
+    criteria:
+      include:
+      - all(spec:Shadow;subspec:Dark Archangel)
+      level: 82
+    spell: Archangel
+    type: Cooldown::Spell::Off::ShortCD
+  Dark Transformation:
+    combat: in
+    criteria:
+      include:
+      - spec:Unholy
+      level: 49
+    type: Cooldown::Spell::Off::ShortCD
+  Dead Winds:
+    absent: 1
+    combat: in
+    criteria:
+      include:
+      - item:Gale of Shadows
+    type: Buff
+  Deadly Calm:
+    combat: in
+    criteria:
+      include:
+      - spec:Arms
+      level: 39
+    type: Cooldown::Spell::Off::LongCD
+  Demonic Empowerment:
+    combat: in
+    criteria:
+      level: 29
+      include:
+        - spec:Demonology
+    type: Cooldown::Spell::Off::LongCD
+  Desperate Prayer:
+    combat: in
+    criteria:
+      include:
+      - subspec:Desperate Prayer
+    type: Cooldown::Spell::Def::ShortCD
+  Dispersion:
+    combat: in
+    conditions:
+    - mp_lt_100_pct
+    criteria:
+      include:
+      - spec:Shadow
+      level: 69
+    type: Cooldown::Spell::Def::ShortCD
+  Divine Favor:
+    combat: in
+    criteria:
+      include:
+      - spec:Holy
+      level: 29
+    type: Cooldown::Spell::Def::ShortCD
+  Divine Guardian:
+    combat: in
+    criteria:
+      include:
+      - all(spec:Protection;subspec:Divine Guardian)
+      level: 49
+    type: Cooldown::Spell::Def::LongCD
+  Divine Protection:
+    combat: in
+    criteria:
+      include:
+      - spec:Protection
+      level: 30
+    type: Cooldown::Spell::Def::ShortCD
+  Draconic Mind or Flowing Water:
+    conditions:
+    - raid
+    criteria:
+      exclude:
+      - prof:Alchemy:500+
+      include:
+      - all(flaskuser;role:Healer)
+    missing: 1
+    spell: 79470;92730;94160
+    type: Buff
+  Dragon's Breath:
+    combat: in
+    criteria:
+      include:
+      - spec:Fire
+      level: 49
+    type: Cooldown::Spell::Off::ShortCD
+  Elemental Mastery:
+    combat: in
+    criteria:
+      include:
+      - spec:Elemental
+      level: 49
+    type: Cooldown::Spell::Off::LongCD
+  Death Grip:
+    conditions:
+      - Type: REACT
+        Unit: target
+        Level: 1
+    criteria:
+      level: 55
+      include:
+        - spec:Blood
+    combat: out
+    type: Cooldown::Spell::Off::ShortCD
+  Endless Healing Potion:
+    conditions:
+    - icon:hplt100
+    criteria:
+      include:
+      - all(prof:Alchemy;item:Endless Healing Potion)
+    type: Cooldown::Item
+  Endless Mana Potion:
+    conditions:
+    - mp_lt_100_pct
+    criteria:
+      include:
+      - all(prof:Alchemy;item:Endless Mana Potion)
+    type: Cooldown::Item
+  Enhanced Agility:
+    combat: out
+    criteria:
+      exclude:
+      - flaskuser
+      include:
+      - all(prof:Alchemy:500+;role:Agility DPS)
+      - all(prof:Alchemy:500+;role:Tank;class:Druid)
+    missing: 1
+    spell: 79639
+    type: Buff
+  Enhanced Agility or Winds:
+    combat: out
+    criteria:
+      include:
+      - all(flaskuser;role:Agility DPS;prof:Alchemy:500+)
+    missing: 1
+    spell: 79639;79471;92725
+    type: Buff
+  Enhanced Intellect:
+    combat: out
+    criteria:
+      exclude:
+      - flaskuser
+      include:
+      - all(prof:Alchemy:500+;role:Intellect DPS)
+      - all(prof:Alchemy:500+;role:Healer)
+    missing: 1
+    spell: 79640
+    type: Buff
+  Enhanced Intellect or Draconic Mind:
+    combat: out
+    criteria:
+      include:
+      - all(flaskuser;role:Intellect DPS;prof:Alchemy:500+)
+    missing: 1
+    spell: 79640;79470;92730
+    type: Buff
+  Enhanced Intellect or Draconic Mind or Flowing Water:
+    combat: out
+    criteria:
+      include:
+      - all(flaskuser;role:Healer;prof:Alchemy:500+)
+    missing: 1
+    spell: 79640;79470;92730;94160
+    type: Buff
+  Enhanced Strength:
+    combat: out
+    criteria:
+      exclude:
+      - flaskuser
+      - class:Druid
+      include:
+      - all(prof:Alchemy:500+;role:Strength DPS)
+      - all(prof:Alchemy:500+;role:Tank)
+    missing: 1
+    spell: 79638
+    type: Buff
+  Enhanced Strength or Steelskin:
+    combat: out
+    criteria:
+      exclude:
+      - nrflaskuser
+      include:
+      - all(flaskuser;role:Tank;prof:Alchemy:500+)
+    missing: 1
+    spell: 79638;79469;92729
+    type: Buff
+  Enhanced Strength or Steelskin or Stoneblood:
+    combat: out
+    criteria:
+      include:
+      - all(flaskuser;nrflaskuser;role:Tank;prof:Alchemy:500+)
+    missing: 1
+    spell: 79638;79469;92729;53758
+    type: Buff
+  Enhanced Strength or Titanic Strength:
+    combat: out
+    criteria:
+      include:
+      - all(flaskuser;role:Strength DPS;prof:Alchemy:500+)
+    missing: 1
+    spell: 79638;79472;92731
+    type: Buff
+  Enraged Regeneration:
+    Alpha: 1
+    conditions:
+    - hp_le_75_pct
+    criteria:
+      level: 76
+    CooldownCheck: 1
+    type: Reactive::Def
+  Evasion:
+    combat: in
+    criteria:
+      level: 9
+    type: Cooldown::Spell::Def::LongCD
+  Evocation:
+    combat: in
+    conditions:
+    - mp_lt_100_pct
+    criteria:
+      level: 12
+    spell: Evocation
+    type: Cooldown::Spell::Def::LongCD
+  Execute:
+    combat: in
+    criteria:
+      exclude:
+      - spec:Protection
+      level: 16
+    type: Reactive::Off
+  Explosive Shot:
+    combat: in
+    ManaCheck: 1
+    criteria:
+      include:
+      - spec:Survival
+    type: Cooldown::Spell::Off::ShortCD
+  Fade:
+    combat: in
+    criteria:
+      level: 24
+    type: Cooldown::Spell::Def::ShortCD
+  Feral Spirit:
+    combat: in
+    criteria:
+      include:
+      - spec:Enhancement
+      level: 69
+    type: Cooldown::Spell::Off::LongCD
+  Flame Shock Missing:
+    Unit: target
+    combat: in
+    criteria:
+      include:
+      - spec:Elemental
+      level: 14
+    missing: 1
+    spell: Flame Shock
+    type: Debuff
+  Flask of Endless Rage:
+    combat: out
+    criteria:
+      include:
+      - all(nrflaskuser;role:Strength DPS)
+    missing: 1
+    spell: 53760
+    type: Buff
+  Flask of Flowing Water:
+    conditions:
+    - raid
+    criteria:
+      include:
+      - disabled
+    missing: 1
+    spell: 94160
+    type: Buff
+  Flask of Titanic Strength:
+    conditions:
+    - raid
+    criteria:
+      exclude:
+      - prof:Alchemy:500+
+      include:
+      - all(flaskuser;role:Strength DPS)
+    missing: 1
+    spell: 79472;92731
+    type: Buff
+  Flask of the Draconic Mind:
+    conditions:
+    - raid
+    criteria:
+      exclude:
+      - prof:Alchemy:500+
+      include:
+      - all(flaskuser;role:Intellect DPS)
+    missing: 1
+    spell: 79470;92730
+    type: Buff
+  Flask of the North:
+    combat: out
+    criteria:
+      include:
+      - all(prof:Alchemy;item:Flask of the North)
+    missing: 1
+    spell: 67016;67017;67018
+    type: Buff
+  Flask of the Winds:
+    conditions:
+    - raid
+    criteria:
+      exclude:
+      - prof:Alchemy:500+
+      include:
+      - all(flaskuser;role:Agility DPS)
+    missing: 1
+    spell: 79471;92725
+    type: Buff
+  Focus Fire:
+    combat: in
+    conditions:
+      - Type: BUFFSTACKS
+        Checked: 1
+        Operator: '>='
+        Name: Frenzy Effect
+        Unit: pet
+        Level: 4
+    criteria:
+      include:
+      - spec:Beast Mastery
+      level: 29
+    type: Cooldown::Spell::Off::ShortCD
+  Focused Insight:
+    combat: in
+    criteria:
+      include:
+      - all(spec:Restoration;subspec:Focused Insight)
+      level: 19
+    ShowTimer: 1
+    type: Buff
+  Force of Nature:
+    combat: in
+    criteria:
+      include:
+      - spec:Balance
+      level: 49
+    type: Cooldown::Spell::Off::LongCD
+  Free Mangle:
+    combat: in
+    criteria:
+      include:
+      - all(spec:Feral Combat;subspec:Bear)
+      level: 69
+    spell: Mangle
+    type: Cooldown::Spell::Off::ShortCD
+  Frenzied Regeneration:
+    combat: in
+    criteria:
+      include:
+      - all(spec:Feral Combat;subspec:Bear)
+      level: 52
+    type: Cooldown::Spell::Def::LongCD
+  GotN Meta:
+    combat: in
+    Icons:
+      - Gift of the Naaru Solo
+      - Gift of the Naaru Party
+    criteria:
+      include:
+        - race:Draenei
+    type: Meta
+  Gift of the Naaru Solo:
+    no_filter_group_ok: 1
+    spell: Gift of the Naaru
+    conditions:
+      - solo
+      - AND
+      - hp_le_75_pct
+    type: Cooldown::Spell::Def::LongCD
+  Gift of the Naaru Party:
+    no_filter_group_ok: 1
+    spell: Gift of the Naaru
+    conditions:
+      - party
+    type: Cooldown::Spell::Def::LongCD
+  Goblin Rockets:
+    criteria:
+      include:
+      - race:Goblin
+    spell: Rocket Jump;Rocket Barrage
+    type: Cooldown::Spell::LongCD
+  Guardian Spirit:
+    combat: in
+    criteria:
+      include:
+      - spec:Holy
+      level: 59
+    type: Cooldown::Spell::Def::LongCD
+  Guardian of Ancient Kings:
+    combat: in
+    criteria:
+      level: 85
+    type: Cooldown::Spell::Def::LongCD
+  Haunt:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+  Haunt Missing:
+    Unit: target
+    combat: in
+    conditions:
+    - icon:Haunt
+    criteria:
+      include:
+      - spec:Affliction
+      level: 69
+    missing: 1
+    spell: Haunt
+    type: Debuff
+  Healing Rains:
+    combat: in
+    criteria:
+      include:
+      - spec:Restoration
+      level: 83
+    spell: Healing Rain
+    type: Cooldown::Spell::Def::ShortCD
+  Heroic Strike:
+    combat: in
+    conditions:
+      - Level:  50
+        Operator: '>'
+        Type: RAGE
+        Unit: player
+      - AND
+      - icon:!Mortal Strike
+    criteria:
+      include:
+      - spec:Arms
+      level: 69
+    type: Cooldown::Spell::Off::ShortCD
+  Holy Radiance:
+    combat: in
+    criteria:
+      level: 83
+    type: Cooldown::Spell::Def::ShortCD
+  Holy Shock:
+    combat: in
+    criteria:
+      include:
+      - spec:Holy
+    type: Cooldown::Spell::Def::ShortCD
+  Holy Shield:
+    combat: in
+    criteria:
+      include:
+      - spec:Protection
+    type: Cooldown::Spell::Def::ShortCD
+  Holy Word:
+    combat: in
+    criteria:
+      include:
+      - spec:Holy
+      level: 51
+    spell: 88625
+    type: Cooldown::Multistate
+  Hunter's Mark Missing:
+    Unit: target
+    combat: in
+    criteria:
+      level: 14
+    missing: 1
+    spell: Hunter's Mark
+    type: Debuff
+  Icebound Fortitude:
+    combat: in
+    criteria:
+      level: 62
+    type: Cooldown::Spell::Def::LongCD
+  Icy Veins:
+    combat: in
+    criteria:
+      include:
+      - spec:Frost
+      level: 29
+    type: Cooldown::Spell::Off::LongCD
+  Immolate:
+    Unit: target
+    combat: in
+    criteria:
+      include:
+      - spec:Demonology
+      - spec:Destruction
+      level: 3
+    missing: 1
+    type: Debuff
+  Inner Eye:
+    Alpha: 1
+    combat: in
+    conditions:
+    - instance
+    - AND
+    - mp_le_75_pct
+    criteria:
+      include:
+      - item:Jar of Ancient Remedies
+    stacks:
+      max: 5
+      min: 4
+    type: Buff
+  Inner Focus:
+    combat: in
+    criteria:
+      exclude:
+      - subspec:Train of Thought
+      include:
+      - spec:Discipline
+      level: 29
+    type: Cooldown::Spell::Def::ShortCD
+  Inner Focus ToT:
+    combat: in
+    criteria:
+      include:
+      - all(spec:Discipline;subspec:Train of Thought)
+      level: 51
+    spell: Inner Focus
+    Alpha: 1
+    UnAlpha: 0.2
+    ShowWhen: always
+    ShowTimer: 1
+    type: Cooldown::Spell::Def::ShortCD
+  Innervate:
+    combat: in
+    criteria:
+      include:
+      - spec:Balance
+      - spec:Restoration
+      level: 28
+    type: Cooldown::Spell::Def::LongCD
+  Inquisition:
+    no_filter_group_ok: 1
+    conditions:
+    - icon:!Sacred Duty
+    type: Cooldown::Spell
+  Shield of the Righteous:
+    no_filter_group_ok: 1
+    conditions:
+    - icon:Sacred Duty
+    type: Cooldown::Spell
+  Judgements of the Pure:
+    type: Buff
+    combat: in
+    missing: 1
+    criteria:
+      include:
+        - spec:Holy
+  WoG 3HP:
+    type: Cooldown::Spell::Def::ShortCD
+    spell: Word of Glory
+    conditions:
+      - holy_power_3
+    criteria:
+      include:
+        - spec:Holy
+  Best Use of 3HP:
+    combat: in
+    type: Meta
+    Alpha: 1
+    conditions:
+      - holy_power_3
+    Icons:
+      - Inquisition
+      - Shield of the Righteous
+    criteria:
+      include:
+      - spec:Protection
+      level: 81
+  Insect Swarm Missing:
+    Unit: target
+    combat: in
+    criteria:
+      include:
+      - spec:Balance
+      level: 20
+    missing: 1
+    spell: Insect Swarm
+    type: Debuff
+  Intervene:
+    criteria:
+      include:
+      - disabled
+    type: Cooldown::Spell::Def::ShortCD
+  Intimidation:
+    combat: in
+    criteria:
+      include:
+      - spec:Beast Mastery
+    spell: Intimidation
+    type: Cooldown::Spell::Off::ShortCD
+  Invisibility:
+    combat: in
+    criteria:
+      level: 78
+    type: Cooldown::Spell::Def::LongCD
+  Kick:
+    combat: in
+    criteria:
+      level: 14
+    type: Cooldown::Spell::Off::ShortCD
+  Kill Command:
+    combat: in
+    criteria:
+      include:
+      - spec:Beast Mastery
+      level: 10
+    type: Cooldown::Spell::Off::ShortCD
+  Kill Shot:
+    combat: in
+    CooldownCheck: 1
+    criteria:
+      level: 35
+    type: Reactive::Off
+  Killing Spree:
+    combat: in
+    criteria:
+      include:
+      - spec:Combat
+      level: 69
+    type: Cooldown::Spell::Off::LongCD
+  Lacerate:
+    Unit: target
+    combat: in
+    criteria:
+      include:
+      - all(spec:Feral Combat;subspec:Bear)
+      level: 66
+    stacks:
+      max: 3
+      min: 3
+    ShowTimer: 1
+    type: Debuff
+  Last Stand:
+    combat: in
+    criteria:
+      include:
+      - spec:Protection
+      level: 20
+    type: Cooldown::Spell::Def::LongCD
+  Lava Burst:
+    combat: in
+    criteria:
+      include:
+      - spec:Elemental
+      level: 34
+    type: Cooldown::Spell::Off::ShortCD
+  Lay on Hands:
+    combat: in
+    criteria:
+      level: 16
+    type: Cooldown::Spell::Def::LongCD
+  Leap of Faith:
+    combat: in
+    criteria:
+      level: 85
+    type: Cooldown::Spell::Def::ShortCD
+  Lifeblood:
+    combat: in
+    criteria:
+      include:
+      - prof:Herbalism
+    type: Cooldown::Spell::ShortCD
+  Lightning Shield 6 to 9 Charges:
+    combat: in
+    criteria:
+      include:
+      - spec:Elemental
+      level: 49
+    spell: Lightning Shield
+    stacks:
+      max: 9
+      min: 6
+    type: Buff
+  Lightwell:
+    combat: in
+    criteria:
+      include:
+      - all(spec:Holy;subspec:Lightwell)
+      level: 29
+    type: Cooldown::Spell::Def::LongCD
+  Living Bomb Missing:
+    Unit: target
+    combat: in
+    criteria:
+      include:
+      - spec:Fire
+      level: 69
+    missing: 1
+    spell: Living Bomb
+    type: Debuff
+  Mana Gem:
+    combat: in
+    conditions:
+    - mp_lt_100_pct
+    criteria:
+      level: 48
+    type: Cooldown::Item::ShortCD
+  Mana Shield:
+    combat: in
+    criteria:
+      level: 46
+    type: Cooldown::Spell::Def::ShortCD
+  Mana Tide Totem:
+    combat: in
+    conditions:
+    - mp_le_75_pct
+    criteria:
+      include:
+      - spec:Restoration
+      level: 49
+    type: Cooldown::Spell::Def::LongCD
+  Master's Call:
+    combat: in
+    criteria:
+      level: 78
+    type: Cooldown::Spell::Def::ShortCD
+  Mend Pet Missing:
+    Unit: pet
+    combat: in
+    conditions:
+    - pet_hp_le_75_pct
+    criteria:
+      level: 16
+    missing: 1
+    spell: Mend Pet
+    type: Buff
+  Health Funnel:
+    combat: in
+    conditions:
+    - pet_hp_le_75_pct
+    criteria:
+      level: 12
+    type: Cooldown::Spell::Def::ShortCD
+  Demon Soul:
+    type: Cooldown::Spell::Off::LongCD
+    criteria:
+      level: 85
+    combat: in
+  Metamorphosis:
+    combat: in
+    criteria:
+      include:
+      - spec:Demonology
+      level: 69
+    type: Cooldown::Spell::Off::LongCD
+  Mind Freeze:
+    combat: in
+    criteria:
+      level: 57
+    type: Cooldown::Spell::Off::ShortCD
+  Mirror Image:
+    combat: in
+    criteria:
+      level: 50
+    type: Cooldown::Spell::Off::LongCD
+  Mortal Strike:
+    combat: in
+    criteria:
+      include:
+      - spec:Arms
+      level: 69
+    type: Cooldown::Spell::Off::ShortCD
+  Nature's Swiftness:
+    combat: in
+    criteria:
+      include:
+      - spec:Restoration
+      level: 29
+    type: Cooldown::Spell::LongCD
+  Overpower:
+    Alpha: 1
+    UseActivationOverlay: 1
+    combat: in
+    CooldownCheck: 1
+    criteria:
+      include:
+      - spec:Arms
+      level: 29
+    type: Reactive::Off
+  Pain Suppression:
+    combat: in
+    criteria:
+      include:
+      - spec:Discipline
+      level: 39
+    type: Cooldown::Spell::Def::LongCD
+  Penance:
+    combat: in
+    criteria:
+      include:
+      - spec:Discipline
+    type: Cooldown::Spell::Def::ShortCD
+  Pillar Of Frost:
+    IgnoreRunes: 1
+    combat: in
+    criteria:
+      include:
+      - spec:Frost
+      level: 39
+    type: Cooldown::Spell::Off::LongCD
+  Power Infusion:
+    combat: in
+    criteria:
+      include:
+      - spec:Discipline
+      level: 29
+    type: Cooldown::Spell::LongCD
+  'Power Word: Barrier':
+    combat: in
+    criteria:
+      include:
+      - spec:Discipline
+      level: 69
+    type: Cooldown::Spell::Def::LongCD
+  Prayer of Mending:
+    combat: in
+    criteria:
+      include:
+      - spec:Discipline
+      - spec:Holy
+      level: 68
+    type: Cooldown::Spell::Def::ShortCD
+  Presence of Mind:
+    combat: in
+    criteria:
+      include:
+      - spec:Arcane
+      level: 29
+    type: Cooldown::Spell::Off::ShortCD
+  Pulverize:
+    combat: in
+    criteria:
+      include:
+      - all(spec:Feral Combat;subspec:Bear)
+      level: 66
+    missing: 1
+    type: Buff
+  Pummel:
+    combat: in
+    criteria:
+      level: 38
+    type: Cooldown::Spell::Off::ShortCD
+  Pure Mojo or Frost Wyrm:
+    combat: out
+    criteria:
+      include:
+      - all(nrflaskuser;role:Healer)
+    missing: 1
+    spell: 54212;53755
+    type: Buff
+  Raise Dead:
+    IgnoreRunes: 1
+    combat: in
+    criteria:
+      level: 56
+    type: Cooldown::Spell::Off::LongCD
+  Rallying Cry:
+    combat: in
+    conditions:
+      - instance
+    criteria:
+      level: 83
+    type: Cooldown::Spell::Def::LongCD
+  Rapid Fire:
+    combat: in
+    criteria:
+      level: 54
+    type: Cooldown::Spell::Off::LongCD
+  Holy Fire:
+    combat: in
+    criteria:
+      level: 18
+      include:
+        - spec:Discipline
+    type: Cooldown::Spell::ShortCD
+  Rapture:
+    combat: in
+    criteria:
+      include:
+      - spec:Discipline
+      level: 39
+    spell: 47755
+    type: Cooldown::Internal::Spell
+    ICDDuration: 12
+    unusable: 1
+  Readiness:
+    combat: in
+    criteria:
+      include:
+      - spec:Marksmanship
+      level: 59
+    type: Cooldown::Spell::Off::LongCD
+  Rebirth:
+    combat: in
+    criteria:
+      level: 20
+    type: Cooldown::Spell::Def::LongCD
+  Rebuke:
+    combat: in
+    criteria:
+      exclude:
+      - spec:Holy
+      level: 54
+    type: Cooldown::Spell::Off::ShortCD
+  Recuperate:
+    combat: in
+    conditions:
+    - icon:Recuperate Missing
+    - AND
+    - hp_le_75_pct
+    criteria:
+      level: 12
+    type: Cooldown::Spell::Def::ShortCD
+  Recuperate Missing:
+    missing: 1
+    no_filter_group_ok: 1
+    spell: Recuperate
+    type: Buff
+  Redirect:
+    combat: in
+    criteria:
+      level: 83
+    type: Cooldown::Spell::Off::ShortCD
+  ReducedArmor:
+    Unit: target
+    combat: in
+    conditions:
+      - target_is_boss
+    criteria:
+      include:
+      - class:Warrior
+      - all(class:Druid;spec:Feral Combat;subspec:Bear)
+      - class:Rogue
+      level: 18
+    missing: 1
+    type: Debuff
+  ReducedAttackSpeed:
+    Unit: target
+    combat: in
+    conditions:
+      - target_is_boss
+    criteria:
+      include:
+      - class:Warrior
+      level: 9
+    missing: 1
+    type: Debuff
+  ReducedPhysicalDone:
+    Unit: target
+    combat: in
+    conditions:
+      - target_is_boss
+    criteria:
+      include:
+      - class:Warrior
+      - all(class:Druid;spec:Feral Combat;subspec:Bear)
+      - class:Warlock
+      level: 16
+    missing: 1
+    type: Debuff
+  Rend Missing:
+    Unit: target
+    combat: in
+    criteria:
+      exclude:
+      - spec:Fury
+      level: 7
+    missing: 1
+    spell: Rend
+    type: Debuff
+  Revenge:
+    Alpha: 1
+    combat: in
+    CooldownCheck: 1
+    criteria:
+      include:
+      - spec:Protection
+      level: 40
+    type: Reactive::Off
+  Revitalize:
+    combat: in
+    criteria:
+      include:
+      - spec:Restoration
+      level: 29
+    spell: 81094
+    type: Cooldown::Internal::Spell
+    ICDDuration: 12
+    unusable: 1
+  Ring of Frost:
+    combat: in
+    criteria:
+      level: 83
+    type: Cooldown::Spell::Off::ShortCD
+  Flame Orb:
+    combat: in
+    criteria:
+      level: 81
+    type: Cooldown::Spell::Off::ShortCD
+  Frozen Target:
+    combat: in
+    criteria:
+      level: 69
+      include:
+        - spec:Frost
+    type: Meta
+    Icons:
+      - Deep Freeze
+      - Brain Freeze FFB
+      - Ice Lance
+  Brain Freeze FFB:
+    no_filter_group_ok: 1
+    spell: Frostfire Bolt
+    Alpha: 1
+    conditions:
+      - icon:Brain Freeze
+      - AND
+      - icon:Fingers of Frost
+    type: Cooldown::Spell
+  Brain Freeze:
+    no_filter_group_ok: 1
+    type: Buff
+  Fingers of Frost:
+    no_filter_group_ok: 1
+    type: Buff
+  Ice Lance:
+    Alpha: 1
+    no_filter_group_ok: 1
+    conditions:
+      - icon:Fingers of Frost
+    type: Cooldown::Spell
+  Deep Freeze:
+    Alpha: 1
+    no_filter_group_ok: 1
+    combat: in
+    type: Reactive::Off
+    CooldownCheck: 1
+  Freeze:
+    combat: in
+    type: Cooldown::Spell::Off::ShortCD
+    spell: 33395
+    criteria:
+      include:
+        - spec:Frost
+  Ice Barrier:
+    combat: in
+    conditions:
+      - icon:Ice Barrier Missing
+    criteria:
+      level: 49
+      include:
+        - spec:Frost
+    type: Cooldown::Spell::Def::ShortCD
+  Ice Barrier Missing:
+    no_filter_group_ok: 1
+    spell: Ice Barrier
+    missing: 1
+    type: Buff
+  Bone Shield:
+    combat: out
+    conditions:
+      - instance
+      - AND
+      - icon:Bone Shield Missing
+    criteria:
+      level: 58
+      include:
+        - spec:Blood
+    type: Cooldown::Spell::Def::ShortCD
+  Bone Shield Missing:
+    no_filter_group_ok: 1
+    spell: Bone Shield
+    missing: 1
+    type: Buff
+  Riptide:
+    combat: in
+    criteria:
+      include:
+      - spec:Restoration
+      level: 69
+    type: Cooldown::Spell::Def::ShortCD
+  Rune Tap:
+    IgnoreRunes: 1
+    combat: in
+    conditions:
+    - hp_le_75_pct
+    criteria:
+      include:
+      - spec:Blood
+      level: 58
+    type: Cooldown::Spell::Def::ShortCD
+    usabe: 1
+  Rupture Missing:
+    Unit: target
+    combat: in
+    criteria:
+      include:
+      - spec:Combat
+      level: 46
+    missing: 1
+    spell: Rupture
+    type: Debuff
+  Sacred Duty:
+    no_filter_group_ok: 1
+    type: Buff
+  Searing Totem Missing:
+    combat: in
+    criteria:
+      include:
+      - spec:Enhancement
+      level: 10
+    missing: 1
+    spell: Searing Totem
+    type: Totem
+  'Shadow Word: Death':
+    combat: in
+    conditions:
+    - target_hp_le_25_pct
+    criteria:
+      include:
+      - spec:Shadow
+      level: 32
+    type: Cooldown::Spell::Off::ShortCD
+  Drain Soul:
+    combat: in
+    conditions:
+    - target_hp_le_25_pct
+    criteria:
+      include:
+      - spec:Affliction
+      level: 10
+    type: Cooldown::Spell::Off::ShortCD
+  Shadowfiend:
+    combat: in
+    conditions:
+    - mp_le_75_pct
+    criteria:
+      level: 66
+    type: Cooldown::Spell::Def::LongCD
+  Shamanistic Rage:
+    combat: in
+    criteria:
+      include:
+      - spec:Enhancement
+      level: 49
+    type: Cooldown::Spell::Def::ShortCD
+  Shield Wall:
+    combat: in
+    criteria:
+      include:
+      - spec:Protection
+      level: 48
+    type: Cooldown::Spell::Def::LongCD
+  Shield Block:
+    combat: in
+    criteria:
+      include:
+      - spec:Protection
+      level: 28
+    type: Cooldown::Spell::Def::ShortCD
+  Shock Usable:
+    combat: in
+    criteria:
+      level: 5
+    spell: Earth Shock
+    type: Cooldown::Spell::Off::ShortCD
+  Shockwave:
+    combat: in
+    criteria:
+      include:
+      - spec:Protection
+      level: 69
+    type: Cooldown::Spell::Off::ShortCD
+  Thunderstruck:
+    combat: in
+    criteria:
+      include:
+      - spec:Protection
+      level: 69
+    type: Buff
+    ShowTimer: 1
+  Thunder Clap:
+    combat: in
+    criteria:
+      include:
+      - spec:Protection
+      level: 69
+    type: Cooldown::Spell::Off::ShortCD
+  Silencing Shot:
+    combat: in
+    criteria:
+      include:
+      - spec:Marksmanship
+      level: 29
+    CooldownCheck: 0
+    type: Cooldown::Spell::Off::ShortCD
+  Skull Bash Bear:
+    combat: in
+    criteria:
+      include:
+      - all(spec:Feral Combat;subspec:Bear)
+      level: 22
+    spell: 80964
+    type: Cooldown::Spell::Off::ShortCD
+  Skull Bash Cat:
+    combat: in
+    criteria:
+      include:
+      - all(spec:Feral Combat;subspec:Cat)
+      level: 22
+    spell: 80965
+    type: Cooldown::Spell::Off::ShortCD
+  Slice and Dice:
+    combat: in
+    criteria:
+      level: 22
+    missing: 1
+    type: Buff
+  Solar Beam:
+    combat: in
+    criteria:
+      include:
+      - all(spec:Balance;subspec:Solar Beam)
+      level: 39
+    type: Cooldown::Spell::Off::ShortCD
+  Hand of Guldan Missing:
+    combat: in
+    spell: Hand of Gul'dan
+    unit: target
+    missing: 1
+    criteria:
+      level: 39
+      include:
+        - spec:Demonology
+    type: Cooldown::Spell::Off::ShortCD
+  Decimation:
+    combat: in
+    type: Buff
+    criteria:
+      level: 49
+      include:
+        - spec:Demonology
+  Felstorm:
+    combat: in
+    spell: 89751
+    criteria:
+      level: 45
+      include:
+        - spec:Demonology
+    type: Cooldown::Spell::Off::ShortCD
+  Spell Lock:
+    combat: in
+    spell: 19647
+    criteria:
+      level: 52
+      include:
+        - spec:Affliction
+    type: Cooldown::Spell::Off::ShortCD
+  Spirit Link Totem:
+    combat: in
+    criteria:
+      include:
+      - spec:Restoration
+      level: 49
+    type: Cooldown::Spell::Def::LongCD
+  Spiritwalker's Grace:
+    combat: in
+    criteria:
+      include:
+      - all(level;85)
+    type: Cooldown::Spell::LongCD
+  Starfall:
+    combat: in
+    criteria:
+      include:
+      - spec:Balance
+      level: 69
+    type: Cooldown::Spell::Off::ShortCD
+  Sting Missing:
+    Unit: target
+    combat: in
+    criteria:
+      level: 10
+    missing: 1
+    spell: Serpent Sting;Wyvern Sting
+    type: Debuff
+  Summon Gargoyle:
+    IgnoreRunes: 1
+    combat: in
+    criteria:
+      include:
+      - spec:Unholy
+      level: 69
+    type: Cooldown::Spell::Off::LongCD
+  Sunder Armor:
+    Unit: target
+    combat: in
+    conditions:
+      - Type: DEBUFFSTACKS
+        Checked: 1
+        Operator: '<'
+        Name: 58567
+        Unit: target
+        Level: 3
+    criteria:
+      include:
+      - spec:Protection
+      level: 18
+    type: Cooldown::Spell::Off::ShortCD
+  Survival Instincts:
+    combat: in
+    criteria:
+      include:
+      - all(spec:Feral Combat;subspec:Bear)
+      level: 49
+    type: Cooldown::Spell::Def::LongCD
+  Swiftmend:
+    combat: in
+    criteria:
+      include:
+      - spec:Restoration
+    type: Cooldown::Spell::Def::ShortCD
+  Sword and Board:
+    criteria:
+      include:
+      - disabled
+    type: Buff
+  Throwdown:
+    combat: in
+    criteria:
+      include:
+      - spec:Arms
+      level: 59
+    type: Cooldown::Spell::Off::ShortCD
+  Thunderstorm:
+    combat: in
+    criteria:
+      include:
+      - spec:Elemental
+    type: Cooldown::Spell::Off::ShortCD
+  Tranquility:
+    combat: in
+    criteria:
+      include:
+      - spec:Restoration
+      level: 68
+    type: Cooldown::Spell::Def::LongCD
+  Tree of Life:
+    combat: in
+    criteria:
+      include:
+      - spec:Restoration
+      level: 69
+    type: Cooldown::Spell::Def::LongCD
+  Tremor Totem:
+    combat: in
+    criteria:
+      level: 52
+    type: Cooldown::Spell::Def::ShortCD
+  Tricks of the Trade:
+    combat: in
+    conditions:
+    - instance
+    criteria:
+      level: 75
+    type: Cooldown::Spell::Off::ShortCD
+  Typhoon:
+    combat: in
+    criteria:
+      include:
+      - spec:Balance
+      level: 29
+    type: Cooldown::Spell::Off::ShortCD
+  Unleash Elements:
+    combat: in
+    criteria:
+      level: 81
+    type: Cooldown::Spell::ShortCD
+  Unstable Affliction:
+    Unit: target
+    combat: in
+    criteria:
+      include:
+      - spec:Affliction
+    missing: 1
+    type: Debuff
+  Vampiric Blood:
+    IgnoreRunes: 1
+    combat: in
+    criteria:
+      include:
+      - spec:Blood
+      level: 58
+    type: Cooldown::Spell::Def::ShortCD
+  Vampiric Touch Missing:
+    Unit: target
+    combat: in
+    criteria:
+      include:
+      - spec:Shadow
+      level: 39
+    missing: 1
+    spell: Vampiric Touch
+    type: Debuff
+  Vanish:
+    combat: in
+    criteria:
+      level: 24
+    type: Cooldown::Spell::Def::LongCD
+  Vendetta:
+    combat: in
+    criteria:
+      include:
+      - spec:Assassination
+      level: 69
+    type: Cooldown::Spell::Off::LongCD
+  Victory Rush:
+    combat: in
+    criteria:
+      level: 5
+    ShowTimer: 1
+    type: Reactive::Def
+  Well Fed:
+    combat: out
+    conditions:
+    - instance
+    criteria:
+      level: 85
+      exclude:
+      - nowellfed
+    missing: 1
+    type: Buff
+  Wild Growth:
+    combat: in
+    criteria:
+      include:
+      - spec:Restoration
+      level: 49
+    type: Cooldown::Spell::Def::ShortCD
+  Word of Glory:
+    combat: in
+    criteria:
+      exclude:
+      - spec:Holy
+    type: Cooldown::Spell::Def::ShortCD
+  Zealotry:
+    combat: in
+    criteria:
+      include:
+      - spec:Retribution
+      level: 69
+    type: Cooldown::Spell::Off::LongCD

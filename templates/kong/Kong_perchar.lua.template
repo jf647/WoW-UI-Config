@@ -1,0 +1,5 @@
+
+Kong_Settings = {
+    ["profile"] = "[% profilename %]",
+    ["enabled"] = true,
+}

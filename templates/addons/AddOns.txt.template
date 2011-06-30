@@ -1,0 +1,3 @@
+[% FOR addon IN addons -%]
+[% addon.name %]: [% IF addon.enabled %]enabled[% ELSE %]disabled[% END %]
+[% END -%]

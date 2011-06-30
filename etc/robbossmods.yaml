@@ -1,0 +1,39 @@
+---
+templates:
+    global:
+        robbossmods:
+            input: $TEMPLATEDIR/robbossmods/RobBossMods.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/RobBossMods.lua
+strategies:
+    General Erudax:
+        id: 39625
+        strategy: >
+            Phases: 1.\nSPELL(90250): Boss targets a player and charges
+            after 2 seconds.  Strafe away or you'll be hit (or one-shot in
+            hc)\nSPELL(90249): Frontal cone like a warrior's shockwave.\n
+            SPELL(91937): Bleed on the tank which is cleared by healing past
+            90%\nAdds: Four troggs will spawn.  CC or kill the malignant
+            trogg (bigger and purple) away from the boss, or he'll debuff
+            the tank with SPELL(90179) and buff the boss with SPELL(90169)
+    Baron Silverlaine:
+        id: 3887
+        strategy: >
+            Phases: 1.\nCasts SPELL(93857) at intervals - kill the
+            summoned worgen then switch back to the boss.\nSPELL(93956)
+            generally only needs to be removed from the tank.
+    Ammunae:
+        id: 39731
+        strategy: >
+            Phases: 1.\nOne or two DPS need to be assigned to kill
+            the Seedling Pods that spawn.  They buff the boss, heal him and
+            if not killed quickly become Bloodpetal Blossoms that cast
+            SPELL(90007), an undispellable bleed.  Back on the boss when
+            there are no pods up.
+    Siamat:
+        id: 44819
+        strategy: >
+            Phases: 2.\nIn phase 1, the boss is immune - kill adds: minions
+            before servants.  In phase 2, the boss is tankable - keep
+            killing servants (minions will disperse over time), but stay out
+            of the green and white ground effects.
+

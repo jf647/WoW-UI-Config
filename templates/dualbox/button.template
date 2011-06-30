@@ -1,0 +1,5 @@
+[% IF ooc -%]
+/cast [nocombat] [% ooc_spell %]; [% IF unit %][@[% unit %]] [% END %][% spell -%]
+[% ELSE -%]
+[% IF seq %]/castsequence[% ELSE %]/cast[% END %] [% IF unit %][@[% unit %]] [% END %][% IF reset %]reset=[% reset %] [% END %][% IF seq %][% spell.join(',') %][% ELSE %][% spell %][% END -%]
+[% END -%]

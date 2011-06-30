@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Clique Bindings</title>
+</head>
+<body>
+<h1>Clique Bindings</h1>
+<h2>Profiles by Character</h2>
+[% FOREACH char IN chars.values -%]
+<h3>[% char.name %] - [% char.realm %]</h3>
+<ul>
+[% IF char.exists('spec1') -%]
+<li>[% char.spec1 %] - [% char.profile1 %]</li>
+[% END -%]
+[% IF char.exists('spec2') -%]
+<li>[% char.spec2 %] - [% char.profile2 %]</li>
+[% END -%]
+</ul>
+[% END -%]
+<h2>Profiles</h2>
+[% FOREACH profile IN profiles.values -%]
+<h3>[% profile.name %]</h3>
+<ul>
+[% FOR set IN [ 'default', 'ooc', 'friend', 'enemy', 'global' ] -%]
+<li>[% set %]
+<ul>
+[% FOREACH action IN profile.actions -%]
+[% NEXT IF action.set != set -%]
+[% IF 'spell' == action.type -%]
+<li>[% action.humanclick %] = [% action.value %]</li>
+[% ELSIF 'macro' == action.type -%]
+<li>[% action.humanclick %] = [% action.value %]</li>
+[% ELSIF 'menu' == action.type -%]
+<li>[% action.humanclick %] = Show Unit Menu</li>
+[% ELSIF 'target' == action.type -%]
+<li>[% action.humanclick %] = Target Unit</li>
+[% END -%]
+[% END # FOR action -%]
+</ul>
+</li>
+[% END # FOR set -%]
+</ul>
+[% END # FOR profile -%]
+</ul>
+</body>
+</html>

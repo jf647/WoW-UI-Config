@@ -1,0 +1,43 @@
+
+Postal3DB = {
+    ["profileKeys"] = {
+[% FOR realm IN postal.keys -%]
+[% FOR char IN postal.$realm.values -%]
+        ["[% char.name %] - [% realm %]"] = "Default",
+[% END -%]
+[% END -%]
+    },
+    ["global"] = {
+        ["BlackBook"] = {
+            ["alts"] = {
+[% FOR realm IN postal.keys -%]
+[% FOR char IN postal.$realm.values -%]
+                "[% char.name %]|[% realm %]|[% char.faction FILTER ucfirst %]|[% char.level %]|[% char.class FILTER upper %]", -- [[% loop.count %]]
+[% END -%]
+[% END -%]
+            },
+        },
+    },
+    ["profiles"] = {
+        ["Default"] = {
+            ["Express"] = {
+                ["AutoSend"] = false,
+                ["MouseWheel"] = false,
+            },
+            ["ModuleEnabledState"] = {
+                ["DoNotWant"] = false,
+                ["CarbonCopy"] = false,
+            },
+            ["BlackBook"] = {
+                ["recent"] = {
+                },
+            },
+            ["Select"] = {
+                ["KeepFreeSpace"] = 2,
+            },
+            ["OpenAll"] = {
+                ["KeepFreeSpace"] = 2,
+            },
+        },
+    },
+}

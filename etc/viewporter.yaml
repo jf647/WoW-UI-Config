@@ -1,0 +1,9 @@
+---
+templates:
+    perchar:
+        viewporter:
+            input: $TEMPLATEDIR/viewporter/Viewporter.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Viewporter.lua
+perchar_criteria:
+    addons:
+        - Viewporter

@@ -1,0 +1,45 @@
+ChocolateBarDB = {
+    ["profileKeys"] = {
+[% FOR realm IN realms.keys -%]
+[% FOR char IN realms.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = "[% char %] - [% realm %]",
+[% END # FOR realm -%]
+[% END # FOR char -%]
+    },
+    ["profiles"] = {
+[% FOR realm IN realms.keys -%]
+[% FOR char IN realms.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = {
+            ["fontPath"] = "[% font %]",
+            ["fontSize"] = [% fontsize %],
+            ["fontName"] = "[% fontname %]",
+            ["objSettings"] = {
+[% FOR plugin IN realms.$realm.$char.plugins -%]
+[% IF plugin.exists('altname') -%]
+                ["[% plugin.altname %]"] = {
+[% ELSE # IF altname -%]
+                ["[% plugin.name %]"] = {
+[% END # IF altname -%]
+[% IF 'left' != plugin.align -%]
+                    ["align"] = "[% plugin.align %]",
+[% END # IF align -%]
+[% IF plugin.notext -%]
+                    ["showText"] = false,
+[% END # IF notext -%]
+[% IF plugin.noicon -%]
+                    ["showIcon"] = false,
+[% END # IF notext -%]
+[% IF 0 == plugin.enabled -%]
+                    ["enabled"] = false,
+[% END -%]
+                    ["index"] = [% plugin.index %],
+                    ["barName"] = "ChocolateBar1",
+                }, -- [% loop.count %]
+[% END # FOR plugin -%]
+            }, -- [% loop.count %]
+        }, -- end char
+[% END # FOR char-%]
+[% END # FOR realm-%]
+    },
+}    
+

@@ -1,0 +1,16 @@
+---
+templates:
+    perchar:
+        tidyplates:
+            input: $TEMPLATEDIR/tidyplates/TidyPlates_perchar.lua
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/TidyPlates.lua
+        tidyplateshub:
+            input: $TEMPLATEDIR/tidyplates/TidyPlatesHub.lua
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/TidyPlatesHub.lua
+    global:
+        tidyplates:
+            input: $TEMPLATEDIR/tidyplates/TidyPlates.lua
+            output: $TEMPDIR/WTF/SavedVariables/TidyPlates.lua
+perchar_criteria:
+    addons:
+        - TidyPlates

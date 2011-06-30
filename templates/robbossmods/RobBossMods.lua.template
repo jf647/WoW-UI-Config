@@ -1,0 +1,20 @@
+
+rbm_elang = "en"
+rbm_tellnextboss = false
+rbm_showminimap = false
+rbm_telleveryboss = false
+rbm_customTactics = {
+[% FOR s IN strats -%]
+    -- [% s.name %]
+    ["T[% s.id %]"] = "[% s.strategy %]",
+[% END -%]
+}
+rbm_minimapcords = nil
+rbm_oncetold = nil
+rbm_whispermode = true
+rbm_tellgrid = {
+    ["hintonce"] = "Boss tactics are available writing !boss in party chat or in a whisper to me right before the fight.",
+}
+rbm_showframe = false
+rbm_nevershow = false
+

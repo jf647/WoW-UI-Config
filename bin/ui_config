@@ -1,0 +1,155 @@
+#!/usr/bin/perl
+#
+# $Id$ $Date$
+#
+
+use strict;
+use warnings;
+
+use Archive::Zip qw|:ERROR_CODES :CONSTANTS|;
+use FindBin;
+use Getopt::Long;
+use Template;
+use Path::Class qw|dir file|;
+
+use lib "$FindBin::Bin/../lib";
+
+use WoWUI::Config;
+use WoWUI::Profile;
+use WoWUI::Machine;
+use WoWUI::Util::Filter;
+
+# parse command line
+my %o = (
+    configfile => "$FindBin::Bin/../etc/ui_config.yaml",
+    clean => 1,
+    debug => [],
+    trace => [],
+);
+GetOptions(
+    \%o,
+    'configfile=s',
+    'clean!',
+    'debug=s@',
+    'trace=s@',
+    'outputdir=s',
+) or die "can't parse command line";
+my $profilename = shift @ARGV;
+die "profile required" unless( $profilename );
+die "unexpected args: @ARGV" if( @ARGV );
+
+# load the main config
+my $cfg = WoWUI::Config->new( file => $o{configfile} )->cfg;
+
+# allow override of outputdir
+if( $o{outputdir} ) {
+  $cfg->{dirs}->{outputdir} = dir( $o{outputdir} )->absolute->stringify;
+}
+
+# init logging
+my $logcfg = $cfg->{logging};
+if( @{ $o{debug} } ) {
+    for my $category( @{ $o{debug} } ) {
+        $logcfg->{"log4perl.logger.$category"} = 'DEBUG';
+    }
+}
+if( @{ $o{trace} } ) {
+    for my $category( @{ $o{trace} } ) {
+        $logcfg->{"log4perl.logger.$category"} = 'TRACE';
+    }
+}
+Log::Log4perl->init( $logcfg );
+my $log = Log::Log4perl->get_logger('main');
+$log->info('START');
+
+
+eval {
+
+my %extra_files;
+
+# create a temp dir in which to work
+my $tempdir = WoWUI::Util::tempdir( $o{clean} );
+
+# create a machine object
+my $machine = WoWUI::Machine->initialize( $profilename );
+
+# make sure our output is writeable
+unless( -w $machine->output->parent ) {
+  die "can't write to ", $machine->output->parent;
+}
+if( -f $machine->output && ! -w $machine->output ) {
+  die "can't write to ", $machine->output;
+}
+
+# create a profile object
+my $profile = WoWUI::Profile->initialize( $machine->configfile );
+$profile->populate;
+
+# iterate over modules
+for my $module( @{ $cfg->{modules} } ) {
+
+    $log->info("processing $module");
+
+    # load the module
+    eval "require $module";
+    if( $@ ) {
+        die "can't load $module: $@";
+    }
+
+    # instantiate the UI module
+    my $mod = $module->new( extra_files => \%extra_files );
+
+    # process the UI's per-char config if it has one
+    if( $mod->perchar ) {
+        $log->debug("processing perchar for $module");
+        for my $realm( $profile->realms_values ) {
+            for my $char( $realm->chars_values ) {
+                $log->debug("processing ", $char->name, " of ", $realm->name);
+                my $chardata = $mod->chardata( $char );
+                next unless $chardata;
+                $log->trace("writing files for ", $char->name, " of ", $realm->name);
+                $mod->process_perchar( $char, $chardata );
+            }
+        }
+    }
+
+    # process the UI's global config if it has one
+    if( $mod->global ) {
+        $log->debug("processing global for $module");
+        my $data = $mod->data;
+        next unless( $data );
+        $data->{charlist} = $profile->charlist;
+        $log->trace("writing files");
+        $mod->process_global( $data );
+    }
+
+}
+
+# create an archive of the tempdir
+my $zip = Archive::Zip->new();
+while( my $dir = $tempdir->next ) {
+    next unless( -d $dir );
+    next if( $dir eq $tempdir );
+    next if( $dir =~ m/\.\.?$/ );
+    unless( AZ_OK == $zip->addTree($dir, $dir->relative($tempdir)) ) {
+        die "addTree error: $dir";
+    }
+}
+unless ( $zip->writeToFileNamed($machine->output->stringify) == AZ_OK ) {
+    die "write error";
+}
+$log->info("wrote settings to ", $machine->output);
+$log->info("tempdir was $tempdir") unless( $o{clean} );
+
+};
+if( $@ ) {
+    $log->fatal($@);
+    exit(1);
+}
+
+# all done
+$log->info('STOP');
+exit(0);
+
+#
+# EOF

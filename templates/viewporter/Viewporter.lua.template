@@ -1,0 +1,9 @@
+
+ViewporterDB = {
+    ["enabled"] = true,
+    ["firsttime"] = false,
+    ["bottom"] = "[% bottom %]",
+    ["right"] = 0,
+    ["left"] = 0,
+    ["top"] = 0,
+}

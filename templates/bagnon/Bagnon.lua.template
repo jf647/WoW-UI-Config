@@ -1,0 +1,33 @@
+
+BagnonFrameSettings = {
+    ["frames"] = {
+        ["inventory"] = {
+            ["scale"] = [% scale %],
+            ["hasMoneyFrame"] = [% IF moneyframe %]true[% ELSE %]false[% END %],
+            ["itemFrameColumns"] = 16,
+            ["y"] = 225,
+            ["x"] = 0,
+            ["itemFrameSpacing"] = 0,
+        },
+        ["keys"] = {
+            ["point"] = "TOPRIGHT",
+            ["scale"] = [% scale %],
+            ["hasOptionsToggle"] = false,
+            ["itemFrameColumns"] = 8,
+            ["y"] = -575.1109821350593,
+            ["x"] = -267.0382680029534,
+            ["itemFrameSpacing"] = 0,
+        },
+        ["bank"] = {
+            ["scale"] = [% scale %],
+            ["hasMoneyFrame"] = false,
+            ["hasOptionsToggle"] = false,
+            ["itemFrameColumns"] = 16,
+            ["y"] = 281.5553550593666,
+            ["x"] = 703.9998555661503,
+            ["hasDBOFrame"] = false,
+            ["itemFrameSpacing"] = 0,
+        },
+    },
+    ["version"] = "2.15.0",
+}

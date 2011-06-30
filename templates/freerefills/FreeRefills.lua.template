@@ -1,0 +1,24 @@
+
+FreeRefillsDB = {
+	["profileKeys"] = {
+[% FOR realm IN freerefills.keys -%]
+[% FOR char IN freerefills.$realm.keys -%]
+		["[% char %] - [% realm %]"] = "[% char %] - [% realm %]",
+[% END -%]
+[% END -%]
+	},
+	["profiles"] = {
+[% FOR realm IN freerefills.keys -%]
+[% FOR char IN freerefills.$realm.keys -%]
+		["[% char %] - [% realm %]"] = {
+			["refills"] = {
+[% FOR item IN freerefills.$realm.$char -%]
+				["|cffffffff|Hitem:[% item.itemid %]:0:0:0:0:0:0:0:80:0|h[[% item.name %]]|h|r"] = [% item.quantity %],
+[% END -%]
+			},
+        },
+[% END -%]
+[% END -%]
+	},
+}
+

@@ -1,0 +1,21 @@
+
+_NPCScanOptionsCharacter = {
+	["Achievements"] = {
+[% FOR a IN achievements -%]
+        [[% a.id %]] = [% IF a.enabled %]true[% ELSE %]false[% END %],
+[% END -%]
+	},
+	["NPCs"] = {
+[% FOR n IN npcs -%]
+        [[% n.id %]] = "[% n.name %]",
+[% END -%]
+	},
+	["Version"] = "4.0.3.6",
+	["NPCWorldIDs"] = {
+[% FOR n IN npcs -%]
+[% IF n.world -%]
+        [[% n.id %]] = [% n.world %],
+[% END -%]
+[% END -%]
+	},
+}

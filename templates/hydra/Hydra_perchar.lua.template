@@ -1,0 +1,46 @@
+HydraSettings = {
+[% IF hydra -%]
+	["Party"] = {
+		["enable"] = [% IF slave %]true[% ELSE %]false[% END %],
+	},
+	["Mount"] = {
+		["enable"] = false,
+	},
+	["Automation"] = {
+		["declineDuels"] = false,
+		["declineArenaTeams"] = [% IF slave %]true[% ELSE %]false[% END %],
+		["acceptSummons"] = [% IF slave %]true[% ELSE %]false[% END %],
+		["acceptResurrections"] = [% IF slave %]true[% ELSE %]false[% END %],
+		["declineGuilds"] = [% IF slave %]true[% ELSE %]false[% END %],
+		["verbose"] = true,
+		["sellJunk"] = false,
+		["repairWithGuildFunds"] = false,
+		["repairEquipment"] = false,
+		["acceptResurrectionsInCombat"] = [% IF slave %]true[% ELSE %]false[% END %],
+	},
+	["Taxi"] = {
+		["enable"] = true,
+		["timeout"] = 60,
+	},
+	["Follow"] = {
+		["enable"] = true,
+        ["sticky"] = true,
+        ["sticky_ooc"] = true,
+        ["sticky_ooc_window"] = 8,
+		["verbose"] = true,
+	},
+	["Quest"] = {
+        ["enable"] = true,
+		["share"] = [% IF slave %]false[% ELSE %]true[% END %],
+		["abandon"] = [% IF slave %]true[% ELSE %]false[% END %],
+		["turnin"] = [% IF slave %]true[% ELSE %]false[% END %],
+		["accept"] = [% IF slave %]true[% ELSE %]false[% END %],
+		["complete"] = [% IF slave %]true[% ELSE %]false[% END %],
+	},
+	["Chat"] = {
+		["enable"] = true,
+		["mode"] = "leader",
+		["timeout"] = 300,
+	},
+[% END -%]
+}

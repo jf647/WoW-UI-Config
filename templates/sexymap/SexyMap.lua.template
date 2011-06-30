@@ -1,0 +1,176 @@
+
+SexyMapDB = {
+	["namespaces"] = {
+		["Ping"] = {
+		},
+		["Coordinates"] = {
+		},
+		["Buttons"] = {
+			["profiles"] = {
+				["Default"] = {
+					["direction"] = {
+						["hide"] = "never",
+					},
+					["close"] = {
+						["hide"] = "never",
+					},
+					["LibDBIcon10_Skada"] = {
+						["hide"] = "never",
+					},
+					["voice"] = {
+						["hide"] = "never",
+					},
+					["FuBarPluginGridFrameMinimapButton"] = {
+						["hide"] = "never",
+					},
+					["LibDBIcon10_PitBull4"] = {
+						["hide"] = "never",
+					},
+					["TrinketMenu_IconFrame"] = {
+						["hide"] = "never",
+					},
+					["LibDBIcon10_BugSack"] = {
+						["hide"] = "never",
+					},
+					["zoom"] = {
+						["hide"] = "never",
+					},
+					["lfg"] = {
+						["hide"] = "always",
+					},
+					["LibDBIcon10_AutoBar"] = {
+						["hide"] = "always",
+					},
+					["calendar"] = {
+						["hide"] = "always",
+					},
+					["worldmap"] = {
+						["hide"] = "never",
+					},
+					["difficulty"] = {
+						["hide"] = "always",
+					},
+					["mapclock"] = {
+						["hide"] = "never",
+					},
+					["DBMMinimapButton"] = {
+						["hide"] = "never",
+					},
+					["DominosMinimapButton"] = {
+						["hide"] = "never",
+					},
+					["mail"] = {
+						["hide"] = "always",
+					},
+					["dragPositions"] = {
+						["MiniMapInstanceDifficulty"] = -53.71681422444052,
+						["MiniMapMailFrame"] = 206.4155068662106,
+						["MiniMapTrackingButton"] = 146.9524968531208,
+						["MiniMapBattlefieldFrame"] = 199.9758374766612,
+						["LibDBIcon10_Grid"] = -43.26878011073129,
+						["GameTimeFrame"] = 228.7398915670497,
+						["GuildInstanceDifficulty"] = -58.85138774040271,
+						["MiniMapLFGFrame"] = 248.9519248166429,
+					},
+					["tracking"] = {
+						["hide"] = "always",
+					},
+					["pvp"] = {
+						["hide"] = "never",
+					},
+				},
+			},
+		},
+		["AutoZoom"] = {
+			["profiles"] = {
+				["Default"] = {
+					["autoZoom"] = 10,
+				},
+			},
+		},
+		["Shapes"] = {
+			["profiles"] = {
+				["Default"] = {
+					["shape"] = "Interface\\BUTTONS\\WHITE8X8",
+				},
+			},
+		},
+		["Fader"] = {
+		},
+		["Movers"] = {
+			["profiles"] = {
+				["Default"] = {
+					["clamp"] = false,
+					["scale"] = 0.8,
+					["rightClickToConfig"] = false,
+				},
+			},
+		},
+		["Borders"] = {
+			["profiles"] = {
+				["Default"] = {
+					["applyPreset"] = false,
+					["borders"] = {
+						{
+							["a"] = 1,
+							["hNudge"] = 0,
+							["rotSpeed"] = 10,
+							["r"] = 0.3411764705882353,
+							["scale"] = 0.73,
+							["g"] = 0.4705882352941176,
+							["vNudge"] = 0,
+							["disableRotation"] = true,
+							["name"] = "Square Overlay",
+							["blendMode"] = "ADD",
+							["rotation"] = 66,
+							["drawLayer"] = "ARTWORK",
+							["b"] = 1,
+							["texture"] = "World\\GENERIC\\ACTIVEDOODADS\\WORLDTREEPORTALS\\TWISTEDNETHER8.BLP",
+						}, -- [1]
+						{
+							["a"] = 1,
+							["hNudge"] = 0,
+							["rotSpeed"] = -14,
+							["b"] = 1,
+							["scale"] = 1.9,
+							["g"] = 0.7215686274509804,
+							["vNudge"] = 5,
+							["disableRotation"] = true,
+							["name"] = "Circle 2",
+							["drawLayer"] = "BACKGROUND",
+							["blendMode"] = "ADD",
+							["r"] = 0.3607843137254902,
+							["texture"] = "World\\GENERIC\\ACTIVEDOODADS\\INSTANCEPORTAL\\GENERICGLOW2.BLP",
+						}, -- [2]
+					},
+				},
+			},
+		},
+		["HudMap"] = {
+			["profiles"] = {
+				["Default"] = {
+					["setNewScale"] = true,
+					["scale"] = 1.4,
+				},
+			},
+		},
+		["ZoneText"] = {
+			["profiles"] = {
+				["Default"] = {
+					["show"] = "never",
+				},
+			},
+		},
+	},
+	["profileKeys"] = {
+[% FOR realm IN charlist.keys -%]
+[% FOR char IN charlist.$realm.keys -%]
+		["[% char %] - [% realm %]"] = "Default",
+[% END -%]
+[% END -%]
+	},
+	["profiles"] = {
+		["Default"] = {
+		},
+	},
+}

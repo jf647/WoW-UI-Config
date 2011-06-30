@@ -1,0 +1,220 @@
+---
+templates:
+    global:
+        chocolatebar:
+            input: $TEMPLATEDIR/chocolatebar/ChocolateBar.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/ChocolateBar.lua
+perchar_criteria:
+    addons:
+        - ChocolateBar
+plugins:
+    RobBossMods:
+        align: left
+        priority: 90
+        notext: 1
+        criteria:
+            addons:
+                - RobBossMods
+    LoggerHead:
+        align: left
+        priority: 80
+        criteria:
+            addons:
+                - LoggerHead
+    Raven:
+        criteria:
+            exclude:
+                - everyone
+    Archy:
+        align: left
+        priority: 70
+        notext: 1
+        criteria:
+            addons:
+                - Archy
+    epgp:
+        align: right
+        priority: 100
+        include:
+            - addon:epgp
+    Broker Currency:
+        align: left
+        priority: 20
+        noicon: 1
+        criteria:
+            addons:
+                - Broker_Currency
+    Broker_uClock:
+        align: right
+        priority: 30
+        criteria:
+            addons:
+                - Broker_uClock
+    BugSack:
+        align: left
+        priority: 10
+        criteria:
+            addons:
+                - BugSack
+    AllXP:
+        align: right
+        priority: 10
+        criteria:
+            addons:
+                - Broker_AllXP
+    Ara_Broker_Tradeskills:
+        align: right
+        priority: 50
+        altname: '|cFFFFB366Ara|r Tradeskills'
+        criteria:
+            addons:
+                - Ara_Broker_Tradeskills
+    AutoBar:
+        criteria:
+            exclude:
+                - everyone
+    Bagsy:
+        align: left
+        priority: 30
+        criteria:
+            addons:
+                - Bagsy
+    Broker_MicroMenu:
+        align: right
+        priority: 20
+        criteria:
+            addons:
+                - Broker_MicroMenu
+    Broker_Equipment:
+        align: left
+        priority: 60
+        criteria:
+            addons:
+                - Broker_Equipment
+    MoreChocolate:
+        criteria:
+            exclude:
+                - everyone
+    PitBull4:
+        criteria:
+            exclude:
+                - everyone
+    Ara_Broker_Friends:
+        align: center
+        priority: 20
+        altname: '|cFFFFB366Ara|r Friends'
+        criteria:
+            addons:
+                - Ara_Broker_Guild_Friends
+    BufCanceler:
+        align: center
+        priority: 50
+        notext: 1
+        criteria:
+            addons:
+                - Broker_BufCanceler
+    Grid:
+        criteria:
+            exclude:
+                - everyone
+    Dominos:
+        criteria:
+            exclude:
+                - everyone
+    picoEXP:
+        align: center
+        priority: 10
+        criteria:
+            addons:
+                - picoEXP
+    RepairBroker:
+        align: left
+        priority: 40
+        criteria:
+            addons:
+                - RepairBroker
+    Prat:
+        criteria:
+            exclude:
+                - everyone
+    Broker Group:
+        align: left
+        priority: 50
+        criteria:
+            addons:
+                - Broker_Group
+    Parrot:
+        criteria:
+            exclude:
+                - everyone
+    TellMeWhen:
+        criteria:
+            exclude:
+                - everyone
+    CorkLauncher:
+        criteria:
+            exclude:
+                - everyone
+    Ara_Broker_Reputations:
+        align: center
+        priority: 40
+        altname: '|cffffb366Ara|r Reputations'
+        criteria:
+            addons:
+                - Ara_Broker_Reputations
+    Ara_Broker_Guild:
+        align: center
+        priority: 30
+        altname: '|cFFFFB366Ara|r Guild'
+        criteria:
+            addons:
+                - Ara_Broker_Guild_Friends
+            include:
+                - guilded
+    Broker_AltGuild:
+        align: center
+        priority: 30
+        criteria:
+            addons:
+                - Broker_AltGuild
+    GatherMate2:
+        criteria:
+            exclude:
+                - everyone
+    Buffet:
+        criteria:
+            exclude:
+                - everyone
+    Hydra:
+        criteria:
+            exclude:
+                - everyone
+    BankStack:
+        align: right
+        priority: 60
+        notext: 1
+        criteria:
+            addons:
+                - BankStack
+    Skada:
+        criteria:
+            exclude:
+                - everyone
+    BagnonLauncher:
+        criteria:
+            exclude:
+                - everyone
+    WIM:
+        align: right
+        priority: 40
+        notext: 1
+        criteria:
+            addons:
+                - WIM
+    Panda:
+        align: right
+        priority: 70
+        notext: 1
+        criteria:
+            addons:
+                - Panda

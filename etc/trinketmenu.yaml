@@ -1,0 +1,19 @@
+---
+templates:
+    perchar:
+        trinketmenu:
+            input: $TEMPLATEDIR/trinketmenu/TrinketMenu.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/TrinketMenu.lua
+perchar_criteria:
+    addons:
+        - TrinketMenu
+cachefile: $VARRUNDIR/trinketmenu_cache.yaml
+overrides:
+    Discerning Eye of the Beast:
+        priority: 1740
+    Swift Hand of Justice:
+        priority: 1740
+    'Darkmoon Card: Blue Dragon':
+        priority: 3590
+    Jar of Ancient Remedies:
+        prefer: 1

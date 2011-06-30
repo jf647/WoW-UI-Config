@@ -1,0 +1,22 @@
+
+SellJunkDB = {
+    ["char"] = {
+[% FOR realm IN charlist.keys -%]
+[% FOR char IN charlist.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = {
+            ["max12"] = false,
+            ["auto"] = true,
+            ["showSpam"] = false,
+        },
+[% END -%]
+[% END -%]
+    },
+    ["profileKeys"] = {
+[% FOR realm IN charlist.keys -%]
+[% FOR char IN charlist.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = "[% char %] - [% realm %]",
+[% END -%]
+[% END -%]
+    },
+}
+

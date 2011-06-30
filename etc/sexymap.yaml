@@ -1,0 +1,14 @@
+---
+templates:
+    global:
+        sexymap:
+            input: $TEMPLATEDIR/sexymap/SexyMap.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/SexyMap.lua
+perchar_criteria:
+    exclude:
+        - banker
+        - mule
+criteria:
+    include:
+        - machine:name:kara
+        - machine:name:heidi

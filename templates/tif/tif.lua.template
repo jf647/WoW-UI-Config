@@ -1,0 +1,66 @@
+
+TIF_Misc = {
+    ["versionCaps"] = 2,
+    ["versionIgnore"] = 3,
+    ["versionFilter"] = 2,
+    ["versionShared"] = 2,
+}
+TIFDB = {
+    ["factionrealm"] = {
+[% FOR realm IN realms.keys -%]
+[% FOR faction IN realms.$realm.keys -%]
+        ["[% faction %] - [% realm %]"] = {
+            ["Tipx's Ignore/Filter_Ignore"] = {
+                ["Ignores"] = {
+                },
+            },
+            ["Tipx's Ignore/Filter_AntiCaps"] = {
+                ["GoodWords"] = {
+                    "WTS", -- [1]
+                    "WTB", -- [2]
+                    "LF", -- [3]
+                    "DPS", -- [4]
+                },
+                ["starColor"] = "ffff0000",
+                ["BadWords"] = {
+                },
+            },
+            ["Tipx's Ignore/Filter_Filter"] = {
+                ["BadNames"] = {
+[% FOR name IN realms.$realm.$faction.names -%]
+                    "[% name %]", -- [% loop.count %]
+[% END -%]
+                },
+                ["BadWords"] = {
+[% FOR string IN realms.$realm.$faction.strings -%]
+                    "[% string %]", -- [% loop.count %]
+[% END -%]
+                },
+            },
+        },
+[% END -%]
+[% END -%]
+    },
+    ["profileKeys"] = {
+[% FOR realm IN charlist.keys -%]
+[% FOR char IN charlist.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = "[% realm %]",
+[% END -%]
+[% END -%]
+    },
+    ["profiles"] = {
+[% FOR realm IN charlist.keys -%]
+        ["[% realm %]"] = {
+            ["modulesStates"] = {
+                ["Filter"] = true,
+            },
+            ["filterActiveChannels"] = {
+                ["msgYell"] = false,
+                ["msgSay"] = false,
+                ["msgEmote"] = false,
+                ["msgChannel"] = false,
+            },
+        },
+[% END -%]
+    },
+}

@@ -1,0 +1,42 @@
+
+DigitsDB = {
+[% FOR realm IN realms.keys -%]
+[% FOR char IN realms.$realm.keys -%]
+[% c = realms.$realm.$char -%]
+    ["[% char %] of [% realm %]"] = {
+[% FOR pt IN [ 'rage', 'focus', 'energy', 'mana', 'runicpower', 'altpower' ] -%]
+[% IF c.$pt -%]
+		[% IF powertypes.$pt.exists('index') %][[% powertypes.$pt.index %]] = [% END %]{
+            ["enabled"] = true,
+            ["r"] = [% powertypes.$pt.color.r %],
+            ["g"] = [% powertypes.$pt.color.g %],
+            ["b"] = [% powertypes.$pt.color.b %],
+            ["a"] = [% powertypes.$pt.color.a %],
+        },
+[% ELSE -%]
+		[% IF powertypes.$pt.exists('index') %][[% powertypes.$pt.index %]] = [% END %]{
+            ["enabled"] = false,
+            ["r"] = 0.5,
+            ["g"] = 0.5,
+            ["b"] = 0.5,
+            ["a"] = 0.5,
+        },
+[% END -%]
+[% END -%]
+[% FOR frame IN [ 'health', 'power' ] -%]
+		["[% frame %]Frame"] = {
+			["outline"] = "[% IF font.outline %]OUTLINE[% END %]",
+			["fontSize"] = [% font.size %],
+			["font"] = "[% font.face %]",
+			["relative"] = "[% anchor.$frame.point %]",
+			["y"] = [% anchor.$frame.y %],
+			["x"] = [% anchor.$frame.x %],
+			["enabled"] = [% IF c.frames.$frame.enabled %]true[% ELSE %]false[% END %],
+			["percent"] = [% IF c.frames.$frame.percent %]true[% ELSE %]false[% END %],
+			["ooc"] = [% IF c.frames.$frame.ooc %]true[% ELSE %]false[% END %],
+		},
+[% END -%]
+	},
+[% END -%]
+[% END -%]
+}

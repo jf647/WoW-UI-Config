@@ -1,0 +1,21 @@
+---
+templates:
+    global:
+        tif:
+            input: $TEMPLATEDIR/tif/tif.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/tif.lua
+realms:
+    The Sha'tar:
+        Alliance:
+            strings:
+                - is this by choice
+            names:
+                - Battle for the Sun
+    Winterhoof:
+        Alliance:
+            strings:
+                - .+join.+guild.+
+                - .+Bum.+Fight.+Krew.+
+        Horde:
+            strings:
+                - .+join.+guild.+

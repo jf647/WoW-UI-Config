@@ -1,0 +1,9 @@
+
+CorkDB = {
+	["y"] = [% anchor.y %],
+	["x"] = [% anchor.x %],
+	["point"] = "[% anchor.point %]",
+	["showbg"] = true,
+	["bindwheel"] = true,
+	["showanchor"] = false,
+}

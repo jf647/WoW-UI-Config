@@ -1,0 +1,17 @@
+
+-- [% char %]
+CorkDBPC = {
+	{
+        -- [% specs.1.name %]
+[% FOR setting IN specs.1.settings -%]
+		["[% setting.name %]"] = [% INCLUDE cork/cork_setting.template -%],
+[% END -%]
+	}, -- [1]
+	{
+        -- [% specs.2.name %]
+[% FOR setting IN specs.2.settings -%]
+		["[% setting.name %]"] = [% INCLUDE cork/cork_setting.template -%],
+[% END -%]
+	}, -- [2]
+}
+

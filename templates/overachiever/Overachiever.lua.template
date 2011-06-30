@@ -1,0 +1,53 @@
+
+Overachiever_Settings = {
+	["SoundAchIncomplete_AnglerCheckPole"] = true,
+	["Tooltip_ShowProgress"] = true,
+	["Tooltip_ShowID"] = false,
+	["UI_RequiredForMetaTooltip"] = true,
+	["AnglerTip_fished"] = true,
+	["CritterTip_killed"] = true,
+	["UI_SeriesTooltip"] = true,
+	["Item_consumed_whencomplete"] = false,
+	["SoundAchIncomplete"] = 0,
+	["Explore_AutoTrack_Completed"] = false,
+	["Draggable_AchFrame"] = true,
+	["CreatureTip_killed"] = false,
+[% IF autotrack -%]
+	["Tracker_AutoTimer"] = true,
+[% ELSE -%]
+	["Tracker_AutoTimer"] = false,
+[% END -%]
+	["Version"] = "0.57",
+	["Tooltip_ShowProgress_Other"] = true,
+	["Item_consumed"] = true,
+	["WellReadTip_read"] = true,
+	["Explore_AutoTrack"] = false,
+	["CritterTip_loved"] = true,
+	["DragSave_AchFrame"] = false,
+[% IF pilgrimsbounty OR allholidays -%]
+	["TurkeyLurkey_feathered"] = true,
+[% ELSE -%]
+	["TurkeyLurkey_feathered"] = false,
+[% END -%]
+[% IF hallowsend OR allholidays -%]
+	["CheckYourHead_pumpkin"] = true,
+[% ELSE -%]
+	["CheckYourHead_pumpkin"] = false,
+[% END -%]
+[% IF loveisintheair OR allholidays -%]
+	["FistfulOfLove_petals"] = true,
+[% ELSE -%]
+	["FistfulOfLove_petals"] = false,
+[% END -%]
+[% IF winterveil OR allholidays -%]
+	["LetItSnow_flaked"] = true,
+[% ELSE -%]
+	["LetItSnow_flaked"] = false,
+[% END -%]
+[% IF noblegarden OR allholidays -%]
+	["BunnyMaker_eared"] = true,
+[% ELSE -%]
+	["BunnyMaker_eared"] = false,
+[% END -%]
+}
+Overachiever_CharVars_Default = nil

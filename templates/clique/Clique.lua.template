@@ -1,0 +1,48 @@
+
+CliqueDB = nil
+CliqueDB3 = {
+	["char"] = {
+[% FOREACH char IN chars.values -%]
+		["[% char.key %]"] = {
+			["alerthidden"] = true,
+			["downclick"] = false,
+			["pri_profileKey"] = "[% char.profile1 %]",
+			["fastooc"] = true,
+			["sec_profileKey"] = "[% IF char.exists('profile2') %][% char.profile2 %][% ELSE %][% char.profile1 %][% END %]",
+			["specswap"] = [% IF char.exists('profile2') %][% IF char.profile1 != char.profile2 %]true[% ELSE %]false[% END %][% ELSE %]false[% END %],
+		},
+[% END -%]
+	},
+	["profileKeys"] = {
+[% FOREACH char IN chars.values -%]
+        ["[% char.key %]"] = "[% char.profile1 %]",
+[% END -%]
+	},
+	["profiles"] = {
+[% FOREACH profile IN profiles.values -%]
+		["[% profile.name %]"] = {
+			["bindings"] = {
+[% FOREACH action IN profile.actions -%]
+				{
+					["type"] = "[% action.type %]",
+					["key"] = "[% action.click %]",
+					["sets"] = {
+						["[% action.set %]"] = true,
+					},
+[% IF action.type == 'spell' -%]
+                    ["spell"] = "[% action.value %]",
+[% ELSIF action.type == 'macro' -%]
+                    ["macrotext"] = "[% action.value %]",
+[% ELSIF action.type == 'target' -%]
+                    ["unit"] = "mouseover",
+[% END -%]
+[% IF action.exists('icon') -%]
+					["icon"] = "Interface\\Icons\\[% action.icon %]",
+[% END -%]
+				}, -- [[% loop.count %]]
+[% END -%]
+			},
+		},
+[% END -%]
+    },
+}

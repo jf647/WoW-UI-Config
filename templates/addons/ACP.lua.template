@@ -1,0 +1,27 @@
+
+ACP_Data = {
+	["sorter"] = "Titles",
+	["NoRecurse"] = true,
+	["NoChildren"] = true,
+	["collapsed"] = {},
+	["ProtectedAddons"] = {
+		["ACP"] = true,
+	},
+	["AddonSet"] = {
+[% FOR set IN named_sets -%]
+		{
+[% FOR addon IN set.addons -%]
+			"[% addon %]", -- [[% loop.count %]]
+[% END -%]
+			["name"] = "[% set.name %]",
+		}, -- [[% loop.count %]]
+[% END -%]
+[% FOR set IN class_sets -%]
+		["[% set.name %]"] = {
+[% FOR addon IN set.addons -%]
+			"[% addon %]", -- [[% loop.count %]]
+[% END -%]
+		},
+[% END -%]
+	},
+}

@@ -1,0 +1,94 @@
+
+QuestGuru_Items = {
+}
+QuestGuru_Settings = {
+    ["ShowObjItemIcons"] = false,
+    ["ShowGuildStatus"] = false,
+    ["Colorize"] = {
+        ["PlayerName"] = {
+            ["Enabled"] = true,
+            ["Color"] = {
+                ["b"] = 0.8,
+                ["g"] = 0.4,
+                ["r"] = 0,
+            },
+        },
+        ["NPCNames"] = {
+            ["Enabled"] = true,
+            ["Color"] = {
+                ["b"] = 0.8,
+                ["g"] = 0.4,
+                ["r"] = 0,
+            },
+        },
+        ["AreaNames"] = {
+            ["Enabled"] = true,
+            ["Color"] = {
+                ["b"] = 0.8,
+                ["g"] = 0.4,
+                ["r"] = 0,
+            },
+        },
+    },
+    ["ShowAltStatus"] = false,
+    ["ShowLevels"] = {
+        ["QuestLog"] = true,
+        ["Abandon"] = true,
+        ["History"] = true,
+    },
+    ["HeaderQuests"] = true,
+    ["LogAbandon"] = false,
+    ["Sounds"] = {
+        ["Progress"] = {
+            ["Enabled"] = false,
+            ["Sound"] = "AuctionWindowOpen",
+        },
+        ["Enabled"] = true,
+        ["QuestComplete"] = {
+            ["Enabled"] = true,
+            ["Sound"] = "Sound\\Creature\\Peon\\PeonBuildingComplete1.wav",
+        },
+        ["ObjComplete"] = {
+            ["Enabled"] = true,
+            ["Sound"] = "Sound\\Creature\\Peasant\\PeasantReady1.wav",
+        },
+    },
+    ["DisableComm"] = false,
+    ["AutoComplete"] = false,
+    ["TooltipText"] = true,
+    ["Tracker"] = {
+    },
+    ["ShowWorldMapIcons"] = true,
+    ["Announce"] = {
+        ["Enabled"] =  [% IF announce %]true[% ELSE %]false[% END %],
+        ["guild"] = false,
+        ["QuestAccept"] = {
+            ["Enabled"] = true,
+            ["Text"] = "Started $qlink",
+        },
+        ["Echo"] = false,
+        ["party"] = true,
+        ["item"] = {
+            ["Enabled"] = true,
+            ["Text"] = "$name: $done/$needed ($questTitle)",
+        },
+        ["say"] = false,
+        ["whisper"] = {
+            ["Enabled"] = false,
+            ["To"] = "",
+        },
+        ["monster"] = {
+            ["Enabled"] = true,
+            ["Text"] = "$name: $done/$needed ($questTitle)",
+        },
+        ["Quest"] = {
+            ["Enabled"] = true,
+            ["Text"] = "$qlink $complete",
+        },
+        ["event"] = {
+            ["Enabled"] = true,
+            ["Text"] = "$uitext",
+        },
+    },
+    ["ShowSimpleGuildStatus"] = false,
+}
