@@ -21,7 +21,7 @@ use WoWUI::Util::Filter;
 
 # parse command line
 my %o = (
-    configfile => "$FindBin::Bin/../../WoW-UI-Config-Private/ui_config.yaml",
+    configfile => "$FindBin::Bin/../private/ui_config.yaml",
     clean => 1,
     debug => [],
     trace => [],

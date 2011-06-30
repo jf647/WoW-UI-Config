@@ -2,7 +2,7 @@
 dirs:
     templatedir: $BINDIR/../templates
     etcdir: $BINDIR/../etc
-    profiledir: $BINDIR/../../WoW-UI-Config-Private
+    profiledir: $BINDIR/../private
     varrundir: $BINDIR/../var/run
     tempbase: $BINDIR/../tmp
     outputdir: $BINDIR/settings
