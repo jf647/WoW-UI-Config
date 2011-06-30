@@ -1,0 +1,146 @@
+---
+dirs:
+    templatedir: $BINDIR/../templates
+    etcdir: $BINDIR/../etc
+    profiledir: $BINDIR/../../WoW-UI-Config-Private
+    varrundir: $BINDIR/../var/run
+    tempbase: $BINDIR/../tmp
+    outputdir: $BINDIR/settings
+logging:
+    log4perl.logger: INFO, Screen
+    log4perl.appender.Screen: Log::Log4perl::Appender::Screen
+    log4perl.appender.Screen.layout: Log::Log4perl::Layout::PatternLayout
+    log4perl.appender.Screen.stderr: 0
+    log4perl.appender.Screen.layout.ConversionPattern: '%d [%-5p] %c %m%n'
+levelcap: 85
+modules:
+    - WoWUI::Module::Addons
+    - WoWUI::Module::TellMeWhen
+    - WoWUI::Module::tif
+    - WoWUI::Module::Clique
+    - WoWUI::Module::Cork
+    - WoWUI::Module::Raven
+    - WoWUI::Module::CombatLogTrigger
+    - WoWUI::Module::Digits
+    - WoWUI::Module::TrinketMenu
+    - WoWUI::Module::TidyPlates
+    - WoWUI::Module::NPCScan
+    - WoWUI::Module::Bagnon
+    - WoWUI::Module::Postal
+    - WoWUI::Module::DualBoxMacro
+    - WoWUI::Module::BrokerCurrency
+    - WoWUI::Module::Auctionator
+    - WoWUI::Module::DeadlyBossMods
+    - WoWUI::Module::wMarker
+    - WoWUI::Module::SexyMap
+    - WoWUI::Module::Overachiever
+    - WoWUI::Module::Viewporter
+    - WoWUI::Module::WIM
+    - WoWUI::Module::SellJunk
+    - WoWUI::Module::QuestGuru
+    - WoWUI::Module::TurnIn
+    - WoWUI::Module::Hydra
+    - WoWUI::Module::FreeRefills
+    - WoWUI::Module::Kong
+    - WoWUI::Module::ChocolateBar
+modconfigfile: $ETCDIR/$NAME.yaml
+profiles:
+    machinename:
+        output: $OUTPUTDIR/machinename_settings.zip
+        configfile: $PROFILEDIR/user.yaml
+        account: ACCOUNTNAME
+        machinetype: master
+        player: username
+        wowversions:
+            - 4.x
+            - 4.2
+        modules:
+            digits:
+                font:
+                    size: 30
+                    face: White Rabbit
+                    outline: 1
+                anchor:
+                    health:
+                        x: -150
+                        y: 140
+                        point: CENTER
+                    power:
+                        x: 150
+                        y: 140
+                        point: CENTER
+            raven:
+                shortbuffs:
+                    x: 0.278
+                    y: 0.928
+                    xr: 0.696
+                    yt: 0.0262
+                    w: 35
+                    h: 35
+                    size: 25
+                    scale: 1.4
+                    width: 20
+                    height: 5
+                    wrap: 20
+                    max: 20
+                    growdir: 1
+                    wrapdir: 0
+                debuffs:
+                    x: 0.672511
+                    y: 0.614389
+                    xr: 0.294529
+                    yt: 0.327016
+                    w: 35
+                    h: 35
+                    size: 25
+                    scale: 1.8
+                    width: 20
+                    height: 5
+                    wrap: 5
+                    max: 20
+                    growdir: 1
+                    wrapdir: 1
+                longbuffs:
+                    x: 0.70
+                    y: 0.14
+                    xr: 0.285
+                    yt: 0.833
+                    w: 20
+                    h: 20
+                    size: 25
+                    scale: 0.8
+                    width: 20
+                    height: 5
+                    wrap: 7
+                    max: 42
+                    growdir: 1
+                    wrapdir: 0
+                ic:
+                    x: 0.671
+                    y: 0.650
+                    size: 25
+                    scale: 1.2
+                    dir: 0
+            questguru:
+                announce: 0
+            turnin:
+                startquest: 0
+                finishquest: 0
+            viewporter:
+                bottom: 135
+            bagnon:
+                scale: 0.6
+            cork:
+                anchor:
+                    point: BOTTOMLEFT
+                    x: 40
+                    y: 690
+            chocolatebar:
+                font: Fonts\\FRIZQT__.TTF
+                fontname: Friz Quadrata TT
+                fontsize: 10
+            hydra:
+                extratrust:
+                    Realm:
+                        - Trustone
+                        - Trusttwo
