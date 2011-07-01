@@ -36,7 +36,7 @@ sub BUILD
   my $self = shift;
 
   my $gcfg = WoWUI::Config->instance->cfg;
-  $self->config( load_file( expand_path( $gcfg->{modconfigfile}, name => $self->name ) ) );
+  $self->config( load_layered( file("$ADDONCONFDIR", $self->name . '.yaml'), file("$PRIVADDONCONFDIR", $self->name . '.yaml') ) );
   
 }
 

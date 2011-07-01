@@ -1,7 +1,7 @@
 ---
 realm:
-    Realmname:
-        Charone:
+    realm1:
+        char1:
             class: Shaman
             race: Dwarf
             spec1: Restoration
@@ -23,13 +23,11 @@ realm:
                 - Cooking:500
                 - InactiveCooking
             modules:
-                cork:
-                    values_common:
-                        - Tracking-spell: Find Herbs
                 dualboxmacro:
                     masters:
-                        - Masterone
-                        - Mastertwo
+                        - master1
+                        - master2
+                        - master3
                 trinketmenu:
                     Resto:
                         - Blood of Isiset (Heroic)
@@ -43,31 +41,15 @@ realm:
                         - Anhuur's Hymnal (Heroic)
                 npcscan: &npcscan
                     sets:
-                        - +@critters_3
-                        - +@boe
-                        - +@vanity
                         - +@gold
                         - +@mount
-                        - +@mage
-                        - +@questgivers
-                        - +Karoma
-                        - -Alpine Chipmunk
-                        - -Rattlesnake
-                        - -Rock Viper
-                        - -Grotto Vole
-                        - -Yellow-Bellied Marmot
-                        - -Oasis Moth
-                        - -Wharf Rat
-                        - -Sea Cucumber
-                        - -Rockchewer Whelk
-                        - -Highlands Turkey
-                        - -Mac Frog
+                        - +@boe
+                        - +@vanity
+                        - +@quests
                     achievements:
-                        - outland_rare
-                        - northrend_rare
-                clt:
-                    debug: 1
-        Chartwo:
+                        - outland
+                        - northrend
+        char2:
             class: Death Knight
             race: Night Elf
             spec1: Frost

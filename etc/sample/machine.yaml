@@ -1,0 +1,96 @@
+---
+output: $OUTPUTDIR/$MACHINE_wowui.zip
+dualbox_type: master
+wowversions:
+    - 4.x
+    - 4.2
+modules:
+    digits:
+        font:
+            size: 30
+            face: White Rabbit
+            outline: 1
+        anchor:
+            health:
+                x: -150
+                y: 140
+                point: CENTER
+            power:
+                x: 150
+                y: 140
+                point: CENTER
+    raven:
+        shortbuffs:
+            x: 0.278
+            y: 0.928
+            xr: 0.696
+            yt: 0.0262
+            w: 35
+            h: 35
+            size: 25
+            scale: 1.4
+            width: 20
+            height: 5
+            wrap: 20
+            max: 20
+            growdir: 1
+            wrapdir: 0
+        debuffs:
+            x: 0.672511
+            y: 0.614389
+            xr: 0.294529
+            yt: 0.327016
+            w: 35
+            h: 35
+            size: 25
+            scale: 1.8
+            width: 20
+            height: 5
+            wrap: 5
+            max: 20
+            growdir: 1
+            wrapdir: 1
+        longbuffs:
+            x: 0.70
+            y: 0.14
+            xr: 0.285
+            yt: 0.833
+            w: 20
+            h: 20
+            size: 25
+            scale: 0.8
+            width: 20
+            height: 5
+            wrap: 7
+            max: 42
+            growdir: 1
+            wrapdir: 0
+        ic:
+            x: 0.671
+            y: 0.650
+            size: 25
+            scale: 1.2
+            dir: 0
+    questguru:
+        announce: 0
+    turnin:
+        startquest: 0
+        finishquest: 0
+    viewporter:
+        bottom: 135
+    bagnon:
+        scale: 0.6
+    cork:
+        anchor:
+            point: BOTTOMLEFT
+            x: 40
+            y: 690
+    chocolatebar:
+        font: Fonts\\FRIZQT__.TTF
+        fontname: Friz Quadrata TT
+        fontsize: 10
+    hydra:
+        extratrust:
+            realm1:
+                - trust1
+                - trust2

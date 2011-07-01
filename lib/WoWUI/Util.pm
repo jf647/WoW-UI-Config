@@ -24,6 +24,7 @@ use warnings;
 use FindBin;
 use File::Temp;
 use Carp 'croak';
+use Hash::Merge::Simple;
 use Path::Class qw|dir file|;
 use YAML::Any   qw|LoadFile DumpFile|;
 use Log::Log4perl;
@@ -40,7 +41,7 @@ sub expand_path
         my $gcfg = WoWUI::Config->instance->cfg;
         for my $dirtype( keys %{ $gcfg->{dirs} } ) {
             my $dir = $gcfg->{dirs}->{$dirtype};
-            $dir =~ s/\$BINDIR/$FindBin::Bin/;
+            $dir =~ s|\$TOPDIR|$FindBin::Bin/..|;
             $dirs->{uc $dirtype} = dir( $dir )->resolve;
         }
     }
@@ -70,6 +71,18 @@ sub load_file
     }
   
     return LoadFile($fname);  
+
+}
+
+sub load_layered
+{
+
+  my @fnames = @_;
+  my $cfg;
+  for my $path( map { expand_path $_ } @fnames ) {
+    $cfg = Hash::Merge::Simple->merge( $cfg, load_file($path) );
+  }
+  return $cfg;
 
 }
 
