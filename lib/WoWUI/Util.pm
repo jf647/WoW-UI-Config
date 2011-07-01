@@ -77,9 +77,10 @@ sub load_file
 sub load_layered
 {
 
-  my @fnames = @_;
+  my $fname = shift;
+  my @paths = @_;
   my $cfg;
-  for my $path( map { expand_path $_ } @fnames ) {
+  for my $path( map { expand_path "$_/$fname" } @paths ) {
     $cfg = Hash::Merge::Simple->merge( $cfg, load_file($path) );
   }
   return $cfg;

@@ -27,7 +27,7 @@ __PACKAGE__->meta->make_immutable;
 use Carp 'croak';
 use File::Copy;
 
-use WoWUI::Util qw|expand_path load_file perchar_sv sv tempfile tt log tempdir|;
+use WoWUI::Util qw|expand_path load_layered perchar_sv sv tempfile tt log tempdir|;
 
 # constructor
 sub BUILD
@@ -36,7 +36,7 @@ sub BUILD
   my $self = shift;
 
   my $gcfg = WoWUI::Config->instance->cfg;
-  $self->config( load_layered( file("$ADDONCONFDIR", $self->name . '.yaml'), file("$PRIVADDONCONFDIR", $self->name . '.yaml') ) );
+  $self->config( load_layered( $self->name . '.yaml', '$ADDONCONFDIR', '$PRIVADDONCONFDIR' ) );
   
 }
 
