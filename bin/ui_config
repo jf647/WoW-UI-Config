@@ -21,7 +21,9 @@ use WoWUI::Util::Filter;
 
 # parse command line
 my %o = (
-    configfile => "$FindBin::Bin/../private/ui_config.yaml",
+    configdir => [ "$FindBin::Bin/../private" ],
+    configfile => "ui_config.yaml",
+    machinesfile => '$PRIVATEDIR/machines.yaml',
     clean => 1,
     debug => [],
     trace => [],
@@ -29,17 +31,18 @@ my %o = (
 GetOptions(
     \%o,
     'configfile=s',
+    'configdir=s@',
+    'machinesfile=s',
     'clean!',
     'debug=s@',
     'trace=s@',
     'outputdir=s',
 ) or die "can't parse command line";
-my $profilename = shift @ARGV;
-die "profile required" unless( $profilename );
-die "unexpected args: @ARGV" if( @ARGV );
+my @machines = @ARGV;
+die "machine required" unless( @machines );
 
 # load the main config
-my $cfg = WoWUI::Config->new( file => $o{configfile} )->cfg;
+my $cfg = WoWUI::Config->new( dirs => [ $o{configdir} ], file => $o{configfile} )->cfg;
 
 # allow override of outputdir
 if( $o{outputdir} ) {
@@ -62,13 +65,17 @@ Log::Log4perl->init( $logcfg );
 my $log = Log::Log4perl->get_logger('main');
 $log->info('START');
 
-
 eval {
 
 my %extra_files;
 
 # create a temp dir in which to work
 my $tempdir = WoWUI::Util::tempdir( $o{clean} );
+
+# create a machines object
+my $profiles = WoWUI::Machines->initialize( $machinesfile );
+
+# make sure our machine
 
 # create a machine object
 my $machine = WoWUI::Machine->initialize( $profilename );

@@ -13,9 +13,9 @@ The main configuration that drives everything else
 Per-addon configurations, where $ADDON is the 'slug' of the addon - tmw,
 clt, dbm, etc.
 
-* private/profiles.yaml
+* private/machines.yaml
 
-Your profile configuration, which lists the machines you build
+Your machines configuration, which lists the machines you build
 configurations for and the players who use each of those machines
 
 * private/machine/$MACHINE.yaml
