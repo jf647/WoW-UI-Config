@@ -73,90 +73,101 @@ my %extra_files;
 my $tempdir = WoWUI::Util::tempdir( $o{clean} );
 
 # create a machines object
-my $profiles = WoWUI::Machines->initialize( $machinesfile );
+my $machines = WoWUI::Machines->initialize( $machinesfile );
 
-# make sure our machine
-
-# create a machine object
-my $machine = WoWUI::Machine->initialize( $profilename );
-
-# make sure our output is writeable
-unless( -w $machine->output->parent ) {
-  die "can't write to ", $machine->output->parent;
-}
-if( -f $machine->output && ! -w $machine->output ) {
-  die "can't write to ", $machine->output;
-}
-
-# create a profile object
-my $profile = WoWUI::Profile->initialize( $machine->configfile );
-$profile->populate;
-
-# iterate over modules
-for my $module( @{ $cfg->{modules} } ) {
-
-    $log->info("processing $module");
-
-    # load the module
-    eval "require $module";
-    if( $@ ) {
-        die "can't load $module: $@";
-    }
-
-    # instantiate the UI module
-    my $mod = $module->new( extra_files => \%extra_files );
-
-    # process the UI's per-char config if it has one
-    if( $mod->perchar ) {
-        $log->debug("processing perchar for $module");
-        for my $realm( $profile->realms_values ) {
-            for my $char( $realm->chars_values ) {
-                $log->debug("processing ", $char->name, " of ", $realm->name);
-                my $chardata = $mod->chardata( $char );
-                next unless $chardata;
-                $log->trace("writing files for ", $char->name, " of ", $realm->name);
-                $mod->process_perchar( $char, $chardata );
-            }
-        }
-    }
-
-    # process the UI's global config if it has one
-    if( $mod->global ) {
-        $log->debug("processing global for $module");
-        my $data = $mod->data;
-        next unless( $data );
-        $data->{charlist} = $profile->charlist;
-        $log->trace("writing files");
-        $mod->process_global( $data );
-    }
-
-}
-
-# create an archive of the tempdir
-my $zip = Archive::Zip->new();
-while( my $dir = $tempdir->next ) {
-    next unless( -d $dir );
-    next if( $dir eq $tempdir );
-    next if( $dir =~ m/\.\.?$/ );
-    unless( AZ_OK == $zip->addTree($dir, $dir->relative($tempdir)) ) {
-        die "addTree error: $dir";
-    }
-}
-unless ( $zip->writeToFileNamed($machine->output->stringify) == AZ_OK ) {
-    die "write error";
-}
-$log->info("wrote settings to ", $machine->output);
-$log->info("tempdir was $tempdir") unless( $o{clean} );
-
-};
-if( $@ ) {
-    $log->fatal($@);
-    exit(1);
+# execute our main loop for each machine requested
+for my $machname( @machines ) {
+    process_machine( $machname );
 }
 
 # all done
 $log->info('STOP');
 exit(0);
+
+# process a machine
+sub process_machine
+{
+
+    my $machname = shift;
+
+    # populate the machine singleton with our machine object
+    $machines->populate( $machname );
+
+    # make sure our output is writeable
+    unless( -w $machine->output->parent ) {
+      die "can't write to ", $machine->output->parent;
+    }
+    if( -f $machine->output && ! -w $machine->output ) {
+      die "can't write to ", $machine->output;
+    }
+
+    # create a profile object
+    my $profile = WoWUI::Profile->initialize( $machine->configfile );
+    $profile->populate;
+
+    # iterate over modules
+    for my $module( @{ $cfg->{modules} } ) {
+
+        $log->info("processing $module");
+
+        # load the module
+        eval "require $module";
+        if( $@ ) {
+            die "can't load $module: $@";
+        }
+
+        # instantiate the UI module
+        my $mod = $module->new( extra_files => \%extra_files );
+
+        # process the UI's per-char config if it has one
+        if( $mod->perchar ) {
+            $log->debug("processing perchar for $module");
+            for my $realm( $profile->realms_values ) {
+                for my $char( $realm->chars_values ) {
+                    $log->debug("processing ", $char->name, " of ", $realm->name);
+                    my $chardata = $mod->chardata( $char );
+                    next unless $chardata;
+                    $log->trace("writing files for ", $char->name, " of ", $realm->name);
+                    $mod->process_perchar( $char, $chardata );
+                }
+            }
+        }
+
+        # process the UI's global config if it has one
+        if( $mod->global ) {
+            $log->debug("processing global for $module");
+            my $data = $mod->data;
+            next unless( $data );
+            $data->{charlist} = $profile->charlist;
+            $log->trace("writing files");
+            $mod->process_global( $data );
+        }
+
+    }
+
+    # create an archive of the tempdir
+    my $zip = Archive::Zip->new();
+    while( my $dir = $tempdir->next ) {
+        next unless( -d $dir );
+        next if( $dir eq $tempdir );
+        next if( $dir =~ m/\.\.?$/ );
+        unless( AZ_OK == $zip->addTree($dir, $dir->relative($tempdir)) ) {
+            die "addTree error: $dir";
+        }
+    }
+    unless ( $zip->writeToFileNamed($machine->output->stringify) == AZ_OK ) {
+        die "write error";
+    }
+    $log->info("wrote settings to ", $machine->output);
+    $log->info("tempdir was $tempdir") unless( $o{clean} );
+
+    };
+    if( $@ ) {
+        $log->fatal($@);
+        exit(1);
+    }
+
+}
 
 #
 # EOF
