@@ -16,14 +16,14 @@ has wowversions => ( is => 'rw', isa => 'ArrayRef[Str]' );
 has players => ( is => 'rw', isa => 'ArrayRef[Str]' );
 has output => ( is => 'rw', isa => 'Path::Class::File' );
 has modoptions => (
-  is => 'rw',
+  is => 'bare',
   isa => 'HashRef',
   traits => ['Hash'],
   default => sub { {} },
   handles => {
     modoption_set => 'set',
     modoption_get => 'get',
-    modoptions_list => 'keys',
+    modoptions => 'keys',
     modoptions_values => 'values',
   },
 );
@@ -60,7 +60,9 @@ sub BUILD
     $self->cfg( load_file( $machinefile ) );
 
     # set our various options
-    $self->modoptions( $cfg->{modules} );
+    for my $mod( keys %{ $self->cfg->{modules} } ) {
+        $self->modoption_set( $mod, $self->cfg->{modules}->{$mod} );
+    }
     $self->flags( Set::Scalar->new );
     $self->flags->insert('machine:name:'.$self->name);
     $self->output( expand_path( $cfg->{output} ) );
