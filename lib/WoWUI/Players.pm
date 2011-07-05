@@ -16,6 +16,8 @@ has players => (
   handles => {
     player_get => 'get',
     player_set => 'set',
+    players => 'values',
+    player_names => 'keys',
   },
 );
 

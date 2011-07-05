@@ -19,8 +19,8 @@ has realms => (
     handles => {
         realm_get => 'get',
         realm_set => 'set',
-        realms => 'keys',
-        realm_values => 'values',
+        realm_names => 'keys',
+        realms => 'values',
     },
 );
 has modoptions => (
@@ -31,8 +31,7 @@ has modoptions => (
     handles => {
         modoption_set => 'set',
         modoption_get => 'get',
-        modoptions => 'keys',
-        modoptions_values => 'values',
+        modoption_names => 'keys',
     },
 );
 __PACKAGE__->meta->make_immutable;
@@ -60,9 +59,33 @@ sub BUILD
     my $cfg = WoWUI::Config->instance->cfg;
     my $playercfg = load_file( expand_path( file( $cfg->{dirs}->{playerdir}, $self->name . '.yaml' ) ) );
     
+    # iterate over realms
+    for my $realmname( keys %{ $playercfg->{realms} } ) {
+        $log->debug("creating realm object for $realmname");
+        my $realm = WoWUI::Realm->new( name => $realmname, chars => $playercfg->{realms}->{$realmname} );
+        $self->realm_set( $realmname, $realm );
+    }
+    
     return $self;
 
 }
+
+sub charlist
+{
+
+    my $self = shift;
+
+    my %chars;
+    for my $realm( $self->realms ) {
+        for my $char( $realm->char_names ) {
+            $chars{$realm->name}->{$char} = {};
+        }
+    }
+  
+    return \%chars;
+
+}
+
 
 # keep require happy
 1;

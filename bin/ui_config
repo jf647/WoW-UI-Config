@@ -15,13 +15,12 @@ use Path::Class qw|dir file|;
 use lib "$FindBin::Bin/../lib";
 
 use WoWUI::Config;
-use WoWUI::Profile;
-use WoWUI::Machine;
+use WoWUI::Machines;
 use WoWUI::Util::Filter;
 
 # parse command line
 my %o = (
-    configdir => [ "$FindBin::Bin/../private" ],
+    configdir => [ "$FindBin::Bin/../etc", "$FindBin::Bin/../private" ],
     configfile => "ui_config.yaml",
     machinesfile => '$PRIVATEDIR/machines.yaml',
     clean => 1,
@@ -42,7 +41,7 @@ my @machines = @ARGV;
 die "machine required" unless( @machines );
 
 # load the main config
-my $cfg = WoWUI::Config->new( dirs => [ $o{configdir} ], file => $o{configfile} )->cfg;
+my $cfg = WoWUI::Config->initialize( dirs => $o{configdir}, file => $o{configfile} )->cfg;
 
 # allow override of outputdir
 if( $o{outputdir} ) {
@@ -67,17 +66,18 @@ $log->info('START');
 
 eval {
 
-my %extra_files;
+    # create a machines object
+    my $machines = WoWUI::Machines->initialize( $o{machinesfile} );
 
-# create a temp dir in which to work
-my $tempdir = WoWUI::Util::tempdir( $o{clean} );
+    # execute our main loop for each machine requested
+    for my $machname( @machines ) {
+        process_machine( $machname );
+    }
 
-# create a machines object
-my $machines = WoWUI::Machines->initialize( $machinesfile );
-
-# execute our main loop for each machine requested
-for my $machname( @machines ) {
-    process_machine( $machname );
+};
+if( $@ ) {
+    $log->fatal($@);
+    exit(1);
 }
 
 # all done
@@ -90,8 +90,11 @@ sub process_machine
 
     my $machname = shift;
 
-    # populate the machine singleton with our machine object
-    $machines->populate( $machname );
+    # create a temp dir in which to work
+    my $tempdir = WoWUI::Util::tempdir( $o{clean}, 1 );
+
+    # get our machine object
+    my $machine = WoWUI::Machines->instance->machine_get( $machname );
 
     # make sure our output is writeable
     unless( -w $machine->output->parent ) {
@@ -100,49 +103,13 @@ sub process_machine
     if( -f $machine->output && ! -w $machine->output ) {
       die "can't write to ", $machine->output;
     }
-
-    # create a profile object
-    my $profile = WoWUI::Profile->initialize( $machine->configfile );
-    $profile->populate;
-
-    # iterate over modules
-    for my $module( @{ $cfg->{modules} } ) {
-
-        $log->info("processing $module");
-
-        # load the module
-        eval "require $module";
-        if( $@ ) {
-            die "can't load $module: $@";
-        }
-
-        # instantiate the UI module
-        my $mod = $module->new( extra_files => \%extra_files );
-
-        # process the UI's per-char config if it has one
-        if( $mod->perchar ) {
-            $log->debug("processing perchar for $module");
-            for my $realm( $profile->realms_values ) {
-                for my $char( $realm->chars_values ) {
-                    $log->debug("processing ", $char->name, " of ", $realm->name);
-                    my $chardata = $mod->chardata( $char );
-                    next unless $chardata;
-                    $log->trace("writing files for ", $char->name, " of ", $realm->name);
-                    $mod->process_perchar( $char, $chardata );
-                }
-            }
-        }
-
-        # process the UI's global config if it has one
-        if( $mod->global ) {
-            $log->debug("processing global for $module");
-            my $data = $mod->data;
-            next unless( $data );
-            $data->{charlist} = $profile->charlist;
-            $log->trace("writing files");
-            $mod->process_global( $data );
-        }
-
+    
+    # keep a list of extra files to add to the zip
+    my %extra_files;
+    
+    # iterate over players
+    for my $player( $machine->players ) {
+        process_player( $machine, $player, \%extra_files );
     }
 
     # create an archive of the tempdir
@@ -159,14 +126,60 @@ sub process_machine
         die "write error";
     }
     $log->info("wrote settings to ", $machine->output);
-    $log->info("tempdir was $tempdir") unless( $o{clean} );
+    $log->info("tempdir for ", $machine->name, " is $tempdir") unless( $o{clean} );
+    
+}
 
-    };
-    if( $@ ) {
-        $log->fatal($@);
-        exit(1);
+# process a player on a machine
+sub process_player
+{
+
+    my $machine = shift;
+    my $player = shift;
+    my $extra_files = shift;
+    
+    my $cfg = WoWUI::Config->instance->cfg;
+    
+    # iterate over modules
+    for my $module( @{ $cfg->{modules} } ) {
+
+        $log->info("processing $module");
+
+        # load the module
+        eval "require $module";
+        if( $@ ) {
+            die "can't load $module: $@";
+        }
+
+        # instantiate the UI module
+        my $mod = $module->new( extra_files => $extra_files );
+
+        # process the UI's per-char config if it has one
+        if( $mod->perchar ) {
+            $log->debug("processing perchar for $module");
+            for my $realm( $player->realms ) {
+                for my $char( $realm->chars ) {
+                    $log->debug("processing ", $char->name, " of ", $realm->name);
+                    my $chardata = $mod->chardata( $char );
+                    next unless $chardata;
+                    $log->trace("writing files for ", $char->name, " of ", $realm->name);
+                    $mod->process_perchar( $char, $chardata );
+                }
+            }
+        }
+
+        # process the UI's global config if it has one
+        if( $mod->global ) {
+            $log->debug("processing global for $module");
+            my $data = $mod->data;
+            next unless( $data );
+            $data->{charlist} = $player->charlist;
+            $log->trace("writing files");
+            $mod->process_global( $data );
+        }
+
     }
-
+    
 }
 
 #

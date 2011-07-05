@@ -6,7 +6,7 @@ dirs:
     varrundir: $TOPDIR/var/run
     tempbase: $TOPDIR/tmp
     outputdir: $TOPDIR/settings
-    privdir: $TOPDIR/private
+    privatedir: $TOPDIR/private
     playerdir: $TOPDIR/private/player
     machinedir: $TOPDIR/private/machine
     privaddonconfdir: $TOPDIR/private/addon

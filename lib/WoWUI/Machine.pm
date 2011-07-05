@@ -9,12 +9,22 @@ use namespace::autoclean;
 
 # set up class
 has name => ( is => 'rw', isa => 'Str', required => 1 );
-has cfg => ( is => 'rw', isa => 'HashRef' );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
 has types => ( is => 'rw', isa => 'ArrayRef[Str]' );
 has wowversions => ( is => 'rw', isa => 'ArrayRef[Str]' );
-has players => ( is => 'rw', isa => 'ArrayRef[Str]' );
 has output => ( is => 'rw', isa => 'Path::Class::File' );
+has players => (
+    is => 'bare',
+    isa => 'HashRef[WoWUI::Player]',
+    traits => ['Hash'],
+    default => sub { {} },
+    handles => {
+        player_set => 'set',
+        player_get => 'get',
+        player_names => 'keys',
+        players => 'values',
+    },
+);
 has modoptions => (
   is => 'bare',
   isa => 'HashRef',
@@ -23,8 +33,7 @@ has modoptions => (
   handles => {
     modoption_set => 'set',
     modoption_get => 'get',
-    modoptions => 'keys',
-    modoptions_values => 'values',
+    modoption_names => 'keys',
   },
 );
 __PACKAGE__->meta->make_immutable;
@@ -33,7 +42,6 @@ use Carp 'croak';
 use Set::Scalar;
 
 use WoWUI::Config;
-use WoWUI::Machines;
 use WoWUI::Util qw|log load_file expand_path|;
 
 sub BUILD
@@ -57,11 +65,11 @@ sub BUILD
     unless( -f $machinefile ) {
         croak "no such machine file $machinefile";
     }
-    $self->cfg( load_file( $machinefile ) );
+    my $cfg = load_file( $machinefile );
 
     # set our various options
-    for my $mod( keys %{ $self->cfg->{modules} } ) {
-        $self->modoption_set( $mod, $self->cfg->{modules}->{$mod} );
+    for my $mod( keys %{ $cfg->{modules} } ) {
+        $self->modoption_set( $mod, $cfg->{modules}->{$mod} );
     }
     $self->flags( Set::Scalar->new );
     $self->flags->insert('machine:name:'.$self->name);
@@ -70,16 +78,16 @@ sub BUILD
     for my $type( @{ $self->types } ) {
         $self->flags->insert("machine:type:$type");
     }
-    $self->wowversions( $options->{wowversions} );
-    for my $wowversion( @{ $options->{wowversions} } ) {
+    $self->wowversions( $cfg->{wowversions} );
+    for my $wowversion( @{ $cfg->{wowversions} } ) {
         $self->flags->insert('machine:wowversion:'.$wowversion);
     }
     
     # expand players
-    $self->players( $cur_mach->{players} );
     for my $playername( @{ $cur_mach->{players} } ) {
         my $player = WoWUI::Players->instance->player_get( $playername );
         $self->flags->insert( "player:$playername" );
+        $self->player_set( $playername, $player );
     }
 
     # store this machine in the machines singleton

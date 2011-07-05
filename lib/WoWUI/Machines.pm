@@ -1,10 +1,11 @@
-#
+
 # $Id: Machine.pm 5034 2011-06-28 18:13:59Z james $
 #
 
 package WoWUI::Machines;
 use MooseX::Singleton;
 
+use Carp 'croak';
 use namespace::autoclean;
 
 # set up class
@@ -12,35 +13,49 @@ has file => ( is => 'rw', isa => 'Str' );
 has cfg => ( is => 'rw', isa => 'HashRef' );
 has machines => (
   is => 'bare',
-  isa => 'HashRef[WoWUI::Machine|HashRef]',
+  isa => 'HashRef[WoWUI::Machine]',
   default => sub { {} },
   traits => ['Hash'],
   handles => {
     machine_get => 'get',
     machine_set => 'set',
+    machine_names => 'keys',
+    machine_exists => 'exists',
+    machines => 'values',
   },
 );
-
-use Carp 'croak';
+before machine_get => sub {
+    my $self = shift;
+    my $machname = shift;
+    unless( exists $self->cfg->{$machname} ) {
+        croak "no such machine '$machname'";
+    }
+    unless( $self->machine_exists( $machname ) ) {
+        my $machine = WoWUI::Machine->new( $machname );
+        $self->machine_set( $machname, $machine );
+    }
+};
 
 use WoWUI::Util qw|log expand_path load_file|;
+use WoWUI::Machine;
 
 sub BUILDARGS
 {
 
-  my $class = shift;
-  return { file => shift };
+    my $class = shift;
+    return { file => shift };
 
 }
 
 sub BUILD
 {
 
-  my $self = shift;
+    my $self = shift;
+    $DB::single = 1;
 
-  $self->cfg( load_file( expand_path( $self->file ) ) );
+    $self->cfg( load_file( expand_path( $self->file ) ) );
   
-  return $self;
+    return $self;
   
 }   
 

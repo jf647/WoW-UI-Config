@@ -7,15 +7,16 @@ use base 'Exporter';
 
 our @EXPORT = ();
 our @EXPORT_OK = qw|
-  expand_path
-  tempdir
-  tempfile
-  load_file
-  dump_file
-  perchar_sv
-  sv
-  tt
-  log
+    expand_path
+    tempdir
+    tempfile
+    load_file
+    load_layered
+    dump_file
+    perchar_sv
+    sv
+    tt
+    log
 |;
 
 use strict;
@@ -36,7 +37,9 @@ sub expand_path
     my $path = shift;
     my %extra = @_;
 
-    unless( $dirs ) {
+    $DB::single = 1;
+
+    if( ! defined $dirs && WoWUI::Config->initialized ) {
         require WoWUI::Config;
         my $gcfg = WoWUI::Config->instance->cfg;
         for my $dirtype( keys %{ $gcfg->{dirs} } ) {
@@ -79,7 +82,7 @@ sub load_layered
 
   my $fname = shift;
   my @paths = @_;
-  my $cfg;
+  my $cfg = {};
   for my $path( map { expand_path "$_/$fname" } @paths ) {
     $cfg = Hash::Merge::Simple->merge( $cfg, load_file($path) );
   }
@@ -102,9 +105,11 @@ sub tempdir
 {
 
     my $clean = shift;
+    my $clear = shift;
 
     my $log = WoWUI::Util->log();
 
+    undef $tempdir if( $tempdir && $clear );
     return $tempdir if( $tempdir );
 
     my $cfg = WoWUI::Config->instance->cfg;
