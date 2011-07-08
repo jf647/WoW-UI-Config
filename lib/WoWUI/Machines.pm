@@ -27,18 +27,18 @@ has machines => (
 before machine_get => sub {
     my $self = shift;
     my $machname = shift;
+    return if( $self->machine_exists( $machname ) );
     unless( exists $self->cfg->{$machname} ) {
         croak "no such machine '$machname'";
     }
-    unless( $self->machine_exists( $machname ) ) {
-        my $machine = WoWUI::Machine->new( $machname );
-        $self->machine_set( $machname, $machine );
-    }
+    my $machine = WoWUI::Machine->new( $machname, $self->cfg->{$machname}->{players} );
+    $self->machine_set( $machname, $machine );
 };
 
 use WoWUI::Util qw|log expand_path load_file|;
 use WoWUI::Machine;
 
+# constructor
 sub BUILDARGS
 {
 
@@ -46,15 +46,11 @@ sub BUILDARGS
     return { file => shift };
 
 }
-
 sub BUILD
 {
 
     my $self = shift;
-    $DB::single = 1;
-
     $self->cfg( load_file( expand_path( $self->file ) ) );
-  
     return $self;
   
 }   

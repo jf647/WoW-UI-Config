@@ -22,7 +22,6 @@ sub BUILD
 {  
   
     my $self = shift;
-    $DB::single = 1;
     $self->cfg( load_layered( $self->file, @{ $self->dirs } ) );
     $self->initialized( 1 );
 

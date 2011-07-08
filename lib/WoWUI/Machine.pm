@@ -42,8 +42,26 @@ use Carp 'croak';
 use Set::Scalar;
 
 use WoWUI::Config;
+use WoWUI::Players;
 use WoWUI::Util qw|log load_file expand_path|;
 
+# constructor
+sub BUILDARGS
+{
+
+    my $class = shift;
+    my $machname = shift;
+    my $playernames = shift;
+
+    # expand players
+    my $players;
+    for my $playername( @$playernames ) {
+        my $player = WoWUI::Players->instance->player_get( $playername );
+        push @$players, $player;
+    }
+    return { name => $machname, players => $players };
+
+}
 sub BUILD
 {
 
@@ -53,13 +71,6 @@ sub BUILD
     my $log = WoWUI::Util->log;
     $log->debug("creating machine object for ", $self->name);
 
-    # if the machines singleton already has an object for this machine, just return it
-    my $cur_mach = WoWUI::Machines->instance->machine_get( $self->name );
-    if( 'WoWUI::Machine' eq reftype $cur_mach ) {
-        $log->debug("using built machine object");
-        return $cur_mach;
-    }
-
     # load our machine config file
     my $machinefile = expand_path( $config->{dirs}->{machinedir} )->file( $self->name . '.yaml' );
     unless( -f $machinefile ) {
@@ -68,8 +79,8 @@ sub BUILD
     my $cfg = load_file( $machinefile );
 
     # set our various options
-    for my $mod( keys %{ $cfg->{modules} } ) {
-        $self->modoption_set( $mod, $cfg->{modules}->{$mod} );
+    for my $mod( keys %{ $cfg->{modoptions} } ) {
+        $self->modoption_set( $mod, $cfg->{modoptions}->{$mod} );
     }
     $self->flags( Set::Scalar->new );
     $self->flags->insert('machine:name:'.$self->name);
@@ -82,16 +93,9 @@ sub BUILD
     for my $wowversion( @{ $cfg->{wowversions} } ) {
         $self->flags->insert('machine:wowversion:'.$wowversion);
     }
-    
-    # expand players
-    for my $playername( @{ $cur_mach->{players} } ) {
-        my $player = WoWUI::Players->instance->player_get( $playername );
-        $self->flags->insert( "player:$playername" );
-        $self->player_set( $playername, $player );
+    for my $player( $self->players ) {
+        $self->flags->insert( "player:" . $player->name );
     }
-
-    # store this machine in the machines singleton
-    WoWUI::Machines->instance->machine_set( $self->name, $self );
 
     return $self;
 

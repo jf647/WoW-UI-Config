@@ -2,18 +2,18 @@
 # $Id: Machine.pm 5034 2011-06-28 18:13:59Z james $
 #
 
-package WoWUI::Machine;
+package WoWUI::Player;
 use Moose;
 
 use namespace::autoclean;
 
 # set up class
 has name => ( is => 'rw', isa => 'Str', required => 1 );
-has account => ( is => 'rw', isa => 'Str', required => 1 );
+has account => ( is => 'rw', isa => 'Str' );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
 has realms => (
     is => 'bare',
-    isa => 'HashRef[WoWUI::Realm]'
+    isa => 'HashRef[WoWUI::Realm]',
     traits => ['Hash'],
     default => sub { {} },
     handles => {
@@ -40,6 +40,7 @@ use Carp 'croak';
 use Path::Class qw|dir file|;
 
 use WoWUI::Util qw|log load_file expand_path|;
+use WoWUI::Realm;
 
 # constructor
 sub BUILDARGS
@@ -57,15 +58,25 @@ sub BUILD
     my $self = shift;
     
     my $cfg = WoWUI::Config->instance->cfg;
-    my $playercfg = load_file( expand_path( file( $cfg->{dirs}->{playerdir}, $self->name . '.yaml' ) ) );
+    my $playercfg = load_file( expand_path( '$PLAYERDIR/' . $self->name . '.yaml' ) );
     
+    my $log = WoWUI::Util->log;
+    
+    # set our various options
+    for my $mod( keys %{ $playercfg->{modoptions} } ) {
+        $self->modoption_set( $mod, $cfg->{modoptions}->{$mod} );
+    }
+    $self->account( $playercfg->{account} );
+    $self->flags( Set::Scalar->new );
+    $self->flags->insert('player:name:'.$self->name);
+
     # iterate over realms
     for my $realmname( keys %{ $playercfg->{realms} } ) {
         $log->debug("creating realm object for $realmname");
-        my $realm = WoWUI::Realm->new( name => $realmname, chars => $playercfg->{realms}->{$realmname} );
+        my $realm = WoWUI::Realm->new( name => $realmname, playercfg => $playercfg );
         $self->realm_set( $realmname, $realm );
     }
-    
+
     return $self;
 
 }

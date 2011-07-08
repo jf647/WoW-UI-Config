@@ -37,7 +37,9 @@ sub expand_path
     my $path = shift;
     my %extra = @_;
 
-    $DB::single = 1;
+    if( $path !~ m/\$/ ) {
+        return $path;
+    }
 
     if( ! defined $dirs && WoWUI::Config->initialized ) {
         require WoWUI::Config;
@@ -45,6 +47,9 @@ sub expand_path
         for my $dirtype( keys %{ $gcfg->{dirs} } ) {
             my $dir = $gcfg->{dirs}->{$dirtype};
             $dir =~ s|\$TOPDIR|$FindBin::Bin/..|;
+            unless( -d $dir ) {
+                croak "no such directory: $dir";
+            }
             $dirs->{uc $dirtype} = dir( $dir )->resolve;
         }
     }

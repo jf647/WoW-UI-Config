@@ -12,16 +12,16 @@ has name => ( is => 'rw', isa => 'Str' );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
 has cfg => ( is => 'rw', isa => 'HashRef' );
 has chars => (
-  is => 'bare',
-  isa => 'HashRef[WoWUI::Char]',
-  traits => ['Hash'],
-  default => sub { {} },
-  handles => {
-    char_set => 'set',
-    char_get => 'get',
-    char_names => 'keys',
-    chars => 'values',
-  },
+    is => 'bare',
+    isa => 'HashRef[WoWUI::Char]',
+    traits => ['Hash'],
+    default => sub { {} },
+    handles => {
+        char_set => 'set',
+        char_get => 'get',
+        char_names => 'keys',
+        chars => 'values',
+    },
 );
 __PACKAGE__->meta->make_immutable;
 
@@ -29,30 +29,33 @@ use Carp 'croak';
 use Set::Scalar;
 
 use WoWUI::Char;
+use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
 sub BUILD
 {
 
-  my $self = shift;
-  my %p = @_;
+    my $self = shift;
+    my $p = shift;
   
-  my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->log;
+    my $gcfg = WoWUI::Config->instance->cfg;
 
-  $self->flags( Set::Scalar->new );
+    $self->flags( Set::Scalar->new );
 
-  for my $charname( keys %{ $p{chars} } ) {
-    $log->debug("creating char object for $charname on ", $self->name);
-    my $char = WoWUI::Char->new( name => $charname, realm => $self );
-    if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, { include => [ 'everyone' ], exclude => [ qw|level:85 bankalt mule| ] } ) ) {
-      $self->flags->insert("realm:still_leveling");
+    for my $charname( keys %{ $p->{charnames} } ) {
+        $log->debug("creating char object for $charname on ", $self->name);
+        my $char = WoWUI::Char->new( name => $charname, realm => $self );
+        my $levelcap = $gcfg->{levelcap};
+        if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, { include => [ 'everyone' ], exclude => [ qw|level:$levelcap bankalt mule| ] } ) ) {
+            $self->flags->insert("realm:still_leveling");
+        }
+        $self->char_set( $charname => $char );
     }
-    $self->char_set( $charname => $char );
-  }
-  for my $char( $self->chars_values ) {
-    $char->flags_get(0)->insert( $self->flags->members );
-  }
+    for my $char( $self->chars ) {
+        $char->flags_get(0)->insert( $self->flags->members );
+    }
 
 }   
 

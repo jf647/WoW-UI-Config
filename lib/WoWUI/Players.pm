@@ -23,6 +23,7 @@ has players => (
 
 use Carp 'croak';
 
+use WoWUI::Player;
 use WoWUI::Util qw|log expand_path load_file|;
 
 before player_get => sub {
