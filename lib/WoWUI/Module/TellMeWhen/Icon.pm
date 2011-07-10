@@ -44,7 +44,6 @@ has [ qw|
     StackMaxEnabled ShowPBar Sort
 | ] => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
 # Int / Num
-has ICDDuration => ( is => 'rw', isa => 'Int', traits => ['Relevant'] );
 has ConditionAlpha => ( is => 'rw', isa => 'Num', default => 0, traits => ['Relevant'], relevant => 1 );
 has CBarOffs => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'], relevant => 1 );
 has PBarOffs => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'] );

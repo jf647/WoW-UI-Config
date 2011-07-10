@@ -10,6 +10,5 @@ perchar_criteria:
 icbuffs:
     Paladin:
         - Divine Shield
-        - Divine Protection
         - Hand of Protection
         - Divine Plea

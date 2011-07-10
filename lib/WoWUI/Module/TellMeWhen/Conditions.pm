@@ -40,8 +40,10 @@ sub BUILD
     my $a = shift;
 
     for my $cname( keys %{ $a->{config}->{conditions} } ) {
-        $a->{config}->{conditions}->{$cname}->{Name} =
-            $a->{config}->{conditions}->{$cname}->{tag} = $cname;
+        $a->{config}->{conditions}->{$cname}->{tag} = $cname;
+        unless( exists $a->{config}->{conditions}->{$cname}->{Name} ) {
+            $a->{config}->{conditions}->{$cname}->{Name} = $cname;
+        }
         my $c = WoWUI::Module::TellMeWhen::Condition->new(
             %{ $a->{config}->{conditions}->{$cname} }
         );

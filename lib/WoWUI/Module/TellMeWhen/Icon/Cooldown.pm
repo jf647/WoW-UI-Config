@@ -9,6 +9,7 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::TellMeWhen::Icon';
+with 'WoWUI::Module::TellMeWhen::Icon::Usable';
 has '+priority' => ( default => 2050 );
 has '+Type' => ( default => 'cooldown' );
 has '+CooldownCheck' => ( default => 1 );
@@ -21,27 +22,6 @@ has [ qw|
     +ShowPBar
 | ] => ( relevant => 1 );
 __PACKAGE__->meta->make_immutable;
-
-# constructor
-sub BUILD
-{
-
-    my $self = shift;
-    my $icfg = shift;
-
-    # usable / unusable
-    if( exists $icfg->{unusable} ) {
-        $self->ShowWhen( 'unalpha' );
-        $self->UnAlpha( 0.5 );
-    }
-    elsif( exists $icfg->{always} ) {
-        $self->ShowWhen( 'always' );
-        $self->UnAlpha( 0.5 );
-    }
-    
-    return $self;
-
-}
 
 package WoWUI::Module::TellMeWhen::Icon::Cooldown::ShortCD;
 use Moose;

@@ -1318,13 +1318,8 @@ addons:
             - machine:type:basic
         group: Standard
     ShockAndAwe:
-        include:
-            - all(class:Shaman;spec:Enhancement)
         exclude:
-            - machine:type:slave
-            - machine:type:basic
             - everyone
-        class: Shaman
     Skada:
         include:
             - everyone

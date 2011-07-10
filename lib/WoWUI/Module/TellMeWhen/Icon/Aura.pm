@@ -19,6 +19,7 @@ has [ qw|
     +StackMinEnabled +Unit +Sort +SortAsc +SortDesc
 | ] => ( relevant => 1 );
 with 'WoWUI::Module::TellMeWhen::Icon::SpellName';
+with 'WoWUI::Module::TellMeWhen::Icon::Present';
 __PACKAGE__->meta->make_immutable;
 
 # constructor
@@ -27,16 +28,6 @@ sub BUILD
 
     my $self = shift;
     my $icfg = shift;
-
-    # present / missing
-    if( exists $icfg->{missing} ) {
-        $self->ShowWhen('unalpha');
-        $self->UnAlpha( 0.5 );
-    }
-    elsif( exists $icfg->{always} ) {
-        $self->ShowWhen( 'always' );
-        $self->UnAlpha( 0.5 );
-    }
 
     # stacks
     if( exists $icfg->{stacks} ) {
