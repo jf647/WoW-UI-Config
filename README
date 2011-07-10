@@ -49,17 +49,15 @@ Tanky on Aggramar), you need to create at least two files in a subdirectory
 named private.
 
 You can either create a 'private' directory and populate it yourself, or you
-can create your own git repository so that your own configs are tracked.  In
-my personal development environment, I have my git repositories in /srv/git. 
-I create an empty repository like this:
+can create your own git repository so that your own configs are tracked.
 
-git init --bare /srv/git/WoW-UI-Config-Private.git
+Assuming I've created a repositry using gitosis, gitolite or just manually
+using git itself, I run this commnad from the root of the WoW-UI-Config
+checkout:
 
-and then from the root of the WoW-UI-Config checkout, I run this command:
+git clone git@mygitserver.com:wow/WoW-UI-Config-Private.git private
 
-git clone /srv/git/WoW-UI-Config-Private.git private
-
-If you're just starting out, you will want to create private/profiles.yaml
+If you're just starting out, you will want to create private/machines.yaml
 by copying the example file from the etc directory.  Then you need at least
 one machine file in private/machine and at least one player file in
 private/player.  Examples of each of these files are in the etc/sample

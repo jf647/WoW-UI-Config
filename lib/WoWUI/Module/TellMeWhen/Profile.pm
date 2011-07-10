@@ -120,6 +120,7 @@ sub BUILD
     my $a = shift;
     my $config = $a->{config};
 
+    # XXX
     my $o = WoWUI::Machine->instance->modoption_get('tmw');
     
     # set the update interval

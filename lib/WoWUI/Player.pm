@@ -73,7 +73,7 @@ sub BUILD
     # iterate over realms
     for my $realmname( keys %{ $playercfg->{realms} } ) {
         $log->debug("creating realm object for $realmname");
-        my $realm = WoWUI::Realm->new( name => $realmname, playercfg => $playercfg );
+        my $realm = WoWUI::Realm->new( name => $realmname, player => $self, playercfg => $playercfg );
         $self->realm_set( $realmname, $realm );
     }
 

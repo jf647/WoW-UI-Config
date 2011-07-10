@@ -25,14 +25,15 @@ sub augment_data
 {
 
     my $self = shift;
+    my $player = shift;
 
     my $log = WoWUI::Util->log;
 
     my $data;
 
-    for my $realm( WoWUI::Profile->instance->realms_values ) {
+    for my $realm( $player->realms ) {
         $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars_values ) {
+        for my $char( $realm->chars ) {
             $log->debug("processing character ", $char->name);
             $data->{postal}->{$realm->name}->{$char} = {
                 name => $char->name,

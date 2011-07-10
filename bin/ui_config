@@ -171,7 +171,7 @@ sub process_player
         # process the UI's global config if it has one
         if( $mod->global ) {
             $log->debug("processing global for $module");
-            my $data = $mod->data;
+            my $data = $mod->data( $player );
             next unless( $data );
             $data->{charlist} = $player->charlist;
             $log->trace("writing files");

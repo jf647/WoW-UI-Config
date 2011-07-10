@@ -60,6 +60,7 @@ sub augment_data
 {
 
     my $self = shift;
+    my $player = shift;
 
     my $log = WoWUI::Util->log;
 
@@ -67,9 +68,9 @@ sub augment_data
 
     my $data;
 
-    for my $realm( WoWUI::Profile->instance->realms_values ) {
+    for my $realm( $player->realms ) {
         $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars_values ) {
+        for my $char( $realm->chars ) {
             if( exists $config->{perchar_criteria} ) {
                 next unless( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{perchar_criteria} ) );
             }

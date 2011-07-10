@@ -54,12 +54,12 @@ sub BUILDARGS
     my $playernames = shift;
 
     # expand players
-    my $players;
+    my %players;
     for my $playername( @$playernames ) {
         my $player = WoWUI::Players->instance->player_get( $playername );
-        push @$players, $player;
+        $players{$playername} = $player;
     }
-    return { name => $machname, players => $players };
+    return { name => $machname, players => \%players };
 
 }
 sub BUILD

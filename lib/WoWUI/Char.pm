@@ -79,6 +79,7 @@ sub BUILD
   my $self = shift;
 
   # raw profile
+  # XXX
   my $rp = WoWUI::Profile->instance->options->{realm}->{$self->realm->name}->{$self->name};
 
   # directory name override (for those pesky accented people)
@@ -98,7 +99,9 @@ sub BUILD
   $self->flags_get(0)->insert('everyone');
 
   # add machine and profile flags
+  # XXX
   $self->flags_get(0)->insert( WoWUI::Profile->instance->flags->members );
+  # XXX
   $self->flags_get(0)->insert( WoWUI::Machine->instance->flags->members );
 
   # common flags

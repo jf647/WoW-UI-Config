@@ -29,15 +29,17 @@ sub augment_data
 {
 
   my $self = shift;
+  my $player = shift;
 
   my $config = $self->config;
+  # XXX
   my $o = WoWUI::Machine->instance->modoption_get('hydra');
   my $log = WoWUI::Util->log;
 
   # Hydra
   my $data;
-  for my $realm( WoWUI::Profile->instance->realms_values ) {
-    for my $char( $realm->chars_values ) {
+  for my $realm( $player->realms ) {
+    for my $char( $realm->chars ) {
         if( WoWUI::Util::Filter::matches( $char->flags_get(0), $char, { include => [ 'dualbox' ] } ) ) {
             $log->trace("adding self char ", $char->name, " to trust list for realm ", $realm->name);
             $data->{hydra}->{$realm->name}->{$char->name} = 1;

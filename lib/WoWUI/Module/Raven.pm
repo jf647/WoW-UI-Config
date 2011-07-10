@@ -25,8 +25,10 @@ sub augment_data
 {
 
     my $self = shift;
+    my $player = shift;
 
     my $config = $self->config;
+    # XXX
     my $o = WoWUI::Machine->instance->modoption_get('raven');
 
     my $log = WoWUI::Util->log;
@@ -34,9 +36,9 @@ sub augment_data
     my $data = { raven => $o };
 
     # per-char settings
-    for my $realm( WoWUI::Profile->instance->realms_values ) {
+    for my $realm( $player->realms ) {
         $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars_values ) {
+        for my $char( $realm->chars ) {
 
             if( exists $config->{perchar_criteria} ) {
                 next unless( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{perchar_criteria} ) );

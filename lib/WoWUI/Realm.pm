@@ -8,9 +8,10 @@ use Moose;
 use namespace::autoclean;
 
 # set up class
-has name => ( is => 'rw', isa => 'Str' );
+has name => ( is => 'rw', isa => 'Str', required => 1 );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
 has cfg => ( is => 'rw', isa => 'HashRef' );
+has player => ( is => 'rw', isa => 'WoWUI::Player', required => 1 );
 has chars => (
     is => 'bare',
     isa => 'HashRef[WoWUI::Char]',

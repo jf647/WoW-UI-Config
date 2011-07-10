@@ -88,6 +88,7 @@ sub load_trinket_cache
 {
 
   my $self = shift;
+  my $player = shift;
 
   my $config = $self->config;
   my $cachefile = expand_path( $config->{cachefile} );
@@ -105,8 +106,8 @@ sub load_trinket_cache
       $updated = 1;
     }
   }
-  for my $realm( WoWUI::Profile->instance->realms_values ) {
-    for my $char( $realm->chars_values ) {
+  for my $realm( $player->realms ) {
+    for my $char( $realm->chars ) {
       my $co = $char->modoption_get($self->name);
       for my $set( keys %$co ) {
         for my $trinket( @{ $co->{$set} } ) {

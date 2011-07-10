@@ -30,6 +30,7 @@ sub augment_data
   my $self = shift;
 
   my $config = $self->config;
+  # XXX
   my $options = WoWUI::Machine->instance->modoption_get($self->name);
 
   my $data;

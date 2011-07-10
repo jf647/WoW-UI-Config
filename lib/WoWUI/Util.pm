@@ -52,6 +52,7 @@ sub expand_path
             }
             $dirs->{uc $dirtype} = dir( $dir )->resolve;
         }
+        $dirs->{TOPDIR} = dir( "$FindBin::Bin/.." )->resolve;
     }
 
     for my $dirtype( %$dirs ) {
@@ -89,7 +90,9 @@ sub load_layered
   my @paths = @_;
   my $cfg = {};
   for my $path( map { expand_path "$_/$fname" } @paths ) {
-    $cfg = Hash::Merge::Simple->merge( $cfg, load_file($path) );
+    if( -f $path ) {
+        $cfg = Hash::Merge::Simple->merge( $cfg, load_file($path) );
+    }
   }
   return $cfg;
 
@@ -151,6 +154,7 @@ sub perchar_sv
     my $realm = shift;
     my $char = shift;
   
+    # XXX
     my $machine = WoWUI::Machine->instance;
   
     my $tempdir = tempdir();
@@ -168,6 +172,7 @@ sub sv
 {
 
     my $tempdir = tempdir();
+    # XXX
     my $machine = WoWUI::Machine->instance;
     my $svdir = $tempdir->subdir('WTF')->subdir('Account')->subdir($machine->account)->subdir('SavedVariables');
     $svdir->mkpath(0) unless( -d $svdir );

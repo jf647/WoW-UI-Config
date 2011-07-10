@@ -94,6 +94,7 @@ sub match
         $flags += $self->char->realm->flags;
     }
     if( F_MACH & $using ) {
+        # XXX
         $flags += WoWUI::Machine->instance->flags;
     }
     $log->debug("matching against flagset: $flags");

@@ -42,6 +42,7 @@ sub augment_data
 {
 
     my $self = shift;
+    # XXX
     return WoWUI::Machine->instance->modoption_get($self->name);
 
 }
@@ -89,6 +90,7 @@ sub augment_chardata
     }
     
     # expand the values for our settings
+    # XXX
     my $type = WoWUI::Machine->instance->type;
     for my $block( "values_common", "values_spec${specnum}", "values_spec${specnum}_${type}" ) {
       if( exists $options->{$block} ) {

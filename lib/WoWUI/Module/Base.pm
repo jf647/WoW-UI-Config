@@ -12,7 +12,6 @@ has 'name' => ( is => 'ro', isa => 'Str' );
 has [ qw|global perchar| ] => ( is => 'ro', isa => 'Bool' );
 has 'config' => ( is => 'rw', isa => 'HashRef' );
 has 'options' => ( is => 'rw', isa => 'HashRef' );
-has 'profile' => ( is => 'rw', isa => 'WoWUI::Profile' );
 has 'extra_files' => (
     is => 'rw',
     isa => 'HashRef[Str]',
@@ -47,6 +46,7 @@ sub process_global
   my $data = shift;
   
   my $config = $self->config;
+  # XXX
   my $machine = WoWUI::Machine->instance;
   
   my $svdir = sv();
@@ -92,15 +92,17 @@ sub data
 {
 
   my $self = shift;
+  my $player = shift;
 
   my $config = $self->config;
 
   if( exists $config->{criteria} ) {
     my $log = WoWUI::Util->log;
+    # XXX
     my $flags = WoWUI::Machine->instance->flags + WoWUI::Profile->instance->flags;
     return unless( WoWUI::Util::Filter::matches( $flags, undef, $config->{criteria} ) );
   }
-  inner();
+  inner($player);
 
 }
 
@@ -129,6 +131,7 @@ sub process_perchar
   my $chardata = shift;
 
   my $config = $self->config;
+  # XXX
   my $machine = WoWUI::Machine->instance;
   
   my $svdir = perchar_sv( $char->realm->name, $char->dirname );
