@@ -20,17 +20,19 @@ use Set::Scalar;
 use WoWUI::Config;
 use WoWUI::Util qw|load_file dump_file expand_path log|;
 
+# class attributes
+__PACKAGE__->name( 'trinketmenu' );
+__PACKAGE__->perchar( 1 );
+
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'trinketmenu', global => 0, perchar => 1 };
-}
 sub BUILD
 {
 
   my $self = shift;
 
   $self->load_trinket_cache();
+
+  return $self;
 
 }
 

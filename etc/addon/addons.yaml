@@ -1,4 +1,6 @@
 ---
+modoptions:
+    max_sets: 20
 templates:
     global:
         acp:
@@ -8,7 +10,6 @@ templates:
         addons:
             input: $TEMPLATEDIR/addons/AddOns.txt.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/AddOns.txt
-max_sets: 20
 addons:
     tif:
         exclude:

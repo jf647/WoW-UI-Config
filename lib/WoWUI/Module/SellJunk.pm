@@ -14,11 +14,9 @@ __PACKAGE__->meta->make_immutable;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'selljunk', global => 1, perchar => 0 };
-}
+# class attributes
+__PACKAGE__->name( 'selljunk' );
+__PACKAGE__->global( 1 );
 
 # keep require happy
 1;

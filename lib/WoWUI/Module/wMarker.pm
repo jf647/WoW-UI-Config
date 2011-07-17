@@ -11,11 +11,9 @@ use namespace::autoclean;
 extends 'WoWUI::Module::Basic';
 __PACKAGE__->meta->make_immutable;
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'wmarker', global => 0, perchar => 1 };
-}
+# class attributes
+__PACKAGE__->name( 'wmarker' );
+__PACKAGE__->perchar( 1 );
 
 # keep require happy
 1;

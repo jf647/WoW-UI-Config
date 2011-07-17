@@ -46,17 +46,22 @@ use Set::Scalar;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
+# class attributes
+__PACKAGE__->name( 'addons' );
+__PACKAGE__->global( 1 );
+__PACKAGE__->perchar( 1 );
+
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'addons', global => 1, perchar => 1 };
-}
 sub BUILD
 {
 
   my $self = shift;
+
   my $config = $self->config;
+
   $self->all_addons( Set::Scalar->new( keys %{ $config->{addons} } ) );
+
+  return $self;
 
 }
 
@@ -67,11 +72,11 @@ sub augment_data
 
   my $data;
 
-  my $config = $self->config;
+  my $o = $self->modoptions;
 
   # do we have too many named sets?
-  if( $self->named_count > $config->{max_sets} ) {
-    croak "selected ", $self->named_count, " sets but we can only support $config->{max_sets}";
+  if( $self->named_count > $o->{max_sets} ) {
+    croak "selected ", $self->named_count, " sets but we can only support $o->{max_sets}";
   }
 
   # named sets

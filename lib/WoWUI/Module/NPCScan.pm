@@ -29,16 +29,16 @@ use Set::Scalar;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'npcscan', global => 0, perchar => 1 };
-}
+# class attributes
+__PACKAGE__->name( 'npcscan' );
+__PACKAGE__->perchar( 1 );
 
+# constructor
 sub BUILD
 {
 
     my $self = shift;
+    
     my $config = $self->config;
 
     for my $npc( keys %{ $config->{npcs} } ) {
@@ -52,6 +52,8 @@ sub BUILD
             }
         }
     }    
+    
+    return $self;
 
 }
 

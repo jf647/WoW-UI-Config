@@ -19,20 +19,18 @@ use Set::Scalar;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
+# class attributes
+__PACKAGE__->name( 'cork' );
+__PACKAGE__->global( 1 );
+__PACKAGE__->perchar( 1 );
+
 # constructor
-sub BUILDARGS
-{
-
-    my $class = shift;
-    return { @_, name => 'cork', global => 1, perchar => 1 };
-
-}
-
 sub BUILD
 {
 
     my $self = shift;
-    my $config = shift;
+    
+    my $config = $self->config;
     
     WoWUI::Util::Filter::check_filter_groups( $config->{settingsgroups}, $config->{settings}, 'settings' );    
 
@@ -42,8 +40,7 @@ sub augment_data
 {
 
     my $self = shift;
-    # XXX
-    return WoWUI::Machine->instance->modoption_get($self->name);
+    return $self->modoptions;
 
 }
 
@@ -90,8 +87,7 @@ sub augment_chardata
     }
     
     # expand the values for our settings
-    # XXX
-    my $type = WoWUI::Machine->instance->type;
+    my $type = $self->machine->type;
     for my $block( "values_common", "values_spec${specnum}", "values_spec${specnum}_${type}" ) {
       if( exists $options->{$block} ) {
         for my $setting( @{ $options->{$block} } ) {

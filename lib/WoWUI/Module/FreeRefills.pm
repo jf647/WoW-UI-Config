@@ -19,16 +19,13 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'freerefills', global => 1, perchar => 0 };
-}
+__PACKAGE__->name( 'freerefills' );
+__PACKAGE__->global( 1 );
 
 sub augment_data
 {
 
     my $self = shift;
-    my $player = shift;
 
     my $log = WoWUI::Util->log;
 
@@ -36,7 +33,7 @@ sub augment_data
 
     my $data;
   
-    for my $realm( $player->realms ) {
+    for my $realm( $self->player->realms ) {
         $log->debug("processing realm ", $realm->name);
         for my $char( $realm->chars ) {
             if( exists $config->{perchar_criteria} ) {

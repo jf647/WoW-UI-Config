@@ -11,6 +11,7 @@ use namespace::autoclean;
 use WoWUI::Meta::Attribute::Trait::Relevant;
 with 'WoWUI::Module::TellMeWhen::Dumpable';
 has char => ( is => 'rw', isa => 'WoWUI::Char', required => 1 );
+has modoptions => ( is => 'rw', isa => 'HashRef', required => 1 );
 has nextgrouppos => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen::Point' );
 has filtergroups => ( is => 'rw', isa => 'WoWUI::FilterGroups', required => 1 );
 has widestgroup => ( is => 'rw', isa => 'Num', default => 0 );
@@ -120,25 +121,12 @@ sub BUILD
     my $a = shift;
     my $config = $a->{config};
 
-    # XXX
-    my $o = WoWUI::Machine->instance->modoption_get('tmw');
-    
     # set the update interval
-    if( exists $o->{interval} ) {
-        $self->Interval( $o->{interval} );
-    }
-    else {
-        $self->Interval( $config->{interval} );
-    }
+    $self->Interval( $self->modoptions->{interval} );
 
     # create a point for the first group
-    if( exists $o->{anchor} ) {
-        $self->nextgrouppos( WoWUI::Module::TellMeWhen::Point->new( %{ $o->{anchor} } ) );
-    }
-    else {
-        $self->nextgrouppos( WoWUI::Module::TellMeWhen::Point->new( %{ $config->{anchor} } ) );
-    }
-    
+    $self->nextgrouppos( WoWUI::Module::TellMeWhen::Point->new( %{ $self->modoptions->{anchor} } ) );
+
     return $self;
 
 }
@@ -153,8 +141,6 @@ sub populate
     my $f = $a{f};
     my $config = $a{config};
     
-    my $options = WoWUI::Machine->modoption_get('tmw');
-    my $coptions = $self->char->modoption_get('tmw');
     my $desc = $self->char->name . ' of ' . $self->char->realm->name;
     
     my $log = WoWUI::Util->log;
@@ -258,15 +244,15 @@ sub populate
         my($name, $spec, $combat) = splice(@group_order, 0, 3);
         if( exists $i{$name}->{$spec}->{$combat} ) {
             $log->debug("building group for $name/$spec/$combat");
-            my $group = WoWUI::Module::TellMeWhen::Group->new;
+            my $group = WoWUI::Module::TellMeWhen::Group->new( modoptions => $self->modoptions );
             $group->populate( $self, $config, \%i, $name, $spec, $combat );
         }
     }
 
     # if we have a rotation group, build it
-    if( exists $coptions->{rotation} ) {
+    if( exists $self->modoptions->{rotation} ) {
         for my $spec( qw|1 2| ) {
-            if( my $r = $coptions->{rotation}->{"spec$spec"} ) {
+            if( my $r = $self->modoptions->{rotation}->{"spec$spec"} ) {
                 my $group = WoWUI::Module::TellMeWhen::Group::Rotation->new;
                 $group->populate( $self, $spec, $r );
             }

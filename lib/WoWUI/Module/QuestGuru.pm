@@ -18,11 +18,10 @@ use Carp 'croak';
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'questguru', global => 1, perchar => 1 };
-}
+# class attributes
+__PACKAGE__->name( 'questguru' );
+__PACKAGE__->global( 1 );
+__PACKAGE__->perchar( 1 );
 
 sub augment_data
 {
@@ -30,14 +29,13 @@ sub augment_data
   my $self = shift;
 
   my $config = $self->config;
-  # XXX
-  my $options = WoWUI::Machine->instance->modoption_get($self->name);
+  my $o = $self->modoptions;
 
   my $data;
 
   # Questguru Party Announce
-  if( exists $options->{announce} ) {
-    $data->{announce} = $options->{announce};
+  if( exists $o->{announce} ) {
+    $data->{announce} = $o->{announce};
   }
   else {
     $data->{announce} = 0;

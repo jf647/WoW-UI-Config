@@ -12,11 +12,9 @@ extends 'WoWUI::Module::Basic';
 augment chardata => \&augment_chardata;
 __PACKAGE__->meta->make_immutable;
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'bagnon', global => 0, perchar => 1 };
-}
+# class attributes
+__PACKAGE__->name( 'bagnon' );
+__PACKAGE__->perchar( 1 );
 
 sub augment_chardata
 {
@@ -24,10 +22,7 @@ sub augment_chardata
   my $self = shift;
   my $char = shift;
 
-  my $config = $self->config;
-  # XXX
-  my $o = WoWUI::Machine->instance->modoption_get($self->name);
-
+  my $o = $self->modoptions( $char );
   
   # money frame defaults to on
   my $moneyframe = 1;
@@ -36,13 +31,7 @@ sub augment_chardata
     $moneyframe = 0;
   }
 
-  # scale
-  my $scale = 1.0;
-  if( exists $o->{scale} ) {
-    $scale = $o->{scale};
-  }
-
-  return { realm => $char->realm->name, char => $char->name, scale => $scale, moneyframe => $moneyframe };
+  return { realm => $char->realm->name, char => $char->name, scale => $o->{scale}, moneyframe => $moneyframe };
 
 }
 

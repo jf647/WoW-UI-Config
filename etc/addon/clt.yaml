@@ -1,4 +1,7 @@
 ---
+modoptions:
+    debug: 0
+    enabled: 1
 templates:
     perchar:
         clt:

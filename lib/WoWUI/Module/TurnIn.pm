@@ -17,11 +17,9 @@ use Carp 'croak';
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'turnin', global => 1, perchar => 0 };
-}
+# class attributes
+__PACKAGE__->name( 'turnin' );
+__PACKAGE__->global( 1 );
 
 sub augment_data
 {
@@ -29,8 +27,7 @@ sub augment_data
   my $self = shift;
 
   my $config = $self->config;
-  # XXX
-  my $options = WoWUI::Machine->instance->modoption_get($self->name);
+  my $options = $self->modoptions;
 
   # TurnIn
   my $data;

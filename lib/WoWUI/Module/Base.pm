@@ -4,12 +4,14 @@
 
 package WoWUI::Module::Base;
 use Moose;
+use MooseX::ABC;
+use MooseX::ClassAttribute;
 
 use namespace::autoclean;
 
 # set up class
-has name => ( is => 'ro', isa => 'Str' );
-has [ qw|global perchar| ] => ( is => 'ro', isa => 'Bool', default => 0 );
+class_has name => ( is => 'rw', isa => 'Str' );
+class_has [ qw|global perchar| ] => ( is => 'rw', isa => 'Bool', default => 0 );
 has config => ( is => 'rw', isa => 'HashRef' );
 has player => ( is => 'rw', isa => 'WoWUI::Player', required => 1 );
 has machine => ( is => 'rw', isa => 'WoWUI::Machine', required => 1 );
@@ -21,6 +23,7 @@ has modoptions => (
   handles => {
     modoption_set => 'set',
     modoption_get => 'get',
+    modoption_exists => 'exists',
     modoptions_list => 'keys',
     modoptions_values => 'values',
   },
@@ -28,6 +31,7 @@ has modoptions => (
 __PACKAGE__->meta->make_immutable;
 
 use Carp 'croak';
+use Hash::Merge::Simple 'merge';
 use File::Copy;
 
 use WoWUI::Util qw|expand_path load_layered perchar_sv sv tempfile tt log tempdir|;
@@ -36,10 +40,14 @@ use WoWUI::Util qw|expand_path load_layered perchar_sv sv tempfile tt log tempdi
 sub BUILD
 {
 
-  my $self = shift;
+    my $self = shift;
 
-  my $gcfg = WoWUI::Config->instance->cfg;
-  $self->config( load_layered( $self->name . '.yaml', '$ADDONCONFDIR', '$PRIVADDONCONFDIR' ) );
+    my $gcfg = WoWUI::Config->instance->cfg;
+    $self->config( load_layered( $self->name . '.yaml', '$ADDONCONFDIR', '$PRIVADDONCONFDIR' ) );
+
+    $self->modoption_set( $self->name, $self->config->{modoptions} );
+
+    return $self;
   
 }
 
@@ -51,7 +59,7 @@ sub process_global
   
   my $config = $self->config;
   
-  my $svdir = sv();
+  my $svdir = sv( $self->player );
   my $log = WoWUI::Util->log;
   
   my $tt = tt();
@@ -94,16 +102,17 @@ sub data
 {
 
   my $self = shift;
-  my $player = shift;
 
   my $config = $self->config;
 
   if( exists $config->{criteria} ) {
     my $log = WoWUI::Util->log;
-    my $flags = WoWUI::Machine->instance->flags + WoWUI::Profile->instance->flags;
+    # XXX
+    # my $flags = $self->machine->flags + $WoWUI::Profile->instance->flags;
+    my $flags = $self->machine->flags;
     return unless( WoWUI::Util::Filter::matches( $flags, undef, $config->{criteria} ) );
   }
-  inner($player);
+  inner();
 
 }
 
@@ -132,15 +141,12 @@ sub process_perchar
   my $chardata = shift;
 
   my $config = $self->config;
-  # XXX
-  my $machine = WoWUI::Machine->instance;
   
-  my $svdir = perchar_sv( $char->realm->name, $char->dirname );
+  my $svdir = perchar_sv( $char );
   
   my $tt = tt();
 
   $chardata->{config} = $config;
-  $chardata->{profile} = $self->profile;
 
   for my $template( keys %{ $config->{templates}->{perchar} } ) {
     my $infname = expand_path( $config->{templates}->{perchar}->{$template}->{input} );
@@ -176,6 +182,31 @@ sub process_perchar
   }
   
 }
+
+sub modoptions
+{
+
+    my $self = shift;
+    my $char = shift;
+
+    my $options = {};
+    my @things;
+    if( defined $char ) {
+        @things = ( $self, $self->machine, $self->player, $char->realm, $char );
+    }
+    else {
+        @things = ( $self, $self->machine, $self->player );
+    }
+    for my $thing( @things ) {
+        if( $thing->modoption_exists( $self->name ) ) {
+            $options = merge( $options, $self->modoption_get( $self->name ) );
+        }
+    }
+    
+    return $options;
+
+}
+
 
 # keep require happy
 1;

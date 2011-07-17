@@ -19,26 +19,22 @@ use Carp 'croak';
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'hydra', global => 1, perchar => 1 };
-}
+# class attributes
+__PACKAGE__->name( 'hydra' );
+__PACKAGE__->global( 1 );
+__PACKAGE__->perchar( 1 );
 
 sub augment_data
 {
 
   my $self = shift;
-  my $player = shift;
 
   my $config = $self->config;
-  # XXX
-  my $o = WoWUI::Machine->instance->modoption_get('hydra');
+  my $o = $self->modoptions;
   my $log = WoWUI::Util->log;
 
-  # Hydra
   my $data;
-  for my $realm( $player->realms ) {
+  for my $realm( $self->player->realms ) {
     for my $char( $realm->chars ) {
         if( WoWUI::Util::Filter::matches( $char->flags_get(0), $char, { include => [ 'dualbox' ] } ) ) {
             $log->trace("adding self char ", $char->name, " to trust list for realm ", $realm->name);

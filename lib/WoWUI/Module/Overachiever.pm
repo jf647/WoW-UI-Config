@@ -17,11 +17,9 @@ use Carp 'croak';
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'overachiever', global => 1, perchar => 0 };
-}
+# class attributes
+__PACKAGE__->name( 'overachiever' );
+__PACKAGE__->global( 1 );
 
 sub augment_data
 {
@@ -29,8 +27,7 @@ sub augment_data
   my $self = shift;
 
   my $config = $self->config;
-  # XXX
-  my $o = WoWUI::Machine->instance->modoption_get($self->name);
+  my $o = $self->modoptions;
 
   my $data = {};
   

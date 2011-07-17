@@ -85,10 +85,6 @@ modules:
             point: BOTTOMLEFT
             x: 40
             y: 690
-    chocolatebar:
-        font: Fonts\\FRIZQT__.TTF
-        fontname: Friz Quadrata TT
-        fontsize: 10
     hydra:
         extratrust:
             realm1:

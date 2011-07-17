@@ -1,4 +1,6 @@
 ---
+modoptions:
+    scale: 1.0
 templates:
     perchar:
         currency:

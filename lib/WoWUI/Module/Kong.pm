@@ -19,17 +19,15 @@ use Set::Scalar;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'kong', global => 1, perchar => 1 };
-}
+# class attributes
+__PACKAGE__->name( 'kong' );
+__PACKAGE__->global( 1 );
+__PACKAGE__->perchar( 1 );
 
 sub augment_data
 {
 
     my $self = shift;
-    my $player = shift;
 
     my $log = WoWUI::Util->log;
 
@@ -37,7 +35,7 @@ sub augment_data
 
     my $data;
 
-    for my $realm( $player->realms ) {
+    for my $realm( $self->player->realms ) {
         $log->debug("processing realm ", $realm->name);
         for my $char( $realm->chars ) {
 

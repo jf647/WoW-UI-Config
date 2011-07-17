@@ -1,86 +1,90 @@
 ---
 realm:
     realm1:
-        char1:
-            class: Shaman
-            race: Dwarf
-            spec1: Restoration
-            spec2: Elemental
-            level: 85
-            dungeontypes:
-                - raids
-            flags_common:
-                - item:Loot-A-Rang
-                - dualbox
-                - dualbox:slave
-                - wellfed
-            flags_spec1:
-                - flaskuser
-                - item:Jar of Ancient Remedies
-            professions:
-                - Jewelcrafting:525
-                - Engineering:525
-                - Cooking:500
-                - InactiveCooking
-            modules:
-                dualboxmacro:
-                    masters:
-                        - master1
-                        - master2
-                        - master3
-                trinketmenu:
-                    Resto:
-                        - Blood of Isiset (Heroic)
-                        - Figurine - Dream Owl
-                        - Figurine - Jeweled Serpent
-                        - Mandala of Stirring Patterns #62472
-                        - Jar of Ancient Remedies
-                    Elemental:
-                        - Sorrowsong
-                        - Figurine - Jeweled Serpent
-                        - Anhuur's Hymnal (Heroic)
-                npcscan: &npcscan
-                    sets:
-                        - +@gold
-                        - +@mount
-                        - +@boe
-                        - +@vanity
-                        - +@quests
-                    achievements:
-                        - outland
-                        - northrend
-        char2:
-            class: Death Knight
-            race: Night Elf
-            spec1: Frost
-            spec2: Blood
-            level: 85
-            flags_common:
-                - goal:Achievements
-                - dualbox
-                - dualbox:master
-                - wowhead
-            professions:
-                - Skinning:525
-                - Mining:525
-                - Fishing:525
-                - Cooking:525
-                - InactiveCooking
-            modules:
-                trinketmenu:
-                    DPS:
-                        - Heart of Solace
-                        - Right Eye of Rajh
-                        - Harrison's Insignia of Panache
-                        - Mark of Khardros
-                npcscan: *npcscan
-                tmw:
-                    rotation:
-                        spec1:
-                            icon: DK Frost Rotation
-                            anchor:
-                                x: 63.55
-                                y: 36.57
-                                point: BOTTOM
-                                relativePoint: BOTTOM
-                            scale: 2.0
+        modoptions:
+            module1:
+                optiona: valuea
+        chars:
+            char1:
+                class: Shaman
+                race: Dwarf
+                spec1: Restoration
+                spec2: Elemental
+                level: 85
+                dungeontypes:
+                    - raids
+                flags_common:
+                    - item:Loot-A-Rang
+                    - dualbox
+                    - dualbox:slave
+                    - wellfed
+                flags_spec1:
+                    - flaskuser
+                    - item:Jar of Ancient Remedies
+                professions:
+                    - Jewelcrafting:525
+                    - Engineering:525
+                    - Cooking:500
+                    - InactiveCooking
+                modoptions:
+                    dualboxmacro:
+                        masters:
+                            - master1
+                            - master2
+                            - master3
+                    trinketmenu:
+                        Resto:
+                            - Blood of Isiset (Heroic)
+                            - Figurine - Dream Owl
+                            - Figurine - Jeweled Serpent
+                            - Mandala of Stirring Patterns #62472
+                            - Jar of Ancient Remedies
+                        Elemental:
+                            - Sorrowsong
+                            - Figurine - Jeweled Serpent
+                            - Anhuur's Hymnal (Heroic)
+                    npcscan: &npcscan
+                        sets:
+                            - +@gold
+                            - +@mount
+                            - +@boe
+                            - +@vanity
+                            - +@quests
+                        achievements:
+                            - outland
+                            - northrend
+            char2:
+                class: Death Knight
+                race: Night Elf
+                spec1: Frost
+                spec2: Blood
+                level: 85
+                flags_common:
+                    - goal:Achievements
+                    - dualbox
+                    - dualbox:master
+                    - wowhead
+                professions:
+                    - Skinning:525
+                    - Mining:525
+                    - Fishing:525
+                    - Cooking:525
+                    - InactiveCooking
+                modoptions:
+                    trinketmenu:
+                        DPS:
+                            - Heart of Solace
+                            - Right Eye of Rajh
+                            - Harrison's Insignia of Panache
+                            - Mark of Khardros
+                    npcscan: *npcscan
+                    tmw:
+                        rotation:
+                            spec1:
+                                icon: DK Frost Rotation
+                                anchor:
+                                    x: 63.55
+                                    y: 36.57
+                                    point: BOTTOM
+                                    relativePoint: BOTTOM
+                                scale: 2.0

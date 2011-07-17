@@ -33,6 +33,7 @@ has modoptions => (
   handles => {
     modoption_set => 'set',
     modoption_get => 'get',
+    modoption_exists => 'exists',
     modoptions_list => 'keys',
     modoptions_values => 'values',
   },
@@ -93,9 +94,6 @@ sub BUILD
     $self->wowversions( $cfg->{wowversions} );
     for my $wowversion( @{ $cfg->{wowversions} } ) {
         $self->flags->insert('machine:wowversion:'.$wowversion);
-    }
-    for my $player( $self->players ) {
-        $self->flags->insert( "player:" . $player->name );
     }
 
     return $self;

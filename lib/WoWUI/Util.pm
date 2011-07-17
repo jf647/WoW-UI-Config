@@ -151,16 +151,12 @@ sub tempfile
 sub perchar_sv
 {
 
-    my $realm = shift;
     my $char = shift;
-  
-    # XXX
-    my $machine = WoWUI::Machine->instance;
   
     my $tempdir = tempdir();
 
-    my $realmdir = $tempdir->subdir('WTF')->subdir('Account')->subdir($machine->account)->subdir($realm);
-    my $chardir= $realmdir->subdir($char);
+    my $realmdir = $tempdir->subdir('WTF')->subdir('Account')->subdir($char->realm->player->account)->subdir($char->realm->name);
+    my $chardir= $realmdir->subdir($char->name);
     my $svdir = $chardir->subdir('SavedVariables');
     $svdir->mkpath(0) unless( -d $svdir );
   
@@ -171,11 +167,13 @@ sub perchar_sv
 sub sv
 {
 
+    my $player = shift;
+
     my $tempdir = tempdir();
-    # XXX
-    my $machine = WoWUI::Machine->instance;
-    my $svdir = $tempdir->subdir('WTF')->subdir('Account')->subdir($machine->account)->subdir('SavedVariables');
+
+    my $svdir = $tempdir->subdir('WTF')->subdir('Account')->subdir($player->account)->subdir('SavedVariables');
     $svdir->mkpath(0) unless( -d $svdir );
+
     return $svdir;
 
 }

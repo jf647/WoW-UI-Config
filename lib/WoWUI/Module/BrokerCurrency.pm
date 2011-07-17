@@ -15,11 +15,9 @@ __PACKAGE__->meta->make_immutable;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'brokercurrency', global => 0, perchar => 1 };
-}
+# class attributes
+__PACKAGE__->name( 'brokercurrency' );
+__PACKAGE__->perchar( 1 );
 
 sub augment_chardata
 {

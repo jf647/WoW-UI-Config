@@ -60,11 +60,12 @@ use WoWUI::Module::TellMeWhen::Condition;
 use WoWUI::Module::TellMeWhen::Condition::Icon;
 use WoWUI::Module::TellMeWhen::Condition::Runes;
 
+# class attributes
+__PACKAGE__->name( 'tmw' );
+__PACKAGE__->global( 1 );
+__PACKAGE__->perchar( 1 );
+
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'tmw', global => 1, perchar => 1 };
-}
 sub BUILD
 {
 
@@ -84,6 +85,8 @@ sub BUILD
 
     # instantiate icons singleton
     WoWUI::Module::TellMeWhen::Icons->initialize( config => $config );
+
+    return $self;
     
 }
 
@@ -101,17 +104,16 @@ sub augment_data
 {
 
     my $self = shift;
-    my $player = shift;
 
     my $log = WoWUI::Util->log;
     my $config = $self->config;
 
     my $data;
-
-    for my $realm( $player->realms ) {
+    
+    for my $realm( $self->player->realms ) {
         $log->debug("processing realm ", $realm->name);
         for my $char( $realm->chars ) {
-            my $f = WoWUI::Filter->new( char => $char );
+            my $f = WoWUI::Filter->new( char => $char, machine => $self->machine );
             if( exists $config->{perchar_criteria} ) {
                 next unless( $f->match( $config->{perchar_criteria} ) );
             }
@@ -120,6 +122,7 @@ sub augment_data
                 config => $config,
                 char => $char,
                 filtergroups => $self->filtergroups,
+                modoptions => $self->modoptions( $char ),
             );
             $profile->populate( config => $config, f => $f );
             if( $profile->NumGroups ) {

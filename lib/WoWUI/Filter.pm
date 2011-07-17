@@ -9,6 +9,7 @@ use namespace::autoclean;
 
 # set up class
 has char => ( is => 'rw', isa => 'WoWUI::Char' );
+has machine => ( is => 'rw', isa => 'WoWUI::Machine' );
 has levelcap => ( is => 'rw', isa => 'Int', default => 85 );
 has safe => ( is => 'rw', isa => 'Safe' );
 __PACKAGE__->meta->make_immutable;
@@ -93,9 +94,11 @@ sub match
     if( F_REALM & $using ) {
         $flags += $self->char->realm->flags;
     }
+    if( F_PLAYER & $using ) {
+        $flags += $self->char->player->flags;
+    }
     if( F_MACH & $using ) {
-        # XXX
-        $flags += WoWUI::Machine->instance->flags;
+        $flags += $self->machine->flags;
     }
     $log->debug("matching against flagset: $flags");
 

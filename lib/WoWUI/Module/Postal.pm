@@ -15,23 +15,20 @@ __PACKAGE__->meta->make_immutable;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'postal', global => 1, perchar => 0 };
-}
+# class attributes
+__PACKAGE__->name( 'postal' );
+__PACKAGE__->global( 1 );
 
 sub augment_data
 {
 
     my $self = shift;
-    my $player = shift;
 
     my $log = WoWUI::Util->log;
 
     my $data;
 
-    for my $realm( $player->realms ) {
+    for my $realm( $self->player->realms ) {
         $log->debug("processing realm ", $realm->name);
         for my $char( $realm->chars ) {
             $log->debug("processing character ", $char->name);

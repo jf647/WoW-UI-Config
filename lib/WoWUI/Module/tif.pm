@@ -15,11 +15,9 @@ extends 'WoWUI::Module::Basic';
 augment data => \&augment_data;
 __PACKAGE__->meta->make_immutable;
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'tif', global => 1, perchar => 0 };
-}
+# class attributes
+__PACKAGE__->name( 'tif' );
+__PACKAGE__->global( 1 );
 
 sub augment_data
 {

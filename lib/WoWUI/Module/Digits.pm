@@ -18,28 +18,24 @@ use Carp 'croak';
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'digits', global => 1, perchar => 0 };
-}
+# class attributes
+__PACKAGE__->name( 'digits' );
+__PACKAGE__->global( 1 );
 
 sub augment_data
 {
 
     my $self = shift;
-    my $player = shift;
 
     my $log = WoWUI::Util->log;
 
     my $config = $self->config;
-    # XXX
-    my $o = WoWUI::Machine->instance->modoption_get('digits');
+    my $o = $self->modoptions;
 
     my $data;
       
     # per-char settings
-    for my $realm( $player->realms ) {
+    for my $realm( $self->player->realms ) {
         $log->debug("processing realm ", $realm->name);
         for my $char( $realm->chars ) {
 

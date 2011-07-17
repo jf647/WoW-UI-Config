@@ -15,28 +15,24 @@ __PACKAGE__->meta->make_immutable;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'raven', global => 1, perchar => 0 };
-}
+# class attributes
+__PACKAGE__->name( 'raven' );
+__PACKAGE__->global( 1 );
 
 sub augment_data
 {
 
     my $self = shift;
-    my $player = shift;
 
     my $config = $self->config;
-    # XXX
-    my $o = WoWUI::Machine->instance->modoption_get('raven');
+    my $o = $self->modoptions;
 
     my $log = WoWUI::Util->log;
 
     my $data = { raven => $o };
 
     # per-char settings
-    for my $realm( $player->realms ) {
+    for my $realm( $self->player->realms ) {
         $log->debug("processing realm ", $realm->name);
         for my $char( $realm->chars ) {
 

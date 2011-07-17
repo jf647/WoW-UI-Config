@@ -17,19 +17,18 @@ use Carp 'croak';
 use WoWUI::Config;
 use WoWUI::Util qw|tt expand_path log|;
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'dualboxmacro', global => 0, perchar => 1 };
-}
+# class attributes
+__PACKAGE__->name( 'dualboxmacro' );
+__PACKAGE__->perchar( 1 );
 
-sub BUILD
-{
+# constructor
+sub BUILD {
 
     my $self = shift;
-    my $config = $self->config;
     
     WoWUI::Util::Filter::check_filter_groups( $config->{buttongroups}, $config->{buttons}, 'buttons' );
+    
+    return $self;
 
 }
 

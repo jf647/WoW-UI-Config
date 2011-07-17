@@ -32,6 +32,7 @@ has modoptions => (
   handles => {
     modoption_set => 'set',
     modoption_get => 'get',
+    modoption_exists => 'exists',
     modoptions_list => 'keys',
     modoptions_values => 'values',
   },
@@ -50,24 +51,24 @@ sub BUILD
 {
 
     my $self = shift;
-    my $p = shift;
   
     my $log = WoWUI::Util->log;
     my $gcfg = WoWUI::Config->instance->cfg;
 
     $self->flags( Set::Scalar->new );
 
-    for my $charname( keys %{ $p->{charnames} } ) {
+    for my $mod( keys %{ $self->cfg->{modoptions} } ) {
+        $self->modoption_set( $mod, $self->cfg->{modoptions}->{$mod} );
+    }
+
+    for my $charname( keys %{ $self->cfg->{chars} } ) {
         $log->debug("creating char object for $charname on ", $self->name);
-        my $char = WoWUI::Char->new( name => $charname, realm => $self );
+        my $char = WoWUI::Char->new( name => $charname, realm => $self, cfg => $self->cfg->{chars}->{$charname} );
         my $levelcap = $gcfg->{levelcap};
         if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, { include => [ 'everyone' ], exclude => [ qw|level:$levelcap bankalt mule| ] } ) ) {
             $self->flags->insert("realm:still_leveling");
         }
         $self->char_set( $charname => $char );
-    }
-    for my $char( $self->chars ) {
-        $char->flags_get(0)->insert( $self->flags->members );
     }
 
 }   

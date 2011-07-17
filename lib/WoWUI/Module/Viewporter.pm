@@ -18,11 +18,9 @@ use Carp 'croak';
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'viewporter', global => 0, perchar => 1 };
-}
+# class attributes
+__PACKAGE__->name( 'viewporter' );
+__PACKAGE__->perchar( 1 );
 
 sub augment_chardata
 {
@@ -31,8 +29,7 @@ sub augment_chardata
   my $char = shift;
 
   my $config = $self->config;
-  # XXX
-  my $o = WoWUI::Machine->instance->modoption_get($self->name);
+  my $o = $self->modoptions( $char );
 
   my $chardata = { realm => $char->realm->name, char => $char->name };
 

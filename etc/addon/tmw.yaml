@@ -1,11 +1,13 @@
 ---
-interval: 0.2
-anchor:
-    x: 210
-    y: -100
-    point: TOPLEFT
-    relativePoint: TOPLEFT
-groupspacing: 30
+modoptions:
+    interval: 0.2
+    anchor:
+        x: 210
+        y: -100
+        point: TOPLEFT
+        relativePoint: TOPLEFT
+    groupspacing: 30
+    maxpergroup: 7
 groupscale:
   '0': 2.0
   '1': 1.8
@@ -15,7 +17,6 @@ groupscale:
   '5': 1.4
   '6': 1.3
   '7': 1.2
-maxpergroup: 7
 perchar_criteria:
   addons:
   - TellMeWhen

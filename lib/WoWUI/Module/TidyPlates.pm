@@ -15,10 +15,8 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'tidyplates', global => 0, perchar => 1 };
-}
+__PACKAGE__->name( 'tidyplates' );
+__PACKAGE__->perchar( 1 );
 
 # keep require happy
 1;

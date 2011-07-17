@@ -22,16 +22,17 @@ use WoWUI::Util 'log';
 my %profiles;
 my %profiledigest;
 
+# class attributes
+__PACKAGE__->name( 'clique' );
+__PACKAGE__->global( 1 );
+
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'clique', global => 1, perchar => 0 };
-}
 sub BUILD
 {
 
     my $self = shift;
-    my $config = $self->config;
+
+    my $config = $self->config;    
 
     WoWUI::Util::Filter::check_filter_groups( $config->{actiongroups}, $config->{actions}, 'actions' );
     
@@ -60,7 +61,6 @@ sub augment_data
 {
 
     my $self = shift;
-    my $player = shift;
 
     my $log = WoWUI::Util->log;
 
@@ -68,7 +68,7 @@ sub augment_data
 
     my $data;
 
-    for my $realm( $player->realms ) {
+    for my $realm( $self->player->realms ) {
         $log->debug("processing realm ", $realm->name);
         for my $char( $realm->chars ) {
             if( exists $config->{perchar_criteria} ) {

@@ -1,4 +1,8 @@
 ---
+modoptions:
+    font: Fonts\\FRIZQT__.TTF
+    fontname: Friz Quadrata TT
+    fontsize: 10
 templates:
     global:
         chocolatebar:

@@ -27,11 +27,9 @@ my %groupmask = (
     'arena' => 0x10,
 );
 
-# constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'clt', global => 0, perchar => 1 };
-}
+# class attributes
+__PACKAGE__->name( 'clt' );
+__PACKAGE__->perchar( 1 );
 
 sub augment_chardata
 {
@@ -43,10 +41,8 @@ sub augment_chardata
 
   my $config = $self->config;
   my $o = $char->modoption_get('clt');
-  my $enabled = defined( $o->{enabled} ) || 1;
-  my $debug = defined( $o->{debug} ) || 0;
 
-  my $chardata = { realm => $char->realm->name, char => $char->name, enabled => $enabled, debug => $debug };
+  my $chardata = { realm => $char->realm->name, char => $char->name, enabled => $o->{enabled}, debug => $o->{debug} };
   
   my %specs;
   if( $char->spec_get(1) && $char->spec_get(2) ) {

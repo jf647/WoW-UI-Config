@@ -31,6 +31,7 @@ has modoptions => (
   handles => {
     modoption_set => 'set',
     modoption_get => 'get',
+    modoption_exists => 'exists',
     modoptions_list => 'keys',
     modoptions_values => 'values',
   },
@@ -59,7 +60,7 @@ sub BUILD
     my $self = shift;
     
     my $cfg = WoWUI::Config->instance->cfg;
-    my $playercfg = load_file( expand_path( '$PLAYERDIR/' . $self->name . '.yaml' ) );
+    my $playercfg = load_file( file( expand_path( '$PLAYERDIR' ), $self->name . '.yaml' ) );
     
     my $log = WoWUI::Util->log;
     
@@ -74,7 +75,7 @@ sub BUILD
     # iterate over realms
     for my $realmname( keys %{ $playercfg->{realms} } ) {
         $log->debug("creating realm object for $realmname");
-        my $realm = WoWUI::Realm->new( name => $realmname, player => $self, playercfg => $playercfg );
+        my $realm = WoWUI::Realm->new( name => $realmname, player => $self, cfg => $playercfg->{realms}->{$realmname} );
         $self->realm_set( $realmname, $realm );
     }
 
