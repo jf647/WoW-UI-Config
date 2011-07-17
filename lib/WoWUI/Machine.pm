@@ -33,7 +33,8 @@ has modoptions => (
   handles => {
     modoption_set => 'set',
     modoption_get => 'get',
-    modoption_names => 'keys',
+    modoptions_list => 'keys',
+    modoptions_values => 'values',
   },
 );
 __PACKAGE__->meta->make_immutable;

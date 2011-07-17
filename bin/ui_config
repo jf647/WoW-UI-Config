@@ -17,6 +17,7 @@ use lib "$FindBin::Bin/../lib";
 use WoWUI::Config;
 use WoWUI::Machines;
 use WoWUI::Util::Filter;
+use WoWUI::ExtraFiles;
 
 # parse command line
 my %o = (
@@ -104,12 +105,9 @@ sub process_machine
       die "can't write to ", $machine->output;
     }
     
-    # keep a list of extra files to add to the zip
-    my %extra_files;
-    
     # iterate over players
     for my $player( $machine->players ) {
-        process_player( $machine, $player, \%extra_files );
+        process_player( $machine, $player );
     }
 
     # create an archive of the tempdir
@@ -122,6 +120,15 @@ sub process_machine
             die "addTree error: $dir";
         }
     }
+    # add in any extra files
+    for my $file( WoWUI::ExtraFiles->files ) {
+        my $zipdst = WoWUI::ExtraFiles->zipfile($file);
+        $log->debug("adding extra file '$file' to zip as '$zipdst'");
+        unless( AZ_OK == $zip->addFile($file, $zipdst) ) {
+            die "addFile error: $file";
+        }
+    }
+    WoWUI::ExtraFiles->reset;
     unless ( $zip->writeToFileNamed($machine->output->stringify) == AZ_OK ) {
         die "write error";
     }
@@ -136,7 +143,6 @@ sub process_player
 
     my $machine = shift;
     my $player = shift;
-    my $extra_files = shift;
     
     my $cfg = WoWUI::Config->instance->cfg;
     
@@ -152,7 +158,10 @@ sub process_player
         }
 
         # instantiate the UI module
-        my $mod = $module->new( extra_files => $extra_files );
+        my $mod = $module->new(
+            machine => $machine,
+            player => $player,
+        );
 
         # process the UI's per-char config if it has one
         if( $mod->perchar ) {
@@ -171,7 +180,7 @@ sub process_player
         # process the UI's global config if it has one
         if( $mod->global ) {
             $log->debug("processing global for $module");
-            my $data = $mod->data( $player );
+            my $data = $mod->data;
             next unless( $data );
             $data->{charlist} = $player->charlist;
             $log->trace("writing files");

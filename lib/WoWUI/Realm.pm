@@ -24,6 +24,18 @@ has chars => (
         chars => 'values',
     },
 );
+has modoptions => (
+  is => 'bare',
+  isa => 'HashRef',
+  traits => ['Hash'],
+  default => sub { {} },
+  handles => {
+    modoption_set => 'set',
+    modoption_get => 'get',
+    modoptions_list => 'keys',
+    modoptions_values => 'values',
+  },
+);
 __PACKAGE__->meta->make_immutable;
 
 use Carp 'croak';

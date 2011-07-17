@@ -8,7 +8,7 @@ use Moose;
 use namespace::autoclean;
 
 # set up class
-has 'realm' => ( is => 'rw', isa => 'WoWUI::Realm' );
+has realm => ( is => 'rw', isa => 'WoWUI::Realm', required => 1 );
 has level => ( is => 'rw', isa => 'Int' );
 has [ qw|dungeontypes professions| ] => ( is => 'rw', isa => 'ArrayRef[Str]' );
 has [ qw|name dirname class class_ns race guild watchguild faction| ] => ( is => 'rw', isa => 'Str' );
@@ -55,7 +55,7 @@ has flags => (
   },
 );
 has modoptions => (
-  is => 'rw',
+  is => 'bare',
   isa => 'HashRef',
   traits => ['Hash'],
   default => sub { {} },

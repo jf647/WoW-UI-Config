@@ -24,15 +24,16 @@ has realms => (
     },
 );
 has modoptions => (
-    is => 'bare',
-    isa => 'HashRef',
-    traits => ['Hash'],
-    default => sub { {} },
-    handles => {
-        modoption_set => 'set',
-        modoption_get => 'get',
-        modoption_names => 'keys',
-    },
+  is => 'bare',
+  isa => 'HashRef',
+  traits => ['Hash'],
+  default => sub { {} },
+  handles => {
+    modoption_set => 'set',
+    modoption_get => 'get',
+    modoptions_list => 'keys',
+    modoptions_values => 'values',
+  },
 );
 __PACKAGE__->meta->make_immutable;
 

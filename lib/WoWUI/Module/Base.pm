@@ -8,18 +8,22 @@ use Moose;
 use namespace::autoclean;
 
 # set up class
-has 'name' => ( is => 'ro', isa => 'Str' );
-has [ qw|global perchar| ] => ( is => 'ro', isa => 'Bool' );
-has 'config' => ( is => 'rw', isa => 'HashRef' );
-has 'options' => ( is => 'rw', isa => 'HashRef' );
-has 'extra_files' => (
-    is => 'rw',
-    isa => 'HashRef[Str]',
-    traits => ['Hash'],
-    required => 1,
-    handles => {
-        extra_file_add => 'set',
-    },
+has name => ( is => 'ro', isa => 'Str' );
+has [ qw|global perchar| ] => ( is => 'ro', isa => 'Bool', default => 0 );
+has config => ( is => 'rw', isa => 'HashRef' );
+has player => ( is => 'rw', isa => 'WoWUI::Player', required => 1 );
+has machine => ( is => 'rw', isa => 'WoWUI::Machine', required => 1 );
+has modoptions => (
+  is => 'bare',
+  isa => 'HashRef',
+  traits => ['Hash'],
+  default => sub { {} },
+  handles => {
+    modoption_set => 'set',
+    modoption_get => 'get',
+    modoptions_list => 'keys',
+    modoptions_values => 'values',
+  },
 );
 __PACKAGE__->meta->make_immutable;
 
@@ -46,8 +50,6 @@ sub process_global
   my $data = shift;
   
   my $config = $self->config;
-  # XXX
-  my $machine = WoWUI::Machine->instance;
   
   my $svdir = sv();
   my $log = WoWUI::Util->log;
@@ -60,7 +62,7 @@ sub process_global
     my $infname = expand_path( $config->{templates}->{global}->{$template}->{input} );
     my $outfname = expand_path(
         $config->{templates}->{global}->{$template}->{output},
-        account => $machine->account,
+        account => $self->player->account,
     );
     my($tempfh, $tempfname) = tempfile( dir => $svdir );
     $tt->process( $infname->stringify, $data, $tempfh )
@@ -81,7 +83,7 @@ sub process_global
           my $prefix = tempdir();
           my $zipdst = $dst;
           $zipdst =~ s|^$prefix/||;
-          $self->extra_file_add($dst, $zipdst);
+          WoWUI::ExtraFiles->instance->add($dst, $zipdst);
           $log->debug("copied $src to $zipdst");
       }
   }
@@ -98,7 +100,6 @@ sub data
 
   if( exists $config->{criteria} ) {
     my $log = WoWUI::Util->log;
-    # XXX
     my $flags = WoWUI::Machine->instance->flags + WoWUI::Profile->instance->flags;
     return unless( WoWUI::Util::Filter::matches( $flags, undef, $config->{criteria} ) );
   }
@@ -147,7 +148,7 @@ sub process_perchar
       $config->{templates}->{perchar}->{$template}->{output},
       realm => $char->realm->name,
       char => $char->dirname,
-      account => $machine->account,
+      account => $self->player->account,
     );
     my($tempfh, $tempfname) = tempfile( dir => $svdir );
     $tt->process( $infname->stringify, $chardata, $tempfh )
@@ -169,7 +170,7 @@ sub process_perchar
           my $prefix = tempdir();
           my $zipdst = $dst;
           $zipdst =~ s|^$prefix/||;
-          $self->extra_file_add($dst, $zipdst);
+          WoWUI::ExtraFiles->instance->add($dst, $zipdst);
           $self->debug("copied $src to $zipdst");
       }
   }
