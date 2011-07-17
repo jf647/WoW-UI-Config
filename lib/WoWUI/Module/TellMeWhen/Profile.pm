@@ -16,7 +16,6 @@ has nextgrouppos => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen::Point' );
 has filtergroups => ( is => 'rw', isa => 'WoWUI::FilterGroups', required => 1 );
 has widestgroup => ( is => 'rw', isa => 'Num', default => 0 );
 has groupscale => ( is => 'rw', isa => 'Num', default => 2 );
-has Version => ( is => 'ro', isa => 'Str', default => '43013', traits => ['Relevant'], relevant => 1 );
 has Locked => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 has Interval => ( is => 'rw', isa => 'Num', default => 1, traits => ['Relevant'], relevant => 1 );
 has EffThreshold => ( is => 'rw', isa => 'Num', default => 15, traits => ['Relevant'], relevant => 1 );
@@ -65,7 +64,7 @@ has OOMColor => (
     relevant => 1,
 );
 has TextureName => ( is => 'rw', isa => 'Str', default => 'Blizzard', traits => ['Relevant'], relevant => 1 );
-has [ qw|DrawEdge TestOn HasImported MasterSound ReceiveComm| ] => (
+has [ qw|DrawEdge TestOn MasterSound ReceiveComm| ] => (
     is => 'rw', isa => 'Bool', default => 0,
     traits => ['Relevant'], relevant => 1,
 );
@@ -73,7 +72,6 @@ has [ qw|WarnInvalids BarGCD ClockGCD| ] => (
     is => 'rw', isa => 'Bool', default => 1,
     traits => ['Relevant'], relevant => 1,
 );
-has WpnEnchDurs => ( is => 'rw', isa => 'HashRef', default => sub { {} }, traits => ['Relevant'], relevant => 1 );
 has EditorScale => ( is => 'rw', isa => 'Num', default => 0.8, traits => ['Relevant'], relevant => 1 );
 has CheckOrder => ( is => 'rw', isa => 'Num', default => -1, traits => ['Relevant'], relevant => 1 );
 has Groups => (

@@ -11,35 +11,15 @@ use namespace::autoclean;
 extends 'WoWUI::Module::TellMeWhen::Icon';
 has '+priority' => ( default => 4050 );
 has '+Type' => ( default => 'reactive' );
-has '+ShowWhen' => ( relevant => 1 );
 has '+Alpha' => ( default => 0.5 );
 has '+CooldownCheck' => ( relevant => 1, default => 1 );
+has '+ShowWhen' => ( relevant => 1 );
 has [ qw|
     +ManaCheck +RangeCheck +ShowPBar
     +UseActvtnOverlay +IgnoreRunes +PBarOffs
 | ] => ( relevant => 1 );
+with 'WoWUI::Module::TellMeWhen::Icon::Usable';
 __PACKAGE__->meta->make_immutable;
-
-# constructor
-sub BUILD
-{
-
-    my $self = shift;
-    my $icfg = shift;
-
-    # usable / unusable
-    if( exists $icfg->{unusable} ) {
-        $self->ShowWhen( 'unalpha' );
-        $self->UnAlpha( 0.5 );
-    }
-    elsif( exists $icfg->{always} ) {
-        $self->ShowWhen( 'always' );
-        $self->UnAlpha( 0.5 );
-    }
-    
-    return $self;
-
-}
 
 package WoWUI::Module::TellMeWhen::Icon::Reactive::Off;
 use Moose;

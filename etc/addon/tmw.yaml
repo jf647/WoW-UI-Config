@@ -72,6 +72,11 @@ conditions:
     Operator: '<='
     Type: MANA
     Unit: player
+  mp_le_25_pct:
+    Level:  25
+    Operator: '<='
+    Type: MANA
+    Unit: player
   pet_hp_le_75_pct:
     Level:  75
     Operator: '<='
@@ -86,6 +91,12 @@ conditions:
     Type: CLASSIFICATION
     Unit: target
     Operator: ==
+    Level: 5
+  maelstrom_weapon_5:
+    Type: BUFFSTACKS
+    Checked: 1
+    Operator: '=='
+    Name: Maelstrom Weapon
     Level: 5
 groupscale:
   '0': 2.0
@@ -315,7 +326,6 @@ filtergroups:
     - Focused Insight
     - Shamanistic Rage
     - Feral Spirit
-    - Searing Totem Missing
     - Shock Usable
     - Lava Burst
     - Flame Shock Missing
@@ -324,6 +334,8 @@ filtergroups:
     - Elemental Mastery
     - Unleash Elements
     - Healing Rains
+    - MW3 Healing Wave
+    - Wind Shear
     criteria:
       include:
       - class:Shaman
@@ -396,6 +408,110 @@ icons:
       - Obliterate if KM Up
       - Obliterate
       - Frost Strike
+  Enhance Shaman Rotation:
+    no_filter_group_ok: 1
+    type: Meta
+    Icons:
+      - Flame Shock Missing
+      - Searing Totem Missing
+      - Unleash Elements
+      - MW5 Chain Heal
+      - MW5 Healing Wave
+      - MW5 Lightning Bolt
+      - Stormstrike
+      - Lava Lash 3 Searing Flames
+      - Earth Shock
+      - Shamanistic Rage on Boss
+      - Feral Spirit on Boss
+      - Water Shield when Mana Low
+      - Lightning Shield Missing
+  MW5 Chain Heal:
+    no_filter_group_ok: 1
+    conditions:
+      - hp_le_75_pct
+      - AND
+      - maelstrom_weapon_5
+      - AND
+      - instance
+    type: Cooldown::Spell
+    Alpha: 1
+    spell: Chain Heal
+  MW5 Healing Wave:
+    no_filter_group_ok: 1
+    conditions:
+      - hp_le_75_pct
+      - AND
+      - maelstrom_weapon_5
+    type: Cooldown::Spell
+    Alpha: 1
+    spell: Healing Wave
+  MW3 Healing Wave:
+    combat: out
+    conditions:
+      - hp_le_75_pct
+      - AND
+      - Type: BUFFSTACKS
+        Checked: 1
+        Operator: '>='
+        Name: Maelstrom Weapon
+        Level: 3
+    type: Cooldown::Spell
+    spell: Healing Wave
+  MW5 Lightning Bolt:
+    no_filter_group_ok: 1
+    conditions:
+      - maelstrom_weapon_5
+    type: Cooldown::Spell
+    Alpha: 1
+    spell: Lightning Bolt
+  Lava Lash 3 Searing Flames:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    Alpha: 1
+    spell: Lava Lash
+    conditions:
+      - Type: DEBUFFSTACKS
+        Unit: target
+        Operator: '>='
+        Level: 3
+        Name: Searing Flames
+  Stormstrike:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+  Earth Shock:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+  Shamanistic Rage on Boss:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Shamanistic Rage
+    conditions:
+      - target_is_boss
+  Feral Spirit on Boss:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Feral Spirit
+    conditions:
+      - target_is_boss
+  Water Shield when Mana Low:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Water Shield
+    missing: 1
+    conditions:
+      - mp_le_25_pct
+      - AND
+      - icon:Water Shield Missing
+  Water Shield Missing:
+    no_filter_group_ok: 1
+    spell: Water Shield
+    missing: 1
+    type: Buff
+  Lightning Shield Missing:
+    no_filter_group_ok: 1
+    type: Buff
+    missing: 1
+    spell: Lightning Shield
   Blood Plague Missing:
     no_filter_group_ok: 1
     type: Debuff
@@ -996,6 +1112,8 @@ icons:
       include:
       - spec:Elemental
       level: 14
+    conditions:
+      - icon:Shock Usable
     missing: 1
     spell: Flame Shock
     type: Debuff
@@ -1497,6 +1615,11 @@ icons:
     criteria:
       level: 57
     type: Cooldown::Spell::Off::ShortCD
+  Wind Shear:
+    combat: in
+    criteria:
+      level: 16
+    type: Cooldown::Spell::Off::ShortCD
   Mirror Image:
     combat: in
     criteria:
@@ -1628,9 +1751,8 @@ icons:
       include:
       - spec:Discipline
       level: 39
-    spell: 47755
+    spell: '47755: 12'
     type: Cooldown::Internal::Spell
-    ICDDuration: 12
     unusable: 1
   Readiness:
     combat: in
@@ -1732,9 +1854,8 @@ icons:
       include:
       - spec:Restoration
       level: 29
-    spell: 81094
+    spell: '81094: 12'
     type: Cooldown::Internal::Spell
-    ICDDuration: 12
     unusable: 1
   Ring of Frost:
     combat: in
@@ -1853,12 +1974,14 @@ icons:
     no_filter_group_ok: 1
     type: Buff
   Searing Totem Missing:
+    no_filter_group_ok: 1
     combat: in
     criteria:
       include:
       - spec:Enhancement
       level: 10
     missing: 1
+    TotemSlots: 1000
     spell: Searing Totem
     type: Totem
   'Shadow Word: Death':

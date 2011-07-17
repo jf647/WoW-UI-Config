@@ -14,6 +14,7 @@ has '+Type' => ( default => 'totem' );
 has '+ShowWhen' => ( relevant => 1 );
 has '+TotemSlots' => ( relevant => 1 );
 with 'WoWUI::Module::TellMeWhen::Icon::SpellName';
+with 'WoWUI::Module::TellMeWhen::Icon::Present';
 __PACKAGE__->meta->make_immutable;
 
 # keep require happy
