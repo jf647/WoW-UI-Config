@@ -12,6 +12,17 @@ has char => ( is => 'rw', isa => 'WoWUI::Char' );
 has machine => ( is => 'rw', isa => 'WoWUI::Machine' );
 has levelcap => ( is => 'rw', isa => 'Int', default => 85 );
 has safe => ( is => 'rw', isa => 'Safe' );
+has cache => (
+    is => 'bare',
+    isa => 'HashRef[Set::Scalar]',
+    traits => ['Hash'],
+    default => sub { {} },
+    handles => {
+        flags_set => 'set',
+        flags_get => 'get',
+        flags_exists => 'exists',
+    },
+);
 __PACKAGE__->meta->make_immutable;
 
 use Carp 'croak';
@@ -43,7 +54,7 @@ sub match
 
     my $self = shift;
     my $criteria = shift;
-    my $using = shift || F_CALL;
+    my $using = shift;
 
     my $log = WoWUI::Util->log( stacksup => 1, prefix => 'filter' );
     
@@ -76,29 +87,41 @@ sub match
         if( exists $criteria->{using} ) {
             $using = $self->safe->reval( $criteria->{using} );
         }
+        else {
+            $using = F_ALL;
+        }
     }
     $log->trace("flag selection bits are $using");
-    if( F_CALL | $using && ! defined $self->char ) {
-        confess 'filter has no char but char flag match requested';
+    my $flags;
+    if( $self->flags_exists($using) ) {
+        $log->trace("reusing calculated flags");
+        $flags = $self->flags_get($using);
     }
-    my $flags = Set::Scalar->new;
-    if( F_C0 & $using ) {
-        $flags += $self->char->flags_get(0);
-    }
-    if( F_C1 & $using ) {
-        $flags += $self->char->flags_get(1);
-    }
-    if( F_C2 & $using ) {
-        $flags += $self->char->flags_get(2);
-    }
-    if( F_REALM & $using ) {
-        $flags += $self->char->realm->flags;
-    }
-    if( F_PLAYER & $using ) {
-        $flags += $self->char->player->flags;
-    }
-    if( F_MACH & $using ) {
-        $flags += $self->machine->flags;
+    else {
+        $log->trace("building new flags");
+        if( F_CALL | $using && ! defined $self->char ) {
+            confess 'filter has no char but char flag match requested';
+        }
+        $flags = Set::Scalar->new;
+        if( F_C0 & $using ) {
+            $flags += $self->char->flags_get(0);
+        }
+        if( F_C1 & $using ) {
+            $flags += $self->char->flags_get(1);
+        }
+        if( F_C2 & $using ) {
+            $flags += $self->char->flags_get(2);
+        }
+        if( F_REALM & $using ) {
+            $flags += $self->char->realm->flags;
+        }
+        if( F_PLAYER & $using ) {
+            $flags += $self->char->player->flags;
+        }
+        if( F_MACH & $using ) {
+            $flags += $self->machine->flags;
+        }
+        $self->flags_set($using, $flags);
     }
     $log->debug("matching against flagset: $flags");
 
