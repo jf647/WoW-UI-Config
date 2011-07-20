@@ -41,7 +41,7 @@ sub add_meta_members
     }
     
     # chain delegation
-    inner($set);
+    inner();
 
 }
 
@@ -59,7 +59,7 @@ sub resolve_meta_position
     $self->Icons( \@newicons );
 
     # chain delegation
-    inner($profile);
+    inner();
 
 }
 

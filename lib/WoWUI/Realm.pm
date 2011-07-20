@@ -45,6 +45,8 @@ use Set::Scalar;
 use WoWUI::Char;
 use WoWUI::Config;
 use WoWUI::Util 'log';
+use WoWUI::Filter;
+use WoWUI::Filter::Constants qw|F_CALL|;
 
 # constructor
 sub BUILD
@@ -65,7 +67,8 @@ sub BUILD
         $log->debug("creating char object for $charname on ", $self->name);
         my $char = WoWUI::Char->new( name => $charname, realm => $self, cfg => $self->cfg->{chars}->{$charname} );
         my $levelcap = $gcfg->{levelcap};
-        if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, { include => [ 'everyone' ], exclude => [ qw|level:$levelcap bankalt mule| ] } ) ) {
+        my $f = WoWUI::Filter->new( char => $char );
+        if( $f->match( { filter => { exclude => [ qw|level:$levelcap bankalt mule| ] } }, F_CALL ) ) {
             $self->flags->insert("realm:still_leveling");
         }
         $self->char_set( $charname => $char );

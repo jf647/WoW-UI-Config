@@ -139,7 +139,7 @@ sub populate
     my $f = $a{f};
     my $config = $a{config};
     
-    my $desc = $self->char->name . ' of ' . $self->char->realm->name;
+    my $desc = $self->char->rname;
     
     my $log = WoWUI::Util->log;
 
@@ -286,7 +286,7 @@ sub select_icons
 
     my $log = WoWUI::Util->log;
     
-    my $desc = $char->name . ' of ' . $char->realm->name;
+    my $desc = $char->rname;
 
     # get candidates from filter groups
     my $candidates = $self->filtergroups->candidates( $a{f} );

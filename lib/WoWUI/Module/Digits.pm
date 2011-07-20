@@ -9,7 +9,6 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-augment data => \&augment_data;
 __PACKAGE__->meta->make_immutable;
 
 use Clone 'clone';
@@ -54,7 +53,7 @@ sub augment_data
                 };
                 if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{frames}->{$f} ) ) {
                     if( exists $ft_enabled{$fn} ) {
-                        croak "double match on $fn for ", $char->name, " of ", $realm->name, ": $ft_enabled{$fn} before $f";
+                        croak "double match on $fn for ", $char->rname, ": $ft_enabled{$fn} before $f";
                     }
                     else {
                         $ft_enabled{$fn} = $f;

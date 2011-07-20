@@ -20,7 +20,6 @@ has 'sets' => (
     set_list => 'keys',
   },
 );
-augment chardata => \&augment_chardata;
 __PACKAGE__->meta->make_immutable;
 
 use Carp 'croak';

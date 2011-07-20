@@ -8,7 +8,7 @@ use Moose;
 use namespace::autoclean;
 
 # set up class
-extends 'WoWUI::Module::Basic';
+extends 'WoWUI::Module::Base';
 __PACKAGE__->meta->make_immutable;
 
 # class attributes

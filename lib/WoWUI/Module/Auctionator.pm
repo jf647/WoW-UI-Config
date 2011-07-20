@@ -8,12 +8,20 @@ use Moose;
 use namespace::autoclean;
 
 # set up class
-extends 'WoWUI::Module::Basic';
+extends 'WoWUI::Module::Base';
 __PACKAGE__->meta->make_immutable;
 
 # class attributes
-__PACKAGE__->name( 'auctionator' );
-__PACKAGE__->perchar( 1 );
+sub BUILD
+{
+
+    my $self = shift;
+    $self->name( 'auctionator' );
+    $self->perchar( 1 );
+    
+    return $self;
+
+}
 
 # keep require happy
 1;

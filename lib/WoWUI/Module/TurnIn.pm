@@ -9,7 +9,6 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-augment data => \&augment_data;
 __PACKAGE__->meta->make_immutable;
 
 use Carp 'croak';

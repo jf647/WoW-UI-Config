@@ -9,8 +9,6 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-augment data => \&augment_data;
-augment chardata => \&augment_chardata;
 __PACKAGE__->meta->make_immutable;
 
 use Carp 'croak';
@@ -45,7 +43,7 @@ sub augment_data
             $log->debug("processing character ", $char->name);
 
             # calculate profile name
-            my $profilename = $char->name . ' of ' . $realm->name;
+            my $profilename = $char->rname;
             $profilename =~ tr/A-Z/a-z/;
             $profilename =~ s/\s/_/g;
 
@@ -84,7 +82,7 @@ sub augment_chardata
   my $self = shift;
   my $char = shift;
 
-  my $profilename = $char->name . ' of ' . $char->realm->name;
+  my $profilename = $char->rname;
   $profilename =~ tr/A-Z/a-z/;
   $profilename =~ s/\s/_/g;
 

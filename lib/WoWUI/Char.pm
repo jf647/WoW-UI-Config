@@ -540,6 +540,15 @@ sub set_level
 
 }
 
+sub rname
+{
+
+    my $self = shift;
+
+    return $self->name . ' of ' . $self->realm->name;
+
+}
+
 # keep require happy
 1;
 

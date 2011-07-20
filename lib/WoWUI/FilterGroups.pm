@@ -106,7 +106,7 @@ sub candidates
 
     for my $fg( $self->groups_values ) {
         $log->debug("considering filter group ", $fg->name);
-        if( $f->match( $fg->criteria ) ) {
+        if( $f->match( $fg->filter ) ) {
             $log->debug("filter group matches");
             $candidates += $fg->members;
         }

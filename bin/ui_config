@@ -9,6 +9,7 @@ use warnings;
 use Archive::Zip qw|:ERROR_CODES :CONSTANTS|;
 use FindBin;
 use Getopt::Long;
+use Hash::Merge::Simple qw|merge|;
 use Template;
 use Path::Class qw|dir file|;
 
@@ -16,7 +17,6 @@ use lib "$FindBin::Bin/../lib";
 
 use WoWUI::Config;
 use WoWUI::Machines;
-use WoWUI::Util::Filter;
 use WoWUI::ExtraFiles;
 
 # parse command line
@@ -162,6 +162,7 @@ sub process_player
             machine => $machine,
             player => $player,
         );
+        $DB::single = 1;
 
         # process the UI's per-char config if it has one
         if( $mod->perchar ) {
@@ -178,14 +179,21 @@ sub process_player
         }
 
         # process the UI's global config if it has one
+        my $data = {};
         if( $mod->global ) {
             $log->debug("processing global for $module");
-            my $data = $mod->data;
-            next unless( $data );
-            $data->{charlist} = $player->charlist;
-            $log->trace("writing files");
-            $mod->process_global( $data );
+            my $moddata = $mod->data;
+            $data = merge( $data, $moddata );
         }
+        elsif( $mod->globalpc ) {
+            $log->debug("processing globalpc for $module");
+            my $moddatapc = $mod->datapc;
+            $data = merge( $data, $moddatapc );
+        }
+        next unless( %$data );
+        $data->{charlist} = $player->charlist;
+        $log->trace("writing files");
+        $mod->process_global( $data );
 
     }
     

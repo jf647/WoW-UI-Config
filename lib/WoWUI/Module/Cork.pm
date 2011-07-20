@@ -9,8 +9,6 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-augment data => \&augment_data;
-augment chardata => \&augment_chardata;
 __PACKAGE__->meta->make_immutable;
 
 use Carp 'croak';
@@ -118,7 +116,7 @@ sub augment_chardata
         $settings{$setting}->{value} = $config->{settings}->{$setting}->{corkdefault};
       }
       else {
-        croak "no value or default for $setting for ", $char->name, " of ", $char->realm->name;
+        croak "no value or default for $setting for ", $char->rname;
       }
     }
     

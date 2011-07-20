@@ -17,9 +17,9 @@ groupscale:
   '5': 1.4
   '6': 1.3
   '7': 1.2
-perchar_criteria:
-  addons:
-  - TellMeWhen
+perchar_filter:
+    addons:
+        - TellMeWhen
 templates:
   global:
     tmw:
@@ -132,9 +132,6 @@ filtergroups:
     - Endless Healing Potion
     - Corrupted Egg Shell
     - Well Fed
-    criteria:
-      include:
-      - everyone
   deathknight:
     members:
     - Army of the Dead
@@ -152,7 +149,7 @@ filtergroups:
     - Blood Shield Missing
     - Death Grip
     - Bone Shield
-    criteria:
+    filter:
       include:
       - class:Death Knight
   druid:
@@ -179,7 +176,7 @@ filtergroups:
     - ReducedArmor
     - Insect Swarm Missing
     - Revitalize
-    criteria:
+    filter:
       include:
       - class:Druid
   healers:
@@ -187,7 +184,7 @@ filtergroups:
     - Aura of the Blue Dragon
     - Inner Eye
     - Dead Winds
-    criteria:
+    filter:
       include:
       - role:Healer
   hunter:
@@ -208,7 +205,7 @@ filtergroups:
     - Sting Missing
     - Hunter's Mark Missing
     - Aspect of the Pack
-    criteria:
+    filter:
       include:
       - class:Hunter
   mage:
@@ -232,7 +229,7 @@ filtergroups:
     - Frozen Target
     - Ice Barrier
     - Freeze
-    criteria:
+    filter:
       include:
       - class:Mage
   paladin:
@@ -256,7 +253,7 @@ filtergroups:
     - Judgements of the Pure
     - WoG 3HP
     - Holy Shield
-    criteria:
+    filter:
       include:
       - class:Paladin
   priest:
@@ -284,7 +281,7 @@ filtergroups:
     - Leap of Faith
     - Rapture
     - Holy Fire
-    criteria:
+    filter:
       include:
       - class:Priest
   racials:
@@ -292,7 +289,7 @@ filtergroups:
     - GotN Meta
     - Goblin Rockets
     - Berserking
-    criteria:
+    filter:
       include:
       - race:Draenei
       - race:Goblin
@@ -312,7 +309,7 @@ filtergroups:
     - Vendetta
     - Cold Blood
     - Killing Spree
-    criteria:
+    filter:
       include:
       - class:Rogue
   shaman:
@@ -336,7 +333,7 @@ filtergroups:
     - Healing Rains
     - MW3 Healing Wave
     - Wind Shear
-    criteria:
+    filter:
       include:
       - class:Shaman
   warlock:
@@ -357,7 +354,7 @@ filtergroups:
     - Decimation
     - Health Funnel
     - Demon Soul
-    criteria:
+    filter:
       include:
       - class:Warlock
   warrior:
@@ -390,7 +387,7 @@ filtergroups:
     - Thunder Clap
     - Heroic Leap
     - Shield Block
-    criteria:
+    filter:
       include:
       - class:Warrior
 icons:
@@ -594,20 +591,20 @@ icons:
       - hp_le_50_pct
   Anti-Magic Shell:
     combat: in
-    criteria:
+    filter:
       level: 68
     type: Cooldown::Spell::Def::ShortCD
   Anti-Magic Zone:
     IgnoreRunes: 1
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Unholy
       level: 49
     type: Cooldown::Spell::Def::LongCD
   Arcane Power:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Arcane
       level: 69
@@ -620,14 +617,14 @@ icons:
         Operator: '>='
         Name: Evangelism
         Level: 4
-    criteria:
+    filter:
       include:
       - all(spec:Discipline;subspec:Archangel)
       level: 23
     type: Cooldown::Spell::ShortCD
   Ardent Defender:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Protection
       level: 69
@@ -635,18 +632,18 @@ icons:
   Army of the Dead:
     IgnoreRunes: 1
     combat: in
-    criteria:
+    filter:
       level: 80
     type: Cooldown::Spell::Off::LongCD
   Aspect of the Pack:
     Alpha: 1
     combat: in
-    criteria:
+    filter:
       level: 56
     type: Buff
   Aura Mastery:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Holy
       level: 49
@@ -654,19 +651,19 @@ icons:
   Aura of the Blue Dragon:
     Alpha: 1
     combat: in
-    criteria:
+    filter:
       include:
       - all(role:Healer;item:DMC_BD)
     type: Buff
   Avenging Wrath:
     combat: in
-    criteria:
+    filter:
       level: 72
     type: Cooldown::Spell::Off::LongCD
   Bane Missing:
     Unit: target
     combat: in
-    criteria:
+    filter:
       level: 12
     missing: 1
     spell: 980;603
@@ -676,7 +673,7 @@ icons:
     conditions:
       - Type: EXISTS
         Unit: focus
-    criteria:
+    filter:
       include:
       - spec:Holy
       level: 39
@@ -685,7 +682,7 @@ icons:
     type: Buff
   Bestial Wrath:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Beast Mastery
       level: 69
@@ -699,7 +696,7 @@ icons:
     combat: in
     conditions:
     - icon:Black Arrow
-    criteria:
+    filter:
       include:
       - spec:Survival
       level: 69
@@ -708,27 +705,27 @@ icons:
     type: Debuff
   Bladestorm:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Arms
       level: 69
     type: Cooldown::Spell::Off::LongCD
   Blast Wave:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Fire
       level: 29
     type: Cooldown::Spell::Off::ShortCD
   Berserking:
     combat: in
-    criteria:
+    filter:
       include:
       - race:Troll
     type: Cooldown::Spell::Off::LongCD
   Blood Shield Missing:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Blood
       level: 80
@@ -741,7 +738,7 @@ icons:
     type: Cooldown::Spell::ShortCD
   Chakra Missing:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Holy
       level: 51
@@ -750,43 +747,43 @@ icons:
     type: Buff
   Charge:
     combat: in
-    criteria:
+    filter:
       level: 3
     type: Cooldown::Spell::Off::ShortCD
   Heroic Leap:
     combat: in
-    criteria:
+    filter:
       level: 85
     type: Cooldown::Spell::ShortCD
   Circle of Healing:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Holy
       level: 59
     type: Cooldown::Spell::Def::ShortCD
   Cloak of Shadows:
     combat: in
-    criteria:
+    filter:
       level: 58
     type: Cooldown::Spell::Def::ShortCD
   Cold Blood:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Assassination
       level: 29
     type: Cooldown::Spell::Off::LongCD
   Cold Snap:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Frost
       level: 39
     type: Cooldown::Spell::Off::LongCD
   Colossus Smash:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Arms
       - spec:Fury
@@ -794,7 +791,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Combustion:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Fire
       level: 39
@@ -802,7 +799,7 @@ icons:
   Corrupted Egg Shell:
     conditions:
     - mp_le_75_pct
-    criteria:
+    filter:
       include:
       - all(specusesmana;item:Corrupted Egg Shell)
     OnlyEquipped: 1
@@ -810,7 +807,7 @@ icons:
   Corruption:
     Unit: target
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Affliction
       - spec:Demonology
@@ -819,13 +816,13 @@ icons:
     type: Debuff
   Counterspell:
     combat: in
-    criteria:
+    filter:
       level: 9
     type: Cooldown::Spell::Off::ShortCD
   Crusader Aura:
     Alpha: 1
     combat: in
-    criteria:
+    filter:
       level: 62
     type: Buff
   Curse Missing:
@@ -833,7 +830,7 @@ icons:
     combat: in
     conditions:
       - target_is_boss
-    criteria:
+    filter:
       level: 16
     missing: 1
     spell: 702;1490
@@ -841,7 +838,7 @@ icons:
   Dancing Rune Weapon:
     IgnoreRunes: 1
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Blood
       level: 69
@@ -854,7 +851,7 @@ icons:
         Operator: '>='
         Name: Dark Evangelism
         Level: 4
-    criteria:
+    filter:
       include:
       - all(spec:Shadow;subspec:Dark Archangel)
       level: 82
@@ -862,7 +859,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Dark Transformation:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Unholy
       level: 49
@@ -870,27 +867,27 @@ icons:
   Dead Winds:
     absent: 1
     combat: in
-    criteria:
+    filter:
       include:
       - item:Gale of Shadows
     type: Buff
   Deadly Calm:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Arms
       level: 39
     type: Cooldown::Spell::Off::LongCD
   Demonic Empowerment:
     combat: in
-    criteria:
+    filter:
       level: 29
       include:
         - spec:Demonology
     type: Cooldown::Spell::Off::LongCD
   Desperate Prayer:
     combat: in
-    criteria:
+    filter:
       include:
       - subspec:Desperate Prayer
     type: Cooldown::Spell::Def::ShortCD
@@ -898,28 +895,28 @@ icons:
     combat: in
     conditions:
     - mp_lt_100_pct
-    criteria:
+    filter:
       include:
       - spec:Shadow
       level: 69
     type: Cooldown::Spell::Def::ShortCD
   Divine Favor:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Holy
       level: 29
     type: Cooldown::Spell::Def::ShortCD
   Divine Guardian:
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Protection;subspec:Divine Guardian)
       level: 49
     type: Cooldown::Spell::Def::LongCD
   Divine Protection:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Protection
       level: 30
@@ -927,7 +924,7 @@ icons:
   Draconic Mind or Flowing Water:
     conditions:
     - raid
-    criteria:
+    filter:
       exclude:
       - prof:Alchemy:500+
       include:
@@ -937,14 +934,14 @@ icons:
     type: Buff
   Dragon's Breath:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Fire
       level: 49
     type: Cooldown::Spell::Off::ShortCD
   Elemental Mastery:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Elemental
       level: 49
@@ -954,7 +951,7 @@ icons:
       - Type: REACT
         Unit: target
         Level: 1
-    criteria:
+    filter:
       level: 55
       include:
         - spec:Blood
@@ -963,20 +960,20 @@ icons:
   Endless Healing Potion:
     conditions:
     - icon:hplt100
-    criteria:
+    filter:
       include:
       - all(prof:Alchemy;item:Endless Healing Potion)
     type: Cooldown::Item
   Endless Mana Potion:
     conditions:
     - mp_lt_100_pct
-    criteria:
+    filter:
       include:
       - all(prof:Alchemy;item:Endless Mana Potion)
     type: Cooldown::Item
   Enhanced Agility:
     combat: out
-    criteria:
+    filter:
       exclude:
       - flaskuser
       include:
@@ -987,7 +984,7 @@ icons:
     type: Buff
   Enhanced Agility or Winds:
     combat: out
-    criteria:
+    filter:
       include:
       - all(flaskuser;role:Agility DPS;prof:Alchemy:500+)
     missing: 1
@@ -995,7 +992,7 @@ icons:
     type: Buff
   Enhanced Intellect:
     combat: out
-    criteria:
+    filter:
       exclude:
       - flaskuser
       include:
@@ -1006,7 +1003,7 @@ icons:
     type: Buff
   Enhanced Intellect or Draconic Mind:
     combat: out
-    criteria:
+    filter:
       include:
       - all(flaskuser;role:Intellect DPS;prof:Alchemy:500+)
     missing: 1
@@ -1014,7 +1011,7 @@ icons:
     type: Buff
   Enhanced Intellect or Draconic Mind or Flowing Water:
     combat: out
-    criteria:
+    filter:
       include:
       - all(flaskuser;role:Healer;prof:Alchemy:500+)
     missing: 1
@@ -1022,7 +1019,7 @@ icons:
     type: Buff
   Enhanced Strength:
     combat: out
-    criteria:
+    filter:
       exclude:
       - flaskuser
       - class:Druid
@@ -1034,7 +1031,7 @@ icons:
     type: Buff
   Enhanced Strength or Steelskin:
     combat: out
-    criteria:
+    filter:
       exclude:
       - nrflaskuser
       include:
@@ -1044,7 +1041,7 @@ icons:
     type: Buff
   Enhanced Strength or Steelskin or Stoneblood:
     combat: out
-    criteria:
+    filter:
       include:
       - all(flaskuser;nrflaskuser;role:Tank;prof:Alchemy:500+)
     missing: 1
@@ -1052,7 +1049,7 @@ icons:
     type: Buff
   Enhanced Strength or Titanic Strength:
     combat: out
-    criteria:
+    filter:
       include:
       - all(flaskuser;role:Strength DPS;prof:Alchemy:500+)
     missing: 1
@@ -1062,26 +1059,26 @@ icons:
     Alpha: 1
     conditions:
     - hp_le_75_pct
-    criteria:
+    filter:
       level: 76
     CooldownCheck: 1
     type: Reactive::Def
   Evasion:
     combat: in
-    criteria:
+    filter:
       level: 9
     type: Cooldown::Spell::Def::LongCD
   Evocation:
     combat: in
     conditions:
     - mp_lt_100_pct
-    criteria:
+    filter:
       level: 12
     spell: Evocation
     type: Cooldown::Spell::Def::LongCD
   Execute:
     combat: in
-    criteria:
+    filter:
       exclude:
       - spec:Protection
       level: 16
@@ -1089,18 +1086,18 @@ icons:
   Explosive Shot:
     combat: in
     ManaCheck: 1
-    criteria:
+    filter:
       include:
       - spec:Survival
     type: Cooldown::Spell::Off::ShortCD
   Fade:
     combat: in
-    criteria:
+    filter:
       level: 24
     type: Cooldown::Spell::Def::ShortCD
   Feral Spirit:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Enhancement
       level: 69
@@ -1108,7 +1105,7 @@ icons:
   Flame Shock Missing:
     Unit: target
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Elemental
       level: 14
@@ -1119,7 +1116,7 @@ icons:
     type: Debuff
   Flask of Endless Rage:
     combat: out
-    criteria:
+    filter:
       include:
       - all(nrflaskuser;role:Strength DPS)
     missing: 1
@@ -1128,7 +1125,7 @@ icons:
   Flask of Flowing Water:
     conditions:
     - raid
-    criteria:
+    filter:
       include:
       - disabled
     missing: 1
@@ -1137,7 +1134,7 @@ icons:
   Flask of Titanic Strength:
     conditions:
     - raid
-    criteria:
+    filter:
       exclude:
       - prof:Alchemy:500+
       include:
@@ -1148,7 +1145,7 @@ icons:
   Flask of the Draconic Mind:
     conditions:
     - raid
-    criteria:
+    filter:
       exclude:
       - prof:Alchemy:500+
       include:
@@ -1158,7 +1155,7 @@ icons:
     type: Buff
   Flask of the North:
     combat: out
-    criteria:
+    filter:
       include:
       - all(prof:Alchemy;item:Flask of the North)
     missing: 1
@@ -1167,7 +1164,7 @@ icons:
   Flask of the Winds:
     conditions:
     - raid
-    criteria:
+    filter:
       exclude:
       - prof:Alchemy:500+
       include:
@@ -1184,14 +1181,14 @@ icons:
         Name: Frenzy Effect
         Unit: pet
         Level: 4
-    criteria:
+    filter:
       include:
       - spec:Beast Mastery
       level: 29
     type: Cooldown::Spell::Off::ShortCD
   Focused Insight:
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Restoration;subspec:Focused Insight)
       level: 19
@@ -1199,14 +1196,14 @@ icons:
     type: Buff
   Force of Nature:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Balance
       level: 49
     type: Cooldown::Spell::Off::LongCD
   Free Mangle:
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Feral Combat;subspec:Bear)
       level: 69
@@ -1214,7 +1211,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Frenzied Regeneration:
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Feral Combat;subspec:Bear)
       level: 52
@@ -1224,7 +1221,7 @@ icons:
     Icons:
       - Gift of the Naaru Solo
       - Gift of the Naaru Party
-    criteria:
+    filter:
       include:
         - race:Draenei
     type: Meta
@@ -1243,21 +1240,21 @@ icons:
       - party
     type: Cooldown::Spell::Def::LongCD
   Goblin Rockets:
-    criteria:
+    filter:
       include:
       - race:Goblin
     spell: Rocket Jump;Rocket Barrage
     type: Cooldown::Spell::LongCD
   Guardian Spirit:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Holy
       level: 59
     type: Cooldown::Spell::Def::LongCD
   Guardian of Ancient Kings:
     combat: in
-    criteria:
+    filter:
       level: 85
     type: Cooldown::Spell::Def::LongCD
   Haunt:
@@ -1268,7 +1265,7 @@ icons:
     combat: in
     conditions:
     - icon:Haunt
-    criteria:
+    filter:
       include:
       - spec:Affliction
       level: 69
@@ -1277,7 +1274,7 @@ icons:
     type: Debuff
   Healing Rains:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Restoration
       level: 83
@@ -1292,31 +1289,31 @@ icons:
         Unit: player
       - AND
       - icon:!Mortal Strike
-    criteria:
+    filter:
       include:
       - spec:Arms
       level: 69
     type: Cooldown::Spell::Off::ShortCD
   Holy Radiance:
     combat: in
-    criteria:
+    filter:
       level: 83
     type: Cooldown::Spell::Def::ShortCD
   Holy Shock:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Holy
     type: Cooldown::Spell::Def::ShortCD
   Holy Shield:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Protection
     type: Cooldown::Spell::Def::ShortCD
   Holy Word:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Holy
       level: 51
@@ -1325,19 +1322,19 @@ icons:
   Hunter's Mark Missing:
     Unit: target
     combat: in
-    criteria:
+    filter:
       level: 14
     missing: 1
     spell: Hunter's Mark
     type: Debuff
   Icebound Fortitude:
     combat: in
-    criteria:
+    filter:
       level: 62
     type: Cooldown::Spell::Def::LongCD
   Icy Veins:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Frost
       level: 29
@@ -1345,7 +1342,7 @@ icons:
   Immolate:
     Unit: target
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Demonology
       - spec:Destruction
@@ -1359,7 +1356,7 @@ icons:
     - instance
     - AND
     - mp_le_75_pct
-    criteria:
+    filter:
       include:
       - item:Jar of Ancient Remedies
     stacks:
@@ -1368,7 +1365,7 @@ icons:
     type: Buff
   Inner Focus:
     combat: in
-    criteria:
+    filter:
       exclude:
       - subspec:Train of Thought
       include:
@@ -1377,7 +1374,7 @@ icons:
     type: Cooldown::Spell::Def::ShortCD
   Inner Focus ToT:
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Discipline;subspec:Train of Thought)
       level: 51
@@ -1389,7 +1386,7 @@ icons:
     type: Cooldown::Spell::Def::ShortCD
   Innervate:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Balance
       - spec:Restoration
@@ -1409,7 +1406,7 @@ icons:
     type: Buff
     combat: in
     missing: 1
-    criteria:
+    filter:
       include:
         - spec:Holy
   WoG 3HP:
@@ -1417,7 +1414,7 @@ icons:
     spell: Word of Glory
     conditions:
       - holy_power_3
-    criteria:
+    filter:
       include:
         - spec:Holy
   Best Use of 3HP:
@@ -1429,14 +1426,14 @@ icons:
     Icons:
       - Inquisition
       - Shield of the Righteous
-    criteria:
+    filter:
       include:
       - spec:Protection
       level: 81
   Insect Swarm Missing:
     Unit: target
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Balance
       level: 20
@@ -1444,30 +1441,30 @@ icons:
     spell: Insect Swarm
     type: Debuff
   Intervene:
-    criteria:
+    filter:
       include:
       - disabled
     type: Cooldown::Spell::Def::ShortCD
   Intimidation:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Beast Mastery
     spell: Intimidation
     type: Cooldown::Spell::Off::ShortCD
   Invisibility:
     combat: in
-    criteria:
+    filter:
       level: 78
     type: Cooldown::Spell::Def::LongCD
   Kick:
     combat: in
-    criteria:
+    filter:
       level: 14
     type: Cooldown::Spell::Off::ShortCD
   Kill Command:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Beast Mastery
       level: 10
@@ -1475,12 +1472,12 @@ icons:
   Kill Shot:
     combat: in
     CooldownCheck: 1
-    criteria:
+    filter:
       level: 35
     type: Reactive::Off
   Killing Spree:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Combat
       level: 69
@@ -1488,7 +1485,7 @@ icons:
   Lacerate:
     Unit: target
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Feral Combat;subspec:Bear)
       level: 66
@@ -1499,37 +1496,37 @@ icons:
     type: Debuff
   Last Stand:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Protection
       level: 20
     type: Cooldown::Spell::Def::LongCD
   Lava Burst:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Elemental
       level: 34
     type: Cooldown::Spell::Off::ShortCD
   Lay on Hands:
     combat: in
-    criteria:
+    filter:
       level: 16
     type: Cooldown::Spell::Def::LongCD
   Leap of Faith:
     combat: in
-    criteria:
+    filter:
       level: 85
     type: Cooldown::Spell::Def::ShortCD
   Lifeblood:
     combat: in
-    criteria:
+    filter:
       include:
       - prof:Herbalism
     type: Cooldown::Spell::ShortCD
   Lightning Shield 6 to 9 Charges:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Elemental
       level: 49
@@ -1540,7 +1537,7 @@ icons:
     type: Buff
   Lightwell:
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Holy;subspec:Lightwell)
       level: 29
@@ -1548,7 +1545,7 @@ icons:
   Living Bomb Missing:
     Unit: target
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Fire
       level: 69
@@ -1559,26 +1556,26 @@ icons:
     combat: in
     conditions:
     - mp_lt_100_pct
-    criteria:
+    filter:
       level: 48
     type: Cooldown::Item::ShortCD
   Mana Shield:
     combat: in
-    criteria:
+    filter:
       level: 46
     type: Cooldown::Spell::Def::ShortCD
   Mana Tide Totem:
     combat: in
     conditions:
     - mp_le_75_pct
-    criteria:
+    filter:
       include:
       - spec:Restoration
       level: 49
     type: Cooldown::Spell::Def::LongCD
   Master's Call:
     combat: in
-    criteria:
+    filter:
       level: 78
     type: Cooldown::Spell::Def::ShortCD
   Mend Pet Missing:
@@ -1586,7 +1583,7 @@ icons:
     combat: in
     conditions:
     - pet_hp_le_75_pct
-    criteria:
+    filter:
       level: 16
     missing: 1
     spell: Mend Pet
@@ -1595,46 +1592,46 @@ icons:
     combat: in
     conditions:
     - pet_hp_le_75_pct
-    criteria:
+    filter:
       level: 12
     type: Cooldown::Spell::Def::ShortCD
   Demon Soul:
     type: Cooldown::Spell::Off::LongCD
-    criteria:
+    filter:
       level: 85
     combat: in
   Metamorphosis:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Demonology
       level: 69
     type: Cooldown::Spell::Off::LongCD
   Mind Freeze:
     combat: in
-    criteria:
+    filter:
       level: 57
     type: Cooldown::Spell::Off::ShortCD
   Wind Shear:
     combat: in
-    criteria:
+    filter:
       level: 16
     type: Cooldown::Spell::Off::ShortCD
   Mirror Image:
     combat: in
-    criteria:
+    filter:
       level: 50
     type: Cooldown::Spell::Off::LongCD
   Mortal Strike:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Arms
       level: 69
     type: Cooldown::Spell::Off::ShortCD
   Nature's Swiftness:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Restoration
       level: 29
@@ -1644,49 +1641,49 @@ icons:
     UseActivationOverlay: 1
     combat: in
     CooldownCheck: 1
-    criteria:
+    filter:
       include:
       - spec:Arms
       level: 29
     type: Reactive::Off
   Pain Suppression:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Discipline
       level: 39
     type: Cooldown::Spell::Def::LongCD
   Penance:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Discipline
     type: Cooldown::Spell::Def::ShortCD
   Pillar Of Frost:
     IgnoreRunes: 1
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Frost
       level: 39
     type: Cooldown::Spell::Off::LongCD
   Power Infusion:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Discipline
       level: 29
     type: Cooldown::Spell::LongCD
   'Power Word: Barrier':
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Discipline
       level: 69
     type: Cooldown::Spell::Def::LongCD
   Prayer of Mending:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Discipline
       - spec:Holy
@@ -1694,14 +1691,14 @@ icons:
     type: Cooldown::Spell::Def::ShortCD
   Presence of Mind:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Arcane
       level: 29
     type: Cooldown::Spell::Off::ShortCD
   Pulverize:
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Feral Combat;subspec:Bear)
       level: 66
@@ -1709,12 +1706,12 @@ icons:
     type: Buff
   Pummel:
     combat: in
-    criteria:
+    filter:
       level: 38
     type: Cooldown::Spell::Off::ShortCD
   Pure Mojo or Frost Wyrm:
     combat: out
-    criteria:
+    filter:
       include:
       - all(nrflaskuser;role:Healer)
     missing: 1
@@ -1723,31 +1720,31 @@ icons:
   Raise Dead:
     IgnoreRunes: 1
     combat: in
-    criteria:
+    filter:
       level: 56
     type: Cooldown::Spell::Off::LongCD
   Rallying Cry:
     combat: in
     conditions:
       - instance
-    criteria:
+    filter:
       level: 83
     type: Cooldown::Spell::Def::LongCD
   Rapid Fire:
     combat: in
-    criteria:
+    filter:
       level: 54
     type: Cooldown::Spell::Off::LongCD
   Holy Fire:
     combat: in
-    criteria:
+    filter:
       level: 18
       include:
         - spec:Discipline
     type: Cooldown::Spell::ShortCD
   Rapture:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Discipline
       level: 39
@@ -1756,19 +1753,19 @@ icons:
     unusable: 1
   Readiness:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Marksmanship
       level: 59
     type: Cooldown::Spell::Off::LongCD
   Rebirth:
     combat: in
-    criteria:
+    filter:
       level: 20
     type: Cooldown::Spell::Def::LongCD
   Rebuke:
     combat: in
-    criteria:
+    filter:
       exclude:
       - spec:Holy
       level: 54
@@ -1779,7 +1776,7 @@ icons:
     - icon:Recuperate Missing
     - AND
     - hp_le_75_pct
-    criteria:
+    filter:
       level: 12
     type: Cooldown::Spell::Def::ShortCD
   Recuperate Missing:
@@ -1789,7 +1786,7 @@ icons:
     type: Buff
   Redirect:
     combat: in
-    criteria:
+    filter:
       level: 83
     type: Cooldown::Spell::Off::ShortCD
   ReducedArmor:
@@ -1797,7 +1794,7 @@ icons:
     combat: in
     conditions:
       - target_is_boss
-    criteria:
+    filter:
       include:
       - class:Warrior
       - all(class:Druid;spec:Feral Combat;subspec:Bear)
@@ -1810,7 +1807,7 @@ icons:
     combat: in
     conditions:
       - target_is_boss
-    criteria:
+    filter:
       include:
       - class:Warrior
       level: 9
@@ -1821,7 +1818,7 @@ icons:
     combat: in
     conditions:
       - target_is_boss
-    criteria:
+    filter:
       include:
       - class:Warrior
       - all(class:Druid;spec:Feral Combat;subspec:Bear)
@@ -1832,7 +1829,7 @@ icons:
   Rend Missing:
     Unit: target
     combat: in
-    criteria:
+    filter:
       exclude:
       - spec:Fury
       level: 7
@@ -1843,14 +1840,14 @@ icons:
     Alpha: 1
     combat: in
     CooldownCheck: 1
-    criteria:
+    filter:
       include:
       - spec:Protection
       level: 40
     type: Reactive::Off
   Revitalize:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Restoration
       level: 29
@@ -1859,17 +1856,17 @@ icons:
     unusable: 1
   Ring of Frost:
     combat: in
-    criteria:
+    filter:
       level: 83
     type: Cooldown::Spell::Off::ShortCD
   Flame Orb:
     combat: in
-    criteria:
+    filter:
       level: 81
     type: Cooldown::Spell::Off::ShortCD
   Frozen Target:
     combat: in
-    criteria:
+    filter:
       level: 69
       include:
         - spec:Frost
@@ -1909,14 +1906,14 @@ icons:
     combat: in
     type: Cooldown::Spell::Off::ShortCD
     spell: 33395
-    criteria:
+    filter:
       include:
         - spec:Frost
   Ice Barrier:
     combat: in
     conditions:
       - icon:Ice Barrier Missing
-    criteria:
+    filter:
       level: 49
       include:
         - spec:Frost
@@ -1932,7 +1929,7 @@ icons:
       - instance
       - AND
       - icon:Bone Shield Missing
-    criteria:
+    filter:
       level: 58
       include:
         - spec:Blood
@@ -1944,7 +1941,7 @@ icons:
     type: Buff
   Riptide:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Restoration
       level: 69
@@ -1954,7 +1951,7 @@ icons:
     combat: in
     conditions:
     - hp_le_75_pct
-    criteria:
+    filter:
       include:
       - spec:Blood
       level: 58
@@ -1963,7 +1960,7 @@ icons:
   Rupture Missing:
     Unit: target
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Combat
       level: 46
@@ -1976,7 +1973,7 @@ icons:
   Searing Totem Missing:
     no_filter_group_ok: 1
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Enhancement
       level: 10
@@ -1988,7 +1985,7 @@ icons:
     combat: in
     conditions:
     - target_hp_le_25_pct
-    criteria:
+    filter:
       include:
       - spec:Shadow
       level: 32
@@ -1997,7 +1994,7 @@ icons:
     combat: in
     conditions:
     - target_hp_le_25_pct
-    criteria:
+    filter:
       include:
       - spec:Affliction
       level: 10
@@ -2006,46 +2003,46 @@ icons:
     combat: in
     conditions:
     - mp_le_75_pct
-    criteria:
+    filter:
       level: 66
     type: Cooldown::Spell::Def::LongCD
   Shamanistic Rage:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Enhancement
       level: 49
     type: Cooldown::Spell::Def::ShortCD
   Shield Wall:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Protection
       level: 48
     type: Cooldown::Spell::Def::LongCD
   Shield Block:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Protection
       level: 28
     type: Cooldown::Spell::Def::ShortCD
   Shock Usable:
     combat: in
-    criteria:
+    filter:
       level: 5
     spell: Earth Shock
     type: Cooldown::Spell::Off::ShortCD
   Shockwave:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Protection
       level: 69
     type: Cooldown::Spell::Off::ShortCD
   Thunderstruck:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Protection
       level: 69
@@ -2053,14 +2050,14 @@ icons:
     ShowTimer: 1
   Thunder Clap:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Protection
       level: 69
     type: Cooldown::Spell::Off::ShortCD
   Silencing Shot:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Marksmanship
       level: 29
@@ -2068,7 +2065,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Skull Bash Bear:
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Feral Combat;subspec:Bear)
       level: 22
@@ -2076,7 +2073,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Skull Bash Cat:
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Feral Combat;subspec:Cat)
       level: 22
@@ -2084,13 +2081,13 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Slice and Dice:
     combat: in
-    criteria:
+    filter:
       level: 22
     missing: 1
     type: Buff
   Solar Beam:
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Balance;subspec:Solar Beam)
       level: 39
@@ -2100,7 +2097,7 @@ icons:
     spell: Hand of Gul'dan
     unit: target
     missing: 1
-    criteria:
+    filter:
       level: 39
       include:
         - spec:Demonology
@@ -2108,14 +2105,14 @@ icons:
   Decimation:
     combat: in
     type: Buff
-    criteria:
+    filter:
       level: 49
       include:
         - spec:Demonology
   Felstorm:
     combat: in
     spell: 89751
-    criteria:
+    filter:
       level: 45
       include:
         - spec:Demonology
@@ -2123,27 +2120,27 @@ icons:
   Spell Lock:
     combat: in
     spell: 19647
-    criteria:
+    filter:
       level: 52
       include:
         - spec:Affliction
     type: Cooldown::Spell::Off::ShortCD
   Spirit Link Totem:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Restoration
       level: 49
     type: Cooldown::Spell::Def::LongCD
   Spiritwalker's Grace:
     combat: in
-    criteria:
+    filter:
       include:
       - all(level;85)
     type: Cooldown::Spell::LongCD
   Starfall:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Balance
       level: 69
@@ -2151,7 +2148,7 @@ icons:
   Sting Missing:
     Unit: target
     combat: in
-    criteria:
+    filter:
       level: 10
     missing: 1
     spell: Serpent Sting;Wyvern Sting
@@ -2159,7 +2156,7 @@ icons:
   Summon Gargoyle:
     IgnoreRunes: 1
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Unholy
       level: 69
@@ -2174,84 +2171,84 @@ icons:
         Name: 58567
         Unit: target
         Level: 3
-    criteria:
+    filter:
       include:
       - spec:Protection
       level: 18
     type: Cooldown::Spell::Off::ShortCD
   Survival Instincts:
     combat: in
-    criteria:
+    filter:
       include:
       - all(spec:Feral Combat;subspec:Bear)
       level: 49
     type: Cooldown::Spell::Def::LongCD
   Swiftmend:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Restoration
     type: Cooldown::Spell::Def::ShortCD
   Sword and Board:
-    criteria:
+    filter:
       include:
       - disabled
     type: Buff
   Throwdown:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Arms
       level: 59
     type: Cooldown::Spell::Off::ShortCD
   Thunderstorm:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Elemental
     type: Cooldown::Spell::Off::ShortCD
   Tranquility:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Restoration
       level: 68
     type: Cooldown::Spell::Def::LongCD
   Tree of Life:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Restoration
       level: 69
     type: Cooldown::Spell::Def::LongCD
   Tremor Totem:
     combat: in
-    criteria:
+    filter:
       level: 52
     type: Cooldown::Spell::Def::ShortCD
   Tricks of the Trade:
     combat: in
     conditions:
     - instance
-    criteria:
+    filter:
       level: 75
     type: Cooldown::Spell::Off::ShortCD
   Typhoon:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Balance
       level: 29
     type: Cooldown::Spell::Off::ShortCD
   Unleash Elements:
     combat: in
-    criteria:
+    filter:
       level: 81
     type: Cooldown::Spell::ShortCD
   Unstable Affliction:
     Unit: target
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Affliction
     missing: 1
@@ -2259,7 +2256,7 @@ icons:
   Vampiric Blood:
     IgnoreRunes: 1
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Blood
       level: 58
@@ -2267,7 +2264,7 @@ icons:
   Vampiric Touch Missing:
     Unit: target
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Shadow
       level: 39
@@ -2276,19 +2273,19 @@ icons:
     type: Debuff
   Vanish:
     combat: in
-    criteria:
+    filter:
       level: 24
     type: Cooldown::Spell::Def::LongCD
   Vendetta:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Assassination
       level: 69
     type: Cooldown::Spell::Off::LongCD
   Victory Rush:
     combat: in
-    criteria:
+    filter:
       level: 5
     ShowTimer: 1
     type: Reactive::Def
@@ -2296,7 +2293,7 @@ icons:
     combat: out
     conditions:
     - instance
-    criteria:
+    filter:
       level: 85
       exclude:
       - nowellfed
@@ -2304,20 +2301,20 @@ icons:
     type: Buff
   Wild Growth:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Restoration
       level: 49
     type: Cooldown::Spell::Def::ShortCD
   Word of Glory:
     combat: in
-    criteria:
+    filter:
       exclude:
       - spec:Holy
     type: Cooldown::Spell::Def::ShortCD
   Zealotry:
     combat: in
-    criteria:
+    filter:
       include:
       - spec:Retribution
       level: 69

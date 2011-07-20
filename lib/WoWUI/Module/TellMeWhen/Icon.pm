@@ -187,7 +187,7 @@ sub select_extra
         }
     }
     # allow subclasses to do their own thing
-    inner($set);
+    inner();
     
 }
 
@@ -217,7 +217,7 @@ sub fixup
     $self->Conditions( \@newc );
     
     # allow the subclass to do their own thing
-    inner($profile);
+    inner();
 
 }
 

@@ -6,6 +6,7 @@ package WoWUI::Module::Addons;
 use Moose;
 
 use namespace::autoclean;
+use CLASS;
 
 # set up class
 extends 'WoWUI::Module::Base';
@@ -36,8 +37,6 @@ has 'class_sets' => (
     class_count => 'count',
   },
 );
-augment data => \&augment_data;
-augment chardata => \&augment_chardata;
 __PACKAGE__->meta->make_immutable;
 
 use Carp 'croak';
@@ -46,18 +45,17 @@ use Set::Scalar;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# class attributes
-__PACKAGE__->name( 'addons' );
-__PACKAGE__->global( 1 );
-__PACKAGE__->perchar( 1 );
-
 # constructor
+CLASS->name( 'addons' );
 sub BUILD
 {
 
   my $self = shift;
 
   my $config = $self->config;
+  
+  $self->global( 1 );
+  $self->perchar( 1 );
 
   $self->all_addons( Set::Scalar->new( keys %{ $config->{addons} } ) );
 
@@ -106,18 +104,19 @@ sub augment_chardata
 
   my $self = shift;
   my $char = shift;
+  my $f = shift;
 
   my $config = $self->config;
 
   my $chardata = { realm => $char->realm->name, char => $char->name };
 
   my $log = WoWUI::Util->log;
-  $log->debug("processing ", $char->name, " of ", $char->realm->name);
+  $log->debug("processing ", $char->rname);
 
   my $enabled = Set::Scalar->new;
   for my $addon( $self->all_addons->elements ) {
   
-    if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{addons}->{$addon} ) ) {
+    if( $f->match( $config->{addons}->{$addon} ) ) {
       $log->trace("picked up $addon");
       $enabled->insert($addon);
       if( exists $config->{addons}->{$addon}->{group} ) {

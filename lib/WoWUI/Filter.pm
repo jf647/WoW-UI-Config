@@ -53,39 +53,39 @@ sub match
 {
 
     my $self = shift;
-    my $criteria = shift;
+    my $filter = shift;
     my $using = shift;
 
     my $log = WoWUI::Util->log( stacksup => 1, prefix => 'filter' );
     
     # level matching
-    if( $self->char && exists $criteria->{level} ) {
+    if( $self->char && exists $filter->{level} ) {
         my($minl, $maxl);
-        if( $criteria->{level} =~ m/^(\d+)?:(\d+)?$/ ) {
+        if( $filter->{level} =~ m/^(\d+)?:(\d+)?$/ ) {
             $minl = defined $1 ? $1 : 1;
             $maxl = defined $2 ? $2 : $self->levelcap;
         }
-        elsif( $criteria->{level} =~ m/^(\d+)$/ ) {
+        elsif( $filter->{level} =~ m/^(\d+)$/ ) {
             ($minl, $maxl) = ($1, $self->levelcap);
         }
         else {
-            croak "invalid level range '$criteria->{level}'";
+            croak "invalid level range '$filter->{level}'";
         }
         $log->debug("filtering against level range $minl:$maxl");
         return unless( $self->char->level >= $minl && $self->char->level <= $maxl );
     }
     
     # addon filtering
-    if( $self->char && exists $criteria->{addons} ) {
-        my $req = Set::Scalar->new( @{ $criteria->{addons} } );
+    if( $self->char && exists $filter->{addons} ) {
+        my $req = Set::Scalar->new( @{ $filter->{addons} } );
         $log->debug("required addons: $req");
         return unless( $req < $self->char->addons );
     }
 
     # build flags for include/exclude matching
     unless( $using ) {
-        if( exists $criteria->{using} ) {
-            $using = $self->safe->reval( $criteria->{using} );
+        if( exists $filter->{using} ) {
+            $using = $self->safe->reval( $filter->{using} );
         }
         else {
             $using = F_ALL;
@@ -99,8 +99,11 @@ sub match
     }
     else {
         $log->trace("building new flags");
-        if( F_CALL | $using && ! defined $self->char ) {
-            confess 'filter has no char but char flag match requested';
+        if( (F_CALL|F_PLAYER|F_REALM)&$using && ! defined $self->char ) {
+            confess 'filter has no char but char/realm/player flag match requested';
+        }
+        if( F_MACH&$using && ! defined $self->machine ) {
+            confess 'filter has no machine but machine flag match requested';
         }
         $flags = Set::Scalar->new;
         if( F_C0 & $using ) {
@@ -116,7 +119,7 @@ sub match
             $flags += $self->char->realm->flags;
         }
         if( F_PLAYER & $using ) {
-            $flags += $self->char->player->flags;
+            $flags += $self->char->realm->player->flags;
         }
         if( F_MACH & $using ) {
             $flags += $self->machine->flags;
@@ -126,8 +129,8 @@ sub match
     $log->debug("matching against flagset: $flags");
 
     # check for an inclusion match
-    my $include = $criteria->{include} || [ 'everyone' ];
-    my $exclude = $criteria->{exclude};
+    my $include = $filter->{include} || [ 'everyone' ];
+    my $exclude = $filter->{exclude};
     my $matched = 0;
     my $noexclude = 0;
     if( $include ) {

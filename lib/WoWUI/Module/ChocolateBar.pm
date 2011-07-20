@@ -11,7 +11,6 @@ use namespace::autoclean;
 extends 'WoWUI::Module::Base';
 has 'plugins' => ( is => 'rw', isa => 'HashRef' );
 has 'all_plugins' => ( is => 'rw', isa => 'Object' );
-augment data => \&augment_data;
 __PACKAGE__->meta->make_immutable;
 
 use Clone qw|clone|;

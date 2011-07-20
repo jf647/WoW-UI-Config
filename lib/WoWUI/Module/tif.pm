@@ -5,19 +5,27 @@
 package WoWUI::Module::tif;
 use Moose;
 
-use strict;
-use warnings;
+use namespace::autoclean;
+use CLASS;
 
 use Carp 'croak';
 
 # set up class
-extends 'WoWUI::Module::Basic';
-augment data => \&augment_data;
+extends 'WoWUI::Module::Base';
 __PACKAGE__->meta->make_immutable;
 
-# class attributes
-__PACKAGE__->name( 'tif' );
-__PACKAGE__->global( 1 );
+# constructor
+CLASS->name( 'tif' );
+sub BUILD
+{
+
+    my $self = shift;
+
+    $self->global( 1 );
+
+    return $self;
+
+}
 
 sub augment_data
 {

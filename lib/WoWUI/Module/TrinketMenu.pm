@@ -10,7 +10,6 @@ use namespace::autoclean;
 # set up class
 extends 'WoWUI::Module::Base';
 has [ 'trinkets' ] => ( is => 'rw', isa => 'HashRef' );
-augment chardata => \&augment_chardata;
 __PACKAGE__->meta->make_immutable;
 
 use Carp 'croak';

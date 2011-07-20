@@ -11,7 +11,7 @@ use namespace::autoclean;
 
 # set up class
 class_has name => ( is => 'rw', isa => 'Str' );
-class_has [ qw|global perchar| ] => ( is => 'rw', isa => 'Bool', default => 0 );
+has [ qw|global globalpc perchar| ] => ( is => 'rw', isa => 'Bool', default => 0 );
 has config => ( is => 'rw', isa => 'HashRef' );
 has player => ( is => 'rw', isa => 'WoWUI::Player', required => 1 );
 has machine => ( is => 'rw', isa => 'WoWUI::Machine', required => 1 );
@@ -35,6 +35,7 @@ use Hash::Merge::Simple 'merge';
 use File::Copy;
 
 use WoWUI::Util qw|expand_path load_layered perchar_sv sv tempfile tt log tempdir|;
+use WoWUI::Filter::Constants qw|F_MPR|;
 
 # constructor
 sub BUILD
@@ -50,6 +51,74 @@ sub BUILD
     return $self;
   
 }
+
+sub data
+{
+
+    my $self = shift;
+
+    my $config = $self->config;
+
+    if( exists $config->{filter} ) {
+        my $f = WoWUI::Filter->new( machine => $self->machine );
+        return unless( $f->match( { filter => $config->{filter} }, F_MPR ) );
+    }
+    $self->augment_data();
+
+}
+
+sub datapc
+{
+
+    my $self = shift;
+
+    my $config = $self->config;
+
+    if( exists $config->{filter} ) {
+        my $f = WoWUI::Filter->new( machine => $self->machine );
+        return unless( $f->match( { filter => $config->{filter} }, F_MPR ) );
+    }
+
+    my $data;
+    my $log = WoWUI::Util->log;
+    
+    for my $realm( $self->player->realms ) {
+        $log->debug("processing realm ", $realm->name);
+        for my $char( $realm->chars ) {
+            my $f = WoWUI::Filter->new( char => $char, machine => $self->machine );
+            if( exists $config->{perchar_filter} ) {
+                next unless( $f->match( { filter => $config->{perchar_filter} } ) );
+            }
+            $log->debug("processing character ", $char->name);
+            $self->augment_datapc($data, $char, $f);
+        }
+    }
+    
+    return $data;
+
+}
+
+sub chardata
+{
+
+    my $self = shift;
+    my $char = shift;
+  
+    my $config = $self->config;
+
+    my $log = WoWUI::Util->log;
+
+    my $f = WoWUI::Filter->new( char => $char, machine => $self->machine );
+    if( exists $config->{perchar_filter} ) {
+        return unless( $f->match( { filter => $config->{perchar_filter} } ) );
+    }
+    $self->augment_chardata($char, $f);
+
+}
+
+sub augment_data { confess "augment_data must be overridden" }
+sub augment_datapc { confess "augment_datapc must be overridden" }
+sub augment_chardata { confess "augment_chardata must be overridden" }
 
 sub process_global
 {
@@ -95,41 +164,6 @@ sub process_global
           $log->debug("copied $src to $zipdst");
       }
   }
-
-}
-
-sub data
-{
-
-  my $self = shift;
-
-  my $config = $self->config;
-
-  if( exists $config->{criteria} ) {
-    my $log = WoWUI::Util->log;
-    # XXX
-    # my $flags = $self->machine->flags + $WoWUI::Profile->instance->flags;
-    my $flags = $self->machine->flags;
-    return unless( WoWUI::Util::Filter::matches( $flags, undef, $config->{criteria} ) );
-  }
-  inner();
-
-}
-
-sub chardata
-{
-
-  my $self = shift;
-  my $char = shift;
-  
-  my $config = $self->config;
-
-  my $log = WoWUI::Util->log;
-
-  if( exists $config->{perchar_criteria} ) {
-    return unless( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{perchar_criteria} ) );
-  }
-  inner($char);
 
 }
 
