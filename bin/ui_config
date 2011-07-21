@@ -162,7 +162,6 @@ sub process_player
             machine => $machine,
             player => $player,
         );
-        $DB::single = 1;
 
         # process the UI's per-char config if it has one
         if( $mod->perchar ) {

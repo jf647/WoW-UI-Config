@@ -1,1139 +1,1322 @@
 ---
-templates:
-    global:
-        clique:
-            input: $TEMPLATEDIR/clique/Clique.lua.template
-            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Clique.lua
-        cliquedocs:
-            input: $TEMPLATEDIR/clique/clique_profiles.html.template
-            output: $TEMPDIR/clique_profiles.html
 perchar_criteria:
-    addons:
-        - Clique
-actiongroups:
-    any:
-        include:
-            - everyone
-        actions:
-            - targetunit
-            - showmenu
-            - Corrupted Egg Shell
-    racials:
-        include:
-            - race:Draenei
-        actions:
-            - Gift of the Naaru
-    druid:
-        include:
-            - class:Druid
-        actions:
-            - Wild Growth
-            - Entangling Roots
-            - Hibernate
-            - Thorns
-            - Swiftmend
-            - Lifebloom
-            - Rejuvenation
-            - Nourish
-            - Soothe
-            - Innervate
-            - Remove Corruption
-            - Healing Touch
-            - Rebirth
-            - Revive
-            - Regrowth
-            - Growl
-    warrior:
-        include:
-            - class:Warrior
-        actions:
-            - Intervene
-            - Pummel
-            - Enraged Regeneration
-            - Taunt
-            - Heroic Leap
-            - Sunder Armor
-    paladin:
-        include:
-            - class:Paladin
-        actions:
-            - Word of Glory
-            - Righteous Defense
-            - Hammer of Justice
-            - Flash of Light
-            - Divine Light
-            - Lay on Hands
-            - Cleanse
-            - Hand of Protection
-            - Hand of Sacrifice
-            - Hand of Freedom
-            - Hand of Salvation
-            - Beacon of Light
-            - Redemption
-            - Holy Light
-            - Holy Shock
-            - Hand of Reckoning
-    priest:
-        include:
-            - class:Priest
-        actions:
-            - Circle of Healing
-            - Penance
-            - Levitate
-            - 'Power Word: Barrier'
-            - Renew
-            - Cure Disease
-            - Prayer of Mending
-            - Power Infusion
-            - Shackle Undead
-            - Dispel Magic
-            - Mass Dispel
-            - Pain Suppression
-            - Inner Focus Greater Heal
-            - Greater Heal
-            - Leap of Faith
-            - 'Power Word: Shield'
-            - Heal
-            - Binding Heal
-            - Resurrection
-            - Flash Heal
-            - 'Holy Word: Sanctuary'
-            - 'Holy Word: Serenity'
-    rogue:
-        include:
-            - class:Rogue
-        actions:
-            - Tricks of the Trade
-            - Kick
-            - Distract
-            - Cloak of Shadows
-            - Vanish
-    mage:
-        include:
-            - class:Mage
-        actions:
-            - Mage Ward
-            - Mana Shield
-            - Polymorph
-            - Counterspell
-            - Slow Fall
-            - Flamestrike
-            - Blizzard
-            - Spellsteal
-            - Remove Curse
-            - Ring of Frost
-    shaman:
-        include:
-            - class:Shaman
-        actions:
-            - Water Shield
-            - Lightning Shield
-            - Earth Shield
-            - Water Walking
-            - Water Breathing
-            - Chain Heal
-            - Riptide
-            - Bind Elemental
-            - Purge
-            - Hex
-            - Healing Surge
-            - Greater Healing Wave
-            - Unleash Elements
-            - Healing Wave
-            - Wind Shear
-            - Ancestral Spirit
-            - Healing Rain
-            - Cleanse Spirit
-    warlock:
-        include:
-            - class:Warlock
-        actions:
-            - Unending Breath
-            - Health Funnel
-            - Death Coil Warlock
-            - Spell Lock
-            - Devour Magic
-            - Rain of Fire
-            - Banish
-            - Fear
-            - Soulstone OOC
-    deathknight:
-        include:
-            - class:Death Knight
-        actions:
-            - Horn of Winter
-            - Dark Transformation
-            - Death and Decay
-            - Death Coil
-            - Mind Freeze
-            - Raise Ally
-            - Unholy Frenzy
-            - Dark Command
-    hunter:
-        include:
-            - class:Hunter
-        actions:
-            - Misdirection
-            - Heart of the Phoenix
-            - Mend Pet
-            - Master's Call
-            - Spirit Mend
-            - Tranquilizing Shot
-            - Revive Pet
-            - Intervene Pet
+  addons:
+  - Clique
+templates:
+  global:
+    clique:
+      input: $TEMPLATEDIR/clique/Clique.lua.template
+      output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Clique.lua
+    cliquedocs:
+      input: $TEMPLATEDIR/clique/clique_profiles.html.template
+      output: $TEMPDIR/clique_profiles.html
+filtergroups:
+  any:
+    members:
+    - targetunit
+    - showmenu
+    - Corrupted Egg Shell
+  deathknight:
+    members:
+    - Horn of Winter
+    - Dark Transformation
+    - Death and Decay
+    - Death Coil
+    - Mind Freeze
+    - Raise Ally
+    - Unholy Frenzy
+    - Dark Command
+    filter:
+      include:
+      - class:Death Knight
+  druid:
+    members:
+    - Wild Growth
+    - Entangling Roots
+    - Hibernate
+    - Thorns
+    - Swiftmend
+    - Lifebloom
+    - Rejuvenation
+    - Nourish
+    - Soothe
+    - Innervate
+    - Remove Corruption
+    - Healing Touch
+    - Rebirth
+    - Revive
+    - Regrowth
+    - Growl
+    filter:
+      include:
+      - class:Druid
+  hunter:
+    members:
+    - Misdirection
+    - Heart of the Phoenix
+    - Mend Pet
+    - Master's Call
+    - Spirit Mend
+    - Tranquilizing Shot
+    - Revive Pet
+    - Intervene Pet
+    filter:
+      include:
+      - class:Hunter
+  mage:
+    members:
+    - Mage Ward
+    - Mana Shield
+    - Polymorph
+    - Counterspell
+    - Slow Fall
+    - Flamestrike
+    - Blizzard
+    - Spellsteal
+    - Remove Curse
+    - Ring of Frost
+    filter:
+      include:
+      - class:Mage
+  paladin:
+    members:
+    - Word of Glory
+    - Righteous Defense
+    - Hammer of Justice
+    - Flash of Light
+    - Divine Light
+    - Lay on Hands
+    - Cleanse
+    - Hand of Protection
+    - Hand of Sacrifice
+    - Hand of Freedom
+    - Hand of Salvation
+    - Beacon of Light
+    - Redemption
+    - Holy Light
+    - Holy Shock
+    - Hand of Reckoning
+    filter:
+      include:
+      - class:Paladin
+  priest:
+    members:
+    - Circle of Healing
+    - Penance
+    - Levitate
+    - 'Power Word: Barrier'
+    - Renew
+    - Cure Disease
+    - Prayer of Mending
+    - Power Infusion
+    - Shackle Undead
+    - Dispel Magic
+    - Mass Dispel
+    - Pain Suppression
+    - Inner Focus Greater Heal
+    - Greater Heal
+    - Leap of Faith
+    - 'Power Word: Shield'
+    - Heal
+    - Binding Heal
+    - Resurrection
+    - Flash Heal
+    - 'Holy Word: Sanctuary'
+    - 'Holy Word: Serenity'
+    filter:
+      include:
+      - class:Priest
+  racials:
+    members:
+    - Gift of the Naaru
+    filter:
+      include:
+      - race:Draenei
+  rogue:
+    members:
+    - Tricks of the Trade
+    - Kick
+    - Distract
+    - Cloak of Shadows
+    - Vanish
+    filter:
+      include:
+      - class:Rogue
+  shaman:
+    members:
+    - Water Shield
+    - Lightning Shield
+    - Earth Shield
+    - Water Walking
+    - Water Breathing
+    - Chain Heal
+    - Riptide
+    - Bind Elemental
+    - Purge
+    - Hex
+    - Healing Surge
+    - Greater Healing Wave
+    - Unleash Elements
+    - Healing Wave
+    - Wind Shear
+    - Ancestral Spirit
+    - Healing Rain
+    - Cleanse Spirit
+    filter:
+      include:
+      - class:Shaman
+  warlock:
+    members:
+    - Unending Breath
+    - Health Funnel
+    - Death Coil Warlock
+    - Spell Lock
+    - Devour Magic
+    - Rain of Fire
+    - Banish
+    - Fear
+    - Soulstone OOC
+    filter:
+      include:
+      - class:Warlock
+  warrior:
+    members:
+    - Intervene
+    - Pummel
+    - Enraged Regeneration
+    - Taunt
+    - Heroic Leap
+    - Sunder Armor
+    filter:
+      include:
+      - class:Warrior
 actions:
-    Corrupted Egg Shell:
-        icon: inv_misc_cat_trinket09
-        type: macro
-        macro: /use [@mouseover] Corrupted Egg Shell
-        include:
-            - all(item:Corrupted Egg Shell;role:Healer;cliqueaction:trinketitem)
-            - all(item:Corrupted Egg Shell;role:Intellect DPS;cliqueaction:trinketitem)
-    Misdirection:
-        icon: ability_hunter_misdirection
-        level: 76
-        include:
-            - cliqueaction:xferthreat
-    Tricks of the Trade:
-        icon: ability_rogue_tricksofthetrade
-        level: 75
-        include:
-            - cliqueaction:xferthreat
-    Gift of the Naaru:
-        icon: spell_holy_holyprotection
-        include:
-            - all(race:Draenei;cliqueaction:targetedracial)
-    Horn of Winter:
-        icon: inv_misc_horn_02
-        level: 65
-        include:
-            - cliqueaction:selfshield
-    Circle of Healing:
-        icon: spell_holy_circleofrenewal
-        level: 59
-        include:
-            - all(spec:Holy;cliqueaction:smartgroupheal)
-    Wild Growth:
-        icon: ability_druid_flourish
-        level: 49
-        include:
-            - all(spec:Restoration;cliqueaction:smartgroupheal)
-    Water Shield:
-        icon: ability_shaman_watershield
-        level: 20
-        include:
-            - all(spec:Restoration;cliqueaction:selfshield)
-    Mage Ward:
-        icon: spell_fire_twilightfireward
-        level: 36
-        include:
-            - cliqueaction:selfshield2
-    Mana Shield:
-        icon: spell_shadow_detectlesserinvisibility
-        level: 46
-        include:
-            - cliqueaction:selfshield
-    Cloak of Shadows:
-        icon: spell_shadow_nethercloak
-        level: 58
-        include:
-            - cliqueaction:selfshield
-    Lightning Shield:
-        icon: spell_nature_lightningshield
-        level: 8
-        include:
-            - all(spec:Enhancement;cliqueaction:selfshield)
-            - all(spec:Elemental;cliqueaction:selfshield)
-    Polymorph:
-        icon: spell_nature_polymorph
-        level: 14
-        include:
-            - cliqueaction:cc
-    Banish:
-        icon: spell_shadow_cripple
-        level: 32
-        include:
-            - cliqueaction:cc
-    Entangling Roots:
-        icon: spell_nature_stranglevines
-        level: 7
-        include:
-            - cliqueaction:cc2
-    Fear:
-        icon: spell_shadow_possession
-        level: 14
-        include:
-            - cliqueaction:cc2
-    Hibernate:
-        icon: spell_nature_sleep
-        level: 48
-        include:
-            - cliqueaction:cc
-    Heart of the Phoenix:
-        icon: inv_misc_pheonixpet_01
-        level: 56
-        include:
-            - cliqueaction:battlerez
-    Earth Shield:
-        icon: spell_nature_skinofearth
-        include:
-            - all(spec:Restoration;cliqueaction:tankshield)
-    Thorns:
-        icon: spell_nature_thorns
-        level: 5
-        include:
-            - all(spec:Restoration;cliqueaction:tankshield)
-    Counterspell:
-        icon: spell_frost_iceshock
-        level: 9
-        include:
-            - cliqueaction:interrupt
-    Swiftmend:
-        icon: inv_relics_idolofrejuvenation
-        include:
-            - all(spec:Restoration;cliqueaction:buffheal)
-    Mend Pet:
-        icon: ability_hunter_mendpet
-        level: 16
-        include:
-            - cliqueaction:petheal
-    Lifebloom:
-        icon: INV_Misc_Herb_Felblossom
-        level: 64
-        include:
-            - cliqueaction:hot2
-    Rejuvenation:
-        icon: Spell_Nature_Rejuvenation
-        level: 3
-        include:
-            - cliqueaction:hot
-    Dark Transformation:
-        icon: achievement_boss_festergutrotface
-        level: 49
-        include:
-            - all(spec:Unholy;cliqueaction:petbuff)
-    Nourish:
-        icon: Ability_Druid_Nourish
-        level: 8
-        include:
-            - cliqueaction:standardheal
-    Penance:
-        icon: Spell_Holy_Penance
-        include:
-            - all(spec:Discipline;cliqueaction:channeledheal)
-    Levitate:
-        icon: Spell_Holy_LayOnHands
-        level: 34
-        include:
-            - cliqueaction:waterwalk
-            - cliqueaction:slowfall
-    Slow Fall:
-        icon: spell_magic_featherfall
-        level: 32
-        include:
-            - cliqueaction:slowfall
-    Water Walking:
-        icon: spell_frost_windwalkon
-        level: 24
-        include:
-            - cliqueaction:waterwalk
-    Unending Breath:
-        icon: spell_shadow_demonbreath
-        level: 16
-        include:
-            - cliqueaction:waterbreath
-    Water Breathing:
-        icon: spell_shadow_demonbreath
-        level: 46
-        include:
-            - cliqueaction:waterbreath
-    'Power Word: Barrier':
-        icon: spell_holy_powerwordbarrier
-        level: 69
-        include:
-            - all(spec:Discipline;cliqueaction:aoeprotect)
-    Chain Heal:
-        icon: Spell_Nature_HealingWaveGreater
-        level: 40
-        include:
-            - cliqueaction:chainheal
-    Holy Shock:
-        icon: Spell_Holy_SearingLight
-        include:
-            - all(spec:Holy;cliqueaction:instantheal)
-    Word of Glory:
-        icon: inv_helmet_96
-        level: 9
-        include:
-            - cliqueaction:freeheal
-    Master's Call:
-        icon: Ability_Hunter_MastersCall
-        level: 74
-        include:
-            - cliqueaction:freemove
-    Renew:
-        icon: Spell_Holy_Renew
-        level: 8
-        include:
-            - cliqueaction:hot
-    Spirit Mend:
-        icon: spell_shaman_spiritlink
-        level: 69
-        include:
-            - all(spec:Beast Mastery;cliqueaction:hot)
-    Riptide:
-        icon: spell_nature_riptide
-        level: 69
-        include:
-            - all(spec:Restoration;cliqueaction:hot)
-    Cure Disease:
-        icon: Spell_Holy_NullifyDisease
-        level: 22
-        include:
-            - cliqueaction:cleanse2
-    Prayer of Mending:
-        icon: Spell_Holy_PrayerOfMendingtga
-        level: 68
-        include:
-            - cliqueaction:bounceheal
-    Power Infusion:
-        icon: Spell_Holy_PowerInfusion
-        level: 29
-        include:
-            - all(spec:Discipline;cliqueaction:friendhaste)
-    Ring of Frost:
-        icon: spell_frost_ring-of-frost
-        level: 83
-        include:
-            - cliqueaction:holdenemy
-    Remove Curse:
-        icon: Spell_Nature_RemoveCurse
-        level: 30
-        include:
-            - cliqueaction:cleanse
-    Righteous Defense:
-        icon: INV_Shoulder_37
-        level: 36
-        include:
-            - all(spec:Protection;cliqueaction:multitaunt)
-    Intervene:
-        icon: INV_Shoulder_37
-        level: 72
-        include:
-            - cliqueaction:protectphysical
-    Intervene Pet:
-        icon: ability_hunter_pet_turtle
-        level: 68
-        include:
-            - cliqueaction:protectphysical
-    Health Funnel:
-        icon: Spell_Shadow_LifeDrain
-        level: 12
-        include:
-            - cliqueaction:petheal
-    Death and Decay:
-        icon: Spell_Shadow_DeathAndDecay
-        level: 60
-        include:
-            - cliqueaction:grounddmg
-    Rain of Fire:
-        icon: spell_shadow_rainoffire
-        level: 18
-        include:
-            - cliqueaction:grounddmg
-    Flamestrike:
-        icon: spell_fire_selfdestruct
-        level: 44
-        include:
-            - cliqueaction:grounddmg2
-    Blizzard:
-        icon: spell_frost_icestorm
-        level: 52
-        include:
-            - cliqueaction:grounddmg
-    Death Coil:
-        icon: Spell_Shadow_DeathCoil
-        level: 55
-        include:
-            - cliqueaction:globalranged
-            - all(spec:Unholy;cliqueaction:petheal)
-    Death Coil Warlock:
-        icon: Spell_Shadow_DeathCoil
-        level: 42
-        spell: Death Coil
-        include:
-            - cliqueaction:globalranged
-    Shackle Undead:
-        icon: Spell_Nature_Slow
-        level: 32
-        include:
-            - cliqueaction:cc
-    Dispel Magic:
-        icon: Spell_Holy_DispelMagic
-        level: 26
-        include:
-            - cliqueaction:cleanse
-            - cliqueaction:purgebuff
-        exclude:
-            - spec:Shadow
-    Mass Dispel:
-        icon: spell_arcane_massdispel
-        level: 72
-        include:
-            - cliqueaction:aoecleanse
-    Pain Suppression:
-        icon: Spell_Holy_PainSupression
-        include:
-            - all(spec:Discipline;cliqueaction:healerpanic)
-    Bind Elemental:
-        icon: spell_shaman_bindelemental
-        level: 64
-        include:
-            - cliqueaction:cc
-    Inner Focus Greater Heal:
-        type: macro
-        macro: /cast Inner Focus\n/cast [@mouseover] Greater Heal
-        icon: spell_holy_greaterheal
-        level: 51
-        include:
-            - all(spec:Discipline;subspec:Train of Thought;cliqueaction:bigheal)
-    Greater Heal:
-        icon: spell_holy_greaterheal
-        level: 38
-        include:
-            - cliqueaction:bigheal
-        exclude:
-            - subspec:Train of Thought
-    Leap of Faith:
-        icon: priest_spell_leapoffaith_a
-        level: 85
-        include:
-            - cliqueaction:friendpull
-    'Power Word: Shield':
-        icon: Spell_Holy_PowerWordShield
-        level: 5
-        include:
-            - cliqueaction:shield
-    Spellsteal:
-        icon: Spell_Arcane_Arcane02
-        level: 76
-        include:
-            - cliqueaction:purgebuff
-    Purge:
-        icon: spell_nature_purge
-        level: 12
-        include:
-            - cliqueaction:purgebuff
-    Soothe:
-        icon: ability_hunter_beastsoothe
-        level: 28
-        include:
-            - cliqueaction:purgebuff
-    Tranquilizing Shot:
-        icon: spell_nature_drowsy
-        level: 35
-        include:
-            - cliqueaction:purgebuff
-    Mind Freeze:
-        icon: Spell_DeathKnight_MindFreeze
-        level: 57
-        include:
-            - cliqueaction:interrupt
-    Spell Lock:
-        icon: spell_shadow_mindrot
-        level: 52
-        include:
-            - all(spec:Affliction;cliqueaction:interrupt)
-    Hex:
-        icon: Spell_Shaman_Hex
-        level: 80
-        include:
-            - cliqueaction:cc2
-    Hammer of Justice:
-        icon: Spell_Holy_SealOfMight
-        level: 7
-        include:
-            - cliqueaction:stun
-    Innervate:
-        icon: Spell_Nature_Lightning
-        level: 28
-        include:
-            - cliqueaction:restoremana
-    Remove Corruption:
-        icon: Spell_Holy_RemoveCurse
-        level: 24
-        include:
-            - cliqueaction:cleanse
-    Healing Touch:
-        icon: Spell_Nature_HealingTouch
-        level: 78
-        include:
-            - cliqueaction:bigheal
-    Rebirth:
-        icon: Spell_Nature_Reincarnation
-        level: 20
-        include:
-            - cliqueaction:battlerez
-    Revive:
-        icon: Ability_Druid_LunarGuidance
-        level: 12
-        include:
-            - cliqueaction:resurrect
-    Revive Pet:
-        icon: ability_hunter_beastsoothe
-        include:
-            - cliqueaction:resurrect
-    Raise Ally:
-        icon: Spell_Shadow_DeadofNight
-        level: 72
-        include:
-            - cliqueaction:battlerez
-    Unholy Frenzy:
-        icon: Spell_Shadow_UnholyFrenzy
-        level: 29
-        include:
-            - all(spec:Unholy;cliqueaction:friendenrage)
-    Heal:
-        icon: Spell_Holy_LesserHeal
-        level: 16
-        include:
-            - cliqueaction:standardheal
-    Binding Heal:
-        icon: Spell_Holy_BlindingHeal
-        level: 48
-        include:
-            - cliqueaction:linkheal
-    Resurrection:
-        icon: Spell_Holy_Resurrection
-        level: 12
-        include:
-            - cliqueaction:resurrect
-    Flash of Light:
-        icon: Spell_Holy_FlashHeal
-        level: 16
-        include:
-            - cliqueaction:fastheal
-    Healing Surge:
-        icon: Spell_Nature_HealingWay
-        level: 20
-        include:
-            - cliqueaction:fastheal
-    Divine Light:
-        icon: Spell_Holy_SurgeOfLight
-        level: 62
-        include:
-            - cliqueaction:bigheal
-    Greater Healing Wave:
-        icon: Spell_Nature_HealingWaveLesser
-        level: 68
-        include:
-            - cliqueaction:bigheal
-    Flash Heal:
-        icon: Spell_Holy_FlashHeal
-        level: 3
-        include:
-            - cliqueaction:fastheal
-    Lay on Hands:
-        icon: Spell_Holy_LayOnHands
-        level: 16
-        include:
-            - cliqueaction:healerpanic
-    Regrowth:
-        icon: Spell_Nature_ResistNature
-        level: 12
-        include:
-            - cliqueaction:fastheal
-    Unleash Elements:
-        icon: Spell_Shaman_ImprovedStormstrike
-        level: 81
-        include:
-            - cliqueaction:buffheal
-    Healing Wave:
-        icon: Spell_Nature_MagicImmunity
-        level: 7
-        include:
-            - cliqueaction:standardheal
-    Cleanse Spirit:
-        icon: Ability_Shaman_CleanseSpirit
-        level: 18
-        include:
-            - cliqueaction:cleanse
-    Devour Magic:
-        icon: spell_nature_purge
-        level: 38
-        include:
-            - all(spec:Affliction;cliqueaction:cleanse)
-    Cleanse:
-        icon: Spell_Holy_Purify
-        level: 34
-        include:
-            - cliqueaction:cleanse
-    Wind Shear:
-        icon: Spell_Nature_Cyclone
-        level: 16
-        include:
-            - cliqueaction:interrupt
-    Ancestral Spirit:
-        icon: Spell_Nature_Regenerate
-        level: 12
-        include:
-            - cliqueaction:resurrect
-    Healing Rain:
-        icon: Spell_Nature_GiftoftheWaterSpirit
-        level: 83
-        include:
-            - cliqueaction:groundheal
-    'Holy Word: Sanctuary':
-        icon: spell_holy_divineprovidence
-        level: 51
-        include:
-            - all(spec:Holy;cliqueaction:groundheal)
-    'Holy Word: Serenity':
-        icon: spell_holy_persuitofjustice
-        level: 51
-        include:
-            - all(spec:Holy;cliqueaction:buffheal)
-    Hand of Protection:
-        icon: Spell_Holy_SealOfProtection
-        level: 18
-        include:
-            - cliqueaction:protectphysical
-    Hand of Sacrifice:
-        icon: Spell_Holy_SealOfSacrifice
-        level: 80
-        include:
-            - cliqueaction:xferdmg
-    Hand of Freedom:
-        icon: Spell_Holy_SealOfValor
-        level: 52
-        include:
-            - cliqueaction:freemove
-    Hand of Salvation:
-        icon: Spell_Holy_SealOfSalvation
-        level: 66
-        include:
-            - cliqueaction:reducethreat
-    Beacon of Light:
-        icon: Ability_Paladin_BeaconofLight
-        level: 39
-        include:
-            - all(spec:Holy;cliqueaction:setbeacon)
-    Redemption:
-        icon: Spell_Holy_Resurrection
-        level: 12
-        include:
-            - cliqueaction:resurrect
-    Soulstone OOC:
-        icon: spell_shadow_soulgem
-        type: macro
-        macro: /use [@mouseover] Soulstone
-        level: 18
-        include:
-            - cliqueaction:resurrect
-    Holy Light:
-        icon: spell_holy_holybolt
-        level: 7
-        include:
-            - cliqueaction:standardheal
-    Kick:
-        icon: ability_kick
-        level: 14
-        include:
-            - cliqueaction:interrupt
-    Pummel:
-        icon: inv_gauntlets_04
-        level: 38
-        include:
-            - cliqueaction:interrupt
-    Enraged Regeneration:
-        icon: ability_warrior_focusedrage
-        level: 76
-        include:
-            - cliqueaction:healerpanic
-    Taunt:
-        icon: spell_nature_reincarnation
-        level: 12
-        include:
-            - all(spec:Protection;cliqueaction:taunt)
-    Sunder Armor:
-        icon: ability_warrior_sunder
-        level: 18
-        include:
-            - all(spec:Protection;cliqueaction:reducearmor)
-    Growl:
-        icon: ability_physical_taunt
-        level: 15
-        include:
-            - all(spec:Feral Combat;subspec:Bear;cliqueaction:taunt)
-    Hand of Reckoning:
-        icon: spell_holy_unyieldingfaith
-        level: 14
-        include:
-            - all(spec:Protection;cliqueaction:taunt)
-    Dark Command:
-        icon: spell_nature_shamanrage
-        level: 65
-        include:
-            - all(spec:Blood;cliqueaction:taunt)
-    Heroic Leap:
-        icon: ability_heroicleap
-        level: 85
-        include:
-            - cliqueaction:targetedmove
-    Distract:
-        icon: ability_rogue_distract
-        level: 28
-        include:
-            - cliqueaction:holdenemy
-    Vanish:
-        icon: ability_vanish
-        level: 24
-        include:
-            - cliqueaction:selfshield2
-    targetunit:
-        type: target
-        include:
-            - cliqueaction:target
-    showmenu:
-        type: menu
-        include:
-            - cliqueaction:menu
+  Ancestral Spirit:
+    filter:
+      include:
+      - cliqueaction:resurrect
+      level: 12
+    icon: Spell_Nature_Regenerate
+  Banish:
+    filter:
+      include:
+      - cliqueaction:cc
+      level: 32
+    icon: spell_shadow_cripple
+  Beacon of Light:
+    filter:
+      include:
+      - all(spec:Holy;cliqueaction:setbeacon)
+      level: 39
+    icon: Ability_Paladin_BeaconofLight
+  Bind Elemental:
+    filter:
+      include:
+      - cliqueaction:cc
+      level: 64
+    icon: spell_shaman_bindelemental
+  Binding Heal:
+    filter:
+      include:
+      - cliqueaction:linkheal
+      level: 48
+    icon: Spell_Holy_BlindingHeal
+  Blizzard:
+    filter:
+      include:
+      - cliqueaction:grounddmg
+      level: 52
+    icon: spell_frost_icestorm
+  Chain Heal:
+    filter:
+      include:
+      - cliqueaction:chainheal
+      level: 40
+    icon: Spell_Nature_HealingWaveGreater
+  Circle of Healing:
+    filter:
+      include:
+      - all(spec:Holy;cliqueaction:smartgroupheal)
+      level: 59
+    icon: spell_holy_circleofrenewal
+  Cleanse:
+    filter:
+      include:
+      - cliqueaction:cleanse
+      level: 34
+    icon: Spell_Holy_Purify
+  Cleanse Spirit:
+    filter:
+      include:
+      - cliqueaction:cleanse
+      level: 18
+    icon: Ability_Shaman_CleanseSpirit
+  Cloak of Shadows:
+    filter:
+      include:
+      - cliqueaction:selfshield
+      level: 58
+    icon: spell_shadow_nethercloak
+  Corrupted Egg Shell:
+    filter:
+      include:
+      - all(item:Corrupted Egg Shell;role:Healer;cliqueaction:trinketitem)
+      - all(item:Corrupted Egg Shell;role:Intellect DPS;cliqueaction:trinketitem)
+    icon: inv_misc_cat_trinket09
+    macro: /use [@mouseover] Corrupted Egg Shell
+    type: macro
+  Counterspell:
+    filter:
+      include:
+      - cliqueaction:interrupt
+      level: 9
+    icon: spell_frost_iceshock
+  Cure Disease:
+    filter:
+      include:
+      - cliqueaction:cleanse2
+      level: 22
+    icon: Spell_Holy_NullifyDisease
+  Dark Command:
+    filter:
+      include:
+      - all(spec:Blood;cliqueaction:taunt)
+      level: 65
+    icon: spell_nature_shamanrage
+  Dark Transformation:
+    filter:
+      include:
+      - all(spec:Unholy;cliqueaction:petbuff)
+      level: 49
+    icon: achievement_boss_festergutrotface
+  Death Coil:
+    filter:
+      include:
+      - cliqueaction:globalranged
+      - all(spec:Unholy;cliqueaction:petheal)
+      level: 55
+    icon: Spell_Shadow_DeathCoil
+  Death Coil Warlock:
+    filter:
+      include:
+      - cliqueaction:globalranged
+      level: 42
+    icon: Spell_Shadow_DeathCoil
+    spell: Death Coil
+  Death and Decay:
+    filter:
+      include:
+      - cliqueaction:grounddmg
+      level: 60
+    icon: Spell_Shadow_DeathAndDecay
+  Devour Magic:
+    filter:
+      include:
+      - all(spec:Affliction;cliqueaction:cleanse)
+      level: 38
+    icon: spell_nature_purge
+  Dispel Magic:
+    filter:
+      exclude:
+      - spec:Shadow
+      include:
+      - cliqueaction:cleanse
+      - cliqueaction:purgebuff
+      level: 26
+    icon: Spell_Holy_DispelMagic
+  Distract:
+    filter:
+      include:
+      - cliqueaction:holdenemy
+      level: 28
+    icon: ability_rogue_distract
+  Divine Light:
+    filter:
+      include:
+      - cliqueaction:bigheal
+      level: 62
+    icon: Spell_Holy_SurgeOfLight
+  Earth Shield:
+    filter:
+      include:
+      - all(spec:Restoration;cliqueaction:tankshield)
+    icon: spell_nature_skinofearth
+  Enraged Regeneration:
+    filter:
+      include:
+      - cliqueaction:healerpanic
+      level: 76
+    icon: ability_warrior_focusedrage
+  Entangling Roots:
+    filter:
+      include:
+      - cliqueaction:cc2
+      level: 7
+    icon: spell_nature_stranglevines
+  Fear:
+    filter:
+      include:
+      - cliqueaction:cc2
+      level: 14
+    icon: spell_shadow_possession
+  Flamestrike:
+    filter:
+      include:
+      - cliqueaction:grounddmg2
+      level: 44
+    icon: spell_fire_selfdestruct
+  Flash Heal:
+    filter:
+      include:
+      - cliqueaction:fastheal
+      level: 3
+    icon: Spell_Holy_FlashHeal
+  Flash of Light:
+    filter:
+      include:
+      - cliqueaction:fastheal
+      level: 16
+    icon: Spell_Holy_FlashHeal
+  Gift of the Naaru:
+    filter:
+      include:
+      - all(race:Draenei;cliqueaction:targetedracial)
+    icon: spell_holy_holyprotection
+  Greater Heal:
+    filter:
+      exclude:
+      - subspec:Train of Thought
+      include:
+      - cliqueaction:bigheal
+      level: 38
+    icon: spell_holy_greaterheal
+  Greater Healing Wave:
+    filter:
+      include:
+      - cliqueaction:bigheal
+      level: 68
+    icon: Spell_Nature_HealingWaveLesser
+  Growl:
+    filter:
+      include:
+      - all(spec:Feral Combat;subspec:Bear;cliqueaction:taunt)
+      level: 15
+    icon: ability_physical_taunt
+  Hammer of Justice:
+    filter:
+      include:
+      - cliqueaction:stun
+      level: 7
+    icon: Spell_Holy_SealOfMight
+  Hand of Freedom:
+    filter:
+      include:
+      - cliqueaction:freemove
+      level: 52
+    icon: Spell_Holy_SealOfValor
+  Hand of Protection:
+    filter:
+      include:
+      - cliqueaction:protectphysical
+      level: 18
+    icon: Spell_Holy_SealOfProtection
+  Hand of Reckoning:
+    filter:
+      include:
+      - all(spec:Protection;cliqueaction:taunt)
+      level: 14
+    icon: spell_holy_unyieldingfaith
+  Hand of Sacrifice:
+    filter:
+      include:
+      - cliqueaction:xferdmg
+      level: 80
+    icon: Spell_Holy_SealOfSacrifice
+  Hand of Salvation:
+    filter:
+      include:
+      - cliqueaction:reducethreat
+      level: 66
+    icon: Spell_Holy_SealOfSalvation
+  Heal:
+    filter:
+      include:
+      - cliqueaction:standardheal
+      level: 16
+    icon: Spell_Holy_LesserHeal
+  Healing Rain:
+    filter:
+      include:
+      - cliqueaction:groundheal
+      level: 83
+    icon: Spell_Nature_GiftoftheWaterSpirit
+  Healing Surge:
+    filter:
+      include:
+      - cliqueaction:fastheal
+      level: 20
+    icon: Spell_Nature_HealingWay
+  Healing Touch:
+    filter:
+      include:
+      - cliqueaction:bigheal
+      level: 78
+    icon: Spell_Nature_HealingTouch
+  Healing Wave:
+    filter:
+      include:
+      - cliqueaction:standardheal
+      level: 7
+    icon: Spell_Nature_MagicImmunity
+  Health Funnel:
+    filter:
+      include:
+      - cliqueaction:petheal
+      level: 12
+    icon: Spell_Shadow_LifeDrain
+  Heart of the Phoenix:
+    filter:
+      include:
+      - cliqueaction:battlerez
+      level: 56
+    icon: inv_misc_pheonixpet_01
+  Heroic Leap:
+    filter:
+      include:
+      - cliqueaction:targetedmove
+      level: 85
+    icon: ability_heroicleap
+  Hex:
+    filter:
+      include:
+      - cliqueaction:cc2
+      level: 80
+    icon: Spell_Shaman_Hex
+  Hibernate:
+    filter:
+      include:
+      - cliqueaction:cc
+      level: 48
+    icon: spell_nature_sleep
+  Holy Light:
+    filter:
+      include:
+      - cliqueaction:standardheal
+      level: 7
+    icon: spell_holy_holybolt
+  Holy Shock:
+    filter:
+      include:
+      - all(spec:Holy;cliqueaction:instantheal)
+    icon: Spell_Holy_SearingLight
+  'Holy Word: Sanctuary':
+    filter:
+      include:
+      - all(spec:Holy;cliqueaction:groundheal)
+      level: 51
+    icon: spell_holy_divineprovidence
+  'Holy Word: Serenity':
+    filter:
+      include:
+      - all(spec:Holy;cliqueaction:buffheal)
+      level: 51
+    icon: spell_holy_persuitofjustice
+  Horn of Winter:
+    filter:
+      include:
+      - cliqueaction:selfshield
+      level: 65
+    icon: inv_misc_horn_02
+  Inner Focus Greater Heal:
+    filter:
+      include:
+      - all(spec:Discipline;subspec:Train of Thought;cliqueaction:bigheal)
+      level: 51
+    icon: spell_holy_greaterheal
+    macro: /cast Inner Focus\n/cast [@mouseover] Greater Heal
+    type: macro
+  Innervate:
+    filter:
+      include:
+      - cliqueaction:restoremana
+      level: 28
+    icon: Spell_Nature_Lightning
+  Intervene:
+    filter:
+      include:
+      - cliqueaction:protectphysical
+      level: 72
+    icon: INV_Shoulder_37
+  Intervene Pet:
+    filter:
+      include:
+      - cliqueaction:protectphysical
+      level: 68
+    icon: ability_hunter_pet_turtle
+  Kick:
+    filter:
+      include:
+      - cliqueaction:interrupt
+      level: 14
+    icon: ability_kick
+  Lay on Hands:
+    filter:
+      include:
+      - cliqueaction:healerpanic
+      level: 16
+    icon: Spell_Holy_LayOnHands
+  Leap of Faith:
+    filter:
+      include:
+      - cliqueaction:friendpull
+      level: 85
+    icon: priest_spell_leapoffaith_a
+  Levitate:
+    filter:
+      include:
+      - cliqueaction:waterwalk
+      - cliqueaction:slowfall
+      level: 34
+    icon: Spell_Holy_LayOnHands
+  Lifebloom:
+    filter:
+      include:
+      - cliqueaction:hot2
+      level: 64
+    icon: INV_Misc_Herb_Felblossom
+  Lightning Shield:
+    filter:
+      include:
+      - all(spec:Enhancement;cliqueaction:selfshield)
+      - all(spec:Elemental;cliqueaction:selfshield)
+      level: 8
+    icon: spell_nature_lightningshield
+  Mage Ward:
+    filter:
+      include:
+      - cliqueaction:selfshield2
+      level: 36
+    icon: spell_fire_twilightfireward
+  Mana Shield:
+    filter:
+      include:
+      - cliqueaction:selfshield
+      level: 46
+    icon: spell_shadow_detectlesserinvisibility
+  Mass Dispel:
+    filter:
+      include:
+      - cliqueaction:aoecleanse
+      level: 72
+    icon: spell_arcane_massdispel
+  Master's Call:
+    filter:
+      include:
+      - cliqueaction:freemove
+      level: 74
+    icon: Ability_Hunter_MastersCall
+  Mend Pet:
+    filter:
+      include:
+      - cliqueaction:petheal
+      level: 16
+    icon: ability_hunter_mendpet
+  Mind Freeze:
+    filter:
+      include:
+      - cliqueaction:interrupt
+      level: 57
+    icon: Spell_DeathKnight_MindFreeze
+  Misdirection:
+    filter:
+      include:
+      - cliqueaction:xferthreat
+      level: 76
+    icon: ability_hunter_misdirection
+  Nourish:
+    filter:
+      include:
+      - cliqueaction:standardheal
+      level: 8
+    icon: Ability_Druid_Nourish
+  Pain Suppression:
+    filter:
+      include:
+      - all(spec:Discipline;cliqueaction:healerpanic)
+    icon: Spell_Holy_PainSupression
+  Penance:
+    filter:
+      include:
+      - all(spec:Discipline;cliqueaction:channeledheal)
+    icon: Spell_Holy_Penance
+  Polymorph:
+    filter:
+      include:
+      - cliqueaction:cc
+      level: 14
+    icon: spell_nature_polymorph
+  Power Infusion:
+    filter:
+      include:
+      - all(spec:Discipline;cliqueaction:friendhaste)
+      level: 29
+    icon: Spell_Holy_PowerInfusion
+  'Power Word: Barrier':
+    filter:
+      include:
+      - all(spec:Discipline;cliqueaction:aoeprotect)
+      level: 69
+    icon: spell_holy_powerwordbarrier
+  'Power Word: Shield':
+    filter:
+      include:
+      - cliqueaction:shield
+      level: 5
+    icon: Spell_Holy_PowerWordShield
+  Prayer of Mending:
+    filter:
+      include:
+      - cliqueaction:bounceheal
+      level: 68
+    icon: Spell_Holy_PrayerOfMendingtga
+  Pummel:
+    filter:
+      include:
+      - cliqueaction:interrupt
+      level: 38
+    icon: inv_gauntlets_04
+  Purge:
+    filter:
+      include:
+      - cliqueaction:purgebuff
+      level: 12
+    icon: spell_nature_purge
+  Rain of Fire:
+    filter:
+      include:
+      - cliqueaction:grounddmg
+      level: 18
+    icon: spell_shadow_rainoffire
+  Raise Ally:
+    filter:
+      include:
+      - cliqueaction:battlerez
+      level: 72
+    icon: Spell_Shadow_DeadofNight
+  Rebirth:
+    filter:
+      include:
+      - cliqueaction:battlerez
+      level: 20
+    icon: Spell_Nature_Reincarnation
+  Redemption:
+    filter:
+      include:
+      - cliqueaction:resurrect
+      level: 12
+    icon: Spell_Holy_Resurrection
+  Regrowth:
+    filter:
+      include:
+      - cliqueaction:fastheal
+      level: 12
+    icon: Spell_Nature_ResistNature
+  Rejuvenation:
+    filter:
+      include:
+      - cliqueaction:hot
+      level: 3
+    icon: Spell_Nature_Rejuvenation
+  Remove Corruption:
+    filter:
+      include:
+      - cliqueaction:cleanse
+      level: 24
+    icon: Spell_Holy_RemoveCurse
+  Remove Curse:
+    filter:
+      include:
+      - cliqueaction:cleanse
+      level: 30
+    icon: Spell_Nature_RemoveCurse
+  Renew:
+    filter:
+      include:
+      - cliqueaction:hot
+      level: 8
+    icon: Spell_Holy_Renew
+  Resurrection:
+    filter:
+      include:
+      - cliqueaction:resurrect
+      level: 12
+    icon: Spell_Holy_Resurrection
+  Revive:
+    filter:
+      include:
+      - cliqueaction:resurrect
+      level: 12
+    icon: Ability_Druid_LunarGuidance
+  Revive Pet:
+    filter:
+      include:
+      - cliqueaction:resurrect
+    icon: ability_hunter_beastsoothe
+  Righteous Defense:
+    filter:
+      include:
+      - all(spec:Protection;cliqueaction:multitaunt)
+      level: 36
+    icon: INV_Shoulder_37
+  Ring of Frost:
+    filter:
+      include:
+      - cliqueaction:holdenemy
+      level: 83
+    icon: spell_frost_ring-of-frost
+  Riptide:
+    filter:
+      include:
+      - all(spec:Restoration;cliqueaction:hot)
+      level: 69
+    icon: spell_nature_riptide
+  Shackle Undead:
+    filter:
+      include:
+      - cliqueaction:cc
+      level: 32
+    icon: Spell_Nature_Slow
+  Slow Fall:
+    filter:
+      include:
+      - cliqueaction:slowfall
+      level: 32
+    icon: spell_magic_featherfall
+  Soothe:
+    filter:
+      include:
+      - cliqueaction:purgebuff
+      level: 28
+    icon: ability_hunter_beastsoothe
+  Soulstone OOC:
+    filter:
+      include:
+      - cliqueaction:resurrect
+      level: 18
+    icon: spell_shadow_soulgem
+    macro: /use [@mouseover] Soulstone
+    type: macro
+  Spell Lock:
+    filter:
+      include:
+      - all(spec:Affliction;cliqueaction:interrupt)
+      level: 52
+    icon: spell_shadow_mindrot
+  Spellsteal:
+    filter:
+      include:
+      - cliqueaction:purgebuff
+      level: 76
+    icon: Spell_Arcane_Arcane02
+  Spirit Mend:
+    filter:
+      include:
+      - all(spec:Beast Mastery;cliqueaction:hot)
+      level: 69
+    icon: spell_shaman_spiritlink
+  Sunder Armor:
+    filter:
+      include:
+      - all(spec:Protection;cliqueaction:reducearmor)
+      level: 18
+    icon: ability_warrior_sunder
+  Swiftmend:
+    filter:
+      include:
+      - all(spec:Restoration;cliqueaction:buffheal)
+    icon: inv_relics_idolofrejuvenation
+  Taunt:
+    filter:
+      include:
+      - all(spec:Protection;cliqueaction:taunt)
+      level: 12
+    icon: spell_nature_reincarnation
+  Thorns:
+    filter:
+      include:
+      - all(spec:Restoration;cliqueaction:tankshield)
+      level: 5
+    icon: spell_nature_thorns
+  Tranquilizing Shot:
+    filter:
+      include:
+      - cliqueaction:purgebuff
+      level: 35
+    icon: spell_nature_drowsy
+  Tricks of the Trade:
+    filter:
+      include:
+      - cliqueaction:xferthreat
+      level: 75
+    icon: ability_rogue_tricksofthetrade
+  Unending Breath:
+    filter:
+      include:
+      - cliqueaction:waterbreath
+      level: 16
+    icon: spell_shadow_demonbreath
+  Unholy Frenzy:
+    filter:
+      include:
+      - all(spec:Unholy;cliqueaction:friendenrage)
+      level: 29
+    icon: Spell_Shadow_UnholyFrenzy
+  Unleash Elements:
+    filter:
+      include:
+      - cliqueaction:buffheal
+      level: 81
+    icon: Spell_Shaman_ImprovedStormstrike
+  Vanish:
+    filter:
+      include:
+      - cliqueaction:selfshield2
+      level: 24
+    icon: ability_vanish
+  Water Breathing:
+    filter:
+      include:
+      - cliqueaction:waterbreath
+      level: 46
+    icon: spell_shadow_demonbreath
+  Water Shield:
+    filter:
+      include:
+      - all(spec:Restoration;cliqueaction:selfshield)
+      level: 20
+    icon: ability_shaman_watershield
+  Water Walking:
+    filter:
+      include:
+      - cliqueaction:waterwalk
+      level: 24
+    icon: spell_frost_windwalkon
+  Wild Growth:
+    filter:
+      include:
+      - all(spec:Restoration;cliqueaction:smartgroupheal)
+      level: 49
+    icon: ability_druid_flourish
+  Wind Shear:
+    filter:
+      include:
+      - cliqueaction:interrupt
+      level: 16
+    icon: Spell_Nature_Cyclone
+  Word of Glory:
+    filter:
+      include:
+      - cliqueaction:freeheal
+      level: 9
+    icon: inv_helmet_96
+  showmenu:
+    filter:
+      include:
+      - cliqueaction:menu
+    type: menu
+  targetunit:
+    filter:
+      include:
+      - cliqueaction:target
+    type: target
 bindings:
-    default:
-        mouseup:
-            click: MOUSEWHEELUP
-            types:
-                cleanse:
-                    include:
-                        - ability:cleanse
-                        - class:Mage
-                        - all(class:Warlock;spec:Affliction)
-        mousedown:
-            click: MOUSEWHEELDOWN
-            types:
-                shield:
-                    include:
-                        - class:Priest
-                hot2:
-                    include:
-                        - class:Druid
-                freeheal:
-                    include:
-                        - class:Paladin
-                selfshield:
-                    include:
-                        - class:Shaman
-                        - class:Mage
-                        - class:Death Knight
-                        - class:Rogue
-        left:
-            click: BUTTON1
-            types:
-                target:
-                    include:
-                        - everyone
-        alt-left:
-            click: ALT-BUTTON1
-            types:
-                fastheal:
-                    include:
-                        - class:Paladin
-                        - class:Priest
-                        - class:Druid
-                        - class:Shaman
-        control-left:
-            click: CTRL-BUTTON1
-            types:
-                waterwalk:
-                    include:
-                        - class:Shaman
-                        - class:Priest
-        shift-left:
-            click: SHIFT-BUTTON1
-            types:
-                bigheal:
-                    include:
-                        - class:Paladin
-                        - class:Priest
-                        - class:Druid
-                        - class:Shaman
-        control-shift-left:
-            click: CTRL-SHIFT-BUTTON1
-            types:
-                healerpanic:
-                    include:
-                        - all(class:Priest;spec:Holy)
-                        - all(class:Priest;spec:Discipline)
-                        - class:Paladin
-        middle:
-            click: BUTTON3
-            types:
-                channeledheal:
-                    include:
-                        - all(class:Priest;spec:Discipline)
-                chainheal:
-                    include:
-                        - class:Shaman
-                smartgroupheal:
-                    include:
-                        - all(class:Priest;spec:Holy)
-                        - all(class:Druid;spec:Restoration)
-                petheal:
-                    include:
-                        - role:Petclass
-                petbuff:
-                    include:
-                        - class:Death Knight
-                instantheal:
-                    include:
-                        - all(class:Paladin;spec:Holy)
-        alt-middle:
-            click: ALT-BUTTON3
-            types:
-                linkheal:
-                    include:
-                        - class:Priest
-                trinketitem:
-                    include:
-                        - item:Corrupted Egg Shell
-                freemove:
-                    include:
-                        - class:Paladin
-                        - class:Hunter
-        control-middle:
-            click: CTRL-BUTTON3
-            types:
-                slowfall:
-                    include:
-                        - class:Priest
-                        - class:Mage
-                waterbreath:
-                    include:
-                        - class:Shaman
-                        - class:Warlock
-        shift-middle:
-            click: SHIFT-BUTTON3
-            types:
-                bounceheal:
-                    include:
-                        - class:Priest
-                tankshield:
-                    include:
-                        - all(class:Shaman;spec:Restoration)
-                        - all(class:Druid;spec:Restoration)
-                xferdmg:
-                    include:
-                        - class:Paladin
-                selfshield2:
-                    include:
-                        - class:Mage
-                        - class:Rogue
-        control-shift-middle:
-            click: CTRL-SHIFT-BUTTON3
-        control-alt-middle:
-            click: CTRL-ALT-BUTTON3
-        right:
-            click: BUTTON2
-            types:
-                hot:
-                    include:
-                        - class:Priest
-                        - class:Druid
-                        - all(class:Shaman;spec:Restoration)
-                multitaunt:
-                    include:
-                        - all(class:Paladin;spec:Protection)
-                xferthreat:
-                    include:
-                        - class:Rogue
-                        - class:Hunter
-        alt-right:
-            click: ALT-BUTTON2
-        control-right:
-            click: CTRL-BUTTON2
-            types:
-                cleanse2:
-                    include:
-                        - class:Priest
-                reducethreat:
-                    include:
-                        - class:Paladin
-        shift-right:
-            click: SHIFT-BUTTON2
-            types:
-                protectphysical:
-                    include:
-                        - class:Paladin
-                        - class:Warrior
-                buffheal:
-                    include:
-                        - class:Shaman
-                        - all(class:Druid;spec:Restoration)
-                        - all(class:Priest;spec:Holy)
-        alt-control-right:
-            click: ALT-CTRL-BUTTON2
-            types:
-                menu:
-                    include:
-                        - everyone
-        control-shift-right:
-            click: CTRL-SHIFT-BUTTON2
-            types:
-                friendhaste:
-                    include:
-                        - class:Priest
-                friendenrage:
-                    include:
-                        - all(class:Death Knight;spec:Unholy)
-        4:
-            click: BUTTON4
-            types:
-                standardheal:
-                    include:
-                        - class:Paladin
-                        - class:Priest
-                        - class:Druid
-                        - class:Shaman
-        alt-4:
-            click: ALT-BUTTON4
-            types:
-                targetedracial:
-                    include:
-                        - race:Draenei
-        shift-4:
-            click: SHIFT-BUTTON4
-            types:
-                restoremana:
-                    include:
-                        - class:Druid
-                friendpull:
-                    include:
-                        - class:Priest
-        5:
-            click: BUTTON5
+  default:
+    '4':
+      click: BUTTON4
+      types:
+        standardheal:
+          filter:
             include:
-                - everyone
-            exclude:
-                - machine:name:heidi
-            types:
-                enragebuff:
-                    include:
-                        - all(class:Death Knight;spec:Unholy)
-                setbeacon:
-                    include:
-                        - all(class:Paladin;spec:Holy)
-        shift-5:
-            click: SHIFT-BUTTON5
+            - class:Paladin
+            - class:Priest
+            - class:Druid
+            - class:Shaman
+    '5':
+      click: BUTTON5
+      filter:
+        exclude:
+        - machine:name:heidi
+      types:
+        enragebuff:
+          filter:
             include:
-                - everyone
-            types:
-                battlerez:
-                    include:
-                        - ability:battlerez
-    global:
-        middle:
-            click: BUTTON3
-            types:
-                groundheal:
-                    include:
-                        - all(class:Priest;spec:Holy)
-                        - class:Shaman
-                aoeprotect:
-                    include:
-                        - all(class:Priest;spec:Discipline)
-                holdenemy:
-                    include:
-                        - class:Rogue
-                targetedmove:
-                    include:
-                        - class:Warrior
-                grounddmg:
-                    include:
-                        - class:Death Knight
-                        - class:Hunter
-                        - class:Mage
-                        - class:Warlock
-        shift-middle:
-            click: SHIFT-BUTTON3
-            types:
-                aoecleanse:
-                    include:
-                        - class:Priest
-                grounddmg2:
-                    include:
-                        - class:Mage
-        control-middle:
-            click: CONTROL-BUTTON3
-            types:
-                holdenemy:
-                    include:
-                        - class:Mage
-        5:
-            click: BUTTON5
+            - all(class:Death Knight;spec:Unholy)
+        setbeacon:
+          filter:
             include:
-                - everyone
-            exclude:
-                - machine:name:heidi
-            types:
-                globalranged:
-                    include:
-                        - class:Death Knight
-    enemy:
-        mouseup:
-            click: MOUSEWHEELUP
-            types:
-                interrupt:
-                    include:
-                        - ability:interrupt
-        mousedown:
-            click: MOUSEWHEELDOWN
-            types:
-                stun:
-                    include:
-                        - class:Paladin
-                purgebuff:
-                    include:
-                        - class:Mage
-                        - class:Shaman
-                        - class:Priest
-                        - class:Druid
-                        - class:Hunter
-                reducearmor:
-                    include:
-                        - class:Warrior
-        shift-left:
-            click: SHIFT-BUTTON1
-        middle:
-            click: BUTTON3
-            types:
-                cc:
-                    include:
-                        - ability:cc
-                    
-        shift-middle:
-            click: SHIFT-BUTTON3
-        right:
-            click: BUTTON2
-            types:
-                taunt:
-                    include:
-                        - role:Tank
-                cc2:
-                    include:
-                        - ability:cc
-        4:
-            click: BUTTON4
-    ooc:
-        shift-left:
-            click: SHIFT-BUTTON1
-            types:
-                resurrect:
-                    include:
-                        - ability:resurrect
-                        - class:Hunter
-        alt-left:
-            click: ALT-BUTTON1
-            types:
-                menu:
-                    include:
-                        - everyone
+            - all(class:Paladin;spec:Holy)
+    alt-4:
+      click: ALT-BUTTON4
+      types:
+        targetedracial:
+          filter:
+            include:
+            - race:Draenei
+    alt-control-right:
+      click: ALT-CTRL-BUTTON2
+      types:
+        menu: {}
+    alt-left:
+      click: ALT-BUTTON1
+      types:
+        fastheal:
+          filter:
+            include:
+            - class:Paladin
+            - class:Priest
+            - class:Druid
+            - class:Shaman
+    alt-middle:
+      click: ALT-BUTTON3
+      types:
+        freemove:
+          filter:
+            include:
+            - class:Paladin
+            - class:Hunter
+        linkheal:
+          filter:
+            include:
+            - class:Priest
+        trinketitem:
+          filter:
+            include:
+            - item:Corrupted Egg Shell
+    alt-right:
+      click: ALT-BUTTON2
+      types: {}
+    control-alt-middle:
+      click: CTRL-ALT-BUTTON3
+      types: {}
+    control-left:
+      click: CTRL-BUTTON1
+      types:
+        waterwalk:
+          filter:
+            include:
+            - class:Shaman
+            - class:Priest
+    control-middle:
+      click: CTRL-BUTTON3
+      types:
+        slowfall:
+          filter:
+            include:
+            - class:Priest
+            - class:Mage
+        waterbreath:
+          filter:
+            include:
+            - class:Shaman
+            - class:Warlock
+    control-right:
+      click: CTRL-BUTTON2
+      types:
+        cleanse2:
+          filter:
+            include:
+            - class:Priest
+        reducethreat:
+          filter:
+            include:
+            - class:Paladin
+    control-shift-left:
+      click: CTRL-SHIFT-BUTTON1
+      types:
+        healerpanic:
+          filter:
+            include:
+            - all(class:Priest;spec:Holy)
+            - all(class:Priest;spec:Discipline)
+            - class:Paladin
+    control-shift-middle:
+      click: CTRL-SHIFT-BUTTON3
+      types: {}
+    control-shift-right:
+      click: CTRL-SHIFT-BUTTON2
+      types:
+        friendenrage:
+          filter:
+            include:
+            - all(class:Death Knight;spec:Unholy)
+        friendhaste:
+          filter:
+            include:
+            - class:Priest
+    left:
+      click: BUTTON1
+      types:
+        target: {}
+    middle:
+      click: BUTTON3
+      types:
+        chainheal:
+          filter:
+            include:
+            - class:Shaman
+        channeledheal:
+          filter:
+            include:
+            - all(class:Priest;spec:Discipline)
+        instantheal:
+          filter:
+            include:
+            - all(class:Paladin;spec:Holy)
+        petbuff:
+          filter:
+            include:
+            - class:Death Knight
+        petheal:
+          filter:
+            include:
+            - role:Petclass
+        smartgroupheal:
+          filter:
+            include:
+            - all(class:Priest;spec:Holy)
+            - all(class:Druid;spec:Restoration)
+    mousedown:
+      click: MOUSEWHEELDOWN
+      types:
+        freeheal:
+          filter:
+            include:
+            - class:Paladin
+        hot2:
+          filter:
+            include:
+            - class:Druid
+        selfshield:
+          filter:
+            include:
+            - class:Shaman
+            - class:Mage
+            - class:Death Knight
+            - class:Rogue
+        shield:
+          filter:
+            include:
+            - class:Priest
+    mouseup:
+      click: MOUSEWHEELUP
+      types:
+        cleanse:
+          filter:
+            include:
+            - ability:cleanse
+            - class:Mage
+            - all(class:Warlock;spec:Affliction)
+    right:
+      click: BUTTON2
+      types:
+        hot:
+          filter:
+            include:
+            - class:Priest
+            - class:Druid
+            - all(class:Shaman;spec:Restoration)
+        multitaunt:
+          filter:
+            include:
+            - all(class:Paladin;spec:Protection)
+        xferthreat:
+          filter:
+            include:
+            - class:Rogue
+            - class:Hunter
+    shift-4:
+      click: SHIFT-BUTTON4
+      types:
+        friendpull:
+          filter:
+            include:
+            - class:Priest
+        restoremana:
+          filter:
+            include:
+            - class:Druid
+    shift-5:
+      click: SHIFT-BUTTON5
+      types:
+        battlerez:
+          filter:
+            include:
+            - ability:battlerez
+    shift-left:
+      click: SHIFT-BUTTON1
+      types:
+        bigheal:
+          filter:
+            include:
+            - class:Paladin
+            - class:Priest
+            - class:Druid
+            - class:Shaman
+    shift-middle:
+      click: SHIFT-BUTTON3
+      types:
+        bounceheal:
+          filter:
+            include:
+            - class:Priest
+        selfshield2:
+          filter:
+            include:
+            - class:Mage
+            - class:Rogue
+        tankshield:
+          filter:
+            include:
+            - all(class:Shaman;spec:Restoration)
+            - all(class:Druid;spec:Restoration)
+        xferdmg:
+          filter:
+            include:
+            - class:Paladin
+    shift-right:
+      click: SHIFT-BUTTON2
+      types:
+        buffheal:
+          filter:
+            include:
+            - class:Shaman
+            - all(class:Druid;spec:Restoration)
+            - all(class:Priest;spec:Holy)
+        protectphysical:
+          filter:
+            include:
+            - class:Paladin
+            - class:Warrior
+  enemy:
+    '4':
+      click: BUTTON4
+      types: {}
+    middle:
+      click: BUTTON3
+      types:
+        cc:
+          filter:
+            include:
+            - ability:cc
+    mousedown:
+      click: MOUSEWHEELDOWN
+      types:
+        purgebuff:
+          filter:
+            include:
+            - class:Mage
+            - class:Shaman
+            - class:Priest
+            - class:Druid
+            - class:Hunter
+        reducearmor:
+          filter:
+            include:
+            - class:Warrior
+        stun:
+          filter:
+            include:
+            - class:Paladin
+    mouseup:
+      click: MOUSEWHEELUP
+      types:
+        interrupt:
+          filter:
+            include:
+            - ability:interrupt
+    right:
+      click: BUTTON2
+      types:
+        cc2:
+          filter:
+            include:
+            - ability:cc
+        taunt:
+          filter:
+            include:
+            - role:Tank
+    shift-left:
+      click: SHIFT-BUTTON1
+      types: {}
+    shift-middle:
+      click: SHIFT-BUTTON3
+      types: {}
+  global:
+    '5':
+      click: BUTTON5
+      filter:
+        exclude:
+        - machine:name:heidi
+      types:
+        globalranged:
+          filter:
+            include:
+            - class:Death Knight
+    control-middle:
+      click: CONTROL-BUTTON3
+      types:
+        holdenemy:
+          filter:
+            include:
+            - class:Mage
+    middle:
+      click: BUTTON3
+      types:
+        aoeprotect:
+          filter:
+            include:
+            - all(class:Priest;spec:Discipline)
+        grounddmg:
+          filter:
+            include:
+            - class:Death Knight
+            - class:Hunter
+            - class:Mage
+            - class:Warlock
+        groundheal:
+          filter:
+            include:
+            - all(class:Priest;spec:Holy)
+            - class:Shaman
+        holdenemy:
+          filter:
+            include:
+            - class:Rogue
+        targetedmove:
+          filter:
+            include:
+            - class:Warrior
+    shift-middle:
+      click: SHIFT-BUTTON3
+      types:
+        aoecleanse:
+          filter:
+            include:
+            - class:Priest
+        grounddmg2:
+          filter:
+            include:
+            - class:Mage
+  ooc:
+    alt-left:
+      click: ALT-BUTTON1
+      types:
+        menu: {}
+    shift-left:
+      click: SHIFT-BUTTON1
+      types:
+        resurrect:
+          filter:
+            include:
+            - ability:resurrect
+            - class:Hunter

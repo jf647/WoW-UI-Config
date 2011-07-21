@@ -55,7 +55,8 @@ sub match
     my $self = shift;
     my $filter = shift;
     my $using = shift;
-
+    my $extra = shift;
+    
     my $log = WoWUI::Util->log( stacksup => 1, prefix => 'filter' );
     
     # level matching
@@ -125,6 +126,21 @@ sub match
             $flags += $self->machine->flags;
         }
         $self->flags_set($using, $flags);
+    }
+    
+    # if we have extra flags, clone before adding to avoid corrupting the cache
+    if( $extra ) {
+        my $newflags = $flags->clone;
+        if( 'Set::Scalar' eq ref $extra ) {
+            $newflags += $extra;
+        }
+        elsif( 'ARRAY' eq ref $extra ) {
+            $newflags->insert( @$extra );
+        }
+        else {
+            $newflags->insert( $extra );
+        }
+        $flags = $newflags;
     }
     $log->debug("matching against flagset: $flags");
 

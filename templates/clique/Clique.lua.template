@@ -19,8 +19,9 @@ CliqueDB3 = {
 [% END -%]
 	},
 	["profiles"] = {
-[% FOREACH profile IN profiles.values -%]
-		["[% profile.name %]"] = {
+[% FOREACH pname IN pset.profiles_list -%]
+[% profile = pset.profile_get(pname) -%]
+		["[% pname %]"] = {
 			["bindings"] = {
 [% FOREACH action IN profile.actions -%]
 				{

@@ -113,7 +113,6 @@ sub augment_datapc
 {
 
     my $self = shift;
-    $DB::single = 1;
     my $data = shift;
     my $char = shift;
     my $f = shift;

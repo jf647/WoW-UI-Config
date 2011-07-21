@@ -6,9 +6,19 @@ package WoWUI::Module::Clique;
 use Moose;
 
 use namespace::autoclean;
+use CLASS;
 
 # set up class
 extends 'WoWUI::Module::Base';
+has filtergroups => (
+    is => 'rw',
+    isa => 'WoWUI::FilterGroups',
+);
+has profileset => (
+    is => 'rw',
+    isa => 'WoWUI::ProfileSet',
+    default => sub { WoWUI::ProfileSet->new },
+);
 __PACKAGE__->meta->make_immutable;
 
 use Clone 'clone';
@@ -17,23 +27,26 @@ use Digest;
 
 use WoWUI::Config;
 use WoWUI::Util 'log';
-
-my %profiles;
-my %profiledigest;
-
-# class attributes
-__PACKAGE__->name( 'clique' );
-__PACKAGE__->global( 1 );
+use WoWUI::Filter::Constants;
 
 # constructor
+CLASS->name( 'clique' );
 sub BUILD
 {
 
     my $self = shift;
+    
+    $self->global( 1 );
+    $self->globalpc( 1 );
 
     my $config = $self->config;    
 
-    WoWUI::Util::Filter::check_filter_groups( $config->{actiongroups}, $config->{actions}, 'actions' );
+    # build filter groups
+    my $fgs = WoWUI::FilterGroups->new(
+        $config->{filtergroups},
+        $config->{actions},
+    );
+    $self->filtergroups( $fgs );
     
     for my $action( keys %{ $config->{actions} } ) {
         unless( exists $config->{actions}->{$action}->{type} ) {
@@ -53,6 +66,8 @@ sub BUILD
             delete $config->{actions}->{$action}->{macro};
         }
     }
+    
+    return $self;
 
 }
 
@@ -60,41 +75,25 @@ sub augment_data
 {
 
     my $self = shift;
+    return { pset => $self->profileset };
 
-    my $log = WoWUI::Util->log;
+}
 
-    my $config = $self->config;
+sub augment_datapc
+{
 
-    my $data;
+    my $self = shift;
+    my $data = shift;
+    my $char = shift;
+    my $f = shift;
 
-    for my $realm( $self->player->realms ) {
-        $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars ) {
-            if( exists $config->{perchar_criteria} ) {
-                next unless( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{perchar_criteria} ) );
-            }
-            $log->debug("processing character ", $char->name);
-            my $clique = $self->build_clique($char);
-            if( $clique ) {
-                my $key = $char->name . ' - ' . $realm->name;
-                $clique->{key} = $key;
-                $clique->{name} = $char->name;
-                $clique->{realm} = $char->realm->name;
-                for my $spec( 1, 2 ) {
-                    if( my $specname = $char->spec_get($spec) ) {
-                        $clique->{"spec${spec}"} = $specname;
-                    }
-                }
-                $data->{chars}->{$key} = $clique;
-            }
-        }
+    my $clique = $self->build_clique($char, $f);
+    if( $clique ) {
+        $data->{chars}->{$char->name} = $clique;
     }
-
-    return unless keys %$data;
-    
-    $data->{profiles} = \%profiles;
-    
-    return $data;
+    else {
+        croak $char->rname, " has Clique enabled but produced an empty profile";
+    }
        
 }
 
@@ -103,6 +102,7 @@ sub build_clique
 
     my $self = shift;
     my $char = shift;
+    my $f = shift;
     
     my $config = $self->config;
     my $log = WoWUI::Util->log;
@@ -110,22 +110,28 @@ sub build_clique
     my %clique;
 
     # find the potential actions for this char
-    my @candidates = WoWUI::Util::Filter::filter_groups( $char->flags_get('common'), $config->{actiongroups}, 'actions' );
+    my $candidates = $self->filtergroups->candidates($f);
+    $log->trace("candidates are $candidates");
 
     # repeat for each spec that the character has
     for my $spec( 1, 2 ) {
     
         next unless( $char->spec_get($spec) );
-
-        my @actions;
-        my $flags = $char->flags_get("spec${spec}");
+        my $using;
+        if( 1 == $spec ) {
+            $using = F_C1;
+        }
+        else {
+            $using = F_C2;
+        }
 
         # find each of the binding types we need to populate
+        my @actions;
         for my $set( keys %{ $config->{bindings} } ) {
             $log->trace("processing binding set $set");
             for my $binding( keys %{ $config->{bindings}->{$set} } ) {
-                if( exists $config->{bindings}->{$set}->{$binding}->{include} ) {
-                    unless( WoWUI::Util::Filter::matches( $flags, $char, $config->{bindings}->{$set}->{$binding} ) ) {
+                if( exists $config->{bindings}->{$set}->{$binding}->{filter} ) {
+                    unless( $f->match( $config->{bindings}->{$set}->{$binding}, $using ) ) {
                         $log->debug("not trying to match anything to binding $binding");
                         next;
                     }
@@ -136,11 +142,15 @@ sub build_clique
                 my $matchedactiontype;
                 for my $actiontype( keys %{ $config->{bindings}->{$set}->{$binding}->{types} } ) {
                     $log->trace("considering type $actiontype");
-                    my $matches = WoWUI::Util::Filter::matches(
-                        $flags,
-                        $char,
-                        $config->{bindings}->{$set}->{$binding}->{types}->{$actiontype},
-                    );
+                    my $matches = 0;
+                    if( exists $config->{bindings}->{$set}->{$binding}->{types}->{$actiontype}->{filter} ) {
+                        if( $f->match( $config->{bindings}->{$set}->{$binding}->{types}->{$actiontype}, $using ) ) {
+                            $matches = 1;
+                        }
+                    }
+                    else {
+                        $matches = 1;
+                    }
                     if( $matches ) {
                         if( 1 == $foundactiontype ) {
                             croak "binding $binding matched $actiontype after matching $matchedactiontype";
@@ -157,9 +167,9 @@ sub build_clique
                     my $foundaction = 0;
                     my $matchedaction;
                     $log->debug("finding a '$matchedactiontype' action to tie to $binding in set $set");
-                    for my $action( @candidates ) {
+                    for my $action( @$candidates ) {
                         $log->trace( "considering action $action" );
-                        if( WoWUI::Util::Filter::matches( $flags, $char, $config->{actions}->{$action}, [ "cliqueaction:$matchedactiontype" ] ) ) {
+                        if( $f->match( $config->{actions}->{$action}, $using, "cliqueaction:$matchedactiontype" ) ) {
                             if( 1 == $foundaction ) {
                                 croak "$matchedactiontype matched $action after matching $matchedaction";
                             }
@@ -185,55 +195,24 @@ sub build_clique
         }
         
         # determine if this profile matches one we've already built
-        my $actions_digest = $self->actions_digest( \@actions );
-        my $name;
-        unless( exists $profiledigest{$actions_digest} ) {
-            my $done = 0;
-            my $i = 1;
-            while( ! $done ) {
-                $name = $char->class . ' ' . $i;
-                if( exists $profiles{$name} ) {
-                    $i++, next;
-                }
-                $log->debug("storing profile $name");
-                $profiles{$name} = { name => $name, actions => \@actions };
-                $done = 1;
-            }
-            $profiles{$name} = { name => $name, actions => \@actions };
-            $profiledigest{$actions_digest} = $name;
-        }
-        else {
-            $name = $profiledigest{$actions_digest};
-            $log->debug("reusing profile $name")
-        }
-        $clique{"profile${spec}"} = $name;
+        my $pname = $self->profileset->store( { actions => \@actions }, $char->class );
+        $log->debug("profile for ", $char->rname, " is $pname");
+        $clique{"profile${spec}"} = $pname;
 
     }
-    
+
     return unless( %clique );
+
+    $clique{key} = $char->dname;
+    $clique{name} = $char->name;
+    $clique{realm} = $char->realm->name;
+    for my $spec( 1, 2 ) {
+        if( my $specname = $char->spec_get($spec) ) {
+            $clique{"spec${spec}"} = $specname;
+        }
+    }
     
     return \%clique;
-
-}
-
-sub actions_digest
-{
-
-    my $self = shift;
-    my $actions = shift;
-    
-    my $ctx = Digest->new('MD5');
-    for my $action( sort { $a->{set} cmp $b->{set} || $a->{binding} cmp $b->{binding} || $a->{click} cmp $b->{click} || $a->{value} cmp $b->{value} } @$actions ) {
-        $ctx->add( $action->{set} );
-        $ctx->add( $action->{binding} );
-        $ctx->add( $action->{click} );
-        $ctx->add( $action->{type} );
-        if( exists $action->{value} ) {
-            $ctx->add( $action->{value} );
-        }
-    }
-    
-    return $ctx->hexdigest;
 
 }
 

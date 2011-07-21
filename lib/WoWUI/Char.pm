@@ -549,6 +549,15 @@ sub rname
 
 }
 
+sub dname
+{
+
+    my $self = shift;
+
+    return $self->name . ' - ' . $self->realm->name;
+
+}
+
 # keep require happy
 1;
 
