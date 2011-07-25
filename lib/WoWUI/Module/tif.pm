@@ -27,12 +27,12 @@ sub BUILD
 
 }
 
-sub augment_data
+sub augment_global
 {
 
     my $self = shift;
 
-    return { realms => $self->config->{realms} };
+    $self->globaldata->{realms} = $self->config->{realms};
 
 }
 

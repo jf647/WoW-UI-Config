@@ -4,11 +4,11 @@ templates:
         sexymap:
             input: $TEMPLATEDIR/sexymap/SexyMap.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/SexyMap.lua
-perchar_criteria:
+perchar_filter:
     exclude:
         - banker
         - mule
-criteria:
+filter:
     include:
         - machine:name:kara
         - machine:name:heidi

@@ -71,25 +71,24 @@ sub BUILD
 
 }
 
-sub augment_data
+sub augment_global
 {
 
     my $self = shift;
-    return { pset => $self->profileset };
+    $self->globaldata->{pset} = $self->profileset;
 
 }
 
-sub augment_datapc
+sub augment_globalpc
 {
 
     my $self = shift;
-    my $data = shift;
     my $char = shift;
     my $f = shift;
 
     my $clique = $self->build_clique($char, $f);
     if( $clique ) {
-        $data->{chars}->{$char->name} = $clique;
+        $self->globaldata->{chars}->{$char->name} = $clique;
     }
     else {
         croak $char->rname, " has Clique enabled but produced an empty profile";
@@ -119,10 +118,10 @@ sub build_clique
         next unless( $char->spec_get($spec) );
         my $using;
         if( 1 == $spec ) {
-            $using = F_C1;
+            $using = F_C0|F_C1;
         }
         else {
-            $using = F_C2;
+            $using = F_C0|F_C2;
         }
 
         # find each of the binding types we need to populate
@@ -131,7 +130,7 @@ sub build_clique
             $log->trace("processing binding set $set");
             for my $binding( keys %{ $config->{bindings}->{$set} } ) {
                 if( exists $config->{bindings}->{$set}->{$binding}->{filter} ) {
-                    unless( $f->match( $config->{bindings}->{$set}->{$binding}, $using ) ) {
+                    unless( $f->match( $config->{bindings}->{$set}->{$binding}->{filter}, $using ) ) {
                         $log->debug("not trying to match anything to binding $binding");
                         next;
                     }
@@ -141,10 +140,9 @@ sub build_clique
                 my $foundactiontype = 0;
                 my $matchedactiontype;
                 for my $actiontype( keys %{ $config->{bindings}->{$set}->{$binding}->{types} } ) {
-                    $log->trace("considering type $actiontype");
                     my $matches = 0;
                     if( exists $config->{bindings}->{$set}->{$binding}->{types}->{$actiontype}->{filter} ) {
-                        if( $f->match( $config->{bindings}->{$set}->{$binding}->{types}->{$actiontype}, $using ) ) {
+                        if( $f->match( $config->{bindings}->{$set}->{$binding}->{types}->{$actiontype}->{filter}, $using ) ) {
                             $matches = 1;
                         }
                     }
@@ -168,8 +166,7 @@ sub build_clique
                     my $matchedaction;
                     $log->debug("finding a '$matchedactiontype' action to tie to $binding in set $set");
                     for my $action( @$candidates ) {
-                        $log->trace( "considering action $action" );
-                        if( $f->match( $config->{actions}->{$action}, $using, "cliqueaction:$matchedactiontype" ) ) {
+                        if( $f->match( $config->{actions}->{$action}->{filter}, $using, "cliqueaction:$matchedactiontype" ) ) {
                             if( 1 == $foundaction ) {
                                 croak "$matchedactiontype matched $action after matching $matchedaction";
                             }

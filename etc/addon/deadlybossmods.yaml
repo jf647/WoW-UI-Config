@@ -4,6 +4,6 @@ templates:
         dbm:
             input: $TEMPLATEDIR/deadlybossmods/DBM-Core.lua
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/DBM-Core.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - DBM-Core

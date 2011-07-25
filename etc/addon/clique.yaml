@@ -1,5 +1,5 @@
 ---
-perchar_criteria:
+perchar_filter:
   addons:
   - Clique
 templates:

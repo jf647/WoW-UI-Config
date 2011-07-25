@@ -8,6 +8,6 @@ templates:
         questguru_tracker:
             input: $TEMPLATEDIR/questguru/QuestGuru_Tracker.lua
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/QuestGuru_Tracker.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - QuestGuru

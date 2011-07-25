@@ -63,12 +63,10 @@ sub BUILD
 
 }
 
-sub augment_data
+sub augment_global
 {
 
   my $self = shift;
-
-  my $data;
 
   my $o = $self->modoptions;
 
@@ -83,7 +81,7 @@ sub augment_data
     for my $addon( $self->named_get( $setname )->elements ) {
       push @{ $set->{addons} }, $addon;
     }
-    push @{ $data->{named_sets} }, $set;
+    push @{ $self->globaldata->{named_sets} }, $set;
   }
 
   # class sets
@@ -92,14 +90,12 @@ sub augment_data
     for my $addon( $self->class_get( $setname )->elements ) {
       push @{ $set->{addons} }, $addon;
     }
-    push @{ $data->{class_sets} }, $set;
+    push @{ $self->globaldata->{class_sets} }, $set;
   }
   
-  return $data;
-
 }
 
-sub augment_chardata
+sub augment_perchar
 {
 
   my $self = shift;
@@ -108,10 +104,7 @@ sub augment_chardata
 
   my $config = $self->config;
 
-  my $chardata = { realm => $char->realm->name, char => $char->name };
-
   my $log = WoWUI::Util->log;
-  $log->debug("processing ", $char->rname);
 
   my $enabled = Set::Scalar->new;
   for my $addon( $self->all_addons->elements ) {
@@ -151,10 +144,8 @@ sub augment_chardata
   my @addons;
   push @addons, map { { name => $_, enabled => 1 } } $enabled->members;
   push @addons, map { { name => $_, enabled => 0 } } $disabled->members;
-  $chardata->{addons} = [ sort { $a->{name} cmp $b->{name} } @addons ];
+  $self->perchardata->{addons} = [ sort { $a->{name} cmp $b->{name} } @addons ];
   $char->addons( $enabled->clone );
-
-  return $chardata;
 
 }
 

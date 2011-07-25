@@ -4,7 +4,7 @@ templates:
         npcscan:
             input: $TEMPLATEDIR/npcscan/_NPCScan.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/_NPCScan.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - _NPCScan
 achievements:

@@ -8,7 +8,7 @@ templates:
     cork:
       input: $TEMPLATEDIR/cork/Cork_perchar.lua.template
       output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Cork.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - Cork
 settings:

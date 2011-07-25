@@ -79,7 +79,7 @@ sub populate
 {
 
     my $self = shift;
-    my($profile, $config, $i, $name, $spec, $combat) = @_;
+    my($profile, $i, $name, $spec, $combat) = @_;
 
     my $log = WoWUI::Util->log;
     

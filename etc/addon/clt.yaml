@@ -7,7 +7,7 @@ templates:
         clt:
             input: $TEMPLATEDIR/clt/CombatLogTrigger.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/CombatLogTrigger.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - CombatLogTrigger
 triggers:

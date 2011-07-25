@@ -4,7 +4,7 @@ templates:
         freerefills:
             input: $TEMPLATEDIR/freerefills/FreeRefills.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/FreeRefills.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - FreeRefills
 freerefills:

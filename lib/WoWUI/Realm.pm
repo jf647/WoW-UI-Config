@@ -8,6 +8,7 @@ use Moose;
 use namespace::autoclean;
 
 # set up class
+with 'WoWUI::Module::ModOptions';
 has name => ( is => 'rw', isa => 'Str', required => 1 );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
 has cfg => ( is => 'rw', isa => 'HashRef' );
@@ -23,19 +24,6 @@ has chars => (
         char_names => 'keys',
         chars => 'values',
     },
-);
-has modoptions => (
-  is => 'bare',
-  isa => 'HashRef',
-  traits => ['Hash'],
-  default => sub { {} },
-  handles => {
-    modoption_set => 'set',
-    modoption_get => 'get',
-    modoption_exists => 'exists',
-    modoptions_list => 'keys',
-    modoptions_values => 'values',
-  },
 );
 __PACKAGE__->meta->make_immutable;
 
@@ -68,7 +56,7 @@ sub BUILD
         my $char = WoWUI::Char->new( name => $charname, realm => $self, cfg => $self->cfg->{chars}->{$charname} );
         my $levelcap = $gcfg->{levelcap};
         my $f = WoWUI::Filter->new( char => $char );
-        if( $f->match( { filter => { exclude => [ qw|level:$levelcap bankalt mule| ] } }, F_CALL ) ) {
+        if( $f->match( { exclude => [ qw|level:$levelcap bankalt mule| ] }, F_CALL ) ) {
             $self->flags->insert("realm:still_leveling");
         }
         $self->char_set( $charname => $char );

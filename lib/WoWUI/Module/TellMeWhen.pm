@@ -1,4 +1,4 @@
-#
+ #
 # $Id$
 #
 
@@ -72,7 +72,6 @@ sub BUILD
 
     $self->global( 1 );
     $self->globalpc( 1 );
-    $self->perchar( 1 );
 
     # build filter groups
     my $fgs = WoWUI::FilterGroups->new(
@@ -91,37 +90,24 @@ sub BUILD
     
 }
 
-sub augment_chardata
+sub augment_global
 {
 
     my $self = shift;
-    my $char = shift;
-    
-    return { realm => $char->realm->name, name => $char->name };
+    $self->globaldata->{pset} = $self->profileset;
 
 }
 
-sub augment_data
+sub augment_globalpc
 {
 
     my $self = shift;
-    return { pset => $self->profileset };
-
-}
-
-sub augment_datapc
-{
-
-    my $self = shift;
-    my $data = shift;
     my $char = shift;
     my $f = shift;
     
     my $log = WoWUI::Util->log;
-    my $config = WoWUI::Config->instance->cfg;
+    my $config = $self->config;
     
-    $log->debug("processing character ", $char->name);
-
     my $profile = WoWUI::Module::TellMeWhen::Profile->new(
         config => $config,
         char => $char,
@@ -132,7 +118,7 @@ sub augment_datapc
     if( $profile->NumGroups ) {
         my $pname = $self->profileset->store( $profile, $char->class );
         $log->debug("profile for ", $char->rname, " is $pname");
-        $data->{realms}->{$char->realm->name}->{$char->name} = $pname;
+        $self->register_char( $char, $pname );
     }
     else {
         croak $char->rname, " has TellMeWhen enabled but generated no groups";

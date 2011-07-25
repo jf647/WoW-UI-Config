@@ -8,12 +8,12 @@ templates:
         kong:
             input: $TEMPLATEDIR/kong/Kong_perchar.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Kong.lua
-criteria:
+filter:
     include:
         - machine:name:kara
         - machine:name:div
         - machine:name:heidi
-perchar_criteria:
+perchar_filter:
     exclude:
         - banker
         - mule
@@ -29,7 +29,7 @@ frames:
         alpha:
             visible: 1
             hidden: 0.1
-        criteria:
+        filter:
             addons:
                 - Grid
             exclude:
@@ -42,7 +42,7 @@ frames:
         alpha:
             visible: 0.75
             hidden: 0
-        criteria:
+        filter:
             addons:
                 - DKIRunes
     dkidiseasesbar0:
@@ -52,7 +52,7 @@ frames:
         alpha:
             visible: 0.75
             hidden: 0
-        criteria:
+        filter:
             addons:
                 - DKIDiseases
     dkidiseasesbar1:
@@ -62,7 +62,7 @@ frames:
         alpha:
             visible: 0.75
             hidden: 0
-        criteria:
+        filter:
             addons:
                 - DKIDiseases
     dkidiseasesbar2:
@@ -72,7 +72,7 @@ frames:
         alpha:
             visible: 0.75
             hidden: 0
-        criteria:
+        filter:
             addons:
                 - DKIDiseases
     dkidiseasesbar3:
@@ -82,7 +82,7 @@ frames:
         alpha:
             visible: 0.75
             hidden: 0
-        criteria:
+        filter:
             addons:
                 - DKIDiseases
     wmarker:
@@ -93,7 +93,7 @@ frames:
         condition: group:raid
         condition_alpha:
             visible: 0.1
-        criteria:
+        filter:
             addons:
                 - wMarker
     bagnonbags:
@@ -102,7 +102,7 @@ frames:
         alpha:
             visible: 1.0
             hidden: 0
-        criteria:
+        filter:
             addons:
                 - Bagnon
     bagnonbank:
@@ -111,7 +111,7 @@ frames:
         alpha:
             visible: 1.0
             hidden: 0
-        criteria:
+        filter:
             addons:
                 - Bagnon
     bosshp1:
@@ -119,7 +119,7 @@ frames:
         alpha:
             visible: 0
             hidden: 0
-        criteria:
+        filter:
             addons:
                 - DBM-Core
     bosshp2:
@@ -127,7 +127,7 @@ frames:
         alpha:
             visible: 0
             hidden: 0
-        criteria:
+        filter:
             addons:
                 - DBM-Core
     bosshp3:
@@ -135,7 +135,7 @@ frames:
         alpha:
             visible: 0
             hidden: 0
-        criteria:
+        filter:
             addons:
                 - DBM-Core
     bosshp4:
@@ -143,7 +143,7 @@ frames:
         alpha:
             visible: 0
             hidden: 0
-        criteria:
+        filter:
             addons:
                 - DBM-Core
     autobar_basic:
@@ -155,7 +155,7 @@ frames:
             in: 0.2
             out: 3
         group: autobar
-        criteria:
+        filter:
             addons:
                 - AutoBar
     autobar_warrior:
@@ -167,7 +167,7 @@ frames:
             in: 0.2
             out: 3
         group: autobar
-        criteria:
+        filter:
             addons:
                 - AutoBar
             include:
@@ -181,7 +181,7 @@ frames:
             in: 0.2
             out: 3
         group: autobar
-        criteria:
+        filter:
             addons:
                 - AutoBar
             include:
@@ -195,7 +195,7 @@ frames:
             in: 0.2
             out: 3
         group: autobar
-        criteria:
+        filter:
             addons:
                 - AutoBar
             include:
@@ -209,7 +209,7 @@ frames:
             in: 0.2
             out: 3
         group: autobar
-        criteria:
+        filter:
             addons:
                 - AutoBar
             include:
@@ -223,7 +223,7 @@ frames:
             in: 0.2
             out: 3
         group: autobar
-        criteria:
+        filter:
             addons:
                 - AutoBar
             include:
@@ -237,7 +237,7 @@ frames:
             in: 0.2
             out: 3
         group: autobar
-        criteria:
+        filter:
             addons:
                 - AutoBar
             include:
@@ -251,7 +251,7 @@ frames:
             in: 0.2
             out: 3
         group: autobar
-        criteria:
+        filter:
             addons:
                 - AutoBar
             include:
@@ -265,7 +265,7 @@ frames:
             in: 0.2
             out: 3
         group: autobar
-        criteria:
+        filter:
             addons:
                 - AutoBar
             include:
@@ -279,7 +279,7 @@ frames:
             in: 0.2
             out: 3
         group: autobar
-        criteria:
+        filter:
             addons:
                 - AutoBar
             include:
@@ -293,7 +293,7 @@ frames:
             in: 0.2
             out: 3
         group: autobar
-        criteria:
+        filter:
             addons:
                 - AutoBar
             include:

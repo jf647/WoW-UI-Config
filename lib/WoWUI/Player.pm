@@ -8,6 +8,7 @@ use Moose;
 use namespace::autoclean;
 
 # set up class
+with 'WoWUI::Module::ModOptions';
 has name => ( is => 'rw', isa => 'Str', required => 1 );
 has account => ( is => 'rw', isa => 'Str' );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
@@ -22,19 +23,6 @@ has realms => (
         realm_names => 'keys',
         realms => 'values',
     },
-);
-has modoptions => (
-  is => 'bare',
-  isa => 'HashRef',
-  traits => ['Hash'],
-  default => sub { {} },
-  handles => {
-    modoption_set => 'set',
-    modoption_get => 'get',
-    modoption_exists => 'exists',
-    modoptions_list => 'keys',
-    modoptions_values => 'values',
-  },
 );
 __PACKAGE__->meta->make_immutable;
 
@@ -82,23 +70,6 @@ sub BUILD
     return $self;
 
 }
-
-sub charlist
-{
-
-    my $self = shift;
-
-    my %chars;
-    for my $realm( $self->realms ) {
-        for my $char( $realm->char_names ) {
-            $chars{$realm->name}->{$char} = {};
-        }
-    }
-  
-    return \%chars;
-
-}
-
 
 # keep require happy
 1;

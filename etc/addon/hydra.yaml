@@ -8,6 +8,6 @@ templates:
         hydra:
             input: $TEMPLATEDIR/hydra/Hydra_perchar.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Hydra.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - Hydra

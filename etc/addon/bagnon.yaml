@@ -4,6 +4,6 @@ templates:
         bagnon:
             input: $TEMPLATEDIR/bagnon/Bagnon.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Bagnon.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - Bagnon

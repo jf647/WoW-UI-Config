@@ -243,7 +243,7 @@ sub populate
         if( exists $i{$name}->{$spec}->{$combat} ) {
             $log->debug("building group for $name/$spec/$combat");
             my $group = WoWUI::Module::TellMeWhen::Group->new( modoptions => $self->modoptions );
-            $group->populate( $self, $config, \%i, $name, $spec, $combat );
+            $group->populate( $self, \%i, $name, $spec, $combat );
         }
     }
 
@@ -309,7 +309,7 @@ sub select_icons
         $log->trace("considering candidate $iname");
         my $icon = WoWUI::Module::TellMeWhen::Icons->instance->icon_get($iname);
         next if( $icon->combat && $a{combat} ne $icon->combat );
-        if( $a{f}->match( $icon->criteria, $using ) ) {
+        if( $a{f}->match( $icon->filter, $using ) ) {
             $log->trace("selected $iname");
             $selected->insert( $iname );
             # allow the icon to select extra icons

@@ -204,6 +204,9 @@ sub log
     if( exists $p{stacksup} ) {
         $caller = caller($p{stacksup});
     }
+    elsif( exists $p{callingobj} ) {
+        $caller = ref $p{callingobj};
+    }
     else {
         $caller = caller();
     }

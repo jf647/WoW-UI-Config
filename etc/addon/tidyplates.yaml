@@ -11,6 +11,6 @@ templates:
         tidyplates:
             input: $TEMPLATEDIR/tidyplates/TidyPlates.lua
             output: $TEMPDIR/WTF/SavedVariables/TidyPlates.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - TidyPlates

@@ -4,7 +4,7 @@ templates:
         trinketmenu:
             input: $TEMPLATEDIR/trinketmenu/TrinketMenu.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/TrinketMenu.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - TrinketMenu
 cachefile: $VARRUNDIR/trinketmenu_cache.yaml

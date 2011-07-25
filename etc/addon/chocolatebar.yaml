@@ -8,7 +8,7 @@ templates:
         chocolatebar:
             input: $TEMPLATEDIR/chocolatebar/ChocolateBar.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/ChocolateBar.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - ChocolateBar
 plugins:

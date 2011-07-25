@@ -948,7 +948,7 @@ buttons:
       - dbmtype:groupheal
     spell: Wild Growth
 buttontemplate: $TEMPLATEDIR/dualbox/button.template
-perchar_criteria:
+perchar_filter:
     addons:
         - Macaroon
 templates:

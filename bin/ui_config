@@ -17,6 +17,7 @@ use lib "$FindBin::Bin/../lib";
 
 use WoWUI::Config;
 use WoWUI::Machines;
+use WoWUI::Modules;
 use WoWUI::ExtraFiles;
 
 # parse command line
@@ -91,6 +92,8 @@ sub process_machine
 
     my $machname = shift;
 
+    $log->info("processing machine $machname");
+
     # create a temp dir in which to work
     my $tempdir = WoWUI::Util::tempdir( $o{clean}, 1 );
 
@@ -107,9 +110,17 @@ sub process_machine
     
     # iterate over players
     for my $player( $machine->players ) {
-        process_player( $machine, $player );
+        $log->info("processing player ", $player->name);
+        # iterate over modules
+        for my $modname( @{ $cfg->{modules} } ) {
+            $log->info("processing module $modname");
+            my $module = WoWUI::Modules->instance->module_get($modname);
+            $module->machine( $machine );
+            $module->player( $player );
+            $module->process;
+        }
     }
-
+    
     # create an archive of the tempdir
     my $zip = Archive::Zip->new();
     while( my $dir = $tempdir->next ) {
@@ -134,67 +145,6 @@ sub process_machine
     }
     $log->info("wrote settings to ", $machine->output);
     $log->info("tempdir for ", $machine->name, " is $tempdir") unless( $o{clean} );
-    
-}
-
-# process a player on a machine
-sub process_player
-{
-
-    my $machine = shift;
-    my $player = shift;
-    
-    my $cfg = WoWUI::Config->instance->cfg;
-    
-    # iterate over modules
-    for my $module( @{ $cfg->{modules} } ) {
-
-        $log->info("processing $module");
-
-        # load the module
-        eval "require $module";
-        if( $@ ) {
-            die "can't load $module: $@";
-        }
-
-        # instantiate the UI module
-        my $mod = $module->new(
-            machine => $machine,
-            player => $player,
-        );
-
-        # process the UI's per-char config if it has one
-        if( $mod->perchar ) {
-            $log->debug("processing perchar for $module");
-            for my $realm( $player->realms ) {
-                for my $char( $realm->chars ) {
-                    $log->debug("processing ", $char->name, " of ", $realm->name);
-                    my $chardata = $mod->chardata( $char );
-                    next unless $chardata;
-                    $log->trace("writing files for ", $char->name, " of ", $realm->name);
-                    $mod->process_perchar( $char, $chardata );
-                }
-            }
-        }
-
-        # process the UI's global config if it has one
-        my $data = {};
-        if( $mod->global ) {
-            $log->debug("processing global for $module");
-            my $moddata = $mod->data;
-            $data = merge( $data, $moddata );
-        }
-        elsif( $mod->globalpc ) {
-            $log->debug("processing globalpc for $module");
-            my $moddatapc = $mod->datapc;
-            $data = merge( $data, $moddatapc );
-        }
-        next unless( %$data );
-        $data->{charlist} = $player->charlist;
-        $log->trace("writing files");
-        $mod->process_global( $data );
-
-    }
     
 }
 

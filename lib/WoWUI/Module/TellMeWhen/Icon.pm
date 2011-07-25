@@ -14,7 +14,7 @@ with 'WoWUI::Module::TellMeWhen::Dumpable';
 has priority => ( is => 'rw', isa => 'Int', required => 1 );
 has tag => ( is => 'rw', isa => 'Str' );
 has combat => ( is => 'rw', isa => 'Str' );
-has criteria => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
+has filter => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
 # String, no default, not relevant
 has [ qw|BuffOrDebuff CooldownType| ] => ( is => 'rw', isa => 'Str', traits => ['Relevant'] );
 # String, no default, relevant

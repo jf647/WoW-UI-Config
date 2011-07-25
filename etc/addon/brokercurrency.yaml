@@ -6,7 +6,7 @@ templates:
         currency:
             input: $TEMPLATEDIR/brokercurrency/Broker_Currency.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Broker_Currency.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - Broker_Currency
 currencies:

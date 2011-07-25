@@ -4,7 +4,7 @@ templates:
         turnin:
             input: $TEMPLATEDIR/turnin/TurnIn.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/TurnIn.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - TurnIn
 npcs:

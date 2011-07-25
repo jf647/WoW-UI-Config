@@ -8,6 +8,7 @@ use Moose;
 use namespace::autoclean;
 
 # set up class
+with 'WoWUI::Module::ModOptions';
 has realm => ( is => 'rw', isa => 'WoWUI::Realm', required => 1 );
 has level => ( is => 'rw', isa => 'Int' );
 has cfg => ( is => 'rw', isa => 'HashRef' );
@@ -53,19 +54,6 @@ has flags => (
   handles => {
     flags_get => 'get',
     flags_set => 'set',
-  },
-);
-has modoptions => (
-  is => 'bare',
-  isa => 'HashRef',
-  traits => ['Hash'],
-  default => sub { {} },
-  handles => {
-    modoption_set => 'set',
-    modoption_get => 'get',
-    modoption_exists => 'exists',
-    modoptions_list => 'keys',
-    modoptions_values => 'values',
   },
 );
 has addons => ( is => 'rw', isa => 'Set::Scalar' );

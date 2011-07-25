@@ -4,7 +4,7 @@ templates:
         raven:
             input: $TEMPLATEDIR/raven/Raven.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Raven.lua
-perchar_criteria:
+perchar_filter:
     addons:
         - Raven
 icbuffs:
