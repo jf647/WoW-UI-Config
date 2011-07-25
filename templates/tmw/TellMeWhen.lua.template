@@ -1,5 +1,10 @@
 
 TellMeWhenDB = {
+    ["global"] = {
+        ["SeenNewDurSyntax"] = 1,
+        ["WpnEnchDurs"] = 0,
+    },
+    ["Version"] = 44009,
     ["profileKeys"] = {
 [% FOR realm IN realms.keys -%]
 [% FOR char IN realms.$realm.keys -%]

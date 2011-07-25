@@ -285,13 +285,19 @@ triggers:
     Focus Magic:
         type: buff
         reportspellid: 1
+        notonself: 1
+        message_up: '*slink on *tgt'
+        uponly: 1
         level: 59
         combateither: 1
         include:
             - all(class:Mage;spec:Arcane)
     Dark Intent:
         type: buff
+        message_up: '*slink on *tgt'
+        uponly: 1
         reportspellid: 1
+        notonself: 1
         level: 83
         combateither: 1
         include:

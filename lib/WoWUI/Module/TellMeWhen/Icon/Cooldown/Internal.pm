@@ -13,34 +13,12 @@ has '+priority' => ( default => 2450 );
 has '+Type' => ( default => 'icd' );
 has '+ShowTimer' => ( default => 1 );
 has '+ICDType' => ( relevant => 1 );
-has '+ICDDuration' => ( relevant => 1, required => 1 );
 has [ qw|
     +IgnoreRunes +ManaCheck +OnlyEquipped
     +OnlyInBags +PBarOffs +RangeCheck
     +ShowPBar +CooldownType
 | ] => ( relevant => 0 );
 __PACKAGE__->meta->make_immutable;
-
-# constructor
-sub BUILD
-{
-
-    my $self = shift;
-    my $icfg = shift;
-
-    # usable / unusable
-    if( exists $icfg->{unusable} ) {
-        $self->ShowWhen( 'unalpha' );
-        $self->UnAlpha( 0.5 );
-    }
-    elsif( exists $icfg->{always} ) {
-        $self->ShowWhen( 'always' );
-        $self->UnAlpha( 0.5 );
-    }
-    
-    return $self;
-
-}
 
 # keep require happy
 1;
