@@ -953,6 +953,8 @@ icons:
       - Type: REACT
         Unit: target
         Level: 1
+      - Type: ALIVE
+        Unit: Target
     criteria:
       level: 55
       include:
