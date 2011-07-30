@@ -1308,6 +1308,10 @@ addons:
         include:
             - everyone
         group: Basic
+    VendorBait:
+        include:
+            - everyone
+        group: Basic
     SexyMap:
         include:
             - everyone
