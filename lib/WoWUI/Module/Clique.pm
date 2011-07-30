@@ -23,7 +23,6 @@ __PACKAGE__->meta->make_immutable;
 
 use Clone 'clone';
 use Carp 'croak';
-use Digest;
 
 use WoWUI::Config;
 use WoWUI::Util 'log';

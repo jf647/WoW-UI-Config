@@ -206,6 +206,25 @@ sub match
     
 }
 
+sub matchvalue
+{
+
+    my $self = shift;
+    my $filter = shift;
+    my $using = shift;
+    my $extra = shift;
+    
+    my $value;
+    for my $fe( @$filter ) {
+        if( $self->match( $fe, $using, $extra ) ) {
+            $value = $fe->{value};
+            last if( exists $fe->{final} );
+        }
+    }
+    return $value;
+
+}
+
 # keep require happy
 1;
 

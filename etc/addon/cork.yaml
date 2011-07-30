@@ -8,198 +8,328 @@ templates:
     cork:
       input: $TEMPLATEDIR/cork/Cork_perchar.lua.template
       output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Cork.lua
+filtergroups:
+  any:
+    members:
+    - Well Fed-enabled
+    - Training-enabled
+    - tooltiplimit
+    - raid_thresh
+    - Crates-enabled
+    - Quest Starting Items-enabled
+    - Talents-enabled
+    - multithreshold
+    - Repairs-threshold
+    - Archaeology digs-enabled
+    - Shuck Clams-enabled
+    - Combine-enabled
+    - Repairs-enabled
+    - Lances and Poles-enabled
+    - Glyphs-enabled
+    - Blessing of Forgotten Kings-enabled
+    - Runescroll of Fortitude-enabled
+    - Tracking-spell
+    - Tracking-enabled
+    - Flask of Enhancement-enabled
+  deathknight:
+    filter:
+      include:
+      - class:Death Knight
+    members:
+    - Horn of Winter-enabled
+    - Path of Frost-enabled
+    - Bone Shield-enabled
+  druid:
+    filter:
+      include:
+      - class:Druid
+    members:
+    - Fursuit-enabled
+    - Fursuit-spell
+    - Mark of the Wild-enabled
+  hunter:
+    filter:
+      include:
+      - class:Hunter
+    members:
+    - Aspect-spell
+    - Aspect-enabled
+    - Pet Happiness-enabled
+  mage:
+    filter:
+      include:
+      - class:Mage
+    members:
+    - Armor-spell
+    - Arcane Brilliance-enabled
+    - Conjure Mana Gem-enabled
+    - Armor-enabled
+    - Focus Magic-enabled
+  paladin:
+    filter:
+      include:
+      - class:Paladin
+    members:
+    - Righteous Fury-enabled
+    - Seal-enabled
+    - Seal-spell
+    - Aura-spell
+    - Crusader Aura-enabled
+    - Blessings-enabled
+    - Aura-enabled
+    - Beacon of Light-enabled
+  priest:
+    filter:
+      include:
+      - class:Priest
+    members:
+    - Fear Ward-enabled
+    - Shadow Protection-enabled
+    - Inner Fire-spell
+    - Inner Fire-enabled
+    - Fortitude-enabled
+    - Shadowform-enabled
+    - Vampiric Embrace-enabled
+  rogue:
+    filter:
+      include:
+      - class:Rogue
+    members:
+    - Temp Enchant Off Hand-enabled
+    - Temp Enchant Thrown-spell
+    - Temp Enchant Main Hand-enabled
+    - Temp Enchant Off Hand-spell
+    - Temp Enchant Main Hand-spell
+    - Temp Enchant Thrown-enabled
+  shaman:
+    filter:
+      include:
+      - class:Shaman
+    members:
+    - Shields-spell
+    - Shields-enabled
+    - Temp Enchant Main Hand-enabled
+    - Temp Enchant Main Hand-spell
+    - Temp Enchant Off Hand-enabled
+    - Temp Enchant Off Hand-spell
+  warlock:
+    filter:
+      include:
+      - class:Warlock
+    members:
+    - Soul Shards-enabled
+    - Demon Armor-enabled
+    - Demon Armor-spell
+    - Summon demon-spell
+    - Summon demon-enabled
+    - Soul Link-enabled
+    - Healthstone
+    - Soulstone-enabled
+    - Dark Intent-enabled
+  warrior:
+    filter:
+      include:
+      - class:Warrior
+    members:
+    - Shouts-enabled
+    - Vigilance-enabled
+    - Shouts-spell
 perchar_filter:
-    addons:
-        - Cork
+  addons:
+  - Cork
 settings:
   Arcane Brilliance-enabled:
     corkdefault: 1
+    filter:
+    - level: 58
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 58
-        value: 1
   Archaeology digs-enabled:
     corkdefault: 1
+    filter:
+    - include:
+      - prof:Archaeology
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - include:
-          - prof:Archaeology
-        value: 1
   Armor-enabled:
     corkdefault: 1
+    filter:
+    - level: 34
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 34
-        value: 1
   Armor-spell:
-    level: 34
     corkdefault: Molten Armor
+    filter:
+    - include:
+      - spec:Arcane
+      level: 80
+      value: Mage Armor
+    level: 34
     type: string
-    values:
-      - include:
-          - spec:Arcane
-        level: 80
-        value: Mage Armor
   Aspect-enabled:
     corkdefault: 1
+    filter:
+    - level: 16
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 16
-        value: 1
   Aspect-spell:
-    level: 16
     corkdefault: Aspect of the Hawk
+    level: 16
     type: string
   Aura-enabled:
     corkdefault: 1
+    filter:
+    - level: 5
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 5
-        value: 1
   Aura-spell:
-    level: 5
     corkdefault: Devotion Aura
+    filter:
+    - include:
+      - spec:Retribution
+      level: 26
+      value: Retribution Aura
+    - include:
+      - spec:Holy
+      level: 42
+      value: Concentration Aura
+    level: 5
     type: string
-    values:
-      - include:
-          - spec:Retribution
-        level: 26
-        value: Retribution Aura
-      - include:
-          - spec:Holy
-        level: 42
-        value: Concentration Aura
   Beacon of Light-enabled:
     corkdefault: 1
-    type: boolean
+    filter:
+    - include:
+      - spec:Holy
+      level: 39
+      value: 1
     mydefault: 0
-    values:
-        - include:
-            - spec:Holy
-          value: 1
-          level: 39
+    type: boolean
   Blessing of Forgotten Kings-enabled:
     corkdefault: 1
     mydefault: 0
     type: boolean
   Blessings-enabled:
     corkdefault: 1
+    filter:
+    - level: 22
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 22
-        value: 1
   Bone Shield-enabled:
     corkdefault: 1
     mydefault: 0
     type: boolean
   Combine-enabled:
     corkdefault: 1
+    filter:
+    - exclude:
+      - prof:Leatherworking
+      include:
+      - prof:Skinning
+      value: 0
     type: boolean
-    values:
-      - include:
-          - prof:Skinning
-        exclude:
-          - prof:Leatherworking
-        value: 0
   Conjure Mana Gem-enabled:
     corkdefault: 1
+    filter:
+    - level: 48
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 48
-        value: 1
   Crates-enabled:
     corkdefault: 1
     type: boolean
   Crusader Aura-enabled:
     corkdefault: 1
+    filter:
+    - level: 62
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 62
-        value: 1
-  Demon Armor-enabled:
-    corkdefault: 1
-    mydefault: 0
-    type: boolean
-    values:
-      - level: 8
-        value: 1
-  Demon Armor-spell:
-    level: 8
-    type: string
-    corkdefault: Demon armor
-    values:
-      - level: 62
-        value: Fel Armor
-  Fear Ward-enabled:
-    corkdefault: 1
-    mydefault: 0
-    type: boolean
-    values:
-      - level: 54
-        value: 1
-  Focus Magic-enabled:
-    corkdefault: 1
-    mydefault: 0
-    type: boolean
-    values:
-      - include:
-          - spec:Arcane
-        level: 35
-        value: 1
   Dark Intent-enabled:
     corkdefault: 1
+    filter:
+    - level: 83
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 83
-        value: 1
+  Demon Armor-enabled:
+    corkdefault: 1
+    filter:
+    - level: 8
+      value: 1
+    mydefault: 0
+    type: boolean
+  Demon Armor-spell:
+    corkdefault: Demon armor
+    filter:
+    - level: 62
+      value: Fel Armor
+    level: 8
+    type: string
+  Fear Ward-enabled:
+    corkdefault: 1
+    filter:
+    - level: 54
+      value: 1
+    mydefault: 0
+    type: boolean
+  Flask of Enhancement-enabled:
+    corkdefault: 1
+    mydefault: 0
+    type: boolean
+  Focus Magic-enabled:
+    corkdefault: 1
+    filter:
+    - include:
+      - spec:Arcane
+      level: 35
+      value: 1
+    mydefault: 0
+    type: boolean
   Fortitude-enabled:
     corkdefault: 1
     type: boolean
   Fursuit-enabled:
     corkdefault: 1
+    filter:
+    - include:
+      - all(spec:Feral Combat;subspec:Bear)
+      level: 15
+      value: 1
+    - include:
+      - all(spec:Feral Combat;subspec:Cat)
+      level: 8
+      value: 1
+    - include:
+      - spec:Balance
+      level: 20
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - include:
-          - all(spec:Feral Combat;subspec:Bear)
-        level: 15
-        value: 1
-      - include:
-          - all(spec:Feral Combat;subspec:Cat)
-        level: 8
-        value: 1
-      - include:
-          - spec:Balance
-        level: 20
-        value: 1
   Fursuit-spell:
-    include:
+    corkdefault: Cat Form
+    filter:
+    - include:
       - spec:Feral Combat
+      value: Cat Form
+    - include:
+      - subspec:Bear
+      level: 15
+      value: Bear Form
+    - include:
       - spec:Balance
+      level: 30
+      value: Moonkin Form
+    include:
+    - spec:Feral Combat
+    - spec:Balance
     level: 8
     type: string
-    corkdefault: Cat Form
-    values:
-      - include:
-          - spec:Feral Combat
-        value: Cat Form
-      - include:
-          - subspec:Bear
-        level: 15
-        value: Bear Form
-      - include:
-          - spec:Balance
-        level: 30
-        value: Moonkin Form
   Glyphs-enabled:
     corkdefault: 1
     type: boolean
@@ -211,30 +341,30 @@ settings:
     type: boolean
   Inner Fire-enabled:
     corkdefault: 1
+    filter:
+    - level: 7
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 7
-        value: 1
   Inner Fire-spell:
-    level: 83
     corkdefault: Inner Fire
+    filter:
+    - include:
+      - spec:Discipline
+      level: 83
+      value: Inner Will
+    level: 83
     type: string
-    values:
-      - include:
-          - spec:Discipline
-        level: 83
-        value: Inner Will
   Lances and Poles-enabled:
     corkdefault: 1
     type: boolean
   Mark of the Wild-enabled:
     corkdefault: 1
+    filter:
+    - level: 30
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 30
-        value: 1
   Path of Frost-enabled:
     corkdefault: 1
     mydefault: 0
@@ -249,85 +379,81 @@ settings:
     type: boolean
   Repairs-enabled:
     corkdefault: 1
+    filter:
+    - include:
+      - banker
+      - mule
+      value: 0
     type: boolean
-    values:
-      - include:
-          - banker
-          - mule
-        value: 0
   Repairs-threshold:
     corkdefault: 0.85
     mydefault: 0.4
     type: number
   Righteous Fury-enabled:
     corkdefault: 1
+    filter:
+    - include:
+      - spec:Protection
+      level: 12
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - include:
-          - spec:Protection
-        level: 12
-        value: 1
   Runescroll of Fortitude-enabled:
-    corkdefault: 1
-    mydefault: 0
-    type: boolean
-  Flask of Enhancement-enabled:
     corkdefault: 1
     mydefault: 0
     type: boolean
   Seal-enabled:
     corkdefault: 1
+    filter:
+    - level: 3
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 3
-        value: 1
   Seal-spell:
+    filter:
+    - include:
+      - spec:Holy
+      level: 32
+      value: Seal of Insight
+    - include:
+      - spec:Protection
+      level: 44
+      value: Seal of Truth
     level: 3
-    type: string
     mydefault: Seal of Righteousness
-    values:
-      - include:
-          - spec:Holy
-        level: 32
-        value: Seal of Insight
-      - include:
-          - spec:Protection
-        level: 44
-        value: Seal of Truth
+    type: string
   Shadow Protection-enabled:
     corkdefault: 1
+    filter:
+    - level: 58
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 58
-        value: 1
   Shadowform-enabled:
     corkdefault: 0
+    filter:
+    - include:
+      - spec:Shadow
+      level: 20
+      value: 1
     type: boolean
-    values:
-      - include:
-          - spec:Shadow
-        level: 20
-        value: 1
   Shields-enabled:
     corkdefault: 1
     type: boolean
   Shields-spell:
-    type: string
     corkdefault: Lightning Shield
-    values:
-      - include:
-          - spec:Restoration
-        value: Water Shield
+    filter:
+    - include:
+      - spec:Restoration
+      value: Water Shield
+    type: string
   Shouts-enabled:
     corkdefault: 1
+    filter:
+    - level: 20
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 20
-        value: 1
   Shouts-spell:
     level: 20
     mydefault: Battle Shout
@@ -337,11 +463,11 @@ settings:
     type: boolean
   Soul Link-enabled:
     corkdefault: 1
+    filter:
+    - level: 20
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 20
-        value: 1
   Soul Shards-enabled:
     corkdefault: 1
     type: boolean
@@ -353,164 +479,164 @@ settings:
     type: boolean
   Summon demon-spell:
     corkdefault: Summon Imp
+    filter:
+    - include:
+      - spec:Demonology
+      level: 10
+      value: Summon Felguard
+    - include:
+      - spec:Affliction
+      level: 20:29
+      value: Summon Succubus
+    - include:
+      - spec:Affliction
+      level: 30
+      value: Summon Felhunter
     type: string
-    values:
-      - include:
-          - spec:Demonology
-        level: 10
-        value: Summon Felguard
-      - include:
-          - spec:Affliction
-        level: 20:29
-        value: Summon Succubus
-      - include:
-          - spec:Affliction
-        level: 30
-        value: Summon Felhunter
   Talents-enabled:
     corkdefault: 1
+    filter:
+    - exclude:
+      - banker
+      - mule
+      include:
+      - leveling
+      level: 10
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 10
-        include:
-          - leveling
-        exclude:
-          - banker
-          - mule
-        value: 1
   Temp Enchant Main Hand-enabled:
     corkdefault: 1
+    filter:
+    - level: 10
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 10
-        value: 1
   Temp Enchant Main Hand-spell:
+    corkdefault: Crippling Poison
+    filter:
+    - include:
+      - all(class:Shaman;spec:Restoration)
+      level: 54
+      value: Earthliving Weapon
+    - include:
+      - all(class:Shaman;spec:Restoration)
+      level: :53
+      value: Flametongue Weapon
+    - include:
+      - all(class:Shaman;spec:Elemental)
+      value: Flametongue Weapon
+    - include:
+      - all(class:Shaman;spec:Enhancement)
+      level: :25
+      value: Flametongue Weapon
+    - include:
+      - all(class:Shaman;spec:Enhancement)
+      level: 26:31
+      value: Frostbrand Weapon
+    - include:
+      - all(class:Shaman;spec:Enhancement)
+      level: 32
+      value: Windfury Weapon
+    - include:
+      - class:Rogue
+      value: Instant Poison
     level: 10
     type: string
-    corkdefault: Crippling Poison
-    values:
-      - include:
-          - all(class:Shaman;spec:Restoration)
-        level: 54
-        value: Earthliving Weapon
-      - include:
-          - all(class:Shaman;spec:Restoration)
-        level: :53
-        value: Flametongue Weapon
-      - include:
-          - all(class:Shaman;spec:Elemental)
-        value: Flametongue Weapon
-      - include:
-          - all(class:Shaman;spec:Enhancement)
-        level: :25
-        value: Flametongue Weapon
-      - include:
-          - all(class:Shaman;spec:Enhancement)
-        level: 26:31
-        value: Frostbrand Weapon
-      - include:
-          - all(class:Shaman;spec:Enhancement)
-        level: 32
-        value: Windfury Weapon
-      - include:
-          - class:Rogue
-        value: Instant Poison
   Temp Enchant Off Hand-enabled:
     corkdefault: 1
+    filter:
+    - level: 10
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 10
-        value: 1
   Temp Enchant Off Hand-spell:
+    corkdefault: Crippling Poison
+    filter:
+    - include:
+      - all(class:Shaman;spec:Enhancement)
+      value: Flametongue Weapon
+    - include:
+      - class:Rogue
+      value: Deadly Poison
     level: 10
     type: string
-    corkdefault: Crippling Poison
-    values:
-      - include:
-          - all(class:Shaman;spec:Enhancement)
-        value: Flametongue Weapon
-      - include:
-          - class:Rogue
-        value: Deadly Poison
   Temp Enchant Thrown-enabled:
     corkdefault: 1
+    filter:
+    - level: 80
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 80
-        value: 1
   Temp Enchant Thrown-spell:
     corkdefault: Crippling Poison
     level: 80
-    type: string
     mydefault: Deadly Poison
+    type: string
   Tracking-enabled:
     corkdefault: 1
-    mydefault: 0
-    type: boolean
-    values:
-      - include:
-          - class:Hunter
-          - prof:Herbalism
-          - prof:Mining
-          - prof:Fishing
-        exclude:
-          - prof:InactiveFishing
-        value: 1
-  Tracking-spell:
-    type: string
-    include:
+    filter:
+    - exclude:
+      - prof:InactiveFishing
+      include:
       - class:Hunter
       - prof:Herbalism
       - prof:Mining
       - prof:Fishing
+      value: 1
+    mydefault: 0
+    type: boolean
+  Tracking-spell:
     exclude:
-      - prof:InactiveFishing
-    values:
-      - include:
-          - class:Hunter
-        value: Track Beasts
-      - include:
-          - prof:Fishing
-        value: Find Fish
-      - include:
-          - prof:Mining
-        value: Find Minerals
-      - include:
-          - prof:Herbalism
-        value: Find Herbs
+    - prof:InactiveFishing
+    filter:
+    - include:
+      - class:Hunter
+      value: Track Beasts
+    - include:
+      - prof:Fishing
+      value: Find Fish
+    - include:
+      - prof:Mining
+      value: Find Minerals
+    - include:
+      - prof:Herbalism
+      value: Find Herbs
+    include:
+    - class:Hunter
+    - prof:Herbalism
+    - prof:Mining
+    - prof:Fishing
+    type: string
   Training-enabled:
     corkdefault: 1
+    filter:
+    - exclude:
+      - banker
+      - mule
+      include:
+      - leveling
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - include:
-          - leveling
-        exclude:
-          - banker
-          - mule
-        value: 1
   Vampiric Embrace-enabled:
     corkdefault: 1
+    filter:
+    - include:
+      - spec:Shadow
+      level: 20
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 20
-        include:
-          - spec:Shadow
-        value: 1
   Vigilance-enabled:
     corkdefault: 1
+    filter:
+    - include:
+      - spec:Protection
+      level: 30
+      value: 1
     mydefault: 0
     type: boolean
-    values:
-      - level: 30
-        include:
-          - spec:Protection
-        value: 1
   Well Fed-enabled:
     corkdefault: 1
     mydefault: 0
@@ -524,121 +650,12 @@ settings:
   tooltiplimit:
     corkdefault: 10
     type: number
-settingsgroups:
-  any:
-    include:
-      - everyone
-    settings:
-      - Well Fed-enabled
-      - Training-enabled
-      - tooltiplimit
-      - raid_thresh
-      - Crates-enabled
-      - Quest Starting Items-enabled
-      - Talents-enabled
-      - multithreshold
-      - Repairs-threshold
-      - Archaeology digs-enabled
-      - Shuck Clams-enabled
-      - Combine-enabled
-      - Repairs-enabled
-      - Lances and Poles-enabled
-      - Glyphs-enabled
-      - Blessing of Forgotten Kings-enabled
-      - Runescroll of Fortitude-enabled
-      - Tracking-spell
-      - Tracking-enabled
-      - Flask of Enhancement-enabled
-  deathknight:
-    include:
-      - class:Death Knight
-    settings:
-      - Horn of Winter-enabled
-      - Path of Frost-enabled
-      - Bone Shield-enabled
-  druid:
-    include:
-      - class:Druid
-    settings:
-      - Fursuit-enabled
-      - Fursuit-spell
-      - Mark of the Wild-enabled
-  hunter:
-    include:
-      - class:Hunter
-    settings:
-      - Aspect-spell
-      - Aspect-enabled
-      - Pet Happiness-enabled
-  mage:
-    include:
-      - class:Mage
-    settings:
-      - Armor-spell
-      - Arcane Brilliance-enabled
-      - Conjure Mana Gem-enabled
-      - Armor-enabled
-      - Focus Magic-enabled
-  paladin:
-    include:
-      - class:Paladin
-    settings:
-      - Righteous Fury-enabled
-      - Seal-enabled
-      - Seal-spell
-      - Aura-spell
-      - Crusader Aura-enabled
-      - Blessings-enabled
-      - Aura-enabled
-      - Beacon of Light-enabled
-  priest:
-    include:
-      - class:Priest
-    settings:
-      - Fear Ward-enabled
-      - Shadow Protection-enabled
-      - Inner Fire-spell
-      - Inner Fire-enabled
-      - Fortitude-enabled
-      - Shadowform-enabled
-      - Vampiric Embrace-enabled
-  rogue:
-    include:
-      - class:Rogue
-    settings:
-      - Temp Enchant Off Hand-enabled
-      - Temp Enchant Thrown-spell
-      - Temp Enchant Main Hand-enabled
-      - Temp Enchant Off Hand-spell
-      - Temp Enchant Main Hand-spell
-      - Temp Enchant Thrown-enabled
-  shaman:
-    include:
-      - class:Shaman
-    settings:
-      - Shields-spell
-      - Shields-enabled
-      - Temp Enchant Main Hand-enabled
-      - Temp Enchant Main Hand-spell
-      - Temp Enchant Off Hand-enabled
-      - Temp Enchant Off Hand-spell
-  warlock:
-    include:
-      - class:Warlock
-    settings:
-      - Soul Shards-enabled
-      - Demon Armor-enabled
-      - Demon Armor-spell
-      - Summon demon-spell
-      - Summon demon-enabled
-      - Soul Link-enabled
-      - Healthstone
-      - Soulstone-enabled
-      - Dark Intent-enabled
-  warrior:
-    include:
-      - class:Warrior
-    settings:
-      - Shouts-enabled
-      - Vigilance-enabled
-      - Shouts-spell
+templates:
+  global:
+    cork:
+      input: $TEMPLATEDIR/cork/Cork.lua.template
+      output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Cork.lua
+  perchar:
+    cork:
+      input: $TEMPLATEDIR/cork/Cork_perchar.lua.template
+      output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Cork.lua

@@ -9,7 +9,6 @@ use warnings;
 use Archive::Zip qw|:ERROR_CODES :CONSTANTS|;
 use FindBin;
 use Getopt::Long;
-use Hash::Merge::Simple qw|merge|;
 use Template;
 use Path::Class qw|dir file|;
 
