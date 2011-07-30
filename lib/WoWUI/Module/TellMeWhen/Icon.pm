@@ -20,6 +20,7 @@ has [ qw|BuffOrDebuff CooldownType| ] => ( is => 'rw', isa => 'Str', traits => [
 # String, no default, relevant
 has Name => ( is => 'rw', isa => 'Str', required => 1, lazy => 1, builder => 'build_name', traits => ['Relevant'], relevant => 1 );
 has CustomTex => ( is => 'rw', isa => 'Str', traits => ['Relevant'], relevant => 1 );
+has BindText => ( is => 'rw', isa => 'Str', traits => ['Relevant'], relevant => 1 );
 # String, other
 has ShowWhen => ( is => 'rw', isa => 'Str', default => 'alpha', traits => ['Relevant'] );
 has Type => ( is => 'rw', isa => 'Str', required => 1, traits => ['Relevant'], relevant => 1 );
