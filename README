@@ -60,8 +60,8 @@ git clone git@mygitserver.com:wow/WoW-UI-Config-Private.git private
 If you're just starting out, you will want to create private/machines.yaml
 by copying the example file from the etc directory.  Then you need at least
 one machine file in private/machine and at least one player file in
-private/player.  Examples of each of these files are in the etc/sample
-directory.
+private/player.  An example of a private config repository can be found in
+the directory private.sample.
 
 The reason for all this indirection is that it allows you to create
 different configs using the same character data.  For example, I have two

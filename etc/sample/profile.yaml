@@ -1,9 +1,0 @@
----
-machines:
-    machine1:
-        players:
-            - player1
-    machine2:
-        players:
-            - player1
-            - player2

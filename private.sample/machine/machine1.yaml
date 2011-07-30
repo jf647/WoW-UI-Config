@@ -1,10 +1,13 @@
 ---
-output: $OUTPUTDIR/$MACHINE_wowui.zip
-dualbox_type: master
+output: $OUTPUTDIR/machine1_wowui.zip
+types:
+    - dualbox_master
+    - primary
+    - poweruser
 wowversions:
     - 4.x
     - 4.2
-modules:
+modoptions:
     digits:
         font:
             size: 30
@@ -85,8 +88,12 @@ modules:
             point: BOTTOMLEFT
             x: 40
             y: 690
+    chocolatebar:
+        font: Fonts\\FRIZQT__.TTF
+        fontname: Friz Quadrata TT
+        fontsize: 10
     hydra:
         extratrust:
-            realm1:
-                - trust1
-                - trust2
+            Realm1:
+                - Friend1
+                - Friend2
