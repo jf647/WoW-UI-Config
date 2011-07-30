@@ -4,6 +4,7 @@
 
 package WoWUI::Realm;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

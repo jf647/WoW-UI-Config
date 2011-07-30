@@ -4,6 +4,7 @@
 
 package WoWUI::Module::FreeRefills;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

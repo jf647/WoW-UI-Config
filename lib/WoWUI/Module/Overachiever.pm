@@ -4,6 +4,7 @@
 
 package WoWUI::Module::Overachiever;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

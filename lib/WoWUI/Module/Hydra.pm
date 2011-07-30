@@ -4,6 +4,7 @@
 
 package WoWUI::Module::Hydra;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

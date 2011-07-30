@@ -4,6 +4,7 @@
 
 package WoWUI::Char;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

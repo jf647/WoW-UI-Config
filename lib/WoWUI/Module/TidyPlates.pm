@@ -4,6 +4,7 @@
 
 package WoWUI::Module::TidyPlates;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

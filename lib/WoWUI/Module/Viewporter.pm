@@ -4,6 +4,7 @@
 
 package WoWUI::Module::Viewporter;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

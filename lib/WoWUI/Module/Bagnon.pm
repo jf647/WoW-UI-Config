@@ -4,6 +4,7 @@
 
 package WoWUI::Module::Bagnon;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

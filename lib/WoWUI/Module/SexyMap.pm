@@ -4,6 +4,7 @@
 
 package WoWUI::Module::SexyMap;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

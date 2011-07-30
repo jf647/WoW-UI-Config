@@ -4,6 +4,7 @@
 
 package WoWUI::Machine;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

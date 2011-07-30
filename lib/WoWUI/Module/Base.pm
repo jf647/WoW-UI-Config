@@ -6,6 +6,7 @@ package WoWUI::Module::Base;
 use Moose;
 use MooseX::ABC;
 use MooseX::ClassAttribute;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

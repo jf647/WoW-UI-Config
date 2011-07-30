@@ -4,6 +4,7 @@
 
 package WoWUI::ProfileSet;
 use Moose;
+use MooseX::StrictConstructor;
 
 # set up class
 has nameseq => (

@@ -4,6 +4,7 @@
 
 package WoWUI::FilterGroups;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

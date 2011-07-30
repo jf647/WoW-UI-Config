@@ -4,6 +4,7 @@
 
 package WoWUI::LuaDumper;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

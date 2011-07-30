@@ -4,6 +4,7 @@
 
 package WoWUI::Module::TellMeWhen::Icons;
 use MooseX::Singleton;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

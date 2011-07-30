@@ -4,6 +4,7 @@
 
 package WoWUI::Player;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

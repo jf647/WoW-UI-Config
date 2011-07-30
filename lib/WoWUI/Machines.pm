@@ -4,6 +4,7 @@
 
 package WoWUI::Machines;
 use MooseX::Singleton;
+use MooseX::StrictConstructor;
 
 use Carp 'croak';
 use namespace::autoclean;

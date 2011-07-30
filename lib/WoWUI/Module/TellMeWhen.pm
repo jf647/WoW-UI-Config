@@ -4,6 +4,7 @@
 
 package WoWUI::Module::TellMeWhen;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 use CLASS;

@@ -4,6 +4,7 @@
 
 package WoWUI::Module::Clique;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 use CLASS;

@@ -4,6 +4,7 @@
 
 package WoWUI::Module::TellMeWhen::Group::Rotation;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

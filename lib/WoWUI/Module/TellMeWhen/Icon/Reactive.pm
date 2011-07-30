@@ -4,6 +4,7 @@
 
 package WoWUI::Module::TellMeWhen::Icon::Reactive;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

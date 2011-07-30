@@ -4,6 +4,7 @@
 
 package WoWUI::Module::NPCScan;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

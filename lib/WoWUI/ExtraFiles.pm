@@ -4,6 +4,7 @@
 
 package WoWUI::ExtraFiles;
 use MooseX::Singleton;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

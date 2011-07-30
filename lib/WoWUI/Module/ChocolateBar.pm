@@ -4,6 +4,7 @@
 
 package WoWUI::Module::ChocolateBar;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 

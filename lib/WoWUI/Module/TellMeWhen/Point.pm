@@ -4,6 +4,7 @@
 
 package WoWUI::Module::TellMeWhen::Point;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 
