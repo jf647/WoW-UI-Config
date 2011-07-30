@@ -42,3 +42,6 @@ currencies:
     summary:
         include:
             - banker
+    firelands:
+        include:
+            - everyone

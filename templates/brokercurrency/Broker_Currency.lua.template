@@ -43,6 +43,9 @@ Broker_CurrencyCharDB = {
 [% IF tournament -%]
     ["summary241"] = true,
 [% END -%]
+[% IF firelands -%]
+    ["summary416"] = true,
+[% END -%]
 [% IF summary -%]
     ["showYesterday"] = true,
     ["showThisWeek"] = true,
