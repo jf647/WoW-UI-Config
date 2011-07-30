@@ -27,7 +27,7 @@ templates:
       output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/TellMeWhen.lua
 conditions:
   solo:
-    type: GROUP
+    Type: GROUP
   party:
     Type: GROUP
     Level: 1
@@ -345,7 +345,7 @@ filtergroups:
     - ReducedPhysicalDone
     - Drain Soul
     - Spell Lock
-    - Hand of Guldan Missing
+    - Hand of Gul'dan Missing
     - Felstorm
     - Decimation
     - Health Funnel
@@ -490,7 +490,6 @@ icons:
     no_filter_group_ok: 1
     type: Cooldown::Spell
     spell: Water Shield
-    missing: 1
     conditions:
       - mp_le_25_pct
       - AND
@@ -861,7 +860,7 @@ icons:
       level: 49
     type: Cooldown::Spell::Off::ShortCD
   Dead Winds:
-    absent: 1
+    missing: 1
     combat: in
     filter:
       include:
@@ -1634,7 +1633,7 @@ icons:
     type: Cooldown::Spell::LongCD
   Overpower:
     Alpha: 1
-    UseActivationOverlay: 1
+    UseActvtnOverlay: 1
     combat: in
     CooldownCheck: 1
     filter:
@@ -1952,7 +1951,7 @@ icons:
       - spec:Blood
       level: 58
     type: Cooldown::Spell::Def::ShortCD
-    usabe: 1
+    usable: 1
   Rupture Missing:
     Unit: target
     combat: in
@@ -2088,16 +2087,16 @@ icons:
       - all(spec:Balance;subspec:Solar Beam)
       level: 39
     type: Cooldown::Spell::Off::ShortCD
-  Hand of Guldan Missing:
+  Hand of Gul'dan Missing:
     combat: in
     spell: Hand of Gul'dan
-    unit: target
+    Unit: target
     missing: 1
     filter:
       level: 39
       include:
         - spec:Demonology
-    type: Cooldown::Spell::Off::ShortCD
+    type: Debuff
   Decimation:
     combat: in
     type: Buff

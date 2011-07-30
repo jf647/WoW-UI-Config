@@ -16,6 +16,9 @@ has priority => ( is => 'rw', isa => 'Int', required => 1 );
 has tag => ( is => 'rw', isa => 'Str' );
 has combat => ( is => 'rw', isa => 'Str' );
 has filter => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
+has no_filter_group_ok => ( is => 'ro', isa => 'Bool' );
+has type => ( is => 'ro', isa => 'Str' );
+has conditions => ( is => 'ro', isa => 'ArrayRef' );
 # String, no default, not relevant
 has [ qw|BuffOrDebuff CooldownType| ] => ( is => 'rw', isa => 'Str', traits => ['Relevant'] );
 # String, no default, relevant
@@ -91,16 +94,15 @@ sub BUILD
 {
 
     my $self = shift;
-    my $icfg = shift;
 
-    if( exists $icfg->{conditions} ) {
+    if( $self->conditions ) {
         my @conditions;
-        unless( @{ $icfg->{conditions} } % 2 ) {
-            croak "even number of conditions in ", join(':', @{ $icfg->{conditions} });
+        unless( @{ $self->conditions } % 2 ) {
+            croak "even number of conditions in ", join(':', @{ $self->conditions });
         }
         my $needs_join = 0;
-        while( @{ $icfg->{conditions} } ) {
-            my $condition = shift @{ $icfg->{conditions} };
+        while( @{ $self->conditions } ) {
+            my $condition = shift @{ $self->conditions };
             if( $needs_join ) {
                 if( 'OR' eq $condition ) {
                     $conditions[$#conditions]->{AndOr} = 'OR';
@@ -123,13 +125,13 @@ sub BUILD
                         Name => $cname,
                         %$condition
                     );
-                    WoWUI::Module::TellMeWhen::Conditions->instance->cond_set( $cname, $c );
+                    WoWUI::Module::TellMeWhen::Conditions->instance->set( $cname, $c );
                 }
                 elsif( $condition =~ m/^icon:(.+)/ ) {
                     $c = WoWUI::Module::TellMeWhen::Condition::Icon->new( tag => $1, Icon => $1 );
                 }
                 else {
-                    $c = WoWUI::Module::TellMeWhen::Conditions->instance->cond_get( $condition );
+                    $c = WoWUI::Module::TellMeWhen::Conditions->instance->get( $condition );
                 }
                 die "invalid condition '$condition'" unless $c;
                 push @conditions, $c;
@@ -141,7 +143,7 @@ sub BUILD
     
     # set our name to our tag unless a subclass did it for us
     unless( $self->Name ) {
-        $self->Name( $icfg->{tag} );
+        $self->Name( $self->tag );
     }
 
     return $self;

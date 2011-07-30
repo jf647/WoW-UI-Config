@@ -10,6 +10,8 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::TellMeWhen::Icon';
+has stacks => ( is => 'ro', isa => 'HashRef' );
+has duration => ( is => 'ro', isa => 'HashRef' );
 has '+Type' => ( default => 'buff' );
 has '+BuffOrDebuff' => ( relevant => 1, default => 'HELPFUL' );
 has '+ShowWhen' => ( relevant => 1 );
@@ -28,29 +30,28 @@ sub BUILD
 {
 
     my $self = shift;
-    my $icfg = shift;
 
     # stacks
-    if( exists $icfg->{stacks} ) {
-        if( exists $icfg->{stacks}->{min} ) {
+    if( $self->stacks ) {
+        if( exists $self->stacks->{min} ) {
             $self->StackMinEnabled( 1 );
-            $self->StackMin( $icfg->{stacks}->{min} );
+            $self->StackMin( $self->stacks->{min} );
         }
-        if( exists $icfg->{stacks}->{max} ) {
+        if( exists $self->stacks->{max} ) {
             $self->StackMaxEnabled( 1 );
-            $self->StackMax( $icfg->{stacks}->{max} );
+            $self->StackMax( $self->stacks->{max} );
         }
     }
 
     # durations
-    if( exists $icfg->{duration} ) {
-        if( exists $icfg->{duration}->{min} ) {
+    if( $self->duration ) {
+        if( exists $self->duration->{min} ) {
             $self->DurationMinEnabled( 1 );
-            $self->DurationMin( $icfg->{duration}->{min} );
+            $self->DurationMin( $self->duration->{min} );
         }
-        if( exists $icfg->{duration}->{max} ) {
+        if( exists $self->duration->{max} ) {
             $self->DurationMaxEnabled( 1 );
-            $self->DurationMax( $icfg->{duration}->{max} );
+            $self->DurationMax( $self->duration->{max} );
         }
     }
     

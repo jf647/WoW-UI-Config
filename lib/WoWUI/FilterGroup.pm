@@ -9,6 +9,7 @@ use MooseX::StrictConstructor;
 use namespace::autoclean;
 
 # set up class
+has config => ( is => 'ro', isa => 'HashRef' );
 has name => ( is => 'rw', isa => 'Str', required => 1 );
 has filter => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
 has members => ( is => 'rw', isa => 'Set::Scalar' );
@@ -21,12 +22,11 @@ sub BUILD
 {
 
     my $self = shift;
-    my $config = $_[0]->{config};
     
-    if( exists $config->{filter} ) {
-        $self->filter( $config->{filter} );
+    if( exists $self->config->{filter} ) {
+        $self->filter( $self->config->{filter} );
     }
-    $self->members( Set::Scalar->new( @{ $config->{members} } ) );
+    $self->members( Set::Scalar->new( @{ $self->config->{members} } ) );
     
 }
 

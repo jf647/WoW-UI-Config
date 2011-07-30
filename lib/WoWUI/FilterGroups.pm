@@ -9,6 +9,7 @@ use MooseX::StrictConstructor;
 use namespace::autoclean;
 
 # set up class
+has [ qw|filtergroups things| ] => ( is => 'ro', isa=> 'HashRef' );
 has groups => (
     is => 'bare',
     isa => 'HashRef[WoWUI::FilterGroup]',
@@ -43,18 +44,15 @@ sub BUILD
 {
 
     my $self = shift;
-    my $a = shift;
-    my $fgs = $a->{filtergroups};
-    my $things = $a->{things};    
-    for my $fgname( keys %$fgs ) {
+    for my $fgname( keys %{ $self->filtergroups } ) {
         my $fg = WoWUI::FilterGroup->new(
             name => $fgname,
-            config => $fgs->{$fgname},
+            config => $self->filtergroups->{$fgname},
         );
         $self->group_set( $fgname, $fg );
     }
 
-    $self->validate( $things );
+    $self->validate( $self->things );
 
 }
 

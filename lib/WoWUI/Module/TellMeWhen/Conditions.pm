@@ -9,16 +9,17 @@ use MooseX::StrictConstructor;
 use namespace::autoclean;
 
 # set up class
+has config => ( is => 'ro', isa => 'HashRef' );
 has conditions => (
     is => 'bare',
     isa => 'HashRef[WoWUI::Module::TellMeWhen::Condition]',
     traits => ['Hash'],
     default => sub { {} },
     handles => {
-        cond_get => 'get',
-        cond_set => 'set',
-        cond_keys => 'keys',
-        cond_values => 'values',
+        get => 'get',
+        set => 'set',
+        names => 'keys',
+        conditions => 'values',
     },
 );
 has anoncount => (
@@ -38,17 +39,16 @@ sub BUILD
 {
 
     my $self = shift;
-    my $a = shift;
 
-    for my $cname( keys %{ $a->{config}->{conditions} } ) {
-        $a->{config}->{conditions}->{$cname}->{tag} = $cname;
-        unless( exists $a->{config}->{conditions}->{$cname}->{Name} ) {
-            $a->{config}->{conditions}->{$cname}->{Name} = $cname;
+    for my $cname( keys %{ $self->config->{conditions} } ) {
+        $self->config->{conditions}->{$cname}->{tag} = $cname;
+        unless( exists $self->config->{conditions}->{$cname}->{Name} ) {
+            $self->config->{conditions}->{$cname}->{Name} = $cname;
         }
         my $c = WoWUI::Module::TellMeWhen::Condition->new(
-            %{ $a->{config}->{conditions}->{$cname} }
+            %{ $self->config->{conditions}->{$cname} }
         );
-        $self->cond_set( $cname, $c );
+        $self->set( $cname, $c );
     }
 
 }

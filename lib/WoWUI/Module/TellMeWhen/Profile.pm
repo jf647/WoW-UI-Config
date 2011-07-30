@@ -11,6 +11,7 @@ use namespace::autoclean;
 # set up class
 use WoWUI::Meta::Attribute::Trait::Relevant;
 with 'WoWUI::Module::TellMeWhen::Dumpable';
+has config => ( is => 'ro', isa => 'HashRef' );
 has char => ( is => 'rw', isa => 'WoWUI::Char', required => 1 );
 has modoptions => ( is => 'rw', isa => 'HashRef', required => 1 );
 has nextgrouppos => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen::Point' );
