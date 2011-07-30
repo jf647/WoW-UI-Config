@@ -61,10 +61,9 @@ sub augment_perchar
     my $char = shift;
     my $f = shift;
 
-    my $log = WoWUI::Util->log;
-    my $config = $self->config;
-
     for my $specnum( 1, 2 )  {
+
+        my $profile;
 
         # do they have this spec?
         my $spec = $char->spec_get( $specnum );
@@ -82,146 +81,47 @@ sub augment_perchar
             $self->chardata->{specs}->[$specnum]->{name} = 'N/A';
             $using = F_CALL;
         }
-        my $all_settings = $self->get_all_settings( $f, $using );
-
-        # populate values for settings based on flags
-        my %values;
-        for my $setting( $all_settings->members ) {
-            if( exists $config->{settings}->{$setting}->{values} ) {
-                $log->debug("getting value for $setting");
-                my $value = $self->get_value(
-                    $char,
-                    $char->flags_get("spec${specnum}"),
-                    $config->{settings}->{$setting}->{values},
-                );
-                if( defined $value ) {
-                    $values{$setting} = $value;
-                }
-            }
-        }
-      
-      # expand the values for our settings
-      my $type = $self->machine->type;
-      for my $block( "values_common", "values_spec${specnum}", "values_spec${specnum}_${type}" ) {
-        if( exists $options->{$block} ) {
-          for my $setting( @{ $options->{$block} } ) {
-            for my $key( keys %$setting ) {
-              $values{$key} = $setting->{$key};
-            }
-          }
-        }
+        $profile->{$specnum} = $self->get_settings_and_values($f, $using);
       }
       
-      # every setting has to have a value or default
-      my %settings;
-      for my $setting( $all_settings->members ) {
-        $settings{$setting} = {
-          name => $setting,
-          type => $config->{settings}->{$setting}->{type},
-        };
-        if( exists $values{$setting} ) {
-          $log->trace("taking derived value for $setting: $values{$setting}");
-          $settings{$setting}->{value} = $values{$setting};
-        }
-        elsif( exists $config->{settings}->{$setting}->{mydefault} ) {
-          $log->trace("taking default value for $setting: $config->{settings}->{$setting}->{mydefault}");
-          $settings{$setting}->{value} = $config->{settings}->{$setting}->{mydefault};
-        }
-        elsif( exists $config->{settings}->{$setting}->{corkdefault} ) {
-          $log->trace("taking default value for $setting: $config->{settings}->{$setting}->{corkdefault}");
-          $settings{$setting}->{value} = $config->{settings}->{$setting}->{corkdefault};
-        }
-        else {
-          croak "no value or default for $setting for ", $char->rname;
-        }
-      }
-      
-      # remove settings with a default value
-      $self->remove_defaults( \%settings );
-
-      $chardata->{specs}->[$specnum]->{settings} = [ values %settings ];
+      $self->chardata = $profile;
       
     }
 
-    return $chardata;
-
 }
 
-sub get_all_settings
+sub get_all_settings_and_values
 {
 
     my $self = shift;
     my $f = shift;
     my $using = shift;
 
+    my $modoptions = $self->modoptions( $f->char );
+
     my $config = $self->config;
     my $log = WoWUI::Util->log;
 
     my $candidates = $self->filtergroups->candidates( $f, $using );
     $log->debug("candidates are $candidates");
+
+    my $profile;
  
-    my $settings = Set::Scalar->new;
     for my $setting( $candidates->members ) {
         $log->debug("considering $setting");
         # if there is no filter, then it's in
-        unless( exists $config->{settings}->{$setting}->{filter} ) {
-            $settings->insert($setting);
+        if( exists $config->{settings}->{$setting}->{filter} ) {
+          if( $f->match( $config->{settings}->{$setting}, $using );
+              $settings->insert($setting);
+          }
         }
-        if( $f->match( $config->{settings}->{$setting}, $using );
+        else {
             $settings->insert($setting);
         }
     }
     $log->debug("settings: $settings");
   
     return $settings;
-
-}
-
-sub remove_defaults
-{
-
-  my $self = shift;
-  my $settings = shift;
-
-  my $config = $self->config;
-
-  for my $setting( keys %$settings ) {
-    if( exists $config->{settings}->{$setting}->{corkdefault} ) {
-      if( 'number' eq $config->{settings}->{$setting}->{type} ) {
-        if( $settings->{$setting}->{value} == $config->{settings}->{$setting}->{corkdefault} ) {
-          delete $settings->{$setting};
-        }
-      }
-      else {
-        if( $settings->{$setting}->{value} eq $config->{settings}->{$setting}->{corkdefault} ) {
-          delete $settings->{$setting};
-        }
-      }
-    }
-  }
-
-}
-
-sub get_value
-{
-
-  my $self = shift;
-  my $char = shift;
-  my $flags = shift;
-  my $values = shift;
-
-  my $log = WoWUI::Util->log;
-  
-  my $value;
-  $log->trace("flags: $flags");
-  for my $v( @$values ) {
-    if( WoWUI::Util::Filter::matches( $flags, $char, $v ) ) {
-        $log->trace("matched value: $v->{value}");
-        $value = $v->{value};
-    }
-  }
-  
-  return $value;
 
 }
 
