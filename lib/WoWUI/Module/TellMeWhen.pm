@@ -20,7 +20,7 @@ has profileset => (
     isa => 'WoWUI::ProfileSet',
     default => sub { WoWUI::ProfileSet->new },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Clone 'clone';
@@ -63,7 +63,6 @@ use WoWUI::Module::TellMeWhen::Condition::Runes;
 # class attributes
 
 # constructor
-CLASS->name( 'tmw' );
 sub BUILD
 {
 

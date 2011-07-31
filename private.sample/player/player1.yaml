@@ -73,7 +73,7 @@ realms:
                             - Harrison's Insignia of Panache
                             - Mark of Khardros
                     npcscan: *npcscan
-                    tmw:
+                    tellmewhen:
                         rotation:
                             spec1:
                                 icon: DK Frost Rotation

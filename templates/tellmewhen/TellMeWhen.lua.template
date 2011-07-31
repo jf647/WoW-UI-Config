@@ -1,0 +1,22 @@
+
+TellMeWhenDB = {
+    ["global"] = {
+        ["SeenNewDurSyntax"] = 1,
+        ["WpnEnchDurs"] = 0,
+    },
+    ["Version"] = 44009,
+    ["profileKeys"] = {
+[% FOR realm IN realms.keys -%]
+[% FOR char IN realms.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = "[% realms.$realm.$char %]",
+[% END -%]
+[% END -%]
+    },
+    ["profiles"] = {
+[% FOR pname IN pset.profiles_list -%]
+        ["[% pname %]"] = {
+[% pset.profile_get(pname).lua %]
+        },
+[% END -%]
+    },
+}
