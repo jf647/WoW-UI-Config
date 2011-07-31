@@ -20,8 +20,10 @@ __PACKAGE__->meta->make_immutable;
 use Carp 'croak';
 use Set::Scalar;
 
+use Clone 'clone';
 use WoWUI::Config;
 use WoWUI::Filter::Constants;
+use WoWUI::FilterGroups;
 
 # constructor
 CLASS->name( 'cork' );
@@ -50,7 +52,6 @@ sub augment_global
 {
 
     my $self = shift;
-    $DB::single = 1;
     $self->globaldata( $self->modoptions );
 
 }
@@ -97,7 +98,7 @@ sub get_settings_and_values
     my $f = shift;
     my $using = shift;
 
-    my $modoptions = $self->modoptions( $f->char );
+    my $mo = $self->modoptions( $f->char );
 
     my $config = $self->config;
     my $log = WoWUI::Util->log;
@@ -109,7 +110,15 @@ sub get_settings_and_values
  
     for my $setting( $candidates->members ) {
         $log->debug("considering $setting");
-        if( my $r = $f->match( $config->{settings}->{$setting}->{filter}, $using ) ) {
+        my $filter = $config->{settings}->{$setting}->{filter};
+        if( exists $mo->{filters} && exists $mo->{filters}->{$setting} ) {
+            $filter = clone $filter;
+            unshift @$filter, @{ $mo->{filters}->{$setting} };
+        }
+        if( my $r = $f->match( $filter, $using ) ) {
+            unless( defined $r->value ) {
+                croak "match but no value for ", $f->char->rname, "; setting $setting";
+            }
             $profile{$setting} = {
                 name => $setting,
                 value => $r->value,

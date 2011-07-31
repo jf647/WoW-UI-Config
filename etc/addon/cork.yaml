@@ -159,6 +159,7 @@ settings:
   Armor-spell:
     filter:
     - level: 34
+      value: Molten Armor
     - include:
       - spec:Arcane
       level: 80
@@ -173,6 +174,8 @@ settings:
   Aspect-spell:
     level: 16
     type: string
+    filter:
+    - value: Aspect of the Hawk
   Aura-enabled:
     filter:
     - value: 0
@@ -182,6 +185,7 @@ settings:
   Aura-spell:
     filter:
     - level: 5
+      value: Devotion Aura
     - include:
       - spec:Retribution
       level: 26
@@ -456,6 +460,10 @@ settings:
   Summon demon-enabled:
     filter:
     - value: 1
+      exclude:
+      - banker
+      - mule
+    - value: 0
     type: boolean
   Summon demon-spell:
     filter:
