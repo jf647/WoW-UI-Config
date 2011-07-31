@@ -4,8 +4,8 @@ modoptions:
     enabled: 1
 templates:
     perchar:
-        clt:
-            input: $TEMPLATEDIR/clt/CombatLogTrigger.lua.template
+        combatlogtrigger:
+            input: $TEMPLATEDIR/combatlogtrigger/CombatLogTrigger.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/CombatLogTrigger.lua
 perchar_filter:
     addons:

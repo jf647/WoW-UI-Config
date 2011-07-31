@@ -6,11 +6,12 @@ package WoWUI::Module::CombatLogTrigger;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Clone 'clone';
@@ -28,8 +29,7 @@ my %groupmask = (
 );
 
 # class attributes
-__PACKAGE__->name( 'clt' );
-__PACKAGE__->perchar( 1 );
+CLASS->perchar( 1 );
 
 sub augment_chardata
 {
@@ -40,7 +40,7 @@ sub augment_chardata
   my $log = WoWUI::Util->log;
 
   my $config = $self->config;
-  my $o = $char->modoption_get('clt');
+  my $o = $char->modoption_get( $char );
 
   my $chardata = { realm => $char->realm->name, char => $char->name, enabled => $o->{enabled}, debug => $o->{debug} };
   
