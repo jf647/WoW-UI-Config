@@ -23,7 +23,7 @@ modules:
     - WoWUI::Module::tif
     - WoWUI::Module::Clique
     - WoWUI::Module::Cork
-#    - WoWUI::Module::Raven
+    - WoWUI::Module::Raven
 #    - WoWUI::Module::CombatLogTrigger
 #    - WoWUI::Module::Digits
 #    - WoWUI::Module::TrinketMenu

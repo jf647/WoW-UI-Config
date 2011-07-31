@@ -11,6 +11,11 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
+has profileset => (
+    is => 'rw',
+    isa => 'WoWUI::ProfileSet',
+    default => sub { WoWUI::ProfileSet->new },
+);
 CLASS->meta->make_immutable;
 
 use WoWUI::Config;
@@ -23,42 +28,42 @@ sub BUILD
     my $self = shift;
     
     $self->global( 1 );
+    $self->globalpc( 1 );
+    $self->globaldata_set( chars => {} );
     
     return $self;
     
 }
 
-sub augment_data
+sub augment_global
 {
 
     my $self = shift;
 
+    $self->globaldata_set( pset => $self->profileset );
+
+}
+
+sub augment_globalpc
+{
+
+    my $self = shift;
+    my $char = shift;
+
     my $config = $self->config;
-    my $o = $self->modoptions;
+    my $o = $self->modoptions( $char );
 
-    my $log = WoWUI::Util->log;
-
-    my $data = { raven => $o };
-
-    # per-char settings
-    for my $realm( $self->player->realms ) {
-        $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars ) {
-
-            if( exists $config->{perchar_criteria} ) {
-                next unless( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{perchar_criteria} ) );
-            }
-
-            $data->{raven}->{realms}->{$realm->name}->{$char->name} = {};
-
-            if( exists $config->{icbuffs}->{$char->class} ) {
-                $data->{raven}->{realms}->{$realm->name}->{$char->name}->{icbuffs} =  $config->{icbuffs}->{$char->class};
-            }
-            
-        }
+    my $profile = {
+        debuffs => $o->{debuffs},
+        shortbuffs => $o->{shortbuffs},
+        longbuffs => $o->{longbuffs},
+        ic => $o->{ic},
+    };
+    if( exists $config->{icbuffs}->{$char->class} ) {
+         $profile->{icbuffs} = $config->{icbuffs}->{$char->class};
     }
-
-    return $data;
+    my $pname = $self->profileset->store( $profile, $char->class );
+    $self->globaldata_get( 'chars' )->{$char->dname} = $pname;
 
 }
 

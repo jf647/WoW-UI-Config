@@ -21,6 +21,9 @@ has globaldata => (
     default => sub { {} },
     handles => {
         has_globaldata => 'count',
+        globaldata_exists => 'exists',
+        globaldata_set => 'set',
+        globaldata_get => 'get',
     },
 );
 has perchardata => (

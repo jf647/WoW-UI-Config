@@ -111,7 +111,6 @@ sub process_machine
         for my $modname( @{ $cfg->{modules} } ) {
             $log->info("processing module $modname");
             my $module = WoWUI::Modules->instance->module_get($modname);
-            $DB::single = 1;
             $module->machine( $machine );
             $module->player( $player );
             $module->process;
