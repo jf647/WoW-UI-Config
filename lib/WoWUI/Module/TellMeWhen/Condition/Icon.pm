@@ -6,12 +6,13 @@ package WoWUI::Module::TellMeWhen::Condition::Icon;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::TellMeWhen::Condition';
 has '+Type' => ( default => 'ICON' );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # constructor
 sub BUILD

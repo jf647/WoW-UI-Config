@@ -15,7 +15,7 @@ has filtergroups => (
     is => 'rw',
     isa => 'WoWUI::FilterGroups',
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Set::Scalar;
@@ -26,7 +26,6 @@ use WoWUI::Filter::Constants;
 use WoWUI::FilterGroups;
 
 # constructor
-CLASS->name( 'cork' );
 sub BUILD
 {
 

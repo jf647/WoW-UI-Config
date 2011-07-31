@@ -6,13 +6,14 @@ package WoWUI::Module::ChocolateBar;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
 has 'plugins' => ( is => 'rw', isa => 'HashRef' );
 has 'all_plugins' => ( is => 'rw', isa => 'Object' );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Clone qw|clone|;
 use Carp 'croak';
@@ -22,8 +23,7 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # class attributes
-__PACKAGE__->name( 'chocolatebar' );
-__PACKAGE__->global( 1 );
+CLASS->global( 1 );
 
 # constructor
 sub BUILD {

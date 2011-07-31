@@ -6,6 +6,7 @@ package WoWUI::Module::NPCScan;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -21,7 +22,7 @@ has 'sets' => (
     set_list => 'keys',
   },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Set::Scalar;
@@ -30,8 +31,7 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # class attributes
-__PACKAGE__->name( 'npcscan' );
-__PACKAGE__->perchar( 1 );
+CLASS->perchar( 1 );
 
 # constructor
 sub BUILD

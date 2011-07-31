@@ -6,12 +6,13 @@ package WoWUI::Module::TrinketMenu;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
 has [ 'trinkets' ] => ( is => 'rw', isa => 'HashRef' );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Text::Balanced qw|extract_bracketed|;
@@ -21,8 +22,7 @@ use WoWUI::Config;
 use WoWUI::Util qw|load_file dump_file expand_path log|;
 
 # class attributes
-__PACKAGE__->name( 'trinketmenu' );
-__PACKAGE__->perchar( 1 );
+CLASS->perchar( 1 );
 
 # constructor
 sub BUILD

@@ -6,11 +6,12 @@ package WoWUI::Module::TurnIn;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 
@@ -18,8 +19,7 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # class attributes
-__PACKAGE__->name( 'turnin' );
-__PACKAGE__->global( 1 );
+CLASS->global( 1 );
 
 sub augment_data
 {

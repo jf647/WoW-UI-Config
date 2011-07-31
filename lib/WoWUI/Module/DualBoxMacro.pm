@@ -6,11 +6,12 @@ package WoWUI::Module::DualBoxMacro;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 
@@ -18,8 +19,7 @@ use WoWUI::Config;
 use WoWUI::Util qw|tt expand_path log|;
 
 # class attributes
-__PACKAGE__->name( 'dualboxmacro' );
-__PACKAGE__->perchar( 1 );
+CLASS->perchar( 1 );
 
 # constructor
 sub BUILD {

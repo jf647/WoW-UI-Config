@@ -6,6 +6,7 @@ package WoWUI::Char;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -59,7 +60,7 @@ has flags => (
 );
 has addons => ( is => 'rw', isa => 'Set::Scalar' );
 around flags_get => \&around_flags_get;
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Set::Scalar;

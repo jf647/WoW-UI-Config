@@ -6,6 +6,7 @@ package WoWUI::Player;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -25,7 +26,7 @@ has realms => (
         realms => 'values',
     },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Path::Class qw|dir file|;

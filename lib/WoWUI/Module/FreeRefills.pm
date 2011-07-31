@@ -6,11 +6,12 @@ package WoWUI::Module::FreeRefills;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Clone 'clone';
 use Carp 'croak';
@@ -19,8 +20,7 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-__PACKAGE__->name( 'freerefills' );
-__PACKAGE__->global( 1 );
+CLASS->global( 1 );
 
 sub augment_data
 {

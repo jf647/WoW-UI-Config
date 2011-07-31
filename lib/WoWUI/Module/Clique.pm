@@ -20,7 +20,7 @@ has profileset => (
     isa => 'WoWUI::ProfileSet',
     default => sub { WoWUI::ProfileSet->new },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Clone 'clone';
 use Carp 'croak';
@@ -30,7 +30,6 @@ use WoWUI::Util 'log';
 use WoWUI::Filter::Constants;
 
 # constructor
-CLASS->name( 'clique' );
 sub BUILD
 {
 

@@ -6,6 +6,7 @@ package WoWUI::FilterGroups;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -22,7 +23,7 @@ has groups => (
         groups_values => 'values',
     },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use WoWUI::FilterGroup;
 

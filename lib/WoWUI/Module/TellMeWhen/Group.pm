@@ -6,6 +6,7 @@ package WoWUI::Module::TellMeWhen::Group;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -71,7 +72,7 @@ has Conditions => (
         cond_count => 'count',
     },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 

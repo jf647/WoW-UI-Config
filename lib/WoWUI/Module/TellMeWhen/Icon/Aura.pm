@@ -6,6 +6,7 @@ package WoWUI::Module::TellMeWhen::Icon::Aura;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -23,7 +24,7 @@ has [ qw|
 | ] => ( relevant => 1 );
 with 'WoWUI::Module::TellMeWhen::Icon::SpellName';
 with 'WoWUI::Module::TellMeWhen::Icon::Present';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # constructor
 sub BUILD

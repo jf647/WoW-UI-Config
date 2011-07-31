@@ -6,6 +6,7 @@ package WoWUI::Module::TellMeWhen::Icon::Cooldown;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -22,25 +23,27 @@ has [ qw|
     +OnlyInBags +PBarOffs +RangeCheck
     +ShowPBar
 | ] => ( relevant => 1 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 package WoWUI::Module::TellMeWhen::Icon::Cooldown::ShortCD;
 use Moose;
 
+use CLASS;
 use namespace::autoclean;
 
 extends 'WoWUI::Module::TellMeWhen::Icon::Cooldown';
 with 'WoWUI::Module::TellMeWhen::Icon::Priority::ShortCD';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 package WoWUI::Module::TellMeWhen::Icon::Cooldown::LongCD;
 use Moose;
 
+use CLASS;
 use namespace::autoclean;
 
 extends 'WoWUI::Module::TellMeWhen::Icon::Cooldown';
 with 'WoWUI::Module::TellMeWhen::Icon::Priority::LongCD';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # keep require happy
 1;

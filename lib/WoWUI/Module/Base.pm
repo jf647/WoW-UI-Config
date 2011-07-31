@@ -37,7 +37,7 @@ has perchardata => (
 has config => ( is => 'rw', isa => 'HashRef' );
 has player => ( is => 'rw', isa => 'WoWUI::Player' );
 has machine => ( is => 'rw', isa => 'WoWUI::Machine' );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Hash::Merge::Simple 'merge';

@@ -13,10 +13,9 @@ use Carp 'croak';
 
 # set up class
 extends 'WoWUI::Module::Base';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # constructor
-CLASS->name( 'tif' );
 sub BUILD
 {
 

@@ -6,6 +6,7 @@ package WoWUI::Module::TellMeWhen::Icons;
 use MooseX::Singleton;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -22,8 +23,6 @@ has icons => (
         icons_values => 'values',
     },
 );
-# causes problems - build is never called with 0.27 of MooseX::Singleton
-#__PACKAGE__->meta->make_immutable;
 
 use Carp 'croak';
 

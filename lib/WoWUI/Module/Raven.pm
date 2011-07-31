@@ -6,18 +6,18 @@ package WoWUI::Module::Raven;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # class attributes
-__PACKAGE__->name( 'raven' );
-__PACKAGE__->global( 1 );
+CLASS->global( 1 );
 
 sub augment_data
 {

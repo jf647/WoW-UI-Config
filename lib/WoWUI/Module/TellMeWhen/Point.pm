@@ -6,6 +6,7 @@ package WoWUI::Module::TellMeWhen::Point;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -15,7 +16,7 @@ has [ qw|point relativePoint| ] => ( is => 'rw', isa => 'Str', default => 'CENTE
 has [ qw|relativeTo| ] => ( is => 'rw', isa => 'Str', default => 'UIParent', traits => ['Relevant'], relevant => 1 );
 has x => ( is => 'rw', isa => 'Num', default => 0, traits => ['Relevant'], relevant => 1 );
 has y => ( is => 'rw', isa => 'Num', default => 0, traits => ['Number','Relevant'], handles => { y_down => 'sub' }, relevant => 1 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # the Dumpable role requires that we provide this
 sub augment_lua { "" }

@@ -6,6 +6,7 @@ package WoWUI::Module::TellMeWhen::Event;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -17,7 +18,7 @@ has Icon => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], r
 has Size => ( is => 'rw', isa => 'Num', default => 0, traits => ['Relevant'], relevant => 1 );
 has [ qw|Text Channel Location| ] => ( is => 'rw', isa => 'Str', default => '', traits => ['Relevant'], relevant => 1 );
 has [ qw|r g b| ] => ( is => 'rw', isa => 'Num', default => 1, traits => ['Relevant'], relevant => 1 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # the Dumpable role requires that we provide this
 sub augment_lua { "" }

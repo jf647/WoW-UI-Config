@@ -6,6 +6,7 @@ package WoWUI::Filter;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -24,7 +25,7 @@ has cache => (
         flags_exists => 'exists',
     },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Set::Scalar;

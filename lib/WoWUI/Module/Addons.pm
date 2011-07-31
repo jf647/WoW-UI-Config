@@ -38,7 +38,7 @@ has 'class_sets' => (
     class_count => 'count',
   },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Set::Scalar;

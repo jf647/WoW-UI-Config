@@ -6,6 +6,7 @@ package WoWUI::Module::TellMeWhen::Condition;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -28,7 +29,7 @@ has Runes => (
     traits => ['Relevant'],
     relevant => 1,
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # constructor
 sub BUILDARGS

@@ -6,11 +6,12 @@ package WoWUI::Module::Kong;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Set::Scalar;
@@ -19,9 +20,8 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # class attributes
-__PACKAGE__->name( 'kong' );
-__PACKAGE__->global( 1 );
-__PACKAGE__->perchar( 1 );
+CLASS->global( 1 );
+CLASS->perchar( 1 );
 
 sub augment_data
 {

@@ -6,18 +6,18 @@ package WoWUI::Module::DeadlyBossMods;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # class attributes
-__PACKAGE__->name( 'deadlybossmods' );
-__PACKAGE__->perchar( 1 );
+CLASS->perchar( 1 );
 
 # keep require happy
 1;
