@@ -6,6 +6,7 @@ package WoWUI::Machine;
 use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -27,7 +28,7 @@ has players => (
         players => 'values',
     },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Set::Scalar;
@@ -37,22 +38,6 @@ use WoWUI::Players;
 use WoWUI::Util qw|log load_file expand_path|;
 
 # constructor
-sub BUILDARGS
-{
-
-    my $class = shift;
-    my $machname = shift;
-    my $playernames = shift;
-
-    # expand players
-    my %players;
-    for my $playername( @$playernames ) {
-        my $player = WoWUI::Players->instance->player_get( $playername );
-        $players{$playername} = $player;
-    }
-    return { name => $machname, players => \%players };
-
-}
 sub BUILD
 {
 
@@ -63,11 +48,17 @@ sub BUILD
     $log->debug("creating machine object for ", $self->name);
 
     # load our machine config file
-    my $machinefile = expand_path( $config->{dirs}->{machinedir} )->file( $self->name . '.yaml' );
+    my $machinefile = $self->machinefile( $self->name );
     unless( -f $machinefile ) {
         croak "no such machine file $machinefile";
     }
     my $cfg = load_file( $machinefile );
+
+    # vivify our players
+    for my $playername( @{ $cfg->{players} } ) {
+        my $player = WoWUI::Players->instance->player_get( $playername );
+        $self->player_set( $playername, $player );
+    }
 
     # set our various options
     $self->modoptions_set( $cfg );
@@ -86,6 +77,17 @@ sub BUILD
     return $self;
 
 }   
+
+sub machinefile
+{
+
+    my $class = shift;
+    my $machname = shift;
+    
+    my $config = WoWUI::Config->instance->cfg;
+    return expand_path( $config->{dirs}->{machinedir} )->file( $machname . '.yaml' );
+
+}
 
 # keep require happy
 1;

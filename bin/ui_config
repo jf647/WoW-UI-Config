@@ -67,9 +67,6 @@ $log->info('START');
 
 eval {
 
-    # create a machines object
-    my $machines = WoWUI::Machines->initialize( $o{machinesfile} );
-
     # execute our main loop for each machine requested
     for my $machname( @machines ) {
         process_machine( $machname );
@@ -101,10 +98,10 @@ sub process_machine
 
     # make sure our output is writeable
     unless( -w $machine->output->parent ) {
-      die "can't write to ", $machine->output->parent;
+        die "can't write to ", $machine->output->parent;
     }
     if( -f $machine->output && ! -w $machine->output ) {
-      die "can't write to ", $machine->output;
+        die "can't write to ", $machine->output;
     }
     
     # iterate over players
@@ -114,6 +111,7 @@ sub process_machine
         for my $modname( @{ $cfg->{modules} } ) {
             $log->info("processing module $modname");
             my $module = WoWUI::Modules->instance->module_get($modname);
+            $DB::single = 1;
             $module->machine( $machine );
             $module->player( $player );
             $module->process;

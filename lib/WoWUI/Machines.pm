@@ -10,8 +10,6 @@ use Carp 'croak';
 use namespace::autoclean;
 
 # set up class
-has file => ( is => 'rw', isa => 'Str' );
-has cfg => ( is => 'rw', isa => 'HashRef' );
 has machines => (
   is => 'bare',
   isa => 'HashRef[WoWUI::Machine]',
@@ -29,32 +27,12 @@ before machine_get => sub {
     my $self = shift;
     my $machname = shift;
     return if( $self->machine_exists( $machname ) );
-    unless( exists $self->cfg->{$machname} ) {
-        croak "no such machine '$machname'";
-    }
-    my $machine = WoWUI::Machine->new( $machname, $self->cfg->{$machname}->{players} );
+    my $machine = WoWUI::Machine->new( name => $machname );
     $self->machine_set( $machname, $machine );
 };
 
 use WoWUI::Util qw|log expand_path load_file|;
 use WoWUI::Machine;
-
-# constructor
-sub BUILDARGS
-{
-
-    my $class = shift;
-    return { file => shift };
-
-}
-sub BUILD
-{
-
-    my $self = shift;
-    $self->cfg( load_file( expand_path( $self->file ) ) );
-    return $self;
-  
-}   
 
 # keep require happy
 1;

@@ -1,5 +1,7 @@
 ---
 output: $OUTPUTDIR/machine1_wowui.zip
+players:
+    - player1
 types:
     - dualbox_master
     - primary
