@@ -18,8 +18,17 @@ use Carp 'croak';
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# class attributes
-CLASS->global( 1 );
+# constructor
+sub BUILD
+{
+
+    my $self = shift;
+    
+    $self->global( 1 );
+    
+    return $self;
+    
+}
 
 sub augment_data
 {

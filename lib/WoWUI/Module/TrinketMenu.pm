@@ -21,14 +21,13 @@ use Set::Scalar;
 use WoWUI::Config;
 use WoWUI::Util qw|load_file dump_file expand_path log|;
 
-# class attributes
-CLASS->perchar( 1 );
-
 # constructor
 sub BUILD
 {
 
   my $self = shift;
+  
+  $self->perchar( 1 );
 
   $self->load_trinket_cache();
 

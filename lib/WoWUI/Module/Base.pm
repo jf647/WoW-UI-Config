@@ -5,14 +5,14 @@
 package WoWUI::Module::Base;
 use Moose;
 use MooseX::ABC;
-use MooseX::ClassAttribute;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 with 'WoWUI::ModOptions';
-class_has name => ( is => 'rw', isa => 'Str' );
+has name => ( is => 'rw', isa => 'Str' );
 has [ qw|global globalpc perchar| ] => ( is => 'rw', isa => 'Bool', default => 0 );
 has globaldata => (
     is => 'rw',
@@ -53,7 +53,10 @@ sub BUILD
     my $self = shift;
 
     my $gcfg = WoWUI::Config->instance->cfg;
-    $self->config( load_layered( $self->name . '.yaml', '$ADDONCONFDIR', '$PRIVADDONCONFDIR' ) );
+    my $name = lc( ref $self );
+    $name =~ s/^wowui::module:://;
+    $self->name( $name );
+    $self->config( load_layered( "$name.yaml", '$ADDONCONFDIR', '$PRIVADDONCONFDIR' ) );
 
     if( exists $self->config->{modoptions} ) {
         $self->modoptions_set( { modoptions => { $self->name => $self->config->{modoptions} } } );

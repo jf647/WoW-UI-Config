@@ -17,7 +17,16 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-CLASS->perchar( 1 );
+sub BUILD
+{
+
+    my $self = shift;
+    
+    $self->perchar( 1 );
+    
+    return $self;
+    
+}
 
 # keep require happy
 1;

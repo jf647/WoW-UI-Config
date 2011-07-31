@@ -13,8 +13,17 @@ use namespace::autoclean;
 extends 'WoWUI::Module::Base';
 CLASS->meta->make_immutable;
 
-# class attributes
-CLASS->perchar( 1 );
+# constructor
+sub BUILD
+{
+
+    my $self = shift;
+    
+    $self->perchar( 1 );
+    
+    return $self;
+
+}
 
 sub augment_chardata
 {

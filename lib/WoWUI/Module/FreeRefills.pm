@@ -20,7 +20,16 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-CLASS->global( 1 );
+sub BUILD
+{
+
+    my $self = shift;
+    
+    $self->global( 1 );
+    
+    return $self;
+    
+}
 
 sub augment_data
 {

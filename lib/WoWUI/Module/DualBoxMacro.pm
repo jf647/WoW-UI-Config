@@ -18,13 +18,12 @@ use Carp 'croak';
 use WoWUI::Config;
 use WoWUI::Util qw|tt expand_path log|;
 
-# class attributes
-CLASS->perchar( 1 );
-
 # constructor
 sub BUILD {
 
     my $self = shift;
+    
+    $self->perchar( 1 );
     
     WoWUI::Util::Filter::check_filter_groups( $config->{buttongroups}, $config->{buttons}, 'buttons' );
     

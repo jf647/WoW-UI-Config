@@ -28,8 +28,16 @@ my %groupmask = (
     'arena' => 0x10,
 );
 
-# class attributes
-CLASS->perchar( 1 );
+sub BUILD
+{
+
+    my $self = shift;
+
+    $self->perchar( 1 );
+    
+    return $self;
+
+}
 
 sub augment_chardata
 {

@@ -22,13 +22,12 @@ use Set::Scalar;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# class attributes
-CLASS->global( 1 );
-
 # constructor
 sub BUILD {
 
     my $self = shift;
+    
+    $self->global( 1 );
 
     $self->augment_config;
     $self->build_plugin_list();

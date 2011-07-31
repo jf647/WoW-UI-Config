@@ -30,14 +30,13 @@ use Set::Scalar;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# class attributes
-CLASS->perchar( 1 );
-
 # constructor
 sub BUILD
 {
 
     my $self = shift;
+    
+    $self->perchar( 1 );
     
     my $config = $self->config;
 

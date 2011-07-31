@@ -16,8 +16,17 @@ CLASS->meta->make_immutable;
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
-# class attributes
-CLASS->perchar( 1 );
+# constructor
+sub BUILD
+{
+
+    my $self = shift;
+    
+    $self->perchar( 1 );
+    
+    return $self;
+
+}
 
 sub augment_chardata
 {

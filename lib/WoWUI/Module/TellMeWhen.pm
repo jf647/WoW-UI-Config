@@ -60,8 +60,6 @@ use WoWUI::Module::TellMeWhen::Condition;
 use WoWUI::Module::TellMeWhen::Condition::Icon;
 use WoWUI::Module::TellMeWhen::Condition::Runes;
 
-# class attributes
-
 # constructor
 sub BUILD
 {

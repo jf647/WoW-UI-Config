@@ -47,7 +47,6 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-CLASS->name( 'addons' );
 sub BUILD
 {
 

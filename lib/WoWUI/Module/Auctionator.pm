@@ -13,12 +13,12 @@ use namespace::autoclean;
 extends 'WoWUI::Module::Base';
 CLASS->meta->make_immutable;
 
-# class attributes
+# constructor
 sub BUILD
 {
 
     my $self = shift;
-    $self->name( 'auctionator' );
+
     $self->perchar( 1 );
     
     return $self;
