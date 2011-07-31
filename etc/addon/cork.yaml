@@ -54,7 +54,6 @@ filtergroups:
     members:
     - Aspect-spell
     - Aspect-enabled
-    - Pet Happiness-enabled
   mage:
     filter:
       include:
@@ -211,10 +210,15 @@ settings:
       value: 1
     type: boolean
   Bone Shield-enabled:
-    mydefault: 0
+    filter:
+    - value: 0
+    - include:
+      - spec:Blood
+      value: 1
     type: boolean
   Combine-enabled:
     filter:
+    - value: 1
     - exclude:
       - prof:Leatherworking
       include:
@@ -229,6 +233,8 @@ settings:
     type: boolean
   Crates-enabled:
     type: boolean
+    filter:
+    - value: 1
   Crusader Aura-enabled:
     filter:
     - value: 0
@@ -469,14 +475,12 @@ settings:
     type: string
   Talents-enabled:
     filter:
+    - value: 1
     - value: 0
-    - exclude:
-      - banker
-      - mule
       include:
-      - leveling
-      level: 10
-      value: 1
+        - levelcap
+        - banker
+        - mule
     type: boolean
   Temp Enchant Main Hand-enabled:
     filter:

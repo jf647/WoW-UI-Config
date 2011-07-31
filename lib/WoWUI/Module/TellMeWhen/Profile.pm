@@ -253,7 +253,7 @@ sub populate
     if( exists $self->modoptions->{rotation} ) {
         for my $spec( qw|1 2| ) {
             if( my $r = $self->modoptions->{rotation}->{"spec$spec"} ) {
-                my $group = WoWUI::Module::TellMeWhen::Group::Rotation->new;
+                my $group = WoWUI::Module::TellMeWhen::Group::Rotation->new( modoptions => $self->modoptions );
                 $group->populate( $self, $spec, $r );
             }
         }

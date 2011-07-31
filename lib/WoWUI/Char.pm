@@ -9,7 +9,7 @@ use MooseX::StrictConstructor;
 use namespace::autoclean;
 
 # set up class
-with 'WoWUI::Module::ModOptions';
+with 'WoWUI::ModOptions';
 has realm => ( is => 'rw', isa => 'WoWUI::Realm', required => 1 );
 has level => ( is => 'rw', isa => 'Int' );
 has cfg => ( is => 'rw', isa => 'HashRef' );
@@ -73,9 +73,7 @@ sub BUILD
   $self->dirname( $self->cfg->{dirname} || $self->name );
 
   # module options
-  for my $mod( keys %{ $self->cfg->{modoptions} } ) {
-    $self->modoption_set( $mod, $self->cfg->{modoptions}->{$mod} );
-  }
+  $self->modoptions_set( $self->cfg );
 
   # flag sets
   $self->flags_set( 0 => Set::Scalar->new );

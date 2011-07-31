@@ -22,7 +22,7 @@ modules:
     - WoWUI::Module::TellMeWhen
     - WoWUI::Module::tif
     - WoWUI::Module::Clique
-#    - WoWUI::Module::Cork
+    - WoWUI::Module::Cork
 #    - WoWUI::Module::Raven
 #    - WoWUI::Module::CombatLogTrigger
 #    - WoWUI::Module::Digits

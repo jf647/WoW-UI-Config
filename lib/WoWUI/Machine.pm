@@ -9,7 +9,7 @@ use MooseX::StrictConstructor;
 use namespace::autoclean;
 
 # set up class
-with 'WoWUI::Module::ModOptions';
+with 'WoWUI::ModOptions';
 has name => ( is => 'rw', isa => 'Str', required => 1 );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
 has types => ( is => 'rw', isa => 'ArrayRef[Str]' );
@@ -70,9 +70,7 @@ sub BUILD
     my $cfg = load_file( $machinefile );
 
     # set our various options
-    for my $mod( keys %{ $cfg->{modoptions} } ) {
-        $self->modoption_set( $mod, $cfg->{modoptions}->{$mod} );
-    }
+    $self->modoptions_set( $cfg );
     $self->flags( Set::Scalar->new );
     $self->flags->insert('machine:name:'.$self->name);
     $self->output( expand_path( $cfg->{output} ) );

@@ -11,7 +11,7 @@ use MooseX::StrictConstructor;
 use namespace::autoclean;
 
 # set up class
-with 'WoWUI::Module::ModOptions';
+with 'WoWUI::ModOptions';
 class_has name => ( is => 'rw', isa => 'Str' );
 has [ qw|global globalpc perchar| ] => ( is => 'rw', isa => 'Bool', default => 0 );
 has globaldata => (
@@ -55,7 +55,9 @@ sub BUILD
     my $gcfg = WoWUI::Config->instance->cfg;
     $self->config( load_layered( $self->name . '.yaml', '$ADDONCONFDIR', '$PRIVADDONCONFDIR' ) );
 
-    $self->modoption_set( $self->name, $self->config->{modoptions} );
+    if( exists $self->config->{modoptions} ) {
+        $self->modoptions_set( { modoptions => { $self->name => $self->config->{modoptions} } } );
+    }
 
     return $self;
   
@@ -77,7 +79,7 @@ sub modoptions
     }
     for my $thing( @things ) {
         if( $thing->modoption_exists( $self->name ) ) {
-            $options = merge( $options, $self->modoption_get( $self->name ) );
+            $options = merge( $options, $thing->modoption_get( $self->name ) );
         }
     }
     

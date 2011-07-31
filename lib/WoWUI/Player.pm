@@ -9,7 +9,7 @@ use MooseX::StrictConstructor;
 use namespace::autoclean;
 
 # set up class
-with 'WoWUI::Module::ModOptions';
+with 'WoWUI::ModOptions';
 has name => ( is => 'rw', isa => 'Str', required => 1 );
 has account => ( is => 'rw', isa => 'Str' );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
@@ -54,9 +54,7 @@ sub BUILD
     my $log = WoWUI::Util->log;
     
     # set our various options
-    for my $mod( keys %{ $playercfg->{modoptions} } ) {
-        $self->modoption_set( $mod, $cfg->{modoptions}->{$mod} );
-    }
+    $self->modoptions_set( $cfg );
     $self->account( $playercfg->{account} );
     $self->flags( Set::Scalar->new );
     $self->flags->insert('player:name:'.$self->name);

@@ -57,29 +57,30 @@ sub match
     my $filters = shift;
     my $using = shift;
     my $extra = shift;
-    
+
+    my $r = WoWUI::Filter::Result->new;
+
     if( 'ARRAY' eq ref $filters ) {
-        my $result = WoWUI::Filter::Result->new;
         for my $filter( @$filters ) {
-            if( $self->matchone( $filter, $using, $extra ) ) {
-                $result->matched( 1 );
-                if( exists $filter->{value} ) {
-                    $result->value( $filter->{value} );
-                }
-                last if( $filter->{final} );
+            my $r2 = WoWUI::Filter::Result->new;
+            if( $self->matchone( $r2, $filter, $using, $extra ) ) {
+                $r = $r2;
+                last if( exists $filter->{final} );
             }
         }
-        return $result;
     }
     else {
-        return $self->matchone( $filters, $using, $extra );
+        $self->matchone( $r, $filters, $using, $extra );
     }
+    
+    return $r;
 
 }
 
 sub matchone
 {
     my $self = shift;
+    my $r = shift;
     my $filter = shift;
     my $using = shift;
     my $extra = shift;
@@ -174,7 +175,6 @@ sub matchone
     # check for an inclusion match
     my $include = $filter->{include} || [ 'everyone' ];
     my $exclude = $filter->{exclude};
-    my $matched = 0;
     my $noexclude = 0;
     if( $include ) {
         for my $match( @{ $include } ) {
@@ -183,20 +183,24 @@ sub matchone
                 $clauses->insert(split(/;/, $1));
                 $log->trace("all include filter: $clauses");
                 if( $clauses < $flags ) {
-                    $matched = 1, last;
+                    $r->matched( 1 );
+                    last;
                 }
             }
             elsif( $match =~ m/^noexall\((.+)\)$/ ) {
                 $clauses->insert(split(/;/, $1));
                 $log->trace("noexall include filter: $clauses");
                 if( $clauses < $flags ) {
-                    $matched = 1, $noexclude = 1, last;
+                    $r->matched( 1 );
+                    $noexclude = 1;
+                    last;
                 }
             }
             elsif( $match ) {
                 $log->trace("single include filter: $match");
                 if( $flags->contains( $match ) ) {
-                    $matched = 1, last;
+                    $r->matched( 1 );
+                    last;
                 }
             }
             else {
@@ -206,20 +210,22 @@ sub matchone
     }
 
     # check for an exclusion
-    if( $matched && 0 == $noexclude && $exclude ) {
+    if( $r->matched && 0 == $noexclude && $exclude ) {
         for my $match( @$exclude ) {
             my $clauses = Set::Scalar->new;
             if( $match =~ m/^all\((.+)\)$/ ) {
                 $clauses->insert(split(/;/, $1));
                 $log->trace("all exclude filter: $clauses");
                 if( $clauses < $flags ) {
-                    $matched = 0, last;
+                    $r->matched( 0 );
+                    last;
                 }
             }
             elsif( $match ) {
                 $log->trace("single exclude filter: $match");
                 if( $flags->contains( $match ) ) {
-                    $matched = 0, last;
+                    $r->matched( 0 );
+                    last;
                 }
             }
             else {
@@ -228,8 +234,13 @@ sub matchone
         }
     }
 
-    $log->trace("matched: $matched");
-    return WoWUI::Filter::Result->new( matched => $matched );
+    # populate our value
+    if( exists $filter->{value} ) {
+        $r->value( $filter->{value} );
+    }
+
+    $log->trace("matched: $r");
+    return $r;
     
 }
 
@@ -240,7 +251,12 @@ use MooseX::StrictConstructor;
 has matched => ( is => 'rw', isa => 'Bool', default => 0 );
 has value => ( is => 'rw' );
 
-use overload 'bool' => 'matched';
+sub _matchedint
+{
+    $_[0]->matched ? 1 : 0;
+}
+use overload
+    '""' => '_matchedint';
 
 # keep require happy
 1;

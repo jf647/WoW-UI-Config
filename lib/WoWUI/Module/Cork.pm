@@ -7,7 +7,7 @@ use Moose;
 use MooseX::StrictConstructor;
 
 use namespace::autoclean;
-use CLASS:
+use CLASS;
 
 # set up class
 extends 'WoWUI::Module::Base';
@@ -50,7 +50,8 @@ sub augment_global
 {
 
     my $self = shift;
-    return $self->modoptions;
+    $DB::single = 1;
+    $self->globaldata( $self->modoptions );
 
 }
 
@@ -61,15 +62,15 @@ sub augment_perchar
     my $char = shift;
     my $f = shift;
 
-    for my $specnum( 1, 2 )  {
+    my %chardata;
 
-        my $profile;
+    for my $specnum( 1, 2 )  {
 
         # do they have this spec?
         my $spec = $char->spec_get( $specnum );
         my $using;
         if( $spec ) {
-            $self->chardata->{specs}->[$specnum]->{name} = $spec;
+            $chardata{specs}->[$specnum]->{name} = $spec;
             if( 1 == $specnum ) {
                 $using = F_C0|F_C1;
             }
@@ -78,19 +79,18 @@ sub augment_perchar
             }
         }
         else {
-            $self->chardata->{specs}->[$specnum]->{name} = 'N/A';
+            $chardata{specs}->[$specnum]->{name} = 'N/A';
             $using = F_CALL;
         }
-        $profile->{$specnum} = $self->get_settings_and_values($f, $using);
-      }
-      
-      $self->chardata = $profile;
+        $chardata{specs}->[$specnum]->{profile} = $self->get_settings_and_values($f, $using);
       
     }
 
+    $self->perchardata( \%chardata );
+
 }
 
-sub get_all_settings_and_values
+sub get_settings_and_values
 {
 
     my $self = shift;
@@ -105,23 +105,20 @@ sub get_all_settings_and_values
     my $candidates = $self->filtergroups->candidates( $f, $using );
     $log->debug("candidates are $candidates");
 
-    my $profile;
+    my %profile;
  
     for my $setting( $candidates->members ) {
         $log->debug("considering $setting");
-        # if there is no filter, then it's in
-        if( exists $config->{settings}->{$setting}->{filter} ) {
-          if( $f->match( $config->{settings}->{$setting}, $using );
-              $settings->insert($setting);
-          }
-        }
-        else {
-            $settings->insert($setting);
+        if( my $r = $f->match( $config->{settings}->{$setting}->{filter}, $using ) ) {
+            $profile{$setting} = {
+                name => $setting,
+                value => $r->value,
+                type => $config->{settings}->{$setting}->{type},
+            };
         }
     }
-    $log->debug("settings: $settings");
-  
-    return $settings;
+
+    return \%profile;
 
 }
 

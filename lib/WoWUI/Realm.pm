@@ -9,7 +9,7 @@ use MooseX::StrictConstructor;
 use namespace::autoclean;
 
 # set up class
-with 'WoWUI::Module::ModOptions';
+with 'WoWUI::ModOptions';
 has name => ( is => 'rw', isa => 'Str', required => 1 );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
 has cfg => ( is => 'rw', isa => 'HashRef' );
@@ -48,16 +48,14 @@ sub BUILD
 
     $self->flags( Set::Scalar->new );
 
-    for my $mod( keys %{ $self->cfg->{modoptions} } ) {
-        $self->modoption_set( $mod, $self->cfg->{modoptions}->{$mod} );
-    }
+    $self->modoptions_set( $self->cfg );
 
     for my $charname( keys %{ $self->cfg->{chars} } ) {
         $log->debug("creating char object for $charname on ", $self->name);
         my $char = WoWUI::Char->new( name => $charname, realm => $self, cfg => $self->cfg->{chars}->{$charname} );
         my $levelcap = $gcfg->{levelcap};
         my $f = WoWUI::Filter->new( char => $char );
-        if( $f->match( { exclude => [ qw|level:$levelcap bankalt mule| ] }, F_CALL ) ) {
+        if( $f->match( { exclude => [ qw|levelcap bankalt mule| ] }, F_CALL ) ) {
             $self->flags->insert("realm:still_leveling");
         }
         $self->char_set( $charname => $char );
