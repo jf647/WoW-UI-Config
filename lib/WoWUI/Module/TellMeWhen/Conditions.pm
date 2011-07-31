@@ -31,8 +31,6 @@ has anoncount => (
         _nextanoncount => 'inc',
     },
 );
-# causes problems - build is never called with 0.27 of MooseX::Singleton
-#__PACKAGE__->meta->make_immutable;
 
 # constructor
 sub BUILD
