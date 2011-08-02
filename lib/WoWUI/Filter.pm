@@ -54,6 +54,32 @@ sub match
 {
 
     my $self = shift;
+    my $filters = shift;
+    my $using = shift;
+    my $extra = shift;
+    
+    if( 'ARRAY' eq ref $filters ) {
+        my $result = WoWUI::Filter::Result->new;
+        for my $filter( @$filters ) {
+            if( $self->matchone( $filter, $using, $extra ) ) {
+                $result->matched( 1 );
+                if( exists $filter->{value} ) {
+                    $result->value( $filter->{value} );
+                }
+                last if( $filter->{final} );
+            }
+        }
+        return $result;
+    }
+    else {
+        return $self->matchone( $filters, $using, $extra );
+    }
+
+}
+
+sub matchone
+{
+    my $self = shift;
     my $filter = shift;
     my $using = shift;
     my $extra = shift;
@@ -203,28 +229,18 @@ sub match
     }
 
     $log->trace("matched: $matched");
-    return $matched;
+    return WoWUI::Filter::Result->new( matched => $matched );
     
 }
 
-sub matchvalue
-{
+package WoWUI::Filter::Result;
+use Moose;
+use MooseX::StrictConstructor;
 
-    my $self = shift;
-    my $filter = shift;
-    my $using = shift;
-    my $extra = shift;
-    
-    my $value;
-    for my $fe( @$filter ) {
-        if( $self->match( $fe, $using, $extra ) ) {
-            $value = $fe->{value};
-            last if( exists $fe->{final} );
-        }
-    }
-    return $value;
+has matched => ( is => 'rw', isa => 'Bool', default => 0 );
+has value => ( is => 'rw' );
 
-}
+use overload 'bool' => 'matched';
 
 # keep require happy
 1;

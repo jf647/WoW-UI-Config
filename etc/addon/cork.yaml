@@ -139,57 +139,50 @@ perchar_filter:
   - Cork
 settings:
   Arcane Brilliance-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 58
       value: 1
-    mydefault: 0
     type: boolean
   Archaeology digs-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - include:
       - prof:Archaeology
       value: 1
-    mydefault: 0
     type: boolean
   Armor-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 34
       value: 1
-    mydefault: 0
     type: boolean
   Armor-spell:
-    corkdefault: Molten Armor
     filter:
+    - level: 34
     - include:
       - spec:Arcane
       level: 80
       value: Mage Armor
-    level: 34
     type: string
   Aspect-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 16
       value: 1
-    mydefault: 0
     type: boolean
   Aspect-spell:
-    corkdefault: Aspect of the Hawk
     level: 16
     type: string
   Aura-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 5
       value: 1
-    mydefault: 0
     type: boolean
   Aura-spell:
-    corkdefault: Devotion Aura
     filter:
+    - level: 5
     - include:
       - spec:Retribution
       level: 26
@@ -198,34 +191,29 @@ settings:
       - spec:Holy
       level: 42
       value: Concentration Aura
-    level: 5
     type: string
   Beacon of Light-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - include:
       - spec:Holy
       level: 39
       value: 1
-    mydefault: 0
     type: boolean
   Blessing of Forgotten Kings-enabled:
-    corkdefault: 1
-    mydefault: 0
+    filter:
+    - value: 0
     type: boolean
   Blessings-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 22
       value: 1
-    mydefault: 0
     type: boolean
   Bone Shield-enabled:
-    corkdefault: 1
     mydefault: 0
     type: boolean
   Combine-enabled:
-    corkdefault: 1
     filter:
     - exclude:
       - prof:Leatherworking
@@ -234,69 +222,63 @@ settings:
       value: 0
     type: boolean
   Conjure Mana Gem-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 48
       value: 1
-    mydefault: 0
     type: boolean
   Crates-enabled:
-    corkdefault: 1
     type: boolean
   Crusader Aura-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 62
       value: 1
-    mydefault: 0
     type: boolean
   Dark Intent-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 83
       value: 1
-    mydefault: 0
     type: boolean
   Demon Armor-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 8
       value: 1
-    mydefault: 0
     type: boolean
   Demon Armor-spell:
-    corkdefault: Demon armor
     filter:
+    - level: 8
+      value: Demon Armor
     - level: 62
       value: Fel Armor
-    level: 8
     type: string
   Fear Ward-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 54
       value: 1
-    mydefault: 0
     type: boolean
   Flask of Enhancement-enabled:
-    corkdefault: 1
-    mydefault: 0
+    filter:
+    - value: 0
     type: boolean
   Focus Magic-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - include:
       - spec:Arcane
       level: 35
       value: 1
-    mydefault: 0
     type: boolean
   Fortitude-enabled:
-    corkdefault: 1
+    filter:
+    - value: 1
     type: boolean
   Fursuit-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - include:
       - all(spec:Feral Combat;subspec:Bear)
       level: 15
@@ -309,13 +291,10 @@ settings:
       - spec:Balance
       level: 20
       value: 1
-    mydefault: 0
     type: boolean
   Fursuit-spell:
-    corkdefault: Cat Form
     filter:
-    - include:
-      - spec:Feral Combat
+    - level: 8
       value: Cat Form
     - include:
       - subspec:Bear
@@ -325,92 +304,85 @@ settings:
       - spec:Balance
       level: 30
       value: Moonkin Form
-    include:
-    - spec:Feral Combat
-    - spec:Balance
-    level: 8
     type: string
   Glyphs-enabled:
-    corkdefault: 1
+    filter:
+    - value: 1
     type: boolean
   Healthstone:
-    corkdefault: 1
+    filter:
+    - value: 1
     type: boolean
   Horn of Winter-enabled:
-    corkdefault: 1
+    filter:
+    - value: 1
     type: boolean
   Inner Fire-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 7
       value: 1
-    mydefault: 0
     type: boolean
   Inner Fire-spell:
-    corkdefault: Inner Fire
     filter:
+    - value: Inner File
     - include:
       - spec:Discipline
       level: 83
       value: Inner Will
-    level: 83
     type: string
   Lances and Poles-enabled:
-    corkdefault: 1
+    filter:
+    - value: 1
     type: boolean
   Mark of the Wild-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 30
       value: 1
-    mydefault: 0
     type: boolean
   Path of Frost-enabled:
-    corkdefault: 1
-    mydefault: 0
-    type: boolean
-  Pet Happiness-enabled:
-    corkdefault: 1
-    mydefault: 0
+    filter:
+    - value: 0
     type: boolean
   Quest Starting Items-enabled:
-    corkdefault: 1
-    mydefault: 0
+    filter:
+    - value: 0
     type: boolean
   Repairs-enabled:
-    corkdefault: 1
     filter:
+    - value: 1
     - include:
       - banker
       - mule
       value: 0
     type: boolean
   Repairs-threshold:
-    corkdefault: 0.85
-    mydefault: 0.4
+    filter:
+    - value: 0.4
     type: number
   Righteous Fury-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - include:
       - spec:Protection
       level: 12
       value: 1
-    mydefault: 0
     type: boolean
   Runescroll of Fortitude-enabled:
-    corkdefault: 1
-    mydefault: 0
+    filter:
+    - value: 0
     type: boolean
   Seal-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 3
       value: 1
-    mydefault: 0
     type: boolean
   Seal-spell:
     filter:
+    - level: 3
+      value: Seal of Righteousness
     - include:
       - spec:Holy
       level: 32
@@ -419,67 +391,69 @@ settings:
       - spec:Protection
       level: 44
       value: Seal of Truth
-    level: 3
-    mydefault: Seal of Righteousness
     type: string
   Shadow Protection-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 58
       value: 1
-    mydefault: 0
     type: boolean
   Shadowform-enabled:
-    corkdefault: 0
     filter:
+    - value: 0
     - include:
       - spec:Shadow
       level: 20
       value: 1
     type: boolean
   Shields-enabled:
-    corkdefault: 1
+    filter:
+    - value: 1
     type: boolean
   Shields-spell:
-    corkdefault: Lightning Shield
     filter:
-    - include:
+    - value: Lightning Shield
+    - level: 20
+      include:
       - spec:Restoration
       value: Water Shield
     type: string
   Shouts-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 20
       value: 1
-    mydefault: 0
     type: boolean
   Shouts-spell:
-    level: 20
-    mydefault: Battle Shout
-    type: string
-  Shuck Clams-enabled:
-    corkdefault: 1
-    type: boolean
-  Soul Link-enabled:
-    corkdefault: 1
     filter:
     - level: 20
+      value: Battle Shout
+    type: string
+  Shuck Clams-enabled:
+    filter:
+    - value: 1
+    type: boolean
+  Soul Link-enabled:
+    filter:
+    - value: 0
+    - level: 20
       value: 1
-    mydefault: 0
     type: boolean
   Soul Shards-enabled:
-    corkdefault: 1
+    filter:
+    - value: 1
     type: boolean
   Soulstone-enabled:
-    corkdefault: 1
+    filter:
+    - value: 1
     type: boolean
   Summon demon-enabled:
-    corkdefault: 1
+    filter:
+    - value: 1
     type: boolean
   Summon demon-spell:
-    corkdefault: Summon Imp
     filter:
+    - value: Summon Imp
     - include:
       - spec:Demonology
       level: 10
@@ -494,8 +468,8 @@ settings:
       value: Summon Felhunter
     type: string
   Talents-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - exclude:
       - banker
       - mule
@@ -503,18 +477,17 @@ settings:
       - leveling
       level: 10
       value: 1
-    mydefault: 0
     type: boolean
   Temp Enchant Main Hand-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 10
       value: 1
-    mydefault: 0
     type: boolean
   Temp Enchant Main Hand-spell:
-    corkdefault: Crippling Poison
     filter:
+    - level: 10
+      value: Crippling Poison
     - include:
       - all(class:Shaman;spec:Restoration)
       level: 54
@@ -541,41 +514,44 @@ settings:
     - include:
       - class:Rogue
       value: Instant Poison
-    level: 10
     type: string
   Temp Enchant Off Hand-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 10
       value: 1
-    mydefault: 0
     type: boolean
   Temp Enchant Off Hand-spell:
-    corkdefault: Crippling Poison
     filter:
-    - include:
+    - level: 10
+      include:
       - all(class:Shaman;spec:Enhancement)
       value: Flametongue Weapon
-    - include:
+    - level: 10
+      include:
+      - class:Rogue
+      value: Instant Poison
+    - level: 30
+      include:
       - class:Rogue
       value: Deadly Poison
-    level: 10
     type: string
   Temp Enchant Thrown-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - level: 80
       value: 1
-    mydefault: 0
     type: boolean
   Temp Enchant Thrown-spell:
-    corkdefault: Crippling Poison
-    level: 80
-    mydefault: Deadly Poison
+    filter:
+    - level: 80
+      include:
+      - class:Rogue
+      value: Crippling Poison
     type: string
   Tracking-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - exclude:
       - prof:InactiveFishing
       include:
@@ -584,17 +560,16 @@ settings:
       - prof:Mining
       - prof:Fishing
       value: 1
-    mydefault: 0
     type: boolean
   Tracking-spell:
-    exclude:
-    - prof:InactiveFishing
     filter:
     - include:
       - class:Hunter
       value: Track Beasts
     - include:
       - prof:Fishing
+      exclude:
+      - prof:InactiveFishing
       value: Find Fish
     - include:
       - prof:Mining
@@ -602,60 +577,46 @@ settings:
     - include:
       - prof:Herbalism
       value: Find Herbs
-    include:
-    - class:Hunter
-    - prof:Herbalism
-    - prof:Mining
-    - prof:Fishing
     type: string
   Training-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - exclude:
       - banker
       - mule
       include:
       - leveling
       value: 1
-    mydefault: 0
     type: boolean
   Vampiric Embrace-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - include:
       - spec:Shadow
       level: 20
       value: 1
-    mydefault: 0
     type: boolean
   Vigilance-enabled:
-    corkdefault: 1
     filter:
+    - value: 0
     - include:
       - spec:Protection
       level: 30
       value: 1
-    mydefault: 0
     type: boolean
   Well Fed-enabled:
-    corkdefault: 1
-    mydefault: 0
+    filter:
+    - value: 0
     type: boolean
   multithreshold:
-    corkdefault: 2
+    filter:
+    - value: 2
     type: number
   raid_thresh:
-    corkdefault: 5
+    filter:
+    - value: 5
     type: number
   tooltiplimit:
-    corkdefault: 10
+    filter:
+    - value: 10
     type: number
-templates:
-  global:
-    cork:
-      input: $TEMPLATEDIR/cork/Cork.lua.template
-      output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Cork.lua
-  perchar:
-    cork:
-      input: $TEMPLATEDIR/cork/Cork_perchar.lua.template
-      output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Cork.lua

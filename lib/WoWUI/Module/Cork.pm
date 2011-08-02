@@ -64,18 +64,13 @@ sub augment_perchar
     my $log = WoWUI::Util->log;
     my $config = $self->config;
 
-    # find the potential actions for this char
-    my $candidates = $self->filtergroups->candidates($f);
-    $log->trace("candidates are $candidates");
-
     for my $specnum( 1, 2 )  {
 
         # do they have this spec?
         my $spec = $char->spec_get( $specnum );
-        my $all_settings;
         my $using;
         if( $spec ) {
-            $chardata->{specs}->[$specnum]->{name} = $spec;
+            $self->chardata->{specs}->[$specnum]->{name} = $spec;
             if( 1 == $specnum ) {
                 $using = F_C0|F_C1;
             }
@@ -84,10 +79,10 @@ sub augment_perchar
             }
         }
         else {
-            $chardata->{specs}->[$specnum]->{name} = 'N/A';
+            $self->chardata->{specs}->[$specnum]->{name} = 'N/A';
             $using = F_CALL;
         }
-        $all_settings = $self->get_all_settings( $f, $using );
+        my $all_settings = $self->get_all_settings( $f, $using );
 
         # populate values for settings based on flags
         my %values;
@@ -155,25 +150,30 @@ sub augment_perchar
 sub get_all_settings
 {
 
-  my $self = shift;
-  my $char = shift;
-  my $flags = shift;
+    my $self = shift;
+    my $f = shift;
+    my $using = shift;
 
-  my $log = WoWUI::Util->log;
+    my $config = $self->config;
+    my $log = WoWUI::Util->log;
 
-  my $config = $self->config;
-  
-  my $settings = Set::Scalar->new;
-  my @candidates = WoWUI::Util::Filter::filter_groups( $flags, $config->{settingsgroups}, 'settings' );
-  for my $setting( @candidates ) {
-    $log->debug("matching $setting");
-    if( WoWUI::Util::Filter::matches( $flags, $char, $config->{settings}->{$setting} ) ) {
-      $settings->insert($setting);
+    my $candidates = $self->filtergroups->candidates( $f, $using );
+    $log->debug("candidates are $candidates");
+ 
+    my $settings = Set::Scalar->new;
+    for my $setting( $candidates->members ) {
+        $log->debug("considering $setting");
+        # if there is no filter, then it's in
+        unless( exists $config->{settings}->{$setting}->{filter} ) {
+            $settings->insert($setting);
+        }
+        if( $f->match( $config->{settings}->{$setting}, $using );
+            $settings->insert($setting);
+        }
     }
-  }
-  $log->debug("settings: $settings");
+    $log->debug("settings: $settings");
   
-  return $settings;
+    return $settings;
 
 }
 

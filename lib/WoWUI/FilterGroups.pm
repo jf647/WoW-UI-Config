@@ -98,6 +98,7 @@ sub candidates
 
     my $self = shift;
     my $f = shift;
+    my $using = shift;
 
     my $log = WoWUI::Util->log( stacksup => 1, prefix => 'filtergroups' );
 
@@ -105,7 +106,7 @@ sub candidates
 
     for my $fg( $self->groups_values ) {
         $log->debug("considering filter group ", $fg->name);
-        if( $f->match( $fg->filter ) ) {
+        if( $f->match( $fg->filter, $using ) ) {
             $log->debug("filter group matches");
             $candidates += $fg->members;
         }
