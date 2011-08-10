@@ -24,7 +24,7 @@ modules:
     - WoWUI::Module::Clique
     - WoWUI::Module::Cork
     - WoWUI::Module::Raven
-#    - WoWUI::Module::CombatLogTrigger
+    - WoWUI::Module::CombatLogTrigger
 #    - WoWUI::Module::Digits
 #    - WoWUI::Module::TrinketMenu
 #    - WoWUI::Module::TidyPlates

@@ -16,309 +16,364 @@ triggers:
         spellid: 92827
         message: '*src is casting *slink, please assist'
         combateither: 1
-        level: 70
-        include:
-            - class:Mage
+        filter:
+            level: 70
+            include:
+                - class:Mage
     Ritual of Souls:
         type: create
         spellid: 29893
         message: '*src is casting *slink, please assist'
         combateither: 1
-        level: 68
-        include:
-            - class:Warlock
+        filter:
+            level: 68
+            include:
+                - class:Warlock
     Divine Guardian:
         type: spell
         message: '*slink up'
         grouptype: [ raid ]
         spellid: 70940
-        level: 30
-        include:
-            - all(class:Paladin;spec:Protection;subspec:Divine Guardian)
+        filter:
+            level: 30
+            include:
+                - all(class:Paladin;spec:Protection;subspec:Divine Guardian)
     Last Stand:
         type: spell
         message: '*slink used'
         reportspellid: 1
-        level: 20
-        include:
-            - all(class:Warrior;spec:Protection)
+        filter:
+            level: 20
+            include:
+                - all(class:Warrior;spec:Protection)
     Rallying Cry:
         type: spell
         message: '*slink used'
         reportspellid: 1
-        level: 83
-        include:
-            - class:Warrior
+        filter:
+            level: 83
+            include:
+                - class:Warrior
     Guardian of Ancient Kings:
         type: spell
         message: '*slink up'
         reportspellid: 1
-        level: 85
-        include:
-            - all(class:Paladin;spec:Protection)
+        filter:
+            level: 85
+            include:
+                - all(class:Paladin;spec:Protection)
     Icebound Fortitude:
         type: buff
         spellid: 48792
-        level: 62
-        include:
-            - all(class:Death Knight;spec:Blood)
+        filter:
+            level: 62
+            include:
+                - all(class:Death Knight;spec:Blood)
     Vampiric Blood:
         type: buff
         spellid: 55233
-        level: 49
-        include:
-            - all(class:Death Knight;spec:Blood)
+        filter:
+            level: 49
+            include:
+                - all(class:Death Knight;spec:Blood)
     Shield Wall:
         type: buff
         spellid: 871
-        level: 48
-        include:
-            - all(class:Warrior;spec:Protection)
+        filter:
+            level: 48
+            include:
+                - all(class:Warrior;spec:Protection)
     Survival Instincts:
         type: spell
         message: '*slink up'
         reportspellid: 1
-        level: 49
-        include:
-            - all(class:Druid;spec:Feral Combat;subspec:Bear)
+        filter:
+            level: 49
+            include:
+                - all(class:Druid;spec:Feral Combat;subspec:Bear)
     Frenzied Regeneration:
         type: spell
         message: '*slink used'
         reportspellid: 1
-        level: 52
-        include:
-            - all(class:Druid;spec:Feral Combat;subspec:Bear)
+        filter:
+            level: 52
+            include:
+                - all(class:Druid;spec:Feral Combat;subspec:Bear)
     Interrupt:
         type: interrupt
         anyspell: 1
-        level: 9
-        include:
-            - class:Death Knight
-            - all(class:Druid;spec:Feral Combat)
-            - class:Warrior
-            - class:Rogue
-            - class:Shaman
-            - class:Mage
-            - all(class:Warlock;spec:Affliction)
+        filter:
+            - level: 57
+              include:
+                  - class:Death Knight
+            - level: 22
+              include:
+                  - all(class:Druid;spec:Feral Combat)
+            - level: 38
+              include:
+                  - class:Warrior
+            - level: 14
+              include:
+                  - class:Rogue
+            - level: 16
+              include:
+                  - class:Shaman
+            - level: 9
+              include:
+                  - class:Mage
+            - level: 52
+              include:
+                  - all(class:Warlock;spec:Affliction)
     Rebuke:
         type: interrupt
         spellid: 92631
-        level: 54
-        include:
-            - class:Paladin
+        filter:
+            level: 54
+            include:
+                - class:Paladin
     Hand of Protection:
         type: spell
         spellId: 1022
-        level: 18
-        include:
-            - class:Paladin
+        filter:
+            level: 18
+            include:
+                - class:Paladin
     Hand of Sacrifice:
         type: spell
         reportspellid: 1
-        level: 80
-        include:
-            - class:Paladin
+        filter:
+            level: 80
+            include:
+                - class:Paladin
     Hand of Salvation:
         type: spell
         spellId: 1038
-        level: 66
-        include:
-            - class:Paladin
+        filter:
+            level: 66
+            include:
+                - class:Paladin
     Lay on Hands:
         type: spell
         spellId: 633
         combateither: 1
-        level: 16
-        include:
-            - class:Paladin
+        filter:
+            level: 16
+            include:
+                - class:Paladin
     Mana Tide Totem:
         type: totem
         grouptype: [ raid ]
         message_summon: "dropped *slink - healers stay in range for extra regen"
         message_destroy: "Mana Tide Totem finished"
-        level: 49
-        include:
-            - all(class:Shaman;spec:Restoration)
+        filter:
+            level: 49
+            include:
+                - all(class:Shaman;spec:Restoration)
     Spirit Link Totem:
         type: totem
         message_summon: "dropped *slink - health redistributed for six seconds"
         message_destroy: "Spirit Link finished"
-        level: 49
-        include:
-            - all(class:Shaman;spec:Restoration)
+        filter:
+            level: 49
+            include:
+                - all(class:Shaman;spec:Restoration)
     Pain Suppression:
         type: buff
         spellid: 33206
         message_up: "*slink on *tgt up"
         message_down: "*slink on *tgt down"
-        level: 49
-        include:
-            - all(class:Priest;spec:Discipline)
+        filter:
+            level: 49
+            include:
+                - all(class:Priest;spec:Discipline)
     Guardian Spirit:
         type: buff
         reportspellid: 1
         message_up: "*slink on *tgt up"
         message_down: "*slink on *tgt down"
-        level: 69
-        include:
-            - all(class:Priest;spec:Holy)
+        filter:
+            level: 69
+            include:
+                - all(class:Priest;spec:Holy)
     Purge:
         type: dispel
         reportspellid: 1
         message: "Purge *eslink (*tgt*rtls)"
-        level: 12
-        include:
-            - class:Shaman
+        filter:
+            level: 12
+            include:
+                - class:Shaman
     Dispel Magic:
         type: dispel
         spellid: 97691
         affiliation: enemy
-        level: 26
-        include:
-            - class:Priest
+        filter:
+            level: 26
+            include:
+                - class:Priest
     Spellsteal:
         type: steal
         spellid: 30449
-        level: 70
-        include:
-            - class:Mage
+        filter:
+            level: 70
+            include:
+                - class:Mage
     Mass Dispel:
         type: dispel
         reportspellid: 1
         affiliation: enemy
-        level: 72
-        include:
-            - class:Priest
+        filter:
+            level: 72
+            include:
+                - class:Priest
     Tranquilizing Shot:
         type: dispel
         message: "Tranq Shot: *eslink (*tgt*rtls)"
         spellid: 19801
-        level: 76
-        include:
-            - class:Hunter
+        filter:
+            level: 76
+            include:
+                - class:Hunter
     Soothe:
         type: dispel
         reportspellid: 1
         message: "Soothe: *eslink (*tgt*rtls)"
         affiliation: enemy
-        level: 28
-        include:
-            - class:Druid
-        exclude:
-            - spec:Feral Combat
+        filter:
+            level: 28
+            include:
+                - class:Druid
+            exclude:
+                - spec:Feral Combat
     Rebirth:
         type: spell
         reportspellid: 1
-        level: 20
-        include:
-            - class:Druid
+        filter:
+            level: 20
+            include:
+                - class:Druid
     Raise Ally:
         type: spell
         reportspellid: 1
-        level: 72
-        include:
-            - class:Death Knight
+        filter:
+            level: 72
+            include:
+                - class:Death Knight
     Polymorph:
         type: debuff
         reportrefresh: 1
         matchapprox: 1
-        level: 14
-        include:
-            - class:Mage
+        filter:
+            level: 14
+            include:
+                - class:Mage
     Sap:
         type: debuff
         reportspellid: 1
-        level: 10
-        include:
-            - class:Rogue
+        filter:
+            level: 10
+            include:
+                - class:Rogue
     Shackle Undead:
         type: debuff
         reportrefresh: 1
         reportspellid: 1
-        level: 32
-        include:
-            - class:Priest
+        filter:
+            level: 32
+            include:
+                - class:Priest
     Entangling Roots:
         type: debuff
         reportrefresh: 1
         reportspellid: 1
-        level: 7
-        include:
-            - class:Druid
+        filter:
+            level: 7
+            include:
+                - class:Druid
     Hibernate:
         type: debuff
         reportrefresh: 1
         reportspellid: 1
-        level: 48
-        include:
-            - class:Druid
+        filter:
+            level: 48
+            include:
+                - class:Druid
     Wyvern Sting:
         type: debuff
         spellid: 19386
-        level: 49
-        include:
-            - all(class:Hunter;spec:Survival)
+        filter:
+            level: 49
+            include:
+                - all(class:Hunter;spec:Survival)
     Repentance:
         type: debuff
         reportspellid: 1
         reportrefresh: 1
-        level: 49
-        include:
-            - all(class:Paladin;spec:Retribution)
+        filter:
+            level: 49
+            include:
+                - all(class:Paladin;spec:Retribution)
     Blind:
         type: debuff
         reportspellid: 1
         reportrefresh: 1
-        level: 34
-        include:
-            - class:Rogue
+        filter:
+            level: 34
+            include:
+                - class:Rogue
     Hex:
         type: debuff
         reportspellid: 1
         reportrefresh: 1
-        level: 80
-        include:
-            - class:Shaman
+        filter:
+            level: 80
+            include:
+                - class:Shaman
     Banish:
         type: debuff
         spellid: 710
-        level: 32
-        include:
-            - class:Warlock
+        filter:
+            level: 32
+            include:
+                - class:Warlock
     Focus Magic:
         type: buff
         reportspellid: 1
         notonself: 1
         message_up: '*slink on *tgt'
         uponly: 1
-        level: 59
         combateither: 1
-        include:
-            - all(class:Mage;spec:Arcane)
+        filter:
+            level: 59
+            include:
+                - all(class:Mage;spec:Arcane)
     Dark Intent:
         type: buff
         message_up: '*slink on *tgt'
         uponly: 1
         reportspellid: 1
         notonself: 1
-        level: 83
+        filter:
+            level: 83
+            include:
+                - class:Warlock
         combateither: 1
-        include:
-            - class:Warlock
     Fear:
         type: debuff
         reportspellid: 1
         reportrefresh: 1
-        level: 25
-        include:
-            - class:Warlock
+        filter:
+            level: 25
+            include:
+                - class:Warlock
     Soulstone Resurrection:
         type: buff
         spellid: 20707
         notonself: 
-        level: 18
-        include:
-            - class:Warlock
+        filter:
+            level: 18
+            include:
+                - class:Warlock
         message_up: '*slink on *tgt'
         uponly: 1
         combateither: 1
