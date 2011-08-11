@@ -8,69 +8,79 @@ powertypes:
     mana:
         index: 0
         color: { r: 0, g: 0, b: 1, a: 0.5 }
-        include:
-            - all(class:Paladin;spec:Holy)
-            - all(class:Shaman;spec:Restoration)
-            - all(class:Shaman;spec:Elemental)
-            - class:Priest
-            - class:Mage
-            - class:Warlock
-            - all(class:Druid;spec:Balance)
-            - all(class:Druid;spec:Restoration)
+        filter:
+            include:
+                - all(class:Paladin;spec:Holy)
+                - all(class:Shaman;spec:Restoration)
+                - all(class:Shaman;spec:Elemental)
+                - class:Priest
+                - class:Mage
+                - class:Warlock
+                - all(class:Druid;spec:Balance)
+                - all(class:Druid;spec:Restoration)
     rage:
         color: { r: 1, g: 0, b: 0, a: 0.5 }
-        include:
-            - class:Warrior
-            - all(class:Druid;spec:Feral Combat;subspec:Bear)
+        filter:
+            include:
+                - class:Warrior
+                - all(class:Druid;spec:Feral Combat;subspec:Bear)
     focus:
         color: { r: 1, g: 0.5, b: 0.25, a: 0.5 }
-        include:
-            - class:Hunter
+        filter:
+            include:
+                - class:Hunter
     energy:
         color: { r: 1, g: 1, b: 0, a: 0.5 }
-        include:
-            - class:Rogue
-            - all(class:Druid;spec:Feral Combat;subspec:Cat)
+        filter:
+            include:
+                - class:Rogue
+                - all(class:Druid;spec:Feral Combat;subspec:Cat)
     runicpower:
         index: 6
         color: { r: 0, g: 0.82, b: 1, a: 0.5 }
-        include:
-            - class:Death Knight
+        filter:
+            include:
+                - class:Death Knight
     altpower:
         index: 10
         color: { r: 1, g: 1, b: 0.1, a: 0.5 }
-        include:
-            - everyone
+        filter:
+            include:
+                - everyone
 frames:
     health_pct_ic:
         name: health
         percent: 1
         ooc: 0
-        include:
-            - disabled
+        filter:
+            include:
+                - disabled
     power_abs_ic:
         name: power
         percent: 0
         ooc: 0
-        include:
-            - class:Warrior
-            - class:Rogue
-            - class:Death Knight
-            - class:Hunter
-            - all(class:Druid;spec:Feral Combat;subspec:Bear)
+        filter:
+            include:
+                - class:Warrior
+                - class:Rogue
+                - class:Death Knight
+                - class:Hunter
+                - all(class:Druid;spec:Feral Combat;subspec:Bear)
     power_pct_ic:
         name: power
         percent: 1
         ooc: 0
-        include:
-            - classusesmana
-        exclude:
-            - role:Healer
+        filter:
+            include:
+                - classusesmana
+            exclude:
+                - role:Healer
     power_pct_ooc:
         name: power
         percent: 1
         ooc: 1
-        include:
-            - role:Healer
-        exclude:
-            - all(class:Druid;spec:Feral Combat;subspec:Bear)
+        filter:
+            include:
+                - role:Healer
+            exclude:
+                - all(class:Druid;spec:Feral Combat;subspec:Bear)
