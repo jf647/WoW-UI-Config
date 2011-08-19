@@ -75,7 +75,6 @@ sub augment_perchar
         }
         $log->debug("processing spec $specnum");
         my @triggers;
-        $DB::single = 1;
         for my $tname( keys %{ $config->{triggers} } ) {
             $log->debug("considering trigger $tname");
             my $trigger = $config->{triggers}->{$tname};
