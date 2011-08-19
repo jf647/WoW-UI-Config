@@ -3,7 +3,6 @@ dirs:
     templatedir: $TOPDIR/templates
     etcdir: $TOPDIR/etc
     addonconfdir: $TOPDIR/etc/addon
-    varrundir: $TOPDIR/var/run
     tempbase: $TOPDIR/tmp
     outputdir: $TOPDIR/settings
     privatedir: $TOPDIR/private
@@ -26,7 +25,7 @@ modules:
     - WoWUI::Module::Raven
     - WoWUI::Module::CombatLogTrigger
     - WoWUI::Module::Digits
-#    - WoWUI::Module::TrinketMenu
+    - WoWUI::Module::TrinketMenu
 #    - WoWUI::Module::TidyPlates
 #    - WoWUI::Module::NPCScan
 #    - WoWUI::Module::Bagnon
