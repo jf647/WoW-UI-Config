@@ -27,7 +27,7 @@ modules:
     - WoWUI::Module::Digits
     - WoWUI::Module::TrinketMenu
 #    - WoWUI::Module::TidyPlates
-#    - WoWUI::Module::NPCScan
+    - WoWUI::Module::NPCScan
 #    - WoWUI::Module::Bagnon
 #    - WoWUI::Module::Postal
 #    - WoWUI::Module::DualBoxMacro

@@ -56,29 +56,31 @@ sub BUILD
 
 }
 
-sub augment_chardata
+sub augment_perchar
 {
 
   my $self = shift;
   my $char = shift;
+  my $f = shift;
 
   my $config = $self->config;
-  my $o = $char->modoption_get($self->name);
+  my $o = $self->modoptions( $char );
 
-  my $chardata = { realm => $char->realm->name, char => $char->name };
+  my $npcs;
+  my $achievements;
 
   # achievements
   for my $achievement( keys %{ $config->{achievements} } ) {
       my %wantedmap = map { $_ => 1 } @{ $o->{achievements} };
       my $enabled = exists $wantedmap{$achievement} ? 1 : 0;
-      push @{ $chardata->{achievements} }, {
+      push @$achievements, {
           id => $config->{achievements}->{$achievement}->{id},
           enabled => $enabled,
       }
   }
 
   # sets / npcs
-  my $npcs = Set::Scalar->new;
+  my $npcset = Set::Scalar->new;
   for my $setname( @{ $o->{sets} } ) {
       $setname =~ m/^([-\+])?(@)?(.+)$/;
       my( $op, $isgroup, $name ) = ( $1, $2, $3 );
@@ -89,10 +91,10 @@ sub augment_chardata
           }
           for my $npcname( $set->members ) {
               if( '+' eq $op ) {
-                  $npcs->insert( $npcname );
+                  $npcset->insert( $npcname );
               }
               else {
-                  $npcs->delete( $npcname )
+                  $npcset->delete( $npcname )
               }
           }
       }
@@ -101,15 +103,15 @@ sub augment_chardata
               croak "bad NPC name '$name'";
           }
           if( '+' eq $op ) {
-              $npcs->insert( $name );
+              $npcset->insert( $name );
           }
           else {
-              $npcs->delete( $name );
+              $npcset->delete( $name );
           }
       }
   }
   
-  for my $npcname( $npcs->members ) {
+  for my $npcname( $npcset->members ) {
       if( 'ARRAY' eq ref $config->{npcs}->{$npcname}->{id} ) {
           for my $id( @{ $config->{npcs}->{$npcname}->{id} } ) {
               my $npc = { name => $npcname, id => $id };
@@ -119,7 +121,7 @@ sub augment_chardata
                       $npc->{world} = qq{"$npc->{world}"};
                   }
               }
-              push @{ $chardata->{npcs} }, $npc;
+              push @$npcs, $npc;
           }
       }
       else {
@@ -133,11 +135,11 @@ sub augment_chardata
                   $npc->{world} = qq{"$npc->{world}"};
               }
           }
-          push @{ $chardata->{npcs} }, $npc;
+          push @$npcs, $npc;
       }
   }
 
-  return $chardata;
+  $self->perchardata_set( npcs => $npcs, achievements => $achievements );
 
 }
 

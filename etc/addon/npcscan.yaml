@@ -497,8 +497,3 @@ npcs:
         world: 4
         sets:
             - mage
-    Dr. Fingers:
-        id: 13799
-        world: 3
-        sets:
-            - questgivers
