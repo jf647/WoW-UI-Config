@@ -50,8 +50,6 @@ sub augment_perchar
     my $o = $self->modoptions( $char );
     my $log = WoWUI::Util->log;
 
-    $DB::single = 1;
-
     my %trinketmenu;
 
     # get list of all trinket itemids
