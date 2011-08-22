@@ -9,36 +9,82 @@ templates:
 perchar_filter:
     addons:
         - Broker_Currency
-currencies:
-    pve: {}
+groups:
+    basic:
+        filter: {}
+        options:
+            - summaryPlayerSession
+            - summaryRealmToday
+            - showToday
+            - showGold
+            - summaryGold
+    pve:
+        filter: {}
+        options:
+            - summary395
+            - summary396
     pvp:
-        include:
-            - pvp
+        filter:
+            include:
+                - pvp
+        options:
+            - summary392
+            - summary390
+            - summary391
     tournament:
-        include:
-            - goal:ArgentTournament
+        filter:
+            include:
+                - goal:ArgentTournament
+        options:
+            - summary241
+    firelands:
+        filter:
+            include:
+                - goal:Firelands
+        options:
+            - summary416
     jewelcrafting:
-        include:
-            - prof:Jewelcrafting:475+
+        filter:
+            include:
+                - prof:Jewelcrafting:475+
+        options:
+            - summary361
     nrjewelcrafting:
-        level: 65
-        include:
-            - noexall(goal:NorthrendJewelcrafting)
-            - prof:Jewelcrafting:375+
-        exclude:
-            - prof:Jewelcrafting:450+
+        filter:
+            level: 65
+            include:
+                - noexall(goal:NorthrendJewelcrafting)
+                - prof:Jewelcrafting:375+
+            exclude:
+                - prof:Jewelcrafting:450+
+        options:
+            - summary61
     cooking:
-        include:
-            - prof:Cooking
-        exclude:
-            - prof:InactiveCooking
+        filter:
+            include:
+                - prof:Cooking
+            exclude:
+                - prof:InactiveCooking
+        options:
+            - summary402
     nrcooking:
-        level: 65
-        include:
-            - noexall(goal:NorthrendCooking)
-            - prof:Cooking:350+
-        exclude:
-            - prof:Cooking:425+
+        filter:
+            level: 65
+            include:
+                - noexall(goal:NorthrendCooking)
+                - prof:Cooking:350+
+            exclude:
+                - prof:Cooking:425+
+        options:
+            - summary81
     summary:
-        include:
-            - banker
+        filter:
+            include:
+                - banker
+        options:
+            - showYesterday
+            - showThisWeek
+            - showLastWeek
+            - summaryRealmYesterday
+            - summaryRealmThisWeek
+            - summaryRealmLastWeek

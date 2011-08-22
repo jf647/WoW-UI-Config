@@ -31,7 +31,7 @@ modules:
     - WoWUI::Module::Bagnon
     - WoWUI::Module::Postal
 #    - WoWUI::Module::DualBoxMacro
-#    - WoWUI::Module::BrokerCurrency
+    - WoWUI::Module::BrokerCurrency
 #    - WoWUI::Module::Auctionator
 #    - WoWUI::Module::DeadlyBossMods
 #    - WoWUI::Module::wMarker

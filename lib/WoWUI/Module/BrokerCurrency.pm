@@ -28,28 +28,28 @@ sub BUILD
 
 }
 
-sub augment_chardata
+sub augment_perchar
 {
 
-  my $self = shift;
-  my $char = shift;
-  
-  my $config = $self->config;
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
+      
+    my $config = $self->config;
 
-  my $chardata = { realm => $char->realm->name, char => $char->name };
+    my $log = WoWUI::Util->log;
 
-  my $log = WoWUI::Util->log;
-
-  # Broker_Currency
-  for my $currency( keys %{ $config->{currencies} } ) {
-    if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{currencies}->{$currency} ) ) {
-      $log->trace("including currency $currency");
-      $chardata->{$currency} = 1;
+    # Broker_Currency
+    my @options;
+    for my $gname( keys %{ $config->{groups} } ) {
+        if( $f->match( $config->{groups}->{$gname}->{filter} ) ) {
+            $log->trace("including group $gname");
+            push @options, @{ $config->{groups}->{$gname}->{options} };
+        }
     }
-  }
-  
-  return $chardata;
 
+    $self->perchardata_set( options => \@options );
+      
 }
 
 # keep require happy
