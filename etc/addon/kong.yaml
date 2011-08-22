@@ -9,10 +9,8 @@ templates:
             input: $TEMPLATEDIR/kong/Kong_perchar.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Kong.lua
 filter:
-    include:
-        - machine:name:kara
-        - machine:name:div
-        - machine:name:heidi
+    addons:
+        - Kong
 perchar_filter:
     exclude:
         - banker

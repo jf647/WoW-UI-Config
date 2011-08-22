@@ -9,6 +9,5 @@ perchar_filter:
         - banker
         - mule
 filter:
-    include:
-        - machine:name:kara
-        - machine:name:heidi
+    addons:
+        - SexyMap
