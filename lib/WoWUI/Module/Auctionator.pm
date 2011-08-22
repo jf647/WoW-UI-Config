@@ -25,6 +25,14 @@ sub BUILD
 
 }
 
+sub augment_perchar
+{
+
+    my $self = shift;
+    $self->perchardata_set( auctionator => 1 );
+    
+}
+
 # keep require happy
 1;
 
