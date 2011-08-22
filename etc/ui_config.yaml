@@ -29,7 +29,7 @@ modules:
 #    - WoWUI::Module::TidyPlates
     - WoWUI::Module::NPCScan
     - WoWUI::Module::Bagnon
-#    - WoWUI::Module::Postal
+    - WoWUI::Module::Postal
 #    - WoWUI::Module::DualBoxMacro
 #    - WoWUI::Module::BrokerCurrency
 #    - WoWUI::Module::Auctionator

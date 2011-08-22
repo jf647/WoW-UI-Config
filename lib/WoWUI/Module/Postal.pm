@@ -22,35 +22,29 @@ sub BUILD
 
     my $self = shift;
     
-    $self->global( 1 );
+    $self->globalpc( 1 );
     
     return $self;
     
 }
 
-sub augment_data
+sub augment_globalpc
 {
 
     my $self = shift;
+    my $char = shift;
+    my $f = shift;
 
-    my $log = WoWUI::Util->log;
+    my $data = $self->globaldata;
 
-    my $data;
-
-    for my $realm( $self->player->realms ) {
-        $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars ) {
-            $log->debug("processing character ", $char->name);
-            $data->{postal}->{$realm->name}->{$char} = {
-                name => $char->name,
-                faction => $char->faction,
-                class => $char->class_ns,
-                level => $char->level,
-            };
-        }
-    }
+    $data->{postal}->{$char->realm->name}->{$char->name} = {
+        name => $char->name,
+        faction => $char->faction,
+        class => $char->class_ns,
+        level => $char->level,
+    };
     
-    return $data;
+    $self->globaldata( $data );
 
 }
 
