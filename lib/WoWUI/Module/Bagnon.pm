@@ -13,6 +13,8 @@ use namespace::autoclean;
 extends 'WoWUI::Module::Base';
 CLASS->meta->make_immutable;
 
+use WoWUI::Filter::Constants;
+
 # constructor
 sub BUILD
 {
@@ -25,22 +27,19 @@ sub BUILD
 
 }
 
-sub augment_chardata
+sub augment_perchar
 {
 
   my $self = shift;
   my $char = shift;
+  my $f = shift;
 
+  my $config = $self->config;
   my $o = $self->modoptions( $char );
   
-  # money frame defaults to on
-  my $moneyframe = 1;
-  # turn off the money frame for master machines on chars that have broker_currency enabled
-  if( WoWUI::Util::Filter::matches( $char->flags_get('common'), $char, { addons => [ 'Broker_Currency' ], include => [ 'machine:type:master' ] } ) ) {
-    $moneyframe = 0;
-  }
+  my $mf = $f->match( $config->{moneyframe}->{filter}, F_MACH );
 
-  return { realm => $char->realm->name, char => $char->name, scale => $o->{scale}, moneyframe => $moneyframe };
+  $self->perchardata_set( scale => $o->{scale}, moneyframe => $mf->value );
 
 }
 

@@ -7,3 +7,11 @@ templates:
 perchar_filter:
     addons:
         - Bagnon
+moneyframe:
+    filter:
+        - value: 1
+        - value: 0
+          addons:
+              - Broker_Currency
+          include:
+              - machine:type:primary
