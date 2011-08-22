@@ -81,9 +81,6 @@ sub BUILD
   $self->flags_set( 1 => Set::Scalar->new );
   $self->flags_set( 2 => Set::Scalar->new );
   
-  # everyone gets this flag
-  $self->flags_get(0)->insert('everyone');
-
   # common flags
   if( exists $self->cfg->{flags_common} ) {
     $self->flags_get(0)->insert( @{ $self->cfg->{flags_common} } ); 

@@ -71,6 +71,9 @@ sub match
         }
     }
     else {
+        if( exists $filters->{filter} ) {
+            croak "bad single filter passed (one level too high?)";
+        }
         $self->matchone( $r, $filters, $using, $extra );
     }
     
@@ -174,10 +177,9 @@ sub matchone
     $log->debug("matching against flagset: $flags");
 
     # check for an inclusion match
-    my $include = $filter->{include} || [ 'everyone' ];
-    my $exclude = $filter->{exclude};
     my $noexclude = 0;
-    if( $include ) {
+    if( exists $filter->{include} ) {
+        my $include = $filter->{include};
         for my $match( @{ $include } ) {
             my $clauses = Set::Scalar->new;
             if( $match =~ m/^all\((.+)\)$/ ) {
@@ -209,9 +211,14 @@ sub matchone
             }
         }
     }
+    else {
+        $log->trace("no include block; auto-matching");
+        $r->matched( 1 );
+    }
 
     # check for an exclusion
-    if( $r->matched && 0 == $noexclude && $exclude ) {
+    if( $r->matched && 0 == $noexclude && exists $filter->{exclude} ) {
+        my $exclude = $filter->{exclude};
         for my $match( @$exclude ) {
             my $clauses = Set::Scalar->new;
             if( $match =~ m/^all\((.+)\)$/ ) {
@@ -236,7 +243,7 @@ sub matchone
     }
 
     # populate our value
-    if( exists $filter->{value} ) {
+    if( $r->matched && exists $filter->{value} ) {
         $r->value( $filter->{value} );
     }
 

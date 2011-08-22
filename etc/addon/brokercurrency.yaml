@@ -10,9 +10,7 @@ perchar_filter:
     addons:
         - Broker_Currency
 currencies:
-    pve:
-        include:
-            - everyone
+    pve: {}
     pvp:
         include:
             - pvp

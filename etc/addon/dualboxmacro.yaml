@@ -139,8 +139,6 @@ buttongroups:
     buttons:
       - Set Focus
       - Follow Focus
-    include:
-      - everyone
   deathknight:
     buttons:
       - Mind Freeze
@@ -479,7 +477,7 @@ buttons:
   Follow Focus:
     icon: 429
     include:
-      - all(everyone;dbmtype:followfocus)
+      - dbmtype:followfocus
     macro: /follow focus
     name: Follow
   Greater Heal:
@@ -801,7 +799,7 @@ buttons:
   Set Focus:
     icon: 1154
     include:
-      - all(everyone;dbmtype:setfocus)
+      - dbmtype:setfocus
     macro: '/cleartarget\n[% FOR master IN masters %]/target [% master %]\n[% END %]/focus\n/cleartarget'
     name: Set Focus
     ttprocess: 1

@@ -16,11 +16,11 @@ addons:
             - machine:type:basic
             - machine:name:heidi
     Mactics:
-        exclude:
-            - everyone
+        include:
+            - no-one
     RobBossMods:
-        exclude:
-            - everyone
+        include:
+            - no-one
     LoggerHead:
         include:
             - guildrole:CombatLogger
@@ -29,8 +29,6 @@ addons:
             - machine:type:basic
         group: Raiding
     nivItemLevel:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -39,8 +37,6 @@ addons:
             - machine:name:heidi
         group: Standard
     Grid:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -48,8 +44,6 @@ addons:
             - machine:type:basic
         group: Grid
     GridAutoFrameSize:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -57,8 +51,6 @@ addons:
             - machine:type:basic
         group: Grid
     GridStatusDungeonRole:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -82,8 +74,6 @@ addons:
             - mule
         group: Grid
     GridStatusRaidDebuff:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -91,14 +81,12 @@ addons:
             - machine:type:basic
         group: Grid
     GridStatusRD_BC:
-        exclude:
-            - everyone
-    GridStatusRD_WotLK:
-        exclude:
-            - everyone
-    GridStatusRD_Cata:
         include:
-            - everyone
+            - no-one
+    GridStatusRD_WotLK:
+        include:
+            - no-one
+    GridStatusRD_Cata:
         exclude:
             - banker
             - mule
@@ -106,8 +94,6 @@ addons:
             - machine:type:basic
         group: Grid
     GridStatusTankCooldown:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -115,8 +101,6 @@ addons:
             - machine:type:basic
         group: Grid
     GridIndicatorCornerIcons:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -180,8 +164,8 @@ addons:
             - machine:type:basic
         group: Raiding
     DBM-PvP:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-ThroneFourWinds:
         level: 85
         include:
@@ -199,8 +183,8 @@ addons:
             - machine:type:basic
         group: Raiding
     DBM-WorldEvents:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-Party-Cataclysm:
         level: 85
         exclude:
@@ -208,96 +192,84 @@ addons:
             - machine:type:basic
         group: Heroics
     DBM-AQ20:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-AQ40:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-BlackTemple:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-BWL:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-ChamberOfAspects:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-Coliseum:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-EyeOfEternity:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-Hyjal:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-Icecrown:
         include:
             - machine:name:heidi
     DBM-Karazhan:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-MC:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-Onyxia:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-Outlands:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-Party-BC:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-Party-WotLK:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-Serpentsrhine:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-Sunwell:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-TheEye:
-        exclude:
-            - everyone
+        include:
+            - no-one
     DBM-Ulduar:
         include:
             - machine:name:heidi
     DBM-VoA:
-        exclude:
-            - everyone
-    Kong:
         include:
-            - everyone
+            - no-one
+    Kong:
         group: Standard
     KongConfig:
-        include:
-            - everyone
         exclude:
             - machine:type:secondary
         group: UI
     Ace3:
-        exclude:
-            - everyone
-    '!BugGrabber':
         include:
-            - everyone
+            - no-one
+    '!BugGrabber':
         group: Basic
     'BugSack':
-        include:
-            - everyone
         group: Basic
     ACP:
-        include:
-            - everyone
         group: Basic
     Align:
-        exclude:
-            - everyone
-    AltClickToAddItem:
         include:
-            - everyone
+            - no-one
+    AltClickToAddItem:
         group: Basic
     AngeleDei:
         include:
@@ -307,24 +279,18 @@ addons:
             - machine:type:basic
         class: Paladin
     Ara_Broker_Guild_Friends:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     Ara_Broker_Reputations:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     Ara_Broker_Tradeskills:
-        include:
-            - everyone
         exclude:
             - machine:type:secondary
         group: Standard
@@ -337,59 +303,36 @@ addons:
         group: Auctions
     AutoBar:
         include:
-            - noexall(dualbox:slave;machine:type:secondary)
-            - everyone
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
+            - all(dualbox:slave;machine:type:secondary)
         group: Standard
     BadBoy:
-        include:
-            - everyone
         group: Basic
     BadBoy_CCleaner:
-        include:
-            - everyone
         group: Basic
     BadBoy_Levels:
-        include:
-            - everyone
         group: Basic
     Bagnon:
-        include:
-            - everyone
         group: Basic
     Bagnon_GuildBank:
-        exclude:
-            - everyone
-    Bagnon_Config:
         include:
-            - everyone
+            - no-one
+    Bagnon_Config:
         group: Basic
     Bagnon_Forever:
-        include:
-            - everyone
         exclude:
             - machine:type:secondary
             - machine:type:basic
         group: Basic
     Bagnon_Tooltips:
-        include:
-            - everyone
         exclude:
             - machine:type:secondary
             - machine:type:basic
         group: Basic
     Bagsy:
-        include:
-            - everyone
         exclude:
             - machine:type:secondary
         group: Standard
     BankStack:
-        include:
-            - everyone
         group: Standard
     BasicComboPoints:
         include:
@@ -427,23 +370,17 @@ addons:
             - mule
         group: Standard
     Broker_Currency:
-        include:
-            - everyone
         exclude:
             - mule
             - machine:type:secondary
             - machine:type:basic
         group: Standard
     Broker_Equipment:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     Broker_Group:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -451,26 +388,18 @@ addons:
             - machine:type:basic
         group: Standard
     Broker_MicroMenu:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     Broker_uClock:
-        include:
-            - everyone
         group: Basic
     Buffet:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     Butsu:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -478,26 +407,18 @@ addons:
             - machine:type:basic
         group: Standard
     CallbackHandler-1.0:
-        exclude:
-            - everyone
-    ChocolateBar:
         include:
-            - everyone
+            - no-one
+    ChocolateBar:
         group: Basic
     ChocolateBar_Options:
-        include:
-            - everyone
         group: Basic
     Clique:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     Cork:
-        include:
-            - everyone
         exclude:
             - mule
         group:
@@ -518,33 +439,29 @@ addons:
             - machine:type:basic
         class: Death Knight
     Dominos:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     Dominos_Cast:
-        exclude:
-            - everyone
-    Dominos_Config:
         include:
-            - everyone
+            - no-one
+    Dominos_Config:
         exclude:
             - banker
             - mule
         group: Standard
     Dominos_Roll:
-        exclude:
-            - everyone
+        include:
+            - no-one
     Dominos_Totems:
         level: 30
         include:
             - class:Shaman
         group: Standard
     Dominos_XP:
-        exclude:
-            - everyone
+        include:
+            - no-one
     EclipseBarPlus:
         include:
             - all(class:Druid;spec:Balance)
@@ -562,8 +479,6 @@ addons:
             - Raiding
             - Heroics
     Failchievements:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -578,8 +493,6 @@ addons:
             - prof:InactiveFishing
         group: Gathering
     Forte_Casting:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -587,11 +500,9 @@ addons:
             - machine:type:basic
         group: Standard
     Forte_Cooldown:
-        exclude:
-            - everyone
-    Forte_Core:
         include:
-            - everyone
+            - no-one
+    Forte_Core:
         exclude:
             - banker
             - mule
@@ -599,8 +510,8 @@ addons:
             - machine:type:basic
         group: Standard
     Forte_DeathKnight:
-        exclude:
-            - everyone
+        include:
+            - no-one
     Forte_Druid:
         include:
             - class:Druid
@@ -611,8 +522,8 @@ addons:
             - machine:type:basic
         class: Druid
     Forte_Healthstone:
-        exclude:
-            - everyone
+        include:
+            - no-one
     Forte_Hunter:
         include:
             - class:Hunter
@@ -668,20 +579,18 @@ addons:
             - machine:type:basic
         class: Shaman
     Forte_Shard:
-        exclude:
-            - everyone
-    Forte_Soulstone:
-        exclude:
-            - everyone
-    Forte_Summon:
-        exclude:
-            - everyone
-    Forte_Talent:
-        exclude:
-            - everyone
-    Forte_Timer:
         include:
-            - everyone
+            - no-one
+    Forte_Soulstone:
+        include:
+            - no-one
+    Forte_Summon:
+        include:
+            - no-one
+    Forte_Talent:
+        include:
+            - no-one
+    Forte_Timer:
         exclude:
             - banker
             - mule
@@ -689,8 +598,8 @@ addons:
             - machine:type:basic
         group: Standard
     Forte_Vehicle:
-        exclude:
-            - everyone
+        include:
+            - no-one
     Forte_Warlock:
         include:
             - class:Warlock
@@ -710,15 +619,11 @@ addons:
             - machine:type:basic
         class: Warrior
     FreeRefills:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     FriendShare:
-        include:
-            - everyone
         exclude:
             - machine:type:secondary
             - machine:type:basic
@@ -744,15 +649,10 @@ addons:
             - machine:type:basic
         group: Gathering
     GnomishVendorShrinker:
-        include:
-            - everyone
         group: Basic
     GoGoMount:
-        include:
-            - everyone
+        group: Standard
     GreenRange:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -859,8 +759,6 @@ addons:
             - Leveling
             - Loremaster
     LushGearSwap:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -868,8 +766,6 @@ addons:
             - machine:type:basic
         group: Standard
     LushGearSwapOptions:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -881,22 +777,16 @@ addons:
             - all(dualbox:slave;machine:type:secondary)
         group: Dualbox
     MacaroonProfiles:
-        exclude:
-            - everyone
-    Mapster:
         include:
-            - everyone
+            - no-one
+    Mapster:
         exclude:
             - banker
             - mule
         group: Standard
     MicroDeclineDuel:
-        include:
-            - everyone
         group: Basic
     Multishot:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -910,15 +800,11 @@ addons:
             - mule
         group: Standard
     OmniCC:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     OmniCC_Config:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -953,8 +839,6 @@ addons:
             - machine:type:secondary
         group: Crafting
     Parrot:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -962,90 +846,72 @@ addons:
             - machine:type:basic
         group: Standard
     PitBull4:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_Aggro:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_AltPowerBar:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_Aura:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_Background:
-        exclude:
-            - everyone
-    PitBull4_BlankSpace:
         include:
-            - everyone
+            - no-one
+    PitBull4_BlankSpace:
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_Border:
-        exclude:
-            - everyone
-    PitBull4_CastBar:
         include:
-            - everyone
+            - no-one
+    PitBull4_CastBar:
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_CastBarLatency:
-        exclude:
-            - everyone
-    PitBull4_CombatFader:
         include:
-            - everyone
+            - no-one
+    PitBull4_CombatFader:
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_CombatIcon:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_CombatText:
-        exclude:
-            - everyone
+        include:
+            - no-one
     PitBull4_ComboPoints:
         include:
             - all(class:Rogue;machine:name:heidi)
     PitBull4_DogTagTexts:
-        exclude:
-            - everyone
-    PitBull4_PhaseIcon:
         include:
-            - everyone
+            - no-one
+    PitBull4_PhaseIcon:
         exclude:
             - banker
             - mule
@@ -1060,8 +926,8 @@ addons:
             - machine:type:secondary
         class: Druid
     PitBull4_Eclipse:
-        exclude:
-            - everyone
+        include:
+            - no-one
     PitBull4_ExperienceBar:
         level: 10
         include:
@@ -1072,138 +938,109 @@ addons:
             - machine:type:secondary
         class: Hunter
     PitBull4_HappinessIcon:
-        exclude:
-            - everyone
-    PitBull4_HealthBar:
         include:
-            - everyone
+            - no-one
+    PitBull4_HealthBar:
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_HideBlizzard:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_Highlight:
-        exclude:
-            - everyone
-    PitBull4_HolyPower:
-        exclude:
-            - everyone
-    PitBull4_HostilityFader:
         include:
-            - everyone
+            - no-one
+    PitBull4_HolyPower:
+        include:
+            - no-one
+    PitBull4_HostilityFader:
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_LeaderIcon:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_LuaTexts:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_ManaSpark:
-        exclude:
-            - everyone
-    PitBull4_MasterLooterIcon:
         include:
-            - everyone
+            - no-one
+    PitBull4_MasterLooterIcon:
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_Portrait:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_PowerBar:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_PvPIcon:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_QuestIcon:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_RaidTargetIcon:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_RangeFader:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_ReadyCheckIcon:
-        exclude:
-            - everyone
-    PitBull4_ReputationBar:
-        exclude:
-            - everyone
-    PitBull4_RestIcon:
         include:
-            - everyone
+            - no-one
+    PitBull4_ReputationBar:
+        include:
+            - no-one
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_RoleIcon:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     PitBull4_Runes:
-        exclude:
-            - everyone
+        include:
+            - no-one
     PitBull4_SoulShards:
         level: 10
         include:
@@ -1213,62 +1050,48 @@ addons:
             - mule
         class: Warlock
     PitBull4_Sounds:
-        exclude:
-            - everyone
-    PitBull4_ThreatBar:
-        exclude:
-            - everyone
-    PitBull4_Totems:
-        exclude:
-            - everyone
-    PitBull4_VisualHeal:
-        exclude:
-            - everyone
-    PitBull4_VisualHeal5:
-        exclude:
-            - everyone
-    PitBull4_VoiceIcon:
-        exclude:
-            - everyone
-    Postal:
         include:
-            - everyone
+            - no-one
+    PitBull4_ThreatBar:
+        include:
+            - no-one
+    PitBull4_Totems:
+        include:
+            - no-one
+    PitBull4_VisualHeal:
+        include:
+            - no-one
+    PitBull4_VisualHeal5:
+        include:
+            - no-one
+    PitBull4_VoiceIcon:
+        include:
+            - no-one
+    Postal:
         group: Basic
     Prat-3.0:
-        include:
-            - everyone
         group: Basic
     Prat-3.0_HighCPUUsageModules:
-        exclude:
-            - everyone
-    Prat-3.0_Libraries:
         include:
-            - everyone
+            - no-one
+    Prat-3.0_Libraries:
         group: Basic
     Quartz:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     QuestGuru:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     QuestGuru_Tracker:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     RepairBroker:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1284,34 +1107,26 @@ addons:
             - machine:type:basic
         group: Gathering
     SBFOptions:
-        exclude:
-            - everyone
-    SatrinaBuffFrame:
-        exclude:
-            - everyone
-    Raven:
         include:
-            - everyone
+            - no-one
+    SatrinaBuffFrame:
+        include:
+            - no-one
+    Raven:
         exclude:
             - banker
             - mule
             - machine:type:basic
         group: Standard
     Raven_Options:
-        include:
-            - everyone
         exclude:
             - machine:type:basic
             - banker
             - mule
         group: Standard
     SellJunk:
-        include:
-            - everyone
         group: Basic
     SexyMap:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1319,11 +1134,9 @@ addons:
             - machine:type:basic
         group: Standard
     ShockAndAwe:
-        exclude:
-            - everyone
-    Skada:
         include:
-            - everyone
+            - no-one
+    Skada:
         exclude:
             - banker
             - mule
@@ -1331,11 +1144,9 @@ addons:
             - machine:type:basic
         group: Standard
     SkadaAbsorbs:
-        exclude:
-            - everyone
-    SkadaHealAbsorbs:
         include:
-            - everyone
+            - no-one
+    SkadaHealAbsorbs:
         exclude:
             - banker
             - mule
@@ -1352,8 +1163,6 @@ addons:
             - machine:type:basic
         group: Standard
     SkadaDamage:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1361,8 +1170,6 @@ addons:
             - machine:type:basic
         group: Standard
     SkadaDamageTaken:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1370,14 +1177,12 @@ addons:
             - machine:type:basic
         group: Standard
     SkadaDeaths:
-        exclude:
-            - everyone
-    SkadaDebuffs:
-        exclude:
-            - everyone
-    SkadaDispels:
         include:
-            - everyone
+            - no-one
+    SkadaDebuffs:
+        include:
+            - no-one
+    SkadaDispels:
         exclude:
             - banker
             - mule
@@ -1385,14 +1190,12 @@ addons:
             - machine:type:basic
         group: Standard
     SkadaEnemies:
-        exclude:
-            - everyone
-    SkadaFailbot:
-        exclude:
-            - everyone
-    SkadaHealing:
         include:
-            - everyone
+            - no-one
+    SkadaFailbot:
+        include:
+            - no-one
+    SkadaHealing:
         exclude:
             - banker
             - mule
@@ -1400,8 +1203,6 @@ addons:
             - machine:type:basic
         group: Standard
     SkadaPower:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1409,8 +1210,6 @@ addons:
             - machine:type:basic
         group: Standard
     SkadaThreat:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1425,11 +1224,9 @@ addons:
             - mule
         group: Standard
     SoulBurned:
-        exclude:
-            - everyone
-    Talented:
         include:
-            - everyone
+            - no-one
+    Talented:
         exclude:
             - banker
             - mule
@@ -1437,12 +1234,10 @@ addons:
             - machine:type:basic
         group: Standard
     Talented_Inspect:
-        exclude:
-            - everyone
+        include:
+            - no-one
     TellMeWhen:
         level: 15
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1450,8 +1245,6 @@ addons:
             - machine:type:basic
         group: Standard
     TellMeWhen_Options:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1459,8 +1252,6 @@ addons:
             - machine:type:basic
         group: Standard
     TidyPlates:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1468,8 +1259,6 @@ addons:
             - machine:type:basic
         group: Standard
     TidyPlatesHub:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1477,23 +1266,21 @@ addons:
             - machine:type:basic
         group: Standard
     TidyPlates_Grey:
-        exclude:
-            - everyone
-    TidyPlatesIcon:
-        exclude:
-            - everyone
-    TidyPlates_Graphite:
-        exclude:
-            - everyone
-    TidyPlates_Quatre:
-        exclude:
-            - everyone
-    TidyPlates_Neon:
-        exclude:
-            - everyone
-    TidyPlates_ThreatPlates:
         include:
-            - everyone
+            - no-one
+    TidyPlatesIcon:
+        include:
+            - no-one
+    TidyPlates_Graphite:
+        include:
+            - no-one
+    TidyPlates_Quatre:
+        include:
+            - no-one
+    TidyPlates_Neon:
+        include:
+            - no-one
+    TidyPlates_ThreatPlates:
         exclude:
             - banker
             - mule
@@ -1501,30 +1288,24 @@ addons:
             - machine:type:basic
         group: Standard
     TipTac:
-        include:
-            - everyone
         group: Basic
     TipTacItemRef:
-        exclude:
-            - everyone
-    TipTacOptions:
         include:
-            - everyone
+            - no-one
+    TipTacOptions:
         group: Basic
     TipTacTalents:
-        exclude:
-            - everyone
-    TomTom:
         include:
-            - everyone
+            - no-one
+    TomTom:
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     TourGuide:
-        exclude:
-            - everyone
+        include:
+            - no-one
     TrinketMenu:
         include:
             - all(machine:name:kara;levelcap)
@@ -1536,36 +1317,22 @@ addons:
             - all(machine:name:kara;trinketmenu)
         group: Standard
     TurnIn:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     Viewporter:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
         group: Standard
     WIM:
         include:
-            - noexall(dualbox:slave;machine:type:secondary)
-            - everyone
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
+            - all(dualbox:slave;machine:type:secondary)
         group: Basic
     WIM_FlatPanel:
         include:
-            - noexall(dualbox:slave;machine:type:secondary)
-            - everyone
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
+            - all(dualbox:slave;machine:type:secondary)
         group: Basic
     _NPCScan:
         include:
@@ -1598,19 +1365,15 @@ addons:
             - mule
         group: Leveling
     retrot:
-        exclude:
-            - everyone
-    tekKompare:
         include:
-            - everyone
+            - no-one
+    tekKompare:
         exclude:
             - banker
             - mule
             - machine:type:secondary
         group: Standard
     teksLoot:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1622,8 +1385,6 @@ addons:
             - all(machine:name:kara;dungeontype:raids)
         group: Raiding
     AutoItemStartQuest:
-        include:
-            - everyone
         exclude:
             - banker
             - mule
@@ -1647,11 +1408,7 @@ addons:
         group: Standard
     ThatJustHappened:
         include:
-            - machine:name:kara
-        exclude:
-            - banker
-            - mule
-            - everyone
+            - no-one
         group: Standard
     CombatLogTrigger:
         include:

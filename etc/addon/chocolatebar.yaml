@@ -27,8 +27,8 @@ plugins:
                 - LoggerHead
     Raven:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     Archy:
         align: left
         priority: 70
@@ -75,8 +75,8 @@ plugins:
                 - Ara_Broker_Tradeskills
     AutoBar:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     Bagsy:
         align: left
         priority: 30
@@ -97,12 +97,12 @@ plugins:
                 - Broker_Equipment
     MoreChocolate:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     PitBull4:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     Ara_Broker_Friends:
         align: center
         priority: 20
@@ -119,12 +119,12 @@ plugins:
                 - Broker_BufCanceler
     Grid:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     Dominos:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     picoEXP:
         align: center
         priority: 10
@@ -139,8 +139,8 @@ plugins:
                 - RepairBroker
     Prat:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     Broker Group:
         align: left
         priority: 50
@@ -149,16 +149,16 @@ plugins:
                 - Broker_Group
     Parrot:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     TellMeWhen:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     CorkLauncher:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     Ara_Broker_Reputations:
         align: center
         priority: 40
@@ -183,16 +183,16 @@ plugins:
                 - Broker_AltGuild
     GatherMate2:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     Buffet:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     Hydra:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     BankStack:
         align: right
         priority: 60
@@ -202,12 +202,12 @@ plugins:
                 - BankStack
     Skada:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     BagnonLauncher:
         criteria:
-            exclude:
-                - everyone
+            include:
+                - no-one
     WIM:
         align: right
         priority: 40

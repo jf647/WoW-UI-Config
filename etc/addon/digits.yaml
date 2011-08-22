@@ -44,9 +44,7 @@ powertypes:
     altpower:
         index: 10
         color: { r: 1, g: 1, b: 0.1, a: 0.5 }
-        filter:
-            include:
-                - everyone
+        filter: {}
 frames:
     health_pct_ic:
         name: health
