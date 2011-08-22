@@ -335,7 +335,7 @@ settings:
     type: boolean
   Inner Fire-spell:
     filter:
-    - value: Inner File
+    - value: Inner Fire
     - include:
       - spec:Discipline
       level: 83
