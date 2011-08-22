@@ -943,9 +943,6 @@ bindings:
             - class:Shaman
     '5':
       click: BUTTON5
-      filter:
-        exclude:
-        - machine:name:heidi
       types:
         enragebuff:
           filter:
@@ -1254,9 +1251,6 @@ bindings:
   global:
     '5':
       click: BUTTON5
-      filter:
-        exclude:
-        - machine:name:heidi
       types:
         globalranged:
           filter:

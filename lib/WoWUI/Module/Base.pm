@@ -12,6 +12,7 @@ use namespace::autoclean;
 
 # set up class
 with 'WoWUI::ModOptions';
+with 'WoWUI::ModConfig';
 has name => ( is => 'rw', isa => 'Str' );
 has [ qw|global globalpc perchar| ] => ( is => 'rw', isa => 'Bool', default => 0 );
 has globaldata => (
@@ -43,6 +44,7 @@ has machine => ( is => 'rw', isa => 'WoWUI::Machine' );
 CLASS->meta->make_immutable;
 
 use Carp 'croak';
+use Clone 'clone';
 use Hash::Merge::Simple 'merge';
 use File::Copy;
 
@@ -62,11 +64,36 @@ sub BUILD
     $self->config( load_layered( "$name.yaml", '$ADDONCONFDIR', '$PRIVADDONCONFDIR' ) );
 
     if( exists $self->config->{modoptions} ) {
-        $self->modoptions_set( { modoptions => { $self->name => $self->config->{modoptions} } } );
+        $self->set_modoptions( { modoptions => { $self->name => $self->config->{modoptions} } } );
     }
 
     return $self;
   
+}
+
+sub modconfig
+{
+
+    my $self = shift;
+    my $char = shift;
+    
+    my $config = clone $self->config;
+
+    my @things;
+    if( defined $char ) {
+        @things = ( $self, $self->machine, $self->player, $char->realm, $char );
+    }
+    else {
+        @things = ( $self, $self->machine, $self->player );
+    }
+    for my $thing( @things ) {
+        if( $thing->modconfig_exists( $self->name ) ) {
+            $config = merge( $config, $thing->modconfig_get( $self->name ) );
+        }
+    }
+    
+    return $config;
+
 }
 
 sub modoptions
@@ -98,7 +125,7 @@ sub process
 
     my $self = shift;
 
-    my $config = $self->config;
+    my $config = $self->modconfig;
     my $log = WoWUI::Util->log( callingobj => $self );
 
     if( $self->globalpc ) {
@@ -134,7 +161,7 @@ sub build_global
 
     my $self = shift;
 
-    my $config = $self->config;
+    my $config = $self->modconfig;
     my $log = WoWUI::Util->log( callingobj => $self );
 
     $log->debug("processing global");
@@ -152,7 +179,7 @@ sub build_globalpc
 
     my $self = shift;
 
-    my $config = $self->config;
+    my $config = $self->modconfig;
 
     if( exists $config->{filter} ) {
         my $f = WoWUI::Filter->new( machine => $self->machine );
@@ -209,7 +236,7 @@ sub write_global
 
     my $self = shift;
   
-    my $config = $self->config;
+    my $config = $self->modconfig;
   
     my $svdir = sv( $self->player );
     my $log = WoWUI::Util->log( callingobj => $self );
@@ -256,7 +283,7 @@ sub write_perchar
   my $self = shift;
   my $char = shift;
 
-  my $config = $self->config;
+  my $config = $self->modconfig;
   
   my $svdir = perchar_sv( $char );
   

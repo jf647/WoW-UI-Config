@@ -50,7 +50,7 @@ sub augment_globalpc
     my $self = shift;
     my $char = shift;
 
-    my $config = $self->config;
+    my $config = $self->modconfig( $char );
     my $o = $self->modoptions( $char );
 
     my $profile = {

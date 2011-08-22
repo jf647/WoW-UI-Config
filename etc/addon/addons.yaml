@@ -14,7 +14,6 @@ addons:
     tif:
         exclude:
             - machine:type:basic
-            - machine:name:heidi
     Mactics:
         include:
             - no-one
@@ -34,7 +33,6 @@ addons:
             - mule
             - machine:type:secondary
             - machine:type:basic
-            - machine:name:heidi
         group: Standard
     Grid:
         exclude:
@@ -217,7 +215,7 @@ addons:
             - no-one
     DBM-Icecrown:
         include:
-            - machine:name:heidi
+            - no-one
     DBM-Karazhan:
         include:
             - no-one
@@ -247,7 +245,7 @@ addons:
             - no-one
     DBM-Ulduar:
         include:
-            - machine:name:heidi
+            - no-one
     DBM-VoA:
         include:
             - no-one
@@ -297,7 +295,6 @@ addons:
     Auctionator:
         include:
             - banker
-            - machine:name:heidi
         exclude:
             - machine:type:basic
         group: Auctions
@@ -353,7 +350,6 @@ addons:
             - mule
             - machine:type:secondary
             - machine:type:basic
-            - machine:name:heidi
         group: Standard
     Broker_AltGuild:
         include:
@@ -364,11 +360,7 @@ addons:
         group: Unguilded
     Broker_BufCanceler:
         include:
-            - machine:name:heidi
-        exclude:
-            - banker
-            - mule
-        group: Standard
+            - no-one
     Broker_Currency:
         exclude:
             - mule
@@ -472,7 +464,6 @@ addons:
     Expiration-2:
         level: 85
         exclude:
-            - machine:name:heidi
             - machine:type:basic
             - machine:type:secondary
         group:
@@ -484,7 +475,6 @@ addons:
             - mule
             - machine:type:secondary
             - machine:type:basic
-            - machine:name:heidi
         group: Standard
     FishermansFriend:
         include:
@@ -794,7 +784,7 @@ addons:
         group: Standard
     NugMiniPet:
         include:
-            - machine:name:heidi
+            - no-one
         exclude:
             - banker
             - mule
@@ -907,7 +897,8 @@ addons:
             - no-one
     PitBull4_ComboPoints:
         include:
-            - all(class:Rogue;machine:name:heidi)
+            - no-one
+        group: Standard
     PitBull4_DogTagTexts:
         include:
             - no-one
@@ -1336,9 +1327,7 @@ addons:
         group: Basic
     _NPCScan:
         include:
-            - machine:name:kara
-            - machine:name:div
-            - machine:name:heidi
+            - machine:type:primary
         exclude:
             - banker
             - mule
@@ -1393,7 +1382,6 @@ addons:
         include:
             - all(machine:name:kara;wowhead)
             - all(machine:name:kara;realm:Winterhoof)
-            - machine:name:heidi
         exclude:
             - machine:type:secondary
             - banker

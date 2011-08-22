@@ -46,7 +46,7 @@ sub augment_perchar
     my $char = shift;
     my $f = shift;
 
-    my $config = $self->config;
+    my $config = $self->modconfig( $char );
     my $o = $self->modoptions( $char );
     my $log = WoWUI::Util->log;
 
@@ -161,7 +161,7 @@ sub load_cache_from_file
 {
 
     my $self = shift;
-    my $config = $self->config;
+    my $config = $self->modconfig;
 
     my $cachefile = expand_path( $config->{cachefile} );
     if( -f $cachefile ) {
@@ -188,7 +188,7 @@ sub write_cache_to_file
 {
 
     my $self = shift;
-    my $config = $self->config;
+    my $config = $self->modconfig;
     
     my $cachefile = expand_path( $config->{cachefile} );
     dump_file( $cachefile, $self->byname );
@@ -202,7 +202,7 @@ sub add_by_name
     my $trinketfull = shift;
     my $trinket = $trinketfull;
 
-    my $config = $self->config;
+    my $config = $self->modconfig;
     my $log = WoWUI::Util->log;
 
     $log->info("fetching trinket info for '$trinketfull'");

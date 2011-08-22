@@ -23,7 +23,7 @@ sub BUILD
 {
 
     my $self = shift;
-    
+
     if( exists $self->config->{filter} ) {
         $self->filter( $self->config->{filter} );
     }

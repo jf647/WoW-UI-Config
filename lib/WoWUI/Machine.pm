@@ -11,6 +11,7 @@ use namespace::autoclean;
 
 # set up class
 with 'WoWUI::ModOptions';
+with 'WoWUI::ModConfig';
 has name => ( is => 'rw', isa => 'Str', required => 1 );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
 has types => ( is => 'rw', isa => 'ArrayRef[Str]' );
@@ -61,7 +62,8 @@ sub BUILD
     }
 
     # set our various options
-    $self->modoptions_set( $cfg );
+    $self->set_modconfig( $cfg );
+    $self->set_modoptions( $cfg );
     $self->flags( Set::Scalar->new );
     $self->flags->insert('machine:name:'.$self->name);
     $self->output( expand_path( $cfg->{output} ) );

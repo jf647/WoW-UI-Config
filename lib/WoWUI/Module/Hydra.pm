@@ -37,7 +37,7 @@ sub augment_data
 
   my $self = shift;
 
-  my $config = $self->config;
+  my $config = $self->modconfig;
   my $o = $self->modoptions;
   my $log = WoWUI::Util->log;
 
@@ -69,7 +69,7 @@ sub augment_chardata
   my $self = shift;
   my $char = shift;
 
-  my $config = $self->config;
+  my $config = $self->modconfig( $char );
 
   # Hydra master/slave
   if( WoWUI::Util::Filter::matches( $char->flags_get(0), $char, { include => [ 'all(machine:type:master;dualbox:master)' ] } ) ) {

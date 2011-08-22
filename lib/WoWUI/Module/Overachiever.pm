@@ -35,7 +35,7 @@ sub augment_data
 
   my $self = shift;
 
-  my $config = $self->config;
+  my $config = $self->modconfig;
   my $o = $self->modoptions;
 
   my $data = {};

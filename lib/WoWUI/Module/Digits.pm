@@ -37,7 +37,7 @@ sub augment_global
 
     my $self = shift;
 
-    my $config = $self->config;
+    my $config = $self->modconfig;
     my $o = $self->modoptions;
     
     if( $self->has_globaldata ) {
@@ -59,7 +59,7 @@ sub augment_globalpc
 
     my $log = WoWUI::Util->log;
 
-    my $config = $self->config;
+    my $config = $self->modconfig( $char );
     my $o = $self->modoptions;
 
     # frames enabled

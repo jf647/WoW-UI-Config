@@ -32,7 +32,9 @@ sub augment_global
 
     my $self = shift;
 
-    $self->globaldata->{realms} = $self->config->{realms};
+    my $config = $self->modconfig;
+
+    $self->globaldata->{realms} = $config->{realms};
 
 }
 

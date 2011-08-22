@@ -39,7 +39,7 @@ sub augment_data
 
     my $log = WoWUI::Util->log;
 
-    my $config = $self->config;
+    my $config = $self->modconfig;
 
     my $data;
 

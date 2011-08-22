@@ -102,7 +102,7 @@ sub build_clique
     my $char = shift;
     my $f = shift;
     
-    my $config = $self->config;
+    my $config = $self->modconfig( $char );
     my $log = WoWUI::Util->log;
 
     my %clique;

@@ -37,7 +37,7 @@ sub augment_chardata
     my $self = shift;
     my $char = shift;
 
-    my $config = $self->config;
+    my $config = $self->modconfig( $char );
 
     my $chardata = { realm => $char->realm->name, char => $char->name };
 
@@ -99,7 +99,7 @@ sub find_button
     my $buttontype = shift;
     my $unit = shift;
 
-    my $config = $self->config;
+    my $config = $self->modconfig( $char );
     
     my $found = 0;
     my $match;
@@ -138,7 +138,7 @@ sub build_button
     my $char = $p{char};
     my $hotkey = $p{hotkey};
 
-    my $config = $self->config;
+    my $config = $self->modconfig( $char );
     my $buttoncfg = $config->{buttons}->{$buttonname};
 
     my $button = {

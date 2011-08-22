@@ -34,7 +34,7 @@ sub augment_perchar
   my $char = shift;
   my $f = shift;
 
-  my $config = $self->config;
+  my $config = $self->modconfig( $char );
   my $o = $self->modoptions( $char );
   
   my $mf = $f->match( $config->{moneyframe}->{filter}, F_MACH );

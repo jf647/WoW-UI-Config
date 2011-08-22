@@ -11,6 +11,7 @@ use namespace::autoclean;
 
 # set up class
 with 'WoWUI::ModOptions';
+with 'WoWUI::ModConfig';
 has name => ( is => 'rw', isa => 'Str', required => 1 );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
 has cfg => ( is => 'rw', isa => 'HashRef' );
@@ -49,7 +50,8 @@ sub BUILD
 
     $self->flags( Set::Scalar->new );
 
-    $self->modoptions_set( $self->cfg );
+    $self->set_modconfig( $self->cfg );
+    $self->set_modoptions( $self->cfg );
 
     for my $charname( keys %{ $self->cfg->{chars} } ) {
         $log->debug("creating char object for $charname on ", $self->name);

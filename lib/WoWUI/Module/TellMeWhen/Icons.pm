@@ -34,14 +34,16 @@ sub BUILD
 
     my $log = WoWUI::Util->log;
 
-    for my $icon( keys %{ $self->config->{icons} } ) {
-        unless( $self->config->{icons}->{$icon}->{type} ) {
+    my $config = $self->config;
+
+    for my $icon( keys %{ $config->{icons} } ) {
+        unless( $config->{icons}->{$icon}->{type} ) {
             croak "no type defined for $icon";
         }
-        my $type = 'WoWUI::Module::TellMeWhen::Icon::' . $self->config->{icons}->{$icon}->{type};
-        $log->trace("building ", $self->config->{icons}->{$icon}->{type}, " object for '$icon'");
-        $self->config->{icons}->{$icon}->{tag} = $icon;
-        my $i = $type->new( $self->config->{icons}->{$icon} );
+        my $type = 'WoWUI::Module::TellMeWhen::Icon::' . $config->{icons}->{$icon}->{type};
+        $log->trace("building ", $config->{icons}->{$icon}->{type}, " object for '$icon'");
+        $config->{icons}->{$icon}->{tag} = $icon;
+        my $i = $type->new( $config->{icons}->{$icon} );
         $self->icon_set( $icon, $i );
     }
     

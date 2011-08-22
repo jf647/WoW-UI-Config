@@ -104,7 +104,7 @@ sub augment_globalpc
     my $f = shift;
     
     my $log = WoWUI::Util->log;
-    my $config = $self->config;
+    my $config = $self->modconfig( $char );
     
     my $profile = WoWUI::Module::TellMeWhen::Profile->new(
         config => $config,

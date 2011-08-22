@@ -49,7 +49,7 @@ sub augment_perchar
 
     my $log = WoWUI::Util->log;
 
-    my $config = $self->config;
+    my $config = $self->modconfig( $char );
     my $o = $self->modoptions( $char );
 
     my $chardata = { enabled => $o->{enabled}, debug => $o->{debug} };
@@ -95,10 +95,10 @@ sub make_trigger
 {
 
     my $self = shift;
-    my $c = shift;
+    my $char = shift;
     my $tname = shift;
 
-    my $config = $self->config;
+    my $config = $self->modconfig( $char );
     my $trigger = $config->{triggers}->{$tname};
     
     my $t = { name => $tname };
@@ -138,7 +138,7 @@ sub make_trigger
     }
     
     # source / dest
-    $t->{src} = $t->{src} || $c->name;
+    $t->{src} = $t->{src} || $char->name;
     if( exists $trigger->{notonself} ) {
         $t->{notonself} = 1;
     }

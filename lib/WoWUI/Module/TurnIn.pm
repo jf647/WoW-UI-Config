@@ -34,8 +34,7 @@ sub augment_data
 {
 
   my $self = shift;
-
-  my $config = $self->config;
+  my $config = $self->modconfig;
   my $options = $self->modoptions;
 
   # TurnIn

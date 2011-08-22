@@ -38,13 +38,15 @@ sub BUILD
 
     my $self = shift;
 
-    for my $cname( keys %{ $self->config->{conditions} } ) {
-        $self->config->{conditions}->{$cname}->{tag} = $cname;
-        unless( exists $self->config->{conditions}->{$cname}->{Name} ) {
-            $self->config->{conditions}->{$cname}->{Name} = $cname;
+    my $config = $self->config;
+
+    for my $cname( keys %{ $config->{conditions} } ) {
+        $config->{conditions}->{$cname}->{tag} = $cname;
+        unless( exists $config->{conditions}->{$cname}->{Name} ) {
+            $config->{conditions}->{$cname}->{Name} = $cname;
         }
         my $c = WoWUI::Module::TellMeWhen::Condition->new(
-            %{ $self->config->{conditions}->{$cname} }
+            %{ $config->{conditions}->{$cname} }
         );
         $self->set( $cname, $c );
     }

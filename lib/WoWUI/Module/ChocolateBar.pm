@@ -41,7 +41,7 @@ sub augment_data
 
     my $self = shift;
 
-    my $config = $self->config;
+    my $config = $self->modconfig;
     my $o = $self->modoptions;
 
     my $log = WoWUI::Util->log;
@@ -121,7 +121,7 @@ sub augment_config
 {
 
   my $self = shift;
-  my $config = $self->config;
+  my $config = $self->modconfig;
   
   for my $plugin( keys %{ $config->{plugins} } ) {
     $config->{plugins}->{$plugin}->{name} = $plugin;
@@ -134,7 +134,7 @@ sub build_plugin_list
 
   my $self = shift;
 
-  my $config = $self->config;
+  my $config = $self->modconfig;
 
   my %plugins;
   my $all_plugins = Set::Scalar->new;
@@ -158,7 +158,7 @@ sub add_sorted
   my $align = shift;
   my $reverse = 1;
   
-  my $config = $self->config;
+  my $config = $self->modconfig;
   
   my @data;
   for my $plugin( $plugins->members ) {

@@ -11,6 +11,7 @@ use namespace::autoclean;
 
 # set up class
 with 'WoWUI::ModOptions';
+with 'WoWUI::ModConfig';
 has realm => ( is => 'rw', isa => 'WoWUI::Realm', required => 1 );
 has level => ( is => 'rw', isa => 'Int' );
 has cfg => ( is => 'rw', isa => 'HashRef' );
@@ -74,7 +75,8 @@ sub BUILD
   $self->dirname( $self->cfg->{dirname} || $self->name );
 
   # module options
-  $self->modoptions_set( $self->cfg );
+  $self->set_modconfig( $self->cfg );
+  $self->set_modoptions( $self->cfg );
 
   # flag sets
   $self->flags_set( 0 => Set::Scalar->new );

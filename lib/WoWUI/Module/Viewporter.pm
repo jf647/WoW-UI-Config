@@ -37,7 +37,7 @@ sub augment_chardata
   my $self = shift;
   my $char = shift;
 
-  my $config = $self->config;
+  my $config = $self->modconfig( $char );
   my $o = $self->modoptions( $char );
 
   my $chardata = { realm => $char->realm->name, char => $char->name };

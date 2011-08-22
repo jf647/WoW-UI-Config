@@ -21,7 +21,7 @@ has _modoptions => (
 
 use Hash::Merge::Simple 'merge';
 
-sub modoptions_set
+sub set_modoptions
 {
 
     my $self = shift;

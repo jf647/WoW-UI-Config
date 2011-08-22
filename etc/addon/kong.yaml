@@ -30,8 +30,6 @@ frames:
         filter:
             addons:
                 - Grid
-            exclude:
-                - machine:name:heidi
     dkirunes:
         name: DKIRunesFrame
         casting: 1
