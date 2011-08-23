@@ -28,6 +28,14 @@ sub BUILD
     
 }
 
+sub augment_perchar
+{
+
+    my $self = shift;
+    $self->perchardata_set( tidyplates => 1 );
+
+}
+
 # keep require happy
 1;
 

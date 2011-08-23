@@ -5,12 +5,15 @@ templates:
             input: $TEMPLATEDIR/tidyplates/TidyPlates_perchar.lua
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/TidyPlates.lua
         tidyplateshub:
-            input: $TEMPLATEDIR/tidyplates/TidyPlatesHub.lua
+            input: $TEMPLATEDIR/tidyplates/TidyPlatesHub_perchar.lua
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/TidyPlatesHub.lua
     global:
         tidyplates:
             input: $TEMPLATEDIR/tidyplates/TidyPlates.lua
-            output: $TEMPDIR/WTF/SavedVariables/TidyPlates.lua
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/TidyPlates.lua
+        tidyplateshub:
+            input: $TEMPLATEDIR/tidyplates/TidyPlatesHub.lua
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/TidyPlatesHub.lua
 perchar_filter:
     addons:
         - TidyPlates

@@ -26,7 +26,7 @@ modules:
     - WoWUI::Module::CombatLogTrigger
     - WoWUI::Module::Digits
     - WoWUI::Module::TrinketMenu
-#    - WoWUI::Module::TidyPlates
+    - WoWUI::Module::TidyPlates
     - WoWUI::Module::NPCScan
     - WoWUI::Module::Bagnon
     - WoWUI::Module::Postal
