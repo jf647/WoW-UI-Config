@@ -1,4 +1,153 @@
 ---
+buttontemplate: $TEMPLATEDIR/dualbox/button.template
+filtergroups:
+  any:
+    members:
+      - Set Focus
+      - Follow Focus
+  deathknight:
+    filter:
+      include:
+        - class:Death Knight
+    members:
+      - Mind Freeze
+  druid:
+    filter:
+      include:
+        - class:Druid
+    members:
+      - Tranquility
+      - Solar Beam
+      - Innervate
+      - Innervate Self
+      - Druid Panic 3
+      - Druid Panic 4
+      - Healing Touch
+      - Nourish
+      - Rebirth
+      - Druid Prepull Self
+      - Druid Prepull Focus
+      - Druid Prepull Focus 2
+      - Swiftmend
+      - Remove Corruption
+      - Druid DoT
+      - Druid DoT 2
+      - Druid DoT 3
+      - Wrath
+      - Starfire
+      - Wild Growth
+  hunter:
+    filter:
+      include:
+        - class:Hunter
+    members:
+      - Silencing Shot
+      - Hunter Dmg
+      - Master's Call
+      - Hunter Prepull
+  mage:
+    filter:
+      include:
+        - class:Mage
+    members:
+      - Counterspell
+      - Time Warp
+      - Mirror Image
+      - Evocation
+      - Invisibility
+      - Arcane Blast
+      - Fireball
+      - Arcane Missiles
+      - Mage Ward
+      - Slow Fall
+      - Spellsteal
+      - Remove Curse
+      - Mana Shield
+  paladin:
+    filter:
+      include:
+        - class:Paladin
+    members:
+      - Holy Shock
+      - Word of Glory
+      - Paladin Prepull Self
+      - Holy Light
+      - Paladin Panic
+      - Divine Light
+      - Cleanse
+      - Lay on Hands
+      - Lay on Hands Self
+      - Holy Shock Enemy
+      - Judgement
+  priest:
+    filter:
+      include:
+        - class:Priest
+    members:
+      - Pain Suppression
+      - Power Infusion
+      - Greater Heal
+      - Heal
+      - Flash Heal
+      - Guardian Spirit
+      - Shadowfiend
+      - Hymn of Hope
+      - Divine Hymn
+      - Fear Ward
+      - Priest Prepull
+      - Priest Prepull 2
+      - Priest Prepull Self
+      - Priest Cleanse
+      - Renew
+      - Levitate
+      - Flash Heal
+      - Priest DoT
+      - Priest DoT 2
+      - Mind Sear
+      - Atonement Smite
+      - Holy Fire Smite
+      - SWP Holy Fire Smite
+      - SWP Smite
+      - Archangel
+      - Mind Blast
+      - Circle of Healing
+  shaman:
+    filter:
+      include:
+        - class:Shaman
+    members:
+      - Mana Tide Totem
+      - Shaman Prepull
+      - Riptide
+      - Shaman Prepull Self
+      - Shaman Prepull 2
+      - Heroism
+      - Bloodlust
+      - Fire Elemental Totem
+      - Earth Elemental Totem
+      - Tremor Totem
+      - Healing Wave
+      - Greater Healing Wave
+      - Shaman Panic 2
+      - Shaman Panic
+      - Water Walking Breathing
+      - Water Walking
+      - Cleanse Spirit
+      - Shock Rotation
+      - Shock Rotation 2
+      - Lighting Bolt
+      - Call of the Spirits
+      - Call of the Ancestors
+      - Call of the Elements
+      - Wind Shear
+perchar_filter:
+  addons:
+    - Macaroon
+templates:
+  perchar:
+    dualboxmacro:
+      input: $TEMPLATEDIR/dualbox/Macaroon.lua.template
+      output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Macaroon.lua
 bars:
   Focus:
     anchor: RIGHT
@@ -134,237 +283,102 @@ bars:
     showifunit: focus
     x: -215
     y: -83
-buttongroups:
-  any:
-    buttons:
-      - Set Focus
-      - Follow Focus
-  deathknight:
-    buttons:
-      - Mind Freeze
-    include:
-      - class:Death Knight
-  druid:
-    buttons:
-      - Tranquility
-      - Solar Beam
-      - Innervate
-      - Innervate Self
-      - Druid Panic 3
-      - Druid Panic 4
-      - Healing Touch
-      - Nourish
-      - Rebirth
-      - Druid Prepull Self
-      - Druid Prepull Focus
-      - Druid Prepull Focus 2
-      - Swiftmend
-      - Remove Corruption
-      - Druid DoT
-      - Druid DoT 2
-      - Druid DoT 3
-      - Wrath
-      - Starfire
-      - Wild Growth
-    include:
-      - class:Druid
-  healers:
-    buttons: ~
-    include:
-      - role:Healer
-  hunter:
-    buttons:
-      - Silencing Shot
-      - Hunter Dmg
-      - Master's Call
-      - Hunter Prepull
-    include:
-      - class:Hunter
-  mage:
-    buttons:
-      - Counterspell
-      - Time Warp
-      - Mirror Image
-      - Evocation
-      - Invisibility
-      - Arcane Blast
-      - Fireball
-      - Arcane Missiles
-      - Mage Ward
-      - Slow Fall
-      - Spellsteal
-      - Remove Curse
-      - Mana Shield
-    include:
-      - class:Mage
-  paladin:
-    buttons:
-      - Holy Shock
-      - Word of Glory
-      - Paladin Prepull Self
-      - Holy Light
-      - Paladin Panic
-      - Divine Light
-      - Cleanse
-      - Lay on Hands
-      - Lay on Hands Self
-      - Holy Shock Enemy
-      - Judgement
-    include:
-      - class:Paladin
-  priest:
-    buttons:
-      - Pain Suppression
-      - Power Infusion
-      - Greater Heal
-      - Heal
-      - Flash Heal
-      - Guardian Spirit
-      - Shadowfiend
-      - Hymn of Hope
-      - Divine Hymn
-      - Fear Ward
-      - Priest Prepull
-      - Priest Prepull 2
-      - Priest Prepull Self
-      - Priest Cleanse
-      - Renew
-      - Levitate
-      - Flash Heal
-      - Priest DoT
-      - Priest DoT 2
-      - Mind Sear
-      - Atonement Smite
-      - Holy Fire Smite
-      - SWP Holy Fire Smite
-      - SWP Smite
-      - Archangel
-      - Mind Blast
-      - Circle of Healing
-    include:
-      - class:Priest
-  racials:
-    buttons: ~
-    include:
-      - race:Draenei
-      - race:Goblin
-  rogue:
-    buttons: ~
-    include:
-      - class:Rogue
-  shaman:
-    buttons:
-      - Mana Tide Totem
-      - Shaman Prepull
-      - Riptide
-      - Shaman Prepull Self
-      - Shaman Prepull 2
-      - Heroism
-      - Bloodlust
-      - Fire Elemental Totem
-      - Earth Elemental Totem
-      - Tremor Totem
-      - Healing Wave
-      - Greater Healing Wave
-      - Shaman Panic 2
-      - Shaman Panic
-      - Water Walking Breathing
-      - Water Walking
-      - Cleanse Spirit
-      - Shock Rotation
-      - Shock Rotation 2
-      - Lighting Bolt
-      - Call of the Spirits
-      - Call of the Ancestors
-      - Call of the Elements
-      - Wind Shear
-    include:
-      - class:Shaman
-  warlock:
-    buttons: ~
-    include:
-      - class:Warlock
-  warrior:
-    buttons: ~
-    include:
-      - class:Warrior
 buttons:
   Arcane Blast:
-    include:
-      - dbmtype:priattack1
-    level: 20
+    filter:
+      include:
+        - dbmtype:priattack1
+      level: 20
     spell: Arcane Blast
   Arcane Missiles:
-    include:
-      - dbmtype:priattack2
-    level: 3
+    filter:
+      include:
+        - dbmtype:priattack2
+      level: 3
     spell: Arcane Missiles
   Archangel:
-    include:
-      - all(spec:Discipline;subspec:Archangel;dbmtype:priattack2)
-    level: 23
+    filter:
+      include:
+        - all(spec:Discipline;subspec:Archangel;dbmtype:priattack2)
+      level: 23
     notarget: 1
     spell: Archangel
   Atonement Smite:
-    include:
-      - all(spec:Discipline;subspec:Archangel;dbmtype:priattack1)
-    level: 19
+    filter:
+      include:
+        - all(spec:Discipline;subspec:Archangel;dbmtype:priattack1)
+      level: 19
     ooc: Archangel
     spell: Smite
   Bloodlust:
-    include:
-      - all(faction:horde;dbmtype:special1)
-    level: 70
+    filter:
+      include:
+        - all(faction:horde;dbmtype:special1)
+      level: 70
     notarget: 1
     spell: Bloodlust
   Call of the Ancestors:
-    level: 40:49
-    include:
-      - dbmtype:priattack2
+    filter:
+      include:
+        - dbmtype:priattack2
+      level: 40:49
     notarget: 1
     spell: Call of the Ancestors
   Call of the Elements:
-    level: 30:39
-    include:
-      - dbmtype:priattack2
+    filter:
+      include:
+        - dbmtype:priattack2
+      level: 30:39
     notarget: 1
     spell: Call of the Elements
   Call of the Spirits:
-    level: 50
-    include:
-      - dbmtype:priattack2
+    filter:
+      include:
+        - dbmtype:priattack2
+      level: 50
     notarget: 1
     spell: Call of the Spirits
+  Circle of Healing:
+    filter:
+      include:
+        - all(spec:Holy;dbmtype:groupheal)
+    spell: Circle of Healing
   Cleanse:
-    include:
-      - dbmtype:cleanse
-    level: 34
+    filter:
+      include:
+        - dbmtype:cleanse
+      level: 34
     spell: Cleanse
   Cleanse Spirit:
-    include:
-      - dbmtype:cleanse
-    level: 18
+    filter:
+      include:
+        - dbmtype:cleanse
+      level: 18
     spell: Cleanse Spirit
   Counterspell:
-    include:
-      - dbmtype:priattack3
-    level: 9
+    filter:
+      include:
+        - dbmtype:priattack3
+      level: 9
     spell: Counterspell
   Divine Hymn:
-    include:
-      - dbmtype:special5
-    level: 78
+    filter:
+      include:
+        - dbmtype:special5
+      level: 78
     notarget: 1
     spell: Divine Hymn
   Divine Light:
-    include:
-      - dbmtype:bigheal
-    level: 62
+    filter:
+      include:
+        - dbmtype:bigheal
+      level: 62
     spell: Divine Light
   Druid DoT:
-    include:
-      - dbmtype:secattack1
-    level: 24
+    filter:
+      include:
+        - dbmtype:secattack1
+      level: 24
     name: Dmg
     reset: 10/combat/target
     spell:
@@ -372,23 +386,26 @@ buttons:
       - Moonfire
       - Faerie Fire
   Druid DoT 2:
-    level: 20:23
-    include:
-      - dbmtype:secattack1
+    filter:
+      include:
+        - dbmtype:secattack1
+      level: 20:23
     name: Dmg
     reset: 10/combat/target
     spell:
       - Insect Swarm
       - Moonfire
   Druid DoT 3:
-    level: 4:19
-    include:
-      - dbmtype:secattack1
+    filter:
+      include:
+        - dbmtype:secattack1
+      level: 4:19
     spell: Moonfire
   Druid Panic 3:
-    include:
-      - dbmtype:panic
-    level: 78
+    filter:
+      include:
+        - dbmtype:panic
+      level: 78
     name: Panic
     reset: combat
     spell:
@@ -398,9 +415,10 @@ buttons:
       - Nourish
       - Regrowth
   Druid Panic 4:
-    level: 33:77
-    include:
-      - dbmtype:panic
+    filter:
+      include:
+        - dbmtype:panic
+      level: 33:77
     name: Panic
     reset: combat
     spell:
@@ -408,19 +426,21 @@ buttons:
       - Nourish
       - Rejuvenation
       - Regrowth
-  Druid Prepull Self:
-    level: 12
-    include:
-      - all(dbmunit:player;dbmtype:prepull)
+  Druid Prepull Focus:
+    filter:
+      include:
+        - all(dbmunit:focus;dbmtype:prepull)
+      level: :63
     name: PrePull
     reset: combat
     spell:
       - Rejuvenation
       - Regrowth
   Druid Prepull Focus 2:
-    include:
-      - all(dbmunit:focus;dbmtype:prepull)
-    level: 64
+    filter:
+      include:
+        - all(dbmunit:focus;dbmtype:prepull)
+      level: 64
     name: PrePull
     reset: 10/combat
     spell:
@@ -430,101 +450,117 @@ buttons:
       - Lifebloom
       - Wild Growth
       - Lifebloom
-  Druid Prepull Focus:
-    include:
-      - all(dbmunit:focus;dbmtype:prepull)
-    level: :63
+  Druid Prepull Self:
+    filter:
+      include:
+        - all(dbmunit:player;dbmtype:prepull)
+      level: 12
     name: PrePull
     reset: combat
     spell:
       - Rejuvenation
       - Regrowth
   Earth Elemental Totem:
-    include:
-      - dbmtype:special2
-    level: 56
+    filter:
+      include:
+        - dbmtype:special2
+      level: 56
     notarget: 1
     spell: Earth Elemental Totem
   Evocation:
-    include:
-      - dbmtype:special5
-    level: 12
+    filter:
+      include:
+        - dbmtype:special5
+      level: 12
     notarget: 1
     spell: Evocation
   Fear Ward:
-    include:
-      - dbmtype:special6
-    level: 54
+    filter:
+      include:
+        - dbmtype:special6
+      level: 54
     name: FW
     spell: Fear Ward
   Fire Elemental Totem:
-    include:
-      - dbmtype:special5
-    level: 66
+    filter:
+      include:
+        - dbmtype:special5
+      level: 66
     notarget: 1
     spell: Fire Elemental Totem
   Fireball:
-    include:
-      - dbmtype:priattack1
-    level: :19
+    filter:
+      include:
+        - dbmtype:priattack1
+      level: :19
     spell: Fireball
   Flash Heal:
-    level: 3:37
-    include:
-      - dbmtype:bigheal
+    filter:
+      include:
+        - dbmtype:bigheal
+      level: 3:37
     name: BigHeal
     spell: Flash Heal
   Follow Focus:
+    filter:
+      include:
+        - dbmtype:followfocus
     icon: 429
-    include:
-      - dbmtype:followfocus
     macro: /follow focus
     name: Follow
   Greater Heal:
-    include:
-      - dbmtype:bigheal
-    level: 38
+    filter:
+      include:
+        - dbmtype:bigheal
+      level: 38
     name: BigHeal
     spell: Greater Heal
   Greater Healing Wave:
-    include:
-      - dbmtype:bigheal
-    level: 7
+    filter:
+      include:
+        - dbmtype:bigheal
+      level: 7
     spell: Greater Healing Wave
   Guardian Spirit:
-    include:
-      - all(spec:Holy;dbmtype:special2)
-    level: 69
+    filter:
+      include:
+        - all(spec:Holy;dbmtype:special2)
+      level: 69
     name: GS
     spell: Guardian Spirit
   Heal:
-    include:
-      - dbmtype:spamheal
-    level: 16
+    filter:
+      include:
+        - dbmtype:spamheal
+      level: 16
     name: BigHeal
     spell: Heal
   Healing Touch:
-    level: 78
-    include:
-      - dbmtype:bigheal
+    filter:
+      include:
+        - dbmtype:bigheal
+      level: 78
     spell: Healing Touch
   Healing Wave:
-    include:
-      - dbmtype:spamheal
-    level: 7
+    filter:
+      include:
+        - dbmtype:spamheal
+      level: 7
     spell: Healing Wave
   Heroism:
-    include:
-      - all(faction:alliance;dbmtype:special1)
-    level: 70
+    filter:
+      include:
+        - all(faction:alliance;dbmtype:special1)
+      level: 70
     notarget: 1
     spell: Heroism
   Holy Fire Smite:
-    level: 28
-    exclude:
-      - subspec:Archangel
-    include:
-      - all(spec:Discipline;dbmtype:priattack1)
+    filter:
+      exclude:
+        - subspec:Archangel
+      include:
+        - all(spec:Discipline;dbmtype:priattack1)
+      level: 28
     name: Dmg
     reset: 10/combat/target
     spell:
@@ -535,142 +571,167 @@ buttons:
       - Smite
       - Smite
   Holy Light:
-    include:
-      - dbmtype:spamheal
-    level: 7
+    filter:
+      include:
+        - dbmtype:spamheal
+      level: 7
     spell: Holy Light
   Holy Shock:
-    level: 10:43
-    include:
-      - all(spec:Holy;dbmtype:prepull)
+    filter:
+      include:
+        - all(spec:Holy;dbmtype:prepull)
+      level: 10:43
     spell: Holy Shock
   Holy Shock Enemy:
-    include:
-      - all(spec:Holy;dbmtype:priattack1)
-    level: 10
+    filter:
+      include:
+        - all(spec:Holy;dbmtype:priattack1)
+      level: 10
     spell: Holy Shock
   Hunter Dmg:
-    include:
-      - all(dbmtype:priattack1)
+    filter:
+      include:
+        - all(dbmtype:priattack1)
     name: Damage
     spell: Auto Shot
   Hunter Prepull:
-    include:
-      - all(dbmunit:focus;dbmtype:prepull)
-    level: 76
+    filter:
+      include:
+        - all(dbmunit:focus;dbmtype:prepull)
+      level: 76
     spell: Misdirection
     unit: focus
   Hymn of Hope:
-    include:
-      - dbmtype:special4
-    level: 64
+    filter:
+      include:
+        - dbmtype:special4
+      level: 64
     notarget: 1
     spell: Hymn of Hope
   Innervate:
-    include:
-      - dbmtype:special5
-    level: 28
+    filter:
+      include:
+        - dbmtype:special5
+      level: 28
     name: InnF
     spell: Innervate
   Innervate Self:
-    include:
-      - dbmtype:special2
-    level: 28
+    filter:
+      include:
+        - dbmtype:special2
+      level: 28
     name: InnS
     spell: Innervate
     unit: player
   Invisibility:
-    include:
-      - all(class;Mage;dbmtype:special3)
-    level: 78
+    filter:
+      include:
+        - all(class;Mage;dbmtype:special3)
+      level: 78
     notarget: 1
     spell: Invisibility
   Judgement:
-    include:
-      - dbmtype:priattack2
-    level: 3
+    filter:
+      include:
+        - dbmtype:priattack2
+      level: 3
     spell: Judgement
   Lay on Hands:
-    include:
-      - dbmtype:special1
-    level: 16
+    filter:
+      include:
+        - dbmtype:special1
+      level: 16
     spell: Lay on Hands
     unit: focus
   Lay on Hands Self:
-    include:
-      - dbmtype:special2
-    level: 16
+    filter:
+      include:
+        - dbmtype:special2
+      level: 16
     spell: Lay on Hands
     unit: player
   Levitate:
-    include:
-      - dbmtype:utility
-    level: 34
+    filter:
+      include:
+        - dbmtype:utility
+      level: 34
     spell: Levitate
   Lighting Bolt:
-    include:
-      - dbmtype:priattack1
+    filter:
+      include:
+        - dbmtype:priattack1
     spell: Lightning Bolt
   Mage Ward:
-    include:
-      - all(dbmunit:player;dbmtype:spamheal)
-    level: 36
+    filter:
+      include:
+        - all(dbmunit:player;dbmtype:spamheal)
+      level: 36
     notarget: 1
     spell: Mage Ward
   Mana Shield:
-    include:
-      - all(dbmunit:player;dbmtype:prepull)
-    level: 46
+    filter:
+      include:
+        - all(dbmunit:player;dbmtype:prepull)
+      level: 46
     notarget: 1
     spell: Mana Shield
   Mana Tide Totem:
-    level: 49
-    include:
-      - all(spec:Restoration;dbmtype:special4)
+    filter:
+      include:
+        - all(spec:Restoration;dbmtype:special4)
+      level: 49
     notarget: 1
     spell: Mana Tide Totem
   Master's Call:
-    include:
-      - dbmtype:cleanse
-    level: 74
+    filter:
+      include:
+        - dbmtype:cleanse
+      level: 74
     spell: Master's Call
   Mind Blast:
-    include:
-      - dbmtype:priattack3
-    level: 9
+    filter:
+      include:
+        - dbmtype:priattack3
+      level: 9
     spell: Mind Blast
   Mind Freeze:
-    include:
-      - dbmtype:priattack3
-    level: 57
+    filter:
+      include:
+        - dbmtype:priattack3
+      level: 57
     spell: Mind Freeze
   Mind Sear:
-    include:
-      - dbmtype:secattack2
-    level: 74
+    filter:
+      include:
+        - dbmtype:secattack2
+      level: 74
     name: MS
     spell: Mind Sear
   Mirror Image:
-    level: 50
-    include:
-      - all(dbmtype:special2)
+    filter:
+      include:
+        - all(dbmtype:special2)
+      level: 50
     notarget: 1
     spell: Mirror Image
   Nourish:
-    level: 8
-    include:
-      - dbmtype:spamheal
+    filter:
+      include:
+        - dbmtype:spamheal
+      level: 8
     spell: Nourish
   Pain Suppression:
-    include:
-      - all(spec:Discipline;dbmtype:special2)
-    level: 29
+    filter:
+      include:
+        - all(spec:Discipline;dbmtype:special2)
+      level: 29
     name: PS
     spell: Pain Suppression
   Paladin Panic:
-    include:
-      - dbmtype:panic
-    level: 62
+    filter:
+      include:
+        - dbmtype:panic
+      level: 62
     name: Panic
     spell:
       - Flash of Light
@@ -678,48 +739,54 @@ buttons:
       - Flash of Light
       - Divine Light
   Paladin Prepull Self:
-    include:
-      - all(dbmtype:prepull;dbmunit:player)
-    level: 44
+    filter:
+      include:
+        - all(dbmtype:prepull;dbmunit:player)
+      level: 44
     name: PrePullS
     reset: 10/combat
     spell:
       - Divine Plea
       - Beacon of Light
   Power Infusion:
-    include:
-      - all(spec:Discipline;dbmtype:special3)
-    level: 39
+    filter:
+      include:
+        - all(spec:Discipline;dbmtype:special3)
+      level: 39
     name: PI
     spell: Power Infusion
   Priest Cleanse:
-    include:
-      - dbmtype:cleanse
-    level: 26
+    filter:
+      include:
+        - dbmtype:cleanse
+      level: 26
     name: Cleanse
     reset: 5/combat
     spell:
       - Dispel Magic
       - Cure Disease
   Priest DoT:
-    include:
-      - dbmtype:secattack1
-    level: 28
+    filter:
+      include:
+        - dbmtype:secattack1
+      level: 28
     name: DoT
     reset: 10/combat/target
     spell:
       - 'Shadow Word: Pain'
       - Devouring Plague
   Priest DoT 2:
-    level: 4:27
-    include:
-      - dbmtype:secattack1
+    filter:
+      include:
+        - dbmtype:secattack1
+      level: 4:27
     name: DoT
     spell: 'Shadow Word: Pain'
   Priest Prepull:
-    include:
-      - all(dbmunit:focus;dbmtype:prepull)
-    level: 54
+    filter:
+      include:
+        - all(dbmunit:focus;dbmtype:prepull)
+      level: 54
     name: PrePullF
     reset: 10/combat
     spell:
@@ -727,54 +794,62 @@ buttons:
       - Prayer Of Mending
       - Renew
   Priest Prepull 2:
-    include:
-      - all(dbmunit:player;dbmtype:prepull)
-    level: 8:54
+    filter:
+      include:
+        - all(dbmunit:player;dbmtype:prepull)
+      level: 8:54
     name: PrePullS
     reset: 10/combat
     spell:
       - 'Power Word: Shield'
       - Renew
   Priest Prepull Self:
-    include:
-      - all(dbmunit:player;dbmtype:prepull)
-    level: 8
+    filter:
+      include:
+        - all(dbmunit:player;dbmtype:prepull)
+      level: 8
     name: PrePullS
     reset: 10/combat
     spell:
       - 'Power Word: Shield'
       - Renew
   Rebirth:
-    include:
-      - dbmtype:special4
-    level: 20
+    filter:
+      include:
+        - dbmtype:special4
+      level: 20
     spell: Rebirth
   Remove Corruption:
-    include:
-      - dbmtype:cleanse
-    level: 24
+    filter:
+      include:
+        - dbmtype:cleanse
+      level: 24
     spell: Remove Corruption
   Remove Curse:
-    include:
-      - all(dbmtype:cleanse)
-    level: 30
+    filter:
+      include:
+        - all(dbmtype:cleanse)
+      level: 30
     spell: Remove Curse
   Renew:
-    include:
-      - dbmtype:hot
-    level: 8
+    filter:
+      include:
+        - dbmtype:hot
+      level: 8
     spell: Renew
   Riptide:
-    include:
-      - all(spec:Restoration;dbmtype:hot)
-    level: 69
+    filter:
+      include:
+        - all(spec:Restoration;dbmtype:hot)
+      level: 69
     spell: Riptide
   SWP Holy Fire Smite:
-    level: 18:27
-    exclude:
-      - subspec:Archangel
-    include:
-      - all(spec:Discipline;dbmtype:priattack1)
+    filter:
+      exclude:
+        - subspec:Archangel
+      include:
+        - all(spec:Discipline;dbmtype:priattack1)
+      level: 18:27
     name: Dmg
     reset: 10/combat/target
     spell:
@@ -784,11 +859,12 @@ buttons:
       - Smite
       - Smite
   SWP Smite:
-    level: 4:17
-    exclude:
-      - subspec:Archangel
-    include:
-      - all(spec:Discipline;dbmtype:priattack1)
+    filter:
+      exclude:
+        - subspec:Archangel
+      include:
+        - all(spec:Discipline;dbmtype:priattack1)
+      level: 4:17
     name: Dmg
     reset: 10/combat/target
     spell:
@@ -797,36 +873,41 @@ buttons:
       - Smite
       - Smite
   Set Focus:
+    filter:
+      include:
+        - dbmtype:setfocus
     icon: 1154
-    include:
-      - dbmtype:setfocus
     macro: '/cleartarget\n[% FOR master IN masters %]/target [% master %]\n[% END %]/focus\n/cleartarget'
     name: Set Focus
     ttprocess: 1
   Shadowfiend:
-    include:
-      - dbmtype:special1
-    level: 66
+    filter:
+      include:
+        - dbmtype:special1
+      level: 66
     name: SF
     spell: Shadowfiend
     unit: focustarget
   Shaman Panic:
-    level: 20:39
-    include:
-      - dbmtype:panic
+    filter:
+      include:
+        - dbmtype:panic
+      level: 20:39
     spell: Healing Surge
   Shaman Panic 2:
-    include:
-      - dbmtype:panic
-    level: 40
+    filter:
+      include:
+        - dbmtype:panic
+      level: 40
     name: Panic
     spell:
       - Chain Heal
       - Healing Surge
   Shaman Prepull:
-    include:
-      - all(spec:Restoration;dbmtype:prepull;dbmunit:focus)
-    level: 69
+    filter:
+      include:
+        - all(spec:Restoration;dbmtype:prepull;dbmunit:focus)
+      level: 69
     name: PrePullF
     reset: combat
     spell:
@@ -835,22 +916,25 @@ buttons:
       - Riptide
       - Riptide
   Shaman Prepull 2:
-    include:
-      - all(spec:Restoration;dbmtype:prepull;dbmunit:focus)
-    level: :68
+    filter:
+      include:
+        - all(spec:Restoration;dbmtype:prepull;dbmunit:focus)
+      level: :68
     name: PrePullF
     spell: Earth Shield
   Shaman Prepull Self:
-    include:
-      - all(dbmtype:prepull;dbmunit:player)
-    level: 20
+    filter:
+      include:
+        - all(dbmtype:prepull;dbmunit:player)
+      level: 20
     name: PrePullS
     notarget: 1
     spell: Water Shield
   Shock Rotation:
-    include:
-      - dbmtype:secattack1
-    level: 14
+    filter:
+      include:
+        - dbmtype:secattack1
+      level: 14
     name: Shock
     reset: 10/combat/target
     spell:
@@ -858,99 +942,102 @@ buttons:
       - Earth Shock
       - Earth Shock
   Shock Rotation 2:
-    level: 5:13
-    include:
-      - dbmtype:secattack1
+    filter:
+      include:
+        - dbmtype:secattack1
+      level: 5:13
     name: Shock
     spell: Earth Shock
   Silencing Shot:
-    include:
-      - all(spec:Marksmanship;dbmtype:priattack3)
-    level: 29
+    filter:
+      include:
+        - all(spec:Marksmanship;dbmtype:priattack3)
+      level: 29
     spell: Silencing Shot
   Slow Fall:
-    include:
-      - all(dbmtype:utility)
-    level: 32
+    filter:
+      include:
+        - all(dbmtype:utility)
+      level: 32
     spell: Slow Fall
   Solar Beam:
-    include:
-      - all(spec:Balance;dbmtype:priattack3)
-    level: 39
+    filter:
+      include:
+        - all(spec:Balance;dbmtype:priattack3)
+      level: 39
     spell: Solar Beam
   Spellsteal:
-    include:
-      - dbmtype:secattack1
-    level: 76
+    filter:
+      include:
+        - dbmtype:secattack1
+      level: 76
     spell: Spellsteal
   Starfire:
-    level: 8
-    include:
-      - dbmtype:priattack2
+    filter:
+      include:
+        - dbmtype:priattack2
+      level: 8
     spell: Starfire
   Swiftmend:
-    include:
-      - all(spec:Restoration;dbmtype:hot)
+    filter:
+      include:
+        - all(spec:Restoration;dbmtype:hot)
     spell: Swiftmend
   Time Warp:
-    include:
-      - dbmtype:special1
-    level: 85
+    filter:
+      include:
+        - dbmtype:special1
+      level: 85
     notarget: 1
     spell: Time Warp
   Tranquility:
-    include:
-      - dbmtype:special1
-    level: 68
+    filter:
+      include:
+        - dbmtype:special1
+      level: 68
     notarget: 1
     spell: Tranquility
   Tremor Totem:
-    include:
-      - dbmtype:special3
-    level: 52
+    filter:
+      include:
+        - dbmtype:special3
+      level: 52
     notarget: 1
     spell: Tremor Totem
   Water Walking:
-    level: 24:45
-    include:
-      - dbmtype:utility
+    filter:
+      include:
+        - dbmtype:utility
+      level: 24:45
     spell: Water Walking
   Water Walking Breathing:
-    include:
-      - dbmtype:utility
-    level: 46
+    filter:
+      include:
+        - dbmtype:utility
+      level: 46
     name: WaterWB
     spell:
       - Water Walking
       - Water Breathing
+  Wild Growth:
+    filter:
+      include:
+        - dbmtype:groupheal
+    spell: Wild Growth
   Wind Shear:
-    include:
-      - dbmtype:priattack3
-    level: 16
+    filter:
+      include:
+        - dbmtype:priattack3
+      level: 16
     spell: Wind Shear
   Word of Glory:
-    include:
-      - dbmtype:hot
-    level: 9
+    filter:
+      include:
+        - dbmtype:hot
+      level: 9
     spell: Word of Glory
   Wrath:
-    include:
-      - dbmtype:priattack1
+    filter:
+      include:
+        - dbmtype:priattack1
     spell: Wrath
-  Circle of Healing:
-    include:
-      - all(spec:Holy;dbmtype:groupheal)
-    spell: Circle of Healing
-  Wild Growth:
-    include:
-      - dbmtype:groupheal
-    spell: Wild Growth
-buttontemplate: $TEMPLATEDIR/dualbox/button.template
-perchar_filter:
-    addons:
-        - Macaroon
-templates:
-  perchar:
-    dualbox:
-      input: $TEMPLATEDIR/dualbox/Macaroon.lua.template
-      output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Macaroon.lua

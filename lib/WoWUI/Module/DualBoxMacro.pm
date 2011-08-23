@@ -11,12 +11,18 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
+has filtergroups => (
+    is => 'rw',
+    isa => 'WoWUI::FilterGroups',
+);
 CLASS->meta->make_immutable;
 
 use Carp 'croak';
 
 use WoWUI::Config;
 use WoWUI::Util qw|tt expand_path log|;
+use WoWUI::Filter::Constants;
+use WoWUI::FilterGroups;
 
 # constructor
 sub BUILD {
@@ -25,21 +31,27 @@ sub BUILD {
     
     $self->perchar( 1 );
     
-    WoWUI::Util::Filter::check_filter_groups( $config->{buttongroups}, $config->{buttons}, 'buttons' );
+    my $config = $self->config;
+
+    # build filter groups
+    my $fgs = WoWUI::FilterGroups->new(
+        $config->{filtergroups},
+        $config->{buttons},
+    );
+    $self->filtergroups( $fgs );
     
     return $self;
 
 }
 
-sub augment_chardata
+sub augment_perchar
 {
 
     my $self = shift;
     my $char = shift;
+    my $f = shift;
 
     my $config = $self->modconfig( $char );
-
-    my $chardata = { realm => $char->realm->name, char => $char->name };
 
     # walk through bars, picking up a button for each
     my @bars;
@@ -50,6 +62,7 @@ sub augment_chardata
             my $button;
             my $match = $self->find_button(
                 $char,
+                $f,
                 $config->{bars}->{$barname}->{buttons}->{$buttonpos}->{buttontype},
                 $config->{bars}->{$barname}->{defaultunit},
             );
@@ -83,11 +96,8 @@ sub augment_chardata
         push @bars, $bar;
     }
     
-    # walk through bars, building buttons
-    $chardata->{bars} = \@bars;
-    $chardata->{buttons} = \@buttons;
-
-    return $chardata;
+    $self->perchardata_set( bars => \@bars );
+    $self->perchardata_set( buttons => \@buttons );
 
 }
 
@@ -96,6 +106,7 @@ sub find_button
 
     my $self = shift;
     my $char = shift;
+    my $f = shift;
     my $buttontype = shift;
     my $unit = shift;
 
@@ -103,20 +114,23 @@ sub find_button
     
     my $found = 0;
     my $match;
-    my @candidates = WoWUI::Util::Filter::filter_groups( $char->flags_get(0), $config->{buttongroups}, 'buttons' );
-    for my $button( @candidates ) {
+    my $using = F_CALL;
+    if( $char->dualbox_spec ) {
+        if( 1 == $char->dualbox_spec ) {
+            $using = F_C0|F_C1;
+        }
+        else {
+            $using = F_C0|F_C2;
+        }
+    }
+
+    my $candidates = $self->filtergroups->candidates( $f, $using );
+    for my $button( $candidates->members ) {
         my @extra = ( "dbmtype:$buttontype" );
         if( $unit ) {
             push @extra, "dbmunit:$unit";
         }
-        my $flags;
-        if( $char->dualbox_spec ) {
-            $flags = $char->flags_get('spec'.$char->dualbox_spec);
-        }
-        else {
-            $flags = $char->flags_get('all');
-        }
-        if( WoWUI::Util::Filter::matches( $flags, $char, $config->{buttons}->{$button}, \@extra ) ) {
+        if( $f->match( $config->{buttons}->{$button}->{filter}, $using, \@extra ) ) {
             if( $found ) {
                 croak "buttontype '$buttontype' matched two buttons ($match and $button)";
             }

@@ -30,7 +30,7 @@ modules:
     - WoWUI::Module::NPCScan
     - WoWUI::Module::Bagnon
     - WoWUI::Module::Postal
-#    - WoWUI::Module::DualBoxMacro
+    - WoWUI::Module::DualBoxMacro
     - WoWUI::Module::BrokerCurrency
     - WoWUI::Module::Auctionator
 #    - WoWUI::Module::DeadlyBossMods
