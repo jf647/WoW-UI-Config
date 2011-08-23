@@ -451,7 +451,9 @@ settings:
     type: boolean
   Soul Shards-enabled:
     filter:
+    - value: 0
     - value: 1
+      level: 10
     type: boolean
   Soulstone-enabled:
     filter:
