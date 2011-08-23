@@ -11,6 +11,7 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
+with 'WoWUI::NoPercharData';
 CLASS->meta->make_immutable;
 
 use WoWUI::Config;
@@ -26,14 +27,6 @@ sub BUILD
     
     return $self;
     
-}
-
-sub augment_perchar
-{
-
-    my $self = shift;
-    $self->perchardata_set( tidyplates => 1 );
-
 }
 
 # keep require happy

@@ -11,6 +11,7 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
+with 'WoWUI::NoPercharData';
 CLASS->meta->make_immutable;
 
 use WoWUI::Config;

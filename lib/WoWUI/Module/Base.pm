@@ -50,6 +50,7 @@ use File::Copy;
 
 use WoWUI::Util qw|expand_path load_layered perchar_sv sv tempfile tt log tempdir|;
 use WoWUI::Filter::Constants qw|F_MPR|;
+use WoWUI::NoPercharData;
 
 # constructor
 sub BUILD
