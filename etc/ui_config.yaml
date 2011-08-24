@@ -38,7 +38,7 @@ modules:
     - WoWUI::Module::SexyMap
     - WoWUI::Module::Overachiever
     - WoWUI::Module::Viewporter
-#    - WoWUI::Module::WIM
+    - WoWUI::Module::WIM
 #    - WoWUI::Module::SellJunk
 #    - WoWUI::Module::QuestGuru
 #    - WoWUI::Module::TurnIn
