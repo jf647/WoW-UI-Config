@@ -40,7 +40,7 @@ modules:
     - WoWUI::Module::Viewporter
     - WoWUI::Module::WIM
     - WoWUI::Module::SellJunk
-#    - WoWUI::Module::QuestGuru
+    - WoWUI::Module::QuestGuru
 #    - WoWUI::Module::TurnIn
 #    - WoWUI::Module::Hydra
 #    - WoWUI::Module::FreeRefills

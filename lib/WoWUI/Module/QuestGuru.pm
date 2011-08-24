@@ -11,6 +11,7 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
+with 'WoWUI::NoPercharData';
 CLASS->meta->make_immutable;
 
 use Carp 'croak';
@@ -31,35 +32,20 @@ sub BUILD
     
 }
 
-sub augment_data
+sub augment_global
 {
 
   my $self = shift;
 
-  my $config = $self->modconfig;
   my $o = $self->modoptions;
-
-  my $data;
 
   # Questguru Party Announce
   if( exists $o->{announce} ) {
-    $data->{announce} = $o->{announce};
+    $self->globaldata_set( announce => 1 );
   }
   else {
-    $data->{announce} = 0;
+    $self->globaldata_set( announce => 0 );
   }
-
-  return $data;
-
-}
-
-sub augment_chardata
-{
-
-  my $self = shift;
-  my $char = shift;
-
-  return { realm => $char->realm->name, char => $char->name };
 
 }
 
