@@ -31,26 +31,24 @@ sub BUILD
     
 }
 
-sub augment_chardata
+sub augment_perchar
 {
 
-  my $self = shift;
-  my $char = shift;
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
 
-  my $config = $self->modconfig( $char );
-  my $o = $self->modoptions( $char );
+    my $o = $self->modoptions( $char );
 
-  my $chardata = { realm => $char->realm->name, char => $char->name };
-
-  # Viewporter
-  if( exists $o->{bottom} ) {
-    $chardata->{bottom} = $o->{bottom};
-  }
-  else {
-    $chardata->{bottom} = 0;
-  }
-
-  return $chardata;
+    # Viewporter
+    for my $side( qw|top bottom left right| ) {
+        if( exists $o->{$side} ) {
+            $self->perchardata_set( $side => $o->{$side} );
+        }
+        else {
+            $self->perchardata_set( $side => 0 );
+        }
+    }
 
 }
 
