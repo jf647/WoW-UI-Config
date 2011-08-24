@@ -131,7 +131,7 @@ sub process_machine
     for my $file( WoWUI::ExtraFiles->files ) {
         my $zipdst = WoWUI::ExtraFiles->zipfile($file);
         $log->debug("adding extra file '$file' to zip as '$zipdst'");
-        unless( AZ_OK == $zip->addFile($file, $zipdst) ) {
+        unless( $zip->addFile($file, $zipdst) ) {
             die "addFile error: $file";
         }
     }

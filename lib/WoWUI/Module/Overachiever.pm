@@ -30,26 +30,22 @@ sub BUILD
     
 }
 
-sub augment_data
+sub augment_global
 {
 
-  my $self = shift;
+    my $self = shift;
 
-  my $config = $self->modconfig;
-  my $o = $self->modoptions;
+    my $config = $self->modconfig;
+    my $o = $self->modoptions;
 
-  my $data = {};
-  
-  for my $achievement( @{ $config->{achievements} } ) {
-      if( exists $o->{$achievement} ) {
-          $data->{$achievement} = 1;
-      }
-      else {
-          $data->{$achievement} = 0;
-      }
-  }
-  
-  return $data;
+    for my $achievement( @{ $config->{achievements} } ) {
+        if( exists $o->{$achievement} ) {
+            $self->globaldata_set( $achievement => 1 );
+        }
+        else {
+            $self->globaldata_set( $achievement => 0 );
+        }
+    }
 
 }
 
