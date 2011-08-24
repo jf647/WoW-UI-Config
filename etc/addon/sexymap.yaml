@@ -5,9 +5,5 @@ templates:
             input: $TEMPLATEDIR/sexymap/SexyMap.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/SexyMap.lua
 perchar_filter:
-    exclude:
-        - banker
-        - mule
-filter:
     addons:
         - SexyMap
