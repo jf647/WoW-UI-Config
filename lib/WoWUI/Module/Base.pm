@@ -196,7 +196,9 @@ sub build_globalpc
                 next unless( $f->match( $config->{perchar_filter} ) );
             }
             $log->debug("processing globalpc for ", $char->rname);
+            $self->perchardata_clear;
             $self->augment_globalpc($char, $f);
+            $self->register_char( $char );
         }
     }
 

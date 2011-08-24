@@ -4,6 +4,6 @@ templates:
         selljunk:
             input: $TEMPLATEDIR/selljunk/SellJunk.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/SellJunk.lua
-filter:
+perchar_filter:
     addons:
         - SellJunk

@@ -22,10 +22,21 @@ sub BUILD
 
     my $self = shift;
     
-    $self->global( 1 );
+    $self->globalpc( 1 );
     
     return $self;
     
+}
+
+sub augment_globalpc
+{
+
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
+    
+    $self->globaldata_set( $self->name, 1 );
+
 }
 
 # keep require happy

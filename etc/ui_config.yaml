@@ -39,7 +39,7 @@ modules:
     - WoWUI::Module::Overachiever
     - WoWUI::Module::Viewporter
     - WoWUI::Module::WIM
-#    - WoWUI::Module::SellJunk
+    - WoWUI::Module::SellJunk
 #    - WoWUI::Module::QuestGuru
 #    - WoWUI::Module::TurnIn
 #    - WoWUI::Module::Hydra
