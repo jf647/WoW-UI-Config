@@ -4,7 +4,9 @@
 
 package WoWUI::Module::TellMeWhen::Icon;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -14,13 +16,14 @@ with 'WoWUI::Module::TellMeWhen::Dumpable';
 has priority => ( is => 'rw', isa => 'Int', required => 1 );
 has tag => ( is => 'rw', isa => 'Str' );
 has combat => ( is => 'rw', isa => 'Str' );
-has criteria => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
+has filter => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
+has no_filter_group_ok => ( is => 'ro', isa => 'Bool' );
+has type => ( is => 'ro', isa => 'Str' );
+has conditions => ( is => 'ro', isa => 'ArrayRef' );
 # String, no default, not relevant
 has [ qw|BuffOrDebuff CooldownType| ] => ( is => 'rw', isa => 'Str', traits => ['Relevant'] );
 # String, no default, relevant
 has Name => ( is => 'rw', isa => 'Str', required => 1, lazy => 1, builder => 'build_name', traits => ['Relevant'], relevant => 1 );
-has CustomTex => ( is => 'rw', isa => 'Str', traits => ['Relevant'], relevant => 1 );
-has BindText => ( is => 'rw', isa => 'Str', traits => ['Relevant'], relevant => 1 );
 # String, other
 has ShowWhen => ( is => 'rw', isa => 'Str', default => 'alpha', traits => ['Relevant'] );
 has Type => ( is => 'rw', isa => 'Str', required => 1, traits => ['Relevant'], relevant => 1 );
@@ -28,6 +31,8 @@ has Unit => ( is => 'rw', isa => 'Str', default => 'player', traits => ['Relevan
 has WpnEnchantType => ( is => 'rw', isa => 'Str', default => 'MainHandSlot', traits => ['Relevant'] );
 has ICDType => ( is => 'rw', isa => 'Str', default => 'aura', traits => ['Relevant'] );
 has TotemSlots => ( is => 'rw', isa => 'Str', default => '1111', traits => ['Relevant'] );
+has CustomTex => ( is => 'rw', isa => 'Str', default => "", traits => ['Relevant'], relevant => 1 );
+has BindText => ( is => 'rw', isa => 'Str', default => "", traits => ['Relevant'], relevant => 1 );
 # Boolean, default true, relevant
 has [ qw|Enabled ShowTimerText| ] => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 # Boolean, default true, not relevant
@@ -82,7 +87,7 @@ has Conditions => (
         cond_count => 'count',
     },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Scalar::Util 'reftype';
@@ -92,16 +97,20 @@ sub BUILD
 {
 
     my $self = shift;
-    my $icfg = shift;
 
-    if( exists $icfg->{conditions} ) {
+    # set our name to our tag unless a subclass did it for us
+    unless( $self->Name ) {
+        $self->Name( $self->tag );
+    }
+
+    if( $self->conditions ) {
         my @conditions;
-        unless( @{ $icfg->{conditions} } % 2 ) {
-            croak "even number of conditions in ", join(':', @{ $icfg->{conditions} });
+        unless( @{ $self->conditions } % 2 ) {
+            croak "even number of conditions in icon ", $self->Name;
         }
         my $needs_join = 0;
-        while( @{ $icfg->{conditions} } ) {
-            my $condition = shift @{ $icfg->{conditions} };
+        while( @{ $self->conditions } ) {
+            my $condition = shift @{ $self->conditions };
             if( $needs_join ) {
                 if( 'OR' eq $condition ) {
                     $conditions[$#conditions]->{AndOr} = 'OR';
@@ -124,13 +133,13 @@ sub BUILD
                         Name => $cname,
                         %$condition
                     );
-                    WoWUI::Module::TellMeWhen::Conditions->instance->cond_set( $cname, $c );
+                    WoWUI::Module::TellMeWhen::Conditions->instance->set( $cname, $c );
                 }
                 elsif( $condition =~ m/^icon:(.+)/ ) {
                     $c = WoWUI::Module::TellMeWhen::Condition::Icon->new( tag => $1, Icon => $1 );
                 }
                 else {
-                    $c = WoWUI::Module::TellMeWhen::Conditions->instance->cond_get( $condition );
+                    $c = WoWUI::Module::TellMeWhen::Conditions->instance->get( $condition );
                 }
                 die "invalid condition '$condition'" unless $c;
                 push @conditions, $c;
@@ -138,12 +147,7 @@ sub BUILD
             }
         }
         $self->add_cond( @conditions );
-    }
-    
-    # set our name to our tag unless a subclass did it for us
-    unless( $self->Name ) {
-        $self->Name( $icfg->{tag} );
-    }
+    }    
 
     return $self;
 
@@ -189,7 +193,7 @@ sub select_extra
         }
     }
     # allow subclasses to do their own thing
-    inner($set);
+    inner();
     
 }
 
@@ -219,7 +223,7 @@ sub fixup
     $self->Conditions( \@newc );
     
     # allow the subclass to do their own thing
-    inner($profile);
+    inner();
 
 }
 

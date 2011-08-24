@@ -1,0 +1,14 @@
+---
+templates:
+    global:
+        raven:
+            input: $TEMPLATEDIR/raven/Raven.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Raven.lua
+perchar_filter:
+    addons:
+        - Raven
+icbuffs:
+    Paladin:
+        - Divine Shield
+        - Hand of Protection
+        - Divine Plea

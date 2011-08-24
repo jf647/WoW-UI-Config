@@ -5,6 +5,7 @@
 package WoWUI::Module::TellMeWhen::Icon::Cooldown::Multistate;
 use Moose;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -12,7 +13,7 @@ extends 'WoWUI::Module::TellMeWhen::Icon::Cooldown';
 has '+priority' => ( default => 2250 );
 has '+CooldownType' => ( default => 'multistate' );
 with 'WoWUI::Module::TellMeWhen::Icon::SpellName';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # keep require happy
 1;

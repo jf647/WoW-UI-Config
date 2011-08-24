@@ -1,0 +1,224 @@
+---
+modoptions:
+    font: Fonts\\FRIZQT__.TTF
+    fontname: Friz Quadrata TT
+    fontsize: 10
+templates:
+    global:
+        chocolatebar:
+            input: $TEMPLATEDIR/chocolatebar/ChocolateBar.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/ChocolateBar.lua
+perchar_filter:
+    addons:
+        - ChocolateBar
+plugins:
+    RobBossMods:
+        align: left
+        priority: 90
+        notext: 1
+        filter:
+            addons:
+                - RobBossMods
+    LoggerHead:
+        align: left
+        priority: 80
+        filter:
+            addons:
+                - LoggerHead
+    Raven:
+        filter:
+            include:
+                - no-one
+    Archy:
+        align: left
+        priority: 70
+        notext: 1
+        filter:
+            addons:
+                - Archy
+    epgp:
+        align: right
+        priority: 100
+        include:
+            - addon:epgp
+    Broker Currency:
+        align: left
+        priority: 20
+        noicon: 1
+        filter:
+            addons:
+                - Broker_Currency
+    Broker_uClock:
+        align: right
+        priority: 30
+        filter:
+            addons:
+                - Broker_uClock
+    BugSack:
+        align: left
+        priority: 10
+        filter:
+            addons:
+                - BugSack
+    AllXP:
+        align: right
+        priority: 10
+        filter:
+            addons:
+                - Broker_AllXP
+    Ara_Broker_Tradeskills:
+        align: right
+        priority: 50
+        altname: '|cFFFFB366Ara|r Tradeskills'
+        filter:
+            addons:
+                - Ara_Broker_Tradeskills
+    AutoBar:
+        filter:
+            include:
+                - no-one
+    Bagsy:
+        align: left
+        priority: 30
+        filter:
+            addons:
+                - Bagsy
+    Broker_MicroMenu:
+        align: right
+        priority: 20
+        filter:
+            addons:
+                - Broker_MicroMenu
+    Broker_Equipment:
+        align: left
+        priority: 60
+        filter:
+            addons:
+                - Broker_Equipment
+    MoreChocolate:
+        filter:
+            include:
+                - no-one
+    PitBull4:
+        filter:
+            include:
+                - no-one
+    Ara_Broker_Friends:
+        align: center
+        priority: 20
+        altname: '|cFFFFB366Ara|r Friends'
+        filter:
+            addons:
+                - Ara_Broker_Guild_Friends
+    BufCanceler:
+        align: center
+        priority: 50
+        notext: 1
+        filter:
+            addons:
+                - Broker_BufCanceler
+    Grid:
+        filter:
+            include:
+                - no-one
+    Dominos:
+        filter:
+            include:
+                - no-one
+    picoEXP:
+        align: center
+        priority: 10
+        filter:
+            addons:
+                - picoEXP
+    RepairBroker:
+        align: left
+        priority: 40
+        filter:
+            addons:
+                - RepairBroker
+    Prat:
+        filter:
+            include:
+                - no-one
+    Broker Group:
+        align: left
+        priority: 50
+        filter:
+            addons:
+                - Broker_Group
+    Parrot:
+        filter:
+            include:
+                - no-one
+    TellMeWhen:
+        filter:
+            include:
+                - no-one
+    CorkLauncher:
+        filter:
+            include:
+                - no-one
+    Ara_Broker_Reputations:
+        align: center
+        priority: 40
+        altname: '|cffffb366Ara|r Reputations'
+        filter:
+            addons:
+                - Ara_Broker_Reputations
+    Ara_Broker_Guild:
+        align: center
+        priority: 30
+        altname: '|cFFFFB366Ara|r Guild'
+        filter:
+            addons:
+                - Ara_Broker_Guild_Friends
+            include:
+                - guilded
+    Broker_AltGuild:
+        align: center
+        priority: 30
+        filter:
+            addons:
+                - Broker_AltGuild
+    GatherMate2:
+        filter:
+            include:
+                - no-one
+    Buffet:
+        filter:
+            include:
+                - no-one
+    Hydra:
+        filter:
+            include:
+                - no-one
+    BankStack:
+        align: right
+        priority: 60
+        notext: 1
+        filter:
+            addons:
+                - BankStack
+    Skada:
+        filter:
+            include:
+                - no-one
+    BagnonLauncher:
+        filter:
+            include:
+                - no-one
+    WIM:
+        align: right
+        priority: 40
+        notext: 1
+        filter:
+            addons:
+                - WIM
+    Panda:
+        align: right
+        priority: 70
+        notext: 1
+        filter:
+            addons:
+                - Panda

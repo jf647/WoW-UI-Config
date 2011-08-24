@@ -4,7 +4,9 @@
 
 package WoWUI::Module::TellMeWhen::Events;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 use WoWUI::Module::TellMeWhen::Event;
@@ -19,7 +21,7 @@ has [ qw|OnShow OnHide OnStart OnFinish| ] => (
     relevant => 1,
     default => sub { WoWUI::Module::TellMeWhen::Event->new },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # the Dumpable role requires that we provide this
 sub augment_lua { "" }

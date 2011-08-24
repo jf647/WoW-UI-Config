@@ -1,0 +1,9 @@
+---
+templates:
+    global:
+        selljunk:
+            input: $TEMPLATEDIR/selljunk/SellJunk.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/SellJunk.lua
+perchar_filter:
+    addons:
+        - SellJunk

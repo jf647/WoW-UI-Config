@@ -1,0 +1,90 @@
+---
+modoptions:
+    scale: 1.0
+templates:
+    perchar:
+        currency:
+            input: $TEMPLATEDIR/brokercurrency/Broker_Currency.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Broker_Currency.lua
+perchar_filter:
+    addons:
+        - Broker_Currency
+groups:
+    basic:
+        filter: {}
+        options:
+            - summaryPlayerSession
+            - summaryRealmToday
+            - showToday
+            - showGold
+            - summaryGold
+    pve:
+        filter: {}
+        options:
+            - summary395
+            - summary396
+    pvp:
+        filter:
+            include:
+                - pvp
+        options:
+            - summary392
+            - summary390
+            - summary391
+    tournament:
+        filter:
+            include:
+                - goal:ArgentTournament
+        options:
+            - summary241
+    firelands:
+        filter:
+            include:
+                - goal:Firelands
+        options:
+            - summary416
+    jewelcrafting:
+        filter:
+            include:
+                - prof:Jewelcrafting:475+
+        options:
+            - summary361
+    nrjewelcrafting:
+        filter:
+            level: 65
+            include:
+                - noexall(goal:NorthrendJewelcrafting)
+                - prof:Jewelcrafting:375+
+            exclude:
+                - prof:Jewelcrafting:450+
+        options:
+            - summary61
+    cooking:
+        filter:
+            include:
+                - prof:Cooking
+            exclude:
+                - prof:InactiveCooking
+        options:
+            - summary402
+    nrcooking:
+        filter:
+            level: 65
+            include:
+                - noexall(goal:NorthrendCooking)
+                - prof:Cooking:350+
+            exclude:
+                - prof:Cooking:425+
+        options:
+            - summary81
+    summary:
+        filter:
+            include:
+                - banker
+        options:
+            - showYesterday
+            - showThisWeek
+            - showLastWeek
+            - summaryRealmYesterday
+            - summaryRealmThisWeek
+            - summaryRealmLastWeek

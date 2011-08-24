@@ -4,54 +4,66 @@
 
 package WoWUI::Module::Raven;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
-extends 'WoWUI::Module::Basic';
-augment data => \&augment_data;
-__PACKAGE__->meta->make_immutable;
+extends 'WoWUI::Module::Base';
+has profileset => (
+    is => 'rw',
+    isa => 'WoWUI::ProfileSet',
+    default => sub { WoWUI::ProfileSet->new },
+);
+CLASS->meta->make_immutable;
 
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'raven', global => 1, perchar => 0 };
+sub BUILD
+{
+    
+    my $self = shift;
+    
+    $self->global( 1 );
+    $self->globalpc( 1 );
+    $self->globaldata_set( chars => {} );
+    
+    return $self;
+    
 }
 
-sub augment_data
+sub augment_global
 {
 
     my $self = shift;
 
-    my $config = $self->config;
-    my $o = WoWUI::Machine->instance->modoption_get('raven');
+    $self->globaldata_set( pset => $self->profileset );
 
-    my $log = WoWUI::Util->log;
+}
 
-    my $data = { raven => $o };
+sub augment_globalpc
+{
 
-    # per-char settings
-    for my $realm( WoWUI::Profile->instance->realms_values ) {
-        $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars_values ) {
+    my $self = shift;
+    my $char = shift;
 
-            if( exists $config->{perchar_criteria} ) {
-                next unless( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{perchar_criteria} ) );
-            }
+    my $config = $self->modconfig( $char );
+    my $o = $self->modoptions( $char );
 
-            $data->{raven}->{realms}->{$realm->name}->{$char->name} = {};
-
-            if( exists $config->{icbuffs}->{$char->class} ) {
-                $data->{raven}->{realms}->{$realm->name}->{$char->name}->{icbuffs} =  $config->{icbuffs}->{$char->class};
-            }
-            
-        }
+    my $profile = {
+        debuffs => $o->{debuffs},
+        shortbuffs => $o->{shortbuffs},
+        longbuffs => $o->{longbuffs},
+        ic => $o->{ic},
+    };
+    if( exists $config->{icbuffs}->{$char->class} ) {
+         $profile->{icbuffs} = $config->{icbuffs}->{$char->class};
     }
-
-    return $data;
+    my $pname = $self->profileset->store( $profile, $char->class );
+    $self->globaldata_get( 'chars' )->{$char->dname} = $pname;
 
 }
 

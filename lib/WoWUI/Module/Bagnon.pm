@@ -4,44 +4,42 @@
 
 package WoWUI::Module::Bagnon;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
-extends 'WoWUI::Module::Basic';
-augment chardata => \&augment_chardata;
-__PACKAGE__->meta->make_immutable;
+extends 'WoWUI::Module::Base';
+CLASS->meta->make_immutable;
+
+use WoWUI::Filter::Constants;
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'bagnon', global => 0, perchar => 1 };
+sub BUILD
+{
+
+    my $self = shift;
+    
+    $self->perchar( 1 );
+    
+    return $self;
+
 }
 
-sub augment_chardata
+sub augment_perchar
 {
 
   my $self = shift;
   my $char = shift;
+  my $f = shift;
 
-  my $config = $self->config;
-  my $o = WoWUI::Machine->instance->modoption_get($self->name);
-
+  my $config = $self->modconfig( $char );
+  my $o = $self->modoptions( $char );
   
-  # money frame defaults to on
-  my $moneyframe = 1;
-  # turn off the money frame for master machines on chars that have broker_currency enabled
-  if( WoWUI::Util::Filter::matches( $char->flags_get('common'), $char, { addons => [ 'Broker_Currency' ], include => [ 'machine:type:master' ] } ) ) {
-    $moneyframe = 0;
-  }
+  my $mf = $f->match( $config->{moneyframe}->{filter}, F_MACH );
 
-  # scale
-  my $scale = 1.0;
-  if( exists $o->{scale} ) {
-    $scale = $o->{scale};
-  }
-
-  return { realm => $char->realm->name, char => $char->name, scale => $scale, moneyframe => $moneyframe };
+  $self->perchardata_set( scale => $o->{scale}, moneyframe => $mf->value );
 
 }
 

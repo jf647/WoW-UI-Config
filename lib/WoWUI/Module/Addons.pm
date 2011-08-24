@@ -4,8 +4,10 @@
 
 package WoWUI::Module::Addons;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
+use CLASS;
 
 # set up class
 extends 'WoWUI::Module::Base';
@@ -36,9 +38,7 @@ has 'class_sets' => (
     class_count => 'count',
   },
 );
-augment data => \&augment_data;
-augment chardata => \&augment_chardata;
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Set::Scalar;
@@ -47,31 +47,32 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'addons', global => 1, perchar => 1 };
-}
 sub BUILD
 {
 
   my $self = shift;
+
   my $config = $self->config;
+  
+  $self->global( 1 );
+  $self->perchar( 1 );
+
   $self->all_addons( Set::Scalar->new( keys %{ $config->{addons} } ) );
+
+  return $self;
 
 }
 
-sub augment_data
+sub augment_global
 {
 
   my $self = shift;
 
-  my $data;
-
-  my $config = $self->config;
+  my $o = $self->modoptions;
 
   # do we have too many named sets?
-  if( $self->named_count > $config->{max_sets} ) {
-    croak "selected ", $self->named_count, " sets but we can only support $config->{max_sets}";
+  if( $self->named_count > $o->{max_sets} ) {
+    croak "selected ", $self->named_count, " sets but we can only support $o->{max_sets}";
   }
 
   # named sets
@@ -80,7 +81,7 @@ sub augment_data
     for my $addon( $self->named_get( $setname )->elements ) {
       push @{ $set->{addons} }, $addon;
     }
-    push @{ $data->{named_sets} }, $set;
+    push @{ $self->globaldata->{named_sets} }, $set;
   }
 
   # class sets
@@ -89,30 +90,26 @@ sub augment_data
     for my $addon( $self->class_get( $setname )->elements ) {
       push @{ $set->{addons} }, $addon;
     }
-    push @{ $data->{class_sets} }, $set;
+    push @{ $self->globaldata->{class_sets} }, $set;
   }
   
-  return $data;
-
 }
 
-sub augment_chardata
+sub augment_perchar
 {
 
   my $self = shift;
   my $char = shift;
+  my $f = shift;
 
-  my $config = $self->config;
-
-  my $chardata = { realm => $char->realm->name, char => $char->name };
+  my $config = $self->modconfig( $char );
 
   my $log = WoWUI::Util->log;
-  $log->debug("processing ", $char->name, " of ", $char->realm->name);
 
   my $enabled = Set::Scalar->new;
   for my $addon( $self->all_addons->elements ) {
   
-    if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{addons}->{$addon} ) ) {
+    if( $f->match( $config->{addons}->{$addon} ) ) {
       $log->trace("picked up $addon");
       $enabled->insert($addon);
       if( exists $config->{addons}->{$addon}->{group} ) {
@@ -147,10 +144,8 @@ sub augment_chardata
   my @addons;
   push @addons, map { { name => $_, enabled => 1 } } $enabled->members;
   push @addons, map { { name => $_, enabled => 0 } } $disabled->members;
-  $chardata->{addons} = [ sort { $a->{name} cmp $b->{name} } @addons ];
+  $self->perchardata->{addons} = [ sort { $a->{name} cmp $b->{name} } @addons ];
   $char->addons( $enabled->clone );
-
-  return $chardata;
 
 }
 

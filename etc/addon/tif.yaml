@@ -1,0 +1,6 @@
+---
+templates:
+    global:
+        tif:
+            input: $TEMPLATEDIR/tif/tif.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/tif.lua

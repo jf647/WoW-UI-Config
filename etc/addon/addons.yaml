@@ -1,0 +1,1414 @@
+---
+modoptions:
+    max_sets: 20
+templates:
+    global:
+        acp:
+            input: $TEMPLATEDIR/addons/ACP.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/ACP.lua
+    perchar:
+        addons:
+            input: $TEMPLATEDIR/addons/AddOns.txt.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/AddOns.txt
+addons:
+    tif:
+        exclude:
+            - machine:type:basic
+    Mactics:
+        include:
+            - no-one
+    RobBossMods:
+        include:
+            - no-one
+    LoggerHead:
+        include:
+            - guildrole:CombatLogger
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Raiding
+    nivItemLevel:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    Grid:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Grid
+    GridAutoFrameSize:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Grid
+    GridStatusDungeonRole:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Grid
+    GridStatusHots:
+        include:
+            - all(class:Druid;spec:Restoration)
+            - all(class:Priest;spec:Holy)
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+    GridStatusRaidIcons:
+        include:
+            - machine:name:kara
+        exclude:
+            - banker
+            - mule
+        group: Grid
+    GridStatusRaidDebuff:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Grid
+    GridStatusRD_BC:
+        include:
+            - no-one
+    GridStatusRD_WotLK:
+        include:
+            - no-one
+    GridStatusRD_Cata:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Grid
+    GridStatusTankCooldown:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Grid
+    GridIndicatorCornerIcons:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+    Archy:
+        include:
+            - prof:Archaeology
+        exclude:
+            - machine:type:basic
+            - machine:type:secondary
+        group: Archaeology
+    HoPo:
+        level: 9
+        include:
+            - class:Paladin
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+            - banker
+            - mule
+        class: Paladin
+    DBM-Core: 
+        level: 85
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Heroics
+            - Raiding
+    DBM-GUI:
+        level: 85
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Heroics
+            - Raiding
+    DBM-BaradinHold:
+        level: 85
+        include:
+            - dungeontype:raids
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Raiding
+    DBM-BastionTwilight:
+        level: 85
+        include:
+            - dungeontype:raids
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Raiding
+    DBM-BlackwingDescent:
+        level: 85
+        include:
+            - dungeontype:raids
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Raiding
+    DBM-PvP:
+        include:
+            - no-one
+    DBM-ThroneFourWinds:
+        level: 85
+        include:
+            - dungeontype:raids
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Raiding
+    DBM-Firelands:
+        level: 85
+        include:
+            - dungeontype:raids
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Raiding
+    DBM-WorldEvents:
+        include:
+            - no-one
+    DBM-Party-Cataclysm:
+        level: 85
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Heroics
+    DBM-AQ20:
+        include:
+            - no-one
+    DBM-AQ40:
+        include:
+            - no-one
+    DBM-BlackTemple:
+        include:
+            - no-one
+    DBM-BWL:
+        include:
+            - no-one
+    DBM-ChamberOfAspects:
+        include:
+            - no-one
+    DBM-Coliseum:
+        include:
+            - no-one
+    DBM-EyeOfEternity:
+        include:
+            - no-one
+    DBM-Hyjal:
+        include:
+            - no-one
+    DBM-Icecrown:
+        include:
+            - no-one
+    DBM-Karazhan:
+        include:
+            - no-one
+    DBM-MC:
+        include:
+            - no-one
+    DBM-Onyxia:
+        include:
+            - no-one
+    DBM-Outlands:
+        include:
+            - no-one
+    DBM-Party-BC:
+        include:
+            - no-one
+    DBM-Party-WotLK:
+        include:
+            - no-one
+    DBM-Serpentsrhine:
+        include:
+            - no-one
+    DBM-Sunwell:
+        include:
+            - no-one
+    DBM-TheEye:
+        include:
+            - no-one
+    DBM-Ulduar:
+        include:
+            - no-one
+    DBM-VoA:
+        include:
+            - no-one
+    Kong:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    KongConfig:
+        exclude:
+            - machine:type:secondary
+        group: UI
+    Ace3:
+        include:
+            - no-one
+    '!BugGrabber':
+        group: Basic
+    'BugSack':
+        group: Basic
+    ACP:
+        group: Basic
+    Align:
+        include:
+            - no-one
+    AltClickToAddItem:
+        group: Basic
+    AngeleDei:
+        include:
+            - all(class:Paladin;spec:Protection)
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        class: Paladin
+    Ara_Broker_Guild_Friends:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    Ara_Broker_Reputations:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    Ara_Broker_Tradeskills:
+        exclude:
+            - machine:type:secondary
+        group: Standard
+    Auctionator:
+        include:
+            - banker
+        exclude:
+            - machine:type:basic
+        group: Auctions
+    AutoBar:
+        include:
+            - all(dualbox:slave;machine:type:secondary)
+        group: Standard
+    BadBoy:
+        group: Basic
+    BadBoy_CCleaner:
+        group: Basic
+    BadBoy_Levels:
+        group: Basic
+    Bagnon:
+        group: Basic
+    Bagnon_GuildBank:
+        include:
+            - no-one
+    Bagnon_Config:
+        group: Basic
+    Bagnon_Forever:
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
+    Bagnon_Tooltips:
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
+    Bagsy:
+        exclude:
+            - machine:type:secondary
+        group: Standard
+    BankStack:
+        group: Standard
+    BasicComboPoints:
+        include:
+            - class:Rogue
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+            - banker
+            - mule
+        class:
+            - Rogue
+            - Druid
+    Broker_AllXP:
+        include:
+            - realm:still_leveling
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    Broker_AltGuild:
+        include:
+            - all(unguilded;watchguild)
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Unguilded
+    Broker_BufCanceler:
+        include:
+            - no-one
+    Broker_Currency:
+        exclude:
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    Broker_Equipment:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    Broker_Group:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    Broker_MicroMenu:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    Broker_uClock:
+        group: Basic
+    Buffet:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    Butsu:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    CallbackHandler-1.0:
+        include:
+            - no-one
+    ChocolateBar:
+        group: Basic
+    ChocolateBar_Options:
+        group: Basic
+    Clique:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    Cork:
+        exclude:
+            - mule
+        group:
+            - Standard
+            - Auctions
+    DKIDiseases:
+        include:
+            - class:Death Knight
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        class: Death Knight
+    DKIRunes:
+        include:
+            - class:Death Knight
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        class: Death Knight
+    Dominos:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    Dominos_Cast:
+        include:
+            - no-one
+    Dominos_Config:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    Dominos_Roll:
+        include:
+            - no-one
+    Dominos_Totems:
+        level: 30
+        include:
+            - class:Shaman
+        group: Standard
+    Dominos_XP:
+        include:
+            - no-one
+    EclipseBarPlus:
+        include:
+            - all(class:Druid;spec:Balance)
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        class: Druid
+    Expiration-2:
+        level: 85
+        exclude:
+            - machine:type:basic
+            - machine:type:secondary
+        group:
+            - Raiding
+            - Heroics
+    Failchievements:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    FishermansFriend:
+        include:
+            - prof:Fishing
+        exclude:
+            - prof:InactiveFishing
+        group: Gathering
+    Forte_Casting:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    Forte_Cooldown:
+        include:
+            - no-one
+    Forte_Core:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    Forte_DeathKnight:
+        include:
+            - no-one
+    Forte_Druid:
+        include:
+            - class:Druid
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        class: Druid
+    Forte_Healthstone:
+        include:
+            - no-one
+    Forte_Hunter:
+        include:
+            - class:Hunter
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        class: Hunter
+    Forte_Mage:
+        include:
+            - class:Mage
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        class: Mage
+    Forte_Paladin:
+        include:
+            - class:Paladin
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        class: Paladin
+    Forte_Priest:
+        include:
+            - class:Priest
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        class: Priest
+    Forte_Rogue:
+        include:
+            - class:Rogue
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        class: Rogue
+    Forte_Shaman:
+        include:
+            - class:Shaman
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        class: Shaman
+    Forte_Shard:
+        include:
+            - no-one
+    Forte_Soulstone:
+        include:
+            - no-one
+    Forte_Summon:
+        include:
+            - no-one
+    Forte_Talent:
+        include:
+            - no-one
+    Forte_Timer:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    Forte_Vehicle:
+        include:
+            - no-one
+    Forte_Warlock:
+        include:
+            - class:Warlock
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        class: Warlock
+    Forte_Warrior:
+        include:
+            - class:Warrior
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        class: Warrior
+    FreeRefills:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    FriendShare:
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
+    GatherMate2:
+        include:
+            - prof:Herbalism
+            - prof:Mining
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Gathering
+    GatherMate2_Data:
+        include:
+            - prof:Herbalism
+            - prof:Mining
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Gathering
+    GnomishVendorShrinker:
+        group: Basic
+    GoGoMount:
+        group: Standard
+    GreenRange:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    Hydra:
+        include:
+            - all(dualbox:master;machine:type:primary)
+            - all(dualbox:slave;machine:type:secondary)
+        group: Dualbox
+    LightHeaded:
+        include:
+            - goal:Loremaster
+            - leveling
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Leveling
+            - Loremaster
+    LightHeaded_Data_A:
+        include:
+            - goal:Loremaster
+            - leveling
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Leveling
+            - Loremaster
+    LightHeaded_Data_B:
+        include:
+            - goal:Loremaster
+            - leveling
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Leveling
+            - Loremaster
+    LightHeaded_Data_C:
+        include:
+            - goal:Loremaster
+            - leveling
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Leveling
+            - Loremaster
+    LightHeaded_Data_D:
+        include:
+            - goal:Loremaster
+            - leveling
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Leveling
+            - Loremaster
+    LightHeaded_Data_E:
+        include:
+            - goal:Loremaster
+            - leveling
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Leveling
+            - Loremaster
+    LightHeaded_Data_NPC:
+        include:
+            - goal:Loremaster
+            - leveling
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Leveling
+            - Loremaster
+    LightHeaded_Data_QIDNames:
+        include:
+            - goal:Loremaster
+            - leveling
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Leveling
+            - Loremaster
+    LushGearSwap:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    LushGearSwapOptions:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    Macaroon:
+        include:
+            - all(dualbox:slave;machine:type:secondary)
+        group: Dualbox
+    MacaroonProfiles:
+        include:
+            - no-one
+    Mapster:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    MicroDeclineDuel:
+        group: Basic
+    Multishot:
+        exclude:
+            - banker
+            - mule
+            - machine:type:basic
+        group: Standard
+    NugMiniPet:
+        include:
+            - no-one
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    OmniCC:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    OmniCC_Config:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    Overachiever:
+        include:
+            - goal:Achievements
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Achievements
+    Overachiever_Tabs:
+        include:
+            - goal:Achievements
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Achievements
+    Overachiever_Trade:
+        include:
+            - goal:Achievements
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Achievements
+    Panda:
+        include:
+            - prof:Jewelcrafting
+            - prof:Enchanting
+            - prof:Inscription
+        exclude:
+            - machine:type:secondary
+        group: Crafting
+    Parrot:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    PitBull4:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_Aggro:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_AltPowerBar:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_Aura:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_Background:
+        include:
+            - no-one
+    PitBull4_BlankSpace:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_Border:
+        include:
+            - no-one
+    PitBull4_CastBar:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_CastBarLatency:
+        include:
+            - no-one
+    PitBull4_CombatFader:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_CombatIcon:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_CombatText:
+        include:
+            - no-one
+    PitBull4_ComboPoints:
+        include:
+            - no-one
+        group: Standard
+    PitBull4_DogTagTexts:
+        include:
+            - no-one
+    PitBull4_PhaseIcon:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_DruidManaBar:
+        include:
+            - class:Druid
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        class: Druid
+    PitBull4_Eclipse:
+        include:
+            - no-one
+    PitBull4_ExperienceBar:
+        level: 10
+        include:
+            - class:Hunter
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        class: Hunter
+    PitBull4_HappinessIcon:
+        include:
+            - no-one
+    PitBull4_HealthBar:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_HideBlizzard:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_Highlight:
+        include:
+            - no-one
+    PitBull4_HolyPower:
+        include:
+            - no-one
+    PitBull4_HostilityFader:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_LeaderIcon:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_LuaTexts:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_ManaSpark:
+        include:
+            - no-one
+    PitBull4_MasterLooterIcon:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_Portrait:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_PowerBar:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_PvPIcon:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_QuestIcon:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_RaidTargetIcon:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_RangeFader:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_ReadyCheckIcon:
+        include:
+            - no-one
+    PitBull4_ReputationBar:
+        include:
+            - no-one
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_RoleIcon:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    PitBull4_Runes:
+        include:
+            - no-one
+    PitBull4_SoulShards:
+        level: 10
+        include:
+            - class:Warlock
+        exclude:
+            - banker
+            - mule
+        class: Warlock
+    PitBull4_Sounds:
+        include:
+            - no-one
+    PitBull4_ThreatBar:
+        include:
+            - no-one
+    PitBull4_Totems:
+        include:
+            - no-one
+    PitBull4_VisualHeal:
+        include:
+            - no-one
+    PitBull4_VisualHeal5:
+        include:
+            - no-one
+    PitBull4_VoiceIcon:
+        include:
+            - no-one
+    Postal:
+        group: Basic
+    Prat-3.0:
+        group: Basic
+    Prat-3.0_HighCPUUsageModules:
+        include:
+            - no-one
+    Prat-3.0_Libraries:
+        group: Basic
+    Quartz:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    QuestGuru:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    QuestGuru_Tracker:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    RepairBroker:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    Routes:
+        include:
+            - prof:Herbalism
+            - prof:Mining
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Gathering
+    SBFOptions:
+        include:
+            - no-one
+    SatrinaBuffFrame:
+        include:
+            - no-one
+    Raven:
+        exclude:
+            - banker
+            - mule
+            - machine:type:basic
+        group: Standard
+    Raven_Options:
+        exclude:
+            - machine:type:basic
+            - banker
+            - mule
+        group: Standard
+    SellJunk:
+        group: Basic
+    VendorBait:
+        include:
+            - everyone
+        group: Basic
+    SexyMap:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    ShockAndAwe:
+        include:
+            - no-one
+    Skada:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    SkadaAbsorbs:
+        include:
+            - no-one
+    SkadaHealAbsorbs:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    SkadaCC:
+        include:
+            - dungeontype:raids
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    SkadaDamage:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    SkadaDamageTaken:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    SkadaDeaths:
+        include:
+            - no-one
+    SkadaDebuffs:
+        include:
+            - no-one
+    SkadaDispels:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    SkadaEnemies:
+        include:
+            - no-one
+    SkadaFailbot:
+        include:
+            - no-one
+    SkadaHealing:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    SkadaPower:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    SkadaThreat:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    SkadaAvoidanceMitigation:
+        include:
+            - machine:name:kara
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    SoulBurned:
+        include:
+            - no-one
+    Talented:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    Talented_Inspect:
+        include:
+            - no-one
+    TellMeWhen:
+        level: 15
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    TellMeWhen_Options:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    TidyPlates:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    TidyPlatesHub:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    TidyPlates_Grey:
+        include:
+            - no-one
+    TidyPlatesIcon:
+        include:
+            - no-one
+    TidyPlates_Graphite:
+        include:
+            - no-one
+    TidyPlates_Quatre:
+        include:
+            - no-one
+    TidyPlates_Neon:
+        include:
+            - no-one
+    TidyPlates_ThreatPlates:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Standard
+    TipTac:
+        group: Basic
+    TipTacItemRef:
+        include:
+            - no-one
+    TipTacOptions:
+        group: Basic
+    TipTacTalents:
+        include:
+            - no-one
+    TomTom:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    TourGuide:
+        include:
+            - no-one
+    TrinketMenu:
+        include:
+            - all(machine:name:kara;levelcap)
+            - all(machine:name:kara;trinketmenu)
+        group: Standard
+    TrinketsFollowEquipment:
+        include:
+            - all(machine:name:kara;levelcap)
+            - all(machine:name:kara;trinketmenu)
+        group: Standard
+    TurnIn:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    Viewporter:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    WIM:
+        include:
+            - all(dualbox:slave;machine:type:secondary)
+        group: Basic
+    WIM_FlatPanel:
+        include:
+            - all(dualbox:slave;machine:type:secondary)
+        group: Basic
+    _NPCScan:
+        include:
+            - machine:type:primary
+        exclude:
+            - banker
+            - mule
+        group: Achievements
+    _NPCScan.Overlay:
+        include:
+            - class:Hunter
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Achievements
+    epgp:
+        include:
+            - guildrole:Lootmaster
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Lootmaster
+    picoEXP:
+        include:
+            - leveling
+        exclude:
+            - banker
+            - mule
+        group: Leveling
+    retrot:
+        include:
+            - no-one
+    tekKompare:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+        group: Standard
+    teksLoot:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:player:Heidi
+        group: Standard
+    wMarker:
+        include:
+            - all(machine:name:kara;dungeontype:raids)
+        group: Raiding
+    AutoItemStartQuest:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    '+Wowhead_Looter':
+        include:
+            - all(machine:name:kara;wowhead)
+            - all(machine:name:kara;realm:Winterhoof)
+        exclude:
+            - machine:type:secondary
+            - banker
+            - mule
+        group: Wowhead
+    Digits:
+        include:
+            - machine:name:kara
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    ThatJustHappened:
+        include:
+            - no-one
+        group: Standard
+    CombatLogTrigger:
+        include:
+            - machine:name:kara
+        exclude:
+            - banker
+            - mule
+        group: Standard

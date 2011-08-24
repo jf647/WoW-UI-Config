@@ -4,13 +4,14 @@
 
 package WoWUI::Module::FreeRefills;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-augment data => \&augment_data;
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Clone 'clone';
 use Carp 'croak';
@@ -19,49 +20,43 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'freerefills', global => 1, perchar => 0 };
-}
-
-sub augment_data
+sub BUILD
 {
 
     my $self = shift;
+    
+    $self->globalpc( 1 );
+    
+    return $self;
+    
+}
+
+sub augment_globalpc
+{
+
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
 
     my $log = WoWUI::Util->log;
+    my $config = $self->modconfig( $char );
 
-    my $config = $self->config;
-
-    my $data;
-  
-    for my $realm( WoWUI::Profile->instance->realms_values ) {
-        $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars_values ) {
-            if( exists $config->{perchar_criteria} ) {
-                next unless( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{perchar_criteria} ) );
+    my %items;
+    for my $fr( keys %{ $config->{freerefills} } ) {
+        my $frdata = $config->{freerefills}->{$fr};
+        if( $f->match( $frdata->{filter} ) ) {
+            if( exists $items{$frdata->{itemid}} ) {
+                croak "$fr has been picked twice for ", $char->realm->name, "/", $char->name;
             }
-            $log->debug("processing character ", $char->name);
-            my %items;
-            for my $fr( keys %{ $config->{freerefills} } ) {
-                my $frdata = $config->{freerefills}->{$fr};
-                if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $frdata ) ) {
-                    if( exists $items{$frdata->{itemid}} ) {
-                        croak "$fr has been picked twice for ", $realm->name, "/", $char->name;
-                    }
-                    $items{$frdata->{itemid}} = clone $frdata;
-                    unless( exists $frdata->{name} ) {
-                        $items{$frdata->{itemid}}->{name} = $fr;
-                    }
-                }
-            }
-            if( %items ) {
-                $data->{freerefills}->{$realm->name}->{$char->name} = [ values %items ];
+            $items{$frdata->{itemid}} = clone $frdata;
+            unless( exists $frdata->{name} ) {
+                $items{$frdata->{itemid}}->{name} = $fr;
             }
         }
     }
-
-    return $data;
+    if( %items ) {
+        $self->globaldata->{freerefills}->{$char->realm->name}->{$char->name} = [ values %items ];
+    }
 
 }
 

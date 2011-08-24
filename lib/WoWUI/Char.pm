@@ -4,12 +4,17 @@
 
 package WoWUI::Char;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
-has 'realm' => ( is => 'rw', isa => 'WoWUI::Realm' );
+with 'WoWUI::ModOptions';
+with 'WoWUI::ModConfig';
+has realm => ( is => 'rw', isa => 'WoWUI::Realm', required => 1 );
 has level => ( is => 'rw', isa => 'Int' );
+has cfg => ( is => 'rw', isa => 'HashRef' );
 has [ qw|dungeontypes professions| ] => ( is => 'rw', isa => 'ArrayRef[Str]' );
 has [ qw|name dirname class class_ns race guild watchguild faction| ] => ( is => 'rw', isa => 'Str' );
 has [ qw|debug guilded alliance horde played| ] => ( is => 'rw', isa => 'Bool' );
@@ -54,21 +59,9 @@ has flags => (
     flags_set => 'set',
   },
 );
-has modoptions => (
-  is => 'rw',
-  isa => 'HashRef',
-  traits => ['Hash'],
-  default => sub { {} },
-  handles => {
-    modoption_set => 'set',
-    modoption_get => 'get',
-    modoptions_list => 'keys',
-    modoptions_values => 'values',
-  },
-);
 has addons => ( is => 'rw', isa => 'Set::Scalar' );
 around flags_get => \&around_flags_get;
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Set::Scalar;
@@ -78,63 +71,52 @@ sub BUILD
 
   my $self = shift;
 
-  # raw profile
-  my $rp = WoWUI::Profile->instance->options->{realm}->{$self->realm->name}->{$self->name};
-
   # directory name override (for those pesky accented people)
-  $self->dirname( $rp->{dirname} || $self->name );
+  $self->dirname( $self->cfg->{dirname} || $self->name );
 
   # module options
-  if( exists $rp->{modules} ) {
-    $self->modoptions( $rp->{modules} );
-  }
+  $self->set_modconfig( $self->cfg );
+  $self->set_modoptions( $self->cfg );
 
   # flag sets
   $self->flags_set( 0 => Set::Scalar->new );
   $self->flags_set( 1 => Set::Scalar->new );
   $self->flags_set( 2 => Set::Scalar->new );
   
-  # everyone gets this flag
-  $self->flags_get(0)->insert('everyone');
-
-  # add machine and profile flags
-  $self->flags_get(0)->insert( WoWUI::Profile->instance->flags->members );
-  $self->flags_get(0)->insert( WoWUI::Machine->instance->flags->members );
-
   # common flags
-  if( exists $rp->{flags_common} ) {
-    $self->flags_get(0)->insert( @{ $rp->{flags_common} } ); 
+  if( exists $self->cfg->{flags_common} ) {
+    $self->flags_get(0)->insert( @{ $self->cfg->{flags_common} } ); 
   }
 
   # name, realm, class
-  $self->class( $rp->{class} );
-  my $class_ns = $rp->{class};
+  $self->class( $self->cfg->{class} );
+  my $class_ns = $self->cfg->{class};
   $class_ns =~ s/\s+//g;
   $self->class_ns( $class_ns );
   $self->flags_get(0)->insert('name:'.$self->name);
   $self->flags_get(0)->insert('realm:'.$self->realm->name);
-  $self->flags_get(0)->insert('class:'.$rp->{class});
+  $self->flags_get(0)->insert('class:'.$self->cfg->{class});
 
   # levels
-  $self->set_level($rp);
+  $self->set_level;
 
   # faction and race
-  $self->set_faction($rp);
+  $self->set_faction;
 
   # guild
-  $self->set_guild($rp);
+  $self->set_guild;
   
   # specs and roles
-  $self->set_spec_role($rp);
+  $self->set_spec_role;
   
   # abilities
-  $self->set_abilities($rp);
+  $self->set_abilities;
   
   # professions
-  $self->set_professions($rp);
+  $self->set_professions;
 
   # dungeon types
-  $self->set_dungeontypes($rp);
+  $self->set_dungeontypes;
   
 }
 
@@ -167,12 +149,11 @@ sub set_professions
 {
 
   my $self = shift;
-  my $rp = shift;
 
   # professions
-  if( exists $rp->{professions} ) {
-    $self->professions( $rp->{professions} );
-    for my $prof( @{ $rp->{professions} } ) {
+  if( exists $self->cfg->{professions} ) {
+    $self->professions( $self->cfg->{professions} );
+    for my $prof( @{ $self->cfg->{professions} } ) {
       if( $prof =~ m/^(\w+):(\d+)$/ ) {
         my $profname = $1;
         my $skill = $2;
@@ -323,18 +304,17 @@ sub set_faction
 {
 
   my $self = shift;
-  my $rp = shift;
   
-  if( my $faction = $faction{$rp->{race}} ) {
-    $self->race($rp->{race});
-    $self->flags_get(0)->insert("race:$rp->{race}");
+  if( my $faction = $faction{$self->cfg->{race}} ) {
+    $self->race($self->cfg->{race});
+    $self->flags_get(0)->insert('race:'.$self->cfg->{race});
     $self->faction( lc $faction );
     $self->flags_get(0)->insert("faction:".$self->faction);
     $self->alliance( 'Alliance' eq $faction );
     $self->horde( 'Horde' eq $faction );
   }
   else {
-    croak "unknown faction for race '$rp->{race}'";
+    croak "unknown faction for race '", $self->cfg->{race}, "'";
   }
 
 }
@@ -382,24 +362,23 @@ sub set_spec_role
 {
 
   my $self = shift;
-  my $rp = shift;
 
   for my $specnum( 1, 2 ) {
-    if( my $spec = $rp->{"spec${specnum}"} ) {
+    if( my $spec = $self->cfg->{"spec${specnum}"} ) {
       $self->set_consumable_type($specnum, $spec);
-      $self->spec_set($specnum, $rp->{"spec${specnum}"} );
+      $self->spec_set($specnum, $self->cfg->{"spec${specnum}"} );
       $self->flags_get($specnum)->insert("spec:$spec");
-      if( exists $rp->{"spec${specnum}_subspec"} ) {
-        for my $subspec( @{ $rp->{"spec${specnum}_subspec"} } ) {
+      if( exists $self->cfg->{"spec${specnum}_subspec"} ) {
+        for my $subspec( @{ $self->cfg->{"spec${specnum}_subspec"} } ) {
           $self->flags_get($specnum)->insert("subspec:$subspec");
         }
       }
-      if( exists $rp->{"flags_spec${specnum}"} ) {
-        $self->flags_get($specnum)->insert( @{ $rp->{"flags_spec${specnum}"} } ); 
+      if( exists $self->cfg->{"flags_spec${specnum}"} ) {
+        $self->flags_get($specnum)->insert( @{ $self->cfg->{"flags_spec${specnum}"} } ); 
       }
-      if( exists $rp->{"role_spec${specnum}"} ) {
-         $self->role_set( $specnum, $rp->{"role_spec${specnum}"} );
-         for my $role( @{ $rp->{"role_spec${specnum}"} } ) {
+      if( exists $self->cfg->{"role_spec${specnum}"} ) {
+         $self->role_set( $specnum, $self->cfg->{"role_spec${specnum}"} );
+         for my $role( @{ $self->cfg->{"role_spec${specnum}"} } ) {
            $self->flags_get($specnum)->insert( "role:$role" );
          }
       }
@@ -425,8 +404,8 @@ sub set_spec_role
     }
   }
   
-  if( exists $rp->{dualbox_spec} ) {
-      $self->dualbox_spec( $rp->{dualbox_spec} );
+  if( exists $self->cfg->{dualbox_spec} ) {
+      $self->dualbox_spec( $self->cfg->{dualbox_spec} );
   }
 
 }
@@ -435,21 +414,20 @@ sub set_guild
 {
 
   my $self = shift;
-  my $rp = shift;
 
-  if( exists $rp->{guild} ) {
+  if( exists $self->cfg->{guild} ) {
     $self->guilded(1);
-    $self->guild($rp->{guild});
+    $self->guild($self->cfg->{guild});
     $self->flags_get(0)->insert('guilded');
-    $self->flags_get(0)->insert("guild:$rp->{guild}");
+    $self->flags_get(0)->insert('guild:'.$self->cfg->{guild});
   }
   else {
     $self->guilded(0);
     $self->flags_get(0)->insert('unguilded');
-    if( exists $rp->{watchguild} ) {
+    if( exists $self->cfg->{watchguild} ) {
       $self->flags_get(0)->insert('watchguild');
-      $self->flags_get(0)->insert("watchguild:$rp->{watchguild}");
-      $self->watchguild($rp->{watchguild});
+      $self->flags_get(0)->insert('watchguild:'.$self->cfg->{watchguild});
+      $self->watchguild($self->cfg->{watchguild});
     }
   }
 
@@ -459,11 +437,10 @@ sub set_dungeontypes
 {
 
   my $self = shift;
-  my $rp = shift;
 
-  if( exists $rp->{dungeontypes} ) {
-    $self->dungeontypes( $rp->{dungeontypes} );
-    for my $dt( @{ $rp->{dungeontypes} } ) {
+  if( exists $self->cfg->{dungeontypes} ) {
+    $self->dungeontypes( $self->cfg->{dungeontypes} );
+    for my $dt( @{ $self->cfg->{dungeontypes} } ) {
       $self->flags_get(0)->insert("dungeontype:$dt");
     }
   }
@@ -510,10 +487,9 @@ sub set_abilities
 {
 
   my $self = shift;
-  my $rp = shift;
 
   for my $specnum( 1, 2 ) {
-    if( my $spec = $rp->{"spec${specnum}"} ) {
+    if( my $spec = $self->cfg->{"spec${specnum}"} ) {
       if( 'HASH' eq ref $abilities{$self->class} ) {
         if( exists $abilities{$self->class}->{$spec} ) {
           $self->ability_set($specnum, $abilities{$self->class}->{$spec});
@@ -537,18 +513,35 @@ sub set_level
 {
 
     my $self = shift;
-    my $rp = shift;
 
     my $config = WoWUI::Config->instance->cfg;
 
-    $self->level( $rp->{level} );
+    $self->level( $self->cfg->{level} );
 
-    if( $rp->{level} != $config->{levelcap} ) {
+    if( $self->cfg->{level} != $config->{levelcap} ) {
         $self->flags_get(0)->insert('leveling');
     }
     else {
         $self->flags_get(0)->insert('levelcap');
     }
+
+}
+
+sub rname
+{
+
+    my $self = shift;
+
+    return $self->name . ' of ' . $self->realm->name;
+
+}
+
+sub dname
+{
+
+    my $self = shift;
+
+    return $self->name . ' - ' . $self->realm->name;
 
 }
 

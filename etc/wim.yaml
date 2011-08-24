@@ -1,9 +1,0 @@
----
-templates:
-    global:
-        wim:
-            input: $TEMPLATEDIR/wim/WIM.lua.template
-            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/WIM.lua
-perchar_criteria:
-    addons:
-        - WIM

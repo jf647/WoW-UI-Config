@@ -4,7 +4,9 @@
 
 package WoWUI::Module::TellMeWhen::Group::Rotation;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -12,7 +14,7 @@ use WoWUI::Meta::Attribute::Trait::Relevant;
 extends 'WoWUI::Module::TellMeWhen::Group';
 around fixup => sub {}; # no-pp behaviour of parent
 around setscale => sub {}; # no-pp behaviour of parent
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 

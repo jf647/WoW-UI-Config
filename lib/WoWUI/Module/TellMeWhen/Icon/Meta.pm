@@ -4,7 +4,9 @@
 
 package WoWUI::Module::TellMeWhen::Icon::Meta;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -15,7 +17,7 @@ has '+Icons' => ( relevant => 1 );
 has [ qw|+Alpha +UnAlpha +ConditionAlpha| ] => ( relevant => 0 );
 augment select_extra => \&add_meta_members;
 augment fixup => \&resolve_meta_position;
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 
@@ -41,7 +43,7 @@ sub add_meta_members
     }
     
     # chain delegation
-    inner($set);
+    inner();
 
 }
 
@@ -59,7 +61,7 @@ sub resolve_meta_position
     $self->Icons( \@newicons );
 
     # chain delegation
-    inner($profile);
+    inner();
 
 }
 

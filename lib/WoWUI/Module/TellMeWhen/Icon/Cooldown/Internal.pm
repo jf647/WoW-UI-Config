@@ -4,7 +4,9 @@
 
 package WoWUI::Module::TellMeWhen::Icon::Cooldown::Internal;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -18,7 +20,7 @@ has [ qw|
     +OnlyInBags +PBarOffs +RangeCheck
     +ShowPBar +CooldownType
 | ] => ( relevant => 0 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # keep require happy
 1;

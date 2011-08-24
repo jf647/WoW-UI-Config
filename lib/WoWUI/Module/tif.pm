@@ -4,29 +4,37 @@
 
 package WoWUI::Module::tif;
 use Moose;
+use MooseX::StrictConstructor;
 
-use strict;
-use warnings;
+use namespace::autoclean;
+use CLASS;
 
 use Carp 'croak';
 
 # set up class
-extends 'WoWUI::Module::Basic';
-augment data => \&augment_data;
-__PACKAGE__->meta->make_immutable;
+extends 'WoWUI::Module::Base';
+CLASS->meta->make_immutable;
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'tif', global => 1, perchar => 0 };
-}
-
-sub augment_data
+sub BUILD
 {
 
     my $self = shift;
 
-    return { realms => $self->config->{realms} };
+    $self->global( 1 );
+
+    return $self;
+
+}
+
+sub augment_global
+{
+
+    my $self = shift;
+
+    my $config = $self->modconfig;
+
+    $self->globaldata->{realms} = $config->{realms};
 
 }
 

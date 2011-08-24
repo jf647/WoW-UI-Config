@@ -4,13 +4,14 @@
 
 package WoWUI::Module::Digits;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-augment data => \&augment_data;
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Clone 'clone';
 use Carp 'croak';
@@ -19,76 +20,83 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'digits', global => 1, perchar => 0 };
+sub BUILD
+{
+
+    my $self = shift;
+    
+    $self->global( 1 );
+    $self->globalpc( 1 );
+    
+    return $self;
+
 }
 
-sub augment_data
+sub augment_global
 {
 
     my $self = shift;
 
+    my $config = $self->modconfig;
+    my $o = $self->modoptions;
+    
+    if( $self->has_globaldata ) {
+        $self->globaldata_set( font => $o->{font} );
+        $self->globaldata_set( anchor => $o->{anchor} );
+        $self->globaldata_set( powertypes => $config->{powertypes} );
+    }
+
+    return $self;
+
+}
+
+sub augment_globalpc
+{
+
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
+
     my $log = WoWUI::Util->log;
 
-    my $config = $self->config;
-    my $o = WoWUI::Machine->instance->modoption_get('digits');
+    my $config = $self->modconfig( $char );
+    my $o = $self->modoptions;
 
-    my $data;
-      
-    # per-char settings
-    for my $realm( WoWUI::Profile->instance->realms_values ) {
-        $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars_values ) {
-
-            if( exists $config->{perchar_criteria} ) {
-                next unless( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{perchar_criteria} ) );
+    # frames enabled
+    my %ft_enabled;
+    for my $frame( keys %{ $config->{frames} } ) {
+        my $fn = $config->{frames}->{$frame}->{name};
+        $self->globaldata->{realms}->{$f->char->realm->name}->{$f->char->name}->{frames}->{$fn} ||= {
+            enabled => 0,
+            percent => 0,
+            ooc => 0
+        };
+        if( $f->match( $config->{frames}->{$frame}->{filter} ) ) {
+            if( exists $ft_enabled{$fn} ) {
+                croak "double match on $fn for ", $char->rname, ": $ft_enabled{$fn} before $frame";
             }
-
-            # frames enabled
-            my %ft_enabled;
-            for my $f( keys %{ $config->{frames} } ) {
-                my $fn = $config->{frames}->{$f}->{name};
-                $data->{realms}->{$realm->name}->{$char->name}->{frames}->{$fn} ||= {
-                    enabled => 0,
-                    percent => 0,
-                    ooc => 0
-                };
-                if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{frames}->{$f} ) ) {
-                    if( exists $ft_enabled{$fn} ) {
-                        croak "double match on $fn for ", $char->name, " of ", $realm->name, ": $ft_enabled{$fn} before $f";
-                    }
-                    else {
-                        $ft_enabled{$fn} = $f;
-                    }
-                    $data->{realms}->{$realm->name}->{$char->name}->{frames}->{$fn} = {
-                        enabled => 1,
-                        percent => $config->{frames}->{$f}->{percent},
-                        ooc => $config->{frames}->{$f}->{ooc},
-                    }
-                }
+            else {
+                $ft_enabled{$fn} = $frame;
             }
-
-            # power types
-            for my $p( keys %{ $config->{powertypes} } ) {
-                if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{powertypes}->{$p} ) ) {
-                    $data->{realms}->{$realm->name}->{$char->name}->{$p} = 1;
-                }
-                else {
-                    $data->{realms}->{$realm->name}->{$char->name}->{$p} = 0;
-                }
+            $self->globaldata->{realms}->{$f->char->realm->name}->{$f->char->name}->{frames}->{$fn} = {
+                enabled => 1,
+                percent => $config->{frames}->{$frame}->{percent},
+                ooc => $config->{frames}->{$frame}->{ooc},
             }
-
         }
     }
 
-    if( %{ $data->{realms} } ) {
-        $data->{font} = $o->{font};
-        $data->{anchor} = $o->{anchor};
-        $data->{powertypes} = $config->{powertypes};
+    # power types
+    for my $p( keys %{ $config->{powertypes} } ) {
+        if( $f->match( $config->{powertypes}->{$p}->{filter} ) ) {
+            $self->globaldata->{realms}->{$f->char->realm->name}->{$f->char->name}->{$p} = 1;
+        }
+        else {
+            $self->globaldata->{realms}->{$f->char->realm->name}->{$f->char->name}->{$p} = 0;
+        }
     }
 
-    return $data;
+    return $self;
 
 }
 

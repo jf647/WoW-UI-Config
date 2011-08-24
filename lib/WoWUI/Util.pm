@@ -7,15 +7,16 @@ use base 'Exporter';
 
 our @EXPORT = ();
 our @EXPORT_OK = qw|
-  expand_path
-  tempdir
-  tempfile
-  load_file
-  dump_file
-  perchar_sv
-  sv
-  tt
-  log
+    expand_path
+    tempdir
+    tempfile
+    load_file
+    load_layered
+    dump_file
+    perchar_sv
+    sv
+    tt
+    log
 |;
 
 use strict;
@@ -24,6 +25,7 @@ use warnings;
 use FindBin;
 use File::Temp;
 use Carp 'croak';
+use Hash::Merge::Simple;
 use Path::Class qw|dir file|;
 use YAML::Any   qw|LoadFile DumpFile|;
 use Log::Log4perl;
@@ -35,14 +37,22 @@ sub expand_path
     my $path = shift;
     my %extra = @_;
 
-    unless( $dirs ) {
+    if( $path !~ m/\$/ ) {
+        return $path;
+    }
+
+    if( ! defined $dirs && WoWUI::Config->initialized ) {
         require WoWUI::Config;
         my $gcfg = WoWUI::Config->instance->cfg;
         for my $dirtype( keys %{ $gcfg->{dirs} } ) {
             my $dir = $gcfg->{dirs}->{$dirtype};
-            $dir =~ s/\$BINDIR/$FindBin::Bin/;
+            $dir =~ s|\$TOPDIR|$FindBin::Bin/..|;
+            unless( -d $dir ) {
+                croak "no such directory: $dir";
+            }
             $dirs->{uc $dirtype} = dir( $dir )->resolve;
         }
+        $dirs->{TOPDIR} = dir( "$FindBin::Bin/.." )->resolve;
     }
 
     for my $dirtype( %$dirs ) {
@@ -73,6 +83,21 @@ sub load_file
 
 }
 
+sub load_layered
+{
+
+  my $fname = shift;
+  my @paths = @_;
+  my $cfg = {};
+  for my $path( map { expand_path "$_/$fname" } @paths ) {
+    if( -f $path ) {
+        $cfg = Hash::Merge::Simple->merge( $cfg, load_file($path) );
+    }
+  }
+  return $cfg;
+
+}
+
 sub dump_file
 {
 
@@ -88,9 +113,11 @@ sub tempdir
 {
 
     my $clean = shift;
+    my $clear = shift;
 
     my $log = WoWUI::Util->log();
 
+    undef $tempdir if( $tempdir && $clear );
     return $tempdir if( $tempdir );
 
     my $cfg = WoWUI::Config->instance->cfg;
@@ -124,15 +151,12 @@ sub tempfile
 sub perchar_sv
 {
 
-    my $realm = shift;
     my $char = shift;
-  
-    my $machine = WoWUI::Machine->instance;
   
     my $tempdir = tempdir();
 
-    my $realmdir = $tempdir->subdir('WTF')->subdir('Account')->subdir($machine->account)->subdir($realm);
-    my $chardir= $realmdir->subdir($char);
+    my $realmdir = $tempdir->subdir('WTF')->subdir('Account')->subdir($char->realm->player->account)->subdir($char->realm->name);
+    my $chardir= $realmdir->subdir($char->name);
     my $svdir = $chardir->subdir('SavedVariables');
     $svdir->mkpath(0) unless( -d $svdir );
   
@@ -143,10 +167,13 @@ sub perchar_sv
 sub sv
 {
 
+    my $player = shift;
+
     my $tempdir = tempdir();
-    my $machine = WoWUI::Machine->instance;
-    my $svdir = $tempdir->subdir('WTF')->subdir('Account')->subdir($machine->account)->subdir('SavedVariables');
+
+    my $svdir = $tempdir->subdir('WTF')->subdir('Account')->subdir($player->account)->subdir('SavedVariables');
     $svdir->mkpath(0) unless( -d $svdir );
+
     return $svdir;
 
 }
@@ -176,6 +203,9 @@ sub log
     my $caller;
     if( exists $p{stacksup} ) {
         $caller = caller($p{stacksup});
+    }
+    elsif( exists $p{callingobj} ) {
+        $caller = ref $p{callingobj};
     }
     else {
         $caller = caller();

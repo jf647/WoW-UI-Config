@@ -4,20 +4,29 @@
 
 package WoWUI::Module::TidyPlates;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
-extends 'WoWUI::Module::Basic';
-__PACKAGE__->meta->make_immutable;
+extends 'WoWUI::Module::Base';
+with 'WoWUI::NoPercharData';
+CLASS->meta->make_immutable;
 
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'tidyplates', global => 0, perchar => 1 };
+sub BUILD
+{
+
+    my $self = shift;
+    
+    $self->perchar( 1 );
+    
+    return $self;
+    
 }
 
 # keep require happy

@@ -4,7 +4,9 @@
 
 package WoWUI::Module::TellMeWhen::Condition::Runes;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -14,7 +16,7 @@ has runes => (
     isa => 'ArrayRef[Maybe[Bool]]',
     default => sub { [] },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use WoWUI::LuaDumper;
 

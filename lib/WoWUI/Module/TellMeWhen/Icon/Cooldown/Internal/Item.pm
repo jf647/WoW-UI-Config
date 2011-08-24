@@ -5,13 +5,13 @@
 package WoWUI::Module::TellMeWhen::Icon::Cooldown::Internal::Item;
 use Moose;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::TellMeWhen::Icon::Cooldown::Internal';
 has '+CooldownType' => ( default => 'item' );
-has '+ICDDuration' => ( default => 45 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # keep require happy
 1;

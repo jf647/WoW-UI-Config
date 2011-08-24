@@ -1,3 +1,0 @@
-
-TellMeWhen_Settings = nil
-

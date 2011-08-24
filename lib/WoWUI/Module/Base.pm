@@ -4,139 +4,294 @@
 
 package WoWUI::Module::Base;
 use Moose;
+use MooseX::ABC;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
-has 'name' => ( is => 'ro', isa => 'Str' );
-has [ qw|global perchar| ] => ( is => 'ro', isa => 'Bool' );
-has 'config' => ( is => 'rw', isa => 'HashRef' );
-has 'options' => ( is => 'rw', isa => 'HashRef' );
-has 'profile' => ( is => 'rw', isa => 'WoWUI::Profile' );
-has 'extra_files' => (
+with 'WoWUI::ModOptions';
+with 'WoWUI::ModConfig';
+has name => ( is => 'rw', isa => 'Str' );
+has [ qw|global globalpc perchar| ] => ( is => 'rw', isa => 'Bool', default => 0 );
+has globaldata => (
     is => 'rw',
-    isa => 'HashRef[Str]',
+    isa => 'HashRef',
     traits => ['Hash'],
-    required => 1,
+    default => sub { {} },
     handles => {
-        extra_file_add => 'set',
+        has_globaldata => 'count',
+        globaldata_exists => 'exists',
+        globaldata_set => 'set',
+        globaldata_get => 'get',
     },
 );
-__PACKAGE__->meta->make_immutable;
+has perchardata => (
+    is => 'rw',
+    isa => 'HashRef',
+    traits => ['Hash'],
+    default => sub { {} },
+    handles => {
+        perchardata_set => 'set',
+        perchardata_clear => 'clear',
+        has_perchardata => 'count',
+    },
+);
+has config => ( is => 'rw', isa => 'HashRef' );
+has player => ( is => 'rw', isa => 'WoWUI::Player' );
+has machine => ( is => 'rw', isa => 'WoWUI::Machine' );
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
+use Clone 'clone';
+use Hash::Merge::Simple 'merge';
 use File::Copy;
 
-use WoWUI::Util qw|expand_path load_file perchar_sv sv tempfile tt log tempdir|;
+use WoWUI::Util qw|expand_path load_layered perchar_sv sv tempfile tt log tempdir|;
+use WoWUI::Filter::Constants qw|F_MPR|;
+use WoWUI::NoData;
 
 # constructor
 sub BUILD
 {
 
-  my $self = shift;
+    my $self = shift;
 
-  my $gcfg = WoWUI::Config->instance->cfg;
-  $self->config( load_file( expand_path( $gcfg->{modconfigfile}, name => $self->name ) ) );
+    my $gcfg = WoWUI::Config->instance->cfg;
+    my $name = lc( ref $self );
+    $name =~ s/^wowui::module:://;
+    $self->name( $name );
+    $self->config( load_layered( "$name.yaml", '$ADDONCONFDIR', '$PRIVADDONCONFDIR' ) );
+
+    if( exists $self->config->{modoptions} ) {
+        $self->set_modoptions( { modoptions => { $self->name => $self->config->{modoptions} } } );
+    }
+
+    return $self;
   
 }
 
-sub process_global
+sub modconfig
 {
 
-  my $self = shift;
-  my $data = shift;
-  
-  my $config = $self->config;
-  my $machine = WoWUI::Machine->instance;
-  
-  my $svdir = sv();
-  my $log = WoWUI::Util->log;
-  
-  my $tt = tt();
-  
-  $data->{config} = $config;
+    my $self = shift;
+    my $char = shift;
+    
+    my $config = clone $self->config;
 
-  for my $template( keys %{ $config->{templates}->{global} } ) {
-    my $infname = expand_path( $config->{templates}->{global}->{$template}->{input} );
-    my $outfname = expand_path(
-        $config->{templates}->{global}->{$template}->{output},
-        account => $machine->account,
-    );
-    my($tempfh, $tempfname) = tempfile( dir => $svdir );
-    $tt->process( $infname->stringify, $data, $tempfh )
-      or croak $tt->error, "\n";
-    $tempfh->close;
-    rename($tempfname, $outfname)
-        or croak "can't rename $tempfname to $outfname\n";
-  }
-  if( exists $config->{copy} ) {
-      for my $copy( keys %{ $config->{copy}->{global} } ) {
-          my $src = expand_path( $config->{copy}->{global}->{$copy}->{from} ); 
-          my $dst = expand_path( $config->{copy}->{global}->{$copy}->{to} );
-          unless( -d $dst->parent ) {
-              $dst->parent->mkpath( 0, 0755 );
-          }
-          copy( $src, $dst )
-              or croak "can't copy $src to $dst: $!";
-          my $prefix = tempdir();
-          my $zipdst = $dst;
-          $zipdst =~ s|^$prefix/||;
-          $self->extra_file_add($dst, $zipdst);
-          $log->debug("copied $src to $zipdst");
-      }
-  }
+    my @things;
+    if( defined $char ) {
+        @things = ( $self, $self->machine, $self->player, $char->realm, $char );
+    }
+    else {
+        @things = ( $self, $self->machine, $self->player );
+    }
+    for my $thing( @things ) {
+        if( $thing->modconfig_exists( $self->name ) ) {
+            $config = merge( $config, $thing->modconfig_get( $self->name ) );
+        }
+    }
+    
+    return $config;
 
 }
 
-sub data
+sub modoptions
 {
 
-  my $self = shift;
+    my $self = shift;
+    my $char = shift;
 
-  my $config = $self->config;
-
-  if( exists $config->{criteria} ) {
-    my $log = WoWUI::Util->log;
-    my $flags = WoWUI::Machine->instance->flags + WoWUI::Profile->instance->flags;
-    return unless( WoWUI::Util::Filter::matches( $flags, undef, $config->{criteria} ) );
-  }
-  inner();
+    my $options = {};
+    my @things;
+    if( defined $char ) {
+        @things = ( $self, $self->machine, $self->player, $char->realm, $char );
+    }
+    else {
+        @things = ( $self, $self->machine, $self->player );
+    }
+    for my $thing( @things ) {
+        if( $thing->modoption_exists( $self->name ) ) {
+            $options = merge( $options, $thing->modoption_get( $self->name ) );
+        }
+    }
+    
+    return $options;
 
 }
 
-sub chardata
+sub process
+{
+
+    my $self = shift;
+
+    my $config = $self->modconfig;
+    my $log = WoWUI::Util->log( callingobj => $self );
+
+    if( $self->globalpc ) {
+        $self->build_globalpc;
+    }
+    if( $self->perchar ) {
+        for my $realm( $self->player->realms ) {
+            for my $char( $realm->chars ) {
+                my $f = WoWUI::Filter->new( char => $char, machine => $self->machine );
+                if( exists $config->{perchar_filter} ) {
+                    next unless( $f->match( $config->{perchar_filter} ) );
+                }
+                $log->debug("processing perchar for ", $char->rname);
+                $self->build_perchar( $char, $f );
+                next unless( $self->has_perchardata );
+                $self->register_char( $char );
+                $self->write_perchar( $char );
+            }
+        }
+    }
+    if( $self->global ) {
+        $self->build_global;
+    }
+    if( $self->has_globaldata ) {
+        $self->write_global;
+    }
+    
+
+}
+
+sub build_global
+{
+
+    my $self = shift;
+
+    my $config = $self->modconfig;
+    my $log = WoWUI::Util->log( callingobj => $self );
+
+    $log->debug("processing global");
+
+    if( exists $config->{filter} ) {
+        my $f = WoWUI::Filter->new( machine => $self->machine );
+        return unless( $f->match( $config->{filter}, F_MPR ) );
+    }
+    $self->augment_global();
+    
+}
+
+sub build_globalpc
+{
+
+    my $self = shift;
+
+    my $config = $self->modconfig;
+
+    if( exists $config->{filter} ) {
+        my $f = WoWUI::Filter->new( machine => $self->machine );
+        return unless( $f->match( $config->{filter}, F_MPR ) );
+    }
+
+    my $log = WoWUI::Util->log( callingobj => $self );
+    
+    for my $realm( $self->player->realms ) {
+        for my $char( $realm->chars ) {
+            my $f = WoWUI::Filter->new( char => $char, machine => $self->machine );
+            if( exists $config->{perchar_filter} ) {
+                next unless( $f->match( $config->{perchar_filter} ) );
+            }
+            $log->debug("processing globalpc for ", $char->rname);
+            $self->augment_globalpc($char, $f);
+            $self->register_char( $char );
+        }
+    }
+
+}
+
+sub build_perchar
+{
+
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
+
+    $self->perchardata_clear;
+    $self->perchardata_set( realm => $char->realm->name, char => $char->name );
+  
+    $self->augment_perchar( $char, $f );
+
+}
+
+sub augment_global { confess "augment_global must be overridden" }
+sub augment_globalpc { confess "augment_globalpc must be overridden" }
+sub augment_perchar { confess "augment_perchar must be overridden" }
+
+sub register_char
+{
+
+    my $self = shift;
+    my $char = shift;
+    my $value = shift;
+    
+    return if( exists $self->globaldata->{charlist}->{$char->realm->name}->{$char->name} );
+    $self->globaldata->{charlist}->{$char->realm->name}->{$char->name} = $value || 1;
+
+}
+
+sub write_global
+{
+
+    my $self = shift;
+  
+    my $config = $self->modconfig;
+  
+    my $svdir = sv( $self->player );
+    my $log = WoWUI::Util->log( callingobj => $self );
+
+    my $tt = tt();
+  
+    $self->globaldata->{config} = $config;
+
+    for my $template( keys %{ $config->{templates}->{global} } ) {
+        my $infname = expand_path( $config->{templates}->{global}->{$template}->{input} );
+        my $outfname = expand_path(
+            $config->{templates}->{global}->{$template}->{output},
+            account => $self->player->account,
+        );
+        my($tempfh, $tempfname) = tempfile( dir => $svdir );
+        $tt->process( $infname->stringify, $self->globaldata, $tempfh )
+            or croak $tt->error, "\n";
+        $tempfh->close;
+        rename($tempfname, $outfname)
+            or croak "can't rename $tempfname to $outfname\n";
+    }
+    if( exists $config->{copy} ) {
+        for my $copy( keys %{ $config->{copy}->{global} } ) {
+            my $src = expand_path( $config->{copy}->{global}->{$copy}->{from} ); 
+            my $dst = expand_path( $config->{copy}->{global}->{$copy}->{to} );
+            unless( -d $dst->parent ) {
+                $dst->parent->mkpath( 0, 0755 );
+            }
+            copy( $src, $dst )
+                or croak "can't copy $src to $dst: $!";
+            my $prefix = tempdir();
+            my $zipdst = $dst;
+            $zipdst =~ s|^$prefix/||;
+            WoWUI::ExtraFiles->instance->add($dst, $zipdst);
+            $log->debug("copied $src to $zipdst");
+        }
+    }
+
+}
+
+sub write_perchar
 {
 
   my $self = shift;
   my $char = shift;
+
+  my $config = $self->modconfig;
   
-  my $config = $self->config;
-
-  my $log = WoWUI::Util->log;
-
-  if( exists $config->{perchar_criteria} ) {
-    return unless( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{perchar_criteria} ) );
-  }
-  inner($char);
-
-}
-
-sub process_perchar
-{
-
-  my $self = shift;
-  my $char = shift;
-  my $chardata = shift;
-
-  my $config = $self->config;
-  my $machine = WoWUI::Machine->instance;
-  
-  my $svdir = perchar_sv( $char->realm->name, $char->dirname );
+  my $svdir = perchar_sv( $char );
   
   my $tt = tt();
 
-  $chardata->{config} = $config;
-  $chardata->{profile} = $self->profile;
+  $self->perchardata->{config} = $config;
 
   for my $template( keys %{ $config->{templates}->{perchar} } ) {
     my $infname = expand_path( $config->{templates}->{perchar}->{$template}->{input} );
@@ -144,10 +299,10 @@ sub process_perchar
       $config->{templates}->{perchar}->{$template}->{output},
       realm => $char->realm->name,
       char => $char->dirname,
-      account => $machine->account,
+      account => $self->player->account,
     );
     my($tempfh, $tempfname) = tempfile( dir => $svdir );
-    $tt->process( $infname->stringify, $chardata, $tempfh )
+    $tt->process( $infname->stringify, $self->perchardata, $tempfh )
       or croak $tt->error, "\n";
     $tempfh->close;
     rename($tempfname, $outfname)
@@ -166,7 +321,7 @@ sub process_perchar
           my $prefix = tempdir();
           my $zipdst = $dst;
           $zipdst =~ s|^$prefix/||;
-          $self->extra_file_add($dst, $zipdst);
+          WoWUI::ExtraFiles->instance->add($dst, $zipdst);
           $self->debug("copied $src to $zipdst");
       }
   }

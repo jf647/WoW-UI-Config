@@ -4,13 +4,14 @@
 
 package WoWUI::Module::Overachiever;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-augment data => \&augment_data;
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 
@@ -18,31 +19,33 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'overachiever', global => 1, perchar => 0 };
-}
-
-sub augment_data
+sub BUILD
 {
 
-  my $self = shift;
+    my $self = shift;
+    
+    $self->global( 1 );
+    
+    return $self;
+    
+}
 
-  my $config = $self->config;
-  my $o = WoWUI::Machine->instance->modoption_get($self->name);
+sub augment_global
+{
 
-  my $data = {};
-  
-  for my $achievement( @{ $config->{achievements} } ) {
-      if( exists $o->{$achievement} ) {
-          $data->{$achievement} = 1;
-      }
-      else {
-          $data->{$achievement} = 0;
-      }
-  }
-  
-  return $data;
+    my $self = shift;
+
+    my $config = $self->modconfig;
+    my $o = $self->modoptions;
+
+    for my $achievement( @{ $config->{achievements} } ) {
+        if( exists $o->{$achievement} ) {
+            $self->globaldata_set( $achievement => 1 );
+        }
+        else {
+            $self->globaldata_set( $achievement => 0 );
+        }
+    }
 
 }
 

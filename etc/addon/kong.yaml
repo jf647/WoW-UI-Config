@@ -1,0 +1,292 @@
+---
+templates:
+    global:
+        kong:
+            input: $TEMPLATEDIR/kong/Kong.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Kong.lua
+    perchar:
+        kong:
+            input: $TEMPLATEDIR/kong/Kong_perchar.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Kong.lua
+perchar_filter:
+    addons:
+        - Kong
+frames:
+    grid:
+        name: GridLayoutFrame
+        casting: 1
+        combat: 1
+        vehicle: 1
+        delay:
+            in: 0
+            out: 0
+        alpha:
+            visible: 1
+            hidden: 0.1
+        filter:
+            addons:
+                - Grid
+    dkirunes:
+        name: DKIRunesFrame
+        casting: 1
+        combat: 1
+        overridealpha: 1
+        alpha:
+            visible: 0.75
+            hidden: 0
+        filter:
+            addons:
+                - DKIRunes
+    dkidiseasesbar0:
+        name: DKIDiseasesBar0
+        combat: 1
+        overridealpha: 1
+        alpha:
+            visible: 0.75
+            hidden: 0
+        filter:
+            addons:
+                - DKIDiseases
+    dkidiseasesbar1:
+        name: DKIDiseasesBar1
+        combat: 1
+        overridealpha: 1
+        alpha:
+            visible: 0.75
+            hidden: 0
+        filter:
+            addons:
+                - DKIDiseases
+    dkidiseasesbar2:
+        name: DKIDiseasesBar2
+        combat: 1
+        overridealpha: 1
+        alpha:
+            visible: 0.75
+            hidden: 0
+        filter:
+            addons:
+                - DKIDiseases
+    dkidiseasesbar3:
+        name: DKIDiseasesBar3
+        combat: 1
+        overridealpha: 1
+        alpha:
+            visible: 0.75
+            hidden: 0
+        filter:
+            addons:
+                - DKIDiseases
+    wmarker:
+        name: wFlares_mainFrame
+        alpha:
+            visible: 0.5
+            hidden: 0
+        condition: group:raid
+        condition_alpha:
+            visible: 0.1
+        filter:
+            addons:
+                - wMarker
+    bagnonbags:
+        name: BagnonFrameinventory
+        nocombat: 1
+        alpha:
+            visible: 1.0
+            hidden: 0
+        filter:
+            addons:
+                - Bagnon
+    bagnonbank:
+        name: BagnonFramebank
+        nocombat: 1
+        alpha:
+            visible: 1.0
+            hidden: 0
+        filter:
+            addons:
+                - Bagnon
+    bosshp1:
+        name: Boss1TargetFrame
+        alpha:
+            visible: 0
+            hidden: 0
+        filter:
+            addons:
+                - DBM-Core
+    bosshp2:
+        name: Boss2TargetFrame
+        alpha:
+            visible: 0
+            hidden: 0
+        filter:
+            addons:
+                - DBM-Core
+    bosshp3:
+        name: Boss3TargetFrame
+        alpha:
+            visible: 0
+            hidden: 0
+        filter:
+            addons:
+                - DBM-Core
+    bosshp4:
+        name: Boss4TargetFrame
+        alpha:
+            visible: 0
+            hidden: 0
+        filter:
+            addons:
+                - DBM-Core
+    autobar_basic:
+        name: AutoBarClassBarBasicDriver
+        alpha:
+            visible: 0.8
+            hidden: 0
+        delay:
+            in: 0.2
+            out: 3
+        group: autobar
+        filter:
+            addons:
+                - AutoBar
+    autobar_warrior:
+        name: AutoBarClassBarWarriorDriver
+        alpha:
+            visible: 0.8
+            hidden: 0
+        delay:
+            in: 0.2
+            out: 3
+        group: autobar
+        filter:
+            addons:
+                - AutoBar
+            include:
+                - class:Warrior
+    autobar_deathknight:
+        name: AutoBarClassBarDeathKnightDriver
+        alpha:
+            visible: 0.8
+            hidden: 0
+        delay:
+            in: 0.2
+            out: 3
+        group: autobar
+        filter:
+            addons:
+                - AutoBar
+            include:
+                - class:Death Knight
+    autobar_paladin:
+        name: AutoBarClassBarPaladinDriver
+        alpha:
+            visible: 0.8
+            hidden: 0
+        delay:
+            in: 0.2
+            out: 3
+        group: autobar
+        filter:
+            addons:
+                - AutoBar
+            include:
+                - class:Paladin
+    autobar_mage:
+        name: AutoBarClassBarMageDriver
+        alpha:
+            visible: 0.8
+            hidden: 0
+        delay:
+            in: 0.2
+            out: 3
+        group: autobar
+        filter:
+            addons:
+                - AutoBar
+            include:
+                - class:Mage
+    autobar_warlock:
+        name: AutoBarClassBarWarlockDriver
+        alpha:
+            visible: 0.8
+            hidden: 0
+        delay:
+            in: 0.2
+            out: 3
+        group: autobar
+        filter:
+            addons:
+                - AutoBar
+            include:
+                - class:Warlock
+    autobar_druid:
+        name: AutoBarClassBarDruidDriver
+        alpha:
+            visible: 0.8
+            hidden: 0
+        delay:
+            in: 0.2
+            out: 3
+        group: autobar
+        filter:
+            addons:
+                - AutoBar
+            include:
+                - class:Druid
+    autobar_priest:
+        name: AutoBarClassBarPriestDriver
+        alpha:
+            visible: 0.8
+            hidden: 0
+        delay:
+            in: 0.2
+            out: 3
+        group: autobar
+        filter:
+            addons:
+                - AutoBar
+            include:
+                - class:Priest
+    autobar_hunter:
+        name: AutoBarClassBarHunterDriver
+        alpha:
+            visible: 0.8
+            hidden: 0
+        delay:
+            in: 0.2
+            out: 3
+        group: autobar
+        filter:
+            addons:
+                - AutoBar
+            include:
+                - class:Hunter
+    autobar_rogue:
+        name: AutoBarClassBarRogueDriver
+        alpha:
+            visible: 0.8
+            hidden: 0
+        delay:
+            in: 0.2
+            out: 3
+        group: autobar
+        filter:
+            addons:
+                - AutoBar
+            include:
+                - class:Rogue
+    autobar_shaman:
+        name: AutoBarClassBarShamanDriver
+        alpha:
+            visible: 0.8
+            hidden: 0
+        delay:
+            in: 0.2
+            out: 3
+        group: autobar
+        filter:
+            addons:
+                - AutoBar
+            include:
+                - class:Shaman

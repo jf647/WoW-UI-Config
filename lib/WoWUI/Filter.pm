@@ -1,17 +1,31 @@
-#
+ #
 # $Id: Filter.pm 5034 2011-06-28 18:13:59Z james $
 #
 
 package WoWUI::Filter;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 has char => ( is => 'rw', isa => 'WoWUI::Char' );
+has machine => ( is => 'rw', isa => 'WoWUI::Machine' );
 has levelcap => ( is => 'rw', isa => 'Int', default => 85 );
 has safe => ( is => 'rw', isa => 'Safe' );
-__PACKAGE__->meta->make_immutable;
+has cache => (
+    is => 'bare',
+    isa => 'HashRef[Set::Scalar]',
+    traits => ['Hash'],
+    default => sub { {} },
+    handles => {
+        flags_set => 'set',
+        flags_get => 'get',
+        flags_exists => 'exists',
+    },
+);
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Set::Scalar;
@@ -41,89 +55,155 @@ sub match
 {
 
     my $self = shift;
-    my $criteria = shift;
-    my $using = shift || F_CALL;
+    my $filters = shift;
+    my $using = shift;
+    my $extra = shift;
 
+    my $r = WoWUI::Filter::Result->new;
+
+    if( 'ARRAY' eq ref $filters ) {
+        for my $filter( @$filters ) {
+            my $r2 = WoWUI::Filter::Result->new;
+            if( $self->matchone( $r2, $filter, $using, $extra ) ) {
+                $r = $r2;
+                last if( exists $filter->{final} );
+            }
+        }
+    }
+    else {
+        if( exists $filters->{filter} ) {
+            croak "bad single filter passed (one level too high?)";
+        }
+        $self->matchone( $r, $filters, $using, $extra );
+    }
+    
+    return $r;
+
+}
+
+sub matchone
+{
+    my $self = shift;
+    my $r = shift;
+    my $filter = shift;
+    my $using = shift;
+    my $extra = shift;
+    
     my $log = WoWUI::Util->log( stacksup => 1, prefix => 'filter' );
     
     # level matching
-    if( $self->char && exists $criteria->{level} ) {
+    if( $self->char && exists $filter->{level} ) {
         my($minl, $maxl);
-        if( $criteria->{level} =~ m/^(\d+)?:(\d+)?$/ ) {
+        if( $filter->{level} =~ m/^(\d+)?:(\d+)?$/ ) {
             $minl = defined $1 ? $1 : 1;
             $maxl = defined $2 ? $2 : $self->levelcap;
         }
-        elsif( $criteria->{level} =~ m/^(\d+)$/ ) {
+        elsif( $filter->{level} =~ m/^(\d+)$/ ) {
             ($minl, $maxl) = ($1, $self->levelcap);
         }
         else {
-            croak "invalid level range '$criteria->{level}'";
+            croak "invalid level range '$filter->{level}'";
         }
         $log->debug("filtering against level range $minl:$maxl");
         return unless( $self->char->level >= $minl && $self->char->level <= $maxl );
     }
     
     # addon filtering
-    if( $self->char && exists $criteria->{addons} ) {
-        my $req = Set::Scalar->new( @{ $criteria->{addons} } );
+    if( $self->char && exists $filter->{addons} ) {
+        my $req = Set::Scalar->new( @{ $filter->{addons} } );
         $log->debug("required addons: $req");
         return unless( $req < $self->char->addons );
     }
 
     # build flags for include/exclude matching
     unless( $using ) {
-        if( exists $criteria->{using} ) {
-            $using = $self->safe->reval( $criteria->{using} );
+        if( exists $filter->{using} ) {
+            $using = $self->safe->reval( $filter->{using} );
+        }
+        else {
+            $using = F_ALL;
         }
     }
     $log->trace("flag selection bits are $using");
-    if( F_CALL | $using && ! defined $self->char ) {
-        confess 'filter has no char but char flag match requested';
+    my $flags;
+    if( $self->flags_exists($using) ) {
+        $log->trace("reusing calculated flags");
+        $flags = $self->flags_get($using);
     }
-    my $flags = Set::Scalar->new;
-    if( F_C0 & $using ) {
-        $flags += $self->char->flags_get(0);
+    else {
+        $log->trace("building new flags");
+        if( (F_CALL|F_PLAYER|F_REALM)&$using && ! defined $self->char ) {
+            confess 'filter has no char but char/realm/player flag match requested';
+        }
+        if( F_MACH&$using && ! defined $self->machine ) {
+            confess 'filter has no machine but machine flag match requested';
+        }
+        $flags = Set::Scalar->new;
+        if( F_C0 & $using ) {
+            $flags += $self->char->flags_get(0);
+        }
+        if( F_C1 & $using ) {
+            $flags += $self->char->flags_get(1);
+        }
+        if( F_C2 & $using ) {
+            $flags += $self->char->flags_get(2);
+        }
+        if( F_REALM & $using ) {
+            $flags += $self->char->realm->flags;
+        }
+        if( F_PLAYER & $using ) {
+            $flags += $self->char->realm->player->flags;
+        }
+        if( F_MACH & $using ) {
+            $flags += $self->machine->flags;
+        }
+        $self->flags_set($using, $flags);
     }
-    if( F_C1 & $using ) {
-        $flags += $self->char->flags_get(1);
-    }
-    if( F_C2 & $using ) {
-        $flags += $self->char->flags_get(2);
-    }
-    if( F_REALM & $using ) {
-        $flags += $self->char->realm->flags;
-    }
-    if( F_MACH & $using ) {
-        $flags += WoWUI::Machine->instance->flags;
+    
+    # if we have extra flags, clone before adding to avoid corrupting the cache
+    if( $extra ) {
+        my $newflags = $flags->clone;
+        if( 'Set::Scalar' eq ref $extra ) {
+            $newflags += $extra;
+        }
+        elsif( 'ARRAY' eq ref $extra ) {
+            $newflags->insert( @$extra );
+        }
+        else {
+            $newflags->insert( $extra );
+        }
+        $flags = $newflags;
     }
     $log->debug("matching against flagset: $flags");
 
     # check for an inclusion match
-    my $include = $criteria->{include} || [ 'everyone' ];
-    my $exclude = $criteria->{exclude};
-    my $matched = 0;
     my $noexclude = 0;
-    if( $include ) {
+    if( exists $filter->{include} ) {
+        my $include = $filter->{include};
         for my $match( @{ $include } ) {
             my $clauses = Set::Scalar->new;
             if( $match =~ m/^all\((.+)\)$/ ) {
                 $clauses->insert(split(/;/, $1));
                 $log->trace("all include filter: $clauses");
                 if( $clauses < $flags ) {
-                    $matched = 1, last;
+                    $r->matched( 1 );
+                    last;
                 }
             }
             elsif( $match =~ m/^noexall\((.+)\)$/ ) {
                 $clauses->insert(split(/;/, $1));
                 $log->trace("noexall include filter: $clauses");
                 if( $clauses < $flags ) {
-                    $matched = 1, $noexclude = 1, last;
+                    $r->matched( 1 );
+                    $noexclude = 1;
+                    last;
                 }
             }
             elsif( $match ) {
                 $log->trace("single include filter: $match");
                 if( $flags->contains( $match ) ) {
-                    $matched = 1, last;
+                    $r->matched( 1 );
+                    last;
                 }
             }
             else {
@@ -131,22 +211,29 @@ sub match
             }
         }
     }
+    else {
+        $log->trace("no include block; auto-matching");
+        $r->matched( 1 );
+    }
 
     # check for an exclusion
-    if( $matched && 0 == $noexclude && $exclude ) {
+    if( $r->matched && 0 == $noexclude && exists $filter->{exclude} ) {
+        my $exclude = $filter->{exclude};
         for my $match( @$exclude ) {
             my $clauses = Set::Scalar->new;
             if( $match =~ m/^all\((.+)\)$/ ) {
                 $clauses->insert(split(/;/, $1));
                 $log->trace("all exclude filter: $clauses");
                 if( $clauses < $flags ) {
-                    $matched = 0, last;
+                    $r->matched( 0 );
+                    last;
                 }
             }
             elsif( $match ) {
                 $log->trace("single exclude filter: $match");
                 if( $flags->contains( $match ) ) {
-                    $matched = 0, last;
+                    $r->matched( 0 );
+                    last;
                 }
             }
             else {
@@ -155,10 +242,29 @@ sub match
         }
     }
 
-    $log->trace("matched: $matched");
-    return $matched;
+    # populate our value
+    if( $r->matched && exists $filter->{value} ) {
+        $r->value( $filter->{value} );
+    }
+
+    $log->trace("matched: $r");
+    return $r;
     
 }
+
+package WoWUI::Filter::Result;
+use Moose;
+use MooseX::StrictConstructor;
+
+has matched => ( is => 'rw', isa => 'Bool', default => 0 );
+has value => ( is => 'rw' );
+
+sub _matchedint
+{
+    $_[0]->matched ? 1 : 0;
+}
+use overload
+    '""' => '_matchedint';
 
 # keep require happy
 1;

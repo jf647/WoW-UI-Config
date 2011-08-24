@@ -4,13 +4,14 @@
 
 package WoWUI::Module::TurnIn;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-augment data => \&augment_data;
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 
@@ -18,30 +19,34 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'turnin', global => 1, perchar => 0 };
-}
-
-sub augment_data
+sub BUILD
 {
 
-  my $self = shift;
+    my $self = shift;
+    
+    $self->global( 1 );
+    
+    return $self;
+    
+}
 
-  my $config = $self->config;
-  my $options = WoWUI::Machine->instance->modoption_get($self->name);
+sub augment_global
+{
 
-  # TurnIn
-  my $data;
-  if( exists $options->{startquest} ) {
-    $data = $options;
-  }
-  else {
-    $data = { startquest => 0, finishquest => 0 };
-  }
-  $data->{npcs} = $config->{npcs};
+    my $self = shift;
 
-  return $data;
+    my $o = $self->modoptions;
+
+    for my $key( qw|startquest finishquest| ) {
+        if( exists $o->{$key} ) {
+            $self->globaldata_set( $key => $o->{$key} );
+        }
+        else {
+            $self->globaldata_set( $key => 0 );
+        }
+    }
+
+    $self->globaldata_set( npcs => $self->modconfig->{npcs} );
 
 }
 

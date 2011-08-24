@@ -1,0 +1,75 @@
+WoW-UI-Config
+-------------
+
+Configuration Files
+-------------------
+
+* etc/ui_config.yaml
+
+The main configuration that drives everything else
+
+* etc/addon/$ADDON.yaml
+
+Per-addon configurations, where $ADDON is the 'slug' of the addon - tmw,
+clt, dbm, etc.
+
+* private/machines.yaml
+
+Your machines configuration, which lists the machines you build
+configurations for and the players who use each of those machines
+
+* private/machine/$MACHINE.yaml
+
+Details about each machine you build a configuration for
+
+* private/player/$PLAYER.yaml
+
+Details about the characters and options of each player that you build a
+configuration for
+
+* private/ui_config.yaml
+
+Overridden configuration if you don't like my defaults.  If present, this
+is read and merged on top of etc/ui_config.yaml
+
+* private/addon/$ADDON.yaml
+
+Overridden addon configuration if you don't like my defaults.  If present,
+these are read and merged on top of the like-named file in etc/addon.
+
+Generic Configuration
+---------------------
+
+Private Configuration
+---------------------
+
+To separate the generic configuration (this addon is enabled for Protection
+Warriors) from the private configuration (I have a Protection Warrior named
+Tanky on Aggramar), you need to create at least two files in a subdirectory
+named private.
+
+You can either create a 'private' directory and populate it yourself, or you
+can create your own git repository so that your own configs are tracked.
+
+Assuming I've created a repositry using gitosis, gitolite or just manually
+using git itself, I run this commnad from the root of the WoW-UI-Config
+checkout:
+
+git clone git@mygitserver.com:wow/WoW-UI-Config-Private.git private
+
+If you're just starting out, you will want to create private/machines.yaml
+by copying the example file from the etc directory.  Then you need at least
+one machine file in private/machine and at least one player file in
+private/player.  An example of a private config repository can be found in
+the directory private.sample.
+
+The reason for all this indirection is that it allows you to create
+different configs using the same character data.  For example, I have two
+gaming machines - one powerful and one a bit older, plus a netbook and a
+laptop from work.  I might play any of my characters on any of these
+machines, but I want to treat them differently in terms of what addons are
+enabled.  The netbook has very little in the way of addons, but my main
+machine has everything under the sun turned on.
+
+#
+# EOF

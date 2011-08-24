@@ -4,20 +4,22 @@
 
 package WoWUI::Module::TellMeWhen::Conditions;
 use MooseX::Singleton;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
 
 # set up class
+has config => ( is => 'ro', isa => 'HashRef' );
 has conditions => (
     is => 'bare',
     isa => 'HashRef[WoWUI::Module::TellMeWhen::Condition]',
     traits => ['Hash'],
     default => sub { {} },
     handles => {
-        cond_get => 'get',
-        cond_set => 'set',
-        cond_keys => 'keys',
-        cond_values => 'values',
+        get => 'get',
+        set => 'set',
+        names => 'keys',
+        conditions => 'values',
     },
 );
 has anoncount => (
@@ -29,25 +31,24 @@ has anoncount => (
         _nextanoncount => 'inc',
     },
 );
-# causes problems - build is never called with 0.27 of MooseX::Singleton
-#__PACKAGE__->meta->make_immutable;
 
 # constructor
 sub BUILD
 {
 
     my $self = shift;
-    my $a = shift;
 
-    for my $cname( keys %{ $a->{config}->{conditions} } ) {
-        $a->{config}->{conditions}->{$cname}->{tag} = $cname;
-        unless( exists $a->{config}->{conditions}->{$cname}->{Name} ) {
-            $a->{config}->{conditions}->{$cname}->{Name} = $cname;
+    my $config = $self->config;
+
+    for my $cname( keys %{ $config->{conditions} } ) {
+        $config->{conditions}->{$cname}->{tag} = $cname;
+        unless( exists $config->{conditions}->{$cname}->{Name} ) {
+            $config->{conditions}->{$cname}->{Name} = $cname;
         }
         my $c = WoWUI::Module::TellMeWhen::Condition->new(
-            %{ $a->{config}->{conditions}->{$cname} }
+            %{ $config->{conditions}->{$cname} }
         );
-        $self->cond_set( $cname, $c );
+        $self->set( $cname, $c );
     }
 
 }

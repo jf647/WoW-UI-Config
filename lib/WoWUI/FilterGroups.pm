@@ -4,10 +4,13 @@
 
 package WoWUI::FilterGroups;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
+has [ qw|filtergroups things| ] => ( is => 'ro', isa=> 'HashRef' );
 has groups => (
     is => 'bare',
     isa => 'HashRef[WoWUI::FilterGroup]',
@@ -20,7 +23,7 @@ has groups => (
         groups_values => 'values',
     },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use WoWUI::FilterGroup;
 
@@ -42,18 +45,15 @@ sub BUILD
 {
 
     my $self = shift;
-    my $a = shift;
-    my $fgs = $a->{filtergroups};
-    my $things = $a->{things};    
-    for my $fgname( keys %$fgs ) {
+    for my $fgname( keys %{ $self->filtergroups } ) {
         my $fg = WoWUI::FilterGroup->new(
             name => $fgname,
-            config => $fgs->{$fgname},
+            config => $self->filtergroups->{$fgname},
         );
         $self->group_set( $fgname, $fg );
     }
 
-    $self->validate( $things );
+    $self->validate( $self->things );
 
 }
 
@@ -99,6 +99,7 @@ sub candidates
 
     my $self = shift;
     my $f = shift;
+    my $using = shift;
 
     my $log = WoWUI::Util->log( stacksup => 1, prefix => 'filtergroups' );
 
@@ -106,7 +107,7 @@ sub candidates
 
     for my $fg( $self->groups_values ) {
         $log->debug("considering filter group ", $fg->name);
-        if( $f->match( $fg->criteria ) ) {
+        if( $f->match( $fg->filter, $using ) ) {
             $log->debug("filter group matches");
             $candidates += $fg->members;
         }

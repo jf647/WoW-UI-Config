@@ -4,16 +4,23 @@
 
 package WoWUI::Module::TrinketMenu;
 use Moose;
+use MooseX::ClassAttribute;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-has [ 'trinkets' ] => ( is => 'rw', isa => 'HashRef' );
-augment chardata => \&augment_chardata;
-__PACKAGE__->meta->make_immutable;
+class_has parser => ( is => 'ro', isa => 'HTML::Parser', lazy_build => 1 );
+class_has json => ( is => 'ro', isa => 'JSON::Any', lazy_build => 1 );
+class_has mech => ( is => 'ro', isa => 'WWW::Mechanize', lazy_build => 1 );
+class_has cache_loaded => ( is => 'ro', isa => 'Bool', default => 0 );
+class_has [ qw|cache byname byid| ] => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
+use Clone 'clone';
 use Text::Balanced qw|extract_bracketed|;
 use Set::Scalar;
 
@@ -21,159 +28,218 @@ use WoWUI::Config;
 use WoWUI::Util qw|load_file dump_file expand_path log|;
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'trinketmenu', global => 0, perchar => 1 };
-}
 sub BUILD
 {
 
-  my $self = shift;
+    my $self = shift;
+  
+    $self->perchar( 1 );
 
-  $self->load_trinket_cache();
+    return $self;
 
 }
 
-sub augment_chardata
+sub augment_perchar
 {
 
-  my $self = shift;
-  my $char = shift;
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
 
-  my $config = $self->config;
-  my $co = $char->modoption_get($self->name);
-  my $trinkets = $self->trinkets;
+    my $config = $self->modconfig( $char );
+    my $o = $self->modoptions( $char );
+    my $log = WoWUI::Util->log;
 
-  my %trinketmenu;
+    my %trinketmenu;
 
-  # get list of all trinket itemids
-  my $all = Set::Scalar->new;
-  for my $set( keys %{ $co } ) {
-    for my $trinket( @{ $co->{$set} } ) {
-      $all->insert( $trinkets->{byname}->{$trinket}->{itemid} );
-    }
-  }  
-
-  # for each spec
-  for my $set( keys %{ $co } ) {
-    my $active = Set::Scalar->new;
-    for my $trinket( @{ $co->{$set} } ) {
-      if( 0 == $trinkets->{byname}->{$trinket}->{passive} ) {
-        $active->insert( $trinkets->{byname}->{$trinket}->{itemid} );
-      }
-    }
-    my $inactive = $all - $active;
-    $trinketmenu{profiles}->{$set}->{name} = $set;
-    my @active = sort { $trinkets->{byid}->{$b}->{priority} <=> $trinkets->{byid}->{$a}->{priority} } $active->members;
-    my @inactive = sort { $trinkets->{byid}->{$b}->{priority} <=> $trinkets->{byid}->{$a}->{priority} } $inactive->members;
-    push @{ $trinketmenu{profiles}->{$set}->{trinkets} }, map { { name => $trinkets->{byid}->{$_}->{name}, itemid => $_ } } @active;
-    push @{ $trinketmenu{profiles}->{$set}->{trinkets} }, { name => '---', itemid => 0 };
-    push @{ $trinketmenu{profiles}->{$set}->{trinkets} }, map { { name => $trinkets->{byid}->{$_}->{name}, itemid => $_ } } @inactive;
-  }
-
-  for my $itemid( $all->members ) {
-    push @{ $trinketmenu{trinkets} }, {
-      name => $trinkets->{byid}->{$itemid}->{name},
-      itemid => $itemid,
-      passive => 1 == $trinkets->{byid}->{$itemid}->{passive},
-      prefer => 1 == $trinkets->{byid}->{$itemid}->{prefer},
-    };
-  }
-  
-  return { realm => $char->realm->name, char => $char->name, trinketmenu => \%trinketmenu };
-
-}
-
-sub load_trinket_cache
-{
-
-  my $self = shift;
-
-  my $config = $self->config;
-  my $cachefile = expand_path( $config->{cachefile} );
-  my $data = { trinkets => {} };
-  if( -f $cachefile ) {
-    $data = load_file( expand_path( $config->{cachefile} ) );
-  }
-  
-  my $log = WoWUI::Util->log;
-  
-  my $updated = 0;
-  for my $trinket( keys %{ $data->{trinkets} } ) {
-    unless( exists $data->{trinkets}->{$trinket}->{prefer} ) {
-      $data->{trinkets}->{$trinket}->{prefer} = 0;
-      $updated = 1;
-    }
-  }
-  for my $realm( WoWUI::Profile->instance->realms_values ) {
-    for my $char( $realm->chars_values ) {
-      my $co = $char->modoption_get($self->name);
-      for my $set( keys %$co ) {
-        for my $trinket( @{ $co->{$set} } ) {
-          unless( exists $data->{trinkets}->{$trinket} ) {
-            $log->warn("Trinket '$trinket' not found in cache - pulling from Wowhead");
-            $data->{trinkets}->{$trinket} = $self->fetch_trinket_info($trinket);
-            $updated++;
-          }
+    # get list of all trinket itemids
+    my $all = Set::Scalar->new;
+    for my $set( keys %{ $o } ) {
+        for my $trinket( @{ $o->{$set} } ) {
+            my $trinketdata = $self->trinket_by_name( $trinket );
+            $all->insert( $trinketdata->{itemid} );
         }
-      }
     }
-  }
-  
-  if( $updated ) {
-    dump_file( expand_path( $config->{cachefile} ), $data );
-  }
 
-  for my $override( keys %{ $config->{overrides} } ) {
-    if( exists $data->{trinkets}->{$override} ) {
-      if( exists $config->{overrides}->{$override}->{priority} ) {
-        $data->{trinkets}->{$override}->{priority} = $config->{overrides}->{$override}->{priority};
-      }
-      if( exists $config->{overrides}->{$override}->{prefer} ) {
-        $data->{trinkets}->{$override}->{prefer} = 1;
-      }
+    # for each spec
+    for my $set( keys %{ $o } ) {
+        my $active = Set::Scalar->new;
+        for my $trinket( @{ $o->{$set} } ) {
+            my $trinketdata = $self->trinket_by_name( $trinket );
+            if( 0 == $trinketdata->{passive} ) {
+                $active->insert( $trinketdata->{itemid} );
+            }
+        }
+        my $inactive = $all - $active;
+        $trinketmenu{profiles}->{$set}->{name} = $set;
+        my @active = sort { $self->byid->{$b}->{priority} <=> $self->byid->{$a}->{priority} } $active->members;
+        my @inactive = sort { $self->byid->{$b}->{priority} <=> $self->byid->{$a}->{priority} } $inactive->members;
+        push @{ $trinketmenu{profiles}->{$set}->{trinkets} }, map { { name => $self->byid->{$_}->{name}, itemid => $_ } } @active;
+        push @{ $trinketmenu{profiles}->{$set}->{trinkets} }, { name => '---', itemid => 0 };
+        push @{ $trinketmenu{profiles}->{$set}->{trinkets} }, map { { name => $self->byid->{$_}->{name}, itemid => $_ } } @inactive;
     }
-  }
+
+    for my $itemid( $all->members ) {
+        push @{ $trinketmenu{trinkets} }, {
+            name => $self->byid->{$itemid}->{name},
+            itemid => $itemid,
+            passive => 1 == $self->byid->{$itemid}->{passive} ? 1 : 0,
+            prefer => 1 == $self->byid->{$itemid}->{prefer} ? 1 : 0,
+        };
+    }
     
-  # pivot to provide by-item-id lookups
-  my $cache = { byname => $data->{trinkets} };
-  for my $trinket( keys %{ $data->{trinkets} } ) {
-    $cache->{byid}->{$data->{trinkets}->{$trinket}->{itemid}} = $data->{trinkets}->{$trinket};
-  }
-
-  $self->trinkets( $cache );  
+    $self->perchardata_set( trinketmenu => \%trinketmenu );
 
 }
 
-sub fetch_trinket_info
+sub _build_parser
 {
 
-  my $self = shift;
-  my $trinketfull = shift;
-  my $trinket = $trinketfull;
+    require HTML::Parser;
+    my $parser = HTML::Parser->new;
+    $parser->marked_sections( 1 );
+    $parser->report_tags( 'script' );
+    
+    return $parser;
 
+}
 
-  my $itemid;
-  my $hc = 0;
-  if( $trinket =~ m/^(.+)\s+#(\d+)$/ ) {
-    $trinket = $1;
-    $itemid = $2;
-  }
-  
-  unless( $itemid ) {
-    $itemid = $self->get_itemid($trinket);
-  }
+sub _build_mech
+{
 
-  my $passive = $self->is_trinket_passive($trinket, $itemid);
-  my $ilevel = $self->get_item_level($trinket, $itemid);
-  return {
-      name => $trinket,
-      passive => $passive,
-      itemid => $itemid,
-      priority => $ilevel * 10,
-      prefer => 0,
-  };
-  
+    require WWW::Mechanize;
+    return WWW::Mechanize->new;
+
+}
+
+sub _build_json
+{
+
+    require JSON::DWIW;
+    JSON::DWIW->import;
+    require JSON::Any;
+    JSON::Any->import;
+    return JSON::Any->new;
+
+}
+
+sub trinket_by_name
+{
+
+    my $self = shift;
+    my $trinketname = shift;
+
+    unless( $self->cache_loaded ) {
+        $self->load_cache_from_file;
+    }
+
+    unless( exists $self->byname->{$trinketname} ) {
+        $self->add_by_name( $trinketname );
+    }
+    return $self->byname->{$trinketname};
+
+}
+
+sub trinket_by_id
+{
+
+    my $self = shift;
+    my $trinketid = shift;
+
+    unless( $self->cache_loaded ) {
+        $self->load_cache_from_file;
+    }
+    
+    unless( exists $self->byid->{$trinketid} ) {
+        $self->add_by_id( $trinketid );
+    }
+    return $self->byid->{$trinketid};
+
+}
+
+sub load_cache_from_file
+{
+
+    my $self = shift;
+    my $config = $self->modconfig;
+
+    my $cachefile = expand_path( $config->{cachefile} );
+    if( -f $cachefile ) {
+        $self->cache( load_file( $cachefile ) );
+        $self->byname( clone $self->cache );
+        for my $override( keys %{ $config->{overrides} } ) {
+            if( exists $self->cache->{$override} ) {
+                if( exists $config->{overrides}->{$override}->{priority} ) {
+                    $self->byname->{$override}->{priority} = $config->{overrides}->{$override}->{priority};
+                }
+                if( exists $config->{overrides}->{$override}->{prefer} ) {
+                    $self->byname->{$override}->{prefer} = 1;
+                }
+            }
+        }
+    }
+    for my $trinket( keys %{ $self->byname } ) {
+        $self->byid->{$self->byname->{$trinket}->{itemid}} = $self->byname->{$trinket};
+    }
+
+}
+
+sub write_cache_to_file
+{
+
+    my $self = shift;
+    my $config = $self->modconfig;
+    
+    my $cachefile = expand_path( $config->{cachefile} );
+    dump_file( $cachefile, $self->byname );
+
+}
+
+sub add_by_name
+{
+
+    my $self = shift;
+    my $trinketfull = shift;
+    my $trinket = $trinketfull;
+
+    my $config = $self->modconfig;
+    my $log = WoWUI::Util->log;
+
+    $log->info("fetching trinket info for '$trinketfull'");
+
+    my $itemid;
+    my $hc = 0;
+    if( $trinket =~ m/^(.+)\s+#(\d+)$/ ) {
+        $trinket = $1;
+        $itemid = $2;
+    }
+      
+    unless( $itemid ) {
+        $itemid = $self->get_itemid($trinket);
+    }
+
+    my $passive = $self->is_trinket_passive($trinket, $itemid);
+    my $ilevel = $self->get_item_level($trinket, $itemid);
+
+    my $trinketdata = {
+        name => $trinket,
+        passive => $passive,
+        itemid => $itemid,
+        priority => $ilevel * 10,
+        prefer => 0,
+    };
+
+    if( exists $config->{overrides}->{$trinketfull}->{priority} ) {
+        $trinketdata->{priority} = $config->{overrides}->{$trinketfull}->{priority};
+    }
+    if( exists $config->{overrides}->{$trinketfull}->{prefer} ) {
+        $trinketdata->{prefer} = 1;
+    }
+
+    $self->byname->{$trinketfull} = $trinketdata;
+    $self->byid->{$itemid} = $trinketdata;
+    $self->write_cache_to_file;
+    
 }
 
 sub is_trinket_passive
@@ -187,7 +253,7 @@ sub is_trinket_passive
 
     my $mech = $self->mech;
     $mech->get( "http://www.wowhead.com/item=$itemid" ) or die;
-    
+        
     my $passive = 1;
     my $found = 0;
     my $text_handler = sub {
@@ -207,11 +273,11 @@ sub is_trinket_passive
     my $parser = $self->parser;
     $parser->handler( text => $text_handler, 'is_cdata, text' );
     $parser->parse($mech->content)->eof;
-    
+        
     unless( $found ) {
         croak "could not find trinket tooltip for item $itemid";
     }
-    
+        
     $log->debug("$name is ", $passive ? "passive" : "active");
     return $passive;
 
@@ -245,11 +311,11 @@ sub get_item_level
     my $mech = $self->mech;
     $mech->get( "http://www.wowhead.com/item=$itemid" ) or die;
     $parser->parse($mech->content)->eof;
-    
+        
     unless( $itemlevel ) {
         croak "could not find itemlevel for item $itemid";
     }
-    
+        
     $log->debug("$name has item level ", $itemlevel);
     return $itemlevel;
 
@@ -260,7 +326,7 @@ sub get_itemid
 
     my $self = shift;
     my $name = shift;
-    
+        
     my $log = WoWUI::Util->log;
 
     my $hc = 0;
@@ -308,53 +374,16 @@ sub get_itemid
     my $mech = $self->mech;
     $mech->get( "http://www.wowhead.com/items=4.-4?filter=na=$name" ) or die;
     $parser->parse($mech->content)->eof;
-  
+     
     die "no results for '$name'" unless( $itemid );
     return $itemid;
 
 }
 
-my $parser;
-sub parser
+sub add_by_id
 {
 
-    unless( $parser ) {
-        require HTML::Parser;
-        $parser = HTML::Parser->new;
-        $parser->marked_sections( 1 );
-        $parser->report_tags( 'script' );
-    }
-    
-    return $parser;
-
-}
-
-my $mech;
-sub mech
-{
-
-  unless( $mech ) {
-    require WWW::Mechanize;
-    $mech = WWW::Mechanize->new;
-  }
-  
-  return $mech;
-
-}
-
-my $json;
-sub json
-{
-
-  unless( $json ) {
-    require JSON::DWIW;
-    JSON::DWIW->import;
-    require JSON::Any;
-    JSON::Any->import;
-    $json = JSON::Any->new;
-  }
-  
-  return $json;
+    croak "add trinket by ID not yet implemented";
 
 }
 

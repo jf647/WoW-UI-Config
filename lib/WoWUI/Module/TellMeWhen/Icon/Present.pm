@@ -7,18 +7,18 @@ use Moose::Role;
 
 # the monks say this is the best worst way to augment construction via roles
 # http://www.perlmonks.org/?node_id=837369
+has [ qw|missing always| ] => ( is => 'ro', isa => 'Bool' );
 sub BUILD {}
 after BUILD => sub {
 
     my $self = shift;
-    my $icfg = shift;
     
     # present / missing
-    if( exists $icfg->{missing} ) {
+    if( $self->missing ) {
         $self->ShowWhen('unalpha');
         $self->UnAlpha( 0.5 );
     }
-    elsif( exists $icfg->{always} ) {
+    elsif( $self->always ) {
         $self->ShowWhen( 'always' );
         $self->UnAlpha( 0.5 );
     }

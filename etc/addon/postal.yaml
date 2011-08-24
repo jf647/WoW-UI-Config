@@ -1,0 +1,9 @@
+---
+templates:
+    global:
+        postal:
+            input: $TEMPLATEDIR/postal/Postal.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Postal.lua
+perchar_filter:
+    addons:
+        - Postal

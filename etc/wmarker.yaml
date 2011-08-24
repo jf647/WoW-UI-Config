@@ -1,9 +1,0 @@
----
-templates:
-    perchar:
-        wmarker:
-            input: $TEMPLATEDIR/wmarker/wMarker.lua
-            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/wMarker.lua
-perchar_criteria:
-    addons:
-        - wMarker

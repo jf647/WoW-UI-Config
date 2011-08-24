@@ -1,0 +1,13 @@
+filtergroups:
+  racials:
+  members:
+  - Darkflight
+  filter:
+    include:
+    - race:Worgen
+icons:
+  Darkflight:
+    filter:
+      include:
+      - race:Worgen
+    type: Cooldown::Spell::LongCD

@@ -4,8 +4,10 @@
 
 package WoWUI::Module::TellMeWhen;
 use Moose;
+use MooseX::StrictConstructor;
 
 use namespace::autoclean;
+use CLASS;
 
 # set up class
 extends 'WoWUI::Module::Base';
@@ -18,9 +20,7 @@ has profileset => (
     isa => 'WoWUI::ProfileSet',
     default => sub { WoWUI::ProfileSet->new },
 );
-augment data => \&augment_data;
-augment chardata => \&augment_chardata;
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Clone 'clone';
@@ -61,16 +61,15 @@ use WoWUI::Module::TellMeWhen::Condition::Icon;
 use WoWUI::Module::TellMeWhen::Condition::Runes;
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'tmw', global => 1, perchar => 1 };
-}
 sub BUILD
 {
 
     my $self = shift;
 
     my $config = $self->config;
+
+    $self->global( 1 );
+    $self->globalpc( 1 );
 
     # build filter groups
     my $fgs = WoWUI::FilterGroups->new(
@@ -84,57 +83,44 @@ sub BUILD
 
     # instantiate icons singleton
     WoWUI::Module::TellMeWhen::Icons->initialize( config => $config );
+
+    return $self;
     
 }
 
-sub augment_chardata
+sub augment_global
+{
+
+    my $self = shift;
+    $self->globaldata->{pset} = $self->profileset;
+
+}
+
+sub augment_globalpc
 {
 
     my $self = shift;
     my $char = shift;
+    my $f = shift;
     
-    return { realm => $char->realm->name, name => $char->name };
-
-}
-
-sub augment_data
-{
-
-    my $self = shift;
-
     my $log = WoWUI::Util->log;
-    my $config = $self->config;
-
-    my $data;
-
-    for my $realm( WoWUI::Profile->instance->realms_values ) {
-        $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars_values ) {
-            my $f = WoWUI::Filter->new( char => $char );
-            if( exists $config->{perchar_criteria} ) {
-                next unless( $f->match( $config->{perchar_criteria} ) );
-            }
-            $log->debug("processing character ", $char->name);
-            my $profile = WoWUI::Module::TellMeWhen::Profile->new(
-                config => $config,
-                char => $char,
-                filtergroups => $self->filtergroups,
-            );
-            $profile->populate( config => $config, f => $f );
-            if( $profile->NumGroups ) {
-                my $pname = $self->profileset->store( $profile, $char->class );
-                $log->debug("profile for ", $char->name, " of ", $realm->name, " is $pname");
-                $data->{realms}->{$realm->name}->{$char->name} = $pname;
-            }
-            else {
-                croak $char->name, " of ", $realm->name, " has TellMeWhen enabled but generated no groups";
-            }
-        }
+    my $config = $self->modconfig( $char );
+    
+    my $profile = WoWUI::Module::TellMeWhen::Profile->new(
+        config => $config,
+        char => $char,
+        filtergroups => $self->filtergroups,
+        modoptions => $self->modoptions( $char ),
+    );
+    $profile->populate( config => $config, f => $f );
+    if( $profile->NumGroups ) {
+        my $pname = $self->profileset->store( $profile, $char->class );
+        $log->debug("profile for ", $char->rname, " is $pname");
+        $self->register_char( $char, $pname );
     }
-    
-    $data->{pset} = $self->profileset;
-    
-    return $data;
+    else {
+        croak $char->rname, " has TellMeWhen enabled but generated no groups";
+    }
 
 }
 

@@ -1,0 +1,9 @@
+---
+templates:
+    global:
+        sexymap:
+            input: $TEMPLATEDIR/sexymap/SexyMap.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/SexyMap.lua
+perchar_filter:
+    addons:
+        - SexyMap

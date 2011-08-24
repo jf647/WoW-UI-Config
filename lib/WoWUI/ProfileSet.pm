@@ -4,6 +4,10 @@
 
 package WoWUI::ProfileSet;
 use Moose;
+use MooseX::StrictConstructor;
+
+use CLASS;
+use namespace::autoclean;
 
 # set up class
 has nameseq => (
@@ -45,7 +49,7 @@ has profiles => (
     profiles_values => 'values',
   },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Digest;
 use YAML::Any 'Dump';

@@ -4,13 +4,14 @@
 
 package WoWUI::Module::Viewporter;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-augment chardata => \&augment_chardata;
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Clone 'clone';
 use Carp 'croak';
@@ -19,31 +20,35 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'viewporter', global => 0, perchar => 1 };
-}
-
-sub augment_chardata
+sub BUILD
 {
 
-  my $self = shift;
-  my $char = shift;
+    my $self = shift;
+    
+    $self->perchar( 1 );
+    
+    return $self;
+    
+}
 
-  my $config = $self->config;
-  my $o = WoWUI::Machine->instance->modoption_get($self->name);
+sub augment_perchar
+{
 
-  my $chardata = { realm => $char->realm->name, char => $char->name };
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
 
-  # Viewporter
-  if( exists $o->{bottom} ) {
-    $chardata->{bottom} = $o->{bottom};
-  }
-  else {
-    $chardata->{bottom} = 0;
-  }
+    my $o = $self->modoptions( $char );
 
-  return $chardata;
+    # Viewporter
+    for my $side( qw|top bottom left right| ) {
+        if( exists $o->{$side} ) {
+            $self->perchardata_set( $side => $o->{$side} );
+        }
+        else {
+            $self->perchardata_set( $side => 0 );
+        }
+    }
 
 }
 

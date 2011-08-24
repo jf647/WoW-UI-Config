@@ -4,7 +4,9 @@
 
 package WoWUI::Module::TellMeWhen::Icon::Totem;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
@@ -15,7 +17,7 @@ has '+ShowWhen' => ( relevant => 1 );
 has '+TotemSlots' => ( relevant => 1 );
 with 'WoWUI::Module::TellMeWhen::Icon::SpellName';
 with 'WoWUI::Module::TellMeWhen::Icon::Present';
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 # keep require happy
 1;

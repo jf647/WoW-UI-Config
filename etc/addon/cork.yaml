@@ -1,0 +1,636 @@
+---
+templates:
+  global:
+    cork:
+      input: $TEMPLATEDIR/cork/Cork.lua.template
+      output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Cork.lua
+  perchar:
+    cork:
+      input: $TEMPLATEDIR/cork/Cork_perchar.lua.template
+      output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Cork.lua
+filtergroups:
+  any:
+    members:
+    - Well Fed-enabled
+    - Training-enabled
+    - tooltiplimit
+    - raid_thresh
+    - Crates-enabled
+    - Quest Starting Items-enabled
+    - Talents-enabled
+    - multithreshold
+    - Repairs-threshold
+    - Archaeology digs-enabled
+    - Shuck Clams-enabled
+    - Combine-enabled
+    - Repairs-enabled
+    - Lances and Poles-enabled
+    - Glyphs-enabled
+    - Blessing of Forgotten Kings-enabled
+    - Runescroll of Fortitude-enabled
+    - Tracking-spell
+    - Tracking-enabled
+    - Flask of Enhancement-enabled
+  deathknight:
+    filter:
+      include:
+      - class:Death Knight
+    members:
+    - Horn of Winter-enabled
+    - Path of Frost-enabled
+    - Bone Shield-enabled
+  druid:
+    filter:
+      include:
+      - class:Druid
+    members:
+    - Fursuit-enabled
+    - Fursuit-spell
+    - Mark of the Wild-enabled
+  hunter:
+    filter:
+      include:
+      - class:Hunter
+    members:
+    - Aspect-spell
+    - Aspect-enabled
+  mage:
+    filter:
+      include:
+      - class:Mage
+    members:
+    - Armor-spell
+    - Arcane Brilliance-enabled
+    - Conjure Mana Gem-enabled
+    - Armor-enabled
+    - Focus Magic-enabled
+  paladin:
+    filter:
+      include:
+      - class:Paladin
+    members:
+    - Righteous Fury-enabled
+    - Seal-enabled
+    - Seal-spell
+    - Aura-spell
+    - Crusader Aura-enabled
+    - Blessings-enabled
+    - Aura-enabled
+    - Beacon of Light-enabled
+  priest:
+    filter:
+      include:
+      - class:Priest
+    members:
+    - Fear Ward-enabled
+    - Shadow Protection-enabled
+    - Inner Fire-spell
+    - Inner Fire-enabled
+    - Fortitude-enabled
+    - Shadowform-enabled
+    - Vampiric Embrace-enabled
+  rogue:
+    filter:
+      include:
+      - class:Rogue
+    members:
+    - Temp Enchant Off Hand-enabled
+    - Temp Enchant Thrown-spell
+    - Temp Enchant Main Hand-enabled
+    - Temp Enchant Off Hand-spell
+    - Temp Enchant Main Hand-spell
+    - Temp Enchant Thrown-enabled
+  shaman:
+    filter:
+      include:
+      - class:Shaman
+    members:
+    - Shields-spell
+    - Shields-enabled
+    - Temp Enchant Main Hand-enabled
+    - Temp Enchant Main Hand-spell
+    - Temp Enchant Off Hand-enabled
+    - Temp Enchant Off Hand-spell
+  warlock:
+    filter:
+      include:
+      - class:Warlock
+    members:
+    - Soul Shards-enabled
+    - Demon Armor-enabled
+    - Demon Armor-spell
+    - Summon demon-spell
+    - Summon demon-enabled
+    - Soul Link-enabled
+    - Healthstone
+    - Soulstone-enabled
+    - Dark Intent-enabled
+  warrior:
+    filter:
+      include:
+      - class:Warrior
+    members:
+    - Shouts-enabled
+    - Vigilance-enabled
+    - Shouts-spell
+perchar_filter:
+  addons:
+  - Cork
+settings:
+  Arcane Brilliance-enabled:
+    filter:
+    - value: 0
+    - level: 58
+      value: 1
+    type: boolean
+  Archaeology digs-enabled:
+    filter:
+    - value: 0
+    - include:
+      - prof:Archaeology
+      value: 1
+    type: boolean
+  Armor-enabled:
+    filter:
+    - value: 0
+    - level: 34
+      value: 1
+    type: boolean
+  Armor-spell:
+    filter:
+    - level: 34
+      value: Molten Armor
+    - include:
+      - spec:Arcane
+      level: 80
+      value: Mage Armor
+    type: string
+  Aspect-enabled:
+    filter:
+    - value: 0
+    - level: 16
+      value: 1
+    type: boolean
+  Aspect-spell:
+    level: 16
+    type: string
+    filter:
+    - value: Aspect of the Hawk
+  Aura-enabled:
+    filter:
+    - value: 0
+    - level: 5
+      value: 1
+    type: boolean
+  Aura-spell:
+    filter:
+    - level: 5
+      value: Devotion Aura
+    - include:
+      - spec:Retribution
+      level: 26
+      value: Retribution Aura
+    - include:
+      - spec:Holy
+      level: 42
+      value: Concentration Aura
+    type: string
+  Beacon of Light-enabled:
+    filter:
+    - value: 0
+    - include:
+      - spec:Holy
+      level: 39
+      value: 1
+    type: boolean
+  Blessing of Forgotten Kings-enabled:
+    filter:
+    - value: 0
+    type: boolean
+  Blessings-enabled:
+    filter:
+    - value: 0
+    - level: 22
+      value: 1
+    type: boolean
+  Bone Shield-enabled:
+    filter:
+    - value: 0
+    - include:
+      - spec:Blood
+      value: 1
+    type: boolean
+  Combine-enabled:
+    filter:
+    - value: 1
+    - exclude:
+      - prof:Leatherworking
+      include:
+      - prof:Skinning
+      value: 0
+    type: boolean
+  Conjure Mana Gem-enabled:
+    filter:
+    - value: 0
+    - level: 48
+      value: 1
+    type: boolean
+  Crates-enabled:
+    type: boolean
+    filter:
+    - value: 1
+  Crusader Aura-enabled:
+    filter:
+    - value: 0
+    - level: 62
+      value: 1
+    type: boolean
+  Dark Intent-enabled:
+    filter:
+    - value: 0
+    - level: 83
+      value: 1
+    type: boolean
+  Demon Armor-enabled:
+    filter:
+    - value: 0
+    - level: 8
+      value: 1
+    type: boolean
+  Demon Armor-spell:
+    filter:
+    - level: 8
+      value: Demon Armor
+    - level: 62
+      value: Fel Armor
+    type: string
+  Fear Ward-enabled:
+    filter:
+    - value: 0
+    - level: 54
+      value: 1
+    type: boolean
+  Flask of Enhancement-enabled:
+    filter:
+    - value: 0
+    type: boolean
+  Focus Magic-enabled:
+    filter:
+    - value: 0
+    - include:
+      - spec:Arcane
+      level: 35
+      value: 1
+    type: boolean
+  Fortitude-enabled:
+    filter:
+    - value: 1
+    type: boolean
+  Fursuit-enabled:
+    filter:
+    - value: 0
+    - include:
+      - all(spec:Feral Combat;subspec:Bear)
+      level: 15
+      value: 1
+    - include:
+      - all(spec:Feral Combat;subspec:Cat)
+      level: 8
+      value: 1
+    - include:
+      - spec:Balance
+      level: 20
+      value: 1
+    type: boolean
+  Fursuit-spell:
+    filter:
+    - level: 8
+      value: Cat Form
+    - include:
+      - subspec:Bear
+      level: 15
+      value: Bear Form
+    - include:
+      - spec:Balance
+      level: 30
+      value: Moonkin Form
+    type: string
+  Glyphs-enabled:
+    filter:
+    - value: 1
+    type: boolean
+  Healthstone:
+    filter:
+    - value: 1
+    type: boolean
+  Horn of Winter-enabled:
+    filter:
+    - value: 1
+    type: boolean
+  Inner Fire-enabled:
+    filter:
+    - value: 0
+    - level: 7
+      value: 1
+    type: boolean
+  Inner Fire-spell:
+    filter:
+    - value: Inner Fire
+    - include:
+      - spec:Discipline
+      level: 83
+      value: Inner Will
+    type: string
+  Lances and Poles-enabled:
+    filter:
+    - value: 1
+    type: boolean
+  Mark of the Wild-enabled:
+    filter:
+    - value: 0
+    - level: 30
+      value: 1
+    type: boolean
+  Path of Frost-enabled:
+    filter:
+    - value: 0
+    type: boolean
+  Quest Starting Items-enabled:
+    filter:
+    - value: 0
+    type: boolean
+  Repairs-enabled:
+    filter:
+    - value: 1
+    - include:
+      - banker
+      - mule
+      value: 0
+    type: boolean
+  Repairs-threshold:
+    filter:
+    - value: 0.4
+    type: number
+  Righteous Fury-enabled:
+    filter:
+    - value: 0
+    - include:
+      - spec:Protection
+      level: 12
+      value: 1
+    type: boolean
+  Runescroll of Fortitude-enabled:
+    filter:
+    - value: 0
+    type: boolean
+  Seal-enabled:
+    filter:
+    - value: 0
+    - level: 3
+      value: 1
+    type: boolean
+  Seal-spell:
+    filter:
+    - level: 3
+      value: Seal of Righteousness
+    - include:
+      - spec:Holy
+      level: 32
+      value: Seal of Insight
+    - include:
+      - spec:Protection
+      level: 44
+      value: Seal of Truth
+    type: string
+  Shadow Protection-enabled:
+    filter:
+    - value: 0
+    - level: 58
+      value: 1
+    type: boolean
+  Shadowform-enabled:
+    filter:
+    - value: 0
+    - include:
+      - spec:Shadow
+      level: 20
+      value: 1
+    type: boolean
+  Shields-enabled:
+    filter:
+    - value: 1
+    type: boolean
+  Shields-spell:
+    filter:
+    - value: Lightning Shield
+    - level: 20
+      include:
+      - spec:Restoration
+      value: Water Shield
+    type: string
+  Shouts-enabled:
+    filter:
+    - value: 0
+    - level: 20
+      value: 1
+    type: boolean
+  Shouts-spell:
+    filter:
+    - level: 20
+      value: Battle Shout
+    type: string
+  Shuck Clams-enabled:
+    filter:
+    - value: 1
+    type: boolean
+  Soul Link-enabled:
+    filter:
+    - value: 0
+    - level: 20
+      value: 1
+    type: boolean
+  Soul Shards-enabled:
+    filter:
+    - value: 0
+    - value: 1
+      level: 10
+    type: boolean
+  Soulstone-enabled:
+    filter:
+    - value: 1
+    type: boolean
+  Summon demon-enabled:
+    filter:
+    - value: 1
+      exclude:
+      - banker
+      - mule
+    - value: 0
+    type: boolean
+  Summon demon-spell:
+    filter:
+    - value: Summon Imp
+    - include:
+      - spec:Demonology
+      level: 10
+      value: Summon Felguard
+    - include:
+      - spec:Affliction
+      level: 20:29
+      value: Summon Succubus
+    - include:
+      - spec:Affliction
+      level: 30
+      value: Summon Felhunter
+    type: string
+  Talents-enabled:
+    filter:
+    - value: 1
+    - value: 0
+      include:
+        - levelcap
+        - banker
+        - mule
+    type: boolean
+  Temp Enchant Main Hand-enabled:
+    filter:
+    - value: 0
+    - level: 10
+      value: 1
+    type: boolean
+  Temp Enchant Main Hand-spell:
+    filter:
+    - level: 10
+      value: Crippling Poison
+    - include:
+      - all(class:Shaman;spec:Restoration)
+      level: 54
+      value: Earthliving Weapon
+    - include:
+      - all(class:Shaman;spec:Restoration)
+      level: :53
+      value: Flametongue Weapon
+    - include:
+      - all(class:Shaman;spec:Elemental)
+      value: Flametongue Weapon
+    - include:
+      - all(class:Shaman;spec:Enhancement)
+      level: :25
+      value: Flametongue Weapon
+    - include:
+      - all(class:Shaman;spec:Enhancement)
+      level: 26:31
+      value: Frostbrand Weapon
+    - include:
+      - all(class:Shaman;spec:Enhancement)
+      level: 32
+      value: Windfury Weapon
+    - include:
+      - class:Rogue
+      value: Instant Poison
+    type: string
+  Temp Enchant Off Hand-enabled:
+    filter:
+    - value: 0
+    - level: 10
+      value: 1
+    type: boolean
+  Temp Enchant Off Hand-spell:
+    filter:
+    - level: 10
+      include:
+      - all(class:Shaman;spec:Enhancement)
+      value: Flametongue Weapon
+    - level: 10
+      include:
+      - class:Rogue
+      value: Instant Poison
+    - level: 30
+      include:
+      - class:Rogue
+      value: Deadly Poison
+    type: string
+  Temp Enchant Thrown-enabled:
+    filter:
+    - value: 0
+    - level: 80
+      value: 1
+    type: boolean
+  Temp Enchant Thrown-spell:
+    filter:
+    - level: 80
+      include:
+      - class:Rogue
+      value: Crippling Poison
+    type: string
+  Tracking-enabled:
+    filter:
+    - value: 0
+    - exclude:
+      - prof:InactiveFishing
+      include:
+      - class:Hunter
+      - prof:Herbalism
+      - prof:Mining
+      - prof:Fishing
+      value: 1
+    type: boolean
+  Tracking-spell:
+    filter:
+    - include:
+      - class:Hunter
+      value: Track Beasts
+    - include:
+      - prof:Fishing
+      exclude:
+      - prof:InactiveFishing
+      value: Find Fish
+    - include:
+      - prof:Mining
+      value: Find Minerals
+    - include:
+      - prof:Herbalism
+      value: Find Herbs
+    type: string
+  Training-enabled:
+    filter:
+    - value: 0
+    - exclude:
+      - banker
+      - mule
+      include:
+      - leveling
+      value: 1
+    type: boolean
+  Vampiric Embrace-enabled:
+    filter:
+    - value: 0
+    - include:
+      - spec:Shadow
+      level: 20
+      value: 1
+    type: boolean
+  Vigilance-enabled:
+    filter:
+    - value: 0
+    - include:
+      - spec:Protection
+      level: 30
+      value: 1
+    type: boolean
+  Well Fed-enabled:
+    filter:
+    - value: 0
+    type: boolean
+  multithreshold:
+    filter:
+    - value: 2
+    type: number
+  raid_thresh:
+    filter:
+    - value: 5
+    type: number
+  tooltiplimit:
+    filter:
+    - value: 10
+    type: number

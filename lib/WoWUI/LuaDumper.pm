@@ -4,11 +4,13 @@
 
 package WoWUI::LuaDumper;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 
@@ -23,12 +25,16 @@ sub dump
     my $aname = $attr->name;
     my $reader = $attr->get_read_method;
     my $aval = $obj->$reader;
-    if( ! defined $aval && $attr->is_required ) {
-        croak "undefined value for required attribute $aname";
+    if( ! defined $aval ) {
+        if( $attr->is_required ) {
+            croak "undefined value for required attribute $aname";
+        }
     }
-    my $aval2 = $class->rdump($attr, $aval);
-    if( defined $aval2 ) {
-        return qq|["$aname"] = $aval2,\n|;
+    else {
+        my $aval2 = $class->rdump($attr, $aval);
+        if( defined $aval2 ) {
+            return qq|["$aname"] = $aval2,\n|;
+        }
     }
     return undef;
 

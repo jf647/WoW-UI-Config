@@ -4,46 +4,47 @@
 
 package WoWUI::Module::Postal;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
-extends 'WoWUI::Module::Basic';
-augment data => \&augment_data;
-__PACKAGE__->meta->make_immutable;
+extends 'WoWUI::Module::Base';
+CLASS->meta->make_immutable;
 
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'postal', global => 1, perchar => 0 };
-}
-
-sub augment_data
+sub BUILD
 {
 
     my $self = shift;
-
-    my $log = WoWUI::Util->log;
-
-    my $data;
-
-    for my $realm( WoWUI::Profile->instance->realms_values ) {
-        $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars_values ) {
-            $log->debug("processing character ", $char->name);
-            $data->{postal}->{$realm->name}->{$char} = {
-                name => $char->name,
-                faction => $char->faction,
-                class => $char->class_ns,
-                level => $char->level,
-            };
-        }
-    }
     
-    return $data;
+    $self->globalpc( 1 );
+    
+    return $self;
+    
+}
+
+sub augment_globalpc
+{
+
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
+
+    my $data = $self->globaldata;
+
+    $data->{postal}->{$char->realm->name}->{$char->name} = {
+        name => $char->name,
+        faction => $char->faction,
+        class => $char->class_ns,
+        level => $char->level,
+    };
+    
+    $self->globaldata( $data );
 
 }
 

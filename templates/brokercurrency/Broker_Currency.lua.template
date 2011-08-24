@@ -14,44 +14,7 @@ Broker_CurrencyCharDB = {
         ["g"] = 0,
         ["b"] = 0,
     },
-    ["summaryPlayerSession"] = true,
-    ["showToday"] = true,
-    ["summaryRealmToday"] = true,
-    ["showGold"] = true,
-    ["summaryGold"] = true,
-[% IF pve -%]
-    ["summary395"] = true,
-    ["summary396"] = true,
-[% END -%]
-[% IF pvp -%]
-    ["summary392"] = true,
-    ["summary390"] = true,
-    ["summary391"] = true,
-[% END -%]
-[% IF nrcooking -%]
-    ["summary81"] = true,
-[% END -%]
-[% IF cooking -%]
-    ["summary402"] = true,
-[% END -%]
-[% IF nrjewelcrafting -%]
-    ["summary61"] = true,
-[% END -%]
-[% IF jewelcrafting -%]
-    ["summary361"] = true,
-[% END -%]
-[% IF tournament -%]
-    ["summary241"] = true,
-[% END -%]
-[% IF firelands -%]
-    ["summary416"] = true,
-[% END -%]
-[% IF summary -%]
-    ["showYesterday"] = true,
-    ["showThisWeek"] = true,
-    ["showLastWeek"] = true,
-    ["summaryRealmYesterday"] = true,
-    ["summaryRealmThisWeek"] = true,
-    ["summaryRealmLastWeek"] = true,
+[% FOR option IN options -%]
+    ["[% option %]"] = true,
 [% END -%]
 }

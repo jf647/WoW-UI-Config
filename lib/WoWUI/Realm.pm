@@ -4,26 +4,31 @@
 
 package WoWUI::Realm;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
-has 'name' => ( is => 'rw', isa => 'Str' );
+with 'WoWUI::ModOptions';
+with 'WoWUI::ModConfig';
+has name => ( is => 'rw', isa => 'Str', required => 1 );
 has flags => ( is => 'rw', isa => 'Set::Scalar' );
-has options => ( is => 'rw', isa => 'HashRef' );
-has 'chars' => (
-  is => 'rw',
-  isa => 'HashRef[WoWUI::Char]',
-  traits => ['Hash'],
-  default => sub { {} },
-  handles => {
-    char_set => 'set',
-    char_get => 'get',
-    chars_list => 'keys',
-    chars_values => 'values',
-  },
+has cfg => ( is => 'rw', isa => 'HashRef' );
+has player => ( is => 'rw', isa => 'WoWUI::Player', required => 1 );
+has chars => (
+    is => 'bare',
+    isa => 'HashRef[WoWUI::Char]',
+    traits => ['Hash'],
+    default => sub { {} },
+    handles => {
+        char_set => 'set',
+        char_get => 'get',
+        char_names => 'keys',
+        chars => 'values',
+    },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 use Set::Scalar;
@@ -31,39 +36,33 @@ use Set::Scalar;
 use WoWUI::Char;
 use WoWUI::Config;
 use WoWUI::Util 'log';
+use WoWUI::Filter;
+use WoWUI::Filter::Constants qw|F_CALL|;
 
 # constructor
-sub BUILDARGS
-{
-
-  my $class = shift;
-  return { name => shift };
-
-}
 sub BUILD
 {
 
-  my $self = shift;
+    my $self = shift;
   
-  my $config = WoWUI::Config->instance->cfg;
-  my $profile = WoWUI::Profile->instance->options;
-  
-  my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->log;
+    my $gcfg = WoWUI::Config->instance->cfg;
 
-  $self->flags( Set::Scalar->new );
-  my $options = $self->options( $profile->{realm}->{$self->{name}} );
+    $self->flags( Set::Scalar->new );
 
-  for my $charname( keys %{ $options } ) {
-    $log->debug("creating char object for $charname on ", $self->name);
-    my $char = WoWUI::Char->new( name => $charname, realm => $self );
-    if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, { include => [ 'everyone' ], exclude => [ qw|level:85 bankalt mule| ] } ) ) {
-      $self->flags->insert("realm:still_leveling");
+    $self->set_modconfig( $self->cfg );
+    $self->set_modoptions( $self->cfg );
+
+    for my $charname( keys %{ $self->cfg->{chars} } ) {
+        $log->debug("creating char object for $charname on ", $self->name);
+        my $char = WoWUI::Char->new( name => $charname, realm => $self, cfg => $self->cfg->{chars}->{$charname} );
+        my $levelcap = $gcfg->{levelcap};
+        my $f = WoWUI::Filter->new( char => $char );
+        if( $f->match( { exclude => [ qw|levelcap bankalt mule| ] }, F_CALL ) ) {
+            $self->flags->insert("realm:still_leveling");
+        }
+        $self->char_set( $charname => $char );
     }
-    $self->char_set( $charname => $char );
-  }
-  for my $char( $self->chars_values ) {
-    $char->flags_get(0)->insert( $self->flags->members );
-  }
 
 }   
 

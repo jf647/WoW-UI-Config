@@ -4,20 +4,29 @@
 
 package WoWUI::Module::WIM;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
-extends 'WoWUI::Module::Basic';
-__PACKAGE__->meta->make_immutable;
+extends 'WoWUI::Module::Base';
+with 'WoWUI::NoGlobalData';
+CLASS->meta->make_immutable;
 
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'wim', global => 1, perchar => 0 };
+sub BUILD
+{
+    
+    my $self = shift;
+    
+    $self->global( 1 );
+    
+    return $self;
+    
 }
 
 # keep require happy

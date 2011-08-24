@@ -4,14 +4,15 @@
 
 package WoWUI::Module::QuestGuru;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-augment data => \&augment_data;
-augment chardata => \&augment_chardata;
-__PACKAGE__->meta->make_immutable;
+with 'WoWUI::NoPercharData';
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 
@@ -19,40 +20,32 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'questguru', global => 1, perchar => 1 };
+sub BUILD
+{
+
+    my $self = shift;
+    
+    $self->global( 1 );
+    $self->perchar( 1 );
+    
+    return $self;
+    
 }
 
-sub augment_data
+sub augment_global
 {
 
   my $self = shift;
 
-  my $config = $self->config;
-  my $options = WoWUI::Machine->instance->modoption_get($self->name);
-
-  my $data;
+  my $o = $self->modoptions;
 
   # Questguru Party Announce
-  if( exists $options->{announce} ) {
-    $data->{announce} = $options->{announce};
+  if( exists $o->{announce} ) {
+    $self->globaldata_set( announce => 1 );
   }
   else {
-    $data->{announce} = 0;
+    $self->globaldata_set( announce => 0 );
   }
-
-  return $data;
-
-}
-
-sub augment_chardata
-{
-
-  my $self = shift;
-  my $char = shift;
-
-  return { realm => $char->realm->name, char => $char->name };
 
 }
 

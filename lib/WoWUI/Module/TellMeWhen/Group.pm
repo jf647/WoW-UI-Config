@@ -4,12 +4,15 @@
 
 package WoWUI::Module::TellMeWhen::Group;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 use WoWUI::Meta::Attribute::Trait::Relevant;
 with 'WoWUI::Module::TellMeWhen::Dumpable';
+has modoptions => ( is => 'rw', isa => 'HashRef', required => 1 );
 has Enabled => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 has Locked => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 has Name => ( is => 'rw', isa => 'Str', traits => ['Relevant'], relevant => 1 );
@@ -69,7 +72,7 @@ has Conditions => (
         cond_count => 'count',
     },
 );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 
@@ -78,10 +81,10 @@ sub populate
 {
 
     my $self = shift;
-    my($profile, $config, $i, $name, $spec, $combat) = @_;
+    my($profile, $i, $name, $spec, $combat) = @_;
 
     my $log = WoWUI::Util->log;
-
+    
     # set name
     if( 'hidden' eq $name ) {
         $self->Name("Spec $spec hidden Combat $combat");
@@ -94,9 +97,9 @@ sub populate
     $self->add_icon( @{ $i->{$name}->{$spec}->{$combat} } );
 
     # set number of columns and rows
-    if( $self->icon_count > $config->{maxpergroup} ) {
-        $self->Columns( $config->{maxpergroup} );
-        $self->Rows( int( $self->icon_count / $config->{maxpergroup} ) + 1 );
+    if( $self->icon_count > $self->modoptions->{maxpergroup} ) {
+        $self->Columns( $self->modoptions->{maxpergroup} );
+        $self->Rows( int( $self->icon_count / $self->modoptions->{maxpergroup} ) + 1 );
     }
     else {
         $self->Columns( $self->icon_count );
@@ -117,7 +120,7 @@ sub populate
         # otherwise we need to use the next available position
         $gpoint = $profile->nextgrouppos->meta->clone_object( $profile->nextgrouppos );
         # bump the next available position down
-        $profile->nextgrouppos->y_down( $self->Rows * $config->{groupspacing} );
+        $profile->nextgrouppos->y_down( $self->Rows * $self->modoptions->{groupspacing} );
     }
     $self->Point( $gpoint );
     $log->debug("group position is ", $self->Point->x, "/", $self->Point->y);

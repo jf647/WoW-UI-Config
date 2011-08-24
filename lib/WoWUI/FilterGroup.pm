@@ -4,14 +4,17 @@
 
 package WoWUI::FilterGroup;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
+has config => ( is => 'ro', isa => 'HashRef' );
 has name => ( is => 'rw', isa => 'Str', required => 1 );
-has criteria => ( is => 'rw', isa => 'HashRef' );
+has filter => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
 has members => ( is => 'rw', isa => 'Set::Scalar' );
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use Set::Scalar;
 
@@ -20,10 +23,11 @@ sub BUILD
 {
 
     my $self = shift;
-    my $config = $_[0]->{config};
-    
-    $self->criteria( $config->{criteria} );
-    $self->members( Set::Scalar->new( @{ $config->{members} } ) );
+
+    if( exists $self->config->{filter} ) {
+        $self->filter( $self->config->{filter} );
+    }
+    $self->members( Set::Scalar->new( @{ $self->config->{members} } ) );
     
 }
 

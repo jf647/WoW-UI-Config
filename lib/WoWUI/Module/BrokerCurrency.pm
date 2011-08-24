@@ -4,45 +4,52 @@
 
 package WoWUI::Module::BrokerCurrency;
 use Moose;
+use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-augment chardata => \&augment_chardata;
-__PACKAGE__->meta->make_immutable;
+CLASS->meta->make_immutable;
 
 use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILDARGS {
-    my $class = shift;
-    return { @_, name => 'brokercurrency', global => 0, perchar => 1 };
-}
-
-sub augment_chardata
+sub BUILD
 {
 
-  my $self = shift;
-  my $char = shift;
-  
-  my $config = $self->config;
+    my $self = shift;
+    
+    $self->perchar( 1 );
+    
+    return $self;
 
-  my $chardata = { realm => $char->realm->name, char => $char->name };
+}
 
-  my $log = WoWUI::Util->log;
+sub augment_perchar
+{
 
-  # Broker_Currency
-  for my $currency( keys %{ $config->{currencies} } ) {
-    if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{currencies}->{$currency} ) ) {
-      $log->trace("including currency $currency");
-      $chardata->{$currency} = 1;
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
+      
+    my $config = $self->modconfig( $char );
+
+    my $log = WoWUI::Util->log;
+
+    # Broker_Currency
+    my @options;
+    for my $gname( keys %{ $config->{groups} } ) {
+        if( $f->match( $config->{groups}->{$gname}->{filter} ) ) {
+            $log->trace("including group $gname");
+            push @options, @{ $config->{groups}->{$gname}->{options} };
+        }
     }
-  }
-  
-  return $chardata;
 
+    $self->perchardata_set( options => \@options );
+      
 }
 
 # keep require happy
