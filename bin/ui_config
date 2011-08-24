@@ -130,6 +130,7 @@ sub process_machine
     # add in any extra files
     for my $file( WoWUI::ExtraFiles->files ) {
         my $zipdst = WoWUI::ExtraFiles->zipfile($file);
+        next if( $zip->memberNamed( $zipdst ) );
         $log->debug("adding extra file '$file' to zip as '$zipdst'");
         unless( $zip->addFile($file, $zipdst) ) {
             die "addFile error: $file";
