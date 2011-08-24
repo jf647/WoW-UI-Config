@@ -250,6 +250,9 @@ addons:
         include:
             - no-one
     Kong:
+        exclude:
+            - banker
+            - mule
         group: Standard
     KongConfig:
         exclude:

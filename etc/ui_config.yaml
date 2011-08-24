@@ -44,5 +44,5 @@ modules:
     - WoWUI::Module::TurnIn
     - WoWUI::Module::Hydra
     - WoWUI::Module::FreeRefills
-#    - WoWUI::Module::Kong
+    - WoWUI::Module::Kong
 #    - WoWUI::Module::ChocolateBar

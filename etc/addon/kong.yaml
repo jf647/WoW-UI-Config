@@ -8,13 +8,9 @@ templates:
         kong:
             input: $TEMPLATEDIR/kong/Kong_perchar.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/Kong.lua
-filter:
+perchar_filter:
     addons:
         - Kong
-perchar_filter:
-    exclude:
-        - banker
-        - mule
 frames:
     grid:
         name: GridLayoutFrame
