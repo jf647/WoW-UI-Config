@@ -34,7 +34,7 @@ modules:
     - WoWUI::Module::BrokerCurrency
     - WoWUI::Module::Auctionator
     - WoWUI::Module::DeadlyBossMods
-#    - WoWUI::Module::wMarker
+    - WoWUI::Module::wMarker
 #    - WoWUI::Module::SexyMap
 #    - WoWUI::Module::Overachiever
 #    - WoWUI::Module::Viewporter
