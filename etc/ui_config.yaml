@@ -43,6 +43,6 @@ modules:
     - WoWUI::Module::QuestGuru
     - WoWUI::Module::TurnIn
     - WoWUI::Module::Hydra
-#    - WoWUI::Module::FreeRefills
+    - WoWUI::Module::FreeRefills
 #    - WoWUI::Module::Kong
 #    - WoWUI::Module::ChocolateBar

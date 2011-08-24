@@ -25,50 +25,38 @@ sub BUILD
 
     my $self = shift;
     
-    $self->global( 1 );
+    $self->globalpc( 1 );
     
     return $self;
     
 }
 
-sub augment_data
+sub augment_globalpc
 {
 
     my $self = shift;
+    my $char = shift;
+    my $f = shift;
 
     my $log = WoWUI::Util->log;
+    my $config = $self->modconfig( $char );
 
-    my $config = $self->modconfig;
-
-    my $data;
-  
-    for my $realm( $self->player->realms ) {
-        $log->debug("processing realm ", $realm->name);
-        for my $char( $realm->chars ) {
-            if( exists $config->{perchar_criteria} ) {
-                next unless( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $config->{perchar_criteria} ) );
+    my %items;
+    for my $fr( keys %{ $config->{freerefills} } ) {
+        my $frdata = $config->{freerefills}->{$fr};
+        if( $f->match( $frdata->{filter} ) ) {
+            if( exists $items{$frdata->{itemid}} ) {
+                croak "$fr has been picked twice for ", $char->realm->name, "/", $char->name;
             }
-            $log->debug("processing character ", $char->name);
-            my %items;
-            for my $fr( keys %{ $config->{freerefills} } ) {
-                my $frdata = $config->{freerefills}->{$fr};
-                if( WoWUI::Util::Filter::matches( $char->flags_get('all'), $char, $frdata ) ) {
-                    if( exists $items{$frdata->{itemid}} ) {
-                        croak "$fr has been picked twice for ", $realm->name, "/", $char->name;
-                    }
-                    $items{$frdata->{itemid}} = clone $frdata;
-                    unless( exists $frdata->{name} ) {
-                        $items{$frdata->{itemid}}->{name} = $fr;
-                    }
-                }
-            }
-            if( %items ) {
-                $data->{freerefills}->{$realm->name}->{$char->name} = [ values %items ];
+            $items{$frdata->{itemid}} = clone $frdata;
+            unless( exists $frdata->{name} ) {
+                $items{$frdata->{itemid}}->{name} = $fr;
             }
         }
     }
-
-    return $data;
+    if( %items ) {
+        $self->globaldata->{freerefills}->{$char->realm->name}->{$char->name} = [ values %items ];
+    }
 
 }
 
