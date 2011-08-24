@@ -30,24 +30,23 @@ sub BUILD
     
 }
 
-sub augment_data
+sub augment_global
 {
 
-  my $self = shift;
-  my $config = $self->modconfig;
-  my $options = $self->modoptions;
+    my $self = shift;
 
-  # TurnIn
-  my $data;
-  if( exists $options->{startquest} ) {
-    $data = $options;
-  }
-  else {
-    $data = { startquest => 0, finishquest => 0 };
-  }
-  $data->{npcs} = $config->{npcs};
+    my $o = $self->modoptions;
 
-  return $data;
+    for my $key( qw|startquest finishquest| ) {
+        if( exists $o->{$key} ) {
+            $self->globaldata_set( $key => $o->{$key} );
+        }
+        else {
+            $self->globaldata_set( $key => 0 );
+        }
+    }
+
+    $self->globaldata_set( npcs => $self->modconfig->{npcs} );
 
 }
 
