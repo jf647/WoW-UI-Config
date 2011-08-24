@@ -18,6 +18,7 @@ use Carp 'croak';
 
 use WoWUI::Config;
 use WoWUI::Util 'log';
+use WoWUI::Filter::Constants;
 
 # constructor
 sub BUILD
@@ -26,60 +27,70 @@ sub BUILD
     my $self = shift;
     
     $self->global( 1 );
+    $self->globalpc( 1 );
     $self->perchar( 1 );
     
     return $self;
     
 }
 
-sub augment_data
+sub augment_global
 {
 
-  my $self = shift;
+    my $self = shift;
 
-  my $config = $self->modconfig;
-  my $o = $self->modoptions;
-  my $log = WoWUI::Util->log;
+    my $o = $self->modoptions;
+    my $log = WoWUI::Util->log;
 
-  my $data;
-  for my $realm( $self->player->realms ) {
-    for my $char( $realm->chars ) {
-        if( WoWUI::Util::Filter::matches( $char->flags_get(0), $char, { include => [ 'dualbox' ] } ) ) {
-            $log->trace("adding self char ", $char->name, " to trust list for realm ", $realm->name);
-            $data->{hydra}->{$realm->name}->{$char->name} = 1;
+    my $extratrust = $self->globaldata_get( 'extratrust' ) || {};
+    if( exists $o->{extratrust} ) {
+        for my $realm( keys %{ $o->{extratrust} } ) {
+            for my $char( @{ $o->{extratrust}->{$realm} } ) {
+                $log->trace("adding extra char $char to trust list for realm $realm");
+                $extratrust->{$realm}->{$char} = 1;
+            }
         }
     }
-  }
-  if( exists $o->{extratrust} ) {
-      for my $realm( keys %{ $o->{extratrust} } ) {
-          for my $char( @{ $o->{extratrust}->{$realm} } ) {
-              $log->trace("adding extra char $char to trust list for realm $realm");
-              $data->{hydra}->{$realm}->{$char} = 1;
-          }
-      }
-  }
 
-  return $data;
+    $self->globaldata_set( extratrust => $extratrust );
 
 }
 
-sub augment_chardata
+sub augment_globalpc
 {
 
-  my $self = shift;
-  my $char = shift;
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
 
-  my $config = $self->modconfig( $char );
+    my $log = WoWUI::Util->log;
 
-  # Hydra master/slave
-  if( WoWUI::Util::Filter::matches( $char->flags_get(0), $char, { include => [ 'all(machine:type:master;dualbox:master)' ] } ) ) {
-      return { realm => $char->realm->name, char => $char->name, hydra => 1, master => 1, slave => 0 };
-  }
-  elsif( WoWUI::Util::Filter::matches( $char->flags_get(0), $char, { include => [ 'all(machine:type:slave;dualbox:slave)' ] } ) ) {
-      return { realm => $char->realm->name, char => $char->name, hydra => 1, master => 0, slave => 1 };
-  }
-  
-  return;
+    my $extratrust = $self->globaldata_get( 'extratrust' ) || {};
+    if( $f->match( { include => [ 'dualbox' ] }, F_C0 ) ) {
+        $log->trace("adding self char ", $char->name, " to trust list for realm ", $char->realm->name);
+        $extratrust->{$char->realm->name}->{$char->name} = 1;
+    }
+    
+    $self->globaldata_set( extratrust => $extratrust );
+
+}
+
+sub augment_perchar
+{
+
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
+
+    my $config = $self->modconfig( $char );
+
+    # Hydra master/slave
+    if( $f->match( { include => [ 'all(machine:type:primary;dualbox:master)' ] }, F_C0|F_MACH ) ) {
+        $self->perchardata_set( hydra => 1, master => 1, slave => 0 );
+    }
+    elsif( $f->match( { include => [ 'all(machine:type:secondary;dualbox:slave)' ] }, F_C0|F_MACH ) ) {
+        $self->perchardata_set( hydra => 1, master => 0, slave => 1 );
+    }
 
 }
 

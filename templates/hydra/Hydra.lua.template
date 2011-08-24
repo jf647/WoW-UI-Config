@@ -1,8 +1,8 @@
 
 HydraTrustList = {
-[% FOR realm IN hydra.keys -%]
+[% FOR realm IN extratrust.keys -%]
     ["[% realm %]"] = {
-[% FOR char IN hydra.$realm.keys -%]
+[% FOR char IN extratrust.$realm.keys -%]
         ["[% char %]"] = "[% char %]",
 [% END -%]
     },
