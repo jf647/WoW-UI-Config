@@ -13,8 +13,6 @@ use namespace::autoclean;
 use WoWUI::Meta::Attribute::Trait::Relevant;
 with 'WoWUI::Module::TellMeWhen::Dumpable';
 # internal
-has tmw => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen', weak_ref => 1 );
-has profile => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen::Profile', weak_ref => 1 );
 has priority => ( is => 'rw', isa => 'Int', required => 1 );
 has tag => ( is => 'rw', isa => 'Str' );
 has combat => ( is => 'rw', isa => 'Str' );
@@ -128,20 +126,20 @@ sub BUILD
             else {
                 my $c;
                 if( 'HASH' eq ref $condition ) {
-                    my $cs = $self->tmw->conditions;
+                    my $cs = WoWUI::Module::TellMeWhen::Conditions->instance;
                     my $cname = $cs->nextanon;
                     $c = WoWUI::Module::TellMeWhen::Condition->new(
                         tag => $cname,
                         Name => $cname,
                         %$condition
                     );
-                    $self->tmw->conditions->set( $cname, $c );
+                    WoWUI::Module::TellMeWhen::Conditions->instance->set( $cname, $c );
                 }
                 elsif( $condition =~ m/^icon:(.+)/ ) {
                     $c = WoWUI::Module::TellMeWhen::Condition::Icon->new( tag => $1, Icon => $1 );
                 }
                 else {
-                    $c = $self->tmw->conditions->get( $condition );
+                    $c = WoWUI::Module::TellMeWhen::Conditions->instance->get( $condition );
                 }
                 die "invalid condition '$condition'" unless $c;
                 push @conditions, $c;

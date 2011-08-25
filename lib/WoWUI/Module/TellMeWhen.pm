@@ -20,14 +20,6 @@ has profileset => (
     isa => 'WoWUI::ProfileSet',
     default => sub { WoWUI::ProfileSet->new },
 );
-has icons => (
-    is => 'rw',
-    isa => 'WoWUI::Module::TellMeWhen::Icons',
-);
-has conditions => (
-    is => 'rw',
-    isa => 'WoWUI::Module::TellMeWhen::Conditions',
-);
 CLASS->meta->make_immutable;
 
 use Carp 'croak';
@@ -86,6 +78,12 @@ sub BUILD
     );
     $self->filtergroups( $fgs );
 
+    # instantiate conditions singleton
+    WoWUI::Module::TellMeWhen::Conditions->initialize( config => $config );
+
+    # instantiate icons singleton
+    WoWUI::Module::TellMeWhen::Icons->initialize( config => $config );
+
     return $self;
     
 }
@@ -107,22 +105,14 @@ sub augment_globalpc
     
     my $log = WoWUI::Util->log;
     my $config = $self->modconfig( $char );
-
-    # instantiate conditions singleton
-    $self->conditions(
-        WoWUI::Module::TellMeWhen::Conditions->new( tmw => $self, char => $char )
-    );
-
-    # instantiate icons singleton
-    $self->icons(
-        WoWUI::Module::TellMeWhen::Icons->new( tmw => $self, char => $char )
-    );
     
     my $profile = WoWUI::Module::TellMeWhen::Profile->new(
-        tmw => $self,
+        config => $config,
         char => $char,
+        filtergroups => $self->filtergroups,
+        modoptions => $self->modoptions( $char ),
     );
-    $profile->populate( $f );
+    $profile->populate( config => $config, f => $f );
     if( $profile->NumGroups ) {
         my $pname = $self->profileset->store( $profile, $char->class );
         $log->debug("profile for ", $char->rname, " is $pname");

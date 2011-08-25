@@ -12,8 +12,7 @@ use namespace::autoclean;
 # set up class
 use WoWUI::Meta::Attribute::Trait::Relevant;
 with 'WoWUI::Module::TellMeWhen::Dumpable';
-has tmw => ( is => 'ro', isa => 'WoWUI::Module::TellMeWhen', weak_ref => 1 );
-has profile => ( is => 'ro', isa => 'WoWUI::Module::TellMeWhen::Profile', weak_ref => 1 );
+has modoptions => ( is => 'rw', isa => 'HashRef', required => 1 );
 has Enabled => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 has Locked => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 has Name => ( is => 'rw', isa => 'Str', traits => ['Relevant'], relevant => 1 );
@@ -82,11 +81,9 @@ sub populate
 {
 
     my $self = shift;
-    my($i, $name, $spec, $combat) = @_;
+    my($profile, $i, $name, $spec, $combat) = @_;
 
     my $log = WoWUI::Util->log;
-    
-    my $o = $self->tmw->modoptions( $self->profile->char );
     
     # set name
     if( 'hidden' eq $name ) {
@@ -100,9 +97,9 @@ sub populate
     $self->add_icon( @{ $i->{$name}->{$spec}->{$combat} } );
 
     # set number of columns and rows
-    if( $self->icon_count > $o->{maxpergroup} ) {
-        $self->Columns( $o->{maxpergroup} );
-        $self->Rows( int( $self->icon_count / $o->{maxpergroup} ) + 1 );
+    if( $self->icon_count > $self->modoptions->{maxpergroup} ) {
+        $self->Columns( $self->modoptions->{maxpergroup} );
+        $self->Rows( int( $self->icon_count / $self->modoptions->{maxpergroup} ) + 1 );
     }
     else {
         $self->Columns( $self->icon_count );
@@ -114,16 +111,16 @@ sub populate
     my $gpoint;
     if( 2 == $spec ) {
         # spec 2 groups overlap their spec 1 counterparts (if they exist)
-        if( $gpoint = $self->profile->groupspec_get("$name/1/$combat") ) {
+        if( $gpoint = $profile->groupspec_get("$name/1/$combat") ) {
             $log->trace("reusing position of $name/1/$combat");
         }
     }
     unless( $gpoint ) {
         $log->trace("choosing next available group position");
         # otherwise we need to use the next available position
-        $gpoint = $self->profile->nextgrouppos->meta->clone_object( $self->profile->nextgrouppos );
+        $gpoint = $profile->nextgrouppos->meta->clone_object( $profile->nextgrouppos );
         # bump the next available position down
-        $self->profile->nextgrouppos->y_down( $self->Rows * $o->{groupspacing} );
+        $profile->nextgrouppos->y_down( $self->Rows * $self->modoptions->{groupspacing} );
     }
     $self->Point( $gpoint );
     $log->debug("group position is ", $self->Point->x, "/", $self->Point->y);
@@ -150,13 +147,13 @@ sub populate
     }
     
     # add the group to the profile and remember how to get at it by reference
-    $self->profile->add_group( $self );
-    $self->profile->groupspec_set("$name/$spec/$combat", $self->Point );
+    $profile->add_group( $self );
+    $profile->groupspec_set("$name/$spec/$combat", $self->Point );
     
     # remember the position of each icon in the group
-    my($g, $p) = ( $self->profile->NumGroups, 1 );
+    my($g, $p) = ( $profile->NumGroups, 1 );
     for my $icon( @{ $self->Icons } ) {
-        $self->profile->iconpos_set( $icon->tag, [ $g, $p ] );
+        $profile->iconpos_set( $icon->tag, [ $g, $p ] );
         $log->trace("iconpos: ", $icon->tag, " $g/$p");
         $p++;
     }
@@ -167,9 +164,10 @@ sub fixup
 {
 
     my $self = shift;
+    my $profile = shift;
     
-    if( $self->Columns > $self->profile->widestgroup ) {
-        $self->profile->widestgroup( $self->Columns );
+    if( $self->Columns > $profile->widestgroup ) {
+        $profile->widestgroup( $self->Columns );
     }
 
 }
@@ -178,8 +176,9 @@ sub setscale
 {
 
     my $self = shift;
+    my $profile = shift;
     
-    $self->Scale( $self->profile->groupscale );
+    $self->Scale( $profile->groupscale );
 
 }
 
