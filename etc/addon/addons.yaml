@@ -1121,8 +1121,6 @@ addons:
     SellJunk:
         group: Basic
     VendorBait:
-        include:
-            - everyone
         group: Basic
     SexyMap:
         exclude:
