@@ -11,7 +11,6 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-with 'WoWUI::NoGlobalData';
 CLASS->meta->make_immutable;
 
 use WoWUI::Config;
@@ -23,11 +22,13 @@ sub BUILD
 
     my $self = shift;
     
-    $self->global( 1 );
+    $self->globalpc( 1 );
     
     return $self;
     
 }
+
+sub augment_globalpc { }
 
 # keep require happy
 1;
