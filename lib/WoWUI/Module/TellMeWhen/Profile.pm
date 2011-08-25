@@ -271,6 +271,15 @@ sub populate
     for my $group( @{ $self->Groups } ) {
         $group->fixup( $self );
     }
+    
+    # allow for binding text to be set per machine/player/realm/char
+    for my $group( @{ $self->Groups } ) {
+        for my $icon( @{ $group->Icons } ) {
+            if( exists $self->modoptions->{bindtext}->{$icon->tag} ) {
+                $icon->BindText( $self->modoptions->{bindtext}->{$icon->tag} );
+            }
+        }
+    }
 
     # choose the group scale based on the widest group
     $self->groupscale( $config->{groupscale}->{$self->widestgroup} );
