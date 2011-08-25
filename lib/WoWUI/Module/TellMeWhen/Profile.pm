@@ -12,11 +12,9 @@ use namespace::autoclean;
 # set up class
 use WoWUI::Meta::Attribute::Trait::Relevant;
 with 'WoWUI::Module::TellMeWhen::Dumpable';
-has config => ( is => 'ro', isa => 'HashRef' );
+has tmw => ( is => 'ro', isa => 'WoWUI::Module::TellMeWhen', weak_ref => 1 );
 has char => ( is => 'rw', isa => 'WoWUI::Char', required => 1 );
-has modoptions => ( is => 'rw', isa => 'HashRef', required => 1 );
 has nextgrouppos => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen::Point' );
-has filtergroups => ( is => 'rw', isa => 'WoWUI::FilterGroups', required => 1 );
 has widestgroup => ( is => 'rw', isa => 'Num', default => 0 );
 has groupscale => ( is => 'rw', isa => 'Num', default => 2 );
 has Locked => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
@@ -119,14 +117,14 @@ sub BUILD
 {
 
     my $self = shift;
-    my $a = shift;
-    my $config = $a->{config};
+
+    my $o = $self->tmw->modoptions( $self->char );
 
     # set the update interval
-    $self->Interval( $self->modoptions->{interval} );
+    $self->Interval( $o->{interval} );
 
     # create a point for the first group
-    $self->nextgrouppos( WoWUI::Module::TellMeWhen::Point->new( %{ $self->modoptions->{anchor} } ) );
+    $self->nextgrouppos( WoWUI::Module::TellMeWhen::Point->new( %{ $o->{anchor} } ) );
 
     return $self;
 
@@ -137,13 +135,12 @@ sub populate
 {
 
     my $self = shift;
-    my %a = @_;
-    
-    my $f = $a{f};
-    my $config = $a{config};
-    
+    my $f = shift;
+
     my $desc = $self->char->rname;
     
+    my $config = $self->tmw->modconfig( $self->char );
+    my $o = $self->tmw->modoptions( $self->char );
     my $log = WoWUI::Util->log;
 
     # select icons
@@ -152,7 +149,7 @@ sub populate
         for my $combat( qw|in out| ) {
             $log->debug("selecting icons for spec $spec combat $combat");
             ($i{selected}->{$spec}->{$combat}, $i{hidden}->{$spec}->{$combat}) =
-                $self->select_icons( spec => $spec, combat => $combat, f => $f );
+                $self->select_icons( $spec, $combat, $f );
         }
     }
     
@@ -172,14 +169,13 @@ sub populate
         }
     }
 
-    
     # get the icon objects for each group
     for my $name( qw|selected hidden| ) {
         for my $spec( qw|0 1 2| ) {
             for my $combat( qw|in out either| ) {
                 my @set;
                 for my $iname( $i{$name}->{$spec}->{$combat}->members ) {
-                    my $icon = WoWUI::Module::TellMeWhen::Icons->instance->icon_get( $iname );
+                    my $icon = $self->tmw->icons->icon_get( $iname );
                     croak "can't find icon object for $iname" unless( $icon );
                     push @set, $icon->clone;
                 }
@@ -245,17 +241,17 @@ sub populate
         my($name, $spec, $combat) = splice(@group_order, 0, 3);
         if( exists $i{$name}->{$spec}->{$combat} ) {
             $log->debug("building group for $name/$spec/$combat");
-            my $group = WoWUI::Module::TellMeWhen::Group->new( modoptions => $self->modoptions );
-            $group->populate( $self, \%i, $name, $spec, $combat );
+            my $group = WoWUI::Module::TellMeWhen::Group->new( tmw => $self->tmw, profile => $self );
+            $group->populate( \%i, $name, $spec, $combat );
         }
     }
 
     # if we have a rotation group, build it
-    if( exists $self->modoptions->{rotation} ) {
+    if( exists $o->{rotation} ) {
         for my $spec( qw|1 2| ) {
-            if( my $r = $self->modoptions->{rotation}->{"spec$spec"} ) {
-                my $group = WoWUI::Module::TellMeWhen::Group::Rotation->new( modoptions => $self->modoptions );
-                $group->populate( $self, $spec, $r );
+            if( my $r = $o->{rotation}->{"spec$spec"} ) {
+                my $group = WoWUI::Module::TellMeWhen::Group::Rotation->new( tmw => $self->tmw, profile => $self );
+                $group->populate( $spec, $r );
             }
         }
     }
@@ -269,13 +265,13 @@ sub populate
     
     # allow the groups to do post-population cleanup
     for my $group( @{ $self->Groups } ) {
-        $group->fixup( $self );
+        $group->fixup;
     }
 
     # choose the group scale based on the widest group
     $self->groupscale( $config->{groupscale}->{$self->widestgroup} );
     for my $group( @{ $self->Groups } ) {
-        $group->setscale( $self );
+        $group->setscale;
     }
 
 }
@@ -284,15 +280,16 @@ sub select_icons
 {
 
     my $self = shift;
-    my %a = @_;
-    my $char = $a{f}->char;
+    my $spec = shift;
+    my $combat = shift;
+    my $f = shift;
 
     my $log = WoWUI::Util->log;
     
-    my $desc = $char->rname;
+    my $desc = $self->char->rname;
 
     # get candidates from filter groups
-    my $candidates = $self->filtergroups->candidates( $a{f} );
+    my $candidates = $self->tmw->filtergroups->candidates( $f );
     $log->trace("candidates are $candidates");
     
     # create sets for selected and hidden icons
@@ -300,19 +297,19 @@ sub select_icons
     my $hidden = Set::Scalar->new;
     
     # if we don't have this spec, just return the empty sets
-    unless( 0 == $a{spec} ) {
-        unless( $char->spec_get($a{spec}) ) {
+    unless( 0 == $spec ) {
+        unless( $self->char->spec_get($spec) ) {
             return ($selected, $hidden);
         }
     }
     
     # iterate over candidates    
-    my $using = 1 == $a{spec} ? F_C0|F_C1 : F_C0|F_C2;
+    my $using = 1 == $spec ? F_C0|F_C1 : F_C0|F_C2;
     for my $iname( $candidates->members ) {
         $log->trace("considering candidate $iname");
-        my $icon = WoWUI::Module::TellMeWhen::Icons->instance->icon_get($iname);
-        next if( $icon->combat && $a{combat} ne $icon->combat );
-        if( $a{f}->match( $icon->filter, $using ) ) {
+        my $icon = $self->tmw->icons->icon_get($iname);
+        next if( $icon->combat && $combat ne $icon->combat );
+        if( $f->match( $icon->filter, $using ) ) {
             $log->trace("selected $iname");
             $selected->insert( $iname );
             # allow the icon to select extra icons
@@ -320,10 +317,10 @@ sub select_icons
         }
     }
     if( $selected->size ) {
-        $log->debug("pre $desc select $a{spec}/$a{combat}: $selected");
+        $log->debug("pre $desc select $spec/$combat: $selected");
     }
     if( $hidden->size ) {
-        $log->debug("pre $desc hidden $a{spec}/$a{combat}: $hidden");
+        $log->debug("pre $desc hidden $spec/$combat: $hidden");
     }
 
     return ($selected, $hidden);

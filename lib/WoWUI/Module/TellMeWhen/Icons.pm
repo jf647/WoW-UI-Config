@@ -3,14 +3,15 @@
 #
 
 package WoWUI::Module::TellMeWhen::Icons;
-use MooseX::Singleton;
+use Moose;
 use MooseX::StrictConstructor;
 
 use CLASS;
 use namespace::autoclean;
 
 # set up class
-has config => ( is => 'ro', isa => 'HashRef' );
+has tmw => ( is => 'ro', isa => 'WoWUI::Module::TellMeWhen', weak_ref => 1 );
+has char => ( is => 'ro', isa => 'WoWUI::Char', weak_ref => 1 );
 has icons => (
     is => 'bare',
     isa => 'HashRef[WoWUI::Module::TellMeWhen::Icon]',
@@ -23,6 +24,7 @@ has icons => (
         icons_values => 'values',
     },
 );
+CLASS->meta->make_immutable;
 
 use Carp 'croak';
 
@@ -34,7 +36,7 @@ sub BUILD
 
     my $log = WoWUI::Util->log;
 
-    my $config = $self->config;
+    my $config = $self->tmw->modconfig( $self->char );
 
     for my $icon( keys %{ $config->{icons} } ) {
         unless( $config->{icons}->{$icon}->{type} ) {
@@ -43,7 +45,7 @@ sub BUILD
         my $type = 'WoWUI::Module::TellMeWhen::Icon::' . $config->{icons}->{$icon}->{type};
         $log->trace("building ", $config->{icons}->{$icon}->{type}, " object for '$icon'");
         $config->{icons}->{$icon}->{tag} = $icon;
-        my $i = $type->new( $config->{icons}->{$icon} );
+        my $i = $type->new( tmw => $self->tmw, %{ $config->{icons}->{$icon} } );
         $self->icon_set( $icon, $i );
     }
     

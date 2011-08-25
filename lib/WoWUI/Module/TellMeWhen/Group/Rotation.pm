@@ -23,7 +23,7 @@ sub populate
 {
 
     my $self = shift;
-    my($profile, $spec, $r) = @_;
+    my($spec, $r) = @_;
 
     my $log = WoWUI::Util->log;
 
@@ -31,7 +31,7 @@ sub populate
     $self->Name("Spec $spec Rotation");
 
     # add just the icon object for the rotation (which must be a meta)
-    my $metaicon = WoWUI::Module::TellMeWhen::Icons->instance->icon_get( $r->{icon} )->clone;
+    my $metaicon = $self->tmw->icons->icon_get( $r->{icon} )->clone;
     unless( $metaicon ) {
         croak "cannot get rotation icon $r->{icon}";
     }
@@ -45,8 +45,8 @@ sub populate
     $metaicon->select_extra($hidden);
     for my $iname( $hidden->members ) {
         # only add icons that aren't already selected (which should be all, but you never know...)
-        unless( $profile->iconpos_exists( $iname ) ) {
-            my $icon = WoWUI::Module::TellMeWhen::Icons->instance->icon_get( $iname )->clone;
+        unless( $self->profile->iconpos_exists( $iname ) ) {
+            my $icon = $self->tmw->icons->icon_get( $iname )->clone;
             croak "cannot get rotation icon $iname" unless( $icon );
             $icon->FakeHidden( 1 );
             $self->add_icon( $icon );
@@ -67,7 +67,7 @@ sub populate
     my $gpoint;
     if( 2 == $spec ) {
         # spec 2 groups overlap their spec 1 counterparts (if they exist)
-        if( $gpoint = $profile->groupspec_get("rotation/1") ) {
+        if( $gpoint = $self->profile->groupspec_get("rotation/1") ) {
             $log->trace("reusing position of rotation/1");
         }
     }
@@ -89,13 +89,13 @@ sub populate
     }
 
     # add the group to the profile and remember how to get at it by reference
-    $profile->add_group( $self );
-    $profile->groupspec_set("rotation/$spec", $self->Point );
+    $self->profile->add_group( $self );
+    $self->profile->groupspec_set("rotation/$spec", $self->Point );
     
     # remember the position of each icon in the group
-    my($g, $p) = ( $profile->NumGroups, 1 );
+    my($g, $p) = ( $self->profile->NumGroups, 1 );
     for my $icon( @{ $self->Icons } ) {
-        $profile->iconpos_set( $icon->tag, [ $g, $p ] );
+        $self->profile->iconpos_set( $icon->tag, [ $g, $p ] );
         $p++;
     }
 

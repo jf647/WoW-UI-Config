@@ -3,13 +3,15 @@
 #
 
 package WoWUI::Module::TellMeWhen::Conditions;
-use MooseX::Singleton;
+use Moose;
 use MooseX::StrictConstructor;
 
+use CLASS;
 use namespace::autoclean;
 
 # set up class
-has config => ( is => 'ro', isa => 'HashRef' );
+has tmw => ( is => 'ro', isa => 'WoWUI::Module::TellMeWhen', weak_ref => 1 );
+has char => ( is => 'ro', isa => 'WoWUI::Char', weak_ref => 1 );
 has conditions => (
     is => 'bare',
     isa => 'HashRef[WoWUI::Module::TellMeWhen::Condition]',
@@ -31,6 +33,7 @@ has anoncount => (
         _nextanoncount => 'inc',
     },
 );
+CLASS->meta->make_immutable;
 
 # constructor
 sub BUILD
@@ -38,7 +41,7 @@ sub BUILD
 
     my $self = shift;
 
-    my $config = $self->config;
+    my $config = $self->tmw->modconfig( $self->char );
 
     for my $cname( keys %{ $config->{conditions} } ) {
         $config->{conditions}->{$cname}->{tag} = $cname;

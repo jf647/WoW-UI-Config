@@ -29,7 +29,7 @@ sub add_meta_members
 
     for my $iname( @{ $self->Icons } ) {
         $set->insert( $iname );
-        my $icon = WoWUI::Module::TellMeWhen::Icons->icon_get( $iname );
+        my $icon = $self->tmw->icons->icon_get( $iname );
         unless( $icon ) {
             croak "can't get an icon for '$iname'";
         }
