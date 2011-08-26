@@ -66,7 +66,7 @@ addons:
             - machine:type:basic
     GridStatusRaidIcons:
         include:
-            - machine:name:kara
+            - machine:name:primary
         exclude:
             - banker
             - mule
@@ -304,6 +304,7 @@ addons:
     AutoBar:
         include:
             - all(dualbox:slave;machine:type:secondary)
+            - all(dualbox:master;machine:type:primary)
         group: Standard
     BadBoy:
         group: Basic
@@ -1214,7 +1215,7 @@ addons:
         group: Standard
     SkadaAvoidanceMitigation:
         include:
-            - machine:name:kara
+            - machine:name:primary
         exclude:
             - banker
             - mule
@@ -1304,13 +1305,13 @@ addons:
             - no-one
     TrinketMenu:
         include:
-            - all(machine:name:kara;levelcap)
-            - all(machine:name:kara;trinketmenu)
+            - all(machine:name:primary;levelcap)
+            - all(machine:name:primary;trinketmenu)
         group: Standard
     TrinketsFollowEquipment:
         include:
-            - all(machine:name:kara;levelcap)
-            - all(machine:name:kara;trinketmenu)
+            - all(machine:name:primary;levelcap)
+            - all(machine:name:primary;trinketmenu)
         group: Standard
     TurnIn:
         exclude:
@@ -1376,7 +1377,7 @@ addons:
         group: Standard
     wMarker:
         include:
-            - all(machine:name:kara;dungeontype:raids)
+            - all(machine:type:primary;dungeontype:raids)
         group: Raiding
     AutoItemStartQuest:
         exclude:
@@ -1385,8 +1386,8 @@ addons:
         group: Standard
     '+Wowhead_Looter':
         include:
-            - all(machine:name:kara;wowhead)
-            - all(machine:name:kara;realm:Winterhoof)
+            - all(machine:name:primary;wowhead)
+            - all(machine:name:primary;realm:Winterhoof)
         exclude:
             - machine:type:secondary
             - banker
