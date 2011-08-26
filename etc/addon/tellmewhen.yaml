@@ -48,8 +48,8 @@ conditions:
     Operator: <
     Type: HEALTH
     Unit: player
-  hp_le_50_pct:
-    Level:  50
+  hp_le_60_pct:
+    Level:  60
     Operator: '<='
     Type: HEALTH
     Unit: player
@@ -393,12 +393,12 @@ icons:
     Icons:
       - Plague Strike if BP Missing
       - Howling Blast if FF Missing
-      - Death Strike if HP Below 50
+      - Death Strike if HP Below 60
+      - Obliterate if KM Up
       - Obliterate if DDoooo
       - Obliterate if ooFFUU
       - Frost Strike if RP Capped
       - Howling Blast if Rime Up
-      - Obliterate if KM Up
       - Obliterate
       - Frost Strike
   Enhance Shaman Rotation:
@@ -577,13 +577,13 @@ icons:
     no_filter_group_ok:
     type: Cooldown::Spell
     ManaCheck: 1
-  Death Strike if HP Below 50:
+  Death Strike if HP Below 60:
     no_filter_group_ok: 1
     Alpha: 1
     type: Cooldown::Spell
     spell: Death Strike
     conditions:
-      - hp_le_50_pct
+      - hp_le_60_pct
   Anti-Magic Shell:
     combat: in
     filter:
