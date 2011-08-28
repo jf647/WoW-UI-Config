@@ -25,6 +25,7 @@ has globaldata => (
         globaldata_exists => 'exists',
         globaldata_set => 'set',
         globaldata_get => 'get',
+        globaldata_clear => 'clear',
     },
 );
 has perchardata => (
@@ -128,6 +129,9 @@ sub process
 
     my $config = $self->modconfig;
     my $log = WoWUI::Util->log( callingobj => $self );
+
+    # clear out old data
+    $self->globaldata_clear;
 
     if( $self->globalpc ) {
         $self->build_globalpc;
