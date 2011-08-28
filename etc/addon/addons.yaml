@@ -304,7 +304,7 @@ addons:
     AutoBar:
         include:
             - all(dualbox:slave;machine:type:secondary)
-            - all(dualbox:master;machine:type:primary)
+            - machine:type:primary
         group: Standard
     BadBoy:
         group: Basic
