@@ -208,6 +208,10 @@ plugins:
         filter:
             include:
                 - no-one
+    TidyPlatesIcon:
+        filter:
+            include:
+                - no-one
     WIM:
         align: right
         priority: 40
