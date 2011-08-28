@@ -1326,10 +1326,12 @@ addons:
     WIM:
         include:
             - all(dualbox:slave;machine:type:secondary)
+            - machine:type:primary
         group: Basic
     WIM_FlatPanel:
         include:
             - all(dualbox:slave;machine:type:secondary)
+            - machine:type:primary
         group: Basic
     _NPCScan:
         include:
