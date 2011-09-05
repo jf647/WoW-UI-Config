@@ -39,6 +39,8 @@ filtergroups:
     - Horn of Winter-enabled
     - Path of Frost-enabled
     - Bone Shield-enabled
+    - Presence-enabled
+    - Presence-spell
   druid:
     filter:
       include:
@@ -195,6 +197,23 @@ settings:
       level: 42
       value: Concentration Aura
     type: string
+  Presence-enabled:
+    filter:
+    - value: 1
+    type: boolean
+  Presence-spell:
+    filter:
+    - level: 55
+      value: Frost Presence
+    - level: 57
+      value: Blood Presence
+      include:
+        - spec:Blood
+    - level: 70
+      value: Unholy Presence
+      include:
+        - spec:Unholy
+    type: string
   Beacon of Light-enabled:
     filter:
     - value: 0
@@ -213,6 +232,7 @@ settings:
     - level: 22
       value: 1
     type: boolean
+
   Bone Shield-enabled:
     filter:
     - value: 0
