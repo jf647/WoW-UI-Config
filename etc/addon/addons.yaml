@@ -309,6 +309,10 @@ addons:
             - banker
             - mule
         group: Standard
+    BloodShieldTracker:
+        include:
+          - all(class:Death Knight;spec:Blood)
+        class: Death Knight
     BadBoy:
         group: Basic
     BadBoy_CCleaner:
