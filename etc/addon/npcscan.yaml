@@ -497,3 +497,33 @@ npcs:
         world: 4
         sets:
             - mage
+    Linken:
+        id: 52233
+        world: 1
+        sets:
+            - firelands
+    Nat Pagle:
+        id: 52244
+        world: 1
+        sets:
+            - firelands
+    Mankrik:
+        id: 52238
+        world: 1
+        sets:
+            - firelands
+    Hemet Nesingwary:
+        id: 52261
+        world: 1
+        sets:
+            - firelands
+    Chromie:
+        id: 52265
+        world: 1
+        sets:
+            - firelands
+    Thassarian:
+        id: 53427
+        world: 1
+        sets:
+            - firelands
