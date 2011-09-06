@@ -176,6 +176,7 @@ filtergroups:
     - Banish
     - Fear
     - Soulstone OOC
+    - Soulstone IC
     filter:
       include:
       - class:Warlock
@@ -802,6 +803,14 @@ actions:
     filter:
       include:
       - cliqueaction:resurrect
+      level: 18
+    icon: spell_shadow_soulgem
+    macro: /use [@mouseover] Soulstone
+    type: macro
+  Soulstone IC:
+    filter:
+      include:
+      - cliqueaction:battlerez
       level: 18
     icon: spell_shadow_soulgem
     macro: /use [@mouseover] Soulstone
