@@ -12,6 +12,14 @@ perchar_filter:
     addons:
         - ChocolateBar
 plugins:
+    BloodShieldTracker:
+        filter:
+            include:
+                - no-one
+    TidyPlatesIcon:
+        filter:
+            include:
+                - no-one
     RobBossMods:
         align: left
         priority: 90
