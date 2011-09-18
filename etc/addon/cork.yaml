@@ -192,6 +192,10 @@ settings:
       value: Retribution Aura
     - include:
       - spec:Holy
+      level: 26
+      value: Retribution Aura
+    - include:
+      - spec:Holy
       level: 42
       value: Concentration Aura
     type: string
@@ -461,11 +465,11 @@ settings:
     type: boolean
   Summon demon-enabled:
     filter:
+    - value: 0
     - value: 1
       exclude:
       - banker
       - mule
-    - value: 0
     type: boolean
   Summon demon-spell:
     filter:
