@@ -41,7 +41,7 @@ sub augment_global
 
   # Questguru Party Announce
   if( exists $o->{announce} ) {
-    $self->globaldata_set( announce => 1 );
+    $self->globaldata_set( announce => $o->{announce} );
   }
   else {
     $self->globaldata_set( announce => 0 );
