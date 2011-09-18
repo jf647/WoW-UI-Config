@@ -1323,6 +1323,16 @@ addons:
             - banker
             - mule
         group: Standard
+    Viewporter:
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    bobBlackViewPort:
+        exclude:
+            - banker
+            - mule
+        group: Standard
     WIM:
         include:
             - all(dualbox:slave;machine:type:secondary)
