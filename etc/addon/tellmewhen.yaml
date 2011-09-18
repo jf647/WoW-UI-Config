@@ -350,6 +350,7 @@ filtergroups:
     - Decimation
     - Health Funnel
     - Demon Soul
+    - No Soulstone in Bags
     filter:
       include:
       - class:Warlock
@@ -1598,6 +1599,16 @@ icons:
     filter:
       level: 85
     combat: in
+  No Soulstone in Bags:
+    type: Condition
+    filter:
+      level: 18
+    succeed: 1
+    Alpha: 1
+    Name: inv_misc_orb_04
+    conditions:
+        - Type: ITEMINBAGS
+          Name: 5232
   Metamorphosis:
     combat: in
     filter:

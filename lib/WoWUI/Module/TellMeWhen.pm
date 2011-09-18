@@ -56,6 +56,7 @@ use WoWUI::Module::TellMeWhen::Icon::Totem;
 use WoWUI::Module::TellMeWhen::Icon::Aura;
 use WoWUI::Module::TellMeWhen::Icon::Buff;
 use WoWUI::Module::TellMeWhen::Icon::Debuff;
+use WoWUI::Module::TellMeWhen::Icon::Condition;
 use WoWUI::Module::TellMeWhen::Condition;
 use WoWUI::Module::TellMeWhen::Condition::Icon;
 use WoWUI::Module::TellMeWhen::Condition::Runes;

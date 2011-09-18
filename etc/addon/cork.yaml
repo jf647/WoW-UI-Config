@@ -123,8 +123,8 @@ filtergroups:
     - Summon demon-enabled
     - Soul Link-enabled
     - Healthstone
-    - Soulstone-enabled
     - Dark Intent-enabled
+    - Soulstone-enabled
   warrior:
     filter:
       include:
@@ -461,7 +461,7 @@ settings:
     type: boolean
   Soulstone-enabled:
     filter:
-    - value: 1
+    - value: 0
     type: boolean
   Summon demon-enabled:
     filter:
