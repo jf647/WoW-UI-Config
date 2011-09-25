@@ -1,12 +1,13 @@
 
 ARF_DB = {
 
-    mode = "[% mode %]",
-    debug = false,
-    trusted = {
+    ["mode"] = "[% mode %]",
+    ["debug"] = false,
+    ["trusted"] = {
 [% FOR trust IN trust -%]
-        "[% trust %]" = 1,
+        ["[% trust %]"] = 1,
 [% END -%]
     },
+
 }
 

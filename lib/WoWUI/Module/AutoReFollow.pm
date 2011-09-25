@@ -44,7 +44,7 @@ sub augment_perchar
         $self->perchardata_set( enabled => 1 );
     }
     elsif( $f->match( { include => [ 'all(machine:type:secondary;dualbox:slave)' ] }, F_C0|F_MACH ) ) {
-        $self->perchardata_set( enabled => 1, mode => "master" );
+        $self->perchardata_set( enabled => 1, mode => "slave" );
     }
 
 }
