@@ -27,7 +27,6 @@ sub BUILD
     my $self = shift;
     
     $self->global( 1 );
-    $self->globalpc( 1 );
     $self->perchar( 1 );
     
     return $self;
@@ -43,6 +42,19 @@ sub augment_global
     my $log = WoWUI::Util->log;
 
     my $extratrust = $self->globaldata_get( 'extratrust' ) || {};
+    
+    my %seen;
+    for my $realm( $self->player->realms ) {
+        next if( exists $seen{$realm->name} );
+        $seen{$realm->name} = 1;
+        for my $char( $realm->chars ) {
+            my $f = WoWUI::Filter->new( char => $char, machine => $self->machine );
+            if( $f->match( { include => [ 'dualbox' ] }, F_C0 ) ) {
+                $extratrust->{$realm->name}->{$char->name} = 1;
+            }
+        }
+    }
+    
     if( exists $o->{extratrust} ) {
         for my $realm( keys %{ $o->{extratrust} } ) {
             for my $char( @{ $o->{extratrust}->{$realm} } ) {
@@ -56,33 +68,12 @@ sub augment_global
 
 }
 
-sub augment_globalpc
-{
-
-    my $self = shift;
-    my $char = shift;
-    my $f = shift;
-
-    my $log = WoWUI::Util->log;
-
-    my $extratrust = $self->globaldata_get( 'extratrust' ) || {};
-    if( $f->match( { include => [ 'dualbox' ] }, F_C0 ) ) {
-        $log->trace("adding self char ", $char->name, " to trust list for realm ", $char->realm->name);
-        $extratrust->{$char->realm->name}->{$char->name} = 1;
-    }
-    
-    $self->globaldata_set( extratrust => $extratrust );
-
-}
-
 sub augment_perchar
 {
 
     my $self = shift;
     my $char = shift;
     my $f = shift;
-
-    my $config = $self->modconfig( $char );
 
     # Hydra master/slave
     if( $f->match( { include => [ 'all(machine:type:primary;dualbox:master)' ] }, F_C0|F_MACH ) ) {

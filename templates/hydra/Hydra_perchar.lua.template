@@ -25,9 +25,7 @@ HydraSettings = {
 	["Follow"] = {
 		["enable"] = false,
         ["sticky"] = true,
-        ["sticky_ooc"] = true,
-        ["sticky_ooc_window"] = 8,
-		["verbose"] = true,
+		["verbose"] = false,
 	},
 	["Quest"] = {
         ["enable"] = true,
