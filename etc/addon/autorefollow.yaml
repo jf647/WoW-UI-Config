@@ -1,0 +1,9 @@
+---
+templates:
+    perchar:
+        autorefollow:
+            input: $TEMPLATEDIR/autorefollow/AutoReFollow.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/AutoReFollow.lua
+perchar_filter:
+    addons:
+        - AutoReFollow

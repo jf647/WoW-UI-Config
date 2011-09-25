@@ -23,7 +23,7 @@ HydraSettings = {
 		["timeout"] = 60,
 	},
 	["Follow"] = {
-		["enable"] = true,
+		["enable"] = false,
         ["sticky"] = true,
         ["sticky_ooc"] = true,
         ["sticky_ooc_window"] = 8,

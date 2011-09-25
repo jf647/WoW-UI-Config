@@ -1,8 +1,4 @@
-#
-# $Id: Hydra.pm 4998 2011-05-25 16:26:54Z james $
-#
-
-package WoWUI::Module::Hydra;
+package WoWUI::Module::AutoReFollow;
 use Moose;
 use MooseX::StrictConstructor;
 
@@ -39,12 +35,16 @@ sub augment_perchar
     my $char = shift;
     my $f = shift;
 
-    # Hydra master/slave
+    my $o = $self->modoptions( $char );
+    
+    my $trust = $o->{trust} || [];
+
+    $self->perchardata_set( enabled => 0, mode => "master", trust => $trust );
     if( $f->match( { include => [ 'all(machine:type:primary;dualbox:master)' ] }, F_C0|F_MACH ) ) {
-        $self->perchardata_set( hydra => 1, master => 1, slave => 0 );
+        $self->perchardata_set( enabled => 1 );
     }
     elsif( $f->match( { include => [ 'all(machine:type:secondary;dualbox:slave)' ] }, F_C0|F_MACH ) ) {
-        $self->perchardata_set( hydra => 1, master => 0, slave => 1 );
+        $self->perchardata_set( enabled => 1, mode => "master" );
     }
 
 }

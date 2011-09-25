@@ -660,6 +660,11 @@ addons:
             - all(dualbox:master;machine:type:primary)
             - all(dualbox:slave;machine:type:secondary)
         group: Dualbox
+    AutoReFollow:
+        include:
+            - all(dualbox:master;machine:type:primary)
+            - all(dualbox:slave;machine:type:secondary)
+        group: Dualbox
     LightHeaded:
         include:
             - goal:Loremaster

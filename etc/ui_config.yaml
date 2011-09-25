@@ -18,6 +18,7 @@ logging:
 levelcap: 85
 modules:
     - WoWUI::Module::Addons
+    - WoWUI::Module::AutoReFollow
     - WoWUI::Module::TellMeWhen
     - WoWUI::Module::tif
     - WoWUI::Module::Clique
