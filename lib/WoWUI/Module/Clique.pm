@@ -87,7 +87,7 @@ sub augment_globalpc
 
     my $clique = $self->build_clique($char, $f);
     if( $clique ) {
-        $self->globaldata->{chars}->{$char->name} = $clique;
+        $self->globaldata->{chars}->{$char->dname} = $clique;
     }
     else {
         croak $char->rname, " has Clique enabled but produced an empty profile";
