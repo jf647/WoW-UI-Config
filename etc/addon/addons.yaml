@@ -70,7 +70,7 @@ addons:
             - machine:type:basic
     GridStatusRaidIcons:
         include:
-            - machine:name:primary
+            - machine:type:primary
         exclude:
             - banker
             - mule
@@ -1224,7 +1224,7 @@ addons:
         group: Standard
     SkadaAvoidanceMitigation:
         include:
-            - machine:name:primary
+            - machine:type:primary
         exclude:
             - banker
             - mule
@@ -1314,13 +1314,13 @@ addons:
             - no-one
     TrinketMenu:
         include:
-            - all(machine:name:primary;levelcap)
-            - all(machine:name:primary;trinketmenu)
+            - all(machine:type:primary;levelcap)
+            - all(machine:type:primary;trinketmenu)
         group: Standard
     TrinketsFollowEquipment:
         include:
-            - all(machine:name:primary;levelcap)
-            - all(machine:name:primary;trinketmenu)
+            - all(machine:type:primary;levelcap)
+            - all(machine:type:primary;trinketmenu)
         group: Standard
     TurnIn:
         exclude:
@@ -1405,8 +1405,8 @@ addons:
         group: Standard
     '+Wowhead_Looter':
         include:
-            - all(machine:name:primary;wowhead)
-            - all(machine:name:primary;realm:Winterhoof)
+            - all(machine:type:primary;wowhead)
+            - all(machine:type:primary;realm:Winterhoof)
         exclude:
             - machine:type:secondary
             - banker
