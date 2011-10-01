@@ -285,8 +285,10 @@ addons:
     AltClickToAddItem:
         group: Basic
     AngeleDei:
+        level: 81
         include:
             - all(class:Paladin;spec:Protection)
+            - all(class:Druid;spec:Feral Combat;subspec:Bear)
         exclude:
             - machine:type:secondary
             - machine:type:basic
