@@ -184,6 +184,14 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Raiding
+    DBM-DragonSoul:
+        level: 85
+        include:
+            - dungeontype:raids
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Raiding
     DBM-WorldEvents:
         include:
             - no-one
