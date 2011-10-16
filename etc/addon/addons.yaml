@@ -851,8 +851,6 @@ addons:
             - prof:Jewelcrafting
             - prof:Enchanting
             - prof:Inscription
-        exclude:
-            - machine:type:secondary
         group: Crafting
     Parrot:
         exclude:
