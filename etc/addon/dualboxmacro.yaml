@@ -45,6 +45,12 @@ filtergroups:
       - Hunter Dmg
       - Master's Call
       - Hunter Prepull
+  warlock:
+    filter:
+      include:
+        - class:Warlock
+    members:
+        - Warlock Dmg
   mage:
     filter:
       include:
@@ -594,6 +600,13 @@ buttons:
         - all(dbmtype:priattack1)
     name: Damage
     spell: Auto Shot
+  Warlock Dmg:
+    filter:
+      include:
+        - all(dbmtype:priattack1)
+    reset: 10/combat/target
+    name: Damage
+    spell: [ Bane of Agony, Corruption, Immolate, Shadowbolt, Shadowbolt, Shadowbolt ]
   Hunter Prepull:
     filter:
       include:
