@@ -15,7 +15,10 @@ plugins:
     BloodShieldTracker:
         filter:
             include:
-                - no-one
+                - all(class:Death Knight;spec:Blood)
+        alight: left
+        priority: 100
+        notext: 1
     TidyPlatesIcon:
         filter:
             include:
