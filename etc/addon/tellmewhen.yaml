@@ -247,6 +247,7 @@ filtergroups:
     - Holy Shock
     - Best Use of 3HP
     - Judgements of the Pure
+    - Judgement
     - WoG 3HP
     - Holy Shield
     filter:
@@ -1406,6 +1407,14 @@ icons:
     combat: in
     missing: 1
     filter:
+      level: :32
+      include:
+        - spec:Holy
+  Judgement:
+    type: Cooldown::Spell::ShortCD
+    combat: in
+    filter:
+      level: 32
       include:
         - spec:Holy
   WoG 3HP:
