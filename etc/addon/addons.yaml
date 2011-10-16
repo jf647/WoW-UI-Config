@@ -319,6 +319,9 @@ addons:
         include:
             - all(dualbox:slave;machine:type:secondary)
             - machine:type:primary
+        exclude:
+            - banker
+            - mule
         group: Standard
     BadBoy:
         group: Basic
