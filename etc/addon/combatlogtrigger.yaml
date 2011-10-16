@@ -267,6 +267,14 @@ triggers:
             level: 14
             include:
                 - class:Mage
+    Bind Elemental:
+        type: debuff
+        reportrefresh: 1
+        spellid: 76780
+        filter:
+            level: 64
+            include:
+                - class:Shaman
     Sap:
         type: debuff
         reportspellid: 1
@@ -338,7 +346,7 @@ triggers:
                 - class:Warlock
     Focus Magic:
         type: buff
-        reportspellid: 1
+        spellid: 54646
         notonself: 1
         message_up: '*slink on *tgt'
         uponly: 1
