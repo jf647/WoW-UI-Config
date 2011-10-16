@@ -1,4 +1,7 @@
 ---
+perchar_filter:
+  addons:
+  - Cork
 templates:
   global:
     cork:
