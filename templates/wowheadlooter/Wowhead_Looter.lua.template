@@ -1,0 +1,9 @@
+
+wlScans = {
+}
+wlSetting = {
+    ["minimap"] = false,
+}
+wlPetBlacklist = nil
+wlUIReloaded = nil
+

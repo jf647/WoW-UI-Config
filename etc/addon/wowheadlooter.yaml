@@ -1,0 +1,9 @@
+---
+perchar_filter:
+  addons:
+  - +Wowhead_Looter
+templates:
+    perchar:
+        wowheadlooter:
+            input: $TEMPLATEDIR/wowheadlooter/Wowhead_Looter.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/+Wowhead_Looter.lua
