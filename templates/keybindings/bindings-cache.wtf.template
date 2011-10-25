@@ -1,0 +1,6 @@
+[% FOR key IN bindings.keys -%]
+bind [% key %] [% bindings.$key %]
+[% END -%]
+[% FOR key IN modifiedclicks.keys -%]
+modifiedclick [% key %] [% modifiedclicks.$key %]
+[% END -%]
