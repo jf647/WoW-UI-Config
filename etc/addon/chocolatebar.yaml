@@ -16,7 +16,7 @@ plugins:
         filter:
             include:
                 - all(class:Death Knight;spec:Blood)
-        alight: left
+        align: left
         priority: 100
         notext: 1
     TidyPlatesIcon:
