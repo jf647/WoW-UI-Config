@@ -346,7 +346,7 @@ filtergroups:
     - ReducedPhysicalDone
     - Drain Soul
     - Spell Lock
-    - Hand of Gul'dan Missing
+    - Curse of Gul'dan Missing
     - Felstorm
     - Decimation
     - Health Funnel
@@ -1979,8 +1979,6 @@ icons:
     Unit: target
     combat: in
     filter:
-      include:
-      - spec:Combat
       level: 46
     missing: 1
     spell: Rupture
@@ -2110,9 +2108,9 @@ icons:
       - all(spec:Balance;subspec:Solar Beam)
       level: 39
     type: Cooldown::Spell::Off::ShortCD
-  Hand of Gul'dan Missing:
+  Curse of Gul'dan Missing:
     combat: in
-    spell: Hand of Gul'dan
+    spell: Curse of Gul'dan
     Unit: target
     missing: 1
     filter:

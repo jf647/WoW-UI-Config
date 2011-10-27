@@ -269,28 +269,28 @@ freerefills:
                - class:Rogue
     Crippling Poison:
         itemid: 3775
-        quantity: 20
+        quantity: 10
         filter:
             level: 20
             include:
                - class:Rogue
     Deadly Poison:
         itemid: 2892
-        quantity: 20
+        quantity: 40
         filter:
             level: 30
             include:
                - class:Rogue
     Mind-Numbing Poison:
         itemid: 5237
-        quantity: 20
+        quantity: 10
         filter:
             level: 24
             include:
                - class:Rogue
     Wound Poison:
         itemid: 10918
-        quantity: 20
+        quantity: 10
         filter:
             level: 32
             include:

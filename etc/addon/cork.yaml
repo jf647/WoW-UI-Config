@@ -568,7 +568,7 @@ settings:
     - level: 80
       include:
       - class:Rogue
-      value: Crippling Poison
+      value: Deadly Poison
     type: string
   Tracking-enabled:
     filter:
