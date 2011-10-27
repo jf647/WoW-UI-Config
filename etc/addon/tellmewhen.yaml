@@ -294,7 +294,8 @@ filtergroups:
   rogue:
     members:
     - Rupture Missing
-    - Recuperate
+    - Recuperate IC
+    - Recuperate OC
     - Kick
     - Slice and Dice
     - Vanish
@@ -1792,12 +1793,21 @@ icons:
       - spec:Holy
       level: 54
     type: Cooldown::Spell::Off::ShortCD
-  Recuperate:
+  Recuperate IC:
     combat: in
     conditions:
     - icon:Recuperate Missing
     - AND
     - hp_le_75_pct
+    filter:
+      level: 12
+    type: Cooldown::Spell::Def::ShortCD
+  Recuperate OC:
+    combat: out
+    conditions:
+    - icon:Recuperate Missing
+    - AND
+    - hp_lt_100_pct
     filter:
       level: 12
     type: Cooldown::Spell::Def::ShortCD
