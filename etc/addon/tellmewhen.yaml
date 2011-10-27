@@ -415,6 +415,7 @@ icons:
       - MW5 Lightning Bolt
       - Stormstrike
       - Lava Lash 3 Searing Flames
+      - Fire Nova
       - Earth Shock
       - Shamanistic Rage on Boss
       - Feral Spirit on Boss
@@ -474,6 +475,9 @@ icons:
     no_filter_group_ok: 1
     type: Cooldown::Spell
   Earth Shock:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+  Fire Nova:
     no_filter_group_ok: 1
     type: Cooldown::Spell
   Shamanistic Rage on Boss:
