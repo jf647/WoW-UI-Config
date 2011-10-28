@@ -124,6 +124,8 @@ triggers:
             - level: 52
               include:
                   - all(class:Warlock;spec:Affliction)
+            - include:
+                  - race:Blood Elf
     Rebuke:
         type: interrupt
         spellid: 92631
@@ -356,11 +358,9 @@ triggers:
             include:
                 - all(class:Mage;spec:Arcane)
     Dark Intent:
-        type: buff
-        message_up: '*slink on *tgt'
-        uponly: 1
+        type: spell
         reportspellid: 1
-        notonself: 1
+        message: '*slink on *tgt'
         filter:
             level: 83
             include:
