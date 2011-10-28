@@ -150,6 +150,7 @@ freerefills:
                 - classusesfood
             exclude:
                 - role:Healer
+                - class:Rogue
     Melon Juice:
         itemid: 1205
         quality: 1
