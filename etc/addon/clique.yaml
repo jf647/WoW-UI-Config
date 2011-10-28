@@ -96,6 +96,8 @@ filtergroups:
     - Holy Light
     - Holy Shock
     - Hand of Reckoning
+    - Light of Dawn
+    - Divine Plea
     filter:
       include:
       - class:Paladin
@@ -451,6 +453,18 @@ actions:
       - cliqueaction:groundheal
       level: 83
     icon: Spell_Nature_GiftoftheWaterSpirit
+  Light of Dawn:
+    filter:
+      include:
+      - cliqueaction:groundheal
+      level: 85
+    icon: spell_paladin_lightofdawn
+  Divine Plea:
+    filter:
+      include:
+      - cliqueaction:selfrestoremp
+      level: 44
+    icon: spell_holy_aspiration
   Healing Surge:
     filter:
       include:
@@ -1159,6 +1173,10 @@ bindings:
           filter:
             include:
             - ability:battlerez
+        selfrestoremp:
+          filter:
+            include:
+            - all(class:Paladin;spec:Holy)
     shift-left:
       click: SHIFT-BUTTON1
       types:
