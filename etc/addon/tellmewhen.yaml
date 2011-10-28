@@ -286,11 +286,13 @@ filtergroups:
     - GotN Meta
     - Goblin Rockets
     - Berserking
+    - Arcane Torrent
     filter:
       include:
       - race:Draenei
       - race:Goblin
       - race:Troll
+      - race:Blood Elf
   rogue:
     members:
     - Rupture Missing
@@ -1221,6 +1223,12 @@ icons:
       - all(spec:Feral Combat;subspec:Bear)
       level: 52
     type: Cooldown::Spell::Def::LongCD
+  Arcane Torrent:
+    combat: in
+    filter:
+      include:
+        - race:Blood Elf
+    type: Cooldown::Spell::Off::LongCD
   GotN Meta:
     combat: in
     Icons:
