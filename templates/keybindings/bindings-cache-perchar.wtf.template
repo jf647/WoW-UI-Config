@@ -1,1 +1,1 @@
-[% INCLUDE bindings-cache.wtf.template %]
+[% INCLUDE "keybindings/bindings-cache.wtf.template" -%]
