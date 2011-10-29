@@ -1803,6 +1803,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Recuperate IC:
     combat: in
+    spell: Recuperate
     conditions:
     - icon:Recuperate Missing
     - AND
@@ -1812,6 +1813,7 @@ icons:
     type: Cooldown::Spell::Def::ShortCD
   Recuperate OC:
     combat: out
+    spell: Recuperate
     conditions:
     - icon:Recuperate Missing
     - AND
