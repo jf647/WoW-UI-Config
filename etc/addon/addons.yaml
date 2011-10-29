@@ -1355,10 +1355,12 @@ addons:
         group: Standard
     WIM:
         include:
+            - machine:type:primary
             - all(dualbox:slave;machine:type:secondary)
         group: Basic
     WIM_FlatPanel:
         include:
+            - machine:type:primary
             - all(dualbox:slave;machine:type:secondary)
         group: Basic
     _NPCScan:
