@@ -1,0 +1,6 @@
+[% IF bindingmode == 'global' -%]
+BINDINGMODE 0
+[% INCLUDE "keybindings/bindings-cache.wtf.template" -%]
+[% ELSE -%]
+BINDINGMODE 1
+[% END -%]
