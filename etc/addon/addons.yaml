@@ -1114,12 +1114,6 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Gathering
-    SBFOptions:
-        include:
-            - no-one
-    SatrinaBuffFrame:
-        include:
-            - no-one
     Raven:
         exclude:
             - banker
