@@ -808,13 +808,6 @@ addons:
             - mule
             - machine:type:basic
         group: Standard
-    NugMiniPet:
-        include:
-            - no-one
-        exclude:
-            - banker
-            - mule
-        group: Standard
     OmniCC:
         exclude:
             - banker
