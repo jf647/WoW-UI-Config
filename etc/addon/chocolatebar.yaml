@@ -12,6 +12,12 @@ perchar_filter:
     addons:
         - ChocolateBar
 plugins:
+    MiniPetQ:
+        align: right
+        priority: 5
+        filter:
+            addons:
+                - MiniPetQ
     BloodShieldTracker:
         filter:
             include:
