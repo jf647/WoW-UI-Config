@@ -137,16 +137,12 @@ sub build_bindings
 
     my %bindings;
 
-    $DB::single = 1;
-    
     for my $key( keys %{ $config->{bind} } ) {
         my $bind = $config->{bind}->{$key};
         if( exists $config->{aliases}->{$bind} ) {
             $bind = $config->{aliases}->{$bind};
         }
-        else {
-            $bindings{$key} = $bind;
-        }
+        $bindings{$key} = $bind;
     }
 
     $data->{bindings} = \%bindings;

@@ -99,8 +99,6 @@ sub augment_perchar
   my $char = shift;
   my $f = shift;
 
-  $DB::single = 1;
-
   my $config = $self->modconfig( $char );
   
   my $log = WoWUI::Util->log;
