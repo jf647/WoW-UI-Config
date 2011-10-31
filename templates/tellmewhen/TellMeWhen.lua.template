@@ -1,7 +1,9 @@
 
 TellMeWhenDB = {
     ["global"] = {
-        ["SeenNewDurSyntax"] = 1,
+        ["HelpSettings"] = {
+            ["NewDurSyntax"] = 1,
+        },
         ["WpnEnchDurs"] = 0,
     },
     ["Version"] = 44009,

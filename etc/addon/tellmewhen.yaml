@@ -807,7 +807,7 @@ icons:
       include:
       - all(specusesmana;item:Corrupted Egg Shell)
     OnlyEquipped: 1
-    type: Cooldown::Item::Def::LongCD
+    type: Item::Def::LongCD
   Corruption:
     Unit: target
     combat: in
@@ -970,14 +970,14 @@ icons:
     filter:
       include:
       - all(prof:Alchemy;item:Endless Healing Potion)
-    type: Cooldown::Item
+    type: Item
   Endless Mana Potion:
     conditions:
     - mp_lt_100_pct
     filter:
       include:
       - all(prof:Alchemy;item:Endless Mana Potion)
-    type: Cooldown::Item
+    type: Item
   Enhanced Agility:
     combat: out
     filter:
@@ -1200,6 +1200,7 @@ icons:
       - all(spec:Restoration;subspec:Focused Insight)
       level: 19
     ShowTimer: 1
+    ShowTimerText: 1
     type: Buff
   Force of Nature:
     combat: in
@@ -1396,6 +1397,7 @@ icons:
     UnAlpha: 0.2
     ShowWhen: always
     ShowTimer: 1
+    ShowTimerText: 1
     type: Cooldown::Spell::Def::ShortCD
   Innervate:
     combat: in
@@ -1514,6 +1516,7 @@ icons:
       max: 3
       min: 3
     ShowTimer: 1
+    ShowTimerText: 1
     type: Debuff
   Last Stand:
     combat: in
@@ -1579,7 +1582,7 @@ icons:
     - mp_lt_100_pct
     filter:
       level: 48
-    type: Cooldown::Item::ShortCD
+    type: Item::ShortCD
   Mana Shield:
     combat: in
     filter:
@@ -2088,6 +2091,7 @@ icons:
       level: 69
     type: Buff
     ShowTimer: 1
+    ShowTimerText: 1
   Thunder Clap:
     combat: in
     filter:
@@ -2328,6 +2332,7 @@ icons:
     filter:
       level: 5
     ShowTimer: 1
+    ShowTimerText: 1
     type: Reactive::Def
   Well Fed:
     combat: out

@@ -34,12 +34,12 @@ has TotemSlots => ( is => 'rw', isa => 'Str', default => '1111', traits => ['Rel
 has CustomTex => ( is => 'rw', isa => 'Str', default => "", traits => ['Relevant'], relevant => 1 );
 has BindText => ( is => 'rw', isa => 'Str', default => "", traits => ['Relevant'], relevant => 1 );
 # Boolean, default true, relevant
-has [ qw|Enabled ShowTimerText| ] => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has [ qw|Enabled| ] => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 # Boolean, default true, not relevant
 has [ qw|OnlyMine SortAsc SortDesc| ] => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'] );
 # Boolean, default false, relevant
 has [ qw|
-    ShowTimer InvertBars ShowCBar
+    ShowTimer ShowTimerText InvertBars ShowCBar
     FakeHidden DurationMinEnabled DurationMaxEnabled
 | ] => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
 # Boolean, default false, not relevant
@@ -48,7 +48,7 @@ has [ qw|
     IgnoreRunes CheckNext OnlyEquipped
     OnlyInBags OnlySeen UseActvtnOverlay
     HideUnequipped Interruptible StackMinEnabled
-    StackMaxEnabled ShowPBar Sort
+    StackMaxEnabled ShowPBar Sort EnableStacks
 | ] => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
 # Int / Num
 has ConditionAlpha => ( is => 'rw', isa => 'Num', default => 0, traits => ['Relevant'], relevant => 1 );
