@@ -11,7 +11,6 @@ use CLASS;
 
 # set up class
 extends 'WoWUI::Module::Base';
-has 'all_addons' => ( is => 'rw', isa => 'Object' );
 has 'named_sets' => (
   traits => ['Hash'],
   is => 'bare',
@@ -57,8 +56,6 @@ sub BUILD
   $self->global( 1 );
   $self->perchar( 1 );
 
-  $self->all_addons( Set::Scalar->new( keys %{ $config->{addons} } ) );
-
   return $self;
 
 }
@@ -102,12 +99,14 @@ sub augment_perchar
   my $char = shift;
   my $f = shift;
 
-  my $config = $self->modconfig( $char );
+  $DB::single = 1;
 
+  my $config = $self->modconfig( $char );
+  
   my $log = WoWUI::Util->log;
 
   my $enabled = Set::Scalar->new;
-  for my $addon( $self->all_addons->elements ) {
+  for my $addon( keys %{ $config->{addons} } ) {
   
     if( $f->match( $config->{addons}->{$addon} ) ) {
       $log->trace("picked up $addon");
@@ -139,7 +138,8 @@ sub augment_perchar
   
   }
   
-  my $disabled = $self->all_addons - $enabled;
+  my $all_addons = Set::Scalar->new( keys %{ $config->{addons} } );
+  my $disabled = $all_addons - $enabled;
 
   my @addons;
   push @addons, map { { name => $_, enabled => 1 } } $enabled->members;
