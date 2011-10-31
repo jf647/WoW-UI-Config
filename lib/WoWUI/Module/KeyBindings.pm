@@ -121,7 +121,7 @@ sub build_all
     my $self = shift;
     my $data = shift;
     my $config = shift;
-    
+
     $self->build_bindings($data, $config);
     $self->unbind_keys($data, $config);
     $self->build_modifiedclicks($data, $config);
@@ -136,19 +136,16 @@ sub build_bindings
     my $config = shift;
 
     my %bindings;
+
+    $DB::single = 1;
     
-    for my $binding( keys %{ $config->{bind} } ) {
-        my $key = $config->{bind}->{$binding};
-        if( exists $config->{aliases}->{$binding} ) {
-            $binding = $config->{aliases}->{$binding};
-        }
-        if( ref $key ) {
-            for my $k( @$key ) {
-                $bindings{$k} = $binding;
-            }
+    for my $key( keys %{ $config->{bind} } ) {
+        my $bind = $config->{bind}->{$key};
+        if( exists $config->{aliases}->{$bind} ) {
+            $bind = $config->{aliases}->{$bind};
         }
         else {
-            $bindings{$key} = $binding;
+            $bindings{$key} = $bind;
         }
     }
 
