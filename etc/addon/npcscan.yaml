@@ -497,3 +497,103 @@ npcs:
         world: 4
         sets:
             - mage
+    Linken:
+        id: 52233
+        world: 1
+        sets:
+            - firelands
+    Mankrik:
+        id: 52238
+        world: 1
+        sets:
+            - firelands
+    Nat Pagle:
+        id: 52244
+        world: 1
+        sets:
+            - firelands
+    Hemet Nesingwary:
+        id: 52244
+        world: 1
+        sets:
+            - firelands
+    Chromie:
+        id: 52265
+        world: 1
+        sets:
+            - firelands
+    Thassarian:
+        id: 53427
+        world: 1
+        sets:
+            - firelands
+    Searris:
+        id: 53264
+        world: 1
+        sets:
+            - fireylords
+    Kelbnar:
+        id: 53265
+        world: 1
+        sets:
+            - fireylords
+    Andrazor:
+        id: 53267
+        world: 1
+        sets:
+            - fireylords
+    Fah Jarrak:
+        id: 53271
+        world: 1
+        sets:
+            - fireylords
+    Ankha:
+        id: 54318
+        world: 1
+        sets:
+            - tamingchallenge
+    Magria:
+        id: 54319
+        world: 1
+        sets:
+            - tamingchallenge
+    Skarr:
+        id: 50815
+        world: 1
+        sets:
+            - tamingchallenge
+    Ban'thalos:
+        id: 54320
+        world: 1
+        sets:
+            - tamingchallenge
+    Karkin:
+        id: 50959
+        world: 1
+        sets:
+            - tamingchallenge
+    Kirix:
+        id: 54323
+        world: 1
+        sets:
+            - tamingchallenge
+    Sirix:
+        id: 54321
+        world: 1
+        sets:
+            - tamingchallenge
+    Skitterflame:
+        id: 54324
+        world: 1
+        sets:
+            - tamingchallenge
+    Anthriss:
+        id: 54338
+        world: 1
+        sets:
+            - tamingchallenge
+    Deth'tilac:
+        id: 54322
+        world: 1
+        sets:
+            - tamingchallenge
