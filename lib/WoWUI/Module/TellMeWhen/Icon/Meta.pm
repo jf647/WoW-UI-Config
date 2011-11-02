@@ -34,7 +34,7 @@ sub add_meta_members
             croak "can't get an icon for '$iname'";
         }
         if( $icon->cond_count ) {
-            for my $cond( @{ $icon->Conditions } ) {
+            for my $cond( $icon->Conditions->cond_values ) {
                 if( 'WoWUI::Module::TellMeWhen::Condition::Icon' eq blessed($cond) ) {
                     $set->insert( $cond->Icon );
                 }

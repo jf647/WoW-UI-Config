@@ -38,6 +38,7 @@ use WoWUI::ProfileSet;
 use WoWUI::Module::TellMeWhen::Group;
 use WoWUI::Module::TellMeWhen::Group::Rotation;
 use WoWUI::Module::TellMeWhen::Conditions;
+use WoWUI::Module::TellMeWhen::ConditionSet;
 use WoWUI::Module::TellMeWhen::Events;
 use WoWUI::Module::TellMeWhen::Icon;
 use WoWUI::Module::TellMeWhen::Profile;

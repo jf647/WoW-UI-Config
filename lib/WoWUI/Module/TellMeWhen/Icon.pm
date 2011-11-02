@@ -76,16 +76,12 @@ has Icons => (
     },
 );
 has Conditions => (
-    is => 'rw',
-    isa => 'ArrayRef[WoWUI::Module::TellMeWhen::Condition]',
-    traits => ['Array','Relevant'],
+    is => 'ro',
+    isa => 'WoWUI::Module::TellMeWhen::ConditionSet',
+    traits => ['Relevant'],
     relevant => 1,
-    default => sub { [] },
-    handles => {
-        add_cond => 'push',
-        unshift_cond => 'unshift',
-        cond_count => 'count',
-    },
+    default => sub { WoWUI::Module::TellMeWhen::ConditionSet->new },
+    handles => [ qw|add_cond cond_count cond_values unshift_cond| ],
 );
 CLASS->meta->make_immutable;
 
@@ -169,7 +165,8 @@ sub clone
     my $self = shift;
     
     return $self->meta->clone_object(
-        $self, Conditions => [ @{ $self->Conditions } ],
+        $self,
+        Conditions => $self->Conditions->meta->clone_object( $self->Conditions ),
     );
 
 }
@@ -185,7 +182,7 @@ sub select_extra
     
     # add icons that are part of conditions to the hidden set
     if( $self->cond_count ) {
-        for my $cond( @{ $self->Conditions } ) {
+        for my $cond( $self->Conditions->cond_values ) {
             if( 'WoWUI::Module::TellMeWhen::Condition::Icon' eq blessed($cond) ) {
                 $log->trace("adding hidden ", $cond->Icon);
                 $set->insert( $cond->Icon );
@@ -203,7 +200,7 @@ sub fixup
     my($self, $profile) = @_;
 
     my @newc;
-    for my $cond( @{ $self->Conditions } ) {
+    for my $cond( $self->Conditions->cond_values ) {
         if( 'WoWUI::Module::TellMeWhen::Condition::Icon' eq blessed($cond) ) {
             my $iconpos = $profile->iconpos_get( $cond->Icon );
             unless( $iconpos ) {
@@ -220,7 +217,8 @@ sub fixup
             push @newc, $cond;
         }
     }
-    $self->Conditions( \@newc );
+    $self->Conditions->cond_clear;
+    $self->Conditions->add_cond( @newc );
     
     # allow the subclass to do their own thing
     inner();

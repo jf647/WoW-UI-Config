@@ -63,14 +63,11 @@ has Icons => (
 );
 has Conditions => (
     is => 'ro',
-    isa => 'ArrayRef[WoWUI::Module::TellMeWhen::Condition]',
-    traits => ['Array','Relevant'],
+    isa => 'WoWUI::Module::TellMeWhen::ConditionSet',
+    traits => ['Relevant'],
     relevant => 1,
-    default => sub { [] },
-    handles => {
-        add_cond => 'push',
-        cond_count => 'count',
-    },
+    default => sub { WoWUI::Module::TellMeWhen::ConditionSet->new },
+    handles => [ qw|add_cond cond_count cond_values unshift_cond| ],
 );
 CLASS->meta->make_immutable;
 

@@ -3,10 +3,12 @@ TellMeWhenDB = {
     ["global"] = {
         ["HelpSettings"] = {
             ["NewDurSyntax"] = 1,
+            ["ICON_DURS_FIRSTSEE"] = 1,
+            ["ICON_POCKETWATCH_FIRSTSEE"] = 1,
         },
         ["WpnEnchDurs"] = 0,
     },
-    ["Version"] = 44009,
+    ["Version"] = 46502,
     ["profileKeys"] = {
 [% FOR realm IN charlist.keys -%]
 [% FOR char IN charlist.$realm.keys -%]
