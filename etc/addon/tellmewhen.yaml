@@ -340,12 +340,11 @@ filtergroups:
     members:
     - Metamorphosis
     - Demonic Empowerment
-    - Curse Missing
     - Bane Missing
-    - Corruption
-    - Immolate
+    - Corruption Missing
+    - Immolate Missing
     - Haunt Missing
-    - Unstable Affliction
+    - Unstable Affliction Missing
     - ReducedPhysicalDone
     - Drain Soul
     - Spell Lock
@@ -392,6 +391,19 @@ filtergroups:
       include:
       - class:Warrior
 icons:
+  Affliction Warlock Rotation:
+    no_filter_group_ok: 1
+    type: Meta
+    Icons:
+      - Nightfall
+      - Demon Soul
+      - Corruption Missing
+      - Unstable Affliction Missing
+      - Bane Missing
+      - Haunt Missing
+      - Drain Soul
+      - Curse of the Elements Missing
+      - Shadow Bolt
   DK Frost Rotation:
     no_filter_group_ok: 1
     type: Meta
@@ -593,6 +605,9 @@ icons:
     spell: Death Strike
     conditions:
       - hp_le_60_pct
+  Shadow Bolt:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
   Anti-Magic Shell:
     combat: in
     filter:
@@ -669,8 +684,19 @@ icons:
     combat: in
     filter:
       level: 12
+      exclude:
+      - usingrotation
     missing: 1
     spell: 980;603
+    type: Debuff
+  Curse of the Elements Missing:
+    no_filter_group_ok: 1
+    Unit: target
+    combat: in
+    filter:
+      level: 52
+    missing: 1
+    spell: Curse of the Elements
     type: Debuff
   Beacon Missing on Focus:
     Unit: focus
@@ -808,13 +834,16 @@ icons:
       - all(specusesmana;item:Corrupted Egg Shell)
     OnlyEquipped: 1
     type: Item::Def::LongCD
-  Corruption:
+  Corruption Missing:
     Unit: target
     combat: in
+    spell: Corruption
     filter:
       include:
       - spec:Affliction
       - spec:Demonology
+      exclude:
+      - usingrotation
       level: 4
     missing: 1
     type: Debuff
@@ -829,16 +858,6 @@ icons:
     filter:
       level: 62
     type: Buff
-  Curse Missing:
-    Unit: target
-    combat: in
-    conditions:
-      - target_is_boss
-    filter:
-      level: 16
-    missing: 1
-    spell: 702;1490
-    type: Debuff
   Dancing Rune Weapon:
     IgnoreRunes: 1
     combat: in
@@ -1271,17 +1290,20 @@ icons:
     filter:
       level: 85
     type: Cooldown::Spell::Def::LongCD
-  Haunt:
+  Haunt Usable:
     no_filter_group_ok: 1
+    spell: Haunt
     type: Cooldown::Spell
   Haunt Missing:
     Unit: target
     combat: in
     conditions:
-    - icon:Haunt
+    - icon:Haunt Usable
     filter:
       include:
       - spec:Affliction
+      exclude:
+      - usingrotation
       level: 69
     missing: 1
     spell: Haunt
@@ -1353,9 +1375,10 @@ icons:
       - spec:Frost
       level: 29
     type: Cooldown::Spell::Off::LongCD
-  Immolate:
+  Immolate Missing:
     Unit: target
     combat: in
+    spell: Immolate
     filter:
       include:
       - spec:Demonology
@@ -2040,6 +2063,8 @@ icons:
     filter:
       include:
       - spec:Affliction
+      exclude:
+      - usingrotation
       level: 10
     type: Cooldown::Spell::Off::ShortCD
   Shadowfiend:
@@ -2289,12 +2314,15 @@ icons:
     filter:
       level: 81
     type: Cooldown::Spell::ShortCD
-  Unstable Affliction:
+  Unstable Affliction Missing:
     Unit: target
     combat: in
+    spell: Unstable Affliction
     filter:
       include:
       - spec:Affliction
+      exclude:
+      - usingrotation
     missing: 1
     type: Debuff
   Vampiric Blood:
@@ -2364,3 +2392,13 @@ icons:
       - spec:Retribution
       level: 69
     type: Cooldown::Spell::Off::LongCD
+  Nightfall:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Shadow Bolt
+    conditions:
+      - icon:Nightfall Present
+  Nightfall Present:
+    no_filter_group_ok: 1
+    type: Buff
+    spell: Nightfall
