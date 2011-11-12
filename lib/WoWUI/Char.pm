@@ -481,7 +481,7 @@ my %abilities = (
   'Death Knight' => [ 'interrupt', 'battlerez' ],
   Warrior => [ 'interrupt' ],
   Mage => [ 'interrupt', 'cc', 'cc:human', 'cc:beast' ],
-  Warlock => [ 'resurrect', 'cc' ],
+  Warlock => [ 'resurrect', 'cc', 'battlerez' ],
 );
 sub set_abilities
 {
