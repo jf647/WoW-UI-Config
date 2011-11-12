@@ -250,6 +250,10 @@ filtergroups:
     - Judgement
     - WoG 3HP
     - Holy Shield
+    - Hand of Protection
+    - Hand of Sacrifice
+    - Hand of Salvation
+    - Hand of Freedom
     filter:
       include:
       - class:Paladin
@@ -397,10 +401,11 @@ icons:
     Icons:
       - Nightfall
       - Demon Soul
-      - Corruption Missing
+      - Summon Doomguard if Boss
+      - Corruption if Missing
       - Unstable Affliction Missing
-      - Bane Missing
-      - Haunt Missing
+      - Bane if Missing
+      - Haunt if Missing
       - Drain Soul
       - Curse of the Elements Missing
       - Shadow Bolt
@@ -607,7 +612,7 @@ icons:
       - hp_le_60_pct
   Shadow Bolt:
     no_filter_group_ok: 1
-    type: Cooldown::Spell
+    type: Cooldown::Spell::Off
   Anti-Magic Shell:
     combat: in
     filter:
@@ -689,6 +694,17 @@ icons:
     missing: 1
     spell: 980;603
     type: Debuff
+  Bane if Missing:
+    no_filter_group_ok: 1
+    Unit: target
+    combat: in
+    filter:
+      level: 12
+      include:
+      - usingrotation
+    missing: 1
+    spell: Bane of Agony
+    type: Debuff
   Curse of the Elements Missing:
     no_filter_group_ok: 1
     Unit: target
@@ -696,7 +712,7 @@ icons:
     filter:
       level: 52
     missing: 1
-    spell: Curse of the Elements
+    spell: 1490;85547
     type: Debuff
   Beacon Missing on Focus:
     Unit: focus
@@ -844,6 +860,17 @@ icons:
       - spec:Demonology
       exclude:
       - usingrotation
+      level: 4
+    missing: 1
+    type: Debuff
+  Corruption if Missing:
+    no_filter_group_ok: 1
+    Unit: target
+    combat: in
+    spell: Corruption
+    filter:
+      include:
+      - all(spec:Affliction;usingrotation)
       level: 4
     missing: 1
     type: Debuff
@@ -1308,6 +1335,19 @@ icons:
     missing: 1
     spell: Haunt
     type: Debuff
+  Haunt if Missing:
+    no_filter_group_ok: 1
+    Unit: target
+    combat: in
+    conditions:
+    - icon:Haunt Usable
+    filter:
+      include:
+      - all(spec:Affliction;usingrotation)
+      level: 69
+    missing: 1
+    spell: Haunt
+    type: Debuff
   Healing Rains:
     combat: in
     filter:
@@ -1338,6 +1378,34 @@ icons:
   Holy Shock:
     combat: in
     filter:
+      include:
+      - spec:Holy
+    type: Cooldown::Spell::Def::ShortCD
+  Hand of Protection:
+    combat: in
+    filter:
+      level: 18
+      include:
+      - spec:Holy
+    type: Cooldown::Spell::Def::LongCD
+  Hand of Sacrifice:
+    combat: in
+    filter:
+      level: 80
+      include:
+      - spec:Holy
+    type: Cooldown::Spell::Def::ShortCD
+  Hand of Freedom:
+    combat: in
+    filter:
+      level: 52
+      include:
+      - spec:Holy
+    type: Cooldown::Spell::Def::ShortCD
+  Hand of Salvation:
+    combat: in
+    filter:
+      level: 66
       include:
       - spec:Holy
     type: Cooldown::Spell::Def::ShortCD
@@ -2402,3 +2470,9 @@ icons:
     no_filter_group_ok: 1
     type: Buff
     spell: Nightfall
+  Summon Doomguard if Boss:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell::Off::LongCD
+    spell: Summon Doomguard
+    conditions:
+      - target_is_boss
