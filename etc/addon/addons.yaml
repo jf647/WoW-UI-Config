@@ -45,6 +45,20 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Grid
+    kgPanels:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Grid
+    kgPanelsConfig:
+        exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
+        group: Grid
     GridAutoFrameSize:
         exclude:
             - banker
@@ -330,6 +344,8 @@ addons:
     BadBoy_Levels:
         group: Basic
     Bagnon:
+        group: Basic
+    BagBrother:
         group: Basic
     Bagnon_GuildBank:
         include:
@@ -1326,20 +1342,11 @@ addons:
             - mule
         group: Standard
     Viewporter:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    Viewporter:
-        exclude:
-            - banker
-            - mule
-        group: Standard
+        include:
+            - no-one
     bobBlackViewPort:
-        exclude:
-            - banker
-            - mule
-        group: Standard
+        include:
+            - no-one
     WIM:
         include:
             - machine:type:primary

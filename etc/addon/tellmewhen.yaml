@@ -43,6 +43,11 @@ conditions:
     Operator: ==
     Type: HOLY_POWER
     Unit: player
+  hp_gt_85_pct:
+    Level:  85
+    Operator: '>'
+    Type: HEALTH
+    Unit: player
   hp_lt_100_pct:
     Level:  100
     Operator: <
@@ -60,6 +65,11 @@ conditions:
     Unit: player
   mp_lt_100_pct:
     Level:  100
+    Operator: <
+    Type: MANA
+    Unit: player
+  mp_lt_85_pct:
+    Level: 85
     Operator: <
     Type: MANA
     Unit: player
@@ -81,6 +91,11 @@ conditions:
   target_hp_le_25_pct:
     Level:  25
     Operator: <=
+    Type: HEALTH
+    Unit: target
+  target_hp_gt_75_pct:
+    Level:  75
+    Operator: '>'
     Type: HEALTH
     Unit: target
   target_is_boss:
@@ -358,6 +373,7 @@ filtergroups:
     - Health Funnel
     - Demon Soul
     - No Soulstone in Bags
+    - Warlock OOC Regen
     filter:
       include:
       - class:Warlock
@@ -400,13 +416,14 @@ icons:
     type: Meta
     Icons:
       - Nightfall
-      - Demon Soul
       - Summon Doomguard if Boss
       - Corruption if Missing
       - Unstable Affliction Missing
       - Bane if Missing
       - Haunt if Missing
       - Drain Soul
+      - Life Tap
+      - Demon Soul
       - Curse of the Elements Missing
       - Shadow Bolt
   DK Frost Rotation:
@@ -461,6 +478,28 @@ icons:
     type: Cooldown::Spell
     Alpha: 1
     spell: Healing Wave
+  Warlock OOC Regen:
+    type: Meta
+    combat: out
+    filter:
+      level: 10
+    Icons:
+      - Life Tap if Full
+      - Soul Harvest if below 60 Percent
+  Life Tap if Full:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Life Tap
+    conditions:
+      - hp_gt_85_pct
+      - AND
+      - mp_lt_85_pct
+  Soul Harvest if below 60 Percent:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Soul Harvest
+    conditions:
+      - hp_le_60_pct
   MW3 Healing Wave:
     combat: out
     conditions:
@@ -694,16 +733,31 @@ icons:
     missing: 1
     spell: 980;603
     type: Debuff
+  Bane Present:
+    no_filter_group_ok: 1
+    Unit: target
+    combat: in
+    filter:
+      level: 12
+    spell: 980;603
+    type: Debuff
   Bane if Missing:
     no_filter_group_ok: 1
     Unit: target
     combat: in
     filter:
       level: 12
-      include:
-      - usingrotation
-    missing: 1
+    conditions:
+      - icon:!Bane Present
     spell: Bane of Agony
+    type: Cooldown::Spell
+  Curse Present:
+    no_filter_group_ok: 1
+    Unit: target
+    combat: in
+    filter:
+      level: 16
+    spell: 1490;85547;702;1714
     type: Debuff
   Curse of the Elements Missing:
     no_filter_group_ok: 1
@@ -711,9 +765,10 @@ icons:
     combat: in
     filter:
       level: 52
-    missing: 1
-    spell: 1490;85547
-    type: Debuff
+    conditions:
+    - icon:!Curse Present
+    spell: Curse of the Elements
+    type: Cooldown::Spell
   Beacon Missing on Focus:
     Unit: focus
     conditions:
@@ -1714,7 +1769,17 @@ icons:
     type: Cooldown::Spell::Off::LongCD
     filter:
       level: 85
+    conditions:
+    - target_hp_gt_75_pct
     combat: in
+  Life Tap:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    combat: in
+    conditions:
+    - hp_gt_85_pct
+    - AND
+    - mp_lt_85_pct
   No Soulstone in Bags:
     type: Condition
     filter:

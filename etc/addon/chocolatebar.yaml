@@ -29,6 +29,10 @@ plugins:
         filter:
             include:
                 - no-one
+    kgPanels:
+        filter:
+            include:
+                - no-one
     RobBossMods:
         align: left
         priority: 90
