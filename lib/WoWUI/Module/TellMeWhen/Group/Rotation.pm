@@ -46,6 +46,7 @@ sub populate
     for my $iname( $hidden->members ) {
         # only add icons that aren't already selected (which should be all, but you never know...)
         unless( $profile->iconpos_exists( $iname ) ) {
+            $log->debug("adding $iname to rotation");
             my $icon = WoWUI::Module::TellMeWhen::Icons->instance->icon_get( $iname )->clone;
             croak "cannot get rotation icon $iname" unless( $icon );
             $icon->FakeHidden( 1 );

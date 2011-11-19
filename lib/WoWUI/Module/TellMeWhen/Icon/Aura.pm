@@ -21,6 +21,7 @@ has [ qw|
     +OnlyMine +PBarOffs +ShowPBar
     +StackMax +StackMaxEnabled +StackMin
     +StackMinEnabled +Unit +Sort +SortAsc +SortDesc
+    +EnableStacks
 | ] => ( relevant => 1 );
 with 'WoWUI::Module::TellMeWhen::Icon::SpellName';
 with 'WoWUI::Module::TellMeWhen::Icon::Present';
@@ -34,6 +35,7 @@ sub BUILD
 
     # stacks
     if( $self->stacks ) {
+        $self->EnableStacks( 1 );
         if( exists $self->stacks->{min} ) {
             $self->StackMinEnabled( 1 );
             $self->StackMin( $self->stacks->{min} );

@@ -56,6 +56,8 @@ sub resolve_meta_position
     my @newicons;
     for my $icon( @{ $self->Icons } ) {
         my $iconpos = $profile->iconpos_get( $icon );
+        croak "no icon position for '$icon' when resolving Meta Positions"
+            unless( $iconpos );
         push @newicons, 'TellMeWhen_Group' . $iconpos->[0] . '_Icon' . $iconpos->[1];
     }
     $self->Icons( \@newicons );
