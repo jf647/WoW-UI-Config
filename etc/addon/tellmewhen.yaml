@@ -93,6 +93,11 @@ conditions:
     Operator: <=
     Type: HEALTH
     Unit: target
+  target_hp_le_20_pct:
+    Level:  20
+    Operator: <=
+    Type: HEALTH
+    Unit: target
   target_hp_gt_75_pct:
     Level:  75
     Operator: '>'
@@ -103,6 +108,16 @@ conditions:
     Unit: target
     Operator: ==
     Level: 5
+  rage_gt_90_pct:
+    Type: RAGE
+    Operator: '>'
+    Level: 90
+    Unit: player
+  rage_lt_20:
+    Type: RAGE
+    Operator: '<'
+    Level: 20
+    Unit: player
   maelstrom_weapon_5:
     Type: BUFFSTACKS
     Checked: 1
@@ -411,6 +426,34 @@ filtergroups:
       include:
       - class:Warrior
 icons:
+  Fury Warrior TG Rotation:
+    no_filter_group_ok: 1
+    type: Meta
+    Icons:
+      - Victory Rush Rotation
+      - Execute to 3 Stacks
+      - Rage Filler
+      - Death Wish
+      - Bloodthirst
+      - Berserker Rage if not Enraged
+      - Raging Blow
+      - Heroic Strike over 90 Rage
+      - Colossus Smash Rotation
+      - Bloodthirst
+      - Slam if Bloodsurge Up
+  Fury Warrior SMF Rotation:
+    no_filter_group_ok: 1
+    type: Meta
+    Icons:
+      - Victory Rush Rotation
+      - Execute to 3 Stacks
+      - Rage Filler
+      - Death Wish
+      - Bloodthirst
+      - Slam if Bloodsurge Up
+      - Heroic Strike over 90 Rage
+      - Colossus Smash Rotation
+      - Bloodthirst
   Affliction Warlock Rotation:
     no_filter_group_ok: 1
     type: Meta
@@ -850,6 +893,9 @@ icons:
     combat: in
     filter:
       level: 3
+      include:
+        - spec:Arms
+        - spec:Protection
     type: Cooldown::Spell::Off::ShortCD
   Heroic Leap:
     combat: in
@@ -888,8 +934,14 @@ icons:
       include:
       - spec:Arms
       - spec:Fury
+      exclude:
+      - usingrotation
       level: 81
     type: Cooldown::Spell::Off::ShortCD
+  Colossus Smash Rotation:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Colossus Smash
   Combustion:
     combat: in
     filter:
@@ -1189,6 +1241,7 @@ icons:
     filter:
       exclude:
       - spec:Protection
+      - all(spec:Fury;usingrotation)
       level: 16
     type: Reactive::Off
   Explosive Shot:
@@ -2492,9 +2545,15 @@ icons:
     combat: in
     filter:
       level: 5
+      exclude:
+        - usingrotation
     ShowTimer: 1
     ShowTimerText: 1
     type: Reactive::Def
+  Victory Rush Rotation:
+    no_filter_group_ok: 1
+    type: Reactive::Def
+    spell: Victory Rush
   Well Fed:
     combat: out
     conditions:
@@ -2541,3 +2600,64 @@ icons:
     spell: Summon Doomguard
     conditions:
       - target_is_boss
+  Execute to 3 Stacks:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Execute
+    conditions:
+      - target_hp_le_20_pct
+      - AND
+      - icon:!Executioner 3 Stacks
+  Rage Filler:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Battle Shout
+    conditions:
+      - rage_lt_20
+  Death Wish:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+  Bloodthirst:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+  Berserker Rage if not Enraged:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Berserker Rage
+    conditions:
+      - icon:!Enraged
+  Raging Blow:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    conditions:
+      - icon:Enraged
+  Enraged:
+    no_filter_group_ok: 1
+    type: Buff
+    spell: 13046;18499;12292
+  Slam if Bloodsurge Up:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Slam
+    conditions:
+      - icon:Bloodsurge Present
+  Bloodsurge Present:
+    no_filter_group_ok: 1
+    type: Buff
+    spell: Bloodsurge
+  Executioner 3 Stacks:
+    no_filter_group_ok: 1
+    type: Buff
+    spell: 90806
+    stacks:
+      min: 3
+  Execute Usable:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Execute
+  Heroic Strike over 90 Rage:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Heroic Strike
+    conditions:
+      - rage_gt_90_pct
