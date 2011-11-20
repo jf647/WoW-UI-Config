@@ -284,6 +284,7 @@ filtergroups:
     - Hand of Sacrifice
     - Hand of Salvation
     - Hand of Freedom
+    - Divine Plea
     filter:
       include:
       - class:Paladin
@@ -2661,3 +2662,11 @@ icons:
     spell: Heroic Strike
     conditions:
       - rage_gt_90_pct
+  Divine Plea:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+        level: 44
+        include:
+            - spec:Holy
+        conditions:
+            - mp_lt_85_pct
