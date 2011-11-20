@@ -49,14 +49,12 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Grid
     kgPanelsConfig:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Grid
     GridAutoFrameSize:
