@@ -1409,10 +1409,11 @@ icons:
       - party
     type: Cooldown::Spell::Def::LongCD
   Goblin Rockets:
+    combat: in
     filter:
       include:
       - race:Goblin
-    spell: Rocket Jump;Rocket Barrage
+    spell: Rocket Barrage
     type: Cooldown::Spell::LongCD
   Guardian Spirit:
     combat: in
@@ -2668,5 +2669,5 @@ icons:
         level: 44
         include:
             - spec:Holy
-        conditions:
-            - mp_lt_85_pct
+    conditions:
+        - mp_lt_85_pct
