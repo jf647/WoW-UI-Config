@@ -2,7 +2,7 @@
 # $Id: TurnIn.pm 4998 2011-05-25 16:26:54Z james $
 #
 
-package WoWUI::Module::TurnIn;
+package WoWUI::Module::NADTTurnIn;
 use Moose;
 use MooseX::StrictConstructor;
 
@@ -25,6 +25,7 @@ sub BUILD
     my $self = shift;
     
     $self->global( 1 );
+    $self->perchar( 1 );
     
     return $self;
     
@@ -35,18 +36,30 @@ sub augment_global
 
     my $self = shift;
 
+    $self->globaldata_set( npcs => $self->modconfig->{npcs} );
+
+}
+
+sub augment_perchar
+{
+
+    my $self = shift;
+    my $char = shift;
+    my $f = shift;
+
     my $o = $self->modoptions;
+    unless( exists $o->{ignore_perchar_modoptions} ) {
+        $o = $self->modoptions( $char );
+    }
 
     for my $key( qw|startquest finishquest| ) {
         if( exists $o->{$key} ) {
-            $self->globaldata_set( $key => $o->{$key} );
+            $self->perchardata_set( $key => $o->{$key} );
         }
         else {
-            $self->globaldata_set( $key => 0 );
+            $self->perchardata_set( $key => 0 );
         }
     }
-
-    $self->globaldata_set( npcs => $self->modconfig->{npcs} );
 
 }
 

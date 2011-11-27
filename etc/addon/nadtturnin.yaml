@@ -1,12 +1,16 @@
 ---
 templates:
     global:
-        turnin:
-            input: $TEMPLATEDIR/turnin/TurnIn.lua.template
-            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/TurnIn.lua
+        nadtturnin:
+            input: $TEMPLATEDIR/nadtturnin/NADTTurnIn.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/NADTTurnIn.lua
+    perchar:
+        nadtturnin:
+            input: $TEMPLATEDIR/nadtturnin/NADTTurnIn_perchar.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/NADTTurnIn.lua
 perchar_filter:
     addons:
-        - TurnIn
+        - NADTTurnIn
 npcs:
     Koltira Deathweaver:
         - Not a Bug
