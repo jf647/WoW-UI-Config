@@ -692,6 +692,10 @@ addons:
             - all(dualbox:master;machine:type:primary)
             - all(dualbox:slave;machine:type:secondary)
         group: Dualbox
+    NADTTrustList:
+        include:
+            - dualbox
+        group: Dualbox
     LightHeaded:
         include:
             - goal:Loremaster
@@ -1334,7 +1338,7 @@ addons:
             - all(machine:type:primary;levelcap)
             - all(machine:type:primary;trinketmenu)
         group: Standard
-    TurnIn:
+    NADTTurnIn:
         exclude:
             - banker
             - mule

@@ -1,0 +1,11 @@
+
+NTL_DB = {
+
+    ["trusted"] = {
+[% FOR trust IN trust -%]
+        ["[% trust %]"] = 1,
+[% END -%]
+    },
+
+}
+

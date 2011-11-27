@@ -1,4 +1,4 @@
-package WoWUI::Module::AutoReFollow;
+package WoWUI::Module::NADTTrustList;
 use Moose;
 use MooseX::StrictConstructor;
 
@@ -37,13 +37,9 @@ sub augment_perchar
 
     my $o = $self->modoptions( $char );
     
-    $self->perchardata_set( enabled => 0, mode => "master" );
-    if( $f->match( { include => [ 'all(machine:type:primary;dualbox:master)' ] }, F_C0|F_MACH ) ) {
-        $self->perchardata_set( enabled => 1 );
-    }
-    elsif( $f->match( { include => [ 'all(machine:type:secondary;dualbox:slave)' ] }, F_C0|F_MACH ) ) {
-        $self->perchardata_set( enabled => 1, mode => "slave" );
-    }
+    my $trust = $o->{trust} || [];
+
+    $self->perchardata_set( trust => $trust );
 
 }
 

@@ -1,0 +1,9 @@
+---
+templates:
+    perchar:
+        nadttrustlist:
+            input: $TEMPLATEDIR/nadttrustlist/NADTTrustList.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/NADTTrustList.lua
+perchar_filter:
+    addons:
+        - NADTTrustList

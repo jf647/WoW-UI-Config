@@ -20,7 +20,9 @@ modules:
     - WoWUI::Module::Addons
     - WoWUI::Module::KeyBindings
     - WoWUI::Module::WowheadLooter
+    - WoWUI::Module::NADTTrustList
     - WoWUI::Module::AutoReFollow
+    - WoWUI::Module::NADTTurnIn
     - WoWUI::Module::TellMeWhen
     - WoWUI::Module::tif
     - WoWUI::Module::Clique
@@ -43,7 +45,6 @@ modules:
     - WoWUI::Module::WIM
     - WoWUI::Module::SellJunk
     - WoWUI::Module::QuestGuru
-    - WoWUI::Module::TurnIn
     - WoWUI::Module::Hydra
     - WoWUI::Module::FreeRefills
     - WoWUI::Module::Kong
