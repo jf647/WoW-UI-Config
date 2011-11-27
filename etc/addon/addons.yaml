@@ -345,16 +345,16 @@ addons:
         group: Basic
     BagBrother:
         group: Basic
+        exclude:
+            - machine:type:secondary
     Bagnon_GuildBank:
         include:
             - no-one
     Bagnon_Config:
         group: Basic
     Bagnon_Forever:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Basic
+        include:
+            - no-one
     Bagnon_Tooltips:
         exclude:
             - machine:type:secondary
