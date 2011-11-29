@@ -585,7 +585,7 @@ buttons:
   Holy Shock:
     filter:
       include:
-        - all(spec:Holy;dbmtype:prepull)
+        - all(spec:Holy;dbmunit:focus;dbmtype:prepull)
       level: 10:43
     spell: Holy Shock
   Holy Shock Enemy:
