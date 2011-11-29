@@ -95,6 +95,7 @@ filtergroups:
     - Redemption
     - Holy Light
     - Holy Shock
+    - Holy Radiance
     - Hand of Reckoning
     - Light of Dawn
     - Divine Plea
@@ -519,6 +520,12 @@ actions:
       - cliqueaction:standardheal
       level: 7
     icon: spell_holy_holybolt
+  Holy Radiance:
+    filter:
+      include:
+      - all(spec:Holy;cliqueaction:buffheal)
+      level: 83
+    icon: spell_paladin_divinecircle
   Holy Shock:
     filter:
       include:
@@ -898,7 +905,7 @@ actions:
   Unleash Elements:
     filter:
       include:
-      - cliqueaction:buffheal
+      - all(spec:Restoration;cliqueaction:buffheal)
       level: 81
     icon: Spell_Shaman_ImprovedStormstrike
   Vanish:
@@ -1214,9 +1221,10 @@ bindings:
         buffheal:
           filter:
             include:
-            - class:Shaman
+            - all(class:Shaman;spec:Restoration)
             - all(class:Druid;spec:Restoration)
             - all(class:Priest;spec:Holy)
+            - all(class:Paladin;spec:Holy)
         protectphysical:
           filter:
             include:

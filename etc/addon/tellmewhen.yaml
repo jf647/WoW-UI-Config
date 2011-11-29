@@ -262,7 +262,6 @@ filtergroups:
     members:
     - Word of Glory
     - Crusader Aura
-    - Holy Radiance
     - Rebuke
     - Divine Protection
     - Divine Guardian
@@ -277,7 +276,6 @@ filtergroups:
     - Holy Shock
     - Best Use of 3HP
     - Judgements of the Pure
-    - Judgement
     - WoG 3HP
     - Holy Shield
     - Hand of Protection
@@ -1480,11 +1478,6 @@ icons:
       - spec:Arms
       level: 69
     type: Cooldown::Spell::Off::ShortCD
-  Holy Radiance:
-    combat: in
-    filter:
-      level: 83
-    type: Cooldown::Spell::Def::ShortCD
   Holy Shock:
     combat: in
     filter:
@@ -1623,14 +1616,6 @@ icons:
     combat: in
     missing: 1
     filter:
-      level: :32
-      include:
-        - spec:Holy
-  Judgement:
-    type: Cooldown::Spell::ShortCD
-    combat: in
-    filter:
-      level: 32
       include:
         - spec:Holy
   WoG 3HP:
