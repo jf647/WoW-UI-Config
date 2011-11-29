@@ -31,9 +31,9 @@ HydraSettings = {
         ["enable"] = true,
 		["share"] = [% IF slave %]false[% ELSE %]true[% END %],
 		["abandon"] = [% IF slave %]true[% ELSE %]false[% END %],
-		["turnin"] = [% IF slave %]true[% ELSE %]false[% END %],
-		["accept"] = [% IF slave %]true[% ELSE %]false[% END %],
-		["complete"] = [% IF slave %]true[% ELSE %]false[% END %],
+		["turnin"] = false,
+		["accept"] = false,
+		["complete"] = false,
 	},
 	["Chat"] = {
 		["enable"] = true,
