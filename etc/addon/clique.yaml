@@ -1022,7 +1022,11 @@ bindings:
             - item:Corrupted Egg Shell
     alt-right:
       click: ALT-BUTTON2
-      types: {}
+      types:
+        buffheal:
+            filter:
+                include:
+                    - all(class:Paladin;spec:Holy)
     control-alt-middle:
       click: CTRL-ALT-BUTTON3
       types: {}
