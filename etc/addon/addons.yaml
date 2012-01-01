@@ -1407,10 +1407,6 @@ addons:
             - machine:type:secondary
             - machine:player:Heidi
         group: Standard
-    wMarker:
-        include:
-            - all(machine:type:primary;dungeontype:raids)
-        group: Raiding
     AutoItemStartQuest:
         exclude:
             - banker
