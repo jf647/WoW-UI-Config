@@ -24,20 +24,10 @@ sub BUILD
 
     my $self = shift;
     
-    $self->global( 1 );
     $self->perchar( 1 );
     
     return $self;
     
-}
-
-sub augment_global
-{
-
-    my $self = shift;
-
-    $self->globaldata_set( npcs => $self->modconfig->{npcs} );
-
 }
 
 sub augment_perchar
@@ -48,6 +38,7 @@ sub augment_perchar
     my $f = shift;
 
     my $o = $self->modoptions;
+
     unless( exists $o->{ignore_perchar_modoptions} ) {
         $o = $self->modoptions( $char );
     }
@@ -60,6 +51,8 @@ sub augment_perchar
             $self->perchardata_set( $key => 0 );
         }
     }
+
+    $self->perchardata_set( npcs => $self->modconfig->{npcs} );
 
 }
 
