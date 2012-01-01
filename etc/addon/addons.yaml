@@ -69,8 +69,6 @@ addons:
             - mule
             - machine:type:basic
     GridStatusRaidIcons:
-        include:
-            - machine:type:primary
         exclude:
             - banker
             - mule
@@ -1148,9 +1146,9 @@ addons:
             - machine:type:basic
         group: Standard
     SkadaAvoidanceMitigation:
-        include:
-            - machine:type:primary
         exclude:
+            - machine:type:secondary
+            - machine:type:basic
             - banker
             - mule
         group: Standard
@@ -1229,13 +1227,13 @@ addons:
             - no-one
     TrinketMenu:
         include:
-            - all(machine:type:primary;levelcap)
-            - all(machine:type:primary;trinketmenu)
+            - levelcap
+            - trinketmenu
         group: Standard
     TrinketsFollowEquipment:
         include:
-            - all(machine:type:primary;levelcap)
-            - all(machine:type:primary;trinketmenu)
+            - levelcap
+            - trinketmenu
         group: Standard
     NADTTurnIn:
         exclude:

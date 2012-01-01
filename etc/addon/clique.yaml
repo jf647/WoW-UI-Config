@@ -1228,7 +1228,6 @@ bindings:
             - all(class:Shaman;spec:Restoration)
             - all(class:Druid;spec:Restoration)
             - all(class:Priest;spec:Holy)
-            - all(class:Paladin;spec:Holy)
         protectphysical:
           filter:
             include:
