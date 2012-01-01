@@ -1614,7 +1614,11 @@ icons:
   Judgements of the Pure:
     type: Buff
     combat: in
-    missing: 1
+    always: 1
+    ShowTimer: 1
+    ShowTimerText: 1
+    duration:
+        max: 15
     filter:
       include:
         - spec:Holy
