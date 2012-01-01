@@ -76,10 +76,10 @@ sub augment_perchar
     my $f = shift;
 
     # Hydra master/slave
-    if( $f->match( { include => [ 'all(machine:type:primary;dualbox:master)' ] }, F_C0|F_MACH ) ) {
+    if( $f->match( { include => [ 'all(machine:type:primary;dualbox)' ] }, F_C0|F_MACH ) ) {
         $self->perchardata_set( hydra => 1, master => 1, slave => 0 );
     }
-    elsif( $f->match( { include => [ 'all(machine:type:secondary;dualbox:slave)' ] }, F_C0|F_MACH ) ) {
+    elsif( $f->match( { include => [ 'all(machine:type:secondary;dualbox)' ] }, F_C0|F_MACH ) ) {
         $self->perchardata_set( hydra => 1, master => 0, slave => 1 );
     }
 

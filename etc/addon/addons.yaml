@@ -329,7 +329,7 @@ addons:
         group: Auctions
     AutoBar:
         include:
-            - all(dualbox:slave;machine:type:secondary)
+            - all(dualbox;machine:type:secondary)
             - machine:type:primary
         exclude:
             - banker
@@ -684,13 +684,13 @@ addons:
         group: Standard
     Hydra:
         include:
-            - all(dualbox:master;machine:type:primary)
-            - all(dualbox:slave;machine:type:secondary)
+            - all(dualbox;machine:type:primary)
+            - all(dualbox;machine:type:secondary)
         group: Dualbox
     AutoReFollow:
         include:
-            - all(dualbox:master;machine:type:primary)
-            - all(dualbox:slave;machine:type:secondary)
+            - all(dualbox;machine:type:primary)
+            - all(dualbox;machine:type:secondary)
         group: Dualbox
     NADTTrustList:
         include:
@@ -812,7 +812,7 @@ addons:
         group: Standard
     Macaroon:
         include:
-            - all(dualbox:slave;machine:type:secondary)
+            - all(dualbox;machine:type:secondary)
         group: Dualbox
     MacaroonProfiles:
         include:
@@ -1356,12 +1356,12 @@ addons:
     WIM:
         include:
             - machine:type:primary
-            - all(dualbox:slave;machine:type:secondary)
+            - all(dualbox;machine:type:secondary)
         group: Basic
     WIM_FlatPanel:
         include:
             - machine:type:primary
-            - all(dualbox:slave;machine:type:secondary)
+            - all(dualbox;machine:type:secondary)
         group: Basic
     _NPCScan:
         include:

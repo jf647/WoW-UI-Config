@@ -21,6 +21,7 @@ modules:
     - WoWUI::Module::KeyBindings
     - WoWUI::Module::WowheadLooter
     - WoWUI::Module::NADTTrustList
+    - WoWUI::Module::DualBoxMacro
     - WoWUI::Module::NADTQuestShare
     - WoWUI::Module::AutoReFollow
     - WoWUI::Module::NADTTurnIn
@@ -36,7 +37,6 @@ modules:
     - WoWUI::Module::NPCScan
     - WoWUI::Module::Bagnon
     - WoWUI::Module::Postal
-    - WoWUI::Module::DualBoxMacro
     - WoWUI::Module::BrokerCurrency
     - WoWUI::Module::Auctionator
     - WoWUI::Module::DeadlyBossMods

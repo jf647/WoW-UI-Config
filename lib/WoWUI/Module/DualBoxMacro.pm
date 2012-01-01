@@ -52,6 +52,13 @@ sub augment_perchar
     my $f = shift;
 
     my $config = $self->modconfig( $char );
+    
+    # copy masters from NADTTrustList
+    my $ntl = WoWUI::Modules->instance->module_get('WoWUI::Module::NADTTrustList');
+    my $ntl_o = $ntl->modoptions( $char );
+    my $masters = $ntl_o->{trust} || [];
+    $masters = [ grep { $_ ne $char->name } @$masters ];
+    $char->modoption_set( $self->name, { masters => $masters } );
 
     # walk through bars, picking up a button for each
     my @bars;
@@ -173,7 +180,8 @@ sub build_button
         my $macrotxt = $buttoncfg->{macro};
         my $outputtxt = '';
         my $tt = tt();
-        my $masters = $char->modoption_get($self->name)->{masters};
+        my $o = $self->modoptions( $char );
+        my $masters = $o->{masters};
         $tt->process(\$macrotxt, { masters => $masters }, \$outputtxt)
             or die "can't process macro: ", $tt->error;
         $button->{macro} = $outputtxt;

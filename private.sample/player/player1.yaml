@@ -14,7 +14,6 @@ realms:
                 flags_common:
                     - item:Loot-A-Rang
                     - dualbox
-                    - dualbox:slave
                     - wellfed
                 flags_spec1:
                     - flaskuser
@@ -57,7 +56,6 @@ realms:
                 flags_common:
                     - goal:Achievements
                     - dualbox
-                    - dualbox:master
                     - wowhead
                 professions:
                     - Skinning:525
