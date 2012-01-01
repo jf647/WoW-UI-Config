@@ -21,6 +21,7 @@ modules:
     - WoWUI::Module::KeyBindings
     - WoWUI::Module::WowheadLooter
     - WoWUI::Module::NADTTrustList
+    - WoWUI::Module::NADTQuestShare
     - WoWUI::Module::AutoReFollow
     - WoWUI::Module::NADTTurnIn
     - WoWUI::Module::TellMeWhen
