@@ -1,9 +1,5 @@
 ---
 templates:
-    global:
-        nadtturnin:
-            input: $TEMPLATEDIR/nadtturnin/NADTTurnIn.lua.template
-            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/NADTTurnIn.lua
     perchar:
         nadtturnin:
             input: $TEMPLATEDIR/nadtturnin/NADTTurnIn_perchar.lua.template
