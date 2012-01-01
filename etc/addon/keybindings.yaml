@@ -4,10 +4,6 @@ templates:
     keybindings:
       input: $TEMPLATEDIR/keybindings/bindings-cache-global.wtf.template
       output: $TEMPDIR/WTF/Account/$ACCOUNT/bindings-cache.wtf
-  perchar:
-    keybindings:
-      input: $TEMPLATEDIR/keybindings/bindings-cache-perchar.wtf.template
-      output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/bindings-cache.wtf
 bindingmode: global
 aliases:
   TOGGLECHARACTER: TOGGLECHARACTER0

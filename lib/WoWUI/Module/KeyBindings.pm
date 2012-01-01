@@ -26,7 +26,6 @@ sub BUILD
     my $config = $self->config;
   
     $self->global( 1 );
-    $self->perchar( 1 );
 
     return $self;
 
@@ -37,41 +36,9 @@ sub augment_global
 
     my $self = shift;
 
-    my $config = $self->modconfig;
-  
-    if( $config->{bindingmode} eq 'global' ) {
-        $self->augment_global_global;
-    }
-    elsif( $config->{bindingmode} eq 'perchar' ) {
-        $self->augment_global_perchar;
-    }
-    else {
-        croak "invalid binding mode '$config->{bindingmode}'";
-    }
+    $self->augment_global_global;
 
 }
-
-sub augment_perchar
-{
-
-    my $self = shift;
-    my $char = shift;
-    my $f = shift;
-
-    my $config = $self->modconfig;
-
-    if( $config->{bindingmode} eq 'global' ) {
-        $self->augment_perchar_global;
-    }
-    elsif( $config->{bindingmode} eq 'perchar' ) {
-        $self->augment_perchar_perchar;
-    }
-    else {
-        croak "invalid binding mode '$config->{bindingmode}'";
-    }
-
-}
-
 
 sub augment_global_global
 {
@@ -81,37 +48,6 @@ sub augment_global_global
     my %data;
     $self->build_all( \%data, $config );
     $self->globaldata_set( bindingmode => 'global', %data );
-
-}
-
-sub augment_perchar_perchar
-{
-
-    my $self = shift;
-    my $char = shift;
-    my $config = $self->modconfig( $char );
-
-    my %data;
-    $self->build( \%data, $config );
-    $self->perchardata_set( %data );
-
-}
-
-sub augment_global_perchar
-{
-
-    my $self = shift;
-    
-    $self->globaldata_set( bindingmode => 'perchar' );
-
-}
-
-sub augment_perchar_global
-{
-
-    my $self = shift;
-    
-    $self->perchardata_set( bindingmode => 'global' );
 
 }
 
