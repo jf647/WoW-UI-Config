@@ -24,25 +24,16 @@ addons:
     RobBossMods:
         include:
             - no-one
-    LoggerHead:
-        include:
-            - guildrole:CombatLogger
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Raiding
     nivItemLevel:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     Grid:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Grid
     kgPanels:
@@ -61,14 +52,12 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Grid
     GridStatusDungeonRole:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Grid
     GridStatusHots:
@@ -78,7 +67,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
     GridStatusRaidIcons:
         include:
@@ -91,7 +79,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Grid
     GridStatusRD_BC:
@@ -104,21 +91,18 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Grid
     GridStatusTankCooldown:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Grid
     GridIndicatorCornerIcons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
     Archy:
         include:
@@ -279,9 +263,8 @@ addons:
             - mule
         group: Standard
     KongConfig:
-        exclude:
-            - machine:type:secondary
-        group: UI
+        include:
+            - no-one
     Ace3:
         include:
             - no-one
@@ -309,17 +292,14 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     Ara_Broker_Reputations:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     Ara_Broker_Tradeskills:
         exclude:
-            - machine:type:secondary
         group: Standard
     Auctionator:
         include:
@@ -328,9 +308,6 @@ addons:
             - machine:type:basic
         group: Auctions
     AutoBar:
-        include:
-            - all(dualbox;machine:type:secondary)
-            - machine:type:primary
         exclude:
             - banker
             - mule
@@ -353,16 +330,15 @@ addons:
     Bagnon_Config:
         group: Basic
     Bagnon_Forever:
-        include:
-            - no-one
+        group: Basic
+        exclude:
+            - machine:type:secondary
     Bagnon_Tooltips:
         exclude:
             - machine:type:secondary
             - machine:type:basic
         group: Basic
     Bagsy:
-        exclude:
-            - machine:type:secondary
         group: Standard
     BankStack:
         group: Standard
@@ -370,7 +346,6 @@ addons:
         include:
             - class:Rogue
         exclude:
-            - machine:type:secondary
             - machine:type:basic
             - banker
             - mule
@@ -383,14 +358,12 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     Broker_AltGuild:
         include:
             - all(unguilded;watchguild)
         exclude:
-            - machine:type:secondary
             - machine:type:basic
         group: Unguilded
     Broker_BufCanceler:
@@ -399,7 +372,6 @@ addons:
     Broker_Currency:
         exclude:
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     Broker_Equipment:
@@ -411,7 +383,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     Broker_MicroMenu:
@@ -430,7 +401,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     CallbackHandler-1.0:
@@ -455,14 +425,12 @@ addons:
         include:
             - class:Death Knight
         exclude:
-            - machine:type:secondary
             - machine:type:basic
         class: Death Knight
     DKIRunes:
         include:
             - class:Death Knight
         exclude:
-            - machine:type:secondary
             - machine:type:basic
         class: Death Knight
     Dominos:
@@ -493,7 +461,6 @@ addons:
         include:
             - all(class:Druid;spec:Balance)
         exclude:
-            - machine:type:secondary
             - machine:type:basic
         class: Druid
     Expiration-2:
@@ -504,13 +471,6 @@ addons:
         group:
             - Raiding
             - Heroics
-    Failchievements:
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
-            - machine:type:basic
-        group: Standard
     FishermansFriend:
         include:
             - prof:Fishing
@@ -521,7 +481,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     Forte_Cooldown:
@@ -531,7 +490,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     Forte_DeathKnight:
@@ -543,7 +501,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         class: Druid
     Forte_Healthstone:
@@ -555,7 +512,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         class: Hunter
     Forte_Mage:
@@ -564,7 +520,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         class: Mage
     Forte_Paladin:
@@ -573,7 +528,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         class: Paladin
     Forte_Priest:
@@ -582,7 +536,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         class: Priest
     Forte_Rogue:
@@ -591,7 +544,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         class: Rogue
     Forte_Shaman:
@@ -600,7 +552,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         class: Shaman
     Forte_Shard:
@@ -619,7 +570,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     Forte_Vehicle:
@@ -631,7 +581,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         class: Warlock
     Forte_Warrior:
@@ -640,7 +589,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         class: Warrior
     FreeRefills:
@@ -660,7 +608,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Gathering
     GatherMate2_Data:
@@ -670,7 +617,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Gathering
     GnomishVendorShrinker:
@@ -707,7 +653,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group:
             - Leveling
@@ -719,7 +664,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group:
             - Leveling
@@ -731,7 +675,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group:
             - Leveling
@@ -743,7 +686,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group:
             - Leveling
@@ -755,7 +697,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group:
             - Leveling
@@ -767,7 +708,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group:
             - Leveling
@@ -779,7 +719,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group:
             - Leveling
@@ -791,7 +730,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group:
             - Leveling
@@ -800,14 +738,12 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     LushGearSwapOptions:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     Macaroon:
@@ -844,21 +780,18 @@ addons:
         include:
             - goal:Achievements
         exclude:
-            - machine:type:secondary
             - machine:type:basic
         group: Achievements
     Overachiever_Tabs:
         include:
             - goal:Achievements
         exclude:
-            - machine:type:secondary
             - machine:type:basic
         group: Achievements
     Overachiever_Trade:
         include:
             - goal:Achievements
         exclude:
-            - machine:type:secondary
             - machine:type:basic
         group: Achievements
     Panda:
@@ -871,32 +804,27 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     PitBull4:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_Aggro:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_AltPowerBar:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_Aura:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_Background:
         include:
@@ -905,7 +833,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_Border:
         include:
@@ -914,7 +841,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_CastBarLatency:
         include:
@@ -923,13 +849,11 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_CombatIcon:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_CombatText:
         include:
@@ -945,7 +869,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_DruidManaBar:
         include:
@@ -953,7 +876,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         class: Druid
     PitBull4_Eclipse:
         include:
@@ -965,7 +887,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         class: Hunter
     PitBull4_HappinessIcon:
         include:
@@ -974,13 +895,11 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_HideBlizzard:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_Highlight:
         include:
@@ -992,19 +911,16 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_LeaderIcon:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_LuaTexts:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_ManaSpark:
         include:
@@ -1013,43 +929,36 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_Portrait:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_PowerBar:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_PvPIcon:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_QuestIcon:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_RaidTargetIcon:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_RangeFader:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_ReadyCheckIcon:
         include:
@@ -1060,13 +969,11 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_RoleIcon:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     PitBull4_Runes:
         include:
@@ -1133,7 +1040,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Gathering
     Raven:
@@ -1156,7 +1062,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     ShockAndAwe:
@@ -1253,12 +1158,8 @@ addons:
         include:
             - no-one
     Talented:
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
-            - machine:type:basic
-        group: Standard
+        include:
+            - no-one
     Talented_Inspect:
         include:
             - no-one
@@ -1267,28 +1168,24 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     TellMeWhen_Options:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     TidyPlates:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     TidyPlatesHub:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     TidyPlates_Grey:
@@ -1310,7 +1207,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:type:basic
         group: Standard
     TipTac:
@@ -1327,7 +1223,6 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     TourGuide:
         include:
@@ -1354,18 +1249,10 @@ addons:
         include:
             - no-one
     WIM:
-        include:
-            - machine:type:primary
-            - all(dualbox;machine:type:secondary)
         group: Basic
     WIM_FlatPanel:
-        include:
-            - machine:type:primary
-            - all(dualbox;machine:type:secondary)
         group: Basic
     _NPCScan:
-        include:
-            - machine:type:primary
         exclude:
             - banker
             - mule
@@ -1377,13 +1264,6 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Achievements
-    epgp:
-        include:
-            - guildrole:Lootmaster
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Lootmaster
     picoEXP:
         include:
             - leveling
@@ -1398,13 +1278,11 @@ addons:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
         group: Standard
     teksLoot:
         exclude:
             - banker
             - mule
-            - machine:type:secondary
             - machine:player:Heidi
         group: Standard
     AutoItemStartQuest:
