@@ -696,6 +696,10 @@ addons:
         include:
             - dualbox
         group: Dualbox
+    NADTQuestShare:
+        include:
+            - dualbox
+        group: Dualbox
     LightHeaded:
         include:
             - goal:Loremaster

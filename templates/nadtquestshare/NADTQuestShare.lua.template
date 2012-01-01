@@ -1,0 +1,5 @@
+
+NQS_DB = {
+    ["mode"] = "[% IF master %]master[% ELSIF slave %]slave[% ELSE %]none[% END %]",
+}
+
