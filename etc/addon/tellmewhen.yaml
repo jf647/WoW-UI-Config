@@ -1829,9 +1829,11 @@ icons:
     filter:
       level: 18
     succeed: 1
+    CustomTex: inv_misc_orb_04
     Alpha: 1
-    Name: inv_misc_orb_04
     conditions:
+        - instance
+        - AND
         - Type: ITEMINBAGS
           Name: 5232
   Metamorphosis:

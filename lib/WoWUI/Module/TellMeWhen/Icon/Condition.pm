@@ -14,7 +14,7 @@ extends 'WoWUI::Module::TellMeWhen::Icon';
 with 'WoWUI::Module::TellMeWhen::Icon::Succeed';
 has '+priority' => ( default => 6050 );
 has '+Type' => ( default => 'conditionicon' );
-has '+CustomTex' => ( relevant => 0 );
+has '+CustomTex' => ( relevant => 1 );
 has '+ShowWhen' => ( relevant => 1 );
 has '+Alpha' => ( default => 0.5 );
 has [ qw|+CBarOffs +ShowCBar| ] => ( relevant => 1 );
