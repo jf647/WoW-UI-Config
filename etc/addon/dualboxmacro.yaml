@@ -271,7 +271,7 @@ bars:
         binding: 'CTRL-]'
         buttontype: special2
       3:
-        binding: CTRL-#
+        binding: 'CTRL-\'
         buttontype: special3
       4:
         binding: 'CTRL-,'
