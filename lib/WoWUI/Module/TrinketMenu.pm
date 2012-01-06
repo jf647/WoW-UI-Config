@@ -33,9 +33,19 @@ sub BUILD
 
     my $self = shift;
   
+    $self->global( 1 );
     $self->perchar( 1 );
 
     return $self;
+
+}
+
+sub augment_global
+{
+
+    my $self = shift;
+    
+    return 1;
 
 }
 

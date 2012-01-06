@@ -1,70 +1,27 @@
 
-TrinketMenuPerOptions = {
-    ["Visible"] = "OFF",
-    ["MainScale"] = 1,
-    ["XPos"] = 300,
-    ["Alpha"] = 1,
-    ["MainOrient"] = "HORIZONTAL",
-    ["FirstUse"] = true,
-    ["ItemsUsed"] = {},
-    ["Hidden"] = {},
-    ["MenuScale"] = 1,
-    ["MainDock"] = "BOTTOMRIGHT",
-    ["YPos"] = 400,
-    ["MenuDock"] = "BOTTOMLEFT",
-    ["MenuOrient"] = "VERTICAL",
+TrinketMenuOptions = {
+    ["Notify"] = "OFF",
+    ["KeepOpen"] = "OFF",
+    ["LargeCooldown"] = "ON",
+    ["ShowIcon"] = "OFF",
+    ["NotifyChatAlso"] = "OFF",
+    ["Locked"] = "OFF",
+    ["MenuOnShift"] = "OFF",
+    ["RedRange"] = "OFF",
+    ["CooldownCount"] = "OFF",
+    ["StopOnSwap"] = "OFF",
+    ["TooltipFollow"] = "OFF",
+    ["TinyTooltips"] = "OFF",
+    ["IconPos"] = -100,
+    ["NotifyUsedOnly"] = "OFF",
+    ["NotifyThirty"] = "OFF",
+    ["DisableToggle"] = "OFF",
+    ["ShowTooltips"] = "ON",
+    ["HideOnLoad"] = "OFF",
+    ["ShowHotKeys"] = "OFF",
+    ["Columns"] = 4,
+    ["SetColumns"] = "OFF",
+    ["MenuOnRight"] = "ON",
+    ["SquareMinimap"] = "OFF",
+    ["KeepDocked"] = "ON",
 }
-TrinketMenuQueue = {
-    ["Enabled"] = {
-        [0] = 1,
-        1, -- [1]
-    },
-    ["Stats"] = {
-[% FOR trinket IN trinketmenu.trinkets -%]
-        ["[% trinket.itemid %]"] = { -- [% trinket.name %]
-[% IF trinket.passive -%]
-            ["keep"] = 1,
-[% END -%]
-[% IF trinket.prefer -%]
-            ["priority"] = 1,
-[% END -%]
-        },
-[% END -%]
-    },
-[% firstprofile = trinketmenu.profiles.keys.0 -%]
-    ["Sort"] = {
-        {
-[% FOR trinket IN trinketmenu.profiles.$firstprofile.trinkets -%]
-[% IF 0 == trinket.itemid -%]
-            0,
-[% ELSE -%]
-            "[% trinket.itemid %]", -- [% trinket.name %]
-[% END -%]
-[% END -%]
-        },
-        [0] = {
-[% FOR trinket IN trinketmenu.profiles.$firstprofile.trinkets -%]
-[% IF 0 == trinket.itemid -%]
-            0,
-[% ELSE -%]
-            "[% trinket.itemid %]", -- [% trinket.name %]
-[% END -%]
-[% END -%]
-        },
-    },
-    ["Profiles"] = {
-[% FOR profile IN trinketmenu.profiles.values -%]
-        {
-            "[% profile.name %]",
-[% FOR trinket IN profile.trinkets -%]
-[% IF 0 == trinket.itemid -%]
-            0,
-[% ELSE -%]
-            "[% trinket.itemid %]", -- [% trinket.name %]
-[% END -%]
-[% END -%]
-        }, -- [[% loop.count %]]
-[% END -%]
-    },
-}
-

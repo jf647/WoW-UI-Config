@@ -1,8 +1,12 @@
 ---
 templates:
-    perchar:
+    global:
         trinketmenu:
             input: $TEMPLATEDIR/trinketmenu/TrinketMenu.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/TrinketMenu.lua
+    perchar:
+        trinketmenu:
+            input: $TEMPLATEDIR/trinketmenu/TrinketMenu_perchar.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/TrinketMenu.lua
 perchar_filter:
     addons:
