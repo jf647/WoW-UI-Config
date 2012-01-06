@@ -1,0 +1,5 @@
+
+ButsuDB = {
+	["framePosition"] = "[% butsu.point %]UIParent[% butsu.x %][% butsu.y %]",
+}
+

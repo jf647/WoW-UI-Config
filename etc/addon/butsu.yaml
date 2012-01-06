@@ -1,0 +1,10 @@
+---
+templates:
+    global:
+        butsu:
+            input: $TEMPLATEDIR/butsu/Butsu.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Butsu.lua
+anchor:
+    point: LEFT
+    x: 278
+    y: 133
