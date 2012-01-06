@@ -1,0 +1,22 @@
+
+BasicComboPointsDB = {
+    ["profileKeys"] = {
+[% FOR realm IN charlist.keys -%]
+[% FOR char IN charlist.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = "Default",
+[% END -%]
+[% END -%]
+    },
+    ["profiles"] = {
+        ["Default"] = {
+            ["x"] = [% bcp.x %],
+            ["y"] = [% bcp.y %],
+            ["lock"] = true,
+            ["size"] = {
+[% FOR size IN bcp.size.keys -%]
+                ["[% size %]"] = [% bcp.size.$size %],
+[% END -%]
+            },
+        },
+    },
+}

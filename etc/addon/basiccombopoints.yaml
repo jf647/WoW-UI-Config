@@ -1,0 +1,19 @@
+---
+templates:
+    global:
+        basiccombopoints:
+            input: $TEMPLATEDIR/basiccombopoints/BasicComboPoints.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/BasicComboPoints.lua
+perchar_filter:
+    addons:
+        - BasicComboPoints
+
+basiccombopoints:
+    x: 660
+    y: 582
+    size:
+        one: 16
+        two: 24
+        three: 32
+        four: 40
+        five: 48
