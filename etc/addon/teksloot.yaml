@@ -1,0 +1,9 @@
+---
+templates:
+    global:
+        teksloot:
+            input: $TEMPLATEDIR/teksloot/teksLoot.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/teksLoot.lua
+anchor:
+    x: 680
+    y: 399

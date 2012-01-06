@@ -1,0 +1,6 @@
+
+teksLootDB = {
+    ["x"] = [% teksloot.x %],
+    ["y"] = [% teksloot.y %],
+}
+
