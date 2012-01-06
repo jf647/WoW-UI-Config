@@ -50,6 +50,10 @@ plugins:
         filter:
             include:
                 - no-one
+    BloodShieldTracker:
+        filter:
+            include:
+                - no-one
     Archy:
         align: left
         priority: 70
@@ -226,6 +230,10 @@ plugins:
             include:
                 - no-one
     BagnonLauncher:
+        filter:
+            include:
+                - no-one
+    TidyPlatesIcon:
         filter:
             include:
                 - no-one

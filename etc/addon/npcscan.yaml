@@ -512,8 +512,13 @@ npcs:
         world: 1
         sets:
             - firelands
+    Mankrik:
+        id: 52238
+        world: 1
+        sets:
+            - firelands
     Hemet Nesingwary:
-        id: 52244
+        id: 52261
         world: 1
         sets:
             - firelands

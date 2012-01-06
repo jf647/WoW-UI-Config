@@ -310,6 +310,10 @@ addons:
             - banker
             - mule
         group: Standard
+    BloodShieldTracker:
+        include:
+          - all(class:Death Knight;spec:Blood)
+        class: Death Knight
     BadBoy:
         group: Basic
     BadBoy_CCleaner:
@@ -1243,12 +1247,6 @@ addons:
             - banker
             - mule
         group: Standard
-    Viewporter:
-        include:
-            - no-one
-    bobBlackViewPort:
-        include:
-            - no-one
     WIM:
         group: Basic
     WIM_FlatPanel:

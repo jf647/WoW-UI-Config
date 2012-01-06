@@ -216,6 +216,10 @@ settings:
       - spec:Blood
       level: 57
       value: Blood Presence
+    - level: 70
+      value: Unholy Presence
+      include:
+        - spec:Unholy
     type: string
   Beacon of Light-enabled:
     filter:
@@ -235,6 +239,7 @@ settings:
     - level: 22
       value: 1
     type: boolean
+
   Bone Shield-enabled:
     filter:
     - value: 0

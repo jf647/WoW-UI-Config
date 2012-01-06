@@ -16,6 +16,10 @@ has profileset => (
     isa => 'WoWUI::ProfileSet',
     default => sub { WoWUI::ProfileSet->new },
 );
+after 'globaldata_clear' => sub {
+    my $self = shift;
+    $self->globaldata_set( chars => {} );
+};
 CLASS->meta->make_immutable;
 
 use WoWUI::Config;
@@ -29,7 +33,7 @@ sub BUILD
     
     $self->global( 1 );
     $self->globalpc( 1 );
-    $self->globaldata_set( chars => {} );
+    $self->globaldata_clear;
     
     return $self;
     
