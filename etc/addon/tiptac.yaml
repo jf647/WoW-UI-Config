@@ -1,0 +1,22 @@
+---
+templates:
+    global:
+        tiptac:
+            input: $TEMPLATEDIR/tiptac/TipTac.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/TipTac.lua
+anchor:
+    top: 167
+    left: 1251
+    frameunitpoint: BOTTOMRIGHT
+    frametippoint: BOTTOMRIGHT
+    worldunitpoint: BOTTOMLEFT
+    worldtippoint: BOTTOMLEFT
+    iconanchor: TOPLEFT
+    worldtiptype: mouse
+    worldunittype: mouse
+    frameunittype: normal
+fontsize: 10
+barfontsize: 12
+scale: 0.8
+fadetime: 0.1
+prefadetime: 0.1

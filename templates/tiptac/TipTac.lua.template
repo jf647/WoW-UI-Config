@@ -1,0 +1,65 @@
+
+TipTac_Config = {
+    ["top"] = [% tiptac.anchor.top %],
+    ["left"] = [% tiptac.anchor.left %],
+    ["fontSize"] = [% tiptac.fontsize %],
+    ["barFontSize"] = [% tiptac.barfontsize %],
+    ["gttScale"] = [% tiptac.scale %],
+    ["fadeTime"] = [% tiptac.fadetime %],
+    ["preFadeTime"] = [% tiptac.prefadetime %],
+    ["anchorFrameUnitPoint"] = "[% tiptac.anchor.frameunitpoint %]",
+    ["anchorFrameTipPoint"] = "[% tiptac.anchor.frametippoint %]",
+    ["anchorWorldUnitPoint"] = "[% tiptac.anchor.worldunitpoint %]",
+    ["anchorWorldTipPoint"] = "[% tiptac.anchor.worldtippoint %]",
+    ["iconAnchor"] = "[% tiptac.anchor.iconanchor %]",
+    ["anchorWorldTipType"] = "[% tiptac.anchor.worldtiptype %]",
+    ["anchorWorldUnitType"] = "[% tiptac.anchor.worldunittype %]",
+    ["anchorFrameUnitType"] = "[% tiptac.anchor.frameunittype %]",
+    ["nameType"] = "normal",
+    ["showRealm"] = "show",
+    ["classification_elite"] = "Level %s|cffffcc00 Elite",
+    ["showHiddenTipsOnShift"] = false,
+    ["overrideFade"] = true,
+    ["tipBackdropEdge"] = "Interface\\Tooltips\\UI-Tooltip-Border",
+    ["optionsLeft"] = 76.71105851068595,
+    ["backdropEdgeSize"] = 16,
+    ["reactText"] = false,
+    ["showTarget"] = "last",
+    ["powerBar"] = false,
+    ["tipColor"] = {
+        0, -- [1]
+        0, -- [2]
+        0, -- [3]
+        1, -- [4]
+    },
+    ["hideDefaultBar"] = false,
+    ["healthBar"] = false,
+    ["colRace"] = "|cffddeeaa",
+    ["tipBorderColor"] = {
+        0, -- [1]
+        0, -- [2]
+        0, -- [3]
+        1, -- [4]
+    },
+    ["classification_normal"] = "Level %s",
+    ["colLevel"] = "|cffffcc00",
+    ["classification_rare"] = "Level %s|cffff66ff Rare",
+    ["showBuffs"] = false,
+    ["showTargetedBy"] = false,
+    ["reactColoredBackdrop"] = true,
+    ["hideAllTipsInCombat"] = false,
+    ["showAuraCooldown"] = true,
+    ["classification_worldboss"] = "Level %s|cffff0000 Boss",
+    ["showDebuffs"] = false,
+    ["manaBar"] = false,
+    ["classColoredBorder"] = true,
+    ["colorNameByClass"] = true,
+    ["classification_rareelite"] = "Level %s|cffffaaff Rare Elite",
+    ["targetYouText"] = "<<YOU>>",
+    ["hideUFTipsInCombat"] = true,
+    ["backdropInsets"] = 4,
+    ["optionsBottom"] = 293.6000701926626,
+    ["updateFreq"] = 1,
+    ["tipBackdropBG"] = "Interface\\Tooltips\\UI-Tooltip-Background",
+    ["hideWorldTips"] = true,
+}
