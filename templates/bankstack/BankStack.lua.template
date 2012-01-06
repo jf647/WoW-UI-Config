@@ -1,0 +1,34 @@
+
+BankStackDB = {
+    ["namespaces"] = {
+        ["LDB"] = {
+            ["profiles"] = {
+                ["Default"] = {
+                    ["minimap"] = {
+                        ["hide"] = true,
+                    },
+                },
+            },
+        },
+        ["Auto"] = {
+        },
+    },
+    ["profileKeys"] = {
+[% FOR realm IN charlist.keys -%]
+[% FOR char IN charlist.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = "Default",
+[% END -%]
+[% END -%]
+    },
+    ["profiles"] = {
+        ["Default"] = {
+            ["fubar_keybinds"] = {
+[% FOR bind IN bindings.keys -%]
+                ["[% bind %]"] = [% IF bindings.$bind %]"[% bindings.$bind %]"[% ELSE %]false[% END %],
+[% END -%]
+            },
+            ["reverse"] = true,
+        },
+    },
+}
+

@@ -1,0 +1,18 @@
+---
+templates:
+    global:
+        bankstack:
+            input: $TEMPLATEDIR/bankstack/BankStack.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/BankStack.lua
+perchar_filter:
+    addons:
+        - BankStack
+bankstack:
+    BUTTON1: sortbags
+    ALT-BUTTON1: ~
+    CTRL-BUTTON1: sortbank
+    ALT-CTRL-BUTTON1: ~
+    SHIFT-BUTTON1: ~
+    ALT-SHIFT-BUTTON1: ~
+    CTRL-SHIFT-BUTTON1: ~
+    ALT-CTRL-SHIFT-BUTTON1: ~

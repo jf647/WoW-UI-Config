@@ -18,6 +18,7 @@ logging:
 levelcap: 85
 modules:
     - WoWUI::Module::Addons
+    - WoWUI::Module::BankStack
     - WoWUI::Module::KeyBindings
     - WoWUI::Module::WowheadLooter
     - WoWUI::Module::NADTTrustList
