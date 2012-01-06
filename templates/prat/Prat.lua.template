@@ -1,0 +1,78 @@
+
+Prat3DB = {
+    ["namespaces"] = {
+        ["Prat_Frames"] = {
+            ["profiles"] = {
+                ["Default"] = {
+                    ["initialized"] = true,
+                    ["minchatheightdefault"] = [% prat.frame.height.min %],
+                    ["maxchatheightdefault"] = [% prat.frame.height.max %],
+                    ["minchatwidthdefault"] = [% prat.frame.width.min %],
+                    ["maxchatwidthdefault"] = [% prat.frame.width.max %],
+                },
+            },
+        },
+        ["Prat_Editbox"] = {
+            ["profiles"] = {
+                ["Default"] = {
+                    ["edgeSize"] = [% prat.editbox.edgesize %],
+                    ["editW"] = [% prat.editbox.w %],
+                    ["attach"] = "[% prat.editbox.attach %]",
+                    ["editX"] = [% prat.editbox.x %],
+                    ["editY"] = [% prat.editbox.y %],
+                    ["background"] = "Blizzard Dialog Background",
+                },
+            },
+        },
+        ["Prat_Fading"] = {
+            ["profiles"] = {
+                ["Default"] = {
+                    ["duration"] = [% prat.fading.duration %],
+                },
+            },
+        },
+        ["Prat_KeyBindings"] = {
+            ["profiles"] = {
+                ["Default"] = {
+                    ["on"] = true,
+                },
+            },
+        },
+        ["Prat_PopupMessage"] = {
+            ["profiles"] = {
+                ["Default"] = {
+                    ["sinkoptions"] = {
+                        ["sink20OutputSink"] = "[% prat.popup.sinkoptions.outputsink %]",
+                        ["sink20ScrollArea"] = "[% prat.popup.sinkoptions.scrollarea %]",
+                    },
+                    ["on"] = true,
+                },
+            },
+        },
+        ["Prat_Buttons"] = {
+            ["profiles"] = {
+                ["Default"] = {
+                    ["showBnet"] = [% IF prat.buttons.bnet %]true[% ELSE %]false[% END %],
+                    ["showButtons"] = [% IF prat.buttons.buttons %]true[% ELSE %]false[% END %],
+                    ["showMenu"] = [% IF prat.buttons.menu %]true[% ELSE %]false[% END %],
+                },
+            },
+        },
+    },
+    ["profileKeys"] = {
+[% FOR realm IN charlist.keys -%]
+[% FOR char IN charlist.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = "Default",
+[% END -%]
+[% END -%]
+    },
+    ["profiles"] = {
+        ["Default"] = {
+            ["modules"] = {
+[% FOR module IN prat.modules.keys -%]
+                ["[% module %]"] = [% prat.modules.$module %],
+[% END -%]
+            },
+        },
+    },
+}

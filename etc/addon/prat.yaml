@@ -1,0 +1,36 @@
+---
+templates:
+    global:
+        prat:
+            input: $TEMPLATEDIR/prat/Prat.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Prat-3.0.lua
+frame:
+    height:
+        min: 120
+        max: 400
+    width:
+        min: 296
+        max: 600
+editbox:
+    edgesize: 10
+    attach: TOP
+    x: 28
+    y: 184
+    w: 345
+fading:
+    duration: 45
+popup:
+    sinkoptions:
+        outputsink: Parrot
+        scrollarea: Notification
+buttons:
+    bnet: 0
+    buttons: 0
+    menu: 0
+modules:
+    ChatLink: 2
+    ChatLog: 2
+    AltNames: 2
+    Sounds: 2
+    Paragraph: 2
+    Alias: 2
