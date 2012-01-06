@@ -1,0 +1,6 @@
+
+NP_DB = {
+    ["acceptinvite"] = [% IF acceptinvite %]true[% ELSE %]false[% END %],
+    ["setffaloot"] = [% IF setffaloot %]true[% ELSE %]false[% END %],
+}
+

@@ -23,6 +23,7 @@ modules:
     - WoWUI::Module::NADTTrustList
     - WoWUI::Module::DualBoxMacro
     - WoWUI::Module::NADTQuestShare
+    - WoWUI::Module::NADTParty
     - WoWUI::Module::AutoReFollow
     - WoWUI::Module::NADTTurnIn
     - WoWUI::Module::TellMeWhen

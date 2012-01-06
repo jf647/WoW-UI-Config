@@ -1,7 +1,7 @@
 HydraSettings = {
 [% IF hydra -%]
 	["Party"] = {
-		["enable"] = [% IF slave %]true[% ELSE %]false[% END %],
+		["enable"] = false,
 	},
 	["Mount"] = {
 		["enable"] = false,

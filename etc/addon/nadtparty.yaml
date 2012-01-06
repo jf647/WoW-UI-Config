@@ -1,0 +1,9 @@
+---
+templates:
+    perchar:
+        nadtparty:
+            input: $TEMPLATEDIR/nadtparty/NADTParty.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/NADTParty.lua
+perchar_filter:
+    addons:
+        - NADTParty

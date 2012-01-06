@@ -820,6 +820,8 @@ icons:
       include:
       - spec:Holy
       level: 39
+      exclude:
+      - machine:type:secondary
     missing: 1
     spell: Beacon of Light
     type: Buff
@@ -1615,6 +1617,7 @@ icons:
     type: Buff
     combat: in
     always: 1
+    CustomTex: Judgement
     ShowTimer: 1
     ShowTimerText: 1
     duration:
