@@ -1,0 +1,17 @@
+---
+templates:
+    global:
+        mapster:
+            input: $TEMPLATEDIR/mapster/Mapster.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Mapster.lua
+mapster:
+    point: LEFT
+    scale: 0.7
+    alpha: 0.6
+    hidemapbutton: 1
+    x: 84.54
+    y: -7.41
+    modules:
+        FogClear: 0
+        Coords: 0
+        BattleMap: 0

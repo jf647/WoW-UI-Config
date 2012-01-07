@@ -1,0 +1,27 @@
+
+MapsterDB = {
+    ["namespaces"] = {
+    },
+    ["profileKeys"] = {
+[% FOR realm IN charlist.keys -%]
+[% FOR char IN charlist.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = "Default",
+[% END -%]
+[% END -%]
+    },
+    ["profiles"] = {
+        ["Default"] = {
+            ["point"] = "[% mapster.point %]",
+            ["scale"] = [% mapster.scale %],
+            ["alpha"] = [% mapster.alpha %],
+            ["hideMapButton"] = [% IF mapster.hidemapbutton %]true[% ELSE %]false[% END %],
+            ["modules"] = {
+[% FOR module IN mapster.modules.keys -%]
+                ["[% modules %]"] = [% IF mapster.modules.$module %]true[% ELSE %]false[% END %],
+[% END -%]
+            },
+            ["x"] = [% mapster.x %],
+            ["y"] = [% mapster.y %],
+        },
+    },
+}
