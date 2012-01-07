@@ -1,0 +1,11 @@
+---
+templates:
+    global:
+        omnicc:
+            input: $TEMPLATEDIR/omnicc/OmniCC.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/OmniCC.lua
+omnicc:
+    fontFace: 'Interface\\Addons\\Prat-3.0\\fonts\\CRYSRG__.ttf'
+    minDuration: 7
+    mmSSDuration: 600
+    soonscale: 1.4
