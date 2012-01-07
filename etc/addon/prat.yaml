@@ -4,6 +4,9 @@ templates:
         prat:
             input: $TEMPLATEDIR/prat/Prat.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Prat-3.0.lua
+perchar_filter:
+    addons:
+        - Prat-3.0
 frame:
     height:
         min: 120
