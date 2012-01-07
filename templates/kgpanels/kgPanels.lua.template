@@ -1,0 +1,90 @@
+
+kgPanelsDB = {
+    ["global"] = {
+        ["layouts"] = {
+[% FOR lname IN kgp.layout_names -%]
+[% layout = kgp.layout_get(lname) -%]
+            ["[% layout.name %]"] = {
+[% FOR pname IN layout.panels -%]
+[% panel = kgp.panel_get(pname) -%]
+                ["[% panel.name %]"] = {
+[% FOR key IN [ 'parent', 'bg_orientation', 'anchorFrom', 'bg_texture', 'anchor', 'bg_blend', 'strata', 'anchorTo', 'bg_style', 'border_texture', 'height', 'width' ] -%]
+                    ["[% key %]"] = "[% panel.$key %]",
+[% END -%]            
+[% FOR key IN [ 'tileSize', 'level', 'rotation', 'x', 'y', 'bg_alpha', 'border_edgeSize', 'sub_level' ] -%]
+                    ["[% key %]"] = [% panel.$key %],
+[% END -%]
+[% FOR key IN [ 'hflip', 'vflip', 'use_absolute_bg', 'tiling', 'mouse', 'crop' ] -%]
+                    ["[% key %]"] = [% IF panel.$key %]true[% ELSE %]false[% END %],
+[% END -%]
+                    ["text"] = {
+                        ["y"] = [% panel.text.y %],
+                        ["font"] = "[% panel.text.font %]",
+                        ["justifyH"] = "[% panel.text.justifyH %]",
+                        ["x"] = [% panel.text.x %],
+                        ["color"] = {
+                            ["a"] = [% panel.text.color.a %],
+                            ["b"] = [% panel.text.color.b %],
+                            ["g"] = [% panel.text.color.g %],
+                            ["r"] = [% panel.text.color.r %],
+                        },
+                        ["text"] = "[% panel.text.text %]",
+                        ["justifyV"] = "[% panel.text.justifyV %]",
+                        ["size"] = [% panel.text.size %],
+                    },
+                    ["absolute_bg"] = {
+                        ["LLy"] = [% panel.absolute_bg.LLy %],
+                        ["LLx"] = [% panel.absolute_bg.LLx %],
+                        ["LRy"] = [% panel.absolute_bg.LRy %],
+                        ["LRx"] = [% panel.absolute_bg.LRx %],
+                        ["URy"] = [% panel.absolute_bg.URy %],
+                        ["URx"] = [% panel.absolute_bg.URx %],
+                        ["ULy"] = [% panel.absolute_bg.ULy %],
+                        ["ULx"] = [% panel.absolute_bg.ULx %],
+                    },
+                    ["bg_insets"] = {
+                        ["r"] = [% panel.bg_insets.r %],
+                        ["t"] = [% panel.bg_insets.t %],
+                        ["l"] = [% panel.bg_insets.l %],
+                        ["b"] = [% panel.bg_insets.b %],
+                    },
+                    ["gradient_color"] = {
+                        ["a"] = [% panel.gradient_color.a %],
+                        ["b"] = [% panel.gradient_color.b %],
+                        ["g"] = [% panel.gradient_color.g %],
+                        ["r"] = [% panel.gradient_color.r %],
+                    },
+                    ["border_color"] = {
+                        ["a"] = [% panel.border_color.a %],
+                        ["b"] = [% panel.border_color.b %],
+                        ["g"] = [% panel.border_color.g %],
+                        ["r"] = [% panel.border_color.r %],
+                    },
+                    ["bg_color"] = {
+                        ["a"] = [% panel.bg_color.a %],
+                        ["b"] = [% panel.bg_color.b %],
+                        ["g"] = [% panel.bg_color.g %],
+                        ["r"] = [% panel.bg_color.r %],
+                    },
+                    ["scripts"] = {
+                    },
+                },
+[% END -%]
+            },
+[% END -%]
+        },
+    },
+    ["profileKeys"] = {
+[% FOR dname IN chars.keys -%]
+        ["[% dname %]"] = "[% chars.$dname %]",
+[% END -%]
+    },
+    ["profiles"] = {
+[% FOR pname IN kgp.profileset.profiles_list -%]
+[% profile = kgp.profileset.profile_get(pname) -%]
+        ["[% pname %]"] = {
+            ["layout"] = "[% profile.layout %]",
+        },
+[% END -%]
+    },
+}

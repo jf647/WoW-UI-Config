@@ -9,6 +9,8 @@ use MooseX::StrictConstructor;
 use namespace::autoclean;
 use CLASS;
 
+use WoWUI::ProfileSet;
+
 # set up class
 extends 'WoWUI::Module::Base';
 has filtergroups => (

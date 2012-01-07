@@ -1,0 +1,52 @@
+templates:
+    global:
+        kgpanels:
+            input: $TEMPLATEDIR/kgpanels/kgPanels.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/kgPanels.lua
+layouts:
+    standard:
+        filter: {}
+        panels:
+            - bottom_background
+panels:
+    bottom_background:
+        parent: UIParent
+        anchor: UIParent
+        anchorFrom: BOTTOMLEFT
+        anchorTo: BOTTOMLEFT
+        x: -4
+        y: -4
+        height: 144
+        width: 1373
+        level: 0
+        strata: BACKGROUND
+        bg_orientation: HORIZONTAL
+        use_absolute_bg: 0
+        absolute_bg: { LLy: 1, LLx: 0, LRy: 1, LRx: 1, URy: 0, URx: 1, ULy: 0, ULx: 0 }
+        bg_insets: { r: -4, t: -4, l: 4, b: 4 }
+        bg_texture: Solid
+        bg_style: SOLID
+        bg_blend: BLEND
+        bg_alpha: 1
+        bg_color: { a: 0, b: 0, g: 0, r: 0 }
+        gradient_color: { a: 1, b: 1, g: 1, r: 1 }
+        border_color: { a: 1, b: 1, g: 1, r: 1 }
+        border_texture: None
+        hflip: 0
+        vflip: 0
+        tiling: 0
+        tileSize: 0
+        border_edgeSize: 16
+        text:
+            text: ~
+            x: 0
+            y: 0
+            size: 12
+            font: Blizzard
+            justifyV: MIDDLE
+            justifyH: CENTER
+            color: { a: 1, b: 1, g: 1, r: 1 }
+        rotation: 0
+        mouse: 0
+        crop: 0
+        sub_level: 0

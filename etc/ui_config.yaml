@@ -18,6 +18,7 @@ logging:
 levelcap: 85
 modules:
     - WoWUI::Module::Addons
+    - WoWUI::Module::kgPanels
     - WoWUI::Module::Mapster
     - WoWUI::Module::OmniCC
     - WoWUI::Module::Broker_uClock

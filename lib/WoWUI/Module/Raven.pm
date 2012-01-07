@@ -9,6 +9,8 @@ use MooseX::StrictConstructor;
 use CLASS;
 use namespace::autoclean;
 
+use WoWUI::ProfileSet;
+
 # set up class
 extends 'WoWUI::Module::Base';
 has profileset => (
