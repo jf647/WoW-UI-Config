@@ -27,8 +27,8 @@ panels:
         bg_texture: Solid
         bg_style: SOLID
         bg_blend: BLEND
-        bg_alpha: 1
-        bg_color: { a: 0, b: 0, g: 0, r: 0 }
+        bg_alpha: 0.5
+        bg_color: { a: 1, b: 0, g: 0, r: 0 }
         gradient_color: { a: 1, b: 1, g: 1, r: 1 }
         border_color: { a: 1, b: 1, g: 1, r: 1 }
         border_texture: None
