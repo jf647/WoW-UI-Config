@@ -1,0 +1,23 @@
+
+uClockDB = {
+    ["profileKeys"] = {
+[% FOR realm IN charlist.keys -%]
+[% FOR char IN charlist.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = "Default",
+[% END -%]
+[% END -%]
+    },
+    ["profiles"] = {
+        ["Default"] = {
+            ["showLocal"] = [% IF options.showLocal %]true[% ELSE %]false[% END %],
+            ["showRealm"] = [% IF options.showRealm %]true[% ELSE %]false[% END %],
+            ["showUTC"] = [% IF options.showUTC %]true[% ELSE %]false[% END %],
+            ["swap"] = [% IF options.swap %]true[% ELSE %]false[% END %],
+            ["twentyFour"] = [% IF options.twentyFour %]true[% ELSE %]false[% END %],
+            ["showSeconds"] = [% IF options.showSeconds %]true[% ELSE %]false[% END %],
+            ["showClock"] = [% IF options.showClock %]true[% ELSE %]false[% END %],
+            ["hourlyChime"] = [% IF options.hourlyChime %]true[% ELSE %]false[% END %],
+            ["hourlyChimeFile"] = "[% options.hourlyChimeFile %]",
+        },
+    },
+}

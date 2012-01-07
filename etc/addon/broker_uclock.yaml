@@ -1,0 +1,19 @@
+---
+templates:
+    global:
+        broker_uclock:
+            input: $TEMPLATEDIR/broker_uclock/Broker_uClock.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Broker_uClock.lua
+broker_uclock:
+    showLocal: 1
+    showRealm: 0
+    showUTC: 0
+    swap: 0
+    twentyFour: 0
+    showSeconds: 0
+    showClock: 0
+    hourlyChime: 0
+    hourlyChimeFile: 'Blizzard: Alarm Clock 3'
+perchar_filter:
+    addons:
+        - Broker_uClock
