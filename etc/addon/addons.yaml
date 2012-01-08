@@ -405,6 +405,12 @@ addons:
             - mule
             - machine:type:basic
         group: Standard
+    GreedBeacon:
+        exclude:
+            - banker
+            - mule
+            - machine:type:basic
+        group: Standard
     CallbackHandler-1.0:
         include:
             - no-one
