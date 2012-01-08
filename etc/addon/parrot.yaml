@@ -1,0 +1,170 @@
+
+templates:
+    global:
+        parrot:
+            input: $TEMPLATEDIR/parrot/Parrot.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Parrot.lua
+combatevents:
+    shortenAmount:
+        default:
+            filter: {}
+            shortenAmount: 1
+    hideUnitNames:
+        default:
+            filter: {}
+            hideUnitNames: 1
+    abbreviateLength:
+        default:
+            filter: {}
+            abbreviateLength: 8
+    throttles:
+        default:
+            filter: {}
+            throttles:
+                Heals: 1
+                Reputation gains: 1
+                Skill damage: 1
+                Melee damage: 1
+                Killing blows: 1
+                DoTs and HoTs: 3
+    notification:
+        default:
+            filter: {}
+            notification:
+                Power gain: 1
+                Power loss: 1
+                Buff gains: 0
+                Buff stack gains: 0
+                Debuff gains: 0
+                Debuff fades: 0
+                Debuff stack gains: 0
+                Reputation gains: 0
+                Reputation losses: 0
+                Combo point gain: 0
+                Combo points full: 0
+                Buff fades: 0
+                Player killing blows: 0
+                NPC killing blows: 0
+                Loot money: 0
+                Loot items: 0
+                Skill cooldown finish: 0
+                Skill gains: 0
+                Honor gains: 0
+                Extra attacks: 0
+    modifier:
+        default:
+            filter: {}
+            modifier:
+                overheal: ' ([Amount] +)'
+                absorb: ' ([Amount] AB)'
+                crushing: '[Text] CR'
+                overkill: ' ([Amount] ~)'
+                glancing: '[Text] GL'
+                vulnerable: ' ([Amount] VL)'
+                block: ' ([Amount] BL)'
+                crit: '[Text] *'
+                resist: ' ([Amount] RS)'
+    filters:
+        default:
+            filter:
+                level: 85
+            filters:
+                    Power gain: 500
+                    Incoming Damage: 10000
+                    Incoming Heals: 10000
+                    Outgoing Damage: 10000
+                    Outgoing Heals: 10000
+        81_to_84:
+            filter:
+                level: 81:84
+            filters:
+                    Power gain: 400
+                    Incoming Damage: 8000
+                    Incoming Heals: 8000
+                    Outgoing Damage: 8000
+                    Outgoing Heals: 8000
+        71_to_80:
+            filter:
+                level: 71:80
+            filters:
+                    Power gain: 300
+                    Incoming Damage: 3000
+                    Incoming Heals: 3000
+                    Outgoing Damage: 3000
+                    Outgoing Heals: 3000
+        61_to_70:
+            filter:
+                level: 61:70
+            filters:
+                    Power gain: 200
+                    Incoming Damage: 1000
+                    Incoming Heals: 1000
+                    Outgoing Damage: 1000
+                    Outgoing Heals: 1000
+        1_to_60:
+            filter:
+                level: :60
+            filters:
+                    Power gain: 50
+                    Incoming Damage: 100
+                    Incoming Heals: 100
+                    Outgoing Damage: 100
+                    Outgoing Heals: 100
+display:
+    default:
+        filter: {}
+        display:
+            font: Century Gothic
+            stickyFont: Century Gothic Bold
+            stickyFontOutline: NONE
+            fontSize: 14
+            stickyFontSize: 18
+            alpha: 0.4
+scrollareas:
+    default:
+        filter: {}
+        scrollareas:
+            Notification:
+                direction: UP;CENTER
+                stickyDirection: UP;CENTER
+                xOffset: -2.133
+                yOffset: 177.844
+                size: 150
+                iconSide: DISABLE
+                animationStyle: Straight
+                stickyAnimationStyle: Pow
+            Outgoing:
+                direction: UP;RIGHT
+                stickyDirection: UP;RIGHT
+                stickySpeed: 5
+                xOffset: -425
+                yOffset: 60
+                size: 200
+                iconSide: DISABLE
+                animationStyle: Parabola
+                stickyAnimationStyle: Parabola
+            Incoming:
+                direction: DOWN;LEFT
+                stickyDirection: DOWN;LEFT
+                stickySpeed: 5
+                xOffset: -475
+                yOffset: 60
+                size: 200
+                iconSide: DISABLE
+                animationStyle: Parabola
+                stickyAnimationStyle: Parabola
+triggers:
+    default:
+        filter:
+            include:
+                - classusesmana
+        triggers:
+            1009:
+                name: Low Mana
+                conditions:
+                    Unit power:
+                        powerType: 0
+gametext:
+    default:
+        filter: {}
+        gametext: 0

@@ -1,0 +1,127 @@
+
+ParrotDB = {
+    ["namespaces"] = {
+        ["CombatEvents"] = {
+            ["profiles"] = {
+[% FOR pname IN p.profileset.profiles_list -%]
+[% profile = p.profileset.profile_get(pname) -%]
+                ["[% pname %]"] = {
+                    ["abbreviateLength"] = [% profile.combatevents.abbreviateLength %],
+                    ["throttles"] = {
+[% FOR throttle IN profile.combatevents.throttles.keys -%]
+                        ["[% throttle %]"] = [% profile.combatevents.throttles.$throttle %],
+[% END -%]
+                    },
+                    ["Notification"] = {
+[% FOR notification IN profile.combatevents.notification.keys -%]
+                        ["[% notification %]"] = {
+                            ["disabled"] = [% IF profile.combatevents.notification.$notification %]false[% ELSE %]true[% END %],
+                        },
+[% END -%]
+                    },
+                    ["modifier"] = {
+[% FOR modifier IN profile.combatevents.modifier.keys -%]
+                        ["[% modifier %]"] = {
+                            ["tag"] = "[% profile.combatevents.modifier.$modifier %]",
+                        },
+[% END -%]
+                    },
+                    ["dbver"] = 4,
+                    ["filters"] = {
+[% FOR filter IN profile.combatevents.filters.keys -%]
+                        ["[% filter %]"] = [% profile.combatevents.filters.$filter %]
+[% END -%]
+                    },
+                    ["shortenAmount"] = [% IF profile.combatevents.shortenAmount %]true[% ELSE %]false[% END %],
+                    ["hideUnitNames"] = [% IF profile.combatevents.hideUnitNames %]true[% ELSE %]false[% END %],
+                },
+[% END -%]
+            },
+        },
+        ["Display"] = {
+            ["profiles"] = {
+[% FOR pname IN p.profileset.profiles_list -%]
+[% profile = p.profileset.profile_get(pname) -%]
+                ["[% pname %]"] = {
+                    ["fontSize"] = [% profile.display.fontSize %],
+                    ["stickyFontOutline"] = "[% profile.display.stickyFontOutline -%]",
+                    ["alpha"] = [% profile.display.alpha -%],
+                    ["font"] = "[% profile.display.font -%]",
+                    ["stickyFontSize"] = [% profile.display.stickyFontSize -%],
+                    ["stickyFont"] = "[% profile.display.stickyFont -%]",
+                },
+[% END -%]
+            },
+        },
+        ["ScrollAreas"] = {
+            ["profiles"] = {
+[% FOR pname IN p.profileset.profiles_list -%]
+[% profile = p.profileset.profile_get(pname) -%]
+                ["[% pname %]"] = {
+                    ["areas"] = {
+[% FOR area IN profile.scrollareas.keys -%]
+                        ["[% area %]"] = {
+                            ["stickyDirection"] = "[% profile.scrollareas.$area.stickyDirection %]",
+                            ["direction"] = "[% profile.scrollareas.$area.direction %]",
+                            ["yOffset"] = [% profile.scrollareas.$area.yOffset %],
+                            ["iconSide"] = "[% profile.scrollareas.$area.iconSide %]",
+                            ["xOffset"] = [% profile.scrollareas.$area.xOffset %],
+                            ["size"] = [% profile.scrollareas.$area.size %],
+                            ["animationStyle"] = "[% profile.scrollareas.$area.animationStyle %]",
+                            ["stickyAnimationStyle"] = "[% profile.scrollareas.$area.stickyAnimationStyle %]",
+                        },
+[% END -%]
+                    },
+                },
+[% END -%]
+            },
+        },
+        ["Triggers"] = {
+            ["profiles"] = {
+[% FOR pname IN p.profileset.profiles_list -%]
+[% profile = p.profileset.profile_get(pname) -%]
+                ["[% pname %]"] = {
+                    ["dbver"] = 8,
+                    ["triggers2"] = {
+[% FOR trigger IN profile.triggers.keys -%]
+                        [[% trigger %]] = {
+                            ["conditions"] = {
+[% FOR condition IN profile.triggers.$trigger.conditions.keys -%]
+                                ["[% condition %]"] = {
+                                    {
+[% FOR key IN profile.triggers.$trigger.conditions.$condition.keys -%]
+                                        ["[% key %]"] = [% profile.triggers.$trigger.conditions.$condition.$key %],
+[% END -%]
+                                    }, -- [1]
+                                },
+[% END -%]
+                            },
+                        },
+[% END -%]
+                    },
+                },
+[% END -%]
+            },
+        },
+        ["Debug"] = {
+        },
+        ["Suppressions"] = {
+        },
+        ["Cooldowns"] = {
+        },
+    },
+    ["profileKeys"] = {
+[% FOR dname IN chars.keys -%]
+        ["[% dname %]"] = "[% chars.$dname %]",
+[% END -%]
+    },
+    ["profiles"] = {
+[% FOR pname IN p.profileset.profiles_list -%]
+[% profile = p.profileset.profile_get(pname) -%]
+        ["[% pname %]"] = {
+            ["gameText"] = [% IF profile.gametext %]true[% ELSE %]false[% END %],
+        },
+[% END -%]
+    },
+}
+

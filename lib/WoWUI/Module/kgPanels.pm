@@ -6,6 +6,7 @@ use CLASS;
 use namespace::autoclean;
 
 use WoWUI::ProfileSet;
+use WoWUI::Filter::Constants;
 
 # set up class
 extends 'WoWUI::Module::Base';
