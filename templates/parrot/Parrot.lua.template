@@ -29,7 +29,7 @@ ParrotDB = {
                     ["dbver"] = 4,
                     ["filters"] = {
 [% FOR filter IN profile.combatevents.filters.keys -%]
-                        ["[% filter %]"] = [% profile.combatevents.filters.$filter %]
+                        ["[% filter %]"] = [% profile.combatevents.filters.$filter %],
 [% END -%]
                     },
                     ["shortenAmount"] = [% IF profile.combatevents.shortenAmount %]true[% ELSE %]false[% END %],
