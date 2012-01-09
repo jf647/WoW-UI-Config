@@ -70,37 +70,37 @@ combatevents:
                 level: 85
             filters:
                     Power gain: 500
-                    Incoming Damage: 10000
-                    Incoming Heals: 10000
-                    Outgoing Damage: 10000
-                    Outgoing Heals: 10000
+                    Incoming damage: 10000
+                    Incoming heals: 10000
+                    Outgoing damage: 10000
+                    Outgoing heals: 10000
         81_to_84:
             filter:
                 level: 81:84
             filters:
                     Power gain: 400
-                    Incoming Damage: 8000
-                    Incoming Heals: 8000
-                    Outgoing Damage: 8000
-                    Outgoing Heals: 8000
+                    Incoming damage: 8000
+                    Incoming heals: 8000
+                    Outgoing damage: 8000
+                    Outgoing heals: 8000
         71_to_80:
             filter:
                 level: 71:80
             filters:
                     Power gain: 300
-                    Incoming Damage: 3000
-                    Incoming Heals: 3000
-                    Outgoing Damage: 3000
-                    Outgoing Heals: 3000
+                    Incoming damage: 3000
+                    Incoming heals: 3000
+                    Outgoing damage: 3000
+                    Outgoing heals: 3000
         61_to_70:
             filter:
                 level: 61:70
             filters:
                     Power gain: 200
-                    Incoming Damage: 1000
-                    Incoming Heals: 1000
-                    Outgoing Damage: 1000
-                    Outgoing Heals: 1000
+                    Incoming damage: 1000
+                    Incoming heals: 1000
+                    Outgoing damage: 1000
+                    Outgoing heals: 1000
         1_to_60:
             filter:
                 level: :60
@@ -120,6 +120,7 @@ display:
             fontSize: 14
             stickyFontSize: 18
             alpha: 0.4
+            iconsEnabled: 0
 scrollareas:
     default:
         filter: {}
@@ -167,4 +168,4 @@ triggers:
 gametext:
     default:
         filter: {}
-        gametext: 0
+        gametext: 1

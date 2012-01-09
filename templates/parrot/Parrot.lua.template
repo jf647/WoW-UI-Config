@@ -44,11 +44,12 @@ ParrotDB = {
 [% profile = p.profileset.profile_get(pname) -%]
                 ["[% pname %]"] = {
                     ["fontSize"] = [% profile.display.fontSize %],
-                    ["stickyFontOutline"] = "[% profile.display.stickyFontOutline -%]",
-                    ["alpha"] = [% profile.display.alpha -%],
-                    ["font"] = "[% profile.display.font -%]",
-                    ["stickyFontSize"] = [% profile.display.stickyFontSize -%],
-                    ["stickyFont"] = "[% profile.display.stickyFont -%]",
+                    ["stickyFontOutline"] = "[% profile.display.stickyFontOutline %]",
+                    ["alpha"] = [% profile.display.alpha %],
+                    ["font"] = "[% profile.display.font %]",
+                    ["stickyFontSize"] = [% profile.display.stickyFontSize %],
+                    ["stickyFont"] = "[% profile.display.stickyFont %]",
+                    ["iconsEnabled"] = [% IF profile.display.iconsEnabled %]true[% ELSE %]false[% END %],
                 },
 [% END -%]
             },

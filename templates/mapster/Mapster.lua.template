@@ -17,7 +17,7 @@ MapsterDB = {
             ["hideMapButton"] = [% IF mapster.hidemapbutton %]true[% ELSE %]false[% END %],
             ["modules"] = {
 [% FOR module IN mapster.modules.keys -%]
-                ["[% modules %]"] = [% IF mapster.modules.$module %]true[% ELSE %]false[% END %],
+                ["[% module %]"] = [% IF mapster.modules.$module %]true[% ELSE %]false[% END %],
 [% END -%]
             },
             ["x"] = [% mapster.x %],
