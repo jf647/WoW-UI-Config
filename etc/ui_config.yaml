@@ -18,6 +18,7 @@ logging:
 levelcap: 85
 modules:
     - WoWUI::Module::Addons
+    - WoWUI::Module::Quartz
     - WoWUI::Module::EclipseBarPlus
     - WoWUI::Module::Parrot
     - WoWUI::Module::kgPanels

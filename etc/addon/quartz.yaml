@@ -1,0 +1,44 @@
+---
+templates:
+    global:
+        quartz:
+            input: $TEMPLATEDIR/quartz/Quartz.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Quartz.lua
+perchar_filter:
+    addons:
+        - Quartz
+pet:
+    petclass:
+        filter:
+            include:
+                - class:Hunter
+                - class:Warlock
+                - all(class:Death Knight;spec:Unholy)
+        pet:
+            x: 658.518
+player:
+    default:
+        filter: {}
+        player:
+            x: 482.666
+            y: 621.200
+            w: 400
+            hideicon: 1
+focus:
+    default:
+        filter: {}
+        focus:
+            x: 658.518
+target:
+    default:
+        filter: {}
+        target:
+            x: 432.666
+            y: 655.175
+            w: 500
+            noInterruptChangeColor: 1
+            showfriendly: 0
+            hideicon: 1
+            noInterruptColor: [ ~, 0.490, ~, 1 ]
+            noInterruptBorder: Blizzard Dialog Gold
+            noInterruptChangeBorder: 1

@@ -1,0 +1,104 @@
+
+Quartz3DB = {
+    ["namespaces"] = {
+        ["Pet"] = {
+            ["profiles"] = {
+[% FOR pname IN quartz.profileset.profiles_list -%]
+[% profile = quartz.profileset.profile_get(pname) -%]
+[% IF profile.has_pet -%]
+                ["[% pname %]"] = {
+                    ["x"] = [% profile.pet.x %],
+                },
+[% END -%]
+[% END -%]
+            },
+        },
+        ["Player"] = {
+            ["profiles"] = {
+[% FOR pname IN quartz.profileset.profiles_list -%]
+[% profile = quartz.profileset.profile_get(pname) -%]
+[% IF profile.has_player -%]
+                ["[% pname %]"] = {
+                    ["x"] = [% profile.player.x %],
+                    ["y"] = [% profile.player.y %],
+                    ["w"] = [% profile.player.w %],
+                    ["hideicon"] = [% IF profile.player.hideicon %]true[% ELSE %]false[% END %],
+                },
+[% END -%]
+[% END -%]
+            },
+        },
+        ["Focus"] = {
+            ["profiles"] = {
+[% FOR pname IN quartz.profileset.profiles_list -%]
+[% profile = quartz.profileset.profile_get(pname) -%]
+[% IF profile.has_focus -%]
+                ["[% pname %]"] = {
+                    ["x"] = [% profile.focus.x %],
+                },
+[% END -%]
+[% END -%]
+            },
+        },
+        ["Target"] = {
+            ["profiles"] = {
+[% FOR pname IN quartz.profileset.profiles_list -%]
+[% profile = quartz.profileset.profile_get(pname) -%]
+[% IF profile.has_target -%]
+                ["[% pname %]"] = {
+                    ["x"] = [% profile.target.x %],
+                    ["y"] = [% profile.target.y %],
+                    ["w"] = [% profile.target.w %],
+                    ["noInterruptChangeColor"] = [% IF profile.target.noInterruptChangeColor %]true[% ELSE %]false[% END %],
+                    ["showfriendly"] = [% IF profile.target.showfriendly %]true[% ELSE %]false[% END %],
+                    ["hideicon"] = [% IF profile.target.hideicon %]true[% ELSE %]false[% END %],
+                    ["noInterruptChangeBorder"] = [% IF profile.target.noInterruptChangeBorder %]true[% ELSE %]false[% END %],
+                    ["noInterruptColor"] = {
+[% FOR i IN [ 0 .. 3 ] -%]
+                        [% IF profile.target.noInterruptColor.$i.defined %][% profile.target.noInterruptColor.$i %][% ELSE %]nil[% END %], -- [1]
+[% END -%]
+                    },
+                    ["noInterruptBorder"] = "[% profile.target.noInterruptBorder %]",
+                },
+[% END -%]
+[% END -%]
+            },
+        },
+        ["Mirror"] = {
+        },
+        ["Range"] = {
+        },
+        ["Latency"] = {
+        },
+        ["Swing"] = {
+        },
+        ["Buff"] = {
+        },
+        ["Interrupt"] = {
+        },
+        ["Flight"] = {
+        },
+        ["EnemyCasts"] = {
+        },
+        ["GCD"] = {
+        },
+    },
+    ["profileKeys"] = {
+[% FOR dname IN chars.keys -%]
+        ["[% dname %]"] = "[% chars.$dname %]",
+[% END -%]
+    },
+    ["profiles"] = {
+[% FOR pname IN kgp.profileset.profiles_list -%]
+[% profile = kgp.profileset.profile_get(pname) -%]
+        ["[% pname %]"] = {
+            ["modules"] = {
+[% FOR module IN profile.modules.keys -%]
+                ["[% module %]"] = [% IF profile.modules.$module %]true[% ELSE %]false[% END %],
+[% END -%]
+            },
+        },
+[% END -%]
+    },
+}
+
