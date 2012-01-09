@@ -1,0 +1,22 @@
+
+EclipseBarPlusDB = {
+    ["profileKeys"] = {
+[% FOR realm IN charlist.keys -%]
+[% FOR char IN charlist.$realm.keys -%]
+        ["[% char %] - [% realm %]"] = "Default",
+[% END -%]
+[% END -%]
+    },
+    ["profiles"] = {
+        ["Default"] = {
+            ["hide_out_combat"] = [% IF ebp.hideooc %]true[% ELSE %]false[% END %],
+            ["show_percentage"] = [% IF ebp.showpct %]true[% ELSE %]false[% END %],
+            ["locked"] = true,
+            ["position"] = {
+                ["YCOORD"] = [% ebp.x %],
+                ["XCOORD"] = [% ebp.y %],
+            },
+        },
+    },
+}
+

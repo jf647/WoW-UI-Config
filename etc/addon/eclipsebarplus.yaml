@@ -1,0 +1,14 @@
+---
+templates:
+    global:
+        eclipsebarplus:
+            input: $TEMPLATEDIR/eclipsebarplus/EclipseBarPlus.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/EclipseBarPlus.lua
+eclipsebarplus:
+    hideooc: 1
+    showpct: 1
+    x: 2.311
+    y: 160.288
+perchar_filter:
+    addons:
+        - EclipseBarPlus
