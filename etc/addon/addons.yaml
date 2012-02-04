@@ -320,25 +320,33 @@ addons:
         group: Basic
     BadBoy_Levels:
         group: Basic
+    AdiBags:
+        group: Basic
+    AdiBags_PT3Filter:
+        group: Basic
     Bagnon:
+        include:
+            - no-one
         group: Basic
     BagBrother:
+        include:
+            - no-one
         group: Basic
-        exclude:
-            - machine:type:secondary
     Bagnon_GuildBank:
         include:
             - no-one
+        group: Basic
     Bagnon_Config:
+        include:
+            - no-one
         group: Basic
     Bagnon_Forever:
+        include:
+            - no-one
         group: Basic
-        exclude:
-            - machine:type:secondary
     Bagnon_Tooltips:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
+        include:
+            - no-one
         group: Basic
     Bagsy:
         group: Standard
@@ -1194,6 +1202,12 @@ addons:
             - machine:type:basic
         group: Standard
     TidyPlatesHub:
+        exclude:
+            - banker
+            - mule
+            - machine:type:basic
+        group: Standard
+    TidyPlatesWidgets:
         exclude:
             - banker
             - mule

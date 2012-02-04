@@ -74,7 +74,7 @@ sub build_profile
 
     my $profile;
     
-    for my $type( qw|pet player focus target| ) {
+    for my $type( qw|pet player focus target modules| ) {
         for my $block( values %{ $config->{$type} } ) {
             $profile->{"has_$type"} = 0;
             if( $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
@@ -84,7 +84,7 @@ sub build_profile
             }
         }
     }
-
+    
     return $profile;
 
 }

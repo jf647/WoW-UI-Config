@@ -8,6 +8,9 @@ Quartz3DB = {
 [% IF profile.has_pet -%]
                 ["[% pname %]"] = {
                     ["x"] = [% profile.pet.x %],
+                    ["y"] = [% profile.pet.y %],
+                    ["w"] = [% profile.pet.w %],
+                    ["hideicon"] = [% IF profile.pet.hideicon %]true[% ELSE %]false[% END %],
                 },
 [% END -%]
 [% END -%]
@@ -35,6 +38,9 @@ Quartz3DB = {
 [% IF profile.has_focus -%]
                 ["[% pname %]"] = {
                     ["x"] = [% profile.focus.x %],
+                    ["y"] = [% profile.focus.y %],
+                    ["w"] = [% profile.focus.w %],
+                    ["hideicon"] = [% IF profile.focus.hideicon %]true[% ELSE %]false[% END %],
                 },
 [% END -%]
 [% END -%]
@@ -49,9 +55,9 @@ Quartz3DB = {
                     ["x"] = [% profile.target.x %],
                     ["y"] = [% profile.target.y %],
                     ["w"] = [% profile.target.w %],
+                    ["hideicon"] = [% IF profile.target.hideicon %]true[% ELSE %]false[% END %],
                     ["noInterruptChangeColor"] = [% IF profile.target.noInterruptChangeColor %]true[% ELSE %]false[% END %],
                     ["showfriendly"] = [% IF profile.target.showfriendly %]true[% ELSE %]false[% END %],
-                    ["hideicon"] = [% IF profile.target.hideicon %]true[% ELSE %]false[% END %],
                     ["noInterruptChangeBorder"] = [% IF profile.target.noInterruptChangeBorder %]true[% ELSE %]false[% END %],
                     ["noInterruptColor"] = {
 [% FOR i IN [ 0 .. 3 ] -%]
@@ -89,8 +95,8 @@ Quartz3DB = {
 [% END -%]
     },
     ["profiles"] = {
-[% FOR pname IN kgp.profileset.profiles_list -%]
-[% profile = kgp.profileset.profile_get(pname) -%]
+[% FOR pname IN quartz.profileset.profiles_list -%]
+[% profile = quartz.profileset.profile_get(pname) -%]
         ["[% pname %]"] = {
             ["modules"] = {
 [% FOR module IN profile.modules.keys -%]

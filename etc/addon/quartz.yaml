@@ -15,7 +15,10 @@ pet:
                 - class:Warlock
                 - all(class:Death Knight;spec:Unholy)
         pet:
-            x: 658.518
+            x: 580.295
+            y: 593.688
+            w: 200
+            hideicon: 1
 player:
     default:
         filter: {}
@@ -28,7 +31,10 @@ focus:
     default:
         filter: {}
         focus:
-            x: 658.518
+            x: 580.295
+            y: 682.355
+            w: 200
+            hideicon: 1
 target:
     default:
         filter: {}
@@ -42,3 +48,48 @@ target:
             noInterruptColor: [ ~, 0.490, ~, 1 ]
             noInterruptBorder: Blizzard Dialog Gold
             noInterruptChangeBorder: 1
+modules:
+    default:
+        filter:
+            exclude:
+                - class:Hunter
+                - class:Warlock
+                - all(class:Death Knight;spec:Unholy)
+        modules:
+            Player: 1
+            Target: 1
+            Pet: 0
+            Focus: 1
+            Latency: 1
+            Tradeskill Merge: 1
+            GCD: 0
+            Buff: 0
+            Mirror: 1
+            Timer: 0
+            Swing: 0
+            Interrupt: 1
+            Range: 1
+            Flight: 1
+            Enemy CastBars: 0
+    petclass:
+        filter:
+            include:
+                - class:Hunter
+                - class:Warlock
+                - all(class:Death Knight;spec:Unholy)
+        modules:
+            Player: 1
+            Target: 1
+            Pet: 1
+            Focus: 1
+            Latency: 1
+            Tradeskill Merge: 1
+            GCD: 0
+            Buff: 0
+            Mirror: 1
+            Timer: 0
+            Swing: 0
+            Interrupt: 1
+            Range: 1
+            Flight: 1
+            Enemy CastBars: 0
