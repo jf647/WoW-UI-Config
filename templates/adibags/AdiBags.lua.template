@@ -1,0 +1,159 @@
+
+AdiBagsDB = {
+	["profileKeys"] = {
+[% FOR dname IN chars.keys -%]
+        ["[% dname %]"] = "[% chars.$dname %]",
+[% END -%]
+	},
+	["namespaces"] = {
+		["PT3Filter"] = {
+			["profiles"] = {
+[% FOR pname IN adi.profileset.profiles_list -%]
+[% profile = adi.profileset.profile_get(pname) -%]
+                ["[% pname %]"] = {
+					["rules"] = {
+[% FOR rule IN profile.rules -%]
+						["[% rule.name %]"] = {
+							["include"] = {
+[% FOR selector IN rule.selectors -%]
+								"[% selector %]",
+[% END -%]
+							},
+							["name"] = "[% rule.name %]",
+							["section"] = "[% rule.name %]",
+							["priority"] = [% rule.priority %],
+							["category"] = "[% rule.category %]",
+						},
+[% END -%]
+					},
+				},
+[% END -%]
+			},
+		},
+		["FilterOverride"] = {
+            ["profiles"] = {
+[% FOR pname IN adi.profileset.profiles_list -%]
+[% profile = adi.profileset.profile_get(pname) -%]
+[% IF profile.has_override -%]
+                ["[% pname %]"] = {
+                    ["overrides"] = {
+[% FOR itemid IN profile.override.keys -%]
+                        ["[% itemid %]"] = "[% profile.override.$itemid %]",
+[% END -%]
+                    },
+                },
+[% END -%]
+[% END -%]
+            },
+		},
+		["ItemCategory"] = {
+			["profiles"] = {
+[% FOR pname IN adi.profileset.profiles_list -%]
+[% profile = adi.profileset.profile_get(pname) -%]
+                ["[% pname %]"] = {
+                    ["splitBySubclass"] = {
+                        ["Consumable"] = true,
+                        ["Recipe"] = false,
+                        ["Gem"] = false,
+                        ["Trade Goods"] = false,
+                        ["Glyph"] = false,
+                        ["Miscellaneous"] = false,
+                    },
+                },
+[% END -%]
+            },
+		},
+		["NewItem"] = {
+		},
+		["AdiBags_TooltipInfo"] = {
+		},
+		["Junk"] = {
+		},
+		["CurrencyFrame"] = {
+			["profiles"] = {
+[% FOR pname IN adi.profileset.profiles_list -%]
+[% profile = adi.profileset.profile_get(pname) -%]
+                ["[% pname %]"] = {
+					["shown"] = {
+						["Conquest Points"] = false,
+						["Honor Points"] = false,
+					},
+				},
+[% END -%]
+			},
+		},
+		["DataSource"] = {
+		},
+		["ItemSets"] = {
+		},
+		["TidyBags"] = {
+			["profiles"] = {
+[% FOR pname IN adi.profileset.profiles_list -%]
+[% profile = adi.profileset.profile_get(pname) -%]
+                ["[% pname %]"] = {
+					["autoTidy"] = true,
+				},
+[% END -%]
+			},
+		},
+		["Equipment"] = {
+			["profiles"] = {
+[% FOR pname IN adi.profileset.profiles_list -%]
+[% profile = adi.profileset.profile_get(pname) -%]
+                ["[% pname %]"] = {
+					["dispatchRule"] = "one",
+				},
+[% END -%]
+			},
+		},
+	},
+	["profileKeys"] = {
+[% FOR dname IN chars.keys -%]
+        ["[% dname %]"] = "[% chars.$dname %]",
+[% END -%]
+	},
+	["profiles"] = {
+[% FOR pname IN adi.profileset.profiles_list -%]
+[% profile = adi.profileset.profile_get(pname) -%]
+		["[% pname %]"] = {
+			["virtualStacks"] = {
+				["notWhenTrading"] = 4,
+				["stackable"] = true,
+				["incomplete"] = true,
+			},
+			["scale"] = [% profile.frame.scale %],
+			["positions"] = {
+				["Backpack"] = {
+					["xOffset"] = [% profile.frame.x %],
+					["point"] = "[% profile.frame.point %]",
+					["yOffset"] = [% profile.frame.y %],
+				},
+			},
+			["filters"] = {
+				["NewItem"] = false,
+			},
+			["backgroundColors"] = {
+				["Bank"] = {
+					nil, -- [1]
+					nil, -- [2]
+					0.50, -- [3]
+					0, -- [4]
+				},
+				["Backpack"] = {
+					nil, -- [1]
+					nil, -- [2]
+					nil, -- [3]
+					0.68, -- [4]
+				},
+			},
+			["rowWidth"] = {
+				["Backpack"] = 16,
+				["Bank"] = 16,
+			},
+			["qualityOpacity"] = 0.5,
+			["positionMode"] = "manual",
+		},
+[% END -%]
+	},
+}
+

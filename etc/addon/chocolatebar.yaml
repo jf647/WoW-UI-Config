@@ -102,12 +102,22 @@ plugins:
         filter:
             include:
                 - no-one
+    BagSyncLDB:
+        filter:
+            include:
+                - no-one
     Bagsy:
         align: left
         priority: 30
         filter:
             addons:
                 - Bagsy
+    AdiBags:
+        align: left
+        priority: 30
+        filter:
+            addons:
+                - AdiBags
     Broker_MicroMenu:
         align: right
         priority: 20

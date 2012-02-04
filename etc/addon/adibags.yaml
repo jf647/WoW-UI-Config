@@ -1,0 +1,167 @@
+---
+templates:
+    global:
+        adibags:
+            input: $TEMPLATEDIR/adibags/AdiBags.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/AdiBags.lua
+perchar_filter:
+    addons:
+        - AdiBags
+
+rules:
+    Eng:
+        filter:
+            include:
+                - prof:Engineering
+        rule:
+            priority: 40
+            category: Trade Goods
+            selectors:
+                - Tradeskill.Crafted.Engineering.Basic
+                - Tradeskill.Crafted.Engineering.Gnomish
+                - Tradeskill.Crafted.Engineering.Goblin
+                - Tradeskill.Mat.ByProfession.Engineering.Basic
+                - Tradeskill.Mat.ByProfession.Engineering.Gnomish
+                - Tradeskill.Mat.ByProfession.Engineering.Goblin
+    JC:
+        filter:
+            include:
+                - prof:Jewelcrafting
+                - banker
+                - mule
+        rule:
+            priority: 40
+            category: Trade Goods
+            selectors:
+                - Tradeskill.Mat.ByType.Gem
+                - Tradeskill.Tool.Jewelcrafting
+    Scribe:
+        filter:
+            include:
+                - prof:Inscription
+        rule:
+            priority: 40
+            category: Trade Goods
+            selectors:
+                - Tradeskill.Mat.ByType.Ink
+                - Tradeskill.Mat.ByType.Pigment
+                - Tradeskill.Mat.ByType.Parchment
+                - Tradeskill.Tool.Inscription
+    Ench:
+        filter:
+            include:
+                - prof:Enchanting
+                - banker
+                - mule
+        rule:
+            priority: 40
+            category: Trade Goods
+            selectors:
+                - Tradeskill.Mat.ByType.Dust
+                - Tradeskill.Mat.ByType.Crystal
+                - Tradeskill.Mat.ByType.Essence
+                - Tradeskill.Mat.ByType.Shard
+                - Tradeskill.Tool.Enchanting
+    LW:
+        filter:
+            include:
+                - prof:Leatherworking
+                - banker
+                - mule
+        rule:
+            priority: 40
+            category: Trade Goods
+            selectors:
+                - Tradeskill.Mat.ByType.Hide
+                - Tradeskill.Mat.ByType.Leather
+                - Tradeskill.Mat.ByType.Scale
+    Tailor:
+        filter:
+            include:
+                - prof:Tailoring
+                - banker
+                - mule
+        rule:
+            priority: 40
+            category: Trade Goods
+            selectors:
+                - Tradeskill.Mat.ByType.Cloth
+                - Tradeskill.Mat.ByType.Bolt
+    Mining:
+        filter:
+            include:
+                - prof:Mining
+                - banker
+                - mule
+        rule:
+            priority: 50
+            category: Trade Goods
+            selectors:
+                - Tradeskill.Mat.ByType.Stone
+                - Tradeskill.Mat.ByType.Ore
+    Herb:
+        filter:
+            include:
+                - prof:Herbalism
+                - prof:Inscription
+        rule:
+            priority: 50
+            category: Trade Goods
+            selectors:
+                - Tradeskill.Mat.ByType.Herb
+    Cloth:
+        filter: {}
+        rule:
+            priority: 60
+            category: Trade Goods
+            selectors:
+                - Tradeskill.Mat.ByType.Cloth
+    Metal:
+        filter:
+            include:
+                - prof:Blacksmithing
+                - prof:Engineering
+                - banker
+                - mule
+        rule:
+            priority: 60
+            category: Trade Goods
+            selectors:
+                - Tradeskill.Mat.ByType.Ore
+                - Tradeskill.Mat.ByType.Bar
+    Ele:
+        filter: {}
+        rule:
+            priority: 50
+            category: Trade Goods
+            selectors:
+                - Tradeskill.Mat.ByType.Elemental
+                - Tradeskill.Mat.ByType.Mote
+                - Tradeskill.Mat.ByType.Primal
+                - Tradeskill.Mat.ByType.Crystallized
+                - Tradeskill.Mat.ByType.Eternal
+                - Tradeskill.Mat.ByType.Volatile
+override:
+    Ench:
+        filter:
+            include:
+                - prof:Enchanting
+        override:
+            52723: "Ench#Trade Goods"
+            22463: "Ench#Trade Goods"
+            44452: "Ench#Trade Goods"
+            22462: "Ench#Trade Goods"
+            16207: "Ench#Trade Goods"
+            22461: "Ench#Trade Goods"
+            11130: "Ench#Trade Goods"
+            6339: "Ench#Trade Goods"
+            11145: "Ench#Trade Goods"
+            6218: "Ench#Trade Goods"
+frame:
+    default:
+        filter: {}
+        frame:
+            scale: 0.6
+            x: -283.733
+            y: -180.000
+            point: TOPRIGHT

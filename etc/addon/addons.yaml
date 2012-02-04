@@ -322,6 +322,11 @@ addons:
         group: Basic
     AdiBags:
         group: Basic
+    BagSync:
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
     AdiBags_PT3Filter:
         group: Basic
     Bagnon:
@@ -349,6 +354,8 @@ addons:
             - no-one
         group: Basic
     Bagsy:
+        include:
+            - no-one
         group: Standard
     BankStack:
         group: Standard

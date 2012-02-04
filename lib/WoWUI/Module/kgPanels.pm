@@ -125,7 +125,6 @@ sub build_layout
     
     my $config = $self->modconfig( $char );
 
-    $DB::single = 1;
     # build any panels that don't already exist
     for my $pname( @{ $config->{layouts}->{$lname}->{panels} } ) {
         unless( $self->panel_exists( $pname ) ) {
