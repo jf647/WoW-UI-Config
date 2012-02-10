@@ -41,6 +41,8 @@ Quartz3DB = {
                     ["y"] = [% profile.focus.y %],
                     ["w"] = [% profile.focus.w %],
                     ["hideicon"] = [% IF profile.focus.hideicon %]true[% ELSE %]false[% END %],
+                    ["showfriendly"] = [% IF profile.target.showfriendly %]true[% ELSE %]false[% END %],
+                    ["showtarget"] = [% IF profile.target.showtarget %]true[% ELSE %]false[% END %],
                 },
 [% END -%]
 [% END -%]

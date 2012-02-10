@@ -203,6 +203,10 @@ settings:
       - spec:Holy
       level: 42
       value: Concentration Aura
+    - include:
+      - all(spec:Holy;machine:type:secondary)
+      level: 62
+      value: Crusader Aura
     type: string
   Presence-enabled:
     filter:

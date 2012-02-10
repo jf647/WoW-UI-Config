@@ -991,6 +991,8 @@ icons:
     Alpha: 1
     combat: in
     filter:
+      exclude:
+        - machine:type:secondary
       level: 62
     type: Buff
   Dancing Rune Weapon:
@@ -1625,6 +1627,8 @@ icons:
     filter:
       include:
         - spec:Holy
+      exclude:
+        - machine:type:secondary
   WoG 3HP:
     type: Cooldown::Spell::Def::ShortCD
     spell: Word of Glory

@@ -97,6 +97,24 @@ frames:
         filter:
             addons:
                 - Bagnon
+    adibagsbags:
+        name: AdiBagsContainer1
+        nocombat: 1
+        alpha:
+            visible: 1.0
+            hidden: 0
+        filter:
+            addons:
+                - AdiBags
+    adibagsbank:
+        name: AdiBagsContainer2
+        nocombat: 1
+        alpha:
+            visible: 1.0
+            hidden: 0
+        filter:
+            addons:
+                - AdiBags
     bagnonbank:
         name: BagnonFramebank
         nocombat: 1

@@ -75,14 +75,28 @@ AdiBagsDB = {
 [% profile = adi.profileset.profile_get(pname) -%]
                 ["[% pname %]"] = {
 					["shown"] = {
-						["Conquest Points"] = false,
-						["Honor Points"] = false,
+                        ["Mark of the World Tree"] = false,
+                        ["Justice Points"] = false,
+                        ["Chef's Award"] = false,
+                        ["Valor Points"] = false,
+                        ["Honor Points"] = false,
+                        ["Champion's Seal"] = false,
+                        ["Conquest Points"] = false,
 					},
 				},
 [% END -%]
 			},
 		},
 		["DataSource"] = {
+			["profiles"] = {
+[% FOR pname IN adi.profileset.profiles_list -%]
+[% profile = adi.profileset.profile_get(pname) -%]
+                ["[% pname %]"] = {
+                    ["format"] = "free",
+                    ["showTags"] = false,
+                },
+[% END -%]
+            },
 		},
 		["ItemSets"] = {
 		},
@@ -130,16 +144,15 @@ AdiBagsDB = {
 				},
 			},
 			["filters"] = {
-				["NewItem"] = false,
 			},
 			["backgroundColors"] = {
-				["Bank"] = {
+				["Backpack"] = {
 					nil, -- [1]
 					nil, -- [2]
-					0.50, -- [3]
-					0, -- [4]
+					nil, -- [3]
+					0.68, -- [4]
 				},
-				["Backpack"] = {
+				["Bank"] = {
 					nil, -- [1]
 					nil, -- [2]
 					nil, -- [3]
@@ -150,6 +163,7 @@ AdiBagsDB = {
 				["Backpack"] = 16,
 				["Bank"] = 16,
 			},
+            ["showBagType"] = false,
 			["qualityOpacity"] = 0.5,
 			["positionMode"] = "manual",
 		},

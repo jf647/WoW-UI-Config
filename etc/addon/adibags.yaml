@@ -66,6 +66,7 @@ rules:
         filter:
             include:
                 - prof:Leatherworking
+                - prof:Skinning
                 - banker
                 - mule
         rule:

@@ -35,6 +35,8 @@ focus:
             y: 682.355
             w: 200
             hideicon: 1
+            showfriendly: 0
+            showtarget: 0
 target:
     default:
         filter: {}
