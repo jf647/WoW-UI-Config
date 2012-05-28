@@ -1,5 +1,5 @@
 [% FOR macro IN macros -%]
 MACRO [% macro.number %] "[% macro.name %]" "[% macro.icon %]"
-[% macro.txt %]
+[% macro.macro -%]
 END
 [% END -%]

@@ -1,0 +1,205 @@
+---
+templates:
+  global:
+    macros:
+      input: $TEMPLATEDIR/macros/macros-cache.txt.template
+      output: $TEMPDIR/WTF/Account/$ACCOUNT/macros-cache.txt
+  perchar:
+    macros:
+      input: $TEMPLATEDIR/macros/macros-cache.txt.template
+      output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/macros-cache.txt
+global_macros:
+  AutoHP:
+    filter:
+      addons:
+        - Buffet
+  AutoMP:
+    filter:
+      addons:
+        - Buffet
+  Cork:
+    filter:
+      addons:
+        - Cork
+  Trink:
+    macro: |+
+      #showtooltip 13
+      /script UIErrorsFrame:Hide()
+      /use 13
+      /use 14
+      /use 10
+      /script UIErrorsFrame:Clear() ; UIErrorsFrame:Show()
+  Trink1:
+    macro: |+
+      #showtooltip
+      /use 13
+  Trink2:
+    macro: |+
+      #showtooltip
+      /use 14
+macros:
+  DruidCharge:
+    name: Charge
+    filter:
+      include:
+        - all(class:Druid;spec:Feral Combat)
+    macro: |+
+      #showtooltip
+      /cast [stance:1] Feral Charge(Bear Form); [stance:3] Feral Charge(Cat Form)
+  ETGH:
+    icon: Ability_Creature_Cursed_02
+    filter:
+      include:
+        - all(faction:Horde;prof:Cooking)
+      exclude:
+        - prof:Cooking:Zen Master
+    macro: |+
+      /target Orgrimmar Thief
+      /script if UnitName("target") and not UnitIsDead("target") and not GetRaidTargetIndex("target") then SetRaidTargetIcon("target",1); end
+      /cleartarget [dead]
+  LGS:
+    filter:
+      include:
+        - prof:Herbalism:475+
+    icon: Ability_Creature_Poison_06
+    macro: |+
+      #showtooltip Lifegiving Seed
+      /cancelaura Herbouflage
+      /use Lifegiving Seed
+  AtoneHF:
+    filter:
+      include:
+        - all(class:Priest;subspec:Archangel)
+    macro: |+
+      #showtooltip Holy Fire
+      /cast [@target,harm,exists] [@focustarget,harm,exists] [@focus,harm,exists] [@mouseover,harm,exists] Holy Fire
+  AtoneS:
+    filter:
+      include:
+        - all(class:Priest;subspec:Archangel)
+    macro: |+
+      #showtooltip Smite
+      /cast [@target,harm,exists] [@focustarget,harm,exists] [@focus,harm,exists] [@mouseover,harm,exists] Smite
+  LSB-Priest:
+    name: LSB
+    macro: |+
+      /cast Fade
+    filter:
+      include:
+        - class:Priest
+  RSB-Priest:
+    name: RSB
+    macro: |+
+      /cast Psychic Scream
+    filter:
+      include:
+        - class:Priest
+  LSB-Rogue:
+    name: LSB
+    macro: |+
+      /cast Vanish
+    filter:
+      include:
+        - class:Rogue
+  RSB-Rogue:
+    name: RSB
+    macro: |+
+      /cast Cloak of Shadows
+    filter:
+      include:
+        - class:Rogue
+  LSB-Mage:
+    name: LSB
+    macro: |+
+      /cast Blink
+    filter:
+      include:
+        - class:Mage
+  RSB-Mage:
+    name: RSB
+    macro: |+
+      /cancelaura Ice Block
+      /cast Ice Block    
+    filter:
+      include:
+        - class:Mage
+  RSB-Warlock:
+    name: RSB
+    macro: |+
+      /cast Soulshatter
+    filter:
+      include:
+        - class:Warlock
+      level: 66
+  LSB-Paladin:
+    name: LSB
+    macro: |+
+      /cancelaura Divine Shield
+      /cast Divine Shield
+    filter:
+      include:
+        - class:Paladin
+  Interrupt-Mage:
+    name: Int
+    filter:
+      include:
+        - class:Mage
+    macro: |+
+      #showtooltip Counterspell
+      /stopcasting
+      /cast [mod:shift] Counterspell;[@focustarget,harm,exists] Counterspell;[@focus,harm,exists] Counterspell; [@mouseover,harm,exists] Counterspell; Counterspell
+  Interrupt-Shaman:
+    name: Int
+    filter:
+      include:
+        - class:Shaman
+    macro: |+
+      #showtooltip Wind Shear
+      /stopcasting
+      /cast [mod:shift] Wind Shear;[@focustarget,harm,exists] Wind Shear;[@focus,harm,exists] Wind Shear; [@mouseover,harm,exists] Wind Shear; Wind Shear
+  Interrupt-Warlock:
+    name: Int
+    filter:
+      include:
+        - all(class:Warlock;spec:Affliction)
+    macro: |+
+      #showtooltip Spell Lock
+      /stopcasting
+      /cast [mod:shift] Spell Lock;[@focustarget,harm,exists] Spell Lock;[@focus,harm,exists] Spell Lock; [@mouseover,harm,exists] Spell Lock; Spell Lock
+  IFPoH:
+    name: PoH
+    filter:
+      include:
+        - all(class:Priest;spec:Discipline)
+    macro: |+
+      #showtooltip Prayer of Healing
+      /cast Inner Focus
+      /cast Prayer of Healing
+  MD:
+    filter:
+      level: 76
+      include:
+        - class:Hunter
+    macro: |+
+      #showtooltip
+      /cast [target=focus,exists,help] Misdirection; [target=focustarget,exists,help] Misdirection; [target=pet,exists,help] Misdirection
+  HoG:
+    filter:
+      include:
+        - all(class:Warlock;spec:Demonology)
+    macro: |+
+      #showtooltip Hand of Gul'dan
+      /petattack
+      /cast Hand of Gul'dan
+  PA:
+    filter:
+      include:
+        - class:Hunter
+    icon: Ability_Creature_Cursed_02
+    macro: |+
+      /script UIErrorsFrame:Hide()
+      /use 13
+      /use 14
+      /script UIErrorsFrame:Clear(); UIErrorsFrame:Show()
+      /cast Hunter's Mark
+      /petattack
