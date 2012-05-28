@@ -118,6 +118,13 @@ plugins:
         filter:
             addons:
                 - AdiBags
+    Altoholic:
+        align: right
+        priority: 55
+        notext: 1
+        filter:
+            addons:
+                - Altoholic
     Broker_MicroMenu:
         align: right
         priority: 20

@@ -323,6 +323,24 @@ addons:
     AdiBags:
         group: Basic
     BagSync:
+        include:
+            - no-one
+    Altoholic:
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
+    Altoholic_Achievements:
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
+    Altoholic_Characters:
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
+    Altoholic_Search:
         exclude:
             - machine:type:secondary
             - machine:type:basic
@@ -371,12 +389,7 @@ addons:
             - Druid
     Broker_AllXP:
         include:
-            - realm:still_leveling
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
+            - no-one
     Broker_AltGuild:
         include:
             - all(unguilded;watchguild)
@@ -434,6 +447,7 @@ addons:
     ChocolateBar_Options:
         group: Basic
     Clique:
+        level: 10
         exclude:
             - banker
             - mule
@@ -1327,11 +1341,7 @@ addons:
         group: Wowhead
     Digits:
         include:
-            - machine:name:kara
-        exclude:
-            - banker
-            - mule
-        group: Standard
+            - no-one
     ThatJustHappened:
         include:
             - no-one
