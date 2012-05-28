@@ -204,7 +204,7 @@ settings:
       level: 42
       value: Concentration Aura
     - include:
-      - all(spec:Holy;machine:type:secondary)
+      - machine:type:secondary
       level: 62
       value: Crusader Aura
     type: string
@@ -275,6 +275,9 @@ settings:
     - value: 0
     - level: 62
       value: 1
+    - include:
+        - machine:type:secondary
+      value: 0
     type: boolean
   Dark Intent-enabled:
     filter:
