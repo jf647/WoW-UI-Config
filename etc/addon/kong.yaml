@@ -104,7 +104,9 @@ frames:
             visible: 1.0
             hidden: 0
         filter:
-            addons:
+            include:
+                - no-one
+        addons:
                 - AdiBags
     adibagsbank:
         name: AdiBagsContainer2
@@ -113,6 +115,8 @@ frames:
             visible: 1.0
             hidden: 0
         filter:
+            include:
+                - no-one
             addons:
                 - AdiBags
     bagnonbank:
