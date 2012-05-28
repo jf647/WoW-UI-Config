@@ -46,7 +46,6 @@ modules:
     - WoWUI::Module::Cork
     - WoWUI::Module::Raven
     - WoWUI::Module::CombatLogTrigger
-    - WoWUI::Module::Digits
     - WoWUI::Module::TrinketMenu
     - WoWUI::Module::TidyPlates
     - WoWUI::Module::NPCScan
