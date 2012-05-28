@@ -15,7 +15,6 @@ filtergroups:
     members:
     - targetunit
     - showmenu
-    - Corrupted Egg Shell
   deathknight:
     members:
     - Horn of Winter
@@ -261,14 +260,6 @@ actions:
       - cliqueaction:selfshield
       level: 58
     icon: spell_shadow_nethercloak
-  Corrupted Egg Shell:
-    filter:
-      include:
-      - all(item:Corrupted Egg Shell;role:Healer;cliqueaction:trinketitem)
-      - all(item:Corrupted Egg Shell;role:Intellect DPS;cliqueaction:trinketitem)
-    icon: inv_misc_cat_trinket09
-    macro: /use [@mouseover] Corrupted Egg Shell
-    type: macro
   Counterspell:
     filter:
       include:
@@ -316,7 +307,7 @@ actions:
   Devour Magic:
     filter:
       include:
-      - all(spec:Affliction;cliqueaction:cleanse)
+      - all(spec:Affliction;cliqueaction:purgebuff)
       level: 38
     icon: spell_nature_purge
   Dispel Magic:
@@ -1024,10 +1015,6 @@ bindings:
           filter:
             include:
             - class:Priest
-        trinketitem:
-          filter:
-            include:
-            - item:Corrupted Egg Shell
     alt-right:
       click: ALT-BUTTON2
       types:
