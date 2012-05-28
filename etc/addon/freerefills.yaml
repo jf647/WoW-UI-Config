@@ -258,7 +258,7 @@ freerefills:
         quantity: 40
         filter:
             include:
-                - prof:Herbalism:425+
+                - prof:Herbalism:475+
             exclude:
                 - class:Mage
     Instant Poison:
