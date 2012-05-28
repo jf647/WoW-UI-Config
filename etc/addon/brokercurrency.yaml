@@ -54,9 +54,9 @@ groups:
             level: 65
             include:
                 - noexall(goal:NorthrendJewelcrafting)
-                - prof:Jewelcrafting:375+
+                - prof:Jewelcrafting:Master
             exclude:
-                - prof:Jewelcrafting:450+
+                - prof:Jewelcrafting:Grand Master
         options:
             - summary61
     cooking:
