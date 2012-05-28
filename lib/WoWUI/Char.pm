@@ -174,6 +174,31 @@ sub set_prof_brackets
   my $prof = shift;
   my $skill = shift;
   
+  if( $skill >= 75 ) {
+      $self->flags_get(0)->insert("prof:$prof:Apprentice");
+  }
+  if( $skill >= 150 ) {
+      $self->flags_get(0)->insert("prof:$prof:Journeyman");
+  }
+  if( $skill >= 225 ) {
+      $self->flags_get(0)->insert("prof:$prof:Expert");
+  }
+  if( $skill >= 300 ) {
+      $self->flags_get(0)->insert("prof:$prof:Artisan");
+  }
+  if( $skill >= 375 ) {
+      $self->flags_get(0)->insert("prof:$prof:Master");
+  }
+  if( $skill >= 450 ) {
+      $self->flags_get(0)->insert("prof:$prof:Grand Master");
+  }
+  if( $skill >= 525 ) {
+      $self->flags_get(0)->insert("prof:$prof:Illustrious Grand Master");
+  }
+  if( $skill >= 600 ) {
+      $self->flags_get(0)->insert("prof:$prof:Zen Master");
+  }
+  
   $self->flags_get(0)->insert("prof:$prof");
   if( 'Tailoring' eq $prof ) {
     if( $skill >= 350 ) {
@@ -204,6 +229,9 @@ sub set_prof_brackets
     if( $skill >= 425 ) {
       $self->flags_get(0)->insert('prof:Herbalism:425+');
     }
+    if( $skill >= 475 ) {
+      $self->flags_get(0)->insert('prof:Herbalism:475+');
+    }
   }
   elsif( 'Alchemy' eq $prof ) {
     if( $skill >= 500 ) {
@@ -219,12 +247,6 @@ sub set_prof_brackets
     }
   }
   elsif( 'Jewelcrafting' eq $prof ) {
-    if( $skill >= 375 ) {
-      $self->flags_get(0)->insert('prof:Jewelcrafting:375+');
-    }
-    if( $skill >= 450 ) {
-     $self->flags_get(0)->insert('prof:Jewelcrafting:450+');
-    }
     if( $skill >= 475 ) {
       $self->flags_get(0)->insert('prof:Jewelcrafting:475+');
     }
