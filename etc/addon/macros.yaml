@@ -17,10 +17,6 @@ global_macros:
     filter:
       addons:
         - Buffet
-  Cork:
-    filter:
-      addons:
-        - Cork
   Trink:
     macro: |+
       #showtooltip 13
@@ -148,6 +144,26 @@ macros:
       #showtooltip Counterspell
       /stopcasting
       /cast [mod:shift] Counterspell;[@focustarget,harm,exists] Counterspell;[@focus,harm,exists] Counterspell; [@mouseover,harm,exists] Counterspell; Counterspell
+  Interrupt-Warrior:
+    name: Int
+    filter:
+      include:
+        - class:Warrior
+    macro: |+
+      #showtooltip Pummel
+      /stopattack
+      /cast [mod:shift] Pummel;[@focustarget,harm,exists] Pummel;[@focus,harm,exists] Pummel; [@mouseover,harm,exists] Pummel; Pummel
+      /startattack
+  Interrupt-Paladin:
+    name: Int
+    filter:
+      include:
+        - class:Paladin
+    macro: |+
+      #showtooltip Rebuke
+      /stopattack
+      /cast [mod:shift] Rebuke;[@focustarget,harm,exists] Rebuke;[@focus,harm,exists] Rebuke; [@mouseover,harm,exists] Rebuke; Rebuke
+      /startattack
   Interrupt-Shaman:
     name: Int
     filter:
@@ -203,3 +219,10 @@ macros:
       /script UIErrorsFrame:Clear(); UIErrorsFrame:Show()
       /cast Hunter's Mark
       /petattack
+  Bloodthirst:
+    filter:
+      include:
+        - all(class:Warrior;spec:Fury)
+    macro: |+
+      /startattack
+      /cast Bloodthirst

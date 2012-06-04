@@ -49,7 +49,7 @@ triggers:
     Rallying Cry:
         type: spell
         message: '*slink used'
-        reportspellid: 1
+        spellid: 97462
         filter:
             level: 83
             include:

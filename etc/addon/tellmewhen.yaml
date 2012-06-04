@@ -108,10 +108,15 @@ conditions:
     Unit: target
     Operator: ==
     Level: 5
-  rage_gt_90_pct:
+  rage_gt_60:
     Type: RAGE
     Operator: '>'
-    Level: 90
+    Level: 60
+    Unit: player
+  rage_gt_50:
+    Type: RAGE
+    Operator: '>'
+    Level: 50
     Unit: player
   rage_lt_20:
     Type: RAGE
@@ -388,6 +393,7 @@ filtergroups:
     - Demon Soul
     - No Soulstone in Bags
     - Warlock OOC Regen
+    - Dark Intent Missing
     filter:
       include:
       - class:Warlock
@@ -421,6 +427,8 @@ filtergroups:
     - Thunder Clap
     - Heroic Leap
     - Shield Block
+    - Inner Rage
+    - Recklessness
     filter:
       include:
       - class:Warrior
@@ -433,10 +441,11 @@ icons:
       - Execute to 3 Stacks
       - Rage Filler
       - Death Wish
+      - Inner Rage Rotation
       - Bloodthirst
       - Berserker Rage if not Enraged
       - Raging Blow
-      - Heroic Strike over 90 Rage
+      - Heroic Strike over 60 Rage
       - Colossus Smash Rotation
       - Bloodthirst
       - Slam if Bloodsurge Up
@@ -448,9 +457,10 @@ icons:
       - Execute to 3 Stacks
       - Rage Filler
       - Death Wish
+      - Inner Rage Rotation
       - Bloodthirst
       - Slam if Bloodsurge Up
-      - Heroic Strike over 90 Rage
+      - Heroic Strike over 60 Rage
       - Colossus Smash Rotation
       - Bloodthirst
   Affliction Warlock Rotation:
@@ -881,6 +891,16 @@ icons:
     conditions:
       - instance
     type: Cooldown::Spell::ShortCD
+  Dark Intent Missing:
+    conditions:
+      - instance
+    type: Buff
+    filter:
+      level: 83
+      exclude:
+      - machine:type:secondary
+    missing: 1
+    spell: Dark Intent
   Chakra Missing:
     combat: in
     filter:
@@ -2281,6 +2301,22 @@ icons:
       - spec:Protection
       level: 28
     type: Cooldown::Spell::Def::ShortCD
+  Inner Rage:
+    combat: in
+    filter:
+      include:
+      - spec:Fury
+      - spec:Arms
+      level: 56
+    type: Cooldown::Spell::Off::ShortCD
+  Recklessness:
+    combat: in
+    filter:
+      include:
+      - spec:Fury
+      - spec:Arms
+      level: 64
+    type: Cooldown::Spell::Off::LongCD
   Shock Usable:
     combat: in
     filter:
@@ -2617,6 +2653,12 @@ icons:
   Death Wish:
     no_filter_group_ok: 1
     type: Cooldown::Spell
+  Inner Rage Rotation:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
+    spell: Inner Rage
+    conditions:
+      - rage_gt_50
   Bloodthirst:
     no_filter_group_ok: 1
     type: Cooldown::Spell
@@ -2655,12 +2697,12 @@ icons:
     no_filter_group_ok: 1
     type: Cooldown::Spell
     spell: Execute
-  Heroic Strike over 90 Rage:
+  Heroic Strike over 60 Rage:
     no_filter_group_ok: 1
     type: Cooldown::Spell
     spell: Heroic Strike
     conditions:
-      - rage_gt_90_pct
+      - rage_gt_60
   Divine Plea:
     type: Cooldown::Spell::Def::LongCD
     filter:
