@@ -1237,9 +1237,6 @@ addons:
     TidyPlates_Grey:
         include:
             - no-one
-    TidyPlatesIcon:
-        include:
-            - no-one
     TidyPlates_Graphite:
         include:
             - no-one
