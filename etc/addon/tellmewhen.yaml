@@ -316,6 +316,8 @@ filtergroups:
     - Leap of Faith
     - Rapture
     - Holy Fire
+    - Divine Hymn
+    - Hymn of Hope
     filter:
       include:
       - class:Priest
@@ -439,13 +441,13 @@ icons:
     Icons:
       - Victory Rush Rotation
       - Execute to 3 Stacks
-      - Rage Filler
       - Death Wish
+      - Rage Filler
       - Inner Rage Rotation
       - Bloodthirst
       - Berserker Rage if not Enraged
-      - Raging Blow
       - Heroic Strike over 60 Rage
+      - Recklessness
       - Colossus Smash Rotation
       - Bloodthirst
       - Slam if Bloodsurge Up
@@ -458,11 +460,11 @@ icons:
       - Rage Filler
       - Death Wish
       - Inner Rage Rotation
-      - Bloodthirst
-      - Slam if Bloodsurge Up
-      - Heroic Strike over 60 Rage
       - Colossus Smash Rotation
       - Bloodthirst
+      - Slam if Bloodsurge Up
+      - Raging Blow
+      - Heroic Strike over 60 Rage
   Affliction Warlock Rotation:
     no_filter_group_ok: 1
     type: Meta
@@ -1759,6 +1761,16 @@ icons:
     filter:
       level: 85
     type: Cooldown::Spell::Def::ShortCD
+  Divine Hymn:
+    combat: in
+    filter:
+      level: 85
+    type: Cooldown::Spell::Def::LongCD
+  Hymn of Hope:
+    combat: in
+    filter:
+      level: 85
+    type: Cooldown::Spell::Def::LongCD
   Lifeblood:
     combat: in
     filter:
@@ -2670,9 +2682,9 @@ icons:
       - icon:!Enraged
   Raging Blow:
     no_filter_group_ok: 1
-    type: Cooldown::Spell
-    conditions:
-      - icon:Enraged
+    type: Reactive
+    CooldownCheck: 1
+    UseActvtnOverlay: 1
   Enraged:
     no_filter_group_ok: 1
     type: Buff
