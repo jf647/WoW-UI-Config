@@ -224,5 +224,21 @@ macros:
       include:
         - all(class:Warrior;spec:Fury)
     macro: |+
+      #showtooltip Bloodthirst
       /startattack
       /cast Bloodthirst
+  PS/OB:
+    filter:
+      include:
+        - class:Death Knight
+    macro: |+
+      #showtooltip Plague Strike
+      /cast [mod:shift] Outbreak; Plague Strike
+  SoC:
+    filter:
+      include:
+        - all(class:Warlock;spec:Affliction)
+    macro: |+
+      #showtooltip Seed of Corruption
+      /cast Soulburn
+      /cast Seed of Corruption
