@@ -242,6 +242,9 @@ sub add_by_name
     if( exists $config->{overrides}->{$trinketfull}->{priority} ) {
         $trinketdata->{priority} = $config->{overrides}->{$trinketfull}->{priority};
     }
+    if( exists $config->{overrides}->{$trinketfull}->{passive} ) {
+        $trinketdata->{passive} = $config->{overrides}->{$trinketfull}->{passive};
+    }
     if( exists $config->{overrides}->{$trinketfull}->{prefer} ) {
         $trinketdata->{prefer} = 1;
     }

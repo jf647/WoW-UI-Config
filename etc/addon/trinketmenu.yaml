@@ -12,3 +12,12 @@ perchar_filter:
     addons:
         - TrinketMenu
 cachefile: $PRIVATEDIR/cache/trinketmenu.yaml
+overrides:
+    Foul Gift of the Demon Lord:
+        passive: 1
+    Varo'then's Brooch:
+        passive: 1
+    Rosary of Light:
+        passive: 1
+    Dwyer's Caber:
+        passive: 1
