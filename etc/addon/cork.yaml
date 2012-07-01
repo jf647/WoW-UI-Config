@@ -204,6 +204,10 @@ settings:
       level: 42
       value: Concentration Aura
     - include:
+      - spec:Holy
+      level: 76
+      value: Resistance Aura
+    - include:
       - machine:type:secondary
       level: 62
       value: Crusader Aura
