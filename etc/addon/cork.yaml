@@ -456,7 +456,8 @@ settings:
     type: boolean
   Shields-enabled:
     filter:
-    - value: 1
+    - level: 8
+      value: 1
     type: boolean
   Shields-spell:
     filter:
