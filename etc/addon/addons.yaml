@@ -514,7 +514,19 @@ addons:
         exclude:
             - prof:InactiveFishing
         group: Gathering
+    Forte_Core:
+        exclude:
+            - banker
+            - mule
+            - machine:type:basic
+        group: Standard
     Forte_Casting:
+        exclude:
+            - banker
+            - mule
+            - machine:type:basic
+        group: Standard
+    Forte_Class:
         exclude:
             - banker
             - mule
@@ -523,75 +535,16 @@ addons:
     Forte_Cooldown:
         include:
             - no-one
-    Forte_Core:
+    Forte_Timer:
         exclude:
             - banker
             - mule
             - machine:type:basic
         group: Standard
-    Forte_DeathKnight:
+    Forte_Talent:
         include:
             - no-one
-    Forte_Druid:
-        include:
-            - class:Druid
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        class: Druid
     Forte_Healthstone:
-        include:
-            - no-one
-    Forte_Hunter:
-        include:
-            - class:Hunter
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        class: Hunter
-    Forte_Mage:
-        include:
-            - class:Mage
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        class: Mage
-    Forte_Paladin:
-        include:
-            - class:Paladin
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        class: Paladin
-    Forte_Priest:
-        include:
-            - class:Priest
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        class: Priest
-    Forte_Rogue:
-        include:
-            - class:Rogue
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        class: Rogue
-    Forte_Shaman:
-        include:
-            - class:Shaman
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        class: Shaman
-    Forte_Shard:
         include:
             - no-one
     Forte_Soulstone:
@@ -600,34 +553,42 @@ addons:
     Forte_Summon:
         include:
             - no-one
-    Forte_Talent:
+    Forte_DeathKnight:
         include:
             - no-one
-    Forte_Timer:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    Forte_Vehicle:
+    Forte_Druid:
+        include:
+            - no-one
+    Forte_Hunter:
+        include:
+            - no-one
+    Forte_Mage:
+        include:
+            - no-one
+    Forte_Paladin:
+        include:
+            - no-one
+    Forte_Priest:
+        include:
+            - no-one
+    Forte_Rogue:
+        include:
+            - no-one
+    Forte_Shaman:
+        include:
+            - no-one
+    Forte_Shard:
         include:
             - no-one
     Forte_Warlock:
-        include:
-            - class:Warlock
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        class: Warlock
+         include:
+            - no-one
     Forte_Warrior:
         include:
-            - class:Warrior
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        class: Warrior
+            - no-one
+    Forte_Vehicle:
+        include:
+            - no-one
     FreeRefills:
         exclude:
             - banker
