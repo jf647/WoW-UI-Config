@@ -218,7 +218,6 @@ sub add_by_name
     $log->info("fetching trinket info for '$trinketfull'");
 
     my $itemid;
-    my $hc = 0;
     if( $trinket =~ m/^(.+)\s+#(\d+)$/ ) {
         $trinket = $1;
         $itemid = $2;
@@ -343,9 +342,14 @@ sub get_itemid
     my $log = WoWUI::Util->log;
 
     my $hc = 0;
+    my $rf = 0;
     if( $name =~ m/^(.+) \(Heroic\)$/ ) {
         $name = $1;
         $hc = 1;
+    }
+    if( $name =~ m/^(.+) \(Raid Finder\)$/ ) {
+        $name = $1;
+        $rf = 1;
     }
 
     my $json = $self->json;
@@ -361,6 +365,7 @@ sub get_itemid
 
         my $match;
         my $remainder;
+        $DB::single = 1;
         while( $itemtext ) {
             $itemtext =~ s/^,//;
             ($match, $remainder) = extract_bracketed($itemtext, '{}');
@@ -373,11 +378,14 @@ sub get_itemid
             if( $hc ) {
                 next unless( $data->{heroic} );
             }
+            elsif( $rf ) {
+                next unless( $data->{raidfinder} );
+            }
             else {
                 next if( exists $data->{heroic} );
             }
             $itemid = $data->{id};
-            $log->debug("itemid for $name/$hc: $itemid");
+            $log->debug("itemid for $name/$hc/$rf: $itemid");
             last;
         }
     };
