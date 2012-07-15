@@ -242,3 +242,9 @@ macros:
       #showtooltip Seed of Corruption
       /cast Soulburn
       /cast Seed of Corruption
+  Freeze:
+    macro: |+
+      /cast Freeze
+    filter:
+      include:
+        - all(class:Mage;spec:Frost)
