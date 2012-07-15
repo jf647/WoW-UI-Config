@@ -174,7 +174,10 @@ filtergroups:
     - Anti-Magic Zone
     - Summon Gargoyle
     - Icebound Fortitude
-    - Pillar Of Frost
+    - Pillar of Frost
+    - Raise Dead
+    - Blood Tap
+    - Empower Rune Weapon
     - Rune Tap
     - Dancing Rune Weapon
     - Blood Shield Missing
@@ -492,8 +495,12 @@ icons:
       - Obliterate if ooFFUU
       - Frost Strike if RP Capped
       - Howling Blast if Rime Up
+      - Pillar of Frost
+      - Raise Dead
       - Obliterate
       - Frost Strike
+      - Blood Tap
+      - Empower Rune Weapon
   Enhance Shaman Rotation:
     no_filter_group_ok: 1
     type: Meta
@@ -628,13 +635,17 @@ icons:
     type: Debuff
     Unit: target
     spell: Blood Plague
-    missing: 1
+    duration:
+        max: 3
+    always: 1
   Frost Fever Missing:
     no_filter_group_ok: 1
     type: Debuff
     Unit: target
     spell: Frost Fever
-    missing: 1
+    duration:
+        max: 3
+    always: 1
   Howling Blast if FF Missing:
     no_filter_group_ok: 1
     type: Cooldown::Spell
@@ -1934,13 +1945,30 @@ icons:
       include:
       - spec:Discipline
     type: Cooldown::Spell::Def::ShortCD
-  Pillar Of Frost:
+  Pillar of Frost:
     IgnoreRunes: 1
     combat: in
     filter:
       include:
       - spec:Frost
       level: 39
+    type: Cooldown::Spell::Off::ShortCD
+  Raise Dead:
+    combat: in
+    filter:
+      level: 56
+    type: Cooldown::Spell::Off::LongCD
+  Blood Tap:
+    IgnoreRunes: 1
+    combat: in
+    filter:
+      level: 64
+    type: Cooldown::Spell::Off::ShortCD
+  Empower Rune Weapon:
+    IgnoreRunes: 1
+    combat: in
+    filter:
+      level: 75
     type: Cooldown::Spell::Off::LongCD
   Power Infusion:
     combat: in
