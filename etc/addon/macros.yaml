@@ -233,6 +233,7 @@ macros:
         - class:Death Knight
     macro: |+
       #showtooltip Plague Strike
+      /startattack
       /cast [mod:shift] Outbreak; Plague Strike
   SoC:
     filter:
@@ -248,3 +249,19 @@ macros:
     filter:
       include:
         - all(class:Mage;spec:Frost)
+  Howling Blast:
+    macro: |+
+      #showtooltip Howling Blast
+      /startattack
+      /cast Howling Blast
+    filter:
+      include:
+        - all(class:Death Knight;spec:Frost)
+  Outbreak:
+    macro: |+
+      #showtooltip Outbreak
+      /startattack
+      /cast Outbreak
+    filter:
+      include:
+        - class:Death Knight
