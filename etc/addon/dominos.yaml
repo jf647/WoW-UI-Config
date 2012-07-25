@@ -1,0 +1,97 @@
+---
+templates:
+    global:
+        dominos:
+            input: $TEMPLATEDIR/dominos/Dominos.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/Dominos.lua
+generic:
+    standard_pages: &standard_pages
+        page2: 1
+        page3: 2
+        page3: 3
+        page3: 4
+        page3: 5
+    warrior_pages: &warrior_pages
+        page2: 1
+        page3: 2
+        page3: 3
+        page3: 4
+        page3: 5
+        battle: 0
+        defensive: 4
+        berserker: 5
+    priest_pages: &priest_pages
+        page2: 1
+        page3: 2
+        page3: 3
+        page3: 4
+        page3: 5
+        shadow: 4
+    warlock_pages: &warlock_pages
+        page2: 1
+        page3: 2
+        page3: 3
+        page3: 4
+        page3: 5
+        meta: 4
+    druid_pages: &druid_pages
+        page2: 1
+        page3: 2
+        page3: 3
+        page3: 4
+        page3: 5
+        bear: 7
+        cat: 4
+        prowl: 5
+        moonkin: 6
+    rogue_pages: &rogue_pages
+        page2: 1
+        page3: 2
+        page3: 3
+        page3: 4
+        page3: 5
+        stealth: 4
+    monk_pages: monk_pages
+        page2: 1
+        page3: 2
+        page3: 3
+        page3: 4
+        page3: 5
+        fiercetiger: 0
+        sturdyox: 4
+        wiseserpent: 4
+dominos:
+    showminimap:
+        filter:
+            - value: 0
+    linkedopacity:
+        filter:
+            - value: 1
+    barscale:
+        filter:
+            - value: 0.6
+    bar:
+        1:
+            filter:
+                - value:
+                      anchor: BOTTOMLEFT
+                      columns: 6
+                      numbuttons: 12
+                      growsup: 1
+                      padW: 2
+                      padH: 2
+                      x: 1017.777
+                      y: 0
+                      spacing: 4
+                      pages:
+                          DEATHKNIGHT: *standard_pages
+                          PALADIN: *standard_pages
+                          MAGE: standard_pages
+                          HUNTER: *standard_pages
+                          SHAMAN: *warrior_pages
+                          DRUID: *druid_pages
+                          ROGUE: *rogue_pages
+                          WARRIOR: *warrior_pages
+                          PRIEST: *priest_pages
+                          MONK: *monk_pages
+    namedbars:

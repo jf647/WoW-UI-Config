@@ -1,0 +1,88 @@
+
+DominosVersion = "4.3.4"
+DominosDB = {
+    ["profileKeys"] = {
+[% FOR dname IN chars.keys -%]
+        ["[% dname %]"] = "[% chars.$dname %]",
+[% END -%]
+    },
+    ["profiles"] = {
+[% FOR pname IN dominos.profileset.profiles_list -%]
+[% profile = dominos.profileset.profile_get(pname) -%]
+        ["[% pname %]"] = {
+            ["showMinimap"] = [% IF profile.showminimap %]true[% ELSE %]false[% END %],
+            ["showBindingText"] = [% IF profile.showbindings %]true[% ELSE %]false[% END %],
+            ["showgrid"] = [% IF profile.showgrid %]true[% ELSE %]false[% END %],
+            ["linkedOpacity"] = [% IF profile.linkedopacity %]true[% ELSE %]false[% END %],
+            ["sticky"] = [% IF profile.sticky %]1[% ELSE %]0[% END %],
+            ["bagStyle"] = {
+                "Caith", -- [1]
+                0.1, -- [2]
+                false, -- [3]
+                {
+                }, -- [4]
+            },
+            ["ab"] = {
+                ["style"] = {
+                    "Caith", -- [1]
+                    0.1, -- [2]
+                    false, -- [3]
+                    {
+                    }, -- [4]
+                },
+            },
+            ["classStyle"] = {
+                "Caith", -- [1]
+                0.1, -- [2]
+                false, -- [3]
+                {
+                }, -- [4]
+            },
+            ["petStyle"] = {
+                "Caith", -- [1]
+                0.1, -- [2]
+                false, -- [3]
+                {
+                }, -- [4]
+            },
+            ["frames"] = {
+[% FOR bar IN profile.bars -%]
+                {
+                    ["point"] = "[% bar.anchor.point %]",
+                    ["scale"] = "[% bar.scale %]",
+                    ["columns"] = [% bar.columns %],
+                    ["spacing"] = [% bar.spacing %],
+                    ["padW"] = [% bar.padW %],
+                    ["padH"] = [% bar.padH %],
+                    ["x"] = [% bar.anchor.x %],
+                    ["y"] = [% bar.anchor.y %]0,
+                    ["numButtons"] = [% bar.numbuttons %],
+                    ["isBottomToTop"] = [% IF bar.growsup %]true[% ELSE %]false[% END %],
+                    ["pages"] = {
+[% FOR pageclass IN bar.pages -%]
+                        ["[% page.class %]"] = {
+[% FOR page IN page.pages -%]
+                            ["[% page.name %]"] = [% page.num %],
+[% END -%]
+                        },
+[% END -%]
+                    },
+                }, -- [[% loop %]]
+[% END -%]
+[% FOR bar IN profile.namedbars -%]
+                ["totem1"] = {
+                    ["y"] = -223.6175226419422,
+                    ["fadeAlpha"] = 0,
+                    ["point"] = "TOPRIGHT",
+                    ["spacing"] = 2,
+                    ["scale"] = 0.69,
+                    ["x"] = 2.232793804068933e-005,
+                    ["showRecall"] = true,
+                    ["showTotems"] = true,
+                },
+[% END -%]
+            },
+        },
+[% END -%]
+    },
+}
