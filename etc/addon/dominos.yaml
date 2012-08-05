@@ -8,38 +8,38 @@ generic:
     standard_pages: &standard_pages
         page2: 1
         page3: 2
-        page3: 3
-        page3: 4
-        page3: 5
+        page4: 3
+        page5: 4
+        page6: 5
     warrior_pages: &warrior_pages
         page2: 1
         page3: 2
-        page3: 3
-        page3: 4
-        page3: 5
+        page4: 3
+        page5: 4
+        page6: 5
         battle: 0
         defensive: 4
         berserker: 5
     priest_pages: &priest_pages
         page2: 1
         page3: 2
-        page3: 3
-        page3: 4
-        page3: 5
+        page4: 3
+        page5: 4
+        page6: 5
         shadow: 4
     warlock_pages: &warlock_pages
         page2: 1
         page3: 2
-        page3: 3
-        page3: 4
-        page3: 5
+        page4: 3
+        page5: 4
+        page6: 5
         meta: 4
     druid_pages: &druid_pages
         page2: 1
         page3: 2
-        page3: 3
-        page3: 4
-        page3: 5
+        page4: 3
+        page5: 4
+        page6: 5
         bear: 7
         cat: 4
         prowl: 5
@@ -47,51 +47,325 @@ generic:
     rogue_pages: &rogue_pages
         page2: 1
         page3: 2
-        page3: 3
-        page3: 4
-        page3: 5
+        page4: 3
+        page5: 4
+        page6: 5
         stealth: 4
-    monk_pages: monk_pages
+    monk_pages: &monk_pages
         page2: 1
         page3: 2
-        page3: 3
-        page3: 4
-        page3: 5
+        page4: 3
+        page5: 4
+        page6: 5
         fiercetiger: 0
         sturdyox: 4
         wiseserpent: 4
-dominos:
-    showminimap:
+    null_pages: &null_pages
+        DEATHKNIGHT: ~
+        PALADIN: ~
+        MAGE: ~
+        HUNTER: ~
+        SHAMAN: ~
+        DRUID: ~
+        ROGUE: ~
+        WARRIOR: ~
+        PRIEST: ~
+        MONK: ~
+showminimap:
+    filter:
+        - value: 0
+linkedopacity:
+    filter:
+        - value: 1
+showbindings:
+    filter:
+        - value: 0
+showgrid:
+    filter:
+        - value: 0
+sticky:
+    filter:
+        - value: 1
+numberedbars:
+    1:
         filter:
-            - value: 0
-    linkedopacity:
+            - value:
+                  hidden: 0
+                  point: BOTTOMLEFT
+                  columns: 6
+                  numbuttons: 12
+                  scale: 0.6
+                  growsup: 1
+                  padW: 2
+                  padH: 2
+                  x: 1017.777
+                  y: 0
+                  spacing: 4
+                  pages:
+                      DEATHKNIGHT: *standard_pages
+                      PALADIN: *standard_pages
+                      MAGE: *standard_pages
+                      HUNTER: *standard_pages
+                      SHAMAN: *warrior_pages
+                      DRUID: *druid_pages
+                      ROGUE: *rogue_pages
+                      WARRIOR: *warrior_pages
+                      PRIEST: *priest_pages
+    2:
         filter:
-            - value: 1
-    barscale:
+            - value:
+                  hidden: 0
+                  point: BOTTOMLEFT
+                  columns: 2
+                  numbuttons: 10
+                  scale: 0.6
+                  padW: 2
+                  padH: 2
+                  x: 902.370
+                  y: 0
+                  spacing: 4
+                  pages: *null_pages
+    3:
         filter:
-            - value: 0.6
-    bar:
-        1:
-            filter:
-                - value:
-                      anchor: BOTTOMLEFT
-                      columns: 6
-                      numbuttons: 12
-                      growsup: 1
-                      padW: 2
-                      padH: 2
-                      x: 1017.777
-                      y: 0
-                      spacing: 4
-                      pages:
-                          DEATHKNIGHT: *standard_pages
-                          PALADIN: *standard_pages
-                          MAGE: standard_pages
-                          HUNTER: *standard_pages
-                          SHAMAN: *warrior_pages
-                          DRUID: *druid_pages
-                          ROGUE: *rogue_pages
-                          WARRIOR: *warrior_pages
-                          PRIEST: *priest_pages
-                          MONK: *monk_pages
-    namedbars:
+            - value:
+                  hidden: 0
+                  point: BOTTOMLEFT
+                  anchor: 4TR
+                  columns: 7
+                  numbuttons: 7
+                  scale: 0.6
+                  padW: 2
+                  padH: 2
+                  x: 997.776
+                  y: 119.9999
+                  spacing: 4
+                  pages: *null_pages
+    4:
+        filter:
+            - value:
+                  hidden: 0
+                  point: BOTTOMLEFT
+                  anchor: 1TC
+                  columns: 7
+                  numbuttons: 7
+                  scale: 0.6
+                  padW: 2
+                  padH: 2
+                  x: 997.777
+                  y: 80.000
+                  spacing: 4
+                  pages: *null_pages
+    5:
+        filter:
+            - value:
+                  hidden: 1
+                  point: TOPRIGHT
+                  anchor: 6BC
+                  x: -198.498
+                  y: -401.185
+                  padW: 2
+                  padH: 2
+                  scale: 1
+                  spacing: 4
+                  columns: 12
+                  numbuttons: 12
+                  pages: *null_pages
+    6:
+        filter:
+            - value:
+                  hidden: 1
+                  point: BOTTOMRIGHT
+                  anchor: 7BR
+                  x: -199.308
+                  y: 363.555
+                  padW: 2
+                  padH: 2
+                  spacing: 4
+                  scale: 1
+                  columns: 12
+                  numbuttons: 12
+                  pages: *null_pages
+    7:
+        filter:
+            - value:
+                  hidden: 1
+                  point: TOPRIGHT
+                  x: -199.308
+                  y: -324.444
+                  padW: 2
+                  padH: 2
+                  spacing: 4
+                  scale: 1
+                  columns: 12
+                  numbuttons: 12
+                  pages: *null_pages
+    8:
+        filter:
+            - value:
+                  hidden: 1
+                  point: TOPRIGHT
+                  anchor: 7TC
+                  x: -199.308
+                  y: -284.444
+                  padW: 2
+                  padH: 2
+                  spacing: 4
+                  scale: 1
+                  columns: 12
+                  numbuttons: 12
+                  pages: *null_pages
+    9:
+        filter:
+            - value:
+                  hidden: 1
+                  point: TOPRIGHT
+                  anchor: 8TL
+                  x: -199.308
+                  y: -244.444
+                  padW: 2
+                  padH: 2
+                  spacing: 4
+                  scale: 1
+                  columns: 12
+                  numbuttons: 12
+                  pages: *null_pages
+    10:
+        filter:
+            - value:
+                  point: BOTTOMLEFT
+                  anchor: 2LT
+                  x: 857.777
+                  y: 120.000
+                  padW: 2
+                  padH: 2
+                  scale: 0.6
+                  columns: 2
+                  spacing: 4
+                  numbuttons: 4
+                  padH: 2
+                  padW: 2
+                  pages: *null_pages
+namedbars:
+    cast:
+        filter:
+            - value:
+                  hidden: 1
+                  x: 507.242
+                  y: 156.610
+                  point: BOTTOMLEFT
+                  anchor: petTC
+                  showtext: 1
+    roll:
+        filter:
+            - value:
+                  hidden: 1
+                  columns: 1
+                  point: LEFT
+                  numbuttons: 4
+                  spacing: 2
+    menu:
+        filter:
+            - value:
+                  hidden: 1
+                  x: -359.514
+                  y: -277.407
+                  point: TOPRIGHT
+                  scale: 0.6
+                  anchor: bagsBC
+                  disabled: ~
+    bags:
+        filter:
+            - value:
+                  hidden: 1
+                  x: -199.308
+                  y: -136.444
+                  point: TOPRIGHT
+                  spacing: 2
+                  numbuttons: 5
+    xp:
+        filter:
+            - value:
+                  hidden: 1
+                  x: 0
+                  y: 32
+                  point: TOP
+                  height: 14
+                  width: 0.75
+                  texture: blizzard
+                  alwaysshowtext: 1
+    extra:
+        filter:
+            - value:
+                  point: BOTTOMLEFT
+                  x: 377.822
+                  y: 271.244
+                  scale: 0.7
+                  spacing: 1
+    vehicle:
+        filter:
+            - value:
+                  point: BOTTOMLEFT
+                  x: 393.556
+                  y: 203.866
+                  scale: 1.25
+                  numbuttons: 3
+                  showstates: '[@vehicle,exists]'
+                  spacing: 1
+    pet:
+        filter:
+            - value:
+                  point: BOTTOMRIGHT
+                  x: -796.431
+                  y: 431.443
+                  scale: 0.7
+                  spacing: 6
+                  fadealpha: 0
+                  showstates: '[@pet,exists,nobonusbar:5]'
+    class:
+        filter:
+            - value:
+                  point: BOTTOMRIGHT
+                  x: -1068.597
+                  y: 137.142
+                  scale: 0.7
+                  spacing: 2
+                  anchor: 3TC
+    totem1:
+        filter:
+            - include:
+                - class:Shaman
+              value:
+                  point: TOPRIGHT
+                  scale: 0.7
+                  x: 2.232
+                  y: -223.617
+                  spacing: 2
+                  showtotems: 1
+                  fadealpha: 0
+                  showrecall: 1
+    totem2:
+        filter:
+            - include:
+                - class:Shaman
+              value:
+                  point: totem1BL
+                  scale: 0.7
+                  x: -488.430
+                  y: -488.430
+                  spacing: 2
+                  showtotems: 1
+                  fadealpha: 0
+                  showrecall: 1
+    totem3:
+        filter:
+            - include:
+                - class:Shaman
+              value:
+                  point: totem2BL
+                  scale: 0.7
+                  x: -524.430
+                  y: -223.617
+                  spacing: 2
+                  showtotems: 1
+                  fadealpha: 0
+                  showrecall: 1

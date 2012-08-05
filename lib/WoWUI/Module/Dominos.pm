@@ -74,34 +74,37 @@ sub build_profile
 
     my $profile;
     
-    # simple sections
-    for my $section( qw|showminimap linkedopacity barscale| ) {
-        for my $block( values %{ $config->{$section} } ) {
+    # global settings
+    for my $section( qw|showminimap linkedopacity showbindings showgrid sticky| ) {
+        my $block = $config->{$section};
+        if( my $r = $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
+            $profile->{$section} = $r->value;
         }
-        
+        else {
+            croak "can't find value for section $section!";
+        }
     }
     
-    # generic
-    for my $type( qw|frame override| ) {
-        for my $block( values %{ $config->{$type} } ) {
-            $profile->{"has_$type"} = 0;
-            if( $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
-                $profile->{$type} = $block->{$type};
-                $profile->{"has_$type"} = 1;
-                last;
-            }
+    # numbered bars
+    for my $barnum( sort { $a <=> $b } keys %{ $config->{numberedbars} } ) {
+        my $block = $config->{numberedbars}->{$barnum};
+        if( my $r = $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
+            $DB::single = 1;
+            push @{ $profile->{numberedbars} }, $r->value;
+        }
+        else {
+            croak "can't build numbered bar $barnum!";
         }
     }
 
-    # rules
-    for my $blockname( keys %{ $config->{rules} } ) {
-        my $block = $config->{rules}->{$blockname};
-        $block->{rule}->{name} = $blockname;
-        if( $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
-            push @{ $profile->{rules} }, $block->{rule};
+    # named bars
+    for my $barname( keys %{ $config->{namedbars} } ) {
+        my $block = $config->{namedbars}->{$barname};
+        if( my $r = $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
+            $profile->{namedbars}->{$barname} = $r->value;
         }
     }
-    
+
     return $profile;
 
 }

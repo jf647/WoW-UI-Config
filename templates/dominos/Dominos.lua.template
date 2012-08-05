@@ -46,39 +46,92 @@ DominosDB = {
                 }, -- [4]
             },
             ["frames"] = {
-[% FOR bar IN profile.bars -%]
+[% FOR bar IN profile.numberedbars -%]
                 {
-                    ["point"] = "[% bar.anchor.point %]",
-                    ["scale"] = "[% bar.scale %]",
+                    ["point"] = "[% bar.point %]",
+[% IF bar.exists('anchor') -%]
+                    ["anchor"] = "[% bar.anchor %]",
+[% END -%]
+                    ["x"] = [% bar.x %],
+                    ["y"] = [% bar.y %],
+                    ["scale"] = [% bar.scale %],
                     ["columns"] = [% bar.columns %],
+                    ["numButtons"] = [% bar.numbuttons %],
+                    ["hidden"] = [% IF bar.hidden %]true[% ELSE %]false[% END %],
                     ["spacing"] = [% bar.spacing %],
                     ["padW"] = [% bar.padW %],
                     ["padH"] = [% bar.padH %],
-                    ["x"] = [% bar.anchor.x %],
-                    ["y"] = [% bar.anchor.y %]0,
-                    ["numButtons"] = [% bar.numbuttons %],
                     ["isBottomToTop"] = [% IF bar.growsup %]true[% ELSE %]false[% END %],
+[% IF bar.exists('fadealpha') -%]
+                    ["fadeAlpha"] = [% bar.fadealpha %],
+[% END -%]
                     ["pages"] = {
-[% FOR pageclass IN bar.pages -%]
-                        ["[% page.class %]"] = {
-[% FOR page IN page.pages -%]
-                            ["[% page.name %]"] = [% page.num %],
+[% FOR class IN bar.pages.keys -%]
+                        ["[% class %]"] = {
+[% IF bar.pages.$class.defined -%]
+[% FOR k IN bar.pages.$class.keys -%]
+                            ["[% k %]"] = [% bar.pages.$class.$k %],
+[% END -%]
 [% END -%]
                         },
 [% END -%]
                     },
-                }, -- [[% loop %]]
+                }, -- [[% loop.count %]]
 [% END -%]
-[% FOR bar IN profile.namedbars -%]
-                ["totem1"] = {
-                    ["y"] = -223.6175226419422,
-                    ["fadeAlpha"] = 0,
-                    ["point"] = "TOPRIGHT",
-                    ["spacing"] = 2,
-                    ["scale"] = 0.69,
-                    ["x"] = 2.232793804068933e-005,
-                    ["showRecall"] = true,
-                    ["showTotems"] = true,
+[% FOR barname IN profile.namedbars.keys -%]
+[% bar = profile.namedbars.$barname -%]
+                ["[% barname %]"] = {
+                    ["hidden"] = [% IF bar.hidden %]true[% ELSE %]false[% END %],
+                    ["point"] = "[% bar.point %]",
+[% IF bar.exists('anchor') -%]
+                    ["anchor"] = "[% bar.anchor %]",
+[% END -%]
+[% IF bar.exists('height') -%]
+                    ["height"] = [% bar.height %],
+[% END -%]
+[% IF bar.exists('width') -%]
+                    ["width"] = [% bar.width %],
+[% END -%]
+[% IF bar.exists('texture') -%]
+                    ["texture"] = "[% bar.texture %]",
+[% END -%]
+[% IF bar.exists('fadealpha') -%]
+                    ["fadeAlpha"] = [% bar.fadealpha %],
+[% END -%]
+[% IF bar.exists('scale') -%]
+                    ["scale"] = [% bar.scale %],
+[% END -%]
+[% IF bar.exists('spacing') -%]
+                    ["spacing"] = [% bar.spacing %],
+[% END -%]
+[% IF bar.exists('x') -%]
+                    ["x"] = [% bar.x %],
+[% END -%]
+[% IF bar.exists('y') -%]
+                    ["y"] = [% bar.y %],
+[% END -%]
+[% IF bar.exists('numbuttons') -%]
+                    ["numButtons"] = [% bar.numbuttons %],
+[% END -%]
+[% IF bar.exists('showrecall') -%]
+                    ["showRecall"] = [% IF bar.showrecall %]true[% ELSE %]false[% END %],
+[% END -%]
+[% IF bar.exists('showtotems') -%]
+                    ["showTotems"] = [% IF bar.showtotems %]true[% ELSE %]false[% END %],
+[% END -%]
+[% IF bar.exists('showtext') -%]
+                    ["showText"] = [% IF bar.showtext %]true[% ELSE %]false[% END %],
+[% END -%]
+[% IF bar.exists('alwaysshowtext') -%]
+                    ["alwaysShowText"] = [% IF bar.alwaysshowtext %]true[% ELSE %]false[% END %],
+[% END -%]
+[% IF bar.exists('showstates') -%]
+                    ["showstates"] = "[% bar.showstates %]",
+[% END -%]
+[% IF bar.exists('disabled') -%]
+                    ["disabled"] = {
+                    },
+[% END -%]
                 },
 [% END -%]
             },
