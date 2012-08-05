@@ -53,7 +53,6 @@ sub augment_globalpc
                 croak "too many global macros";
             }
         
-            $DB::single = 1;
             my $m = {
                 name => $macro->{name} // $mn,
                 number => $self->gmacronum,

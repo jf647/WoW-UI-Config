@@ -365,7 +365,6 @@ sub get_itemid
 
         my $match;
         my $remainder;
-        $DB::single = 1;
         while( $itemtext ) {
             $itemtext =~ s/^,//;
             ($match, $remainder) = extract_bracketed($itemtext, '{}');
