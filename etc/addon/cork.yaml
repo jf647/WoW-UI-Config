@@ -226,8 +226,6 @@ settings:
       value: Blood Presence
     - level: 70
       value: Unholy Presence
-      include:
-        - spec:Unholy
     type: string
   Beacon of Light-enabled:
     filter:
