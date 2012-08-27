@@ -11,25 +11,6 @@ templates:
             input: $TEMPLATEDIR/addons/AddOns.txt.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/AddOns.txt
 addons:
-    tif:
-        exclude:
-            - machine:type:basic
-    BloodShieldTracker:
-        include:
-            - all(class:Death Knight;spec:Blood)
-        class: Death Knight
-    Mactics:
-        include:
-            - no-one
-    RobBossMods:
-        include:
-            - no-one
-    nivItemLevel:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
     Grid:
         exclude:
             - banker
@@ -48,77 +29,6 @@ addons:
             - mule
             - machine:type:basic
         group: Grid
-    GridAutoFrameSize:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Grid
-    GridStatusDungeonRole:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Grid
-    GridStatusHots:
-        include:
-            - all(class:Druid;spec:Restoration)
-            - all(class:Priest;spec:Holy)
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-    GridStatusRaidIcons:
-        exclude:
-            - banker
-            - mule
-        group: Grid
-    GridStatusRaidDebuff:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Grid
-    GridStatusRD_BC:
-        include:
-            - no-one
-    GridStatusRD_WotLK:
-        include:
-            - no-one
-    GridStatusRD_Cata:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Grid
-    GridStatusTankCooldown:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Grid
-    GridIndicatorCornerIcons:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-    Archy:
-        include:
-            - prof:Archaeology
-        exclude:
-            - machine:type:basic
-            - machine:type:secondary
-        group: Archaeology
-    HoPo:
-        level: 9
-        include:
-            - class:Paladin
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-            - banker
-            - mule
-        class: Paladin
     DBM-Core: 
         level: 85
         exclude:
@@ -255,14 +165,6 @@ addons:
     DBM-VoA:
         include:
             - no-one
-    Kong:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    KongConfig:
-        include:
-            - no-one
     Ace3:
         include:
             - no-one
@@ -272,20 +174,8 @@ addons:
         group: Basic
     ACP:
         group: Basic
-    Align:
-        include:
-            - no-one
     AltClickToAddItem:
         group: Basic
-    AngeleDei:
-        level: 81
-        include:
-            - all(class:Paladin;spec:Protection)
-            - all(class:Druid;spec:Feral Combat;subspec:Bear)
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        class: Paladin
     Ara_Broker_Guild_Friends:
         exclude:
             - banker
@@ -310,10 +200,6 @@ addons:
             - banker
             - mule
         group: Standard
-    BloodShieldTracker:
-        include:
-          - all(class:Death Knight;spec:Blood)
-        class: Death Knight
     BadBoy:
         group: Basic
     BadBoy_CCleaner:
@@ -322,7 +208,60 @@ addons:
         group: Basic
     AdiBags:
         group: Basic
-    BagSync:
+    Datastore:
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
+    Datastore_Achievements:
+        include:
+            - no-one
+    Datastore_Agenda:
+        include:
+            - no-one
+    Datastore_Auctions:
+        include:
+            - no-one
+    Datastore_Characters:
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
+    Datastore_Containers:
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
+    Datastore_Crafts:
+        include:
+            - no-one
+    Datastore_Currencies:
+        include:
+            - no-one
+    Datastore_Inventory:
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
+    Datastore_Mails:
+        include:
+            - no-one
+    Datastore_Pets:
+        include:
+            - no-one
+    Datastore_Quests:
+        include:
+            - no-one
+    Datastore_Reputations:
+        include:
+            - no-one
+    Datastore_Spells:
+        include:
+            - no-one
+    Datastore_Stats:
+        include:
+            - no-one
+    Datastore_Talents:
         include:
             - no-one
     Altoholic:
@@ -347,58 +286,12 @@ addons:
         group: Basic
     AdiBags_PT3Filter:
         group: Basic
-    Bagnon:
-        include:
-            - no-one
-        group: Basic
-    BagBrother:
-        include:
-            - no-one
-        group: Basic
-    Bagnon_GuildBank:
-        include:
-            - no-one
-        group: Basic
-    Bagnon_Config:
-        include:
-            - no-one
-        group: Basic
-    Bagnon_Forever:
-        include:
-            - no-one
-        group: Basic
-    Bagnon_Tooltips:
-        include:
-            - no-one
-        group: Basic
-    Bagsy:
-        include:
-            - no-one
-        group: Standard
-    BankStack:
-        group: Standard
-    BasicComboPoints:
-        include:
-            - class:Rogue
-        exclude:
-            - machine:type:basic
-            - banker
-            - mule
-        class:
-            - Rogue
-            - Druid
-    Broker_AllXP:
-        include:
-            - no-one
     Broker_AltGuild:
         include:
             - all(unguilded;watchguild)
         exclude:
             - machine:type:basic
         group: Unguilded
-    Broker_BufCanceler:
-        include:
-            - no-one
     Broker_Currency:
         exclude:
             - mule
@@ -427,18 +320,6 @@ addons:
             - banker
             - mule
         group: Standard
-    Butsu:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    GreedBeacon:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
     CallbackHandler-1.0:
         include:
             - no-one
@@ -458,18 +339,6 @@ addons:
         group:
             - Standard
             - Auctions
-    DKIDiseases:
-        include:
-            - class:Death Knight
-        exclude:
-            - machine:type:basic
-        class: Death Knight
-    DKIRunes:
-        include:
-            - class:Death Knight
-        exclude:
-            - machine:type:basic
-        class: Death Knight
     Dominos:
         exclude:
             - banker
@@ -494,111 +363,17 @@ addons:
     Dominos_XP:
         include:
             - no-one
-    EclipseBarPlus:
-        include:
-            - all(class:Druid;spec:Balance)
-        exclude:
-            - machine:type:basic
-        class: Druid
-    Expiration-2:
-        level: 85
-        exclude:
-            - machine:type:basic
-            - machine:type:secondary
-        group:
-            - Raiding
-            - Heroics
     FishermansFriend:
         include:
             - prof:Fishing
         exclude:
             - prof:InactiveFishing
         group: Gathering
-    Forte_Core:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    Forte_Casting:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    Forte_Class:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    Forte_Cooldown:
-        include:
-            - no-one
-    Forte_Timer:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    Forte_Talent:
-        include:
-            - no-one
-    Forte_Healthstone:
-        include:
-            - no-one
-    Forte_Soulstone:
-        include:
-            - no-one
-    Forte_Summon:
-        include:
-            - no-one
-    Forte_DeathKnight:
-        include:
-            - no-one
-    Forte_Druid:
-        include:
-            - no-one
-    Forte_Hunter:
-        include:
-            - no-one
-    Forte_Mage:
-        include:
-            - no-one
-    Forte_Paladin:
-        include:
-            - no-one
-    Forte_Priest:
-        include:
-            - no-one
-    Forte_Rogue:
-        include:
-            - no-one
-    Forte_Shaman:
-        include:
-            - no-one
-    Forte_Shard:
-        include:
-            - no-one
-    Forte_Warlock:
-         include:
-            - no-one
-    Forte_Warrior:
-        include:
-            - no-one
-    Forte_Vehicle:
-        include:
-            - no-one
     FreeRefills:
         exclude:
             - banker
             - mule
         group: Standard
-    FriendShare:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Basic
     GatherMate2:
         include:
             - prof:Herbalism
@@ -617,8 +392,6 @@ addons:
             - mule
             - machine:type:basic
         group: Gathering
-    GnomishVendorShrinker:
-        group: Basic
     GoGoMount:
         group: Standard
     GreenRange:
@@ -626,10 +399,6 @@ addons:
             - banker
             - mule
         group: Standard
-    Hydra:
-        include:
-            - no-one
-        group: Dualbox
     AutoReFollow:
         include:
             - all(dualbox;machine:type:primary)
@@ -777,234 +546,12 @@ addons:
             - banker
             - mule
         group: Standard
-    Overachiever:
-        include:
-            - goal:Achievements
-        exclude:
-            - machine:type:basic
-        group: Achievements
-    Overachiever_Tabs:
-        include:
-            - goal:Achievements
-        exclude:
-            - machine:type:basic
-        group: Achievements
-    Overachiever_Trade:
-        include:
-            - goal:Achievements
-        exclude:
-            - machine:type:basic
-        group: Achievements
     Panda:
         include:
             - prof:Jewelcrafting
             - prof:Enchanting
             - prof:Inscription
         group: Crafting
-    Parrot:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    PitBull4:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_Aggro:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_AltPowerBar:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_Aura:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_Background:
-        include:
-            - no-one
-    PitBull4_BlankSpace:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_Border:
-        include:
-            - no-one
-    PitBull4_CastBar:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_CastBarLatency:
-        include:
-            - no-one
-    PitBull4_CombatFader:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_CombatIcon:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_CombatText:
-        include:
-            - no-one
-    PitBull4_ComboPoints:
-        include:
-            - no-one
-        group: Standard
-    PitBull4_DogTagTexts:
-        include:
-            - no-one
-    PitBull4_PhaseIcon:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_DruidManaBar:
-        include:
-            - class:Druid
-        exclude:
-            - banker
-            - mule
-        class: Druid
-    PitBull4_Eclipse:
-        include:
-            - no-one
-    PitBull4_ExperienceBar:
-        level: 10
-        include:
-            - class:Hunter
-        exclude:
-            - banker
-            - mule
-        class: Hunter
-    PitBull4_HappinessIcon:
-        include:
-            - no-one
-    PitBull4_HealthBar:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_HideBlizzard:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_Highlight:
-        include:
-            - no-one
-    PitBull4_HolyPower:
-        include:
-            - no-one
-    PitBull4_HostilityFader:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_LeaderIcon:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_LuaTexts:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_ManaSpark:
-        include:
-            - no-one
-    PitBull4_MasterLooterIcon:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_Portrait:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_PowerBar:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_PvPIcon:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_QuestIcon:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_RaidTargetIcon:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_RangeFader:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_ReadyCheckIcon:
-        include:
-            - no-one
-    PitBull4_ReputationBar:
-        include:
-            - no-one
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_RoleIcon:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    PitBull4_Runes:
-        include:
-            - no-one
-    PitBull4_SoulShards:
-        level: 10
-        include:
-            - class:Warlock
-        exclude:
-            - banker
-            - mule
-        class: Warlock
-    PitBull4_Sounds:
-        include:
-            - no-one
-    PitBull4_ThreatBar:
-        include:
-            - no-one
-    PitBull4_Totems:
-        include:
-            - no-one
-    PitBull4_VisualHeal:
-        include:
-            - no-one
-    PitBull4_VisualHeal5:
-        include:
-            - no-one
-    PitBull4_VoiceIcon:
-        include:
-            - no-one
     Postal:
         group: Basic
     Prat-3.0:
@@ -1014,21 +561,6 @@ addons:
             - no-one
     Prat-3.0_Libraries:
         group: Basic
-    Quartz:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    QuestGuru:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    QuestGuru_Tracker:
-        exclude:
-            - banker
-            - mule
-        group: Standard
     RepairBroker:
         exclude:
             - banker
@@ -1043,18 +575,6 @@ addons:
             - mule
             - machine:type:basic
         group: Gathering
-    Raven:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    Raven_Options:
-        exclude:
-            - machine:type:basic
-            - banker
-            - mule
-        group: Standard
     SellJunk:
         group: Basic
     VendorBait:
@@ -1065,9 +585,6 @@ addons:
             - mule
             - machine:type:basic
         group: Standard
-    ShockAndAwe:
-        include:
-            - no-one
     Skada:
         exclude:
             - banker
@@ -1155,15 +672,6 @@ addons:
             - banker
             - mule
         group: Standard
-    SoulBurned:
-        include:
-            - no-one
-    Talented:
-        include:
-            - no-one
-    Talented_Inspect:
-        include:
-            - no-one
     TellMeWhen:
         level: 15
         exclude:
@@ -1177,60 +685,11 @@ addons:
             - mule
             - machine:type:basic
         group: Standard
-    TidyPlates:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    TidyPlatesHub:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    TidyPlatesWidgets:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    TidyPlates_Grey:
-        include:
-            - no-one
-    TidyPlates_Graphite:
-        include:
-            - no-one
-    TidyPlates_Quatre:
-        include:
-            - no-one
-    TidyPlates_Neon:
-        include:
-            - no-one
-    TidyPlates_ThreatPlates:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
-    TipTac:
-        group: Basic
-    TipTacItemRef:
-        include:
-            - no-one
-    TipTacOptions:
-        group: Basic
-    TipTacTalents:
-        include:
-            - no-one
     TomTom:
         exclude:
             - banker
             - mule
         group: Standard
-    TourGuide:
-        include:
-            - no-one
     TrinketMenu:
         include:
             - levelcap
@@ -1246,10 +705,6 @@ addons:
             - banker
             - mule
         group: Standard
-    WIM:
-        group: Basic
-    WIM_FlatPanel:
-        group: Basic
     _NPCScan:
         exclude:
             - banker
@@ -1269,40 +724,10 @@ addons:
             - banker
             - mule
         group: Leveling
-    retrot:
-        include:
-            - no-one
-    tekKompare:
-        exclude:
-            - banker
-            - mule
-        group: Standard
-    teksLoot:
-        exclude:
-            - banker
-            - mule
-            - machine:player:Heidi
-        group: Standard
     AutoItemStartQuest:
         exclude:
             - banker
             - mule
-        group: Standard
-    '+Wowhead_Looter':
-        include:
-            - all(machine:type:primary;wowhead)
-            - all(machine:type:primary;realm:Winterhoof)
-        exclude:
-            - machine:type:secondary
-            - banker
-            - mule
-        group: Wowhead
-    Digits:
-        include:
-            - no-one
-    ThatJustHappened:
-        include:
-            - no-one
         group: Standard
     CombatLogTrigger:
         include:

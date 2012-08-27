@@ -7,8 +7,8 @@ types:
     - primary
     - poweruser
 wowversions:
-    - 4.x
-    - 4.2
+    - 5.x
+    - 5.0
 modoptions:
     digits:
         font:
