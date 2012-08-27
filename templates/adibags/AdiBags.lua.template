@@ -70,23 +70,7 @@ AdiBagsDB = {
 		["Junk"] = {
 		},
 		["CurrencyFrame"] = {
-			["profiles"] = {
-[% FOR pname IN adi.profileset.profiles_list -%]
-[% profile = adi.profileset.profile_get(pname) -%]
-                ["[% pname %]"] = {
-					["shown"] = {
-                        ["Mark of the World Tree"] = false,
-                        ["Justice Points"] = false,
-                        ["Chef's Award"] = false,
-                        ["Valor Points"] = false,
-                        ["Honor Points"] = false,
-                        ["Champion's Seal"] = false,
-                        ["Conquest Points"] = false,
-					},
-				},
-[% END -%]
-			},
-		},
+        },
 		["DataSource"] = {
 			["profiles"] = {
 [% FOR pname IN adi.profileset.profiles_list -%]
@@ -166,6 +150,9 @@ AdiBagsDB = {
             ["showBagType"] = false,
 			["qualityOpacity"] = 0.5,
 			["positionMode"] = "manual",
+            ["modules"] = {
+                ["CurrencyFrame"] = false,
+            },
 		},
 [% END -%]
 	},
