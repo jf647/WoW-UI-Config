@@ -206,8 +206,15 @@ addons:
         include:
             - no-one
     Ace3:
-        include:
-            - no-one
+        exclude:
+            - banker
+            - mule
+        group: Standard
+    LibPeriodicTable-3.1:
+        exclude:
+            - banker
+            - mule
+        group: Standard
     '!BugGrabber':
         group: Basic
     'BugSack':
@@ -217,8 +224,6 @@ addons:
     AltClickToAddItem:
         group: Basic
     Ara_Broker_Guild_Friends:
-        include:
-            - abgf_fixed_for_mop
         exclude:
             - banker
             - mule
@@ -239,7 +244,7 @@ addons:
         group: Auctions
     AutoBar:
         include:
-            - autobar_fixed_for_mop
+            - fixed_for_mop
         exclude:
             - banker
             - mule
@@ -351,8 +356,6 @@ addons:
             - mule
         group: Standard
     Broker_Group:
-        include:
-            - broker_group_fixed_for_mop
         exclude:
             - banker
             - mule
@@ -379,15 +382,13 @@ addons:
         group: Basic
     Clique:
         level: 10
-        include:
-            - clique_fixed_for_mop
         exclude:
             - banker
             - mule
         group: Standard
     Cork:
         include:
-            - cork_fixed_for_mop
+            - fixed_for_mop
         exclude:
             - mule
         group:
@@ -430,8 +431,8 @@ addons:
         group: Standard
     GatherMate2:
         include:
-            - all(gm2_fixed_for_mop;prof:Herbalism)
-            - all(gm2_fixed_for_mop;prof:Mining)
+            - prof:Herbalism
+            - prof:Mining
         exclude:
             - banker
             - mule
@@ -439,8 +440,8 @@ addons:
         group: Gathering
     GatherMate2_Data:
         include:
-            - all(gm2_fixed_for_mop;prof:Herbalism)
-            - all(gm2_fixed_for_mop;prof:Mining)
+            - prof:Herbalism
+            - prof:Mining
         exclude:
             - banker
             - mule
@@ -449,6 +450,8 @@ addons:
     GoGoMount:
         group: Standard
     GreenRange:
+        include:
+            - fixed_for_mop
         exclude:
             - banker
             - mule
@@ -560,7 +563,7 @@ addons:
             - Loremaster
     LushGearSwap:
         include:
-            - lgs_fixed_for_mop
+            - fixed_for_mop
         exclude:
             - banker
             - mule
@@ -730,16 +733,12 @@ addons:
         group: Standard
     TellMeWhen:
         level: 15
-        include:
-            - tmw_fixed_for_mop
         exclude:
             - banker
             - mule
             - machine:type:basic
         group: Standard
     TellMeWhen_Options:
-        include:
-            - tmw_fixed_for_mop
         exclude:
             - banker
             - mule
@@ -752,8 +751,8 @@ addons:
         group: Standard
     TrinketMenu:
         include:
-            - levelcap
-            - trinketmenu
+            - all(fixed_for_mop;levelcap)
+            - all(fixed_for_mop;trinketmenu)
         group: Standard
     TrinketsFollowEquipment:
         include:
@@ -791,7 +790,7 @@ addons:
         group: Standard
     CombatLogTrigger:
         include:
-            - all(clt_fixed_for_mop;machine:name:kara)
+            - all(fixed_for_mop;machine:name:kara)
         exclude:
             - banker
             - mule
