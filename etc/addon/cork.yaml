@@ -326,11 +326,11 @@ settings:
     filter:
     - value: 0
     - include:
-      - all(spec:Feral Combat;subspec:Bear)
+      - spec:Guardian
       level: 15
       value: 1
     - include:
-      - all(spec:Feral Combat;subspec:Cat)
+      - spec:Feral Combat
       level: 8
       value: 1
     - include:

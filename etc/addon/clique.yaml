@@ -394,7 +394,7 @@ actions:
   Growl:
     filter:
       include:
-      - all(spec:Feral Combat;subspec:Bear;cliqueaction:taunt)
+      - all(spec:Guardian;cliqueaction:taunt)
       level: 15
     icon: ability_physical_taunt
   Hammer of Justice:

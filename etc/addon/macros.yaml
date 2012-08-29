@@ -39,6 +39,7 @@ macros:
     filter:
       include:
         - all(class:Druid;spec:Feral Combat)
+        - all(class:Druid;spec:Guardian)
     macro: |+
       #showtooltip
       /cast [stance:1] Feral Charge(Bear Form); [stance:3] Feral Charge(Cat Form)

@@ -23,7 +23,7 @@ powertypes:
         filter:
             include:
                 - class:Warrior
-                - all(class:Druid;spec:Feral Combat;subspec:Bear)
+                - all(class:Druid;spec:Guardian)
     focus:
         color: { r: 1, g: 0.5, b: 0.25, a: 0.5 }
         filter:
@@ -34,7 +34,7 @@ powertypes:
         filter:
             include:
                 - class:Rogue
-                - all(class:Druid;spec:Feral Combat;subspec:Cat)
+                - all(class:Druid;spec:Feral Combat)
     runicpower:
         index: 6
         color: { r: 0, g: 0.82, b: 1, a: 0.5 }
@@ -63,7 +63,7 @@ frames:
                 - class:Rogue
                 - class:Death Knight
                 - class:Hunter
-                - all(class:Druid;spec:Feral Combat;subspec:Bear)
+                - all(class:Druid;spec:Guardian)
     power_pct_ic:
         name: power
         percent: 1
@@ -81,4 +81,4 @@ frames:
             include:
                 - role:Healer
             exclude:
-                - all(class:Druid;spec:Feral Combat;subspec:Bear)
+                - all(class:Druid;spec:Guardian)

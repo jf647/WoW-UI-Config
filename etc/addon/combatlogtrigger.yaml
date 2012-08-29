@@ -41,7 +41,7 @@ triggers:
     Last Stand:
         type: spell
         message: '*slink used'
-        reportspellid: 1
+        spellid: 12975
         filter:
             level: 20
             include:
@@ -57,7 +57,6 @@ triggers:
     Guardian of Ancient Kings:
         type: spell
         message: '*slink up'
-        reportspellid: 1
         filter:
             level: 85
             include:
@@ -90,7 +89,7 @@ triggers:
         filter:
             level: 49
             include:
-                - all(class:Druid;spec:Feral Combat;subspec:Bear)
+                - all(class:Druid;spec:Guardian)
     Frenzied Regeneration:
         type: spell
         message: '*slink used'
@@ -98,7 +97,7 @@ triggers:
         filter:
             level: 52
             include:
-                - all(class:Druid;spec:Feral Combat;subspec:Bear)
+                - all(class:Druid;spec:Guardian)
     Interrupt:
         type: interrupt
         anyspell: 1

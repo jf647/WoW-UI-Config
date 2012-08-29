@@ -270,6 +270,7 @@ my %consumabletypes = (
       Balance => [ 0, 1 ],
       Restoration => [ 0, 1 ],
       'Feral Combat' => [ 1, 0 ],
+      Guardian => [ 1, 0 ],
     },
     'Death Knight' => [ 1, 0 ],
     Priest => [ 0, 1 ],
@@ -485,6 +486,7 @@ my %abilities = (
     Balance => [ 'cleanse', 'cleanse:poison', 'cleanse:curse', 'resurrect', 'battlerez' ],
     Restoration => [ 'cleanse', 'cleanse:poison', 'cleanse:curse', 'cleanse:magic', 'resurrect', 'battlerez' ],
     'Feral Combat' => [ 'cleanse', 'cleanse:poison', 'cleanse:curse', 'interrupt', 'resurrect', 'battlerez' ],
+    Guardian => [ 'cleanse', 'cleanse:poison', 'cleanse:curse', 'interrupt', 'resurrect', 'battlerez' ],
   },
   Priest => {
     Holy => [ 'cleanse', 'cleanse:disease', 'cleanse:magic', 'cc', 'cc:undead', 'resurrect' ],

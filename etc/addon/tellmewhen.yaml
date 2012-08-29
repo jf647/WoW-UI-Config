@@ -1403,7 +1403,7 @@ icons:
     combat: in
     filter:
       include:
-      - all(spec:Feral Combat;subspec:Bear)
+      - spec:Guardian
       level: 69
     spell: Mangle
     type: Cooldown::Spell::Off::ShortCD
@@ -1411,7 +1411,7 @@ icons:
     combat: in
     filter:
       include:
-      - all(spec:Feral Combat;subspec:Bear)
+      - spec:Guardian
       level: 52
     type: Cooldown::Spell::Def::LongCD
   Arcane Torrent:
@@ -1740,7 +1740,7 @@ icons:
     combat: in
     filter:
       include:
-      - all(spec:Feral Combat;subspec:Bear)
+      - spec:Guardian
       level: 66
     stacks:
       max: 3
@@ -2003,7 +2003,7 @@ icons:
     combat: in
     filter:
       include:
-      - all(spec:Feral Combat;subspec:Bear)
+      - spec:Guardian
       level: 66
     missing: 1
     type: Buff
@@ -2111,7 +2111,7 @@ icons:
     filter:
       include:
       - class:Warrior
-      - all(class:Druid;spec:Feral Combat;subspec:Bear)
+      - all(class:Druid;spec:Guardian)
       - class:Rogue
       level: 18
     missing: 1
@@ -2135,7 +2135,7 @@ icons:
     filter:
       include:
       - class:Warrior
-      - all(class:Druid;spec:Feral Combat;subspec:Bear)
+      - all(class:Druid;spec:Guardian)
       - class:Warlock
       level: 16
     missing: 1
@@ -2398,7 +2398,7 @@ icons:
     combat: in
     filter:
       include:
-      - all(spec:Feral Combat;subspec:Bear)
+      - spec:Guardian
       level: 22
     spell: 80964
     type: Cooldown::Spell::Off::ShortCD
@@ -2406,7 +2406,7 @@ icons:
     combat: in
     filter:
       include:
-      - all(spec:Feral Combat;subspec:Cat)
+      - spec:Feral Combat
       level: 22
     spell: 80965
     type: Cooldown::Spell::Off::ShortCD
@@ -2511,7 +2511,7 @@ icons:
     combat: in
     filter:
       include:
-      - all(spec:Feral Combat;subspec:Bear)
+      - spec:Guardian
       level: 49
     type: Cooldown::Spell::Def::LongCD
   Swiftmend:
