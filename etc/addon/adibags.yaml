@@ -162,7 +162,7 @@ frame:
     default:
         filter: {}
         frame:
-            scale: 0.6
+            scale: 0.8
             x: -283.733
             y: -180.000
             point: TOPRIGHT

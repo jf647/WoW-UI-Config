@@ -94,11 +94,11 @@ numberedbars:
                   point: BOTTOMLEFT
                   columns: 6
                   numbuttons: 12
-                  scale: 0.6
+                  scale: 0.7
                   growsup: 1
                   padW: 2
                   padH: 2
-                  x: 1017.777
+                  x: 1380.366
                   y: 0
                   spacing: 4
                   pages:
@@ -116,12 +116,13 @@ numberedbars:
             - value:
                   hidden: 0
                   point: BOTTOMLEFT
+                  anchor: 3LT
                   columns: 2
                   numbuttons: 10
-                  scale: 0.6
+                  scale: 0.7
                   padW: 2
                   padH: 2
-                  x: 902.370
+                  x: 837.947
                   y: 0
                   spacing: 4
                   pages: *null_pages
@@ -130,13 +131,13 @@ numberedbars:
             - value:
                   hidden: 0
                   point: BOTTOMLEFT
-                  anchor: 4TR
+                  anchor: 4TC
                   columns: 7
                   numbuttons: 7
-                  scale: 0.6
+                  scale: 0.7
                   padW: 2
                   padH: 2
-                  x: 997.776
+                  x: 997.77
                   y: 119.9999
                   spacing: 4
                   pages: *null_pages
@@ -148,7 +149,7 @@ numberedbars:
                   anchor: 1TC
                   columns: 7
                   numbuttons: 7
-                  scale: 0.6
+                  scale: 0.7
                   padW: 2
                   padH: 2
                   x: 997.777
@@ -238,7 +239,7 @@ numberedbars:
                   y: 120.000
                   padW: 2
                   padH: 2
-                  scale: 0.6
+                  scale: 0.7
                   columns: 2
                   spacing: 4
                   numbuttons: 4
@@ -270,8 +271,8 @@ namedbars:
                   x: -359.514
                   y: -277.407
                   point: TOPRIGHT
-                  scale: 0.6
-                  anchor: bagsBC
+                  scale: 0.7
+                  anchor: 9TC
                   disabled: ~
     bags:
         filter:
@@ -280,6 +281,7 @@ namedbars:
                   x: -199.308
                   y: -136.444
                   point: TOPRIGHT
+                  anchor: menuTC
                   spacing: 2
                   numbuttons: 5
     xp:
@@ -296,15 +298,16 @@ namedbars:
     extra:
         filter:
             - value:
-                  point: BOTTOMLEFT
-                  x: 377.822
-                  y: 271.244
-                  scale: 0.7
+                  point: TOPLEFT
+                  x: 206.949
+                  y: -343.648
+                  scale: 1.5
                   spacing: 1
     vehicle:
         filter:
             - value:
                   point: BOTTOMLEFT
+                  anchor: petTC
                   x: 393.556
                   y: 203.866
                   scale: 1.25
@@ -314,9 +317,10 @@ namedbars:
     pet:
         filter:
             - value:
-                  point: BOTTOMRIGHT
-                  x: -796.431
-                  y: 431.443
+                  point: BOTTOMLEFT
+                  anchor: classTL
+                  x: 1314.232
+                  y: 275.155
                   scale: 0.7
                   spacing: 6
                   fadealpha: 0
@@ -330,42 +334,3 @@ namedbars:
                   scale: 0.7
                   spacing: 2
                   anchor: 3TC
-    totem1:
-        filter:
-            - include:
-                - class:Shaman
-              value:
-                  point: TOPRIGHT
-                  scale: 0.7
-                  x: 2.232
-                  y: -223.617
-                  spacing: 2
-                  showtotems: 1
-                  fadealpha: 0
-                  showrecall: 1
-    totem2:
-        filter:
-            - include:
-                - class:Shaman
-              value:
-                  point: totem1BL
-                  scale: 0.7
-                  x: -488.430
-                  y: -488.430
-                  spacing: 2
-                  showtotems: 1
-                  fadealpha: 0
-                  showrecall: 1
-    totem3:
-        filter:
-            - include:
-                - class:Shaman
-              value:
-                  point: totem2BL
-                  scale: 0.7
-                  x: -524.430
-                  y: -223.617
-                  spacing: 2
-                  showtotems: 1
-                  fadealpha: 0
-                  showrecall: 1

@@ -11,24 +11,18 @@ templates:
             input: $TEMPLATEDIR/addons/AddOns.txt.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/AddOns.txt
 addons:
-    Grid:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Grid
     kgPanels:
         exclude:
             - banker
             - mule
             - machine:type:basic
-        group: Grid
+        group: Standard
     kgPanelsConfig:
         exclude:
             - banker
             - mule
             - machine:type:basic
-        group: Grid
+        group: Standard
     DBM-Core: 
         level: 85
         exclude:
@@ -37,7 +31,47 @@ addons:
         group:
             - Heroics
             - Raiding
+    DBM-DefaultSkin:
+        level: 85
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Heroics
+            - Raiding
     DBM-GUI:
+        level: 85
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Heroics
+            - Raiding
+    DBM-HeartofFear:
+        level: 90
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Heroics
+            - Raiding
+    DBM-MogushanVaults:
+        level: 90
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Heroics
+            - Raiding
+    DBM-TerraceofEndlessSpring:
+        level: 90
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group:
+            - Heroics
+            - Raiding
+    DBM-Pandaria:
         level: 85
         exclude:
             - machine:type:secondary
@@ -100,6 +134,12 @@ addons:
         include:
             - no-one
     DBM-Party-Cataclysm:
+        level: 85
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Heroics
+    DBM-Party-MoP:
         level: 85
         exclude:
             - machine:type:secondary
@@ -177,6 +217,8 @@ addons:
     AltClickToAddItem:
         group: Basic
     Ara_Broker_Guild_Friends:
+        include:
+            - abgf_fixed_for_mop
         exclude:
             - banker
             - mule
@@ -196,6 +238,8 @@ addons:
             - machine:type:basic
         group: Auctions
     AutoBar:
+        include:
+            - autobar_fixed_for_mop
         exclude:
             - banker
             - mule
@@ -270,10 +314,14 @@ addons:
             - machine:type:basic
         group: Basic
     Altoholic_Achievements:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Basic
+        include:
+            - no-one
+    Altoholic_Guild:
+        include:
+            - no-one
+    Altoholic_Agenda:
+        include:
+            - no-one
     Altoholic_Characters:
         exclude:
             - machine:type:secondary
@@ -303,6 +351,8 @@ addons:
             - mule
         group: Standard
     Broker_Group:
+        include:
+            - broker_group_fixed_for_mop
         exclude:
             - banker
             - mule
@@ -329,11 +379,15 @@ addons:
         group: Basic
     Clique:
         level: 10
+        include:
+            - clique_fixed_for_mop
         exclude:
             - banker
             - mule
         group: Standard
     Cork:
+        include:
+            - cork_fixed_for_mop
         exclude:
             - mule
         group:
@@ -376,8 +430,8 @@ addons:
         group: Standard
     GatherMate2:
         include:
-            - prof:Herbalism
-            - prof:Mining
+            - all(gm2_fixed_for_mop;prof:Herbalism)
+            - all(gm2_fixed_for_mop;prof:Mining)
         exclude:
             - banker
             - mule
@@ -385,8 +439,8 @@ addons:
         group: Gathering
     GatherMate2_Data:
         include:
-            - prof:Herbalism
-            - prof:Mining
+            - all(gm2_fixed_for_mop;prof:Herbalism)
+            - all(gm2_fixed_for_mop;prof:Mining)
         exclude:
             - banker
             - mule
@@ -505,6 +559,8 @@ addons:
             - Leveling
             - Loremaster
     LushGearSwap:
+        include:
+            - lgs_fixed_for_mop
         exclude:
             - banker
             - mule
@@ -674,12 +730,16 @@ addons:
         group: Standard
     TellMeWhen:
         level: 15
+        include:
+            - tmw_fixed_for_mop
         exclude:
             - banker
             - mule
             - machine:type:basic
         group: Standard
     TellMeWhen_Options:
+        include:
+            - tmw_fixed_for_mop
         exclude:
             - banker
             - mule
@@ -731,7 +791,7 @@ addons:
         group: Standard
     CombatLogTrigger:
         include:
-            - machine:name:kara
+            - all(clt_fixed_for_mop;machine:name:kara)
         exclude:
             - banker
             - mule

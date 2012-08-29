@@ -89,7 +89,6 @@ sub build_profile
     for my $barnum( sort { $a <=> $b } keys %{ $config->{numberedbars} } ) {
         my $block = $config->{numberedbars}->{$barnum};
         if( my $r = $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
-            $DB::single = 1;
             push @{ $profile->{numberedbars} }, $r->value;
         }
         else {

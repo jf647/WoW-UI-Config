@@ -1,0 +1,166 @@
+        ["ping"] = {
+            ["showPing"] = true,
+            ["showAt"] = "map",
+        },
+        ["coordinates"] = {
+            ["enabled"] = false,
+            ["fontColor"] = {
+            },
+            ["borderColor"] = {
+            },
+            ["locked"] = false,
+            ["backgroundColor"] = {
+            },
+        },
+        ["buttons"] = {
+            ["radius"] = 10,
+            ["lockDragging"] = false,
+            ["allowDragging"] = true,
+            ["visibilitySettings"] = {
+                ["MinimapZoomIn"] = "never",
+                ["MiniMapMailFrame"] = "always",
+                ["LibDBIcon10_Skada"] = "never",
+                ["MiniMapWorldMapButton"] = "never",
+                ["MinimapZoomOut"] = "never",
+                ["DBMMinimapButton"] = "never",
+                ["MiniMapTracking"] = "always",
+                ["TimeManagerClockButton"] = "never",
+                ["MinimapZoneTextButton"] = "hover",
+                ["GameTimeFrame"] = "always",
+            },
+            ["dragPositions"] = {
+                ["MiniMapTracking"] = 151.6382062595901,
+            },
+            ["controlVisibility"] = true,
+        },
+        ["hudmap"] = {
+            ["useQuestHelper"] = true,
+            ["useRoutes"] = true,
+            ["useGatherMate"] = true,
+            ["scale"] = 1.4,
+            ["textColor"] = {
+                ["a"] = 1,
+                ["r"] = 0.5,
+                ["g"] = 1,
+                ["b"] = 0.5,
+            },
+            ["alpha"] = 0.7,
+            ["hudColor"] = {
+            },
+        },
+        ["zonetext"] = {
+            ["bgColor"] = {
+                ["a"] = 1,
+                ["r"] = 0,
+                ["g"] = 0,
+                ["b"] = 0,
+            },
+            ["fontColor"] = {
+            },
+            ["borderColor"] = {
+                ["a"] = 1,
+                ["r"] = 0,
+                ["g"] = 0,
+                ["b"] = 0,
+            },
+            ["xOffset"] = 0,
+            ["yOffset"] = 0,
+        },
+        ["fader"] = {
+            ["enabled"] = false,
+            ["normalOpacity"] = 1,
+            ["hoverOpacity"] = 0.25,
+        },
+        ["clock"] = {
+            ["bgColor"] = {
+                ["a"] = 1,
+                ["r"] = 0,
+                ["g"] = 0,
+                ["b"] = 0,
+            },
+            ["fontColor"] = {
+            },
+            ["borderColor"] = {
+                ["a"] = 1,
+                ["r"] = 0,
+                ["g"] = 0,
+                ["b"] = 0,
+            },
+            ["xOffset"] = 0,
+            ["yOffset"] = 0,
+        },
+        ["borders"] = {
+            ["applyPreset"] = false,
+            ["borders"] = {
+                {
+                    ["a"] = 1,
+                    ["hNudge"] = 0,
+                    ["rotSpeed"] = 10,
+                    ["r"] = 0.3411764705882353,
+                    ["scale"] = 0.73,
+                    ["g"] = 0.4705882352941176,
+                    ["vNudge"] = 0,
+                    ["disableRotation"] = true,
+                    ["name"] = "Square Overlay",
+                    ["blendMode"] = "ADD",
+                    ["rotation"] = 66,
+                    ["drawLayer"] = "ARTWORK",
+                    ["b"] = 1,
+                    ["texture"] = "World\\GENERIC\\ACTIVEDOODADS\\WORLDTREEPORTALS\\TWISTEDNETHER8.BLP",
+                }, -- [1]
+                {
+                    ["a"] = 1,
+                    ["hNudge"] = 0,
+                    ["rotSpeed"] = -14,
+                    ["b"] = 1,
+                    ["scale"] = 1.9,
+                    ["g"] = 0.7215686274509804,
+                    ["vNudge"] = 5,
+                    ["disableRotation"] = true,
+                    ["name"] = "Circle 2",
+                    ["drawLayer"] = "BACKGROUND",
+                    ["blendMode"] = "ADD",
+                    ["r"] = 0.3607843137254902,
+                    ["texture"] = "World\\GENERIC\\ACTIVEDOODADS\\INSTANCEPORTAL\\GENERICGLOW2.BLP",
+                }, -- [2]
+            },
+            ["backdrop"] = {
+                ["show"] = false,
+                ["textureColor"] = {
+                },
+                ["settings"] = {
+                    ["bgFile"] = "Interface\\Tooltips\\UI-Tooltip-Background",
+                    ["edgeFile"] = "Interface\\Tooltips\\UI-Tooltip-Border",
+                    ["tile"] = false,
+                    ["edgeSize"] = 16,
+                    ["insets"] = {
+                        ["top"] = 4,
+                        ["right"] = 4,
+                        ["left"] = 4,
+                        ["bottom"] = 4,
+                    },
+                },
+                ["borderColor"] = {
+                },
+                ["scale"] = 1,
+            },
+            ["hideBlizzard"] = true,
+        },
+        ["core"] = {
+            ["clamp"] = true,
+            ["point"] = "TOPRIGHT",
+            ["relpoint"] = "TOPRIGHT",
+            ["autoZoom"] = 5,
+            ["northTag"] = true,
+            ["y"] = -47.9622917175293,
+            ["x"] = -26.84542083740234,
+            ["lock"] = true,
+            ["shape"] = "Interface\\BUTTONS\\WHITE8X8",
+            ["rightClickToConfig"] = true,
+        },
+        ["movers"] = {
+            ["enabled"] = false,
+            ["framePositions"] = {
+            },
+            ["lock"] = false,
+        },

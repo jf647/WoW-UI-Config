@@ -1,0 +1,45 @@
+templates:
+    perchar:
+        layoutlocal:
+            input: $TEMPLATEDIR/layoutlocal/layout-local.txt.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/layout-local.txt
+frames:
+    PlayerFrame:
+        filter:
+            - exclude:
+                  - banker
+                  - mule
+              value:
+                  level: 1
+                  anchor:
+                      point: BOTTOM
+                      x: -325
+                      y: 230
+                      w: 232
+                      h: 100
+    TargetFrame:
+        filter:
+            - exclude:
+                  - banker
+                  - mule
+              value:
+                  level: 1
+                  anchor:
+                      point: BOTTOM
+                      x: 325
+                      y: 230
+                      w: 232
+                      h: 100
+    FocusFrame:
+        filter:
+            - exclude:
+                  - banker
+                  - mule
+              value:
+                  level: 1
+                  anchor:
+                      point: BOTTOM
+                      x: 452
+                      y: 242
+                      w: 232
+                      h: 100

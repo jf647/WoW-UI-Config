@@ -16,8 +16,8 @@ panels:
         anchorTo: BOTTOMLEFT
         x: -4
         y: -4
-        height: 144
-        width: 1373
+        height: 14%
+        width: 101%
         level: 0
         strata: BACKGROUND
         bg_orientation: HORIZONTAL

@@ -1,0 +1,10 @@
+Version: 1
+[% FOR frame IN frames -%]
+Frame: [% frame.name %]
+FrameLevel: [% frame.level %]
+Anchor: [% frame.anchor.point %]
+X: [% frame.anchor.x %]
+Y: [% frame.anchor.y %]
+W: [% frame.anchor.w %]
+H: [% frame.anchor.h %]
+[% END -%]

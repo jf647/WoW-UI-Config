@@ -18,6 +18,7 @@ logging:
 levelcap: 85
 modules:
     - WoWUI::Module::Addons
+    - WoWUI::Module::LayoutLocal
     - WoWUI::Module::Bagnon
     - WoWUI::Module::Dominos
     - WoWUI::Module::Macros
