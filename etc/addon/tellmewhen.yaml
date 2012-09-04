@@ -25,6 +25,7 @@ templates:
     tellmewhen:
       input: $TEMPLATEDIR/tellmewhen/TellMeWhen.lua.template
       output: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/TellMeWhen.lua
+      output_yaml: $TEMPDIR/WTF/Account/$ACCOUNT/SavedVariables/TellMeWhen.yaml
 conditions:
   solo:
     Type: GROUP

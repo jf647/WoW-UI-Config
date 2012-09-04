@@ -243,8 +243,6 @@ addons:
             - machine:type:basic
         group: Auctions
     AutoBar:
-        include:
-            - fixed_for_mop
         exclude:
             - banker
             - mule
@@ -450,8 +448,6 @@ addons:
     GoGoMount:
         group: Standard
     GreenRange:
-        include:
-            - fixed_for_mop
         exclude:
             - banker
             - mule
@@ -562,8 +558,6 @@ addons:
             - Leveling
             - Loremaster
     LushGearSwap:
-        include:
-            - fixed_for_mop
         exclude:
             - banker
             - mule
@@ -790,7 +784,7 @@ addons:
         group: Standard
     CombatLogTrigger:
         include:
-            - all(fixed_for_mop;machine:name:kara)
+            - machine:type:primary
         exclude:
             - banker
             - mule

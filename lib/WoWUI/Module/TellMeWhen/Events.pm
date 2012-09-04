@@ -14,6 +14,20 @@ use WoWUI::Module::TellMeWhen::Event;
 # set up class
 use WoWUI::Meta::Attribute::Trait::Relevant;
 with 'WoWUI::Module::TellMeWhen::Dumpable';
+has Events => (
+    is => 'ro',
+    isa => 'ArrayRef[ArrayRef[WoWUI::Module::TellMeWhen::Event]',
+    traits => ['Array','Relevant'],
+    relevant => 1,
+    default => sub { [] },
+    handles => {
+        add_event => 'push',
+        unshift_event => 'unshift',
+        event_count => 'count',
+        event_values => 'elements',
+        event_clear => 'clear',
+    },
+);
 has [ qw|OnShow OnHide OnStart OnFinish| ] => (
     is => 'rw',
     isa => 'WoWUI::Module::TellMeWhen::Event',
@@ -23,8 +37,24 @@ has [ qw|OnShow OnHide OnStart OnFinish| ] => (
 );
 CLASS->meta->make_immutable;
 
-# the Dumpable role requires that we provide this
-sub augment_lua { "" }
+sub lua
+{
+
+    my $self = shift;
+    
+    if( $self->event_count ) {
+        my @events;
+        for my $event( $self->event_values ) {
+            push @events, '{ ' . $event->lua . ' }';
+        }
+        return join(', ', @events) . ', ["n"] = ' . $self->event_count;
+    }
+    
+    return '';
+
+}
+
+sub augment_lua { '' }
 
 # keep require happy
 1;

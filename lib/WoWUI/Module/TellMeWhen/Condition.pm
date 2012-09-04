@@ -20,8 +20,11 @@ has Operator => ( is => 'rw', isa => 'Str', default => '==', traits => ['Relevan
 has Level => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'], relevant => 1 );
 has Unit => ( is => 'rw', isa => 'Str', default => 'player', traits => ['Relevant'], relevant => 1 );
 has Name => ( is => 'rw', isa => 'Str', default => "", traits => ['Relevant'], relevant => 1 );
-has [ qw|PrtsBefore PrtsAfter| ] => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'], relevant => 1 );
+has Name2 => ( is => 'rw', isa => 'Str', default => "", traits => ['Relevant'], relevant => 1 );
+has PrtsBefore => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'], relevant => 1 );
+has PrtsAfter => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'], relevant => 1 );
 has Checked => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has Checked2 => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
 has Runes => (
     is => 'rw',
     isa => 'WoWUI::Module::TellMeWhen::Condition::Runes',

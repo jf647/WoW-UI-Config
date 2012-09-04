@@ -20,6 +20,11 @@ has profileset => (
     isa => 'WoWUI::ProfileSet',
     default => sub { WoWUI::ProfileSet->new },
 );
+has tmwversion => (
+    is => 'rw',
+    isa => 'Int',
+    default => '60206',
+);
 CLASS->meta->make_immutable;
 
 use Carp 'croak';
@@ -27,6 +32,8 @@ use Clone 'clone';
 use Data::Compare;
 use Digest;
 use Set::Scalar;
+use Data::Lua;
+use YAML::Any 'DumpFile';
 
 use WoWUI::Config;
 use WoWUI::Util 'log';
@@ -90,11 +97,21 @@ sub BUILD
     
 }
 
+after process => sub {
+
+    my $self = shift;
+    
+    
+    
+    
+};
+
 sub augment_global
 {
 
     my $self = shift;
-    $self->globaldata->{pset} = $self->profileset;
+    $self->globaldata_set( pset => $self->profileset );
+    $self->globaldata_set( tmwversion => $self->tmwversion );
 
 }
 
@@ -113,6 +130,7 @@ sub augment_globalpc
         char => $char,
         filtergroups => $self->filtergroups,
         modoptions => $self->modoptions( $char ),
+        tmw => $self,
     );
     $profile->populate( config => $config, f => $f );
     if( $profile->NumGroups ) {

@@ -29,6 +29,16 @@ has spec => (
     spec_set => 'set',
   },
 );
+has talents => (
+  traits => ['Hash'],
+  is => 'rw',
+  isa => 'HashRef[ArrayRef[Str]]',
+  default => sub { {} },
+  handles => {
+    talents_get => 'get',
+    talents_set => 'set',
+  },
+);
 has role => (
   traits => ['Hash'],
   is => 'rw',
@@ -106,9 +116,9 @@ sub BUILD
   # guild
   $self->set_guild;
   
-  # specs and roles
-  $self->set_spec_role;
-  
+  # specs, roles and talents
+  $self->set_spec_role_talents;
+
   # abilities
   $self->set_abilities;
   
@@ -380,8 +390,13 @@ my %roles = (
     Frost => [ 'Intellect DPS', 'Caster DPS', 'Petclass' ],
   },
   Warlock => [ 'Intellect DPS', 'Caster DPS', 'Petclass' ],
+  Monk => {
+      Windwalker => [ 'Agility DPS', 'Melee DPS' ],
+      Mistweaver => [ 'Healer' ],
+      Brewmaster => [ 'Tank' ],
+  },
 );
-sub set_spec_role
+sub set_spec_role_talents
 {
 
   my $self = shift;
@@ -423,6 +438,13 @@ sub set_spec_role
             $self->flags_get($specnum)->insert( "role:$role" );
           }
         }
+      }
+      $DB::single = 1 if( $self->name eq 'Staphod' );
+      if( exists $self->cfg->{"talents_spec${specnum}"} ) {
+          $self->talents_set($specnum, $self->cfg->{"talents_spec${specnum}"});
+          for my $talent( @{ $self->cfg->{"talents_spec${specnum}"} } ) {
+              $self->flags_get($specnum)->insert( "talent:$talent" );
+          }
       }
     }
   }

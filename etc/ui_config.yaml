@@ -35,7 +35,6 @@ modules:
     - WoWUI::Module::NADTParty
     - WoWUI::Module::AutoReFollow
     - WoWUI::Module::NADTTurnIn
-    - WoWUI::Module::TellMeWhen
     - WoWUI::Module::Clique
     - WoWUI::Module::Cork
     - WoWUI::Module::CombatLogTrigger

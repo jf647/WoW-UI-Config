@@ -28,8 +28,6 @@ has Conditions => (
 );
 CLASS->meta->make_immutable;
 
-use Carp 'croak';
-
 sub lua
 {
 

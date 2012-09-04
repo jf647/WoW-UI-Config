@@ -19,64 +19,45 @@ has nextgrouppos => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen::Point' );
 has filtergroups => ( is => 'rw', isa => 'WoWUI::FilterGroups', required => 1 );
 has widestgroup => ( is => 'rw', isa => 'Num', default => 0 );
 has groupscale => ( is => 'rw', isa => 'Num', default => 2 );
+has tmw => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen', is_weak => 1, required => 1 );
+has Version => ( is => 'ro', isa => 'Int', traits => ['Relevant'], relevant => 1, lazy_builder => 1 );
 has Locked => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
-has Interval => ( is => 'rw', isa => 'Num', default => 1, traits => ['Relevant'], relevant => 1 );
-has EffThreshold => ( is => 'rw', isa => 'Num', default => 15, traits => ['Relevant'], relevant => 1 );
 has NumGroups => ( is => 'ro', isa => 'Num', traits => ['Relevant'], relevant => 1 );
 around 'NumGroups' => sub { $_[1]->group_count };
-has CDCOColor => (
-    is => 'rw',
-    isa => 'HashRef[Num]',
-    default => sub { { r => 0, g => 1, b => 0, a => 1 } },
-    traits => ['Relevant'],
-    relevant => 1,
-);
-has CDSTColor => (
-    is => 'rw',
-    isa => 'HashRef[Num]',
-    default => sub { { r => 1, g => 0, b => 0, a => 1 } },
-    traits => ['Relevant'],
-    relevant => 1,
-);
-has PRESENTColor => (
-    is => 'rw',
-    isa => 'HashRef[Num]',
-    default => sub { { r => 1, g => 1, b => 1, a => 1 } },
-    traits => ['Relevant'],
-    relevant => 1,
-);
-has ABSENTColor => (
-    is => 'rw',
-    isa => 'HashRef[Num]',
-    default => sub { { r => 1, g => 0.35, b => 0.35, a => 1 } },
-    traits => ['Relevant'],
-    relevant => 1,
-);
-has OORColor => (
-    is => 'rw',
-    isa => 'HashRef[Num]',
-    default => sub { { r => 0.5, g => 0.5, b => 0.5, a => 1 } },
-    traits => ['Relevant'],
-    relevant => 1,
-);
-has OOMColor => (
-    is => 'rw',
-    isa => 'HashRef[Num]',
-    default => sub { { r => 0.5, g => 0.5, b => 0.5, a => 1 } },
-    traits => ['Relevant'],
-    relevant => 1,
-);
+has Interval => ( is => 'rw', isa => 'Num', default => 0.06, traits => ['Relevant'], relevant => 1 );
+has EffThreshold => ( is => 'rw', isa => 'Num', default => 15, traits => ['Relevant'], relevant => 1 );
 has TextureName => ( is => 'rw', isa => 'Str', default => 'Blizzard', traits => ['Relevant'], relevant => 1 );
-has [ qw|DrawEdge TestOn MasterSound ReceiveComm| ] => (
-    is => 'rw', isa => 'Bool', default => 0,
-    traits => ['Relevant'], relevant => 1,
+has DrawEdge => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has SoundChannel => ( is => 'rw', isa => 'Str', default => 'SFX', traits => ['Relevant'], relevant => 1 );
+has ReceiveComm => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has WarnInvalids => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has BarGCD => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has ClockGCD => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has CheckOrder => ( is => 'rw', isa => 'Int', default => -1, traits => ['Relevant'], relevant => 1 );
+has SUG_atBeginning => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has ColorNames => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has AlwaysSubLinks => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has ColorMSQ => ( ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has OnlyMSQ => ( ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has Colors => (
+    is => 'rw',
+    isa => 'HashRef[HashRef[Num]]',
+    default => sub { {
+        CBC  => { r => 0, g => 1, b => 0, Override => 0, a => 1 },
+        CBS  => { r => 1, g => 0, b => 0, Override  => 0, a => 1 },
+        OOR  => { r => 0.5, g => 0.5, b => 0.5, Override => 0 },
+        OOM  => { r => 0.5, g => 0.5, b => 0.5, Override => 0 },
+        OORM => { r => 0.5, g => 0.5, b => 0.5, Override => 0 },
+        CTA  => { r => 1, g => 1, b => 1, Override => 0 },
+        COA  => { r => 0.5, g => 0.5, b => 0.5, Override => 0 },
+        CTS  => { r => 1, g => 1, b => 1, Override => 0 },
+        COS  => { r => 1, g => 1, b => 1, Override => 0 },
+        NA   => { r => 1, g => 1, b => 1, Override => 0 },
+        NS   => { r => 1, g => 1, b => 1, Override => 0 },
+    } },
+    traits => ['Relevant'],
+    relevant => 1,
 );
-has [ qw|WarnInvalids BarGCD ClockGCD| ] => (
-    is => 'rw', isa => 'Bool', default => 1,
-    traits => ['Relevant'], relevant => 1,
-);
-has EditorScale => ( is => 'rw', isa => 'Num', default => 0.8, traits => ['Relevant'], relevant => 1 );
-has CheckOrder => ( is => 'rw', isa => 'Num', default => -1, traits => ['Relevant'], relevant => 1 );
 has Groups => (
     is => 'ro',
     isa => 'ArrayRef[WoWUI::Module::TellMeWhen::Group]',
@@ -129,6 +110,15 @@ sub BUILD
     $self->nextgrouppos( WoWUI::Module::TellMeWhen::Point->new( %{ $self->modoptions->{anchor} } ) );
 
     return $self;
+
+}
+
+sub _build_Version
+{
+
+    my $self = shift;
+    
+    return $self->tmw->tmwversion;
 
 }
 
@@ -339,7 +329,26 @@ sub select_icons
 
 }
 
-sub augment_lua { '' }
+sub augment_lua {
+
+    return <<END;
+            ["TextLayouts"] = {
+                ["bar1"] = {
+                    {
+                    }, -- [1]
+                    {
+                    }, -- [2]
+                },
+                ["icon1"] = {
+                    {
+                    }, -- [1]
+                    {
+                    }, -- [2]
+                },
+            },
+END
+                                                                                                                                                                                                                                                        END
+}
 
 # keep require happy
 1;

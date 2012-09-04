@@ -1,8 +1,8 @@
 ---
 modoptions:
-    font: Fonts\\FRIZQT__.TTF
-    fontname: Friz Quadrata TT
-    fontsize: 12
+    font: Interface\\Addons\\Prat-3.0\\fonts\\DORISPP.ttf
+    fontname: Doris PP
+    fontsize: 14
 templates:
     global:
         chocolatebar:

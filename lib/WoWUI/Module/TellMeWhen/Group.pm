@@ -14,41 +14,46 @@ use WoWUI::Meta::Attribute::Trait::Relevant;
 with 'WoWUI::Module::TellMeWhen::Dumpable';
 has modoptions => ( is => 'rw', isa => 'HashRef', required => 1 );
 has Enabled => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has OnlyInCombat => ( is => 'rw', isa => 'Bool', default => 0 );
 has Locked => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has View => ( is => 'rw', isa => 'Str', default => 'icon', traits => ['Relevant'], relevant => 1 );
 has Name => ( is => 'rw', isa => 'Str', traits => ['Relevant'], relevant => 1 );
+has Strata => ( is => 'rw', isa => 'Str', default => 'MEDIUM', traits => ['Relevant'], relevant => 1 );
 has Scale => ( is => 'rw', isa => 'Num', default => 2, traits => ['Relevant'], relevant => 1 );
 has Level => ( is => 'rw', isa => 'Int', default => 10, traits => ['Relevant'], relevant => 1 );
-has [ qw|Rows Columns| ] => ( is => 'rw', isa => 'Int', traits => ['Relevant'], relevant => 1 );
-has Spacing => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'], relevant => 1 );
+has Rows => ( is => 'rw', isa => 'Int', traits => ['Relevant'], relevant => 1 );
+has Columns => ( is => 'rw', isa => 'Int', traits => ['Relevant'], relevant => 1 );
 has CheckOrder => ( is => 'rw', isa => 'Int', default => -1, traits => ['Relevant'], relevant => 1 );
-has [ qw|PrimarySpec SecondarySpec| ] => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
-has [ qw|Tree1 Tree2 Tree3| ] => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
-has Point => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen::Point', traits => ['Relevant'], relevant => 1 );
-has 'LBF'=> (
-    is => 'ro',
-    isa => 'HashRef',
+has PrimarySpec => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has SecondarySpec => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has LayoutDirection => ( is => 'rw', isa => 'Num', default => 1, traits => ['Relevant'], relevant => 1 );
+has Tree1 => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has Tree2 => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has Tree3 => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has Tree4 => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
+has SortPriorities => (
+    is => 'rw',
+    isa => 'ArrayRef[HashRef]',
+    defaults => sub { [
+        { Method => 'id', Order => 1 },
+        { Method => 'duration', Order => 1 },
+        { Method => 'stacks', Order => -1 },
+        { Method => 'visiblealpha', Order => -1 },
+        { Method => 'visibleshown', Order => -1 },
+        { Method => 'alpha', Order => -1 },
+        { Method => 'shown', Order => -1 },
+        
+    ] },
     traits => ['Relevant'],
     relevant => 1,
-    default => sub { {
-        Gloss => 0,
-        Colors => {},
-        Backdrop => 0,
-        SkinID => 'Blizzard',
-    } },
 );
-has Font => (
+has Point => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen::Point', traits => ['Relevant'], relevant => 1 );
+has SettingsPerView => (
     is => 'rw',
     isa => 'HashRef',
+    default => sub { {} },
     traits => ['Relevant'],
     relevant => 1,
-    default => sub { {
-        Name => 'Arial Narrow',
-        Size => 12,
-        Outline => 'THICKOUTLINE',
-        x => -2,
-        y => -2,
-        OverrideLBFPos => 0,
-    } },
 );
 has Icons => (
     is => 'ro',

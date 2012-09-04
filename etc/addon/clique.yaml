@@ -80,6 +80,7 @@ filtergroups:
   paladin:
     members:
     - Word of Glory
+    - Eternal Flame
     - Righteous Defense
     - Hammer of Justice
     - Flash of Light
@@ -947,8 +948,16 @@ actions:
     filter:
       include:
       - cliqueaction:freeheal
+      exclude:
+      - talent:Eternal Flame
       level: 9
     icon: inv_helmet_96
+  Eternal Flame:
+    filter:
+      level: 45
+      include:
+      - all(talent:Eternal Flame;cliqueaction:freeheal)
+    icon: inv_torch_thrown
   showmenu:
     filter:
       include:

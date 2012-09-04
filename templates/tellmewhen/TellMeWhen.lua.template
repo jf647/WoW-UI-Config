@@ -1,14 +1,17 @@
 
 TellMeWhenDB = {
     ["global"] = {
-        ["HelpSettings"] = {
-            ["NewDurSyntax"] = 1,
-            ["ICON_DURS_FIRSTSEE"] = 1,
-            ["ICON_POCKETWATCH_FIRSTSEE"] = 1,
+        ["EditorScale"] = 0.9,
+        ["EditorHeight"] = 600,
+        ["WpnEnchDurs"] = {
         },
-        ["WpnEnchDurs"] = 0,
+        ["HelpSettings"] = {
+        },
+        ["HasImported"] = false,
+        ["ConfigWarning"] = false,
+        ["VersionWarning"] = false,
     },
-    ["Version"] = 46502,
+    ["Version"] = [% tmwversion %],
     ["profileKeys"] = {
 [% FOR realm IN charlist.keys -%]
 [% FOR char IN charlist.$realm.keys -%]

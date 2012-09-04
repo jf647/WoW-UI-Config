@@ -20,51 +20,12 @@ has filter => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
 has no_filter_group_ok => ( is => 'ro', isa => 'Bool' );
 has type => ( is => 'ro', isa => 'Str' );
 has conditions => ( is => 'ro', isa => 'ArrayRef' );
-# String, no default, not relevant
-has [ qw|BuffOrDebuff CooldownType| ] => ( is => 'rw', isa => 'Str', traits => ['Relevant'] );
-# String, no default, relevant
+has ShowWhen => ( is => 'rw', isa => 'Num', default => 0x01, traits => ['Relevant'] );
+has Enabled => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 has Name => ( is => 'rw', isa => 'Str', required => 1, lazy => 1, builder => 'build_name', traits => ['Relevant'], relevant => 1 );
-# String, other
-has ShowWhen => ( is => 'rw', isa => 'Str', default => 'alpha', traits => ['Relevant'] );
 has Type => ( is => 'rw', isa => 'Str', required => 1, traits => ['Relevant'], relevant => 1 );
-has Unit => ( is => 'rw', isa => 'Str', default => 'player', traits => ['Relevant'] );
-has WpnEnchantType => ( is => 'rw', isa => 'Str', default => 'MainHandSlot', traits => ['Relevant'] );
-has ICDType => ( is => 'rw', isa => 'Str', default => 'aura', traits => ['Relevant'] );
-has TotemSlots => ( is => 'rw', isa => 'Str', default => '1111', traits => ['Relevant'] );
-has CustomTex => ( is => 'rw', isa => 'Str', default => "", traits => ['Relevant'], relevant => 1 );
-has BindText => ( is => 'rw', isa => 'Str', default => "", traits => ['Relevant'], relevant => 1 );
-# Boolean, default true, relevant
-has [ qw|Enabled| ] => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
-# Boolean, default true, not relevant
-has [ qw|OnlyMine SortAsc SortDesc| ] => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'] );
-# Boolean, default false, relevant
-has [ qw|
-    ShowTimer ShowTimerText InvertBars ShowCBar
-    FakeHidden DurationMinEnabled DurationMaxEnabled
-| ] => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
-# Boolean, default false, not relevant
-has [ qw|
-    RangeCheck ManaCheck CooldownCheck
-    IgnoreRunes CheckNext OnlyEquipped
-    OnlyInBags OnlySeen UseActvtnOverlay
-    HideUnequipped Interruptible StackMinEnabled
-    StackMaxEnabled ShowPBar Sort EnableStacks
-| ] => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
-# Int / Num
-has ConditionAlpha => ( is => 'rw', isa => 'Num', default => 0, traits => ['Relevant'], relevant => 1 );
-has CBarOffs => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'], relevant => 1 );
-has PBarOffs => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'] );
-has [ qw|Alpha UnAlpha| ] => ( is => 'rw', isa => 'Num', default => 1, traits => ['Relevant'], relevant => 1 );
-has [ qw|StackMin StackMax| ] => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'] );
-has [ qw|DurationMin DurationMax| ] => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'], relevant => 1 );
-# Other
-has Events => (
-    is => 'rw',
-    isa => 'WoWUI::Module::TellMeWhen::Events',
-    default => sub { WoWUI::Module::TellMeWhen::Events->new },
-    traits => ['Relevant'],
-    relevant => 1,
-);
+has Alpha => ( is => 'rw', isa => 'Num', default => 1, traits => ['Relevant'], relevant => 1 );
+has UnAlpha => ( is => 'rw', isa => 'Num', default => 1, traits => ['Relevant'], relevant => 1 );
 has Icons => (
     is => 'rw',
     isa => 'ArrayRef[Str]',
@@ -75,6 +36,13 @@ has Icons => (
         metaicon_count => 'count',
     },
 );
+has SettingsPerView => (
+    is => 'rw',
+    isa => 'HashRef',
+    default => sub { {} },
+    traits => ['Relevant'],
+    relevant => 1,
+);
 has Conditions => (
     is => 'ro',
     isa => 'WoWUI::Module::TellMeWhen::ConditionSet',
@@ -83,6 +51,54 @@ has Conditions => (
     default => sub { WoWUI::Module::TellMeWhen::ConditionSet->new },
     handles => [ qw|add_cond cond_count cond_values unshift_cond| ],
 );
+has Events => (
+    is => 'rw',
+    isa => 'WoWUI::Module::TellMeWhen::Events',
+    default => sub { WoWUI::Module::TellMeWhen::Events->new },
+    traits => ['Relevant'],
+    relevant => 1,
+);
+has BindText => ( is => 'rw', isa => 'Str', default => "", traits => ['Relevant'], relevant => 1 );
+has BuffOrDebuff => ( is => 'rw', isa => 'Str', traits => ['Relevant'] );
+has CBarOffs => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'], relevant => 1 );
+has CheckNext => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has ConditionAlpha => ( is => 'rw', isa => 'Num', default => 0, traits => ['Relevant'], relevant => 1 );
+has CooldownCheck => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has CooldownType => ( is => 'rw', isa => 'Str', traits => ['Relevant'] );
+has CustomTex => ( is => 'rw', isa => 'Str', default => "", traits => ['Relevant'], relevant => 1 );
+has DurationMax => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'], relevant => 1 );
+has DurationMaxEnabled => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has DurationMin => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'], relevant => 1 );
+has DurationMinEnabled => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has EnableStacks => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has FakeHidden => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has HideUnequipped => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has ICDType => ( is => 'rw', isa => 'Str', default => 'aura', traits => ['Relevant'] );
+has IgnoreRunes => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has Interruptible => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has InvertBars => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has ManaCheck => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has OnlyEquipped => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has OnlyInBags => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has OnlyMine => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'] );
+has OnlySeen => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has PBarOffs => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'] );
+has RangeCheck => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has ShowCBar => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has ShowPBar => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has ShowTimer => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has ShowTimerText => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has Sort => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has SortAsc => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'] );
+has SortDesc => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'] );
+has StackMax => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'] );
+has StackMaxEnabled => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has StackMin => ( is => 'rw', isa => 'Int', default => 0, traits => ['Relevant'] );
+has StackMinEnabled => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has TotemSlots => ( is => 'rw', isa => 'Str', default => '1111', traits => ['Relevant'] );
+has Unit => ( is => 'rw', isa => 'Str', default => 'player', traits => ['Relevant'] );
+has UseActvtnOverlay => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'] );
+has WpnEnchantType => ( is => 'rw', isa => 'Str', default => 'MainHandSlot', traits => ['Relevant'] );
 CLASS->meta->make_immutable;
 
 use Carp 'croak';

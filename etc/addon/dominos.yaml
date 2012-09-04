@@ -334,3 +334,33 @@ namedbars:
                   scale: 0.7
                   spacing: 2
                   anchor: 3TC
+    totem1:
+        filter:
+            - value:
+                  hidden: 1
+                  x: -199.308
+                  y: -136.444
+                  point: TOPRIGHT
+                  anchor: 5BC
+                  spacing: 2
+                  numbuttons: 5
+    totem2:
+        filter:
+            - value:
+                  hidden: 1
+                  x: -199.308
+                  y: -136.444
+                  point: TOPRIGHT
+                  anchor: 5BC
+                  spacing: 2
+                  numbuttons: 5
+    totem3:
+        filter:
+            - value:
+                  hidden: 1
+                  x: -199.308
+                  y: -136.444
+                  point: TOPRIGHT
+                  anchor: 5BC
+                  spacing: 2
+                  numbuttons: 5
