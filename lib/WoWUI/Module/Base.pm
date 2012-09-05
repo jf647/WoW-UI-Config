@@ -9,6 +9,7 @@ use MooseX::StrictConstructor;
 
 use CLASS;
 use namespace::autoclean;
+use IPC::Run 'run';
 
 # set up class
 with 'WoWUI::ModOptions';
@@ -263,6 +264,15 @@ sub write_global
         $tempfh->close;
         rename($tempfname, $outfname)
             or croak "can't rename $tempfname to $outfname\n";
+        if( $config->{templates}->{global}->{$template}->{pretty_print} ) {
+            my $pp_outfname = expand_path(
+                $config->{templates}->{global}->{$template}->{pp_output},
+                realm => $char->realm->name,
+                char => $char->dirname,
+                account => $self->player->account,
+            );
+            $self->pretty_print_lua( $outfname, $pp_outfname, $config->{templates}->{global}->{$template}->{pp_varname} );
+        }
     }
     if( exists $config->{copy} ) {
         for my $copy( keys %{ $config->{copy}->{global} } ) {
@@ -311,6 +321,15 @@ sub write_perchar
     $tempfh->close;
     rename($tempfname, $outfname)
         or croak "can't rename $tempfname to $outfname\n";
+    if( $config->{templates}->{perchar}->{$template}->{pretty_print} ) {
+        my $pp_outfname = expand_path(
+            $config->{templates}->{perchar}->{$template}->{pp_output},
+            realm => $char->realm->name,
+            char => $char->dirname,
+            account => $self->player->account,
+        );
+        $self->pretty_print_lua( $outfname, $pp_outfname, $config->{templates}->{perchar}->{$template}->{pp_varname} );
+    }
   }
 
   if( exists $config->{copy} ) {
@@ -330,6 +349,40 @@ sub write_perchar
       }
   }
   
+}
+
+sub pretty_print_lua
+{
+
+    my $self = shift;
+    my $outfname = shift;
+    my $pp_outfname = shift;
+    my $varname = shift;
+    
+    my $tt = tt();
+    
+    # create the LUA program to run
+    my($tempfh, $tempfname1) = tempfile( dir => $svdir );
+    my $infname = expand_path( $self->cfg->{pretty_print}->{template} );
+    my $data = {
+        outputfname => $outfname,
+        pp_varname => $varname,
+    };
+    $tt->process( $infname->stringify, $data, $tempfh )
+        or croak $tt->error, "\n";
+    $tempfh->close;
+
+    # use LUA to pretty print
+    my(undef, $tempfname2) = tempfile( dir => $svdir );
+    my @cmd = (
+        $self->cfg->{pretty_print}->{lua},
+        $tempfname1,
+    );
+    run \@cmd, '>', $tempfname2
+        or croak "can't run @cmd > $tempfname2!";
+    rename($tempfname2, $pp_outfname)
+        or croak "can't rename $tempfname2 to $outfname\n";
+
 }
 
 # keep require happy

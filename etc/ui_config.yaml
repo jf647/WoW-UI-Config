@@ -16,8 +16,12 @@ logging:
     log4perl.appender.Screen.stderr: 0
     log4perl.appender.Screen.layout.ConversionPattern: '%d [%-5p] %c %m%n'
 levelcap: 85
+pretty_print:
+    template: $TEMPLATEDIR/pretty_print.lua.template
+    lua: /usr/bin/lua
 modules:
     - WoWUI::Module::Addons
+    - WoWUI::Module::TellMeWhen
     - WoWUI::Module::LayoutLocal
     - WoWUI::Module::Bagnon
     - WoWUI::Module::Dominos
