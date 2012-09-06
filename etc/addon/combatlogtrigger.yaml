@@ -85,17 +85,17 @@ triggers:
     Survival Instincts:
         type: spell
         message: '*slink up'
-        reportspellid: 1
+        spellid: 61336
         filter:
-            level: 49
+            level: 56
             include:
                 - all(class:Druid;spec:Guardian)
     Frenzied Regeneration:
         type: spell
         message: '*slink used'
-        reportspellid: 1
+        spellid: 22842
         filter:
-            level: 52
+            level: 68
             include:
                 - all(class:Druid;spec:Guardian)
     Interrupt:
@@ -141,7 +141,7 @@ triggers:
                 - class:Paladin
     Hand of Sacrifice:
         type: spell
-        reportspellid: 1
+        spellid: 6940
         filter:
             level: 80
             include:
@@ -189,16 +189,16 @@ triggers:
                 - all(class:Priest;spec:Discipline)
     Guardian Spirit:
         type: buff
-        reportspellid: 1
+        spellid: 47788
         message_up: "*slink on *tgt up"
         message_down: "*slink on *tgt down"
         filter:
-            level: 69
+            level: 70
             include:
                 - all(class:Priest;spec:Holy)
     Purge:
         type: dispel
-        reportspellid: 1
+        spellid: 370
         message: "Purge *eslink (*tgt*rtls)"
         filter:
             level: 12
@@ -221,7 +221,7 @@ triggers:
                 - class:Mage
     Mass Dispel:
         type: dispel
-        reportspellid: 1
+        spellid: 32375
         affiliation: enemy
         filter:
             level: 72
@@ -237,7 +237,7 @@ triggers:
                 - class:Hunter
     Soothe:
         type: dispel
-        reportspellid: 1
+        spellid: 2908
         message: "Soothe: *eslink (*tgt*rtls)"
         affiliation: enemy
         filter:
@@ -248,14 +248,14 @@ triggers:
                 - spec:Feral Combat
     Rebirth:
         type: spell
-        reportspellid: 1
+        spellid: 20484
         filter:
-            level: 20
+            level: 56
             include:
                 - class:Druid
     Raise Ally:
         type: spell
-        reportspellid: 1
+        spellid: 61999
         filter:
             level: 72
             include:
@@ -278,7 +278,7 @@ triggers:
                 - class:Shaman
     Sap:
         type: debuff
-        reportspellid: 1
+        spellid: 6770
         filter:
             level: 10
             include:
@@ -286,7 +286,7 @@ triggers:
     Shackle Undead:
         type: debuff
         reportrefresh: 1
-        reportspellid: 1
+        spellid: 9484
         filter:
             level: 32
             include:
@@ -294,7 +294,7 @@ triggers:
     Entangling Roots:
         type: debuff
         reportrefresh: 1
-        reportspellid: 1
+        spellid: 339
         filter:
             level: 7
             include:
@@ -302,7 +302,7 @@ triggers:
     Hibernate:
         type: debuff
         reportrefresh: 1
-        reportspellid: 1
+        spellid: 2637
         filter:
             level: 48
             include:
@@ -316,7 +316,7 @@ triggers:
                 - all(class:Hunter;spec:Survival)
     Repentance:
         type: debuff
-        reportspellid: 1
+        spellid: 20066
         reportrefresh: 1
         filter:
             level: 49
@@ -324,7 +324,7 @@ triggers:
                 - all(class:Paladin;spec:Retribution)
     Blind:
         type: debuff
-        reportspellid: 1
+        spellid: 2094
         reportrefresh: 1
         filter:
             level: 34
@@ -332,7 +332,7 @@ triggers:
                 - class:Rogue
     Hex:
         type: debuff
-        reportspellid: 1
+        spellid: 51514
         reportrefresh: 1
         filter:
             level: 80
@@ -356,21 +356,21 @@ triggers:
             level: 59
             include:
                 - all(class:Mage;spec:Arcane)
-    Dark Intent:
-        type: spell
-        reportspellid: 1
-        message: '*slink on *tgt'
+    Shroud of Purgatory:
+        type: debuff
+        affiliation: mine
+        spellid: 116888
+        message: '*slink saved me!  Heal me before I die!'
         filter:
-            level: 83
+            level: 57
             include:
-                - class:Warlock
-        combateither: 1
+                - all(class:Death Knight;talent:Purgatory)
     Fear:
         type: debuff
-        reportspellid: 1
+        spellid: 5782
         reportrefresh: 1
         filter:
-            level: 25
+            level: 14
             include:
                 - class:Warlock
     Soulstone Resurrection:
