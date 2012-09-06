@@ -99,6 +99,7 @@ filtergroups:
     - Hand of Reckoning
     - Light of Dawn
     - Divine Plea
+    - Repentance
     filter:
       include:
       - class:Paladin
@@ -178,8 +179,8 @@ filtergroups:
     - Rain of Fire
     - Banish
     - Fear
-    - Soulstone OOC
-    - Soulstone IC
+    - Blood Fear
+    - Soulstone
     filter:
       include:
       - class:Warlock
@@ -191,6 +192,7 @@ filtergroups:
     - Taunt
     - Heroic Leap
     - Sunder Armor
+    - Vigilance
     filter:
       include:
       - class:Warrior
@@ -353,7 +355,15 @@ actions:
     filter:
       include:
       - cliqueaction:cc2
+      exclude:
+      - talent:Blood Fear
       level: 14
+    icon: spell_shadow_possession
+  Blood Fear:
+    filter:
+      include:
+      - all(cliqueaction:cc2;talent:Blood Fear)
+      level: 60
     icon: spell_shadow_possession
   Flamestrike:
     filter:
@@ -428,6 +438,12 @@ actions:
       - cliqueaction:xferdmg
       level: 80
     icon: Spell_Holy_SealOfSacrifice
+  Vigilance:
+    filter:
+      include:
+      - cliqueaction:xferdmg
+      level: 75
+    icon: ability_warrior_vigilance
   Hand of Salvation:
     filter:
       include:
@@ -669,6 +685,12 @@ actions:
       - cliqueaction:cc
       level: 14
     icon: spell_nature_polymorph
+  Repentance:
+    filter:
+      include:
+      - all(talent:Repentance;cliqueaction:cc)
+      level: 30
+    icon: spell_holy_prayerofhealing
   Power Infusion:
     filter:
       include:
@@ -812,31 +834,13 @@ actions:
       - cliqueaction:purgebuff
       level: 28
     icon: ability_hunter_beastsoothe
-  Soulstone OOC:
+  Soulstone:
     filter:
       include:
       - cliqueaction:resurrect
-      level: 18
-    icon: spell_shadow_soulgem
-    combat: out
-    macro: /use [@mouseover] Soulstone
-    type: macro
-  Soulstone IC:
-    filter:
-      include:
       - cliqueaction:battlerez
       level: 18
     icon: spell_shadow_soulgem
-    macro: /use [@mouseover] Soulstone
-    type: macro
-  Soulstone IC:
-    filter:
-      include:
-      - cliqueaction:battlerez
-      level: 18
-    icon: spell_shadow_soulgem
-    macro: /use [@mouseover] Soulstone
-    type: macro
   Spell Lock:
     filter:
       include:
