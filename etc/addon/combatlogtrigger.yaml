@@ -37,7 +37,7 @@ triggers:
         filter:
             level: 30
             include:
-                - all(class:Paladin;spec:Protection;subspec:Divine Guardian)
+                - all(class:Paladin;spec:Protection)
     Last Stand:
         type: spell
         message: '*slink used'

@@ -194,7 +194,6 @@ filtergroups:
   healers:
     members:
     - Aura of the Blue Dragon
-    - Inner Eye
     - Dead Winds
     filter:
       include:
@@ -288,16 +287,23 @@ filtergroups:
     - 'Shadow Word: Death'
     - Vampiric Touch Missing
     - Archangel
-    - Dark Archangel
     - Inner Focus
-    - Inner Focus ToT
     - Shadowfiend
+    - Mindbender
     - Fade
     - Leap of Faith
     - Rapture
     - Holy Fire
     - Divine Hymn
     - Hymn of Hope
+    - Angelic Feather
+    - Spectral Guise
+    - Silence
+    - Psychic Horror
+    - Psychic Scream
+    - Vampiric Embrace
+    - Void Tendrils
+    - Spirit Shell
     filter:
       include:
       - class:Priest
@@ -697,7 +703,7 @@ icons:
         Level: 4
     filter:
       include:
-      - all(spec:Discipline;subspec:Archangel)
+      - spec:Discipline
       level: 23
     type: Cooldown::Spell::ShortCD
   Ardent Defender:
@@ -920,20 +926,6 @@ icons:
       - spec:Blood
       level: 69
     type: Cooldown::Spell::Off::LongCD
-  Dark Archangel:
-    combat: in
-    conditions:
-      - Type: BUFFSTACKS
-        Checked: 1
-        Operator: '>='
-        Name: Dark Evangelism
-        Level: 4
-    filter:
-      include:
-      - all(spec:Shadow;subspec:Dark Archangel)
-      level: 82
-    spell: Archangel
-    type: Cooldown::Spell::Off::ShortCD
   Dark Transformation:
     combat: in
     filter:
@@ -964,7 +956,7 @@ icons:
     combat: in
     filter:
       include:
-      - subspec:Desperate Prayer
+        - talent:Desperate Prayer
     type: Cooldown::Spell::Def::ShortCD
   Dispersion:
     combat: in
@@ -975,6 +967,34 @@ icons:
       - spec:Shadow
       level: 69
     type: Cooldown::Spell::Def::ShortCD
+  Psychic Horror:
+    combat: in
+    filter:
+      include:
+      - spec:Shadow
+      level: 74
+    type: Cooldown::Spell::Off::ShortCD
+  Vampiric Embrace:
+    combat: in
+    filter:
+      include:
+      - spec:Shadow
+      level: 78
+    type: Cooldown::Spell::Def::LongCD
+  Psychic Scream:
+    combat: in
+    filter:
+      include:
+      - spec:Shadow
+      level: 12
+    type: Cooldown::Spell::Off::ShortCD
+  Silence:
+    combat: in
+    filter:
+      include:
+      - spec:Shadow
+      level: 52
+    type: Cooldown::Spell::Off::ShortCD
   Divine Favor:
     combat: in
     filter:
@@ -986,7 +1006,7 @@ icons:
     combat: in
     filter:
       include:
-      - all(spec:Protection;subspec:Divine Guardian)
+      - spec:Protection
       level: 49
     type: Cooldown::Spell::Def::LongCD
   Divine Protection:
@@ -1103,7 +1123,7 @@ icons:
     combat: in
     filter:
       include:
-      - all(spec:Restoration;subspec:Focused Insight)
+      - spec:Restoration
       level: 19
     ShowTimer: 1
     ShowTimerText: 1
@@ -1303,41 +1323,12 @@ icons:
       level: 3
     missing: 1
     type: Debuff
-  Inner Eye:
-    Alpha: 1
-    combat: in
-    conditions:
-    - instance
-    - AND
-    - mp_le_75_pct
-    filter:
-      include:
-      - item:Jar of Ancient Remedies
-    stacks:
-      max: 5
-      min: 4
-    type: Buff
   Inner Focus:
     combat: in
     filter:
-      exclude:
-      - subspec:Train of Thought
       include:
       - spec:Discipline
       level: 29
-    type: Cooldown::Spell::Def::ShortCD
-  Inner Focus ToT:
-    combat: in
-    filter:
-      include:
-      - all(spec:Discipline;subspec:Train of Thought)
-      level: 51
-    spell: Inner Focus
-    Alpha: 1
-    UnAlpha: 0.2
-    always: 1
-    ShowTimer: 1
-    ShowTimerText: 1
     type: Cooldown::Spell::Def::ShortCD
   Innervate:
     combat: in
@@ -1485,12 +1476,42 @@ icons:
     combat: in
     filter:
       level: 85
+      include:
+        - spec:Holy
     type: Cooldown::Spell::Def::LongCD
   Hymn of Hope:
     combat: in
     filter:
       level: 85
     type: Cooldown::Spell::Def::LongCD
+  Angelic Feather:
+    combat: either
+    filter:
+      include:
+        - talent:Angelic Feather
+      level: 30
+    type: Cooldown::Spell::Def::ShortCD
+  Spectral Guise:
+    combat: in
+    filter:
+      include:
+        - talent:Spectral Guise
+      level: 60
+    type: Cooldown::Spell::Def::ShortCD
+  Void Tendrils:
+    combat: in
+    filter:
+      include:
+        - talent:Void Tendrils
+      level: 15
+    type: Cooldown::Spell::Def::ShortCD
+  Spirit Shell:
+    combat: in
+    filter:
+      include:
+        - spec:Discipline
+      level: 28
+    type: Cooldown::Spell::Def::ShortCD
   Lifeblood:
     combat: in
     filter:
@@ -1512,7 +1533,7 @@ icons:
     combat: in
     filter:
       include:
-      - all(spec:Holy;subspec:Lightwell)
+      - spec:Holy
       level: 29
     type: Cooldown::Spell::Def::LongCD
   Living Bomb Missing:
@@ -1685,9 +1706,9 @@ icons:
     combat: in
     filter:
       include:
-      - spec:Discipline
+      - talent:Power Infusion
       level: 29
-    type: Cooldown::Spell::LongCD
+    type: Cooldown::Spell::Def::LongCD
   'Power Word: Barrier':
     combat: in
     filter:
@@ -2003,7 +2024,7 @@ icons:
   'Shadow Word: Death':
     combat: in
     conditions:
-    - target_hp_le_25_pct
+    - target_hp_le_20_pct
     filter:
       include:
       - spec:Shadow
@@ -2034,7 +2055,18 @@ icons:
     conditions:
     - mp_le_75_pct
     filter:
-      level: 66
+      level: 42
+      exclude:
+        - talent:Mindbender
+    type: Cooldown::Spell::Def::LongCD
+  Mindbender:
+    combat: in
+    conditions:
+    - mp_le_75_pct
+    filter:
+      level: 45
+      include:
+        - talent:Mindbender
     type: Cooldown::Spell::Def::LongCD
   Shamanistic Rage:
     combat: in
@@ -2126,7 +2158,7 @@ icons:
     combat: in
     filter:
       include:
-      - all(spec:Balance;subspec:Solar Beam)
+      - spec:Balance
       level: 39
     type: Cooldown::Spell::Off::ShortCD
   Curse of Gul'dan Missing:

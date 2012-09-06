@@ -66,14 +66,14 @@ macros:
   AtoneHF:
     filter:
       include:
-        - all(class:Priest;subspec:Archangel)
+        - all(class:Priest;spec:Discipline)
     macro: |+
       #showtooltip Holy Fire
       /cast [@target,harm,exists] [@focustarget,harm,exists] [@focus,harm,exists] [@mouseover,harm,exists] Holy Fire
   AtoneS:
     filter:
       include:
-        - all(class:Priest;subspec:Archangel)
+        - all(class:Priest;spec:Discipline)
     macro: |+
       #showtooltip Smite
       /cast [@target,harm,exists] [@focustarget,harm,exists] [@focus,harm,exists] [@mouseover,harm,exists] Smite

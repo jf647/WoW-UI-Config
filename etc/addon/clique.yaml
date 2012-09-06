@@ -115,9 +115,9 @@ filtergroups:
     - Power Infusion
     - Shackle Undead
     - Dispel Magic
+    - Purify
     - Mass Dispel
     - Pain Suppression
-    - Inner Focus Greater Heal
     - Greater Heal
     - Leap of Faith
     - 'Power Word: Shield'
@@ -315,11 +315,16 @@ actions:
     icon: spell_nature_purge
   Dispel Magic:
     filter:
+      include:
+      - cliqueaction:purgebuff
+      level: 26
+    icon: spell_nature_nullifydisease
+  Purify:
+    filter:
       exclude:
       - spec:Shadow
       include:
       - cliqueaction:cleanse
-      - cliqueaction:purgebuff
       level: 26
     icon: Spell_Holy_DispelMagic
   Distract:
@@ -390,8 +395,6 @@ actions:
     icon: spell_holy_holyprotection
   Greater Heal:
     filter:
-      exclude:
-      - subspec:Train of Thought
       include:
       - cliqueaction:bigheal
       level: 38
@@ -557,14 +560,6 @@ actions:
       - cliqueaction:selfshield
       level: 65
     icon: inv_misc_horn_02
-  Inner Focus Greater Heal:
-    filter:
-      include:
-      - all(spec:Discipline;subspec:Train of Thought;cliqueaction:bigheal)
-      level: 51
-    icon: spell_holy_greaterheal
-    macro: /cast Inner Focus\n/cast [@mouseover] Greater Heal
-    type: macro
   Innervate:
     filter:
       include:

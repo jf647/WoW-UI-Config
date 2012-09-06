@@ -406,11 +406,6 @@ sub set_spec_role_talents
       $self->set_consumable_type($specnum, $spec);
       $self->spec_set($specnum, $self->cfg->{"spec${specnum}"} );
       $self->flags_get($specnum)->insert("spec:$spec");
-      if( exists $self->cfg->{"spec${specnum}_subspec"} ) {
-        for my $subspec( @{ $self->cfg->{"spec${specnum}_subspec"} } ) {
-          $self->flags_get($specnum)->insert("subspec:$subspec");
-        }
-      }
       if( exists $self->cfg->{"flags_spec${specnum}"} ) {
         $self->flags_get($specnum)->insert( @{ $self->cfg->{"flags_spec${specnum}"} } ); 
       }

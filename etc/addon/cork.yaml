@@ -280,7 +280,7 @@ settings:
     - level: 8
       value: Cat Form
     - include:
-      - subspec:Bear
+      - spec:Guardian
       level: 15
       value: Bear Form
     - include:
