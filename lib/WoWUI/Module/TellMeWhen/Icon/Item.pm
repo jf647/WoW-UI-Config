@@ -18,6 +18,7 @@ has [ qw|
     +StackMinEnabled +StackMaxEnabled
     +StackMin +StackMax
 | ] => ( relevant => 1 );
+with 'WoWUI::Module::TellMeWhen::Icon::SpellItemName';
 CLASS->meta->make_immutable;
 
 package WoWUI::Module::TellMeWhen::Icon::Item::ShortCD;

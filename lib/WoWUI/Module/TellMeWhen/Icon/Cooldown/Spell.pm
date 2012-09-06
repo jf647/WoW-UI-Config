@@ -12,7 +12,7 @@ use namespace::autoclean;
 extends 'WoWUI::Module::TellMeWhen::Icon::Cooldown';
 has '+priority' => ( default => 2350 );
 has '+CooldownType' => ( default => 'spell' );
-with 'WoWUI::Module::TellMeWhen::Icon::SpellName';
+with 'WoWUI::Module::TellMeWhen::Icon::SpellItemName';
 CLASS->meta->make_immutable;
 
 package WoWUI::Module::TellMeWhen::Icon::Cooldown::Spell::ShortCD;

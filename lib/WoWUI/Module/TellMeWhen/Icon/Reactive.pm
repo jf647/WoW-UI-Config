@@ -21,7 +21,7 @@ has [ qw|
     +UseActvtnOverlay +IgnoreRunes +PBarOffs
 | ] => ( relevant => 1 );
 with 'WoWUI::Module::TellMeWhen::Icon::Usable';
-with 'WoWUI::Module::TellMeWhen::Icon::SpellName';
+with 'WoWUI::Module::TellMeWhen::Icon::SpellItemName';
 CLASS->meta->make_immutable;
 
 package WoWUI::Module::TellMeWhen::Icon::Reactive::Off;

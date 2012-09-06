@@ -23,7 +23,7 @@ has [ qw|
     +StackMinEnabled +Unit +Sort +SortAsc +SortDesc
     +EnableStacks
 | ] => ( relevant => 1 );
-with 'WoWUI::Module::TellMeWhen::Icon::SpellName';
+with 'WoWUI::Module::TellMeWhen::Icon::SpellItemName';
 with 'WoWUI::Module::TellMeWhen::Icon::Present';
 CLASS->meta->make_immutable;
 

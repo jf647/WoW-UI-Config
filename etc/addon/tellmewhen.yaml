@@ -221,23 +221,24 @@ filtergroups:
       - class:Hunter
   mage:
     members:
-    - Mana Shield
+    - Temporal Shield
     - Presence of Mind
     - Arcane Power
     - Icy Veins
     - Cold Snap
     - Invisibility
+    - Greater Invisibility
     - Mirror Image
     - Counterspell
+    - Frostjaw
     - Evocation
+    - Rune of Power
     - Mana Gem
     - Combustion
     - Dragon's Breath
-    - Blast Wave
     - Living Bomb Missing
+    - Frost Bomb
     - Ring of Frost
-    - Flame Orb
-    - Frozen Target
     - Ice Barrier
     - Freeze
     filter:
@@ -691,7 +692,7 @@ icons:
     filter:
       include:
       - spec:Arcane
-      level: 69
+      level: 62
     type: Cooldown::Spell::Off::LongCD
   Archangel:
     combat: in
@@ -797,13 +798,6 @@ icons:
       - talent:Dragon Roar
       level: 60
     type: Cooldown::Spell::Off::ShortCD
-  Blast Wave:
-    combat: in
-    filter:
-      include:
-      - spec:Fire
-      level: 29
-    type: Cooldown::Spell::Off::ShortCD
   Berserking:
     combat: in
     filter:
@@ -870,8 +864,8 @@ icons:
     combat: in
     filter:
       include:
-      - spec:Frost
-      level: 39
+      - talent:Cold Snap
+      level: 60
     type: Cooldown::Spell::Off::LongCD
   Colossus Smash:
     combat: in
@@ -892,7 +886,7 @@ icons:
     filter:
       include:
       - spec:Fire
-      level: 39
+      level: 77
     type: Cooldown::Spell::Off::LongCD
   Corruption Missing:
     Unit: target
@@ -909,6 +903,13 @@ icons:
     combat: in
     filter:
       level: 9
+    type: Cooldown::Spell::Off::ShortCD
+  Frostjaw:
+    combat: in
+    filter:
+      level: 45
+      include:
+        - talent:Frostjaw
     type: Cooldown::Spell::Off::ShortCD
   Crusader Aura:
     Alpha: 1
@@ -1021,7 +1022,7 @@ icons:
     filter:
       include:
       - spec:Fire
-      level: 49
+      level: 62
     type: Cooldown::Spell::Off::ShortCD
   Elemental Mastery:
     combat: in
@@ -1064,8 +1065,18 @@ icons:
     conditions:
     - mp_lt_100_pct
     filter:
-      level: 12
-    spell: Evocation
+      level: 40
+      exclude:
+        - talent:Rune of Power
+    type: Cooldown::Spell::Def::LongCD
+  Rune of Power:
+    combat: in
+    conditions:
+    - mp_lt_100_pct
+    filter:
+      level: 90
+      include:
+        - talent:Rune of Power
     type: Cooldown::Spell::Def::LongCD
   Execute:
     combat: in
@@ -1310,7 +1321,7 @@ icons:
     filter:
       include:
       - spec:Frost
-      level: 29
+      level: 36
     type: Cooldown::Spell::Off::LongCD
   Immolate Missing:
     Unit: target
@@ -1408,7 +1419,16 @@ icons:
   Invisibility:
     combat: in
     filter:
-      level: 78
+      level: 15
+      exclude:
+        - talent:Greater Invisibility
+    type: Cooldown::Spell::Def::LongCD
+  Greater Invisibility:
+    combat: in
+    filter:
+      level: 60
+      include:
+        - talent:Greater Invisibility
     type: Cooldown::Spell::Def::LongCD
   Kick:
     combat: in
@@ -1541,22 +1561,31 @@ icons:
     combat: in
     filter:
       include:
-      - spec:Fire
-      level: 69
+      - talent:Living Bomb
+      level: 75
     missing: 1
     spell: Living Bomb
     type: Debuff
+  Frost Bomb:
+    combat: in
+    filter:
+      level: 60
+    type: Cooldown::Spell::Off::ShortCD
   Mana Gem:
     combat: in
     conditions:
     - mp_lt_100_pct
     filter:
       level: 48
+    item: 36799;81901
+    OnlyInBags: 1
     type: Item::ShortCD
-  Mana Shield:
+  Temporal Shield:
     combat: in
     filter:
-      level: 46
+      level: 30
+      include:
+        - talent:Temporal Shield
     type: Cooldown::Spell::Def::ShortCD
   Mana Tide Totem:
     combat: in
@@ -1740,8 +1769,8 @@ icons:
     combat: in
     filter:
       include:
-      - spec:Arcane
-      level: 29
+      - talent:Presence of Mind
+      level: 15
     type: Cooldown::Spell::Off::ShortCD
   Pulverize:
     combat: in
@@ -1899,51 +1928,10 @@ icons:
   Ring of Frost:
     combat: in
     filter:
-      level: 83
-    type: Cooldown::Spell::Off::ShortCD
-  Flame Orb:
-    combat: in
-    filter:
-      level: 81
-    type: Cooldown::Spell::Off::ShortCD
-  Frozen Target:
-    combat: in
-    filter:
-      level: 69
+      level: 45
       include:
-        - spec:Frost
-    type: Meta
-    Icons:
-      - Deep Freeze
-      - Brain Freeze FFB
-      - Ice Lance
-  Brain Freeze FFB:
-    no_filter_group_ok: 1
-    spell: Frostfire Bolt
-    Alpha: 1
-    conditions:
-      - icon:Brain Freeze
-      - AND
-      - icon:Fingers of Frost
-    type: Cooldown::Spell
-  Brain Freeze:
-    no_filter_group_ok: 1
-    type: Buff
-  Fingers of Frost:
-    no_filter_group_ok: 1
-    type: Buff
-  Ice Lance:
-    Alpha: 1
-    no_filter_group_ok: 1
-    conditions:
-      - icon:Fingers of Frost
-    type: Cooldown::Spell
-  Deep Freeze:
-    Alpha: 1
-    no_filter_group_ok: 1
-    combat: in
-    type: Reactive::Off
-    CooldownCheck: 1
+        - talent:Ring of Frost
+    type: Cooldown::Spell::Off::ShortCD
   Freeze:
     combat: in
     type: Cooldown::Spell::Off::ShortCD
@@ -1956,9 +1944,9 @@ icons:
     conditions:
       - icon:Ice Barrier Missing
     filter:
-      level: 49
+      level: 30
       include:
-        - spec:Frost
+        - talent:Ice Barrier
     type: Cooldown::Spell::Def::ShortCD
   Ice Barrier Missing:
     no_filter_group_ok: 1

@@ -42,30 +42,6 @@ freerefills:
         filter:
             include:
                 - prof:Blacksmithing:400+
-    Rune of Teleportation:
-        itemid: 17031
-        quality: 1
-        quantity: 20
-        filter:
-            level: 24
-            include:
-                - class:Mage
-    Arcane Powder:
-        itemid: 17020
-        quality: 1
-        quantity: 20
-        filter:
-            level: 70
-            include:
-                - class:Mage
-    Rune of Portals:
-        itemid: 17032
-        quality: 1
-        quantity: 20
-        filter:
-            level: 42
-            include:
-                - class:Mage
     Light Parchment:
         itemid: 39502
         quality: 1

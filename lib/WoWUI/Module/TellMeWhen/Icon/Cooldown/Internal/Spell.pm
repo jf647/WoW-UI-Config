@@ -11,7 +11,7 @@ use namespace::autoclean;
 # set up class
 extends 'WoWUI::Module::TellMeWhen::Icon::Cooldown::Internal';
 has '+CooldownType' => ( default => 'spell' );
-with 'WoWUI::Module::TellMeWhen::Icon::SpellName';
+with 'WoWUI::Module::TellMeWhen::Icon::SpellItemName';
 CLASS->meta->make_immutable;
 
 # keep require happy
