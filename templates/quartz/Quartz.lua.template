@@ -10,6 +10,7 @@ Quartz3DB = {
                     ["x"] = [% profile.pet.x %],
                     ["y"] = [% profile.pet.y %],
                     ["w"] = [% profile.pet.w %],
+                    ["h"] = [% profile.pet.h %],
                     ["hideicon"] = [% IF profile.pet.hideicon %]true[% ELSE %]false[% END %],
                 },
 [% END -%]
@@ -25,6 +26,7 @@ Quartz3DB = {
                     ["x"] = [% profile.player.x %],
                     ["y"] = [% profile.player.y %],
                     ["w"] = [% profile.player.w %],
+                    ["h"] = [% profile.player.h %],
                     ["hideicon"] = [% IF profile.player.hideicon %]true[% ELSE %]false[% END %],
                 },
 [% END -%]
@@ -40,6 +42,7 @@ Quartz3DB = {
                     ["x"] = [% profile.focus.x %],
                     ["y"] = [% profile.focus.y %],
                     ["w"] = [% profile.focus.w %],
+                    ["h"] = [% profile.focus.h %],
                     ["hideicon"] = [% IF profile.focus.hideicon %]true[% ELSE %]false[% END %],
                     ["showfriendly"] = [% IF profile.target.showfriendly %]true[% ELSE %]false[% END %],
                     ["showtarget"] = [% IF profile.target.showtarget %]true[% ELSE %]false[% END %],
@@ -57,6 +60,7 @@ Quartz3DB = {
                     ["x"] = [% profile.target.x %],
                     ["y"] = [% profile.target.y %],
                     ["w"] = [% profile.target.w %],
+                    ["h"] = [% profile.target.h %],
                     ["hideicon"] = [% IF profile.target.hideicon %]true[% ELSE %]false[% END %],
                     ["noInterruptChangeColor"] = [% IF profile.target.noInterruptChangeColor %]true[% ELSE %]false[% END %],
                     ["showfriendly"] = [% IF profile.target.showfriendly %]true[% ELSE %]false[% END %],

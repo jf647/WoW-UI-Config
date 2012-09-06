@@ -385,8 +385,6 @@ addons:
             - mule
         group: Standard
     Cork:
-        include:
-            - fixed_for_mop
         exclude:
             - mule
         group:
@@ -733,6 +731,12 @@ addons:
             - machine:type:basic
         group: Standard
     TellMeWhen_Options:
+        exclude:
+            - banker
+            - mule
+            - machine:type:basic
+        group: Standard
+    Quartz:
         exclude:
             - banker
             - mule

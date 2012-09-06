@@ -22,6 +22,8 @@ pretty_print:
 modules:
     - WoWUI::Module::Addons
     - WoWUI::Module::TellMeWhen
+    - WoWUI::Module::CombatLogTrigger
+    - WoWUI::Module::Quartz
     - WoWUI::Module::LayoutLocal
     - WoWUI::Module::Bagnon
     - WoWUI::Module::Dominos
@@ -41,7 +43,6 @@ modules:
     - WoWUI::Module::NADTTurnIn
     - WoWUI::Module::Clique
     - WoWUI::Module::Cork
-    - WoWUI::Module::CombatLogTrigger
     - WoWUI::Module::TrinketMenu
     - WoWUI::Module::NPCScan
     - WoWUI::Module::Postal
