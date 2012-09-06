@@ -19,8 +19,8 @@ has nextgrouppos => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen::Point' );
 has filtergroups => ( is => 'rw', isa => 'WoWUI::FilterGroups', required => 1 );
 has widestgroup => ( is => 'rw', isa => 'Num', default => 0 );
 has groupscale => ( is => 'rw', isa => 'Num', default => 2 );
-has tmw => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen', is_weak => 1, required => 1 );
-has Version => ( is => 'ro', isa => 'Int', traits => ['Relevant'], relevant => 1, lazy_builder => 1 );
+has tmw => ( is => 'rw', isa => 'WoWUI::Module::TellMeWhen', weak_ref => 1, required => 1 );
+has Version => ( is => 'ro', isa => 'Int', traits => ['Relevant'], relevant => 1, lazy_build => 1 );
 has Locked => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 has NumGroups => ( is => 'ro', isa => 'Num', traits => ['Relevant'], relevant => 1 );
 around 'NumGroups' => sub { $_[1]->group_count };
@@ -37,8 +37,8 @@ has CheckOrder => ( is => 'rw', isa => 'Int', default => -1, traits => ['Relevan
 has SUG_atBeginning => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 has ColorNames => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 has AlwaysSubLinks => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
-has ColorMSQ => ( ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
-has OnlyMSQ => ( ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has ColorMSQ => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
+has OnlyMSQ => ( is => 'rw', isa => 'Bool', default => 0, traits => ['Relevant'], relevant => 1 );
 has Colors => (
     is => 'rw',
     isa => 'HashRef[HashRef[Num]]',
@@ -272,6 +272,7 @@ sub populate
     }
 
     # choose the group scale based on the widest group
+    $DB::single = 1;
     $self->groupscale( $config->{groupscale}->{$self->widestgroup} );
     for my $group( @{ $self->Groups } ) {
         $group->setscale( $self );

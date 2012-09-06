@@ -34,7 +34,7 @@ has Tree4 => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], 
 has SortPriorities => (
     is => 'rw',
     isa => 'ArrayRef[HashRef]',
-    defaults => sub { [
+    default => sub { [
         { Method => 'id', Order => 1 },
         { Method => 'duration', Order => 1 },
         { Method => 'stacks', Order => -1 },

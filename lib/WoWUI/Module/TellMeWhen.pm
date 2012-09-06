@@ -32,8 +32,6 @@ use Clone 'clone';
 use Data::Compare;
 use Digest;
 use Set::Scalar;
-use Data::Lua;
-use YAML::Any 'DumpFile';
 
 use WoWUI::Config;
 use WoWUI::Util 'log';
@@ -96,15 +94,6 @@ sub BUILD
     return $self;
     
 }
-
-after process => sub {
-
-    my $self = shift;
-    
-    
-    
-    
-};
 
 sub augment_global
 {

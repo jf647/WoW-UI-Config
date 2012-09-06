@@ -2,21 +2,22 @@
 modoptions:
     interval: 0.2
     anchor:
-        x: 210
-        y: -100
+        x: 250
+        y: -300
         point: TOPLEFT
         relativePoint: TOPLEFT
     groupspacing: 30
-    maxpergroup: 7
+    maxpergroup: 8
 groupscale:
-  '0': 2.0
-  '1': 1.8
-  '2': 1.7
-  '3': 1.6
-  '4': 1.5
-  '5': 1.4
-  '6': 1.3
-  '7': 1.2
+    '0': 2.5
+    '1': 2.4
+    '2': 2.3
+    '3': 2.2
+    '4': 2.1
+    '5': 2.0
+    '6': 1.9
+    '7': 1.8
+    '8': 1.7
 perchar_filter:
     addons:
         - TellMeWhen
@@ -132,39 +133,14 @@ conditions:
     Operator: '=='
     Name: Maelstrom Weapon
     Level: 5
-groupscale:
-  '0': 2.0
-  '1': 1.8
-  '2': 1.7
-  '3': 1.6
-  '4': 1.5
-  '5': 1.4
-  '6': 1.3
-  '7': 1.2
+  no_soul_shards:
+    Type: SOUL_SHARDS
+    Operator: '=='
+    Level: 0
 filtergroups:
   any:
     members:
-    - Flask of the Draconic Mind
-    - Flask of Flowing Water
-    - Flask of the Winds
-    - Flask of Titanic Strength
-    - Draconic Mind or Flowing Water
-    - Enhanced Strength
-    - Enhanced Intellect
-    - Enhanced Agility
-    - Enhanced Strength or Steelskin
-    - Enhanced Strength or Titanic Strength
-    - Enhanced Intellect or Draconic Mind
-    - Enhanced Intellect or Draconic Mind or Flowing Water
-    - Enhanced Agility or Winds
-    - Enhanced Strength or Steelskin or Stoneblood
-    - Flask of Endless Rage
-    - Pure Mojo or Frost Wyrm
-    - Flask of the North
     - Lifeblood
-    - Endless Mana Potion
-    - Endless Healing Potion
-    - Corrupted Egg Shell
     - Well Fed
   deathknight:
     members:
@@ -183,9 +159,10 @@ filtergroups:
     - Empower Rune Weapon
     - Rune Tap
     - Dancing Rune Weapon
-    - Blood Shield Missing
+    - Blood Shield
     - Death Grip
     - Bone Shield
+    - Conversion
     filter:
       include:
       - class:Death Knight
@@ -209,8 +186,6 @@ filtergroups:
     - Innervate
     - Rebirth
     - Tranquility
-    - ReducedPhysicalDone
-    - ReducedArmor
     - Insect Swarm Missing
     - Revitalize
     filter:
@@ -281,7 +256,6 @@ filtergroups:
     - Zealotry
     - Avenging Wrath
     - Lay on Hands
-    - Beacon Missing on Focus
     - Divine Favor
     - Aura Mastery
     - Holy Shock
@@ -350,7 +324,6 @@ filtergroups:
     - Cloak of Shadows
     - Evasion
     - Tricks of the Trade
-    - ReducedArmor
     - Redirect
     - Vendetta
     - Cold Blood
@@ -386,22 +359,23 @@ filtergroups:
     members:
     - Metamorphosis
     - Demonic Empowerment
-    - Bane Missing
+    - Agony Missing
     - Corruption Missing
     - Immolate Missing
     - Haunt Missing
     - Unstable Affliction Missing
-    - ReducedPhysicalDone
     - Drain Soul
     - Spell Lock
     - Curse of Gul'dan Missing
     - Felstorm
     - Decimation
     - Health Funnel
-    - Demon Soul
-    - No Soulstone in Bags
-    - Warlock OOC Regen
-    - Dark Intent Missing
+    - Life Tap
+    - Sacrificial Pact
+    - Dark Soul
+    - Twilight Ward
+    - Unending Resolve
+    - Soulstone
     filter:
       include:
       - class:Warlock
@@ -413,14 +387,12 @@ filtergroups:
     - Pummel
     - Deadly Calm
     - Bladestorm
+    - Dragon Roar
     - Throwdown
     - Rend Missing
     - Execute
     - Charge
     - Victory Rush
-    - ReducedAttackSpeed
-    - ReducedPhysicalDone
-    - ReducedArmor
     - Heroic Strike
     - Overpower
     - Intervene
@@ -435,57 +407,46 @@ filtergroups:
     - Thunder Clap
     - Heroic Leap
     - Shield Block
-    - Inner Rage
     - Recklessness
+    - Vigilance
+    - Safeguard
+    - Staggering Shout
+    - Disrupting Shout
+    - Mass Spell Reflection
+    - Die by the Sword
+    - Disarm
+    - Shattering Throw
     filter:
       include:
       - class:Warrior
 icons:
-  Fury Warrior TG Rotation:
+  Fury Warrior Rotation:
     no_filter_group_ok: 1
     type: Meta
     Icons:
       - Victory Rush Rotation
-      - Execute to 3 Stacks
-      - Death Wish
+      - Execute
       - Rage Filler
-      - Inner Rage Rotation
-      - Bloodthirst
-      - Berserker Rage if not Enraged
-      - Heroic Strike over 60 Rage
-      - Recklessness
       - Colossus Smash Rotation
       - Bloodthirst
-      - Slam if Bloodsurge Up
-  Fury Warrior SMF Rotation:
-    no_filter_group_ok: 1
-    type: Meta
-    Icons:
-      - Victory Rush Rotation
-      - Execute to 3 Stacks
-      - Rage Filler
-      - Death Wish
-      - Inner Rage Rotation
-      - Colossus Smash Rotation
-      - Bloodthirst
-      - Slam if Bloodsurge Up
       - Raging Blow
+      - Wild Strike
       - Heroic Strike over 60 Rage
   Affliction Warlock Rotation:
     no_filter_group_ok: 1
     type: Meta
     Icons:
-      - Nightfall
-      - Summon Doomguard if Boss
-      - Corruption if Missing
-      - Unstable Affliction Missing
-      - Bane if Missing
-      - Haunt if Missing
+      - Summon Doomguard Boss
       - Drain Soul
+      - Corruption Missing
+      - Unstable Affliction Missing
+      - Agony Missing
+      - Drain Soul No Shards
+      - Haunt Missing
+      - Dark Soul
       - Life Tap
-      - Demon Soul
       - Curse of the Elements Missing
-      - Shadow Bolt
+      - Malefic Grasp
   DK Frost Rotation:
     no_filter_group_ok: 1
     type: Meta
@@ -542,28 +503,14 @@ icons:
     type: Cooldown::Spell
     Alpha: 1
     spell: Healing Wave
-  Warlock OOC Regen:
-    type: Meta
-    combat: out
-    filter:
-      level: 10
-    Icons:
-      - Life Tap if Full
-      - Soul Harvest if below 60 Percent
-  Life Tap if Full:
-    no_filter_group_ok: 1
+  Life Tap:
     type: Cooldown::Spell
     spell: Life Tap
     conditions:
       - hp_gt_85_pct
       - AND
       - mp_lt_85_pct
-  Soul Harvest if below 60 Percent:
-    no_filter_group_ok: 1
-    type: Cooldown::Spell
-    spell: Soul Harvest
-    conditions:
-      - hp_le_60_pct
+    combat: either
   MW3 Healing Wave:
     combat: out
     conditions:
@@ -717,7 +664,7 @@ icons:
     spell: Death Strike
     conditions:
       - hp_le_60_pct
-  Shadow Bolt:
+  Malefic Grasp:
     no_filter_group_ok: 1
     type: Cooldown::Spell::Off
   Anti-Magic Shell:
@@ -730,8 +677,8 @@ icons:
     combat: in
     filter:
       include:
-      - spec:Unholy
-      level: 49
+      - talent:Anti-Magic Zone
+      level: 57
     type: Cooldown::Spell::Def::LongCD
   Arcane Power:
     combat: in
@@ -791,66 +738,22 @@ icons:
     filter:
       level: 72
     type: Cooldown::Spell::Off::LongCD
-  Bane Missing:
+  Agony Missing:
     Unit: target
     combat: in
     filter:
       level: 12
-      exclude:
-      - usingrotation
     missing: 1
-    spell: 980;603
-    type: Debuff
-  Bane Present:
-    no_filter_group_ok: 1
-    Unit: target
-    combat: in
-    filter:
-      level: 12
-    spell: 980;603
-    type: Debuff
-  Bane if Missing:
-    no_filter_group_ok: 1
-    Unit: target
-    combat: in
-    filter:
-      level: 12
-    conditions:
-      - icon:!Bane Present
-    spell: Bane of Agony
-    type: Cooldown::Spell
-  Curse Present:
-    no_filter_group_ok: 1
-    Unit: target
-    combat: in
-    filter:
-      level: 16
-    spell: 1490;85547;702;1714
+    spell: Agony
     type: Debuff
   Curse of the Elements Missing:
     no_filter_group_ok: 1
     Unit: target
-    combat: in
     filter:
       level: 52
-    conditions:
-    - icon:!Curse Present
-    spell: Curse of the Elements
-    type: Cooldown::Spell
-  Beacon Missing on Focus:
-    Unit: focus
-    conditions:
-      - Type: EXISTS
-        Unit: focus
-    filter:
-      include:
-      - spec:Holy
-      level: 39
-      exclude:
-      - machine:type:secondary
     missing: 1
-    spell: Beacon of Light
-    type: Buff
+    spell: Curse of the Elements
+    type: Debuff
   Bestial Wrath:
     combat: in
     filter:
@@ -878,9 +781,16 @@ icons:
     combat: in
     filter:
       include:
-      - spec:Arms
-      level: 69
+      - talent:Bladestorm
+      level: 60
     type: Cooldown::Spell::Off::LongCD
+  Dragon Roar:
+    combat: in
+    filter:
+      include:
+      - talent:Dragon Roar
+      level: 60
+    type: Cooldown::Spell::Off::ShortCD
   Blast Wave:
     combat: in
     filter:
@@ -894,29 +804,21 @@ icons:
       include:
       - race:Troll
     type: Cooldown::Spell::Off::LongCD
-  Blood Shield Missing:
+  Blood Shield:
     combat: in
     filter:
       include:
       - spec:Blood
       level: 80
-    missing: 1
+    always: 1
+    duration:
+        max: 5
     spell: 77535
     type: Buff
   Camouflage:
     conditions:
       - instance
     type: Cooldown::Spell::ShortCD
-  Dark Intent Missing:
-    conditions:
-      - instance
-    type: Buff
-    filter:
-      level: 83
-      exclude:
-      - machine:type:secondary
-    missing: 1
-    spell: Dark Intent
   Chakra Missing:
     combat: in
     filter:
@@ -986,14 +888,6 @@ icons:
       - spec:Fire
       level: 39
     type: Cooldown::Spell::Off::LongCD
-  Corrupted Egg Shell:
-    conditions:
-    - mp_le_75_pct
-    filter:
-      include:
-      - all(specusesmana;item:Corrupted Egg Shell)
-    OnlyEquipped: 1
-    type: Item::Def::LongCD
   Corruption Missing:
     Unit: target
     combat: in
@@ -1002,19 +896,6 @@ icons:
       include:
       - spec:Affliction
       - spec:Demonology
-      exclude:
-      - usingrotation
-      level: 4
-    missing: 1
-    type: Debuff
-  Corruption if Missing:
-    no_filter_group_ok: 1
-    Unit: target
-    combat: in
-    spell: Corruption
-    filter:
-      include:
-      - all(spec:Affliction;usingrotation)
       level: 4
     missing: 1
     type: Debuff
@@ -1070,10 +951,8 @@ icons:
   Deadly Calm:
     combat: in
     filter:
-      include:
-      - spec:Arms
-      level: 39
-    type: Cooldown::Spell::Off::LongCD
+      level: 65
+    type: Cooldown::Spell::Off::ShortCD
   Demonic Empowerment:
     combat: in
     filter:
@@ -1117,17 +996,6 @@ icons:
       - spec:Protection
       level: 30
     type: Cooldown::Spell::Def::ShortCD
-  Draconic Mind or Flowing Water:
-    conditions:
-    - raid
-    filter:
-      exclude:
-      - prof:Alchemy:500+
-      include:
-      - all(flaskuser;role:Healer)
-    missing: 1
-    spell: 79470;92730;94160
-    type: Buff
   Dragon's Breath:
     combat: in
     filter:
@@ -1156,110 +1024,14 @@ icons:
         - spec:Blood
     combat: out
     type: Cooldown::Spell::Off::ShortCD
-  Endless Healing Potion:
-    conditions:
-    - icon:hplt100
-    filter:
-      include:
-      - all(prof:Alchemy;item:Endless Healing Potion)
-    type: Item
-  Endless Mana Potion:
-    conditions:
-    - mp_lt_100_pct
-    filter:
-      include:
-      - all(prof:Alchemy;item:Endless Mana Potion)
-    type: Item
-  Enhanced Agility:
-    combat: out
-    filter:
-      exclude:
-      - flaskuser
-      include:
-      - all(prof:Alchemy:500+;role:Agility DPS)
-      - all(prof:Alchemy:500+;role:Tank;class:Druid)
-    missing: 1
-    spell: 79639
-    type: Buff
-  Enhanced Agility or Winds:
-    combat: out
-    filter:
-      include:
-      - all(flaskuser;role:Agility DPS;prof:Alchemy:500+)
-    missing: 1
-    spell: 79639;79471;92725
-    type: Buff
-  Enhanced Intellect:
-    combat: out
-    filter:
-      exclude:
-      - flaskuser
-      include:
-      - all(prof:Alchemy:500+;role:Intellect DPS)
-      - all(prof:Alchemy:500+;role:Healer)
-    missing: 1
-    spell: 79640
-    type: Buff
-  Enhanced Intellect or Draconic Mind:
-    combat: out
-    filter:
-      include:
-      - all(flaskuser;role:Intellect DPS;prof:Alchemy:500+)
-    missing: 1
-    spell: 79640;79470;92730
-    type: Buff
-  Enhanced Intellect or Draconic Mind or Flowing Water:
-    combat: out
-    filter:
-      include:
-      - all(flaskuser;role:Healer;prof:Alchemy:500+)
-    missing: 1
-    spell: 79640;79470;92730;94160
-    type: Buff
-  Enhanced Strength:
-    combat: out
-    filter:
-      exclude:
-      - flaskuser
-      - class:Druid
-      include:
-      - all(prof:Alchemy:500+;role:Strength DPS)
-      - all(prof:Alchemy:500+;role:Tank)
-    missing: 1
-    spell: 79638
-    type: Buff
-  Enhanced Strength or Steelskin:
-    combat: out
-    filter:
-      exclude:
-      - nrflaskuser
-      include:
-      - all(flaskuser;role:Tank;prof:Alchemy:500+)
-    missing: 1
-    spell: 79638;79469;92729
-    type: Buff
-  Enhanced Strength or Steelskin or Stoneblood:
-    combat: out
-    filter:
-      include:
-      - all(flaskuser;nrflaskuser;role:Tank;prof:Alchemy:500+)
-    missing: 1
-    spell: 79638;79469;92729;53758
-    type: Buff
-  Enhanced Strength or Titanic Strength:
-    combat: out
-    filter:
-      include:
-      - all(flaskuser;role:Strength DPS;prof:Alchemy:500+)
-    missing: 1
-    spell: 79638;79472;92731
-    type: Buff
   Enraged Regeneration:
     Alpha: 1
     conditions:
     - hp_le_75_pct
     filter:
       level: 76
+      include:
+        - talent:Enraged Regeneration
     CooldownCheck: 1
     type: Reactive::Def
   Evasion:
@@ -1277,11 +1049,10 @@ icons:
     type: Cooldown::Spell::Def::LongCD
   Execute:
     combat: in
+    conditions:
+      - target_hp_le_20_pct
     filter:
-      exclude:
-      - spec:Protection
-      - all(spec:Fury;usingrotation)
-      level: 16
+      level: 7
     type: Reactive::Off
   Explosive Shot:
     combat: in
@@ -1314,64 +1085,6 @@ icons:
     missing: 1
     spell: Flame Shock
     type: Debuff
-  Flask of Endless Rage:
-    combat: out
-    filter:
-      include:
-      - all(nrflaskuser;role:Strength DPS)
-    missing: 1
-    spell: 53760
-    type: Buff
-  Flask of Flowing Water:
-    conditions:
-    - raid
-    filter:
-      include:
-      - disabled
-    missing: 1
-    spell: 94160
-    type: Buff
-  Flask of Titanic Strength:
-    conditions:
-    - raid
-    filter:
-      exclude:
-      - prof:Alchemy:500+
-      include:
-      - all(flaskuser;role:Strength DPS)
-    missing: 1
-    spell: 79472;92731
-    type: Buff
-  Flask of the Draconic Mind:
-    conditions:
-    - raid
-    filter:
-      exclude:
-      - prof:Alchemy:500+
-      include:
-      - all(flaskuser;role:Intellect DPS)
-    missing: 1
-    spell: 79470;92730
-    type: Buff
-  Flask of the North:
-    combat: out
-    filter:
-      include:
-      - all(prof:Alchemy;item:Flask of the North)
-    missing: 1
-    spell: 67016;67017;67018
-    type: Buff
-  Flask of the Winds:
-    conditions:
-    - raid
-    filter:
-      exclude:
-      - prof:Alchemy:500+
-      include:
-      - all(flaskuser;role:Agility DPS)
-    missing: 1
-    spell: 79471;92725
-    type: Buff
   Focus Fire:
     combat: in
     conditions:
@@ -1465,33 +1178,12 @@ icons:
     filter:
       level: 85
     type: Cooldown::Spell::Def::LongCD
-  Haunt Usable:
-    no_filter_group_ok: 1
-    spell: Haunt
-    type: Cooldown::Spell
   Haunt Missing:
     Unit: target
     combat: in
-    conditions:
-    - icon:Haunt Usable
     filter:
       include:
       - spec:Affliction
-      exclude:
-      - usingrotation
-      level: 69
-    missing: 1
-    spell: Haunt
-    type: Debuff
-  Haunt if Missing:
-    no_filter_group_ok: 1
-    Unit: target
-    combat: in
-    conditions:
-    - icon:Haunt Usable
-    filter:
-      include:
-      - all(spec:Affliction;usingrotation)
       level: 69
     missing: 1
     spell: Haunt
@@ -1537,6 +1229,20 @@ icons:
       level: 80
       include:
       - spec:Holy
+    type: Cooldown::Spell::Def::ShortCD
+  Vigilance:
+    combat: in
+    filter:
+      level: 75
+      include:
+      - talent:Vigilance
+    type: Cooldown::Spell::Def::ShortCD
+  Safeguard:
+    combat: in
+    filter:
+      level: 75
+      include:
+      - talent:Safeguard
     type: Cooldown::Spell::Def::ShortCD
   Hand of Freedom:
     combat: in
@@ -1629,7 +1335,7 @@ icons:
     spell: Inner Focus
     Alpha: 1
     UnAlpha: 0.2
-    ShowWhen: always
+    always: 1
     ShowTimer: 1
     ShowTimerText: 1
     type: Cooldown::Spell::Def::ShortCD
@@ -1862,33 +1568,6 @@ icons:
     filter:
       level: 12
     type: Cooldown::Spell::Def::ShortCD
-  Demon Soul:
-    type: Cooldown::Spell::Off::LongCD
-    filter:
-      level: 85
-    conditions:
-    - target_hp_gt_75_pct
-    combat: in
-  Life Tap:
-    no_filter_group_ok: 1
-    type: Cooldown::Spell
-    combat: in
-    conditions:
-    - hp_gt_85_pct
-    - AND
-    - mp_lt_85_pct
-  No Soulstone in Bags:
-    type: Condition
-    filter:
-      level: 18
-    succeed: 1
-    CustomTex: inv_misc_orb_04
-    Alpha: 1
-    conditions:
-        - instance
-        - AND
-        - Type: ITEMINBAGS
-          Name: 5232
   Metamorphosis:
     combat: in
     filter:
@@ -1896,6 +1575,26 @@ icons:
       - spec:Demonology
       level: 69
     type: Cooldown::Spell::Off::LongCD
+  Dark Soul:
+    combat: in
+    filter:
+      level: 85
+    type: Cooldown::Spell::Off::LongCD
+  Twilight Ward:
+    combat: in
+    filter:
+      level: 34
+    type: Cooldown::Spell::Def::ShortCD
+  Unending Resolve:
+    combat: in
+    filter:
+      level: 64
+    type: Cooldown::Spell::Def::LongCD
+  Sacrificial Pact:
+    combat: in
+    filter:
+      level: 45
+    type: Cooldown::Spell::Def::ShortCD
   Mind Freeze:
     combat: in
     filter:
@@ -1966,7 +1665,16 @@ icons:
     combat: in
     filter:
       level: 64
+      include:
+        - talent:Blood Tap
     type: Cooldown::Spell::Off::ShortCD
+  Conversion:
+    combat: in
+    filter:
+      level: 60
+      include:
+        - talent:Conversion
+    type: Cooldown::Spell::Def::ShortCD
   Empower Rune Weapon:
     IgnoreRunes: 1
     combat: in
@@ -1986,6 +1694,18 @@ icons:
       include:
       - spec:Discipline
       level: 69
+    type: Cooldown::Spell::Def::LongCD
+  Mass Spell Reflection:
+    combat: in
+    filter:
+      include:
+      - talent:Mass Spell Reflection
+      level: 75
+    type: Cooldown::Spell::Def::ShortCD
+  Die by the Sword:
+    combat: in
+    filter:
+      level: 56
     type: Cooldown::Spell::Def::LongCD
   Prayer of Mending:
     combat: in
@@ -2015,14 +1735,16 @@ icons:
     filter:
       level: 38
     type: Cooldown::Spell::Off::ShortCD
-  Pure Mojo or Frost Wyrm:
-    combat: out
+  Disarm:
+    combat: in
     filter:
-      include:
-      - all(nrflaskuser;role:Healer)
-    missing: 1
-    spell: 54212;53755
-    type: Buff
+      level: 28
+    type: Cooldown::Spell::Off::ShortCD
+  Shattering Throw:
+    combat: in
+    filter:
+      level: 74
+    type: Cooldown::Spell::Off::LongCD
   Raise Dead:
     IgnoreRunes: 1
     combat: in
@@ -2036,6 +1758,20 @@ icons:
     filter:
       level: 83
     type: Cooldown::Spell::Def::LongCD
+  Staggering Shout:
+    combat: in
+    filter:
+      level: 45
+      include:
+        - talent:Staggering Shout
+    type: Cooldown::Spell::Off::ShortCD
+  Disrupting Shout:
+    combat: in
+    filter:
+      level: 45
+      include:
+        - talent:Disrupting Shout
+    type: Cooldown::Spell::Off::ShortCD
   Rapid Fire:
     combat: in
     filter:
@@ -2068,6 +1804,11 @@ icons:
     combat: in
     filter:
       level: 20
+    type: Cooldown::Spell::Def::LongCD
+  Soulstone:
+    combat: in
+    filter:
+      level: 18
     type: Cooldown::Spell::Def::LongCD
   Rebuke:
     combat: in
@@ -2106,43 +1847,6 @@ icons:
     filter:
       level: 83
     type: Cooldown::Spell::Off::ShortCD
-  ReducedArmor:
-    Unit: target
-    combat: in
-    conditions:
-      - target_is_boss
-    filter:
-      include:
-      - class:Warrior
-      - all(class:Druid;spec:Guardian)
-      - class:Rogue
-      level: 18
-    missing: 1
-    type: Debuff
-  ReducedAttackSpeed:
-    Unit: target
-    combat: in
-    conditions:
-      - target_is_boss
-    filter:
-      include:
-      - class:Warrior
-      level: 9
-    missing: 1
-    type: Debuff
-  ReducedPhysicalDone:
-    Unit: target
-    combat: in
-    conditions:
-      - target_is_boss
-    filter:
-      include:
-      - class:Warrior
-      - all(class:Druid;spec:Guardian)
-      - class:Warlock
-      level: 16
-    missing: 1
-    type: Debuff
   Rend Missing:
     Unit: target
     combat: in
@@ -2308,13 +2012,22 @@ icons:
   Drain Soul:
     combat: in
     conditions:
-    - target_hp_le_25_pct
+    - target_hp_le_20_pct
     filter:
       include:
       - spec:Affliction
-      exclude:
-      - usingrotation
       level: 10
+    type: Cooldown::Spell::Off::ShortCD
+  Drain Soul No Shards:
+    no_filter_group_ok: 1
+    combat: in
+    conditions:
+    - no_soul_shards
+    filter:
+      include:
+      - spec:Affliction
+      level: 10
+    spell: Drain Soul
     type: Cooldown::Spell::Off::ShortCD
   Shadowfiend:
     combat: in
@@ -2344,20 +2057,10 @@ icons:
       - spec:Protection
       level: 28
     type: Cooldown::Spell::Def::ShortCD
-  Inner Rage:
-    combat: in
-    filter:
-      include:
-      - spec:Fury
-      - spec:Arms
-      level: 56
-    type: Cooldown::Spell::Off::ShortCD
   Recklessness:
     combat: in
     filter:
       include:
-      - spec:Fury
-      - spec:Arms
       level: 64
     type: Cooldown::Spell::Off::LongCD
   Shock Usable:
@@ -2370,7 +2073,7 @@ icons:
     combat: in
     filter:
       include:
-      - spec:Protection
+      - talent:Shockwave
       level: 69
     type: Cooldown::Spell::Off::ShortCD
   Thunderstruck:
@@ -2586,8 +2289,6 @@ icons:
     filter:
       include:
       - spec:Affliction
-      exclude:
-      - usingrotation
     missing: 1
     type: Debuff
   Vampiric Blood:
@@ -2621,6 +2322,7 @@ icons:
       level: 69
     type: Cooldown::Spell::Off::LongCD
   Victory Rush:
+    spell: Victory Rush;Impending Victory
     combat: in
     filter:
       level: 5
@@ -2628,11 +2330,13 @@ icons:
         - usingrotation
     ShowTimer: 1
     ShowTimerText: 1
+    CooldownCheck: 1
     type: Reactive::Def
   Victory Rush Rotation:
     no_filter_group_ok: 1
+    CooldownCheck: 1
     type: Reactive::Def
-    spell: Victory Rush
+    spell: Victory Rush;Impending Victory
   Well Fed:
     combat: out
     conditions:
@@ -2643,6 +2347,7 @@ icons:
       - nowellfed
     missing: 1
     type: Buff
+    CustomTex: spell_misc_food
   Wild Growth:
     combat: in
     filter:
@@ -2663,45 +2368,18 @@ icons:
       - spec:Retribution
       level: 69
     type: Cooldown::Spell::Off::LongCD
-  Nightfall:
-    no_filter_group_ok: 1
-    type: Cooldown::Spell
-    spell: Shadow Bolt
-    conditions:
-      - icon:Nightfall Present
-  Nightfall Present:
-    no_filter_group_ok: 1
-    type: Buff
-    spell: Nightfall
-  Summon Doomguard if Boss:
+  Summon Doomguard Boss:
     no_filter_group_ok: 1
     type: Cooldown::Spell::Off::LongCD
     spell: Summon Doomguard
     conditions:
       - target_is_boss
-  Execute to 3 Stacks:
-    no_filter_group_ok: 1
-    type: Cooldown::Spell
-    spell: Execute
-    conditions:
-      - target_hp_le_20_pct
-      - AND
-      - icon:!Executioner 3 Stacks
   Rage Filler:
     no_filter_group_ok: 1
     type: Cooldown::Spell
     spell: Battle Shout
     conditions:
       - rage_lt_20
-  Death Wish:
-    no_filter_group_ok: 1
-    type: Cooldown::Spell
-  Inner Rage Rotation:
-    no_filter_group_ok: 1
-    type: Cooldown::Spell
-    spell: Inner Rage
-    conditions:
-      - rage_gt_50
   Bloodthirst:
     no_filter_group_ok: 1
     type: Cooldown::Spell
@@ -2716,16 +2394,13 @@ icons:
     type: Reactive
     CooldownCheck: 1
     UseActvtnOverlay: 1
+  Wild Strike:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell
   Enraged:
     no_filter_group_ok: 1
     type: Buff
     spell: 13046;18499;12292
-  Slam if Bloodsurge Up:
-    no_filter_group_ok: 1
-    type: Cooldown::Spell
-    spell: Slam
-    conditions:
-      - icon:Bloodsurge Present
   Bloodsurge Present:
     no_filter_group_ok: 1
     type: Buff
@@ -2736,10 +2411,6 @@ icons:
     spell: 90806
     stacks:
       min: 3
-  Execute Usable:
-    no_filter_group_ok: 1
-    type: Cooldown::Spell
-    spell: Execute
   Heroic Strike over 60 Rage:
     no_filter_group_ok: 1
     type: Cooldown::Spell

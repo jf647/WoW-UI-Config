@@ -49,7 +49,10 @@ sub populate
             $log->debug("adding $iname to rotation");
             my $icon = WoWUI::Module::TellMeWhen::Icons->instance->icon_get( $iname )->clone;
             croak "cannot get rotation icon $iname" unless( $icon );
+            # make rotation icons fakehidden, show when usable and alpha=1
             $icon->FakeHidden( 1 );
+            $icon->ShowWhen( 0x2 );
+            $icon->Alpha( 1 );
             $self->add_icon( $icon );
         }
     }

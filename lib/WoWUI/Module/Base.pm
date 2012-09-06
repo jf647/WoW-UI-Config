@@ -267,8 +267,6 @@ sub write_global
         if( $config->{templates}->{global}->{$template}->{pretty_print} ) {
             my $pp_outfname = expand_path(
                 $config->{templates}->{global}->{$template}->{pp_output},
-                realm => $char->realm->name,
-                char => $char->dirname,
                 account => $self->player->account,
             );
             $self->pretty_print_lua( $outfname, $pp_outfname, $config->{templates}->{global}->{$template}->{pp_varname} );
@@ -360,10 +358,12 @@ sub pretty_print_lua
     my $varname = shift;
     
     my $tt = tt();
+    my $svdir = sv( $self->player );
+    my $gcfg = WoWUI::Config->instance->cfg;
     
     # create the LUA program to run
     my($tempfh, $tempfname1) = tempfile( dir => $svdir );
-    my $infname = expand_path( $self->cfg->{pretty_print}->{template} );
+    my $infname = expand_path( $gcfg->{pretty_print}->{template} );
     my $data = {
         outputfname => $outfname,
         pp_varname => $varname,
@@ -375,10 +375,10 @@ sub pretty_print_lua
     # use LUA to pretty print
     my(undef, $tempfname2) = tempfile( dir => $svdir );
     my @cmd = (
-        $self->cfg->{pretty_print}->{lua},
+        $gcfg->{pretty_print}->{lua},
         $tempfname1,
     );
-    run \@cmd, '>', $tempfname2
+    run \@cmd, '>', $tempfname2->stringify
         or croak "can't run @cmd > $tempfname2!";
     rename($tempfname2, $pp_outfname)
         or croak "can't rename $tempfname2 to $outfname\n";

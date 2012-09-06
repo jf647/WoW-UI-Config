@@ -16,7 +16,7 @@ use WoWUI::Meta::Attribute::Trait::Relevant;
 with 'WoWUI::Module::TellMeWhen::Dumpable';
 has Events => (
     is => 'ro',
-    isa => 'ArrayRef[ArrayRef[WoWUI::Module::TellMeWhen::Event]',
+    isa => 'ArrayRef[WoWUI::Module::TellMeWhen::Event]',
     traits => ['Array','Relevant'],
     relevant => 1,
     default => sub { [] },
@@ -27,13 +27,6 @@ has Events => (
         event_values => 'elements',
         event_clear => 'clear',
     },
-);
-has [ qw|OnShow OnHide OnStart OnFinish| ] => (
-    is => 'rw',
-    isa => 'WoWUI::Module::TellMeWhen::Event',
-    traits => ['Relevant'],
-    relevant => 1,
-    default => sub { WoWUI::Module::TellMeWhen::Event->new },
 );
 CLASS->meta->make_immutable;
 

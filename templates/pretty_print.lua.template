@@ -1,6 +1,6 @@
-[% INSERT dumper.lua %]
+[% INSERT 'dumper.lua' %]
 
-[% INSERT outputfname %]
+[% INSERT $outputfname %]
 
 print(DataDumper([% pp_varname %], '[% pp_varname %]', false))
 

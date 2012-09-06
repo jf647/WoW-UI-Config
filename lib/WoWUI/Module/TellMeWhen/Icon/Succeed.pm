@@ -15,11 +15,11 @@ after BUILD => sub {
     
     # succeed / fail
     if( $self->fail ) {
-        $self->ShowWhen( 0x02 );
+        $self->ShowWhen( 0x1 );
         $self->UnAlpha( 0.5 );
     }
     elsif( $self->always ) {
-        $self->ShowWhen( 0x03 );
+        $self->ShowWhen( 0x3 );
         $self->UnAlpha( 0.5 );
     }
 

@@ -20,7 +20,7 @@ has filter => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
 has no_filter_group_ok => ( is => 'ro', isa => 'Bool' );
 has type => ( is => 'ro', isa => 'Str' );
 has conditions => ( is => 'ro', isa => 'ArrayRef' );
-has ShowWhen => ( is => 'rw', isa => 'Num', default => 0x01, traits => ['Relevant'] );
+has ShowWhen => ( is => 'rw', isa => 'Num', default => 0x2, traits => ['Relevant'] );
 has Enabled => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 has Name => ( is => 'rw', isa => 'Str', required => 1, lazy => 1, builder => 'build_name', traits => ['Relevant'], relevant => 1 );
 has Type => ( is => 'rw', isa => 'Str', required => 1, traits => ['Relevant'], relevant => 1 );

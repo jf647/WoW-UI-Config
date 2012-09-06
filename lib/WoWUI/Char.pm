@@ -439,7 +439,6 @@ sub set_spec_role_talents
           }
         }
       }
-      $DB::single = 1 if( $self->name eq 'Staphod' );
       if( exists $self->cfg->{"talents_spec${specnum}"} ) {
           $self->talents_set($specnum, $self->cfg->{"talents_spec${specnum}"});
           for my $talent( @{ $self->cfg->{"talents_spec${specnum}"} } ) {
