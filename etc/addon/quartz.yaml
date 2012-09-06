@@ -15,25 +15,28 @@ pet:
                 - class:Warlock
                 - all(class:Death Knight;spec:Unholy)
         pet:
-            x: 580.295
-            y: 593.688
+            x: 950
+            y: 950
             w: 200
+            h: 25
             hideicon: 1
 player:
     default:
         filter: {}
         player:
-            x: 482.666
-            y: 621.200
+            x: 850
+            y: 925
             w: 400
+            h: 25
             hideicon: 1
 focus:
     default:
         filter: {}
         focus:
-            x: 580.295
-            y: 682.355
+            x: 950
+            y: 975
             w: 200
+            h: 25
             hideicon: 1
             showfriendly: 0
             showtarget: 0
@@ -41,9 +44,10 @@ target:
     default:
         filter: {}
         target:
-            x: 432.666
-            y: 655.175
+            x: 800
+            y: 900
             w: 500
+            h: 25
             noInterruptChangeColor: 1
             showfriendly: 0
             hideicon: 1

@@ -195,7 +195,7 @@ sub make_trigger
         $t->{message} = $trigger->{message} || "*slink on *tgt*rtpls";
         $t->{event} = 'SPELL_AURA_APPLIED';
         $t->{replacert} = 1;
-        $t->{affiliation} = 'enemy';
+        $t->{affiliation} = $trigger->{affiliation} || 'enemy';
         delete $t->{incombat};
         push @triggers, $t;
         if( exists $trigger->{reportrefresh} ) {

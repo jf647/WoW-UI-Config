@@ -233,9 +233,8 @@ macros:
       include:
         - class:Death Knight
     macro: |+
-      #showtooltip Plague Strike
       /startattack
-      /cast [mod:shift] Outbreak; Plague Strike
+      /cast [mod:shift] Plague Strike; Outbreak
   SoC:
     filter:
       include:

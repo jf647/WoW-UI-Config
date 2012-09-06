@@ -77,10 +77,7 @@ filtergroups:
     - Righteous Fury-enabled
     - Seal-enabled
     - Seal-spell
-    - Aura-spell
-    - Crusader Aura-enabled
     - Blessings-enabled
-    - Aura-enabled
     - Beacon of Light-enabled
   priest:
     filter:
@@ -122,13 +119,10 @@ filtergroups:
       - class:Warlock
     members:
     - Soul Shards-enabled
-    - Demon Armor-enabled
-    - Demon Armor-spell
     - Summon demon-spell
     - Summon demon-enabled
     - Soul Link-enabled
     - Healthstone
-    - Dark Intent-enabled
     - Soulstone-enabled
   warrior:
     filter:
@@ -181,37 +175,6 @@ settings:
     type: string
     filter:
     - value: Aspect of the Hawk
-  Aura-enabled:
-    filter:
-    - value: 0
-    - level: 5
-      value: 1
-    type: boolean
-  Aura-spell:
-    filter:
-    - level: 5
-      value: Devotion Aura
-    - include:
-      - spec:Retribution
-      level: 26
-      value: Retribution Aura
-    - include:
-      - spec:Holy
-      level: 26
-      value: Retribution Aura
-    - include:
-      - spec:Holy
-      level: 42
-      value: Concentration Aura
-    - include:
-      - spec:Holy
-      level: 76
-      value: Resistance Aura
-    - include:
-      - machine:type:secondary
-      level: 62
-      value: Crusader Aura
-    type: string
   Presence-enabled:
     filter:
     - value: 1
@@ -226,6 +189,8 @@ settings:
       value: Blood Presence
     - level: 70
       value: Unholy Presence
+      include:
+      - spec:Unholy
     type: string
   Beacon of Light-enabled:
     filter:
@@ -272,34 +237,6 @@ settings:
     type: boolean
     filter:
     - value: 1
-  Crusader Aura-enabled:
-    filter:
-    - value: 0
-    - level: 62
-      value: 1
-    - include:
-        - machine:type:secondary
-      value: 0
-    type: boolean
-  Dark Intent-enabled:
-    filter:
-    - value: 0
-    - level: 83
-      value: 1
-    type: boolean
-  Demon Armor-enabled:
-    filter:
-    - value: 0
-    - level: 8
-      value: 1
-    type: boolean
-  Demon Armor-spell:
-    filter:
-    - level: 8
-      value: Demon Armor
-    - level: 62
-      value: Fel Armor
-    type: string
   Fear Ward-enabled:
     filter:
     - value: 0
@@ -483,14 +420,14 @@ settings:
   Soul Link-enabled:
     filter:
     - value: 0
-    - level: 20
+    - include:
+        - talent:Soul Link
+      level: 45
       value: 1
     type: boolean
   Soul Shards-enabled:
     filter:
     - value: 0
-    - value: 1
-      level: 10
     type: boolean
   Soulstone-enabled:
     filter:

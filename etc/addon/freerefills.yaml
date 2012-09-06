@@ -66,13 +66,13 @@ freerefills:
             level: 42
             include:
                 - class:Mage
-    Resilient Parchment:
+    Light Parchment:
         itemid: 39502
         quality: 1
         quantity: 20
         filter:
             include:
-                - prof:Inscription:305+
+                - prof:Inscription
     Enchanting Vellum:
         itemid: 38682
         quality: 1
