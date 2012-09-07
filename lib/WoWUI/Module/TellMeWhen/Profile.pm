@@ -272,7 +272,6 @@ sub populate
     }
 
     # choose the group scale based on the widest group
-    $DB::single = 1;
     $self->groupscale( $config->{groupscale}->{$self->widestgroup} );
     for my $group( @{ $self->Groups } ) {
         $group->setscale( $self );

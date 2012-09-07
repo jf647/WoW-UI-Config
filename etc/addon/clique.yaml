@@ -33,19 +33,20 @@ filtergroups:
     - Wild Growth
     - Entangling Roots
     - Hibernate
-    - Thorns
     - Swiftmend
     - Lifebloom
     - Rejuvenation
     - Nourish
     - Soothe
     - Innervate
-    - Remove Corruption
+    - Nature's Cure
     - Healing Touch
     - Rebirth
     - Revive
     - Regrowth
     - Growl
+    - Cenarion Ward
+    - Ironbark
     filter:
       include:
       - class:Druid
@@ -110,7 +111,6 @@ filtergroups:
     - Levitate
     - 'Power Word: Barrier'
     - Renew
-    - Cure Disease
     - Prayer of Mending
     - Power Infusion
     - Shackle Undead
@@ -269,12 +269,6 @@ actions:
       - cliqueaction:interrupt
       level: 9
     icon: spell_frost_iceshock
-  Cure Disease:
-    filter:
-      include:
-      - cliqueaction:cleanse2
-      level: 22
-    icon: Spell_Holy_NullifyDisease
   Dark Command:
     filter:
       include:
@@ -429,6 +423,12 @@ actions:
       - cliqueaction:protectphysical
       level: 18
     icon: Spell_Holy_SealOfProtection
+  Ironbark:
+    filter:
+      include:
+      - all(spec:Restoration;cliqueaction:protectphysical)
+      level: 64
+    icon: spell_druid_ironbark
   Hand of Reckoning:
     filter:
       include:
@@ -704,6 +704,12 @@ actions:
       - cliqueaction:shield
       level: 5
     icon: Spell_Holy_PowerWordShield
+  Cenarion Ward:
+    filter:
+      include:
+      - all(talent:Cenarion Ward;cliqueaction:shield)
+      level: 30
+    icon: ability_druid_naturalperfection
   Prayer of Mending:
     filter:
       include:
@@ -758,12 +764,12 @@ actions:
       - cliqueaction:hot
       level: 3
     icon: Spell_Nature_Rejuvenation
-  Remove Corruption:
+  Nature's Cure:
     filter:
       include:
       - cliqueaction:cleanse
-      level: 24
-    icon: Spell_Holy_RemoveCurse
+      level: 22
+    icon: ability_shaman_cleansespirit
   Remove Curse:
     filter:
       include:
@@ -871,12 +877,6 @@ actions:
       - all(spec:Protection;cliqueaction:taunt)
       level: 12
     icon: spell_nature_reincarnation
-  Thorns:
-    filter:
-      include:
-      - all(spec:Restoration;cliqueaction:tankshield)
-      level: 5
-    icon: spell_nature_thorns
   Tranquilizing Shot:
     filter:
       include:
@@ -1057,10 +1057,6 @@ bindings:
     control-right:
       click: CTRL-BUTTON2
       types:
-        cleanse2:
-          filter:
-            include:
-            - class:Priest
         reducethreat:
           filter:
             include:
@@ -1149,8 +1145,6 @@ bindings:
           filter:
             include:
             - ability:cleanse
-            - class:Mage
-            - all(class:Warlock;spec:Affliction)
     right:
       click: BUTTON2
       types:
@@ -1208,6 +1202,10 @@ bindings:
           filter:
             include:
             - class:Priest
+        shield:
+          filter:
+            include:
+              - all(class:Druid;spec:Restoration)
         selfshield2:
           filter:
             include:
@@ -1217,7 +1215,6 @@ bindings:
           filter:
             include:
             - all(class:Shaman;spec:Restoration)
-            - all(class:Druid;spec:Restoration)
         xferdmg:
           filter:
             include:

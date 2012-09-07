@@ -267,7 +267,7 @@ settings:
       level: 15
       value: 1
     - include:
-      - spec:Feral Combat
+      - spec:Feral
       level: 8
       value: 1
     - include:

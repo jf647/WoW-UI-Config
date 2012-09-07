@@ -107,7 +107,7 @@ triggers:
                   - class:Death Knight
             - level: 22
               include:
-                  - all(class:Druid;spec:Feral Combat)
+                  - all(class:Druid;spec:Feral)
             - level: 38
               include:
                   - class:Warrior
@@ -245,7 +245,7 @@ triggers:
             include:
                 - class:Druid
             exclude:
-                - spec:Feral Combat
+                - spec:Feral
     Rebirth:
         type: spell
         spellid: 20484

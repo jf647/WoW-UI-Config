@@ -38,7 +38,7 @@ macros:
     name: Charge
     filter:
       include:
-        - all(class:Druid;spec:Feral Combat)
+        - all(class:Druid;spec:Feral)
         - all(class:Druid;spec:Guardian)
     macro: |+
       #showtooltip

@@ -34,7 +34,7 @@ powertypes:
         filter:
             include:
                 - class:Rogue
-                - all(class:Druid;spec:Feral Combat)
+                - all(class:Druid;spec:Feral)
     runicpower:
         index: 6
         color: { r: 0, g: 0.82, b: 1, a: 0.5 }

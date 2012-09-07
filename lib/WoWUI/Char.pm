@@ -94,8 +94,8 @@ sub BUILD
   $self->flags_set( 2 => Set::Scalar->new );
   
   # common flags
-  if( exists $self->cfg->{flags_common} ) {
-    $self->flags_get(0)->insert( @{ $self->cfg->{flags_common} } ); 
+  if( exists $self->cfg->{flags} ) {
+    $self->flags_get(0)->insert( @{ $self->cfg->{flags} } ); 
   }
 
   # name, realm, class
@@ -279,7 +279,7 @@ my %consumabletypes = (
     Druid => {
       Balance => [ 0, 1 ],
       Restoration => [ 0, 1 ],
-      'Feral Combat' => [ 1, 0 ],
+      Feral => [ 1, 0 ],
       Guardian => [ 1, 0 ],
     },
     'Death Knight' => [ 1, 0 ],
@@ -371,6 +371,8 @@ my %roles = (
   Druid => {
     Balance => [ 'Intellect DPS', 'Caster DPS' ],
     Restoration => [ 'Healer' ],
+    Feral => [ 'Melee DPS', 'Agility DPS' ],
+    Guardian => [ 'Tank' ],
   },
   'Death Knight' => {
     Blood => [ 'Tank' ],
@@ -402,41 +404,39 @@ sub set_spec_role_talents
   my $self = shift;
 
   for my $specnum( 1, 2 ) {
-    if( my $spec = $self->cfg->{"spec${specnum}"} ) {
-      $self->set_consumable_type($specnum, $spec);
-      $self->spec_set($specnum, $self->cfg->{"spec${specnum}"} );
-      $self->flags_get($specnum)->insert("spec:$spec");
-      if( exists $self->cfg->{"flags_spec${specnum}"} ) {
-        $self->flags_get($specnum)->insert( @{ $self->cfg->{"flags_spec${specnum}"} } ); 
+    if( exists $self->cfg->{spec}->{$specnum} ) {
+      # spec tree
+      my $tree = $self->cfg->{spec}->{$specnum}->{tree};
+      $self->spec_set($specnum, $tree );
+      # consumable type
+      $self->set_consumable_type($specnum, $tree);
+      $self->flags_get($specnum)->insert("spec:$tree");
+      # spec flags
+      if( exists $self->cfg->{spec}->{$specnum}->{flags} ) {
+        $self->flags_get($specnum)->insert( @{ $self->cfg->{spec}->{$specnum}->{flags} } );
       }
-      if( exists $self->cfg->{"role_spec${specnum}"} ) {
-         $self->role_set( $specnum, $self->cfg->{"role_spec${specnum}"} );
-         for my $role( @{ $self->cfg->{"role_spec${specnum}"} } ) {
-           $self->flags_get($specnum)->insert( "role:$role" );
-         }
-      }
-      else {
-        if( 'HASH' eq ref $roles{$self->class} ) {
-          if( exists $roles{$self->class}->{$spec} ) {
-            $self->role_set( $specnum, $roles{$self->class}->{$spec} );
-            for my $role( @{ $roles{$self->class}->{$spec} } ) {
-              $self->flags_get($specnum)->insert( "role:$role" );
-            }
-          }
-          else {
-            croak "can't determine role for ", $self->class, "/$spec";
-          }
-        }
-        else {
-          $self->role_set( $specnum, $roles{$self->class} );
-          for my $role( @{ $roles{$self->class} } ) {
+      # spec roles
+      if( 'HASH' eq ref $roles{$self->class} ) {
+        if( exists $roles{$self->class}->{$tree} ) {
+          $self->role_set( $specnum, $roles{$self->class}->{$tree} );
+          for my $role( @{ $roles{$self->class}->{$tree} } ) {
             $self->flags_get($specnum)->insert( "role:$role" );
           }
         }
+        else {
+          croak "can't determine role for ", $self->class, "/$tree";
+        }
       }
-      if( exists $self->cfg->{"talents_spec${specnum}"} ) {
-          $self->talents_set($specnum, $self->cfg->{"talents_spec${specnum}"});
-          for my $talent( @{ $self->cfg->{"talents_spec${specnum}"} } ) {
+      else {
+        $self->role_set( $specnum, $roles{$self->class} );
+        for my $role( @{ $roles{$self->class} } ) {
+          $self->flags_get($specnum)->insert( "role:$role" );
+        }
+      }
+      # spec talents
+      if( exists $self->cfg->{spec}->{$specnum}->{talents} ) {
+          $self->talents_set($specnum, $self->cfg->{spec}->{$specnum}->{talents} );
+          for my $talent( @{ $self->cfg->{spec}->{$specnum}->{talents} } ) {
               $self->flags_get($specnum)->insert( "talent:$talent" );
           }
       }
@@ -488,26 +488,26 @@ sub set_dungeontypes
 
 my %abilities = (
   Paladin => {
-    Retribution => [ 'cleanse', 'cleanse:poison', 'cleanse:disease', 'interrupt', 'cc', 
+    Retribution => [ 'cleanse', 'interrupt', 'cc', 
       'cc:demon', 'cc:dragon', 'cc:giant', 'cc:human', 'cc:undead', 'stun', 'resurrect' ],
-    Holy => [ 'cleanse', 'cleanse:poison', 'cleanse:disease', 'cleanse:magic', 'stun', 'resurrect' ],
-    Protection => [ 'cleanse', 'cleanse:poison', 'cleanse:disease', 'stun', 'resurrect' ],
+    Holy => [ 'cleanse', 'stun', 'resurrect' ],
+    Protection => [ 'cleanse', 'stun', 'resurrect' ],
   },
   Shaman => {
-    Enhancement => [ 'cleanse', 'cleanse:curse', 'interrupt', 'cc', 'cc:human', 'cc:beast', 'cc:elemental', 'resurrect' ],
-    Elemental => [ 'cleanse', 'cleanse:curse', 'interrupt', 'cc', 'cc:human', 'cc:beast', 'cc:elemental', 'resurrect' ],
-    Restoration => [ 'cleanse', 'cleanse:curse', 'cleanse:magic', 'interrupt', 'cc', 'cc:human', 'cc:beast', 'cc:elemental', 'resurrect' ],
+    Enhancement => [ 'cleanse', 'interrupt', 'cc', 'cc:human', 'cc:beast', 'cc:elemental', 'resurrect' ],
+    Elemental => [ 'cleanse', 'interrupt', 'cc', 'cc:human', 'cc:beast', 'cc:elemental', 'resurrect' ],
+    Restoration => [ 'cleanse', 'interrupt', 'cc', 'cc:human', 'cc:beast', 'cc:elemental', 'resurrect' ],
   },
   Druid => {
-    Balance => [ 'cleanse', 'cleanse:poison', 'cleanse:curse', 'resurrect', 'battlerez' ],
-    Restoration => [ 'cleanse', 'cleanse:poison', 'cleanse:curse', 'cleanse:magic', 'resurrect', 'battlerez' ],
-    'Feral Combat' => [ 'cleanse', 'cleanse:poison', 'cleanse:curse', 'interrupt', 'resurrect', 'battlerez' ],
-    Guardian => [ 'cleanse', 'cleanse:poison', 'cleanse:curse', 'interrupt', 'resurrect', 'battlerez' ],
+    Balance => [ 'cleanse', 'resurrect', 'battlerez' ],
+    Restoration => [ 'cleanse', 'resurrect', 'battlerez' ],
+    Feral => [ 'cleanse', 'interrupt', 'resurrect', 'battlerez' ],
+    Guardian => [ 'cleanse', 'interrupt', 'resurrect', 'battlerez' ],
   },
   Priest => {
-    Holy => [ 'cleanse', 'cleanse:disease', 'cleanse:magic', 'cc', 'cc:undead', 'resurrect' ],
-    Discipline => [ 'cleanse', 'cleanse:disease', 'cleanse:magic', 'cc', 'cc:undead', 'resurrect' ],
-    Shadow => [ 'cleanse', 'cleanse:disease', 'cleanse:magic', 'cc', 'cc:undead', 'resurrect' ],
+    Holy => [ 'cleanse', 'cc', 'cc:undead', 'resurrect' ],
+    Discipline => [ 'cleanse', 'cc', 'cc:undead', 'resurrect' ],
+    Shadow => [ 'cleanse', 'cc', 'cc:undead', 'resurrect' ],
   },
   Hunter => {
     Survival => [ 'cc', 'cc:undead', 'cc:human', 'cc:demon', 'cc:beast', 'cc:elemental',
@@ -520,7 +520,7 @@ my %abilities = (
   Rogue => [ 'interrupt' ],
   'Death Knight' => [ 'interrupt', 'battlerez' ],
   Warrior => [ 'interrupt' ],
-  Mage => [ 'interrupt', 'cc', 'cc:human', 'cc:beast' ],
+  Mage => [ 'interrupt', 'cc', 'cc:human', 'cc:beast', 'cleanse' ],
   Warlock => [ 'resurrect', 'cc', 'battlerez' ],
 );
 sub set_abilities
@@ -529,11 +529,12 @@ sub set_abilities
   my $self = shift;
 
   for my $specnum( 1, 2 ) {
-    if( my $spec = $self->cfg->{"spec${specnum}"} ) {
+    if( exists $self->cfg->{spec}->{$specnum} ) {
+      my $tree = $self->cfg->{spec}->{$specnum}->{tree};
       if( 'HASH' eq ref $abilities{$self->class} ) {
-        if( exists $abilities{$self->class}->{$spec} ) {
-          $self->ability_set($specnum, $abilities{$self->class}->{$spec});
-          for my $ability( @{ $abilities{$self->class}->{$spec} } ) {
+        if( exists $abilities{$self->class}->{$tree} ) {
+          $self->ability_set($specnum, $abilities{$self->class}->{$tree});
+          for my $ability( @{ $abilities{$self->class}->{$tree} } ) {
             $self->flags_get($specnum)->insert("ability:$ability");
           }
         }

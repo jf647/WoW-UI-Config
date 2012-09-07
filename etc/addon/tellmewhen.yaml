@@ -137,6 +137,12 @@ conditions:
     Type: SOUL_SHARDS
     Operator: '=='
     Level: 0
+  arcanecharges_ge_4:
+    Type: DEBUFFSTACKS
+    Checked: 1
+    Operator: '>='
+    Name: Arcane Charge
+    Level: 4
 filtergroups:
   any:
     members:
@@ -169,12 +175,10 @@ filtergroups:
   druid:
     members:
     - Lacerate
-    - Pulverize
     - Free Mangle
     - Swiftmend
     - Nature's Swiftness
     - Wild Growth
-    - Tree of Life
     - Skull Bash Bear
     - Skull Bash Cat
     - Survival Instincts
@@ -187,14 +191,25 @@ filtergroups:
     - Rebirth
     - Tranquility
     - Insect Swarm Missing
-    - Revitalize
+    - Barkskin
+    - Cenarion Ward
+    - Incarnation
+    - Ironbark
+    - Mass Entanglement
+    - Stampeding Roar
+    - Ursol's Vortex
+    - Bear Hug
+    - Berserk
+    - Disorienting Roar
+    - Might of Ursoc
+    - Renewal
+    - Savage Defense
     filter:
       include:
       - class:Druid
   healers:
     members:
     - Aura of the Blue Dragon
-    - Dead Winds
     filter:
       include:
       - role:Healer
@@ -241,6 +256,8 @@ filtergroups:
     - Ring of Frost
     - Ice Barrier
     - Freeze
+    - Arcane Barrage
+    - Nether Tempest Missing
     filter:
       include:
       - class:Mage
@@ -925,13 +942,6 @@ icons:
       - spec:Unholy
       level: 49
     type: Cooldown::Spell::Off::ShortCD
-  Dead Winds:
-    missing: 1
-    combat: in
-    filter:
-      include:
-      - item:Gale of Shadows
-    type: Buff
   Deadly Calm:
     combat: in
     filter:
@@ -1543,10 +1553,22 @@ icons:
     missing: 1
     spell: Living Bomb
     type: Debuff
+  Nether Tempest Missing:
+    Unit: target
+    combat: in
+    filter:
+      include:
+      - talent:Nether Tempest
+      level: 75
+    missing: 1
+    spell: Nether Tempest
+    type: Debuff
   Frost Bomb:
     combat: in
     filter:
-      level: 60
+      level: 75
+      include:
+        - talent:Frost Bomb
     type: Cooldown::Spell::Off::ShortCD
   Mana Gem:
     combat: in
@@ -1627,6 +1649,15 @@ icons:
     filter:
       level: 57
     type: Cooldown::Spell::Off::ShortCD
+  Arcane Barrage:
+    combat: in
+    conditions:
+      - arcanecharges_ge_4
+    filter:
+      include:
+        - spec:Arcane
+      level: 12
+    type: Cooldown::Spell::Off::ShortCD
   Wind Shear:
     combat: in
     filter:
@@ -1648,8 +1679,8 @@ icons:
     combat: in
     filter:
       include:
-      - spec:Restoration
-      level: 29
+      - talent:Nature's Swiftness
+      level: 30
     type: Cooldown::Spell::LongCD
   Overpower:
     Alpha: 1
@@ -1749,14 +1780,6 @@ icons:
       - talent:Presence of Mind
       level: 15
     type: Cooldown::Spell::Off::ShortCD
-  Pulverize:
-    combat: in
-    filter:
-      include:
-      - spec:Guardian
-      level: 66
-    missing: 1
-    type: Buff
   Pummel:
     combat: in
     filter:
@@ -1832,6 +1855,93 @@ icons:
     filter:
       level: 20
     type: Cooldown::Spell::Def::LongCD
+  Barkskin:
+    combat: in
+    filter:
+      level: 44
+    type: Cooldown::Spell::Def::ShortCD
+  Cenarion Ward:
+    combat: in
+    filter:
+      include:
+        - talent:Cenarion Ward
+      level: 30
+    type: Cooldown::Spell::Def::ShortCD
+  Ironbark:
+    combat: in
+    filter:
+      level: 64
+      include:
+        - spec:Restoration
+    type: Cooldown::Spell::Def::LongCD
+  Mass Entanglement:
+    combat: in
+    filter:
+      level: 45
+      include:
+        - talent:Mass Entanglement
+    type: Cooldown::Spell::Def::LongCD
+  Stampeding Roar:
+    combat: in
+    filter:
+      level: 83
+    type: Cooldown::Spell::Def::LongCD
+  Ursol's Vortex:
+    combat: in
+    filter:
+      level: 75
+      include:
+        - talent:Ursols Vortex
+    type: Cooldown::Spell::Def::ShortCD
+  Bear Hug:
+    combat: in
+    filter:
+      level: 18
+      include:
+        - spec:Guardian
+    type: Cooldown::Spell::Off::ShortCD
+  Berserk:
+    combat: in
+    filter:
+      level: 48
+      include:
+        - spec:Guardian
+    type: Cooldown::Spell::Off::LongCD
+  Disorienting Roar:
+    combat: in
+    filter:
+      level: 75
+      include:
+        - talent:Disorienting Roar
+    type: Cooldown::Spell::Def::LongCD
+  Might of Ursoc:
+    combat: in
+    filter:
+      level: 72
+      include:
+        - spec:Guardian
+    type: Cooldown::Spell::Def::LongCD
+  Renewal:
+    combat: in
+    filter:
+      level: 30
+      include:
+        - talent:Renewal
+    type: Cooldown::Spell::Def::LongCD
+  Savage Defense:
+    combat: in
+    filter:
+      level: 10
+      include:
+        - spec:Guardian
+    type: Cooldown::Spell::Def::LongCD
+  Incarnation:
+    combat: in
+    filter:
+      include:
+        - talent:Incarnation
+      level: 60
+    type: Cooldown::Spell::Off::LongCD
   Soulstone:
     combat: in
     filter:
@@ -1893,15 +2003,6 @@ icons:
       - spec:Protection
       level: 40
     type: Reactive::Off
-  Revitalize:
-    combat: in
-    filter:
-      include:
-      - spec:Restoration
-      level: 29
-    spell: '81094: 12'
-    type: Cooldown::Internal::Spell
-    unusable: 1
   Ring of Frost:
     combat: in
     filter:
@@ -2109,7 +2210,7 @@ icons:
     combat: in
     filter:
       include:
-      - spec:Feral Combat
+      - spec:Feral
       level: 22
     spell: 80965
     type: Cooldown::Spell::Off::ShortCD
@@ -2215,7 +2316,7 @@ icons:
     filter:
       include:
       - spec:Guardian
-      level: 49
+      level: 56
     type: Cooldown::Spell::Def::LongCD
   Swiftmend:
     combat: in
@@ -2247,13 +2348,6 @@ icons:
       include:
       - spec:Restoration
       level: 68
-    type: Cooldown::Spell::Def::LongCD
-  Tree of Life:
-    combat: in
-    filter:
-      include:
-      - spec:Restoration
-      level: 69
     type: Cooldown::Spell::Def::LongCD
   Tremor Totem:
     combat: in
