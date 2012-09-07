@@ -246,11 +246,8 @@ filtergroups:
       - class:Mage
   paladin:
     members:
-    - Word of Glory
-    - Crusader Aura
     - Rebuke
     - Divine Protection
-    - Divine Guardian
     - Guardian of Ancient Kings
     - Ardent Defender
     - Zealotry
@@ -259,15 +256,13 @@ filtergroups:
     - Divine Favor
     - Aura Mastery
     - Holy Shock
-    - Best Use of 3HP
-    - Judgements of the Pure
-    - WoG 3HP
-    - Holy Shield
     - Hand of Protection
     - Hand of Sacrifice
     - Hand of Salvation
     - Hand of Freedom
     - Divine Plea
+    - Devotion Aura
+    - Divine Purpose
     filter:
       include:
       - class:Paladin
@@ -582,6 +577,12 @@ icons:
     spell: Water Shield
     missing: 1
     type: Buff
+  Divine Purpose:
+    spellid: 90174
+    filter:
+      include:
+        - talent:Divine Purpose
+    type: Buff
   Lightning Shield Missing:
     no_filter_group_ok: 1
     type: Buff
@@ -712,7 +713,7 @@ icons:
     filter:
       include:
       - spec:Protection
-      level: 69
+      level: 70
     type: Cooldown::Spell::Def::LongCD
   Army of the Dead:
     IgnoreRunes: 1
@@ -911,14 +912,6 @@ icons:
       include:
         - talent:Frostjaw
     type: Cooldown::Spell::Off::ShortCD
-  Crusader Aura:
-    Alpha: 1
-    combat: in
-    filter:
-      exclude:
-        - machine:type:secondary
-      level: 62
-    type: Buff
   Dancing Rune Weapon:
     IgnoreRunes: 1
     combat: in
@@ -1003,13 +996,6 @@ icons:
       - spec:Holy
       level: 29
     type: Cooldown::Spell::Def::ShortCD
-  Divine Guardian:
-    combat: in
-    filter:
-      include:
-      - spec:Protection
-      level: 49
-    type: Cooldown::Spell::Def::LongCD
   Divine Protection:
     combat: in
     filter:
@@ -1289,12 +1275,6 @@ icons:
       include:
       - spec:Holy
     type: Cooldown::Spell::Def::ShortCD
-  Holy Shield:
-    combat: in
-    filter:
-      include:
-      - spec:Protection
-    type: Cooldown::Spell::Def::ShortCD
   Holy Word:
     combat: in
     filter:
@@ -1359,41 +1339,6 @@ icons:
     conditions:
     - icon:Sacred Duty
     type: Cooldown::Spell
-  Judgements of the Pure:
-    type: Buff
-    combat: in
-    always: 1
-    CustomTex: Judgement
-    ShowTimer: 1
-    ShowTimerText: 1
-    duration:
-        max: 15
-    filter:
-      include:
-        - spec:Holy
-      exclude:
-        - machine:type:secondary
-  WoG 3HP:
-    type: Cooldown::Spell::Def::ShortCD
-    spell: Word of Glory
-    conditions:
-      - holy_power_3
-    filter:
-      include:
-        - spec:Holy
-  Best Use of 3HP:
-    combat: in
-    type: Meta
-    Alpha: 1
-    conditions:
-      - holy_power_3
-    Icons:
-      - Inquisition
-      - Shield of the Righteous
-    filter:
-      include:
-      - spec:Protection
-      level: 81
   Insect Swarm Missing:
     Unit: target
     combat: in
@@ -2375,12 +2320,6 @@ icons:
       - spec:Restoration
       level: 49
     type: Cooldown::Spell::Def::ShortCD
-  Word of Glory:
-    combat: in
-    filter:
-      exclude:
-      - spec:Holy
-    type: Cooldown::Spell::Def::ShortCD
   Zealotry:
     combat: in
     filter:
@@ -2445,3 +2384,8 @@ icons:
             - spec:Holy
     conditions:
         - mp_lt_85_pct
+  Devotion Aura:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+        level: 60
+    combat: in
