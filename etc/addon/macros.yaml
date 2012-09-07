@@ -265,3 +265,9 @@ macros:
     filter:
       include:
         - class:Death Knight
+  5CPAss:
+    macro: |+
+      /cast [mod:shift] Dispatch; Envenom
+    filter:
+      include:
+        - all(class:Rogue;spec:Assassination)

@@ -328,8 +328,13 @@ filtergroups:
     - Tricks of the Trade
     - Redirect
     - Vendetta
-    - Cold Blood
     - Killing Spree
+    - Shadowstep
+    - Blind
+    - Shadow Walk
+    - Shroud of Concealment
+    - Smoke Bomb
+    - Adrenaline Rush
     filter:
       include:
       - class:Rogue
@@ -854,13 +859,6 @@ icons:
     filter:
       level: 58
     type: Cooldown::Spell::Def::ShortCD
-  Cold Blood:
-    combat: in
-    filter:
-      include:
-      - spec:Assassination
-      level: 29
-    type: Cooldown::Spell::Off::LongCD
   Cold Snap:
     combat: in
     filter:
@@ -1398,7 +1396,41 @@ icons:
     filter:
       include:
       - spec:Combat
-      level: 69
+      level: 80
+    type: Cooldown::Spell::Off::LongCD
+  Shadowstep:
+    combat: in
+    filter:
+      include:
+      - talent:Shadowstep
+      level: 60
+    type: Cooldown::Spell::Off::ShortCD
+  Blind:
+    combat: in
+    filter:
+      level: 34
+    type: Cooldown::Spell::Off::LongCD
+  Shadow Walk:
+    combat: out
+    filter:
+      level: 72
+    type: Cooldown::Spell::Def::ShortCD
+  Shroud of Concealment:
+    combat: out
+    filter:
+      level: 76
+    type: Cooldown::Spell::Def::LongCD
+  Smoke Bomb:
+    combat: in
+    filter:
+      level: 85
+    type: Cooldown::Spell::Def::LongCD
+  Adrenaline Rush:
+    combat: in
+    filter:
+      include:
+        - spec:Combat
+      level: 40
     type: Cooldown::Spell::Off::LongCD
   Lacerate:
     Unit: target
@@ -2277,14 +2309,14 @@ icons:
   Vanish:
     combat: in
     filter:
-      level: 24
+      level: 34
     type: Cooldown::Spell::Def::LongCD
   Vendetta:
     combat: in
     filter:
       include:
       - spec:Assassination
-      level: 69
+      level: 80
     type: Cooldown::Spell::Off::LongCD
   Victory Rush:
     spell: Victory Rush;Impending Victory
