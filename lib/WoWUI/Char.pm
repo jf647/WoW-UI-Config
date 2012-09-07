@@ -39,6 +39,16 @@ has talents => (
     talents_set => 'set',
   },
 );
+has glyphs => (
+  traits => ['Hash'],
+  is => 'rw',
+  isa => 'HashRef[ArrayRef[Str]]',
+  default => sub { {} },
+  handles => {
+    glyphs_get => 'get',
+    glyphs_set => 'set',
+  },
+);
 has role => (
   traits => ['Hash'],
   is => 'rw',
@@ -117,7 +127,7 @@ sub BUILD
   $self->set_guild;
   
   # specs, roles and talents
-  $self->set_spec_role_talents;
+  $self->set_spec_role_talents_glyphs;
 
   # abilities
   $self->set_abilities;
@@ -398,7 +408,7 @@ my %roles = (
       Brewmaster => [ 'Tank' ],
   },
 );
-sub set_spec_role_talents
+sub set_spec_role_talents_glyphs
 {
 
   my $self = shift;
@@ -438,6 +448,13 @@ sub set_spec_role_talents
           $self->talents_set($specnum, $self->cfg->{spec}->{$specnum}->{talents} );
           for my $talent( @{ $self->cfg->{spec}->{$specnum}->{talents} } ) {
               $self->flags_get($specnum)->insert( "talent:$talent" );
+          }
+      }
+      # spec glyphs
+      if( exists $self->cfg->{spec}->{$specnum}->{glyphs} ) {
+          $self->glyphs_set($specnum, $self->cfg->{spec}->{$specnum}->{glyphs} );
+          for my $glyph( @{ $self->cfg->{spec}->{$specnum}->{glyphs} } ) {
+              $self->flags_get($specnum)->insert( "glyph:$glyph" );
           }
       }
     }

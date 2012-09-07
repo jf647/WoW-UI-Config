@@ -440,6 +440,7 @@ settings:
       exclude:
       - banker
       - mule
+      - talent:Grimoire of Sacrifice
     type: boolean
   Summon demon-spell:
     filter:

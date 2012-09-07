@@ -143,6 +143,11 @@ conditions:
     Operator: '>='
     Name: Arcane Charge
     Level: 4
+  demonicfury_ge_800:
+    Type: DEMONIC_FURY
+    Operator: '>='
+    Level: 800
+    Unit: player
 filtergroups:
   any:
     members:
@@ -382,7 +387,6 @@ filtergroups:
   warlock:
     members:
     - Metamorphosis
-    - Demonic Empowerment
     - Agony Missing
     - Corruption Missing
     - Immolate Missing
@@ -390,9 +394,8 @@ filtergroups:
     - Unstable Affliction Missing
     - Drain Soul
     - Spell Lock
-    - Curse of Gul'dan Missing
+    - Shadowflame Missing
     - Felstorm
-    - Decimation
     - Health Funnel
     - Life Tap
     - Sacrificial Pact
@@ -400,6 +403,10 @@ filtergroups:
     - Twilight Ward
     - Unending Resolve
     - Soulstone
+    - Grimoire of Sacrifice
+    - Dark Bargain
+    - Soul Link Missing
+    - Imp Swarm
     filter:
       include:
       - class:Warlock
@@ -772,10 +779,28 @@ icons:
     Unit: target
     combat: in
     filter:
+      exclude:
+        - spec:Demonology
       level: 12
     missing: 1
     spell: Agony
     type: Debuff
+  Soul Link Missing:
+    Unit: player
+    combat: in
+    filter:
+      include:
+        - talent:Soul Link
+      level: 45
+    missing: 1
+    spell: Soul Link
+    type: Buff
+  Imp Swarm:
+    combat: in
+    filter:
+      include:
+        - glyph:Imp Swarm
+    type: Cooldown::Spell::Off::LongCD
   Curse of the Elements Missing:
     no_filter_group_ok: 1
     Unit: target
@@ -947,13 +972,6 @@ icons:
     filter:
       level: 65
     type: Cooldown::Spell::Off::ShortCD
-  Demonic Empowerment:
-    combat: in
-    filter:
-      level: 29
-      include:
-        - spec:Demonology
-    type: Cooldown::Spell::Off::LongCD
   Desperate Prayer:
     combat: in
     filter:
@@ -1317,7 +1335,6 @@ icons:
     spell: Immolate
     filter:
       include:
-      - spec:Demonology
       - spec:Destruction
       level: 3
     missing: 1
@@ -1619,10 +1636,11 @@ icons:
     type: Cooldown::Spell::Def::ShortCD
   Metamorphosis:
     combat: in
+    conditions:
+      - demonicfury_ge_800
     filter:
       include:
       - spec:Demonology
-      level: 69
     type: Cooldown::Spell::Off::LongCD
   Dark Soul:
     combat: in
@@ -1642,6 +1660,8 @@ icons:
   Sacrificial Pact:
     combat: in
     filter:
+      include:
+        - talent:Sacrificial Pact
       level: 45
     type: Cooldown::Spell::Def::ShortCD
   Mind Freeze:
@@ -1947,6 +1967,21 @@ icons:
     filter:
       level: 18
     type: Cooldown::Spell::Def::LongCD
+  Grimoire of Sacrifice:
+    combat: in
+    filter:
+      include:
+        - talent:Grimoire of Sacrifice
+      level: 75
+    missing: 1
+    type: Buff
+  Dark Bargain:
+    combat: in
+    filter:
+      include:
+        - talent:Dark Bargain
+      level: 45
+    type: Cooldown::Spell::Def::LongCD
   Rebuke:
     combat: in
     filter:
@@ -2227,9 +2262,9 @@ icons:
       - spec:Balance
       level: 39
     type: Cooldown::Spell::Off::ShortCD
-  Curse of Gul'dan Missing:
+  Shadowflame Missing:
     combat: in
-    spell: Curse of Gul'dan
+    spell: Shadowflame
     Unit: target
     missing: 1
     filter:
@@ -2237,16 +2272,9 @@ icons:
       include:
         - spec:Demonology
     type: Debuff
-  Decimation:
-    combat: in
-    type: Buff
-    filter:
-      level: 49
-      include:
-        - spec:Demonology
   Felstorm:
     combat: in
-    spell: 89751
+    spell: 89751;115831
     filter:
       level: 45
       include:
