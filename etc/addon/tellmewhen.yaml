@@ -686,7 +686,7 @@ icons:
     Unit: target
     spell: Frost Fever
     duration:
-        max: 5
+        max: 4
     always: 1
     ShowTimer: 1
     ShowTimerText: 1
