@@ -298,7 +298,9 @@ settings:
     type: boolean
   Horn of Winter-enabled:
     filter:
+    - value: 0
     - value: 1
+      level: 65
     type: boolean
   Inner Fire-enabled:
     filter:

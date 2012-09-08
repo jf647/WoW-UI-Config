@@ -86,13 +86,15 @@ sub augment_globalpc
     my $self = shift;
     my $char = shift;
     my $f = shift;
+    
+    my $log = WoWUI::Util->log;
 
     my $clique = $self->build_clique($char, $f);
     if( $clique ) {
         $self->globaldata->{chars}->{$char->dname} = $clique;
     }
     else {
-        croak $char->rname, " has Clique enabled but produced an empty profile";
+        $log->warn($char->rname, " has Clique enabled but produced an empty profile");
     }
        
 }

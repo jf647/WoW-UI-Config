@@ -22,7 +22,7 @@ has type => ( is => 'ro', isa => 'Str' );
 has conditions => ( is => 'ro', isa => 'ArrayRef' );
 has ShowWhen => ( is => 'rw', isa => 'Num', default => 0x2, traits => ['Relevant'] );
 has Enabled => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
-has Name => ( is => 'rw', isa => 'Str', required => 1, lazy => 1, builder => 'build_name', traits => ['Relevant'], relevant => 1 );
+has Name => ( is => 'rw', isa => 'Str', required => 1, lazy_build => 1, traits => ['Relevant'], relevant => 1 );
 has Type => ( is => 'rw', isa => 'Str', required => 1, traits => ['Relevant'], relevant => 1 );
 has Alpha => ( is => 'rw', isa => 'Num', default => 1, traits => ['Relevant'], relevant => 1 );
 has UnAlpha => ( is => 'rw', isa => 'Num', default => 1, traits => ['Relevant'], relevant => 1 );
@@ -38,10 +38,10 @@ has Icons => (
 );
 has SettingsPerView => (
     is => 'rw',
-    isa => 'HashRef',
-    default => sub { {} },
+    isa => 'WoWUI::Module::TellMeWhen::RawLua',
     traits => ['Relevant'],
     relevant => 1,
+    lazy_build => 1,
 );
 has Conditions => (
     is => 'ro',
@@ -114,6 +114,13 @@ sub BUILD
     unless( $self->Name ) {
         $self->Name( $self->tag );
     }
+    
+    # add format if ShowTimerText is set
+    if( $self->ShowTimerText ) {
+        $self->SettingsPerView( WoWUI::Module::TellMeWhen::RawLua->new(
+            luastr => "icon = { Texts = { [2] = '[Duration:TMWFormatDuration]' } }",
+        ) );
+    }
 
     if( $self->conditions ) {
         my @conditions;
@@ -166,11 +173,18 @@ sub BUILD
 }
 
 # builder for our Name
-sub build_name
+sub _build_Name
 {
 
     my $self = shift;
     $self->Name( $self->tag );
+
+}
+
+sub _build_SettingsPerView
+{
+
+    return WoWUI::Module::TellMeWhen::RawLua->new( luastr => '' );
 
 }
 

@@ -298,6 +298,7 @@ my %consumabletypes = (
     Hunter => [ 1, 0 ],
     Mage => [ 0, 1 ],
     Warlock => [ 1, 1 ],
+    Monk => [ 1, 1 ],
 );
 sub set_consumable_type
 {
@@ -505,15 +506,14 @@ sub set_dungeontypes
 
 my %abilities = (
   Paladin => {
-    Retribution => [ 'cleanse', 'interrupt', 'cc', 
-      'cc:demon', 'cc:dragon', 'cc:giant', 'cc:human', 'cc:undead', 'stun', 'resurrect' ],
+    Retribution => [ 'cleanse', 'interrupt', 'cc', 'stun', 'resurrect' ],
     Holy => [ 'cleanse', 'stun', 'resurrect' ],
     Protection => [ 'cleanse', 'stun', 'resurrect' ],
   },
   Shaman => {
-    Enhancement => [ 'cleanse', 'interrupt', 'cc', 'cc:human', 'cc:beast', 'cc:elemental', 'resurrect' ],
-    Elemental => [ 'cleanse', 'interrupt', 'cc', 'cc:human', 'cc:beast', 'cc:elemental', 'resurrect' ],
-    Restoration => [ 'cleanse', 'interrupt', 'cc', 'cc:human', 'cc:beast', 'cc:elemental', 'resurrect' ],
+    Enhancement => [ 'cleanse', 'interrupt', 'cc', 'resurrect' ],
+    Elemental => [ 'cleanse', 'interrupt', 'cc', 'resurrect' ],
+    Restoration => [ 'cleanse', 'interrupt', 'cc', 'resurrect' ],
   },
   Druid => {
     Balance => [ 'cleanse', 'resurrect', 'battlerez' ],
@@ -522,23 +522,21 @@ my %abilities = (
     Guardian => [ 'cleanse', 'interrupt', 'resurrect', 'battlerez' ],
   },
   Priest => {
-    Holy => [ 'cleanse', 'cc', 'cc:undead', 'resurrect' ],
-    Discipline => [ 'cleanse', 'cc', 'cc:undead', 'resurrect' ],
-    Shadow => [ 'cleanse', 'cc', 'cc:undead', 'resurrect' ],
+    Holy => [ 'cleanse', 'cc', 'resurrect' ],
+    Discipline => [ 'cleanse', 'cc', 'resurrect' ],
+    Shadow => [ 'cleanse', 'cc', 'resurrect' ],
   },
   Hunter => {
-    Survival => [ 'cc', 'cc:undead', 'cc:human', 'cc:demon', 'cc:beast', 'cc:elemental',
-      'cc:demon', 'cc:giant', 'cc:dragon' ],
-    Marksmanship => [ 'cc', 'cc:undead', 'cc:human', 'cc:demon', 'cc:beast', 'cc:elemental',
-      'cc:demon', 'cc:giant', 'cc:dragon', 'interrupt' ],
-    'Beast Mastery' => [ 'cc', 'cc:undead', 'cc:human', 'cc:demon', 'cc:beast', 'cc:elemental',
-      'cc:demon', 'cc:giant', 'cc:dragon' ],
+    Survival => [ 'cc' ],
+    Marksmanship => [ 'cc', 'interrupt' ],
+    'Beast Mastery' => [ 'cc' ],
   },
   Rogue => [ 'interrupt' ],
   'Death Knight' => [ 'interrupt', 'battlerez' ],
   Warrior => [ 'interrupt' ],
-  Mage => [ 'interrupt', 'cc', 'cc:human', 'cc:beast', 'cleanse' ],
+  Mage => [ 'interrupt', 'cc', 'cleanse' ],
   Warlock => [ 'resurrect', 'cc', 'battlerez' ],
+  Monk => [ 'resurrect', 'cc', 'cleanse', 'interrupt' ],
 );
 sub set_abilities
 {

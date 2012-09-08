@@ -15,6 +15,25 @@ filtergroups:
     members:
     - targetunit
     - showmenu
+  monk:
+    members:
+    - Detox
+    - Resuscitate
+    - Spear Hand Strike
+    - Life Cocoon
+    - Enveloping Mist
+    - Chi Wave
+    - Paralysis
+    - Renewing Mist
+    - Revival
+    - Soothing Mist
+    - Surging Mist
+    - Thunder Focus Tea
+    - Uplift
+    - Paralysis
+    filter:
+      include:
+      - class:Monk
   deathknight:
     members:
     - Horn of Winter
@@ -24,7 +43,6 @@ filtergroups:
     - Mind Freeze
     - Raise Ally
     - Unholy Frenzy
-    - Dark Command
     filter:
       include:
       - class:Death Knight
@@ -44,7 +62,6 @@ filtergroups:
     - Rebirth
     - Revive
     - Regrowth
-    - Growl
     - Cenarion Ward
     - Ironbark
     filter:
@@ -97,7 +114,6 @@ filtergroups:
     - Holy Light
     - Holy Shock
     - Holy Radiance
-    - Hand of Reckoning
     - Light of Dawn
     - Divine Plea
     - Repentance
@@ -189,7 +205,6 @@ filtergroups:
     - Intervene
     - Pummel
     - Enraged Regeneration
-    - Taunt
     - Heroic Leap
     - Sunder Armor
     - Vigilance
@@ -269,12 +284,6 @@ actions:
       - cliqueaction:interrupt
       level: 9
     icon: spell_frost_iceshock
-  Dark Command:
-    filter:
-      include:
-      - all(spec:Blood;cliqueaction:taunt)
-      level: 65
-    icon: spell_nature_shamanrage
   Dark Transformation:
     filter:
       include:
@@ -399,12 +408,6 @@ actions:
       - cliqueaction:bigheal
       level: 68
     icon: Spell_Nature_HealingWaveLesser
-  Growl:
-    filter:
-      include:
-      - all(spec:Guardian;cliqueaction:taunt)
-      level: 15
-    icon: ability_physical_taunt
   Hammer of Justice:
     filter:
       include:
@@ -429,12 +432,6 @@ actions:
       - all(spec:Restoration;cliqueaction:protectphysical)
       level: 64
     icon: spell_druid_ironbark
-  Hand of Reckoning:
-    filter:
-      include:
-      - all(spec:Protection;cliqueaction:taunt)
-      level: 14
-    icon: spell_holy_unyieldingfaith
   Hand of Sacrifice:
     filter:
       include:
@@ -871,12 +868,6 @@ actions:
       include:
       - all(spec:Restoration;cliqueaction:buffheal)
     icon: inv_relics_idolofrejuvenation
-  Taunt:
-    filter:
-      include:
-      - all(spec:Protection;cliqueaction:taunt)
-      level: 12
-    icon: spell_nature_reincarnation
   Tranquilizing Shot:
     filter:
       include:
@@ -957,6 +948,82 @@ actions:
       include:
       - all(talent:Eternal Flame;cliqueaction:freeheal)
     icon: inv_torch_thrown
+  Detox:
+    filter:
+      level: 20
+      include:
+        - cliqueaction:cleanse
+    icon: spell_holy_dispelmagic
+  Resuscitate:
+    filter:
+      level: 18
+      include:
+        - cliqueaction:resurrect
+    icon: ability_druid_lunarguidance
+  Spear Hand Strike:
+    filter:
+      level: 32
+      include:
+        - cliqueaction:interrupt
+  Life Cocoon:
+    filter:
+      level: 50
+      include:
+        - cliqueaction:healerpanic
+    icon: ability_monk_chicocoon
+  Enveloping Mist:
+    filter:
+      level: 34
+      include:
+        - cliqueaction:bigheal
+    icon: spell_shaman_spiritlink
+  Chi Wave:
+    filter:
+      include:
+        - all(cliqueaction:bounceheal;talent:Chi Wave)
+    icon: ability_monk_chiwave
+  Paralysis:
+    filter:
+      level: 44
+      include:
+        - cliqueaction:cc
+    icon: ability_monk_paralysis
+  Renewing Mist:
+    filter:
+      level: 42
+      include:
+        - cliqueaction:hot
+    icon: ability_monk_renewingmists
+  Revival:
+    filter:
+      level: 78
+      include:
+        - cliqueaction:aoecleanse
+    icon: spell_shaman_blessingofeternals
+  Soothing Mist:
+    filter:
+      level: 10
+      include:
+        - cliqueaction:standardheal
+    icon: ability_monk_soothingmists
+  Surging Mist:
+    filter:
+      level: 34
+      include:
+        - cliqueaction:fastheal
+    icon: ability_monk_surgingmist
+  Thunder Focus Tea:
+    filter:
+      level: 66
+      include:
+        - cliqueaction:buffheal
+    icon: ability_monk_thunderfocustea
+  Uplift:
+    filter:
+      level: 62
+      include:
+        - cliqueaction:instantheal
+    icon: ability_monk_uplift
   showmenu:
     filter:
       include:
@@ -975,10 +1042,7 @@ bindings:
         standardheal:
           filter:
             include:
-            - class:Paladin
-            - class:Priest
-            - class:Druid
-            - class:Shaman
+            - role:Healer
     '5':
       click: BUTTON5
       types:
@@ -1007,10 +1071,7 @@ bindings:
         fastheal:
           filter:
             include:
-            - class:Paladin
-            - class:Priest
-            - class:Druid
-            - class:Shaman
+            - role:Healer
     alt-middle:
       click: ALT-BUTTON3
       types:
@@ -1030,6 +1091,10 @@ bindings:
             filter:
                 include:
                     - all(class:Paladin;spec:Holy)
+        aoecleanse:
+          filter:
+            include:
+            - all(class:Monk;spec:Mistweaver)
     control-alt-middle:
       click: CTRL-ALT-BUTTON3
       types: {}
@@ -1067,9 +1132,7 @@ bindings:
         healerpanic:
           filter:
             include:
-            - all(class:Priest;spec:Holy)
-            - all(class:Priest;spec:Discipline)
-            - class:Paladin
+            - role:Healer
     control-shift-middle:
       click: CTRL-SHIFT-BUTTON3
       types: {}
@@ -1103,6 +1166,7 @@ bindings:
           filter:
             include:
             - all(class:Paladin;spec:Holy)
+            - all(class:Monk;talent:Chi Wave)
         petbuff:
           filter:
             include:
@@ -1151,9 +1215,7 @@ bindings:
         hot:
           filter:
             include:
-            - class:Priest
-            - class:Druid
-            - all(class:Shaman;spec:Restoration)
+            - role:Healer
         multitaunt:
           filter:
             include:
@@ -1191,10 +1253,7 @@ bindings:
         bigheal:
           filter:
             include:
-            - class:Paladin
-            - class:Priest
-            - class:Druid
-            - class:Shaman
+            - role:Healer
     shift-middle:
       click: SHIFT-BUTTON3
       types:
@@ -1202,6 +1261,7 @@ bindings:
           filter:
             include:
             - class:Priest
+            - all(class:Monk;spec:Mistweaver)
         shield:
           filter:
             include:
@@ -1228,6 +1288,7 @@ bindings:
             - all(class:Shaman;spec:Restoration)
             - all(class:Druid;spec:Restoration)
             - all(class:Priest;spec:Holy)
+            - all(class:Monk;spec:Mistweaver)
         protectphysical:
           filter:
             include:
@@ -1277,10 +1338,6 @@ bindings:
           filter:
             include:
             - ability:cc
-        taunt:
-          filter:
-            include:
-            - role:Tank
     shift-left:
       click: SHIFT-BUTTON1
       types: {}

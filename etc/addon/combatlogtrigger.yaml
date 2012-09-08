@@ -11,19 +11,19 @@ perchar_filter:
     addons:
         - CombatLogTrigger
 triggers:
-    Ritual of Refreshment:
+    Conjure Refreshment Table:
         type: create
-        spellid: 92827
-        message: '*src is casting *slink, please assist'
+        spellid: 43987
+        message: '*src casts *slink'
         combateither: 1
         filter:
             level: 70
             include:
                 - class:Mage
-    Ritual of Souls:
-        type: create
+    Create Soulwell:
+        type: spell
         spellid: 29893
-        message: '*src is casting *slink, please assist'
+        message: '*src casts *slink'
         combateither: 1
         filter:
             level: 68

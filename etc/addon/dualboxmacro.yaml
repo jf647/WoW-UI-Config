@@ -111,9 +111,6 @@ filtergroups:
       - Priest DoT 2
       - Mind Sear
       - Atonement Smite
-      - Holy Fire Smite
-      - SWP Holy Fire Smite
-      - SWP Smite
       - Archangel
       - Mind Blast
       - Circle of Healing
@@ -560,20 +557,6 @@ buttons:
       level: 70
     notarget: 1
     spell: Heroism
-  Holy Fire Smite:
-    filter:
-      include:
-        - all(spec:Discipline;dbmtype:priattack1)
-      level: 28
-    name: Dmg
-    reset: 10/combat/target
-    spell:
-      - 'Shadow Word: Pain'
-      - Devouring Plague
-      - Holy Fire
-      - Smite
-      - Smite
-      - Smite
   Holy Light:
     filter:
       include:
@@ -854,31 +837,6 @@ buttons:
         - all(spec:Restoration;dbmtype:hot)
       level: 69
     spell: Riptide
-  SWP Holy Fire Smite:
-    filter:
-      include:
-        - all(spec:Discipline;dbmtype:priattack1)
-      level: 18:27
-    name: Dmg
-    reset: 10/combat/target
-    spell:
-      - 'Shadow Word: Pain'
-      - Holy Fire
-      - Smite
-      - Smite
-      - Smite
-  SWP Smite:
-    filter:
-      include:
-        - all(spec:Discipline;dbmtype:priattack1)
-      level: 4:17
-    name: Dmg
-    reset: 10/combat/target
-    spell:
-      - 'Shadow Word: Pain'
-      - Smite
-      - Smite
-      - Smite
   Set Focus:
     filter:
       include:

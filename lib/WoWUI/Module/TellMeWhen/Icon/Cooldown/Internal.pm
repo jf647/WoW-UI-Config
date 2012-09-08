@@ -14,6 +14,7 @@ extends 'WoWUI::Module::TellMeWhen::Icon::Cooldown';
 has '+priority' => ( default => 2450 );
 has '+Type' => ( default => 'icd' );
 has '+ShowTimer' => ( default => 1 );
+has '+ShowTimerText' => ( default => 1 );
 has '+ICDType' => ( relevant => 1 );
 has [ qw|
     +IgnoreRunes +ManaCheck +OnlyEquipped

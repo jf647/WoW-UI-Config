@@ -20,7 +20,7 @@ groupscale:
     '8': 1.7
 perchar_filter:
     addons:
-        - TellMeWhen
+      - TellMeWhen
 templates:
   global:
     tellmewhen:
@@ -133,6 +133,18 @@ conditions:
     Operator: '=='
     Name: Maelstrom Weapon
     Level: 5
+  elusive_brew_ge_10_stacks:
+    Type: BUFFSTACKS
+    Checked: 1
+    Operator: '>='
+    Name: Elusive Brew
+    Level: 10
+  death_note:
+    Type: BUFFSTACKS
+    Checked: 1
+    Operator: '=='
+    Name: Death Note
+    Level: 1
   no_soul_shards:
     Type: SOUL_SHARDS
     Operator: '=='
@@ -153,6 +165,43 @@ filtergroups:
     members:
     - Lifeblood
     - Well Fed
+  monk:
+    members:
+    - Leg Sweep
+    - Tiger's Lust
+    - Chi Wave
+    - Chi Brew
+    - Charging Ox Wave
+    - Dampen Harm
+    - Diffuse Magic
+    - Rushing Jade Wind
+    - Invoke Xuen, the White Tiger
+    - Leer of the Ox
+    - Avert Harm
+    - Shuffle
+    - Dizzying Haze Missing
+    - Clash
+    - Elusive Brew
+    - Expel Harm
+    - Fortifying Brew
+    - Grapple Weapon
+    - Guard
+    - Keg Smash
+    - Paralysis
+    - Provoke
+    - Spear Hand Strike
+    - Summon Black Ox Statue
+    - Touch of Death
+    - 'Transcendence: Transfer'
+    - Zen Meditation
+    - Life Cocoon
+    - Revival
+    - Summon Jade Serpent Statue
+    - Thunder Focus Tea
+    - Mana Tea
+    filter:
+      include:
+      - class:Monk
   deathknight:
     members:
     - Army of the Dead
@@ -165,7 +214,6 @@ filtergroups:
     - Summon Gargoyle
     - Icebound Fortitude
     - Pillar of Frost
-    - Raise Dead
     - Blood Tap
     - Empower Rune Weapon
     - Rune Tap
@@ -174,6 +222,10 @@ filtergroups:
     - Death Grip
     - Bone Shield
     - Conversion
+    - Unholy Blight
+    - Death's Advance
+    - Blood Plague Missing
+    - Frost Fever Missing
     filter:
       include:
       - class:Death Knight
@@ -263,6 +315,9 @@ filtergroups:
     - Freeze
     - Arcane Barrage
     - Nether Tempest Missing
+    - Inferno Blast
+    - Frostfire Bolt
+    - Ice Lance
     filter:
       include:
       - class:Mage
@@ -494,7 +549,6 @@ icons:
       - Raise Dead
       - Obliterate
       - Frost Strike
-      - Blood Tap
       - Empower Rune Weapon
   Enhance Shaman Rotation:
     no_filter_group_ok: 1
@@ -618,21 +672,25 @@ icons:
     missing: 1
     spell: Lightning Shield
   Blood Plague Missing:
-    no_filter_group_ok: 1
     type: Debuff
     Unit: target
     spell: Blood Plague
     duration:
-        max: 3
+        max: 4
     always: 1
+    ShowTimer: 1
+    ShowTimerText: 1
+    combat: in
   Frost Fever Missing:
-    no_filter_group_ok: 1
     type: Debuff
     Unit: target
     spell: Frost Fever
     duration:
-        max: 3
+        max: 5
     always: 1
+    ShowTimer: 1
+    ShowTimerText: 1
+    combat: in
   Howling Blast if FF Missing:
     no_filter_group_ok: 1
     type: Cooldown::Spell
@@ -863,6 +921,8 @@ icons:
         max: 5
     spell: 77535
     type: Buff
+    ShowTimer: 1
+    ShowTimerText: 1
   Camouflage:
     conditions:
       - instance
@@ -1580,6 +1640,42 @@ icons:
     missing: 1
     spell: Nether Tempest
     type: Debuff
+  Inferno Blast:
+    combat: in
+    filter:
+      include:
+      - spec:Fire
+    type: Cooldown::Spell::Off::ShortCD
+  Brain Freeze:
+    no_filter_group_ok: 1
+    combat: in
+    filter:
+      include:
+      - spec:Frost
+    type: Buff
+  Fingers of Frost:
+    no_filter_group_ok: 1
+    combat: in
+    filter:
+      include:
+      - spec:Frost
+    type: Buff
+  Frostfire Bolt:
+    combat: in
+    filter:
+      include:
+        - spec:Frost
+    conditions:
+      - icon:Brain Freeze
+    type: Cooldown::Spell::Off::ShortCD
+  Ice Lance:
+    combat: in
+    filter:
+      include:
+        - spec:Frost
+    conditions:
+      - icon:Fingers of Frost
+    type: Cooldown::Spell::Off::ShortCD
   Frost Bomb:
     combat: in
     filter:
@@ -1731,13 +1827,8 @@ icons:
     filter:
       include:
       - spec:Frost
-      level: 39
+      level: 68
     type: Cooldown::Spell::Off::ShortCD
-  Raise Dead:
-    combat: in
-    filter:
-      level: 56
-    type: Cooldown::Spell::Off::LongCD
   Blood Tap:
     IgnoreRunes: 1
     combat: in
@@ -1753,6 +1844,18 @@ icons:
       include:
         - talent:Conversion
     type: Cooldown::Spell::Def::ShortCD
+  Unholy Blight:
+    combat: in
+    filter:
+      include:
+        - talent:Unholy Blight
+    type: Cooldown::Spell::Off::LongCD
+  Death's Advance:
+    combat: in
+    filter:
+      include:
+        - talent:Death's Advance
+    type: Cooldown::Spell::ShortCD
   Empower Rune Weapon:
     IgnoreRunes: 1
     combat: in
@@ -2543,3 +2646,220 @@ icons:
     filter:
         level: 60
     combat: in
+  Leg Sweep:
+    type: Cooldown::Spell::Off::ShortCD
+    filter:
+      include:
+        - talent:Leg Sweep
+    combat: in
+  Tiger's Lust:
+    type: Cooldown::Spell::ShortCD
+    filter:
+      include:
+        - talent:Tiger's Lust
+    combat: in
+  Chi Wave:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      include:
+        - talent:Chi Wave
+    combat: in
+  Chi Brew:
+    type: Cooldown::Spell::LongCD
+    filter:
+      include:
+        - talent:Chi Brew
+    combat: in
+  Charging Ox Wave:
+    type: Cooldown::Spell::Off::ShortCD
+    filter:
+      include:
+       - talent:Charging Ox Wave
+    combat: in
+  Dampen Harm:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+      include:
+        - talent:Dampen Harm
+    combat: in
+  Diffuse Magic:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+      include:
+        - talent:Diffuse Magic
+    combat: in
+  Rushing Jade Wind:
+    type: Cooldown::Spell::Off::ShortCD
+    filter:
+      include:
+        - talent:Rushing Jade Wind
+    combat: in
+  Invoke Xuen, the White Tiger:
+    type: Cooldown::Spell::Off::LongCD
+    filter:
+      include:
+        - talent:Invoke Xuen, the White Tiger
+    combat: in
+  Leer of the Ox:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 78
+      include:
+        - all(spec:Brewmaster;glyph:Leer of the Ox)
+    combat: in
+  Avert Harm:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+      level: 48
+      include:
+        - spec:Brewmaster
+    combat: in
+  Shuffle:
+    type: Buff
+    duration:
+      max: 4
+    always: 1
+    filter:
+      level: 34
+      include:
+        - spec:Brewmaster
+    combat: in
+    ShowTimer: 1
+    ShowTimerText: 1
+  Dizzying Haze Missing:
+    type: Debuff
+    Unit: target
+    combat: in
+    filter:
+      include:
+      - spec:Brewmaster
+      level: 11
+    always: 1
+    duration:
+      max: 4
+    spell: Dizzying Haze
+    ShowTimer: 1
+    ShowTimerText: 1
+  Clash:
+    type: Cooldown::Spell::Off::ShortCD
+    filter:
+      level: 18
+      include:
+        - spec:Brewmaster
+    combat: in
+  Elusive Brew:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 36
+      include:
+        - spec:Brewmaster
+    combat: in
+    conditions:
+      - elusive_brew_ge_10_stacks
+  Expel Harm:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 26
+    combat: in
+  Fortifying Brew:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+      level: 24
+    combat: in
+  Grapple Weapon:
+    type: Cooldown::Spell::Off::ShortCD
+    filter:
+      level: 68
+    combat: in
+  Guard:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 26
+      include:
+        - spec:Brewmaster
+    combat: in
+  Keg Smash:
+    type: Cooldown::Spell::Off::ShortCD
+    filter:
+      level: 11
+      include:
+        - spec:Brewmaster
+    combat: in
+  Paralysis:
+    type: Cooldown::Spell::Off::ShortCD
+    filter:
+      level: 44
+    combat: in
+  Provoke:
+    type: Cooldown::Spell::Off::ShortCD
+    filter:
+      level: 14
+      include:
+        - spec:Brewmaster
+    combat: in
+  Spear Hand Strike:
+    type: Cooldown::Spell::Off::ShortCD
+    filter:
+      level: 32
+    combat: in
+  Summon Black Ox Statue:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 70
+      include:
+        - spec:Brewmaster
+    combat: either
+  Summon Jade Serpent Statue:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 70
+      include:
+        - spec:Mistweaver
+    combat: either
+  Touch of Death:
+    type: Cooldown::Spell::Off::LongCD
+    filter:
+      level: 22
+    combat: in
+    conditions:
+      - death_note
+  'Transcendence: Transfer':
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 87
+    combat: in
+  Zen Meditation:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+      level: 82
+    combat: in
+  Life Cocoon:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+      level: 50
+      include:
+        - spec:Mistweaver
+    combat: in
+  Revival:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+      level: 78
+      include:
+        - spec:Mistweaver
+    combat: in
+  Thunder Focus Tea:
+    type: Cooldown::Spell::ShortCD
+    filter:
+      level: 66
+      include:
+        - spec:Mistweaver
+    combat: in
+  Mana Tea:
+    type: Buff
+    filter:
+      level: 56
+      include:
+        - spec:Mistweaver
+    combat: either
+    stacks:
+      min: 10

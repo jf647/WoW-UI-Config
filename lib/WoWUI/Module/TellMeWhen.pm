@@ -48,6 +48,7 @@ use WoWUI::Module::TellMeWhen::Events;
 use WoWUI::Module::TellMeWhen::Icon;
 use WoWUI::Module::TellMeWhen::Profile;
 use WoWUI::Module::TellMeWhen::Point;
+use WoWUI::Module::TellMeWhen::RawLua;
 use WoWUI::Module::TellMeWhen::Icons;
 use WoWUI::Module::TellMeWhen::Icon::Meta;
 use WoWUI::Module::TellMeWhen::Icon::Reactive;
@@ -128,7 +129,7 @@ sub augment_globalpc
         $self->register_char( $char, $pname );
     }
     else {
-        croak $char->rname, " has TellMeWhen enabled but generated no groups";
+        $log->warn( $char->rname, " has TellMeWhen enabled but generated no groups" );
     }
 
 }
