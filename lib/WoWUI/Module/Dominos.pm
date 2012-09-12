@@ -75,13 +75,13 @@ sub build_profile
     my $profile;
     
     # global settings
-    for my $section( qw|showminimap linkedopacity showbindings showgrid sticky| ) {
-        my $block = $config->{$section};
+    for my $gs( keys %{ $config->{global_options} } ) {
+        my $block = $config->{global_options}->{$gs};
         if( my $r = $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
-            $profile->{$section} = $r->value;
+            $profile->{$gs} = $r->value;
         }
         else {
-            croak "can't find value for section $section!";
+            croak "can't find value for section $gs!";
         }
     }
     

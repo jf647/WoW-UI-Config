@@ -382,6 +382,8 @@ sub pretty_print_lua
         or croak "can't run @cmd > $tempfname2!";
     rename($tempfname2, $pp_outfname)
         or croak "can't rename $tempfname2 to $outfname\n";
+    unlink($tempfname1)
+        or croak "can't unlink $tempfname1\n";
 
 }
 

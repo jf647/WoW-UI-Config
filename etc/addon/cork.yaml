@@ -85,23 +85,22 @@ filtergroups:
       - class:Priest
     members:
     - Fear Ward-enabled
+    - Chakra-enabled
+    - Chakra-spell
     - Shadow Protection-enabled
     - Inner Fire-spell
     - Inner Fire-enabled
     - Fortitude-enabled
     - Shadowform-enabled
-    - Vampiric Embrace-enabled
   rogue:
     filter:
       include:
       - class:Rogue
     members:
-    - Temp Enchant Off Hand-enabled
-    - Temp Enchant Thrown-spell
-    - Temp Enchant Main Hand-enabled
-    - Temp Enchant Off Hand-spell
-    - Temp Enchant Main Hand-spell
-    - Temp Enchant Thrown-enabled
+    - Poison - Damage-enabled
+    - Poison - Utility-enabled
+    - Poison - Damage-spell
+    - Poison - Utility-spell
   shaman:
     filter:
       include:
@@ -124,6 +123,8 @@ filtergroups:
     - Soul Link-enabled
     - Healthstone
     - Soulstone-enabled
+    - Dark Intent-enabled
+    - Grimoire of Sacrifice-enabled
   warrior:
     filter:
       include:
@@ -257,7 +258,15 @@ settings:
     type: boolean
   Fortitude-enabled:
     filter:
-    - value: 1
+    - value: 0
+    - level: 22
+      value: 1
+    type: boolean
+  Dark Intent-enabled:
+    filter:
+    - value: 0
+    - level: 82
+      value: 1
     type: boolean
   Fursuit-enabled:
     filter:
@@ -315,6 +324,18 @@ settings:
       - spec:Discipline
       level: 83
       value: Inner Will
+    type: string
+  Chakra-enabled:
+    filter:
+    - value: 0
+    - level: 56
+      include:
+        - spec:Holy
+      value: 1
+    type: boolean
+  Chakra-spell:
+    filter:
+    - value: 'Chakra: Serenity'
     type: string
   Lances and Poles-enabled:
     filter:
@@ -444,6 +465,21 @@ settings:
       - mule
       - talent:Grimoire of Sacrifice
     type: boolean
+  Grimoire of Sacrifice-enabled:
+    filter:
+    - value: 0
+    - include:
+      - talent:Grimoire of Sacrifice
+      value: 1
+  Summon demon-enabled:
+    filter:
+    - value: 0
+    - value: 1
+      exclude:
+      - banker
+      - mule
+      - talent:Grimoire of Sacrifice
+    type: boolean
   Summon demon-spell:
     filter:
     - value: Summon Imp
@@ -469,7 +505,41 @@ settings:
         - banker
         - mule
     type: boolean
+  Poison - Damage-enabled:
+    filter:
+    - value: 0
+    - level: 10
+      value: 1
+    type: boolean
+  Poison - Utility-enabled:
+    filter:
+    - value: 0
+    - level: 20
+      value: 1
+    type: boolean
+  Poison - Damage-spell:
+    filter:
+      - level: 10
+        value: Deadly Poison
+    type: string
+  Poison - Utility-spell:
+    filter:
+      - level: 20
+        value: Crippling Poison
+      - include:
+          - talent:Leeching Poison
+        value: Leeching Poison
+      - include:
+          - talent:Paralytic Poison
+        value: Paralytic Poison
+    type: string
   Temp Enchant Main Hand-enabled:
+    filter:
+    - value: 0
+    - level: 10
+      value: 1
+    type: boolean
+  Temp Enchant Off Hand-enabled:
     filter:
     - value: 0
     - level: 10
@@ -477,8 +547,6 @@ settings:
     type: boolean
   Temp Enchant Main Hand-spell:
     filter:
-    - level: 10
-      value: Crippling Poison
     - include:
       - all(class:Shaman;spec:Restoration)
       level: 54
@@ -502,43 +570,13 @@ settings:
       - all(class:Shaman;spec:Enhancement)
       level: 32
       value: Windfury Weapon
-    - include:
-      - class:Rogue
-      value: Instant Poison
     type: string
-  Temp Enchant Off Hand-enabled:
-    filter:
-    - value: 0
-    - level: 10
-      value: 1
-    type: boolean
   Temp Enchant Off Hand-spell:
     filter:
     - level: 10
       include:
       - all(class:Shaman;spec:Enhancement)
       value: Flametongue Weapon
-    - level: 10
-      include:
-      - class:Rogue
-      value: Instant Poison
-    - level: 30
-      include:
-      - class:Rogue
-      value: Deadly Poison
-    type: string
-  Temp Enchant Thrown-enabled:
-    filter:
-    - value: 0
-    - level: 80
-      value: 1
-    type: boolean
-  Temp Enchant Thrown-spell:
-    filter:
-    - level: 80
-      include:
-      - class:Rogue
-      value: Deadly Poison
     type: string
   Tracking-enabled:
     filter:
@@ -577,14 +615,6 @@ settings:
       - mule
       include:
       - leveling
-      value: 1
-    type: boolean
-  Vampiric Embrace-enabled:
-    filter:
-    - value: 0
-    - include:
-      - spec:Shadow
-      level: 20
       value: 1
     type: boolean
   Vigilance-enabled:

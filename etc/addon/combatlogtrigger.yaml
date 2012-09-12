@@ -68,6 +68,13 @@ triggers:
             level: 62
             include:
                 - all(class:Death Knight;spec:Blood)
+    Zen Meditation:
+        type: buff
+        spellid: 115176
+        filter:
+            level: 82
+            include:
+                - class:Monk
     Vampiric Blood:
         type: buff
         spellid: 55233
@@ -102,29 +109,8 @@ triggers:
         type: interrupt
         anyspell: 1
         filter:
-            - level: 57
-              include:
-                  - class:Death Knight
-            - level: 22
-              include:
-                  - all(class:Druid;spec:Feral)
-            - level: 38
-              include:
-                  - class:Warrior
-            - level: 14
-              include:
-                  - class:Rogue
-            - level: 16
-              include:
-                  - class:Shaman
-            - level: 9
-              include:
-                  - class:Mage
-            - level: 52
-              include:
-                  - all(class:Warlock;spec:Affliction)
             - include:
-                  - race:Blood Elf
+                  - ability:interrupt
     Rebuke:
         type: interrupt
         spellid: 92631
@@ -268,6 +254,13 @@ triggers:
             level: 14
             include:
                 - class:Mage
+    Paralysis:
+        type: debuff
+        reportrefresh: 1
+        filter:
+            level: 44
+            include:
+                - class:Monk
     Bind Elemental:
         type: debuff
         reportrefresh: 1

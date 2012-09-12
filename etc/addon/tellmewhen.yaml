@@ -199,6 +199,10 @@ filtergroups:
     - Summon Jade Serpent Statue
     - Thunder Focus Tea
     - Mana Tea
+    - Touch of Karma
+    - Energizing Brew
+    - Fists of Fury
+    - Tigereye Brew
     filter:
       include:
       - class:Monk
@@ -2863,3 +2867,32 @@ icons:
     combat: either
     stacks:
       min: 10
+  Tigereye Brew:
+    type: Buff
+    filter:
+      level: 60
+      include:
+        - spec:Windwalker
+    combat: in
+    stacks:
+      min: 7
+  Touch of Karma:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+      level: 22
+      include:
+        - spec:Windwalker
+    combat: in
+  Energizing Brew:
+    type: Cooldown::Spell::Off::LongCD
+    filter:
+      level: 36
+      include:
+        - spec:Windwalker
+    combat: in
+  Fists of Fury:
+    type: Cooldown::Spell::Off::ShortCD
+    filter:
+      include:
+        - spec:Windwalker
+    combat: in

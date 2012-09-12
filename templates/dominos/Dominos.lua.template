@@ -1,5 +1,5 @@
 
-DominosVersion = "4.3.4"
+DominosVersion = "5.0.16"
 DominosDB = {
     ["profileKeys"] = {
 [% FOR dname IN chars.keys -%]
@@ -10,6 +10,7 @@ DominosDB = {
 [% FOR pname IN dominos.profileset.profiles_list -%]
 [% profile = dominos.profileset.profile_get(pname) -%]
         ["[% pname %]"] = {
+            ["useOverrideUI"] = [% IF profile.useoverrideui %]true[% ELSE %]false[% END %],
             ["showMinimap"] = [% IF profile.showminimap %]true[% ELSE %]false[% END %],
             ["showBindingText"] = [% IF profile.showbindings %]true[% ELSE %]false[% END %],
             ["showgrid"] = [% IF profile.showgrid %]true[% ELSE %]false[% END %],
@@ -62,6 +63,8 @@ DominosDB = {
                     ["padW"] = [% bar.padW %],
                     ["padH"] = [% bar.padH %],
                     ["isBottomToTop"] = [% IF bar.growsup %]true[% ELSE %]false[% END %],
+                    ["showInPetBattleUI"] = [% IF bar.petbattleui %]true[% ELSE %]false[% END %],
+                    ["showInOverrideUI"] = [% IF bar.overrideui %]true[% ELSE %]false[% END %],
 [% IF bar.exists('fadealpha') -%]
                     ["fadeAlpha"] = [% bar.fadealpha %],
 [% END -%]
@@ -82,6 +85,8 @@ DominosDB = {
 [% bar = profile.namedbars.$barname -%]
                 ["[% barname %]"] = {
                     ["hidden"] = [% IF bar.hidden %]true[% ELSE %]false[% END %],
+                    ["showInPetBattleUI"] = [% IF bar.petbattleui %]true[% ELSE %]false[% END %],
+                    ["showInOverrideUI"] = [% IF bar.overrideui %]true[% ELSE %]false[% END %],
                     ["point"] = "[% bar.point %]",
 [% IF bar.exists('anchor') -%]
                     ["anchor"] = "[% bar.anchor %]",

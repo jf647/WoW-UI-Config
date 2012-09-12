@@ -71,25 +71,31 @@ generic:
         WARRIOR: ~
         PRIEST: ~
         MONK: ~
-showminimap:
-    filter:
-        - value: 0
-linkedopacity:
-    filter:
-        - value: 1
-showbindings:
-    filter:
-        - value: 0
-showgrid:
-    filter:
-        - value: 0
-sticky:
-    filter:
-        - value: 1
+global_options:
+    showminimap:
+        filter:
+            - value: 0
+    linkedopacity:
+        filter:
+            - value: 1
+    showbindings:
+        filter:
+            - value: 0
+    showgrid:
+        filter:
+            - value: 0
+    sticky:
+        filter:
+            - value: 1
+    useoverrideui:
+        filter:
+            - value: 1
 numberedbars:
     1:
         filter:
             - value:
+                  petbattleui: 0
+                  overrideui: 0
                   hidden: 0
                   point: BOTTOMLEFT
                   columns: 6
@@ -114,6 +120,8 @@ numberedbars:
     2:
         filter:
             - value:
+                  petbattleui: 0
+                  overrideui: 0
                   hidden: 0
                   point: BOTTOMLEFT
                   anchor: 3LT
@@ -129,6 +137,8 @@ numberedbars:
     3:
         filter:
             - value:
+                  petbattleui: 0
+                  overrideui: 0
                   hidden: 0
                   point: BOTTOMLEFT
                   anchor: 4TC
@@ -144,6 +154,8 @@ numberedbars:
     4:
         filter:
             - value:
+                  petbattleui: 0
+                  overrideui: 0
                   hidden: 0
                   point: BOTTOMLEFT
                   anchor: 1TC
@@ -298,6 +310,8 @@ namedbars:
     extra:
         filter:
             - value:
+                  petbattleui: 1
+                  overrideui: 1
                   point: TOPLEFT
                   x: 206.949
                   y: -343.648
@@ -317,6 +331,8 @@ namedbars:
     pet:
         filter:
             - value:
+                  petbattleui: 0
+                  overrideui: 0
                   point: BOTTOMLEFT
                   anchor: classTL
                   x: 1314.232
@@ -328,6 +344,8 @@ namedbars:
     class:
         filter:
             - value:
+                  petbattleui: 0
+                  overrideui: 0
                   point: BOTTOMRIGHT
                   x: -1068.597
                   y: 137.142

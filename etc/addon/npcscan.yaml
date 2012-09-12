@@ -4,6 +4,14 @@ templates:
         npcscan:
             input: $TEMPLATEDIR/npcscan/_NPCScan.lua.template
             output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/_NPCScan.lua
+copy:
+    global:
+        creaturecache-eu:
+            from: $TEMPLATEDIR/npcscan/creaturecache.wdb
+            to: $TEMPDIR/Cache/WDB/enGB/creaturecache.wdb
+        creaturecache-us:
+            from: $TEMPLATEDIR/npcscan/creaturecache.wdb
+            to: $TEMPDIR/Cache/WDB/enUS/creaturecache.wdb
 perchar_filter:
     addons:
         - _NPCScan

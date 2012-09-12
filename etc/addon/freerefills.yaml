@@ -43,7 +43,7 @@ freerefills:
             include:
                 - prof:Blacksmithing:400+
     Light Parchment:
-        itemid: 39502
+        itemid: 39354
         quality: 1
         quantity: 20
         filter:

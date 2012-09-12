@@ -524,7 +524,7 @@ my %abilities = (
   Priest => {
     Holy => [ 'cleanse', 'cc', 'resurrect' ],
     Discipline => [ 'cleanse', 'cc', 'resurrect' ],
-    Shadow => [ 'cleanse', 'cc', 'resurrect' ],
+    Shadow => [ 'cleanse', 'cc', 'resurrect', 'interrupt' ],
   },
   Hunter => {
     Survival => [ 'cc' ],
@@ -535,7 +535,11 @@ my %abilities = (
   'Death Knight' => [ 'interrupt', 'battlerez' ],
   Warrior => [ 'interrupt' ],
   Mage => [ 'interrupt', 'cc', 'cleanse' ],
-  Warlock => [ 'resurrect', 'cc', 'battlerez' ],
+  Warlock => {
+      Affliction => [ 'resurrect', 'cc', 'battlerez', 'interrupt' ],
+      Demonology => [ 'resurrect', 'cc', 'battlerez' ],
+      Destruction => [ 'resurrect', 'cc', 'battlerez' ],
+  },
   Monk => [ 'resurrect', 'cc', 'cleanse', 'interrupt' ],
 );
 sub set_abilities

@@ -965,6 +965,7 @@ actions:
       level: 32
       include:
         - cliqueaction:interrupt
+    icon: ability_monk_spearhand
   Life Cocoon:
     filter:
       level: 50
@@ -1022,7 +1023,7 @@ actions:
     filter:
       level: 62
       include:
-        - cliqueaction:instantheal
+        - all(cliqueaction:instantheal;spec:Mistweaver)
     icon: ability_monk_uplift
   showmenu:
     filter:
