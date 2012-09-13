@@ -1467,7 +1467,7 @@ icons:
   Kick:
     combat: in
     filter:
-      level: 14
+      level: 18
     type: Cooldown::Spell::Off::ShortCD
   Kill Command:
     combat: in
@@ -2104,7 +2104,7 @@ icons:
     - AND
     - hp_le_75_pct
     filter:
-      level: 12
+      level: 16
     type: Cooldown::Spell::Def::ShortCD
   Recuperate OC:
     combat: out
@@ -2114,7 +2114,7 @@ icons:
     - AND
     - hp_lt_100_pct
     filter:
-      level: 12
+      level: 16
     type: Cooldown::Spell::Def::ShortCD
   Recuperate Missing:
     missing: 1

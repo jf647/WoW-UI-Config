@@ -13,13 +13,19 @@ freerefills:
         quality: 1
         quantity: 5
         filter:
-            level: 81
+            level: 81:85
+    Tome of the Clear Mind:
+        itemid: 79249
+        quality: 1
+        quantity: 5
+        filter:
+            level: 86
     Vanishing Powder:
         itemid: 64670
         quality: 1
         quantity: 5
         filter:
-            level: 25:80
+            level: 15:80
     Crystal Vial:
         itemid: 3371
         quality: 1
@@ -237,38 +243,3 @@ freerefills:
                 - prof:Herbalism:475+
             exclude:
                 - class:Mage
-    Instant Poison:
-        itemid: 6947
-        quantity: 20
-        filter:
-            level: 10
-            include:
-               - class:Rogue
-    Crippling Poison:
-        itemid: 3775
-        quantity: 10
-        filter:
-            level: 20
-            include:
-               - class:Rogue
-    Deadly Poison:
-        itemid: 2892
-        quantity: 40
-        filter:
-            level: 30
-            include:
-               - class:Rogue
-    Mind-Numbing Poison:
-        itemid: 5237
-        quantity: 10
-        filter:
-            level: 24
-            include:
-               - class:Rogue
-    Wound Poison:
-        itemid: 10918
-        quantity: 10
-        filter:
-            level: 32
-            include:
-               - class:Rogue
