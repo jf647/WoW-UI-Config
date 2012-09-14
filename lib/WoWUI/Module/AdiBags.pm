@@ -78,7 +78,7 @@ sub build_profile
     for my $type( qw|frame override| ) {
         for my $block( values %{ $config->{$type} } ) {
             $profile->{"has_$type"} = 0;
-            if( $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
+            if( $f->match( $block->{filter}, $F_CALL|$F_MACH ) ) {
                 $profile->{$type} = $block->{$type};
                 $profile->{"has_$type"} = 1;
                 last;
@@ -90,7 +90,7 @@ sub build_profile
     for my $blockname( keys %{ $config->{rules} } ) {
         my $block = $config->{rules}->{$blockname};
         $block->{rule}->{name} = $blockname;
-        if( $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
+        if( $f->match( $block->{filter}, $F_CALL|$F_MACH ) ) {
             push @{ $profile->{rules} }, $block->{rule};
         }
     }

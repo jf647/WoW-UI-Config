@@ -77,7 +77,7 @@ sub build_profile
     # global settings
     for my $gs( keys %{ $config->{global_options} } ) {
         my $block = $config->{global_options}->{$gs};
-        if( my $r = $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
+        if( my $r = $f->match( $block->{filter}, $F_CALL|$F_MACH ) ) {
             $profile->{$gs} = $r->value;
         }
         else {
@@ -88,7 +88,7 @@ sub build_profile
     # numbered bars
     for my $barnum( sort { $a <=> $b } keys %{ $config->{numberedbars} } ) {
         my $block = $config->{numberedbars}->{$barnum};
-        if( my $r = $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
+        if( my $r = $f->match( $block->{filter}, $F_CALL|$F_MACH ) ) {
             push @{ $profile->{numberedbars} }, $r->value;
         }
         else {
@@ -99,7 +99,7 @@ sub build_profile
     # named bars
     for my $barname( keys %{ $config->{namedbars} } ) {
         my $block = $config->{namedbars}->{$barname};
-        if( my $r = $f->match( $block->{filter}, F_CALL|F_MACH ) ) {
+        if( my $r = $f->match( $block->{filter}, $F_CALL|$F_MACH ) ) {
             $profile->{namedbars}->{$barname} = $r->value;
         }
     }

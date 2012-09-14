@@ -15,13 +15,12 @@ with 'WoWUI::NoPercharData';
 CLASS->meta->make_immutable;
 
 # constructor
-sub BUILD
-{
+sub BUILD {
 
     my $self = shift;
 
-    $self->perchar( 1 );
-    
+    $self->perchar(1);
+
     return $self;
 
 }

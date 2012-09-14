@@ -121,10 +121,10 @@ sub build_clique
         next unless( $char->spec_get($spec) );
         my $using;
         if( 1 == $spec ) {
-            $using = F_C0|F_C1;
+            $using = $F_C0|$F_C1;
         }
         else {
-            $using = F_C0|F_C2;
+            $using = $F_C0|$F_C2;
         }
 
         # find each of the binding types we need to populate

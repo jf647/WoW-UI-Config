@@ -72,15 +72,15 @@ sub augment_perchar
         if( $spec ) {
             $chardata{specs}->[$specnum]->{name} = $spec;
             if( 1 == $specnum ) {
-                $using = F_C0|F_C1|F_MACH;
+                $using = $F_C0|$F_C1|$F_MACH;
             }
             else {
-                $using = F_C0|F_C2|F_MACH;
+                $using = $F_C0|$F_C2|$F_MACH;
             }
         }
         else {
             $chardata{specs}->[$specnum]->{name} = 'N/A';
-            $using = F_CALL|F_MACH;
+            $using = $F_CALL|$F_MACH;
         }
         $chardata{specs}->[$specnum]->{profile} = $self->get_settings_and_values($f, $using);
       

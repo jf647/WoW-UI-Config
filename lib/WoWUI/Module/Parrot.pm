@@ -77,7 +77,7 @@ sub build_profile
     # combat events
     for my $ce_subtype( qw|abbreviateLength throttles notification modifier filters shortenAmount hideUnitNames| ) {
         for my $block( values %{ $config->{combatevents}->{$ce_subtype} } ) {
-            if( $f->match( $block->{filter}, F_C0|F_MACH ) ) {
+            if( $f->match( $block->{filter}, $F_C0|$F_MACH ) ) {
                 $profile->{combatevents}->{$ce_subtype} = $block->{$ce_subtype};
                 last;
             }
@@ -87,7 +87,7 @@ sub build_profile
     # display, scrollareas, triggers, gametext
     for my $type( qw|display scrollareas triggers gametext| ) {
         for my $block( values %{ $config->{$type} } ) {
-            if( $f->match( $block->{filter}, F_C0|F_MACH ) ) {
+            if( $f->match( $block->{filter}, $F_C0|$F_MACH ) ) {
                 $profile->{$type} = $block->{$type};
                 last;
             }

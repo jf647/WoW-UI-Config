@@ -20,29 +20,27 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILD
-{
+sub BUILD {
 
     my $self = shift;
-    
-    $self->global( 1 );
-    $self->globalpc( 1 );
-    
+
+    $self->global(1);
+    $self->globalpc(1);
+
     return $self;
 
 }
 
-sub augment_global
-{
+sub augment_global {
 
     my $self = shift;
 
     my $config = $self->modconfig;
-    my $o = $self->modoptions;
-    
-    if( $self->has_globaldata ) {
-        $self->globaldata_set( font => $o->{font} );
-        $self->globaldata_set( anchor => $o->{anchor} );
+    my $o      = $self->modoptions;
+
+    if ( $self->has_globaldata ) {
+        $self->globaldata_set( font       => $o->{font} );
+        $self->globaldata_set( anchor     => $o->{anchor} );
         $self->globaldata_set( powertypes => $config->{powertypes} );
     }
 
@@ -50,49 +48,53 @@ sub augment_global
 
 }
 
-sub augment_globalpc
-{
+sub augment_globalpc {
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
+    my $f    = shift;
 
     my $log = WoWUI::Util->log;
 
-    my $config = $self->modconfig( $char );
-    my $o = $self->modoptions;
+    my $config = $self->modconfig($char);
+    my $o      = $self->modoptions;
 
     # frames enabled
     my %ft_enabled;
-    for my $frame( keys %{ $config->{frames} } ) {
+    for my $frame ( keys %{ $config->{frames} } ) {
         my $fn = $config->{frames}->{$frame}->{name};
-        $self->globaldata->{realms}->{$f->char->realm->name}->{$f->char->name}->{frames}->{$fn} ||= {
+        $self->globaldata->{realms}->{ $f->char->realm->name }
+          ->{ $f->char->name }->{frames}->{$fn} ||= {
             enabled => 0,
             percent => 0,
-            ooc => 0
-        };
-        if( $f->match( $config->{frames}->{$frame}->{filter} ) ) {
-            if( exists $ft_enabled{$fn} ) {
-                croak "double match on $fn for ", $char->rname, ": $ft_enabled{$fn} before $frame";
+            ooc     => 0
+          };
+        if ( $f->match( $config->{frames}->{$frame}->{filter} ) ) {
+            if ( exists $ft_enabled{$fn} ) {
+                croak "double match on $fn for ", $char->rname,
+                  ": $ft_enabled{$fn} before $frame";
             }
             else {
                 $ft_enabled{$fn} = $frame;
             }
-            $self->globaldata->{realms}->{$f->char->realm->name}->{$f->char->name}->{frames}->{$fn} = {
+            $self->globaldata->{realms}->{ $f->char->realm->name }
+              ->{ $f->char->name }->{frames}->{$fn} = {
                 enabled => 1,
                 percent => $config->{frames}->{$frame}->{percent},
-                ooc => $config->{frames}->{$frame}->{ooc},
-            }
+                ooc     => $config->{frames}->{$frame}->{ooc},
+              };
         }
     }
 
     # power types
-    for my $p( keys %{ $config->{powertypes} } ) {
-        if( $f->match( $config->{powertypes}->{$p}->{filter} ) ) {
-            $self->globaldata->{realms}->{$f->char->realm->name}->{$f->char->name}->{$p} = 1;
+    for my $p ( keys %{ $config->{powertypes} } ) {
+        if ( $f->match( $config->{powertypes}->{$p}->{filter} ) ) {
+            $self->globaldata->{realms}->{ $f->char->realm->name }
+              ->{ $f->char->name }->{$p} = 1;
         }
         else {
-            $self->globaldata->{realms}->{$f->char->realm->name}->{$f->char->name}->{$p} = 0;
+            $self->globaldata->{realms}->{ $f->char->realm->name }
+              ->{ $f->char->name }->{$p} = 0;
         }
     }
 
