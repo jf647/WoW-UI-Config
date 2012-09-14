@@ -280,8 +280,10 @@ addons:
             - machine:type:basic
         group: Basic
     Datastore_Crafts:
-        include:
-            - no-one
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
     Datastore_Currencies:
         include:
             - no-one

@@ -161,7 +161,6 @@ sub populate
             $i{$name}->{$spec}->{out} -= $i{$name}->{$spec}->{either};
         }
     }
-
     
     # get the icon objects for each group
     for my $name( qw|selected hidden| ) {
@@ -185,7 +184,15 @@ sub populate
     for my $name( qw|selected hidden| ) {
         for my $spec( qw|0 1 2| ) {
             for my $icon( @{ $i{$name}->{$spec}->{out} } ) {
-                $icon->unshift_cond( $ooc );
+                my $has_cond = 0;
+                for my $cond( $icon->cond_values ) {
+                    if( 'ooc' eq $cond->tag ) {
+                        $has_cond = 1, last;
+                    }
+                }
+                unless( $has_cond ) {
+                    $icon->unshift_cond( $ooc );
+                }
                 push @{ $i{$name}->{$spec}->{either} }, $icon;
             }
             delete $i{$name}->{$spec}->{out};

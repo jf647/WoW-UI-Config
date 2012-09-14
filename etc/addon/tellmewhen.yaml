@@ -2109,7 +2109,7 @@ icons:
   Recuperate OC:
     combat: out
     spell: Recuperate
-    PowerCheck: 1
+    ManaCheck: 1
     conditions:
     - icon:Recuperate Missing
     - AND
