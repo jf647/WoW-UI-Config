@@ -2109,6 +2109,7 @@ icons:
   Recuperate OC:
     combat: out
     spell: Recuperate
+    PowerCheck: 1
     conditions:
     - icon:Recuperate Missing
     - AND
@@ -2359,7 +2360,7 @@ icons:
   Slice and Dice:
     combat: in
     filter:
-      level: 22
+      level: 14
     missing: 1
     type: Buff
   Solar Beam:
