@@ -7,20 +7,20 @@ use Moose::Role;
 
 # the monks say this is the best worst way to augment construction via roles
 # http://www.perlmonks.org/?node_id=837369
-has [qw|succeed fail always|] => ( is => 'ro', isa => 'Bool' );
-sub BUILD { }
+has [ qw|succeed fail always| ] => ( is => 'ro', isa => 'Bool' );
+sub BUILD {}
 after BUILD => sub {
 
     my $self = shift;
-
+    
     # succeed / fail
-    if ( $self->fail ) {
-        $self->ShowWhen(0x1);
-        $self->UnAlpha(0.5);
+    if( $self->fail ) {
+        $self->ShowWhen( 0x1 );
+        $self->UnAlpha( 0.5 );
     }
-    elsif ( $self->always ) {
-        $self->ShowWhen(0x3);
-        $self->UnAlpha(0.5);
+    elsif( $self->always ) {
+        $self->ShowWhen( 0x3 );
+        $self->UnAlpha( 0.5 );
     }
 
     return $self;

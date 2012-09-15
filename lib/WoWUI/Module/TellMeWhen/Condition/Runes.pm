@@ -12,8 +12,8 @@ use namespace::autoclean;
 # set up class
 with 'WoWUI::Module::TellMeWhen::Dumpable' => { -excludes => 'lua' };
 has runes => (
-    is      => 'rw',
-    isa     => 'ArrayRef[Maybe[Bool]]',
+    is => 'rw',
+    isa => 'ArrayRef[Maybe[Bool]]',
     default => sub { [] },
 );
 CLASS->meta->make_immutable;
@@ -21,16 +21,18 @@ CLASS->meta->make_immutable;
 use WoWUI::LuaDumper;
 
 # custom dumper - we only consume the role to let LuaDumper dispatch to us
-sub lua {
+sub lua
+{
 
     my $self = shift;
 
-    return join( ', ',
-        map { defined $_ ? $_ ? 'true' : 'false' : 'nil' } @{ $self->runes } );
+    return join(', ', map {
+        defined $_ ? $_ ? 'true' : 'false' : 'nil'
+    } @{ $self->runes } );
 
 }
 
-sub augment_lua { }
+sub augment_lua {}
 
 # keep require happy
 1;

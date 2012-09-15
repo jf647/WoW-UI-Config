@@ -11,9 +11,9 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::TellMeWhen::Icon';
-has '+priority'   => ( default  => 5050 );
-has '+Type'       => ( default  => 'totem' );
-has '+ShowWhen'   => ( relevant => 1 );
+has '+priority' => ( default => 5050 );
+has '+Type' => ( default => 'totem' );
+has '+ShowWhen' => ( relevant => 1 );
 has '+TotemSlots' => ( relevant => 1 );
 with 'WoWUI::Module::TellMeWhen::Icon::SpellItemName';
 with 'WoWUI::Module::TellMeWhen::Icon::Present';

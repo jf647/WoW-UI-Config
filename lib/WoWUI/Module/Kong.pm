@@ -48,7 +48,7 @@ sub augment_globalpc
     my %groups;
     for my $frame( keys %{ $config->{frames} } ) {
         if( exists $config->{frames}->{$frame}->{filter} ) {
-            if( $f->match( $config->{frames}->{$frame}->{filter}, $F_ALL ) ) {
+            if( $f->match( $config->{frames}->{$frame}->{filter}, F_ALL ) ) {
                 push @frames, $config->{frames}->{$frame};
                 if( my $group = $config->{frames}->{$frame}->{group} ) {
                     push @{ $groups{$group} }, $config->{frames}->{$frame}->{name};

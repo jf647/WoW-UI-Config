@@ -11,43 +11,43 @@ use namespace::autoclean;
 
 # set up class
 has nameseq => (
-    is      => 'bare',
-    isa     => 'HashRef[Num]',
-    traits  => ['Hash'],
-    default => sub { {} },
-    handles => {
-        nameseq_set     => 'set',
-        nameseq_get     => 'get',
-        nameseq_exists  => 'exists',
-        nameseqs_list   => 'keys',
-        nameseqs_values => 'values',
-    },
+  is => 'bare',
+  isa => 'HashRef[Num]',
+  traits => ['Hash'],
+  default => sub { {} },
+  handles => {
+    nameseq_set => 'set',
+    nameseq_get => 'get',
+    nameseq_exists => 'exists',
+    nameseqs_list => 'keys',
+    nameseqs_values => 'values',
+  },
 );
 has digests => (
-    is      => 'bare',
-    isa     => 'HashRef[Str]',
-    traits  => ['Hash'],
-    default => sub { {} },
-    handles => {
-        digest_set     => 'set',
-        digest_get     => 'get',
-        digest_exists  => 'exists',
-        digests_list   => 'keys',
-        digests_values => 'values',
-    },
+  is => 'bare',
+  isa => 'HashRef[Str]',
+  traits => ['Hash'],
+  default => sub { {} },
+  handles => {
+    digest_set => 'set',
+    digest_get => 'get',
+    digest_exists => 'exists',
+    digests_list => 'keys',
+    digests_values => 'values',
+  },
 );
 has profiles => (
-    is      => 'bare',
-    isa     => 'HashRef[HashRef|Object]',
-    traits  => ['Hash'],
-    default => sub { {} },
-    handles => {
-        profile_set     => 'set',
-        profile_get     => 'get',
-        profile_exists  => 'exists',
-        profiles_list   => 'keys',
-        profiles_values => 'values',
-    },
+  is => 'bare',
+  isa => 'HashRef[HashRef|Object]',
+  traits => ['Hash'],
+  default => sub { {} },
+  handles => {
+    profile_set => 'set',
+    profile_get => 'get',
+    profile_exists => 'exists',
+    profiles_list => 'keys',
+    profiles_values => 'values',
+  },
 );
 CLASS->meta->make_immutable;
 
@@ -57,42 +57,44 @@ use YAML::Any 'Dump';
 use WoWUI::Util;
 
 # store or match/return a profile
-sub store {
+sub store
+{
 
-    my $self    = shift;
+    my $self = shift;
     my $profile = shift;
-    my $name    = shift || 'Profile';
-
+    my $name = shift || 'Profile';
+    
     my $log = WoWUI::Util->log( stacksup => 1, prefix => 'profileset' );
-
-    my $digest = $self->digest($profile);
+    
+    my $digest = $self->digest( $profile );
     $log->debug("profile digest is $digest");
     my $pname;
-    if ( $self->digest_exists($digest) ) {
-        $pname = $self->digest_get($digest);
+    if( $self->digest_exists( $digest ) ) {
+        $pname = $self->digest_get( $digest );
         $log->debug("matches to existing profile $pname");
     }
     else {
         my $pnum = 1;
-        if ( $self->nameseq_exists($name) ) {
+        if( $self->nameseq_exists($name) ) {
             $pnum = $self->nameseq_get($name) + 1;
         }
         $pname = "$name $pnum";
         $log->debug("storing new profile as $pname");
-        $self->profile_set( $pname, $profile );
-        $self->digest_set( $digest, $pname );
-        $self->nameseq_set( $name, $pnum );
+        $self->profile_set($pname, $profile);
+        $self->digest_set( $digest, $pname);
+        $self->nameseq_set($name, $pnum);
     }
-
+    
     return $pname;
 
 }
 
-sub digest {
+sub digest
+{
 
-    my $self    = shift;
+    my $self = shift;
     my $profile = shift;
-
+    
     my $ctx = Digest->new('MD5');
     $ctx->add( Dump($profile) );
     return $ctx->hexdigest;

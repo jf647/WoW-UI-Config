@@ -121,13 +121,13 @@ sub find_button
     
     my $found = 0;
     my $match;
-    my $using = $F_CALL;
+    my $using = F_CALL;
     if( $char->dualbox_spec ) {
         if( 1 == $char->dualbox_spec ) {
-            $using = $F_C0|$F_C1;
+            $using = F_C0|F_C1;
         }
         else {
-            $using = $F_C0|$F_C2;
+            $using = F_C0|F_C2;
         }
     }
 

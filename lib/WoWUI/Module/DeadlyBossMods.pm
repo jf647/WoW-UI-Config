@@ -18,14 +18,15 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILD {
+sub BUILD
+{
 
     my $self = shift;
 
-    $self->perchar(1);
-
+    $self->perchar( 1 );
+    
     return $self;
-
+    
 }
 
 # keep require happy

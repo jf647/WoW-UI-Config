@@ -17,14 +17,15 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILD {
+sub BUILD
+{
 
     my $self = shift;
-
-    $self->globalpc(1);
-
+    
+    $self->globalpc( 1 );
+    
     return $self;
-
+    
 }
 
 sub augment_globalpc { }

@@ -47,7 +47,7 @@ sub augment_globalpc
 
         my $macro = $config->{global_macros}->{$mn};    
 
-        if( $f->match( $macro->{filter}, $F_CALL|$F_MACH ) ) {
+        if( $f->match( $macro->{filter}, F_CALL|F_MACH ) ) {
         
             if( @{ $gdata->{macros} } >= $self->maxmacro ) {
                 croak "too many global macros";
@@ -91,7 +91,7 @@ sub augment_perchar
 
         my $macro = $config->{macros}->{$mn};
     
-        if( $f->match( $macro->{filter}, $F_CALL|$F_MACH ) ) {
+        if( $f->match( $macro->{filter}, F_CALL|F_MACH ) ) {
         
             if( @{ $pdata->{macros} } >= $self->maxmacro ) {
                 croak "too many perchar macros for " . $char->dname;

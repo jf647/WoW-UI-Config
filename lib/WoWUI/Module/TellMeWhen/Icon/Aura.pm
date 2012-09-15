@@ -11,54 +11,53 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::TellMeWhen::Icon';
-has stacks   => ( is => 'ro', isa => 'HashRef' );
+has stacks => ( is => 'ro', isa => 'HashRef' );
 has duration => ( is => 'ro', isa => 'HashRef' );
-has '+Type'         => ( default  => 'buff' );
+has '+Type' => ( default => 'buff' );
 has '+BuffOrDebuff' => ( relevant => 1, default => 'HELPFUL' );
-has '+ShowWhen'     => ( relevant => 1 );
-has '+Alpha'        => ( default  => 0.5 );
-has [
-    qw|
-      +OnlyMine +PBarOffs +ShowPBar
-      +StackMax +StackMaxEnabled +StackMin
-      +StackMinEnabled +Unit +Sort +SortAsc +SortDesc
-      +EnableStacks
-      |
-] => ( relevant => 1 );
+has '+ShowWhen' => ( relevant => 1 );
+has '+Alpha' => ( default => 0.5 );
+has [ qw|
+    +OnlyMine +PBarOffs +ShowPBar
+    +StackMax +StackMaxEnabled +StackMin
+    +StackMinEnabled +Unit +Sort +SortAsc +SortDesc
+    +EnableStacks
+| ] => ( relevant => 1 );
 with 'WoWUI::Module::TellMeWhen::Icon::SpellItemName';
 with 'WoWUI::Module::TellMeWhen::Icon::Present';
 CLASS->meta->make_immutable;
 
 # constructor
-sub BUILD {
+sub BUILD
+{
 
     my $self = shift;
 
     # stacks
-    if ( $self->stacks ) {
-        $self->EnableStacks(1);
-        if ( exists $self->stacks->{min} ) {
-            $self->StackMinEnabled(1);
+    if( $self->stacks ) {
+        $self->EnableStacks( 1 );
+        if( exists $self->stacks->{min} ) {
+            $self->StackMinEnabled( 1 );
             $self->StackMin( $self->stacks->{min} );
         }
-        if ( exists $self->stacks->{max} ) {
-            $self->StackMaxEnabled(1);
+        if( exists $self->stacks->{max} ) {
+            $self->StackMaxEnabled( 1 );
             $self->StackMax( $self->stacks->{max} );
         }
     }
 
     # durations
-    if ( $self->duration ) {
-        if ( exists $self->duration->{min} ) {
-            $self->DurationMinEnabled(1);
+    if( $self->duration ) {
+        if( exists $self->duration->{min} ) {
+            $self->DurationMinEnabled( 1 );
             $self->DurationMin( $self->duration->{min} );
         }
-        if ( exists $self->duration->{max} ) {
-            $self->DurationMaxEnabled(1);
+        if( exists $self->duration->{max} ) {
+            $self->DurationMaxEnabled( 1 );
             $self->DurationMax( $self->duration->{max} );
         }
     }
-
+    
     return $self;
 
 }

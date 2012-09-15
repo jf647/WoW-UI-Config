@@ -68,10 +68,10 @@ sub augment_perchar
     for my $specnum( sort keys %specs ) {
         my $using;
         if( 1 == $specnum ) {
-            $using = $F_C0|$F_C1;
+            $using = F_C0|F_C1;
         }
         else {
-            $using = $F_C0|$F_C2;
+            $using = F_C0|F_C2;
         }
         $log->debug("processing spec $specnum");
         my @triggers;

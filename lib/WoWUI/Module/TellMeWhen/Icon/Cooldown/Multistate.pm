@@ -10,7 +10,7 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::TellMeWhen::Icon::Cooldown';
-has '+priority'     => ( default => 2250 );
+has '+priority' => ( default => 2250 );
 has '+CooldownType' => ( default => 'multistate' );
 with 'WoWUI::Module::TellMeWhen::Icon::SpellItemName';
 CLASS->meta->make_immutable;

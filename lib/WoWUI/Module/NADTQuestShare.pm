@@ -38,10 +38,10 @@ sub augment_perchar
     my $master = 0;
     my $slave = 0;
     
-    if( $f->match( { include => [ 'all(dualbox;machine:type:primary)'] }, $F_C0|$F_MACH ) ) {
+    if( $f->match( { include => [ 'all(dualbox;machine:type:primary)'] }, F_C0|F_MACH ) ) {
         $master = 1;
     }
-    elsif( $f->match( { include => [ 'all(dualbox;machine:type:secondary)'] }, $F_C0|$F_MACH ) ) {
+    elsif( $f->match( { include => [ 'all(dualbox;machine:type:secondary)'] }, F_C0|F_MACH ) ) {
         $slave = 1;
     }
 

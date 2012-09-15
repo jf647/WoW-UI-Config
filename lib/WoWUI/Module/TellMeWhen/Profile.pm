@@ -313,7 +313,7 @@ sub select_icons
     }
     
     # iterate over candidates    
-    my $using = 1 == $a{spec} ? $F_C0|$F_C1|$F_MACH : $F_C0|$F_C2|$F_MACH;
+    my $using = 1 == $a{spec} ? F_C0|F_C1|F_MACH : F_C0|F_C2|F_MACH;
     for my $iname( $candidates->members ) {
         $log->trace("considering candidate $iname");
         my $icon = WoWUI::Module::TellMeWhen::Icons->instance->icon_get($iname);

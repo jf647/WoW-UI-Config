@@ -5,10 +5,7 @@
 package WoWUI::Util;
 use base 'Exporter';
 
-use strict;
-use warnings;
-
-our @EXPORT = '';
+our @EXPORT = ();
 our @EXPORT_OK = qw|
     expand_path
     tempdir

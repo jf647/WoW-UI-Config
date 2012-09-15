@@ -38,11 +38,11 @@ sub augment_perchar
     my $acceptinvite = 0;
     my $setffaloot = 0;
     
-    if( $f->match( { include => [ 'all(dualbox;machine:type:primary)'] }, $F_C0|$F_MACH ) ) {
+    if( $f->match( { include => [ 'all(dualbox;machine:type:primary)'] }, F_C0|F_MACH ) ) {
         $setffaloot = 1;
     }
 
-    if( $f->match( { include => [ 'all(dualbox;machine:type:secondary)'] }, $F_C0|$F_MACH ) ) {
+    if( $f->match( { include => [ 'all(dualbox;machine:type:secondary)'] }, F_C0|F_MACH ) ) {
         $acceptinvite = 1;
     }
 

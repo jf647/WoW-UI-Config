@@ -37,7 +37,7 @@ sub augment_perchar
   my $config = $self->modconfig( $char );
   my $o = $self->modoptions( $char );
   
-  my $mf = $f->match( $config->{moneyframe}->{filter}, $F_MACH );
+  my $mf = $f->match( $config->{moneyframe}->{filter}, F_MACH );
 
   $self->perchardata_set( scale => $o->{scale}, moneyframe => $mf->value );
 

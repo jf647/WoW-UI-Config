@@ -6,21 +6,19 @@ package WoWUI::ExtraFiles;
 use MooseX::Singleton;
 use MooseX::StrictConstructor;
 
-use strict;
-use warnings;
 use namespace::autoclean;
 
 # set up class
 has files => (
-    is      => 'bare',
-    isa     => 'HashRef[Str]',
-    traits  => ['Hash'],
+    is => 'bare',
+    isa => 'HashRef[Str]',
+    traits => ['Hash'],
     default => sub { {} },
     handles => {
-        add     => 'set',
-        files   => 'keys',
+        add => 'set',
+        files => 'keys',
         zipfile => 'get',
-        reset   => 'clear',
+        reset => 'clear',
     },
 );
 

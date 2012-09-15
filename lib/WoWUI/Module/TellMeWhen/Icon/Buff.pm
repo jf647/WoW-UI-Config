@@ -11,7 +11,7 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::TellMeWhen::Icon::Aura';
-has '+priority'     => ( default => 3050 );
+has '+priority' => ( default => 3050 );
 has '+BuffOrDebuff' => ( default => 'HELPFUL' );
 CLASS->meta->make_immutable;
 

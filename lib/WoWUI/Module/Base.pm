@@ -51,7 +51,7 @@ use Hash::Merge::Simple 'merge';
 use File::Copy;
 
 use WoWUI::Util qw|expand_path load_layered perchar_sv sv tempfile tt log tempdir|;
-use WoWUI::Filter::Constants qw|$F_MPR|;
+use WoWUI::Filter::Constants qw|F_MPR|;
 use WoWUI::NoData;
 
 # constructor
@@ -174,7 +174,7 @@ sub build_global
 
     if( exists $config->{filter} ) {
         my $f = WoWUI::Filter->new( machine => $self->machine );
-        return unless( $f->match( $config->{filter}, $F_MPR ) );
+        return unless( $f->match( $config->{filter}, F_MPR ) );
     }
     $self->augment_global();
     
@@ -189,7 +189,7 @@ sub build_globalpc
 
     if( exists $config->{filter} ) {
         my $f = WoWUI::Filter->new( machine => $self->machine );
-        return unless( $f->match( $config->{filter}, $F_MPR ) );
+        return unless( $f->match( $config->{filter}, F_MPR ) );
     }
 
     my $log = WoWUI::Util->log( callingobj => $self );
