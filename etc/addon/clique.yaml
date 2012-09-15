@@ -57,6 +57,7 @@ filtergroups:
     - Nourish
     - Soothe
     - Innervate
+    - Remove Corruption
     - Nature's Cure
     - Healing Touch
     - Rebirth
@@ -183,6 +184,7 @@ filtergroups:
     - Ancestral Spirit
     - Healing Rain
     - Cleanse Spirit
+    - Purify Spirit
     filter:
       include:
       - class:Shaman
@@ -271,6 +273,14 @@ actions:
     filter:
       include:
       - cliqueaction:cleanse
+      exclude:
+      - spec:Restoration
+      level: 18
+    icon: Ability_Shaman_CleanseSpirit
+  Purify Spirit:
+    filter:
+      include:
+      - all(spec:Restoration;cliqueaction:cleanse)
       level: 18
     icon: Ability_Shaman_CleanseSpirit
   Cloak of Shadows:
@@ -769,10 +779,18 @@ actions:
       - cliqueaction:hot
       level: 3
     icon: Spell_Nature_Rejuvenation
-  Nature's Cure:
+  Remove Corruption:
     filter:
       include:
       - cliqueaction:cleanse
+      level: 24
+      exclude:
+      - spec:Restoration
+    icon: spell_holy_removecurse
+  Nature's Cure:
+    filter:
+      include:
+      - all(cliqueaction:cleanse;spec:Restoration)
       level: 22
     icon: ability_shaman_cleansespirit
   Remove Curse:

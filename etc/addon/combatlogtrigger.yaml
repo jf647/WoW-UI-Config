@@ -96,7 +96,6 @@ triggers:
         filter:
             level: 56
             include:
-                - all(class:Druid;spec:Guardian)
     Frenzied Regeneration:
         type: spell
         message: '*slink used'
@@ -125,6 +124,13 @@ triggers:
             level: 18
             include:
                 - class:Paladin
+    Ironbark:
+        type: spell
+        spellId: 102342
+        filter:
+            level: 64
+            include:
+                - all(class:Druid;spec:Restoration)
     Hand of Sacrifice:
         type: spell
         spellid: 6940

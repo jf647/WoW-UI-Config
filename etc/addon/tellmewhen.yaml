@@ -203,6 +203,7 @@ filtergroups:
     - Energizing Brew
     - Fists of Fury
     - Tigereye Brew
+    - Detox
     filter:
       include:
       - class:Monk
@@ -265,6 +266,7 @@ filtergroups:
     - Might of Ursoc
     - Renewal
     - Savage Defense
+    - Nature's Cure
     filter:
       include:
       - class:Druid
@@ -344,6 +346,7 @@ filtergroups:
     - Divine Plea
     - Devotion Aura
     - Divine Purpose
+    - Cleanse
     filter:
       include:
       - class:Paladin
@@ -381,6 +384,7 @@ filtergroups:
     - Vampiric Embrace
     - Void Tendrils
     - Spirit Shell
+    - Purify
     filter:
       include:
       - class:Priest
@@ -440,6 +444,7 @@ filtergroups:
     - Healing Rains
     - MW3 Healing Wave
     - Wind Shear
+    - Purify Spirit
     filter:
       include:
       - class:Shaman
@@ -2880,7 +2885,6 @@ icons:
   Touch of Karma:
     type: Cooldown::Spell::Def::LongCD
     filter:
-      level: 22
       include:
         - spec:Windwalker
     combat: in
@@ -2896,4 +2900,40 @@ icons:
     filter:
       include:
         - spec:Windwalker
+    combat: in
+  Detox:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 20
+      include:
+        - spec:Mistweaver
+    combat: in
+  Purify Spirit:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 18
+      include:
+        - spec:Restoration
+    combat: in
+  Purify:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 26
+      include:
+        - spec:Holy
+        - spec:Discipline
+    combat: in
+  Cleanse:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 20
+      include:
+        - spec:Holy
+    combat: in
+  Nature's Cure:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      level: 22
+      include:
+        - spec:Restoration
     combat: in
