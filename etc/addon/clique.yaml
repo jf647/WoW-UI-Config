@@ -64,6 +64,7 @@ filtergroups:
     - Regrowth
     - Cenarion Ward
     - Ironbark
+    - Wild Mushroom
     filter:
       include:
       - class:Druid
@@ -432,6 +433,13 @@ actions:
       - all(spec:Restoration;cliqueaction:protectphysical)
       level: 64
     icon: spell_druid_ironbark
+  Wild Mushroom:
+    filter:
+      include:
+      - all(spec:Restoration;cliqueaction:groundheal)
+      - all(spec:Balance;cliqueaction:grounddmg)
+      level: 84
+    icon: druid_ability_wildmushroom_a
   Hand of Sacrifice:
     filter:
       include:
@@ -1076,6 +1084,10 @@ bindings:
     alt-middle:
       click: ALT-BUTTON3
       types:
+        protectphysical:
+            filter:
+                include:
+                    - all(class:Druid;spec:Restoration)
         freemove:
           filter:
             include:
@@ -1374,11 +1386,13 @@ bindings:
             - class:Hunter
             - class:Mage
             - class:Warlock
+            - all(class:Druid;spec:Balance)
         groundheal:
           filter:
             include:
             - all(class:Priest;spec:Holy)
             - class:Shaman
+            - all(class:Druid;spec:Restoration)
         holdenemy:
           filter:
             include:
