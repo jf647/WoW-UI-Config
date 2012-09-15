@@ -516,10 +516,10 @@ my %abilities = (
     Restoration => [ 'cleanse', 'interrupt', 'cc', 'resurrect' ],
   },
   Druid => {
-    Balance => [ 'cleanse', 'resurrect', 'battlerez' ],
-    Restoration => [ 'cleanse', 'resurrect', 'battlerez' ],
-    Feral => [ 'cleanse', 'interrupt', 'resurrect', 'battlerez' ],
-    Guardian => [ 'cleanse', 'interrupt', 'resurrect', 'battlerez' ],
+    Balance => [ 'cc', 'cleanse', 'resurrect', 'battlerez' ],
+    Restoration => [ 'cc', 'cleanse', 'resurrect', 'battlerez' ],
+    Feral => [ 'cc', 'cleanse', 'interrupt', 'resurrect', 'battlerez' ],
+    Guardian => [ 'cc', 'cleanse', 'interrupt', 'resurrect', 'battlerez' ],
   },
   Priest => {
     Holy => [ 'cleanse', 'cc', 'resurrect' ],
