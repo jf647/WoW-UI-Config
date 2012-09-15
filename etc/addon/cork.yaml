@@ -527,7 +527,7 @@ settings:
       - level: 20
         value: Crippling Poison
       - level: 30
-        value: Mind-Numbing Poison
+        value: Mind-numbing Poison
       - include:
           - talent:Leeching Poison
         value: Leeching Poison
