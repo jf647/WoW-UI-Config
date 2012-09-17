@@ -145,6 +145,7 @@ filtergroups:
     - Flash Heal
     - 'Holy Word: Sanctuary'
     - 'Holy Word: Serenity'
+    - Guardian Spirit
     filter:
       include:
       - class:Priest
@@ -684,6 +685,11 @@ actions:
       include:
       - all(spec:Discipline;cliqueaction:healerpanic)
     icon: Spell_Holy_PainSupression
+  Guardian Spirit:
+    filter:
+      include:
+      - all(spec:Holy;cliqueaction:healerpanic)
+    icon: spell_holy_guardianspirit
   Penance:
     filter:
       include:

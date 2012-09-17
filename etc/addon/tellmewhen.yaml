@@ -358,7 +358,7 @@ filtergroups:
     - Desperate Prayer
     - 'Power Word: Barrier'
     - Lightwell
-    - Holy Word
+    - 'Holy Word: Serenity'
     - Guardian Spirit
     - Penance
     - Circle of Healing
@@ -386,6 +386,7 @@ filtergroups:
     - Void Tendrils
     - Spirit Shell
     - Purify
+    - Desperate Prayer
     filter:
       include:
       - class:Priest
@@ -1379,14 +1380,14 @@ icons:
       include:
       - spec:Holy
     type: Cooldown::Spell::Def::ShortCD
-  Holy Word:
+  'Holy Word: Serenity':
     combat: in
     filter:
       include:
       - spec:Holy
       level: 51
-    spell: 88625
-    type: Cooldown::Multistate
+    spell: 88684
+    type: Cooldown::Spell::Def::ShortCD
   Hunter's Mark Missing:
     Unit: target
     combat: in
@@ -2945,4 +2946,10 @@ icons:
       level: 22
       include:
         - spec:Restoration
+    combat: in
+  Desperate Prayer:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+      include:
+        - talent:Desperate Prayer
     combat: in

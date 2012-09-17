@@ -20,6 +20,22 @@ triggers:
             level: 70
             include:
                 - class:Mage
+    Lightwell:
+        type: spell
+        message: 'remember, only *you* can click on the *slink'
+        combateither: 1
+        filter:
+            level: 36
+            include:
+                - all(class:Priest;spec:Holy)
+    Lightspring:
+        type: spell
+        message: '*src creates a *slink.  It's like a Lightwell for lazy people"
+        combateither: 1
+        filter:
+            level: 36
+            include:
+                - all(class:Priest;spec:Holy;glyph:Lightspring)
     Create Soulwell:
         type: spell
         spellid: 29893

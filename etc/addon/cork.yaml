@@ -247,6 +247,9 @@ settings:
   Flask of Enhancement-enabled:
     filter:
     - value: 0
+    - value: 1
+      filter:
+        - prof:Alchemy:300+
     type: boolean
   Focus Magic-enabled:
     filter:
