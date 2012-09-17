@@ -47,7 +47,7 @@ sub lua
 
     # die if we didn't handle all deferred attributes
     if( %deferred ) {
-        croak "unhandled attributes in " . blessed($self) . ": ", join(', ', keys %deferred);
+        croak "unhandled attributes in " . $self->Name . ": ", join(', ', keys %deferred);
     }
 
     return $lua;

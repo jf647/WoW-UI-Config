@@ -693,7 +693,8 @@ icons:
     combat: in
   Arcane Charge:
     type: Debuff
-    present: 1
+    spellid: 36032
+    showstacks: 1
     filter:
         include:
             - spec:Arcane
