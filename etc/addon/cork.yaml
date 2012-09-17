@@ -474,6 +474,7 @@ settings:
     - include:
       - talent:Grimoire of Sacrifice
       value: 1
+    type: boolean
   Summon demon-enabled:
     filter:
     - value: 0

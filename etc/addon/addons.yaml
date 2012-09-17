@@ -264,8 +264,10 @@ addons:
         include:
             - no-one
     Datastore_Agenda:
-        include:
-            - no-one
+        exclude:
+            - machine:type:secondary
+            - machine:type:basic
+        group: Basic
     Datastore_Auctions:
         include:
             - no-one
