@@ -37,7 +37,7 @@ sub augment_perchar
       
     my $config = $self->modconfig( $char );
 
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     # Broker_Currency
     my @options;

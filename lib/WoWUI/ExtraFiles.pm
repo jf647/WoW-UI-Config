@@ -7,18 +7,20 @@ use MooseX::Singleton;
 use MooseX::StrictConstructor;
 
 use namespace::autoclean;
+use strict;
+use warnings;
 
 # set up class
 has files => (
-    is => 'bare',
-    isa => 'HashRef[Str]',
-    traits => ['Hash'],
+    is      => 'bare',
+    isa     => 'HashRef[Str]',
+    traits  => ['Hash'],
     default => sub { {} },
     handles => {
-        add => 'set',
-        files => 'keys',
+        add     => 'set',
+        files   => 'keys',
         zipfile => 'get',
-        reset => 'clear',
+        reset   => 'clear',
     },
 );
 

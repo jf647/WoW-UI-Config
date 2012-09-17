@@ -8,25 +8,27 @@ use MooseX::StrictConstructor;
 
 use Carp 'croak';
 use namespace::autoclean;
+use strict;
+use warnings;
 
 # set up class
 has machines => (
-  is => 'bare',
-  isa => 'HashRef[WoWUI::Machine]',
-  default => sub { {} },
-  traits => ['Hash'],
-  handles => {
-    machine_get => 'get',
-    machine_set => 'set',
-    machine_names => 'keys',
-    machine_exists => 'exists',
-    machines => 'values',
-  },
+    is      => 'bare',
+    isa     => 'HashRef[WoWUI::Machine]',
+    default => sub { {} },
+    traits  => ['Hash'],
+    handles => {
+        machine_get    => 'get',
+        machine_set    => 'set',
+        machine_names  => 'keys',
+        machine_exists => 'exists',
+        machines       => 'values',
+    },
 );
 before machine_get => sub {
-    my $self = shift;
+    my $self     = shift;
     my $machname = shift;
-    return if( $self->machine_exists( $machname ) );
+    return if ( $self->machine_exists($machname) );
     my $machine = WoWUI::Machine->new( name => $machname );
     $self->machine_set( $machname, $machine );
 };

@@ -85,7 +85,7 @@ sub populate
     my $self = shift;
     my($profile, $i, $name, $spec, $combat) = @_;
 
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
     
     # set name
     if( 'hidden' eq $name ) {

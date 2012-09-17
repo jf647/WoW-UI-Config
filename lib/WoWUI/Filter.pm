@@ -89,7 +89,7 @@ sub matchone
     my $using = shift;
     my $extra = shift;
     
-    my $log = WoWUI::Util->log( stacksup => 1, prefix => 'filter' );
+    my $log = WoWUI::Util->logger( stacksup => 1, prefix => 'filter' );
     
     # level matching
     if( $self->char && exists $filter->{level} ) {

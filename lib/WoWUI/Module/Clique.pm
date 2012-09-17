@@ -87,7 +87,7 @@ sub augment_globalpc
     my $char = shift;
     my $f = shift;
     
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     my $clique = $self->build_clique($char, $f);
     if( $clique ) {
@@ -107,7 +107,7 @@ sub build_clique
     my $f = shift;
     
     my $config = $self->modconfig( $char );
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     my %clique;
 

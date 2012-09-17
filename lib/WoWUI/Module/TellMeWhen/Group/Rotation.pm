@@ -25,7 +25,7 @@ sub populate
     my $self = shift;
     my($profile, $spec, $r) = @_;
 
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     # set name
     $self->Name("Spec $spec Rotation");

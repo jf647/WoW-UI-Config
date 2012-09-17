@@ -52,7 +52,6 @@ use File::Copy;
 
 use WoWUI::Util qw|expand_path load_layered perchar_sv sv tempfile tt log tempdir|;
 use WoWUI::Filter::Constants qw|F_MPR|;
-use WoWUI::NoData;
 
 # constructor
 sub BUILD
@@ -129,7 +128,7 @@ sub process
     my $self = shift;
 
     my $config = $self->modconfig;
-    my $log = WoWUI::Util->log( callingobj => $self );
+    my $log = WoWUI::Util->logger( callingobj => $self );
 
     # clear out old data
     $self->globaldata_clear;
@@ -168,7 +167,7 @@ sub build_global
     my $self = shift;
 
     my $config = $self->modconfig;
-    my $log = WoWUI::Util->log( callingobj => $self );
+    my $log = WoWUI::Util->logger( callingobj => $self );
 
     $log->debug("processing global");
 
@@ -192,7 +191,7 @@ sub build_globalpc
         return unless( $f->match( $config->{filter}, F_MPR ) );
     }
 
-    my $log = WoWUI::Util->log( callingobj => $self );
+    my $log = WoWUI::Util->logger( callingobj => $self );
     
     for my $realm( $self->player->realms ) {
         for my $char( $realm->chars ) {
@@ -246,7 +245,7 @@ sub write_global
     my $config = $self->modconfig;
   
     my $svdir = sv( $self->player );
-    my $log = WoWUI::Util->log( callingobj => $self );
+    my $log = WoWUI::Util->logger( callingobj => $self );
 
     my $tt = tt();
   

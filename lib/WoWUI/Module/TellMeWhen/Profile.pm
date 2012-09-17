@@ -134,7 +134,7 @@ sub populate
     
     my $desc = $self->char->rname;
     
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     # select icons
     my %i;
@@ -293,7 +293,7 @@ sub select_icons
     my %a = @_;
     my $char = $a{f}->char;
 
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
     
     my $desc = $char->rname;
 

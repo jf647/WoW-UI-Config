@@ -101,7 +101,7 @@ sub augment_perchar
 
   my $config = $self->modconfig( $char );
   
-  my $log = WoWUI::Util->log;
+  my $log = WoWUI::Util->logger;
 
   my $enabled = Set::Scalar->new;
   for my $addon( keys %{ $config->{addons} } ) {

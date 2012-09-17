@@ -39,7 +39,7 @@ sub augment_global
     my $self = shift;
 
     my $o = $self->modoptions;
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     my $extratrust = $self->globaldata_get( 'extratrust' ) || {};
     

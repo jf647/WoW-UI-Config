@@ -57,7 +57,7 @@ sub augment_globalpc
     my $char = shift;
     my $f = shift;
 
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     my $config = $self->modconfig( $char );
     my $o = $self->modoptions;

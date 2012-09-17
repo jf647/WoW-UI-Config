@@ -10,9 +10,9 @@ use CLASS;
 use namespace::autoclean;
 
 # set up class
-has config => ( is => 'ro', isa => 'HashRef' );
-has name => ( is => 'rw', isa => 'Str', required => 1 );
-has filter => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
+has config  => ( is => 'ro', isa => 'HashRef' );
+has name    => ( is => 'rw', isa => 'Str', required => 1 );
+has filter  => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
 has members => ( is => 'rw', isa => 'Set::Scalar' );
 CLASS->meta->make_immutable;
 
@@ -24,11 +24,13 @@ sub BUILD
 
     my $self = shift;
 
-    if( exists $self->config->{filter} ) {
+    if ( exists $self->config->{filter} ) {
         $self->filter( $self->config->{filter} );
     }
     $self->members( Set::Scalar->new( @{ $self->config->{members} } ) );
-    
+
+    return;
+
 }
 
 # keep require happy

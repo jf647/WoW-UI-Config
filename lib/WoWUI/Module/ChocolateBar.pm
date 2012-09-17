@@ -60,7 +60,7 @@ sub augment_globalpc
     my $f = shift;
 
     my $config = $self->modconfig( $char );
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     my $plugins = Set::Scalar->new;
     for my $plugin( keys %{ $config->{plugins} } ) {

@@ -13,19 +13,19 @@ use namespace::autoclean;
 with 'WoWUI::ModOptions';
 with 'WoWUI::ModConfig';
 has name => ( is => 'rw', isa => 'Str', required => 1 );
-has flags => ( is => 'rw', isa => 'Set::Scalar' );
-has cfg => ( is => 'rw', isa => 'HashRef' );
+has flags  => ( is => 'rw', isa => 'Set::Scalar' );
+has cfg    => ( is => 'rw', isa => 'HashRef' );
 has player => ( is => 'rw', isa => 'WoWUI::Player', required => 1 );
 has chars => (
-    is => 'bare',
-    isa => 'HashRef[WoWUI::Char]',
-    traits => ['Hash'],
+    is      => 'bare',
+    isa     => 'HashRef[WoWUI::Char]',
+    traits  => ['Hash'],
     default => sub { {} },
     handles => {
-        char_set => 'set',
-        char_get => 'get',
+        char_set   => 'set',
+        char_get   => 'get',
         char_names => 'keys',
-        chars => 'values',
+        chars      => 'values',
     },
 );
 CLASS->meta->make_immutable;
@@ -44,8 +44,8 @@ sub BUILD
 {
 
     my $self = shift;
-  
-    my $log = WoWUI::Util->log;
+
+    my $log  = WoWUI::Util->logger;
     my $gcfg = WoWUI::Config->instance->cfg;
 
     $self->flags( Set::Scalar->new );
@@ -53,18 +53,24 @@ sub BUILD
     $self->set_modconfig( $self->cfg );
     $self->set_modoptions( $self->cfg );
 
-    for my $charname( keys %{ $self->cfg->{chars} } ) {
-        $log->debug("creating char object for $charname on ", $self->name);
-        my $char = WoWUI::Char->new( name => $charname, realm => $self, cfg => $self->cfg->{chars}->{$charname} );
+    for my $charname ( keys %{ $self->cfg->{chars} } ) {
+        $log->debug( "creating char object for $charname on ", $self->name );
+        my $char = WoWUI::Char->new(
+            name  => $charname,
+            realm => $self,
+            cfg   => $self->cfg->{chars}->{$charname}
+        );
         my $levelcap = $gcfg->{levelcap};
         my $f = WoWUI::Filter->new( char => $char );
-        if( $f->match( { exclude => [ qw|levelcap bankalt mule| ] }, F_CALL ) ) {
+        if ( $f->match( { exclude => [qw|levelcap bankalt mule|] }, F_CALL ) ) {
             $self->flags->insert("realm:still_leveling");
         }
         $self->char_set( $charname => $char );
     }
 
-}   
+    return;
+
+}
 
 # keep require happy
 1;

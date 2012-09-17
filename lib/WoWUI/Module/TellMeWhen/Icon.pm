@@ -221,7 +221,7 @@ sub select_extra
 
     my($self, $set) = @_;
 
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
     
     # add icons that are part of conditions to the hidden set
     if( $self->cond_count ) {

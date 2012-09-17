@@ -100,7 +100,7 @@ sub get_settings_and_values
     my $mo = $self->modoptions( $f->char );
 
     my $config = $self->modconfig( $f->char );
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     my $candidates = $self->filtergroups->candidates( $f, $using );
     $log->debug("candidates are $candidates");

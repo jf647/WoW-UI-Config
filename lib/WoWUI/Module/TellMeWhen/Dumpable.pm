@@ -21,7 +21,7 @@ sub lua
     
     my $lua;
 
-    my $log = WoWUI::Util->log( stacksup => 1, prefix => 'dump' );
+    my $log = WoWUI::Util->logger( stacksup => 1, prefix => 'dump' );
 
     # iterate over the relevant attributes for this icon type
     my %deferred;
@@ -29,7 +29,8 @@ sub lua
     for my $a( $self->meta->get_all_attributes ) {
         next unless( $a->does('WoWUI::Meta::Attribute::Trait::Relevant') && $a->relevant );
         $log->trace("dumping attribute ", $a->name);
-        my $snippet = WoWUI::LuaDumper->dump($self, $a);
+        $DB::single = 1 if( $a->name eq 'SortPriorities' );
+        my $snippet = WoWUI::LuaDumper->dumplua($self, $a);
         if( $snippet ) {
             $lua .= $snippet;
         }

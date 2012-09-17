@@ -32,7 +32,7 @@ sub BUILD
 
     my $self = shift;
 
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     my $config = $self->config;
 

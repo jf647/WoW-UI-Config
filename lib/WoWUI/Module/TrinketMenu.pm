@@ -58,7 +58,7 @@ sub augment_perchar
 
     my $config = $self->modconfig( $char );
     my $o = $self->modoptions( $char );
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     my %trinketmenu;
 
@@ -213,7 +213,7 @@ sub add_by_name
     my $trinket = $trinketfull;
 
     my $config = $self->modconfig;
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     $log->info("fetching trinket info for '$trinketfull'");
 
@@ -261,7 +261,7 @@ sub is_trinket_passive
     my $name = shift;
     my $itemid = shift;
 
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     my $mech = $self->mech;
     $mech->get( "http://www.wowhead.com/item=$itemid" ) or die;
@@ -302,7 +302,7 @@ sub get_item_level
     my $name = shift;
     my $itemid = shift;
 
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     my $itemlevel;
     my $text_handler = sub {
@@ -339,7 +339,7 @@ sub get_itemid
     my $self = shift;
     my $name = shift;
         
-    my $log = WoWUI::Util->log;
+    my $log = WoWUI::Util->logger;
 
     my $hc = 0;
     my $rf = 0;
