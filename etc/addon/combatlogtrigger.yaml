@@ -30,7 +30,7 @@ triggers:
                 - all(class:Priest;spec:Holy)
     Lightspring:
         type: spell
-        message: '*src creates a *slink.  It's like a Lightwell for lazy people"
+        message: "*src creates a *slink.  It's like a Lightwell for lazy people"
         combateither: 1
         filter:
             level: 36

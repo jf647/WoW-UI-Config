@@ -99,41 +99,30 @@ sub augment_perchar
   my $char = shift;
   my $f = shift;
 
-  my $config = $self->modconfig( $char );
   
+  my $config = $self->modconfig( $char );
   my $log = WoWUI::Util->logger;
 
   my $enabled = Set::Scalar->new;
+  my $prereqs = Set::Scalar->new;
+  my $alsoadd = Set::Scalar->new;
   for my $addon( keys %{ $config->{addons} } ) {
-  
     if( $f->match( $config->{addons}->{$addon} ) ) {
-      $log->trace("picked up $addon");
-      $enabled->insert($addon);
-      if( exists $config->{addons}->{$addon}->{group} ) {
-        if( 'ARRAY' eq ref $config->{addons}->{$addon}->{group} ) {
-          for my $group( @{ $config->{addons}->{$addon}->{group} } ) {
-            $self->add_to_named_set($group, $addon);
-          }
-        }
-        else {
-            $self->add_to_named_set($config->{addons}->{$addon}->{group}, $addon);
-        }
-      }
-      if( exists $config->{addons}->{$addon}->{class} ) {
-        if( 'ARRAY' eq ref $config->{addons}->{$addon}->{class} ) {
-          for my $group( @{ $config->{addons}->{$addon}->{group} } ) {
-            $self->add_to_class_set($group, $addon);
-          }
-        }
-        else {
-          $self->add_to_class_set($config->{addons}->{$addon}->{class}, $addon);
-        }
-      }
+        $self->enable_addon( $addon, $char, $enabled, $prereqs, $alsoadd );
     }
-    else {
-      $log->trace("excluding $addon");
-    }
-  
+  }
+  my $done = 0;
+  while( ! $done ) {
+      for my $addon( $alsoadd->members ) {
+          $self->enable_addon( $addon, $char, $enabled, $prereqs, $alsoadd );
+      }
+      for my $addon( $prereqs->members ) {
+          $self->enable_addon( $addon, $char, $enabled, $prereqs, $alsoadd );
+      }
+      $DB::single = 1;
+      if( ( $prereqs + $alsoadd ) < $enabled ) {
+          $done = 1;
+      }
   }
   
   my $all_addons = Set::Scalar->new( keys %{ $config->{addons} } );
@@ -144,6 +133,63 @@ sub augment_perchar
   push @addons, map { { name => $_, enabled => 0 } } $disabled->members;
   $self->perchardata->{addons} = [ sort { $a->{name} cmp $b->{name} } @addons ];
   $char->addons( $enabled->clone );
+
+}
+
+sub enable_addon
+{
+
+    my $self = shift;
+    my $addon = shift;
+    my $char = shift;
+    my $enabled = shift;
+    my $prereqs = shift;
+    my $alsoadd = shift;
+
+  my $config = $self->modconfig( $char );
+  my $log = WoWUI::Util->logger;
+    
+
+  $log->trace("picked up $addon");
+  $enabled->insert($addon);
+  # check for pre-requisites
+  if( exists $config->{addons}->{$addon}->{prereq} ) {
+      for my $addon_name( @{ $config->{addons}->{$addon}->{prereq} } ) {
+          unless( exists $config->{addons}->{$addon_name} ) {
+              croak "non-existent prereq '$addon_name' for $addon";
+          }
+          $prereqs->insert( $addon_name );
+      }
+      for my $addon_name( @{ $config->{addons}->{$addon}->{alsoadd} } ) {
+          unless( exists $config->{addons}->{$addon_name} ) {
+              croak "non-existent also-add '$addon_name' for $addon";
+          }
+          $alsoadd->insert( $addon_name );
+      }
+  }
+  # put the addon in the named group
+  if( exists $config->{addons}->{$addon}->{group} ) {
+    if( 'ARRAY' eq ref $config->{addons}->{$addon}->{group} ) {
+      for my $group( @{ $config->{addons}->{$addon}->{group} } ) {
+        $self->add_to_named_set($group, $addon);
+      }
+    }
+    else {
+        $self->add_to_named_set($config->{addons}->{$addon}->{group}, $addon);
+    }
+  }
+  # put the addon in the named class
+  if( exists $config->{addons}->{$addon}->{class} ) {
+    if( 'ARRAY' eq ref $config->{addons}->{$addon}->{class} ) {
+      for my $group( @{ $config->{addons}->{$addon}->{group} } ) {
+        $self->add_to_class_set($group, $addon);
+      }
+    }
+    else {
+      $self->add_to_class_set($config->{addons}->{$addon}->{class}, $addon);
+    }
+  }
+
 
 }
 

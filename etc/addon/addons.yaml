@@ -17,20 +17,14 @@ addons:
             - mule
             - machine:type:basic
         group: Standard
+        prereq: [ kgPanelsConfig ]
     kgPanelsConfig:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
+        include:
+            - no-one
     DBM-Core: 
-        level: 85
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group:
-            - Heroics
-            - Raiding
+        include:
+            - no-one
+        alsoadd: [ DBM-DefaultSkin, DB_GUI ]
     DBM-DefaultSkin:
         level: 85
         exclude:
@@ -39,6 +33,7 @@ addons:
         group:
             - Heroics
             - Raiding
+        prereq: [ DBM-Core ]
     DBM-GUI:
         level: 85
         exclude:
@@ -47,6 +42,7 @@ addons:
         group:
             - Heroics
             - Raiding
+        prereq: [ DBM-Core ]
     DBM-HeartofFear:
         level: 90
         exclude:
@@ -55,6 +51,7 @@ addons:
         group:
             - Heroics
             - Raiding
+        prereq: [ DBM-Core ]
     DBM-MogushanVaults:
         level: 90
         exclude:
@@ -63,6 +60,7 @@ addons:
         group:
             - Heroics
             - Raiding
+        prereq: [ DBM-Core ]
     DBM-TerraceofEndlessSpring:
         level: 90
         exclude:
@@ -71,6 +69,7 @@ addons:
         group:
             - Heroics
             - Raiding
+        prereq: [ DBM-Core ]
     DBM-Pandaria:
         level: 85
         exclude:
@@ -79,6 +78,7 @@ addons:
         group:
             - Heroics
             - Raiding
+        prereq: [ DBM-Core ]
     DBM-BaradinHold:
         level: 85
         include:
@@ -87,6 +87,7 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Raiding
+        prereq: [ DBM-Core ]
     DBM-BastionTwilight:
         level: 85
         include:
@@ -95,6 +96,7 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Raiding
+        prereq: [ DBM-Core ]
     DBM-BlackwingDescent:
         level: 85
         include:
@@ -103,9 +105,11 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Raiding
+        prereq: [ DBM-Core ]
     DBM-PvP:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-ThroneFourWinds:
         level: 85
         include:
@@ -114,6 +118,7 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Raiding
+        prereq: [ DBM-Core ]
     DBM-Firelands:
         level: 85
         include:
@@ -122,6 +127,7 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Raiding
+        prereq: [ DBM-Core ]
     DBM-DragonSoul:
         level: 85
         include:
@@ -130,81 +136,105 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Raiding
+        prereq: [ DBM-Core ]
     DBM-WorldEvents:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-Party-Cataclysm:
         level: 85
         exclude:
             - machine:type:secondary
             - machine:type:basic
         group: Heroics
+        prereq: [ DBM-Core ]
     DBM-Party-MoP:
         level: 85
         exclude:
             - machine:type:secondary
             - machine:type:basic
         group: Heroics
+        prereq: [ DBM-Core ]
     DBM-AQ20:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-AQ40:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-BlackTemple:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-BWL:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-ChamberOfAspects:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-Coliseum:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-EyeOfEternity:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-Hyjal:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-Icecrown:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-Karazhan:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-MC:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-Onyxia:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-Outlands:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-Party-BC:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-Party-WotLK:
         include:
             - no-one
-    DBM-Serpentsrhine:
+        prereq: [ DBM-Core ]
+    DBM-Serpentshrine:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-Sunwell:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-TheEye:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-Ulduar:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     DBM-VoA:
         include:
             - no-one
+        prereq: [ DBM-Core ]
     Ace3:
         exclude:
             - banker
@@ -216,9 +246,11 @@ addons:
             - mule
         group: Standard
     '!BugGrabber':
-        group: Basic
+        include:
+            - no-one
     'BugSack':
         group: Basic
+        prereq: [ '!BugGrabber' ]
     ACP:
         group: Basic
     AltClickToAddItem:
@@ -249,98 +281,119 @@ addons:
         group: Standard
     BadBoy:
         group: Basic
+        alsoadd: [ BadBoy_CCleaner, BadBoy_Levels ]
     BadBoy_CCleaner:
         group: Basic
+        prereq: [ BadBoy ]
     BadBoy_Levels:
         group: Basic
+        prereq: [ BadBoy ]
     AdiBags:
         group: Basic
-    Datastore:
+        alsoadd: [ AdiBags_PT3Filter ]
+    AdiBags_PT3Filter:
+        group: Basic
+        prereqs: [ AdiBags, LibPeriodicTable-3.1 ]
+    DataStore:
         exclude:
             - machine:type:secondary
             - machine:type:basic
         group: Basic
-    Datastore_Achievements:
+    DataStore_Achievements:
         include:
             - no-one
-    Datastore_Agenda:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Basic
-    Datastore_Auctions:
+        prereq: [ DataStore ] 
+    DataStore_Agenda:
         include:
             - no-one
-    Datastore_Characters:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Basic
-    Datastore_Containers:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Basic
-    Datastore_Crafts:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Basic
-    Datastore_Currencies:
+        prereq: [ DataStore ] 
+    DataStore_Auctions:
         include:
             - no-one
-    Datastore_Inventory:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Basic
-    Datastore_Mails:
+        prereq: [ DataStore ] 
+    DataStore_Characters:
         include:
             - no-one
-    Datastore_Pets:
+        prereq: [ DataStore ] 
+    DataStore_Containers:
         include:
             - no-one
-    Datastore_Quests:
+        prereq: [ DataStore ] 
+    DataStore_Crafts:
         include:
             - no-one
-    Datastore_Reputations:
+        prereq: [ DataStore ] 
+    DataStore_Currencies:
         include:
             - no-one
-    Datastore_Spells:
+        prereq: [ DataStore ] 
+    DataStore_Inventory:
         include:
             - no-one
-    Datastore_Stats:
+        prereq: [ DataStore ] 
+    DataStore_Mails:
         include:
             - no-one
-    Datastore_Talents:
+        prereq: [ DataStore ] 
+    DataStore_Pets:
         include:
             - no-one
+        prereq: [ DataStore ] 
+    DataStore_Quests:
+        include:
+            - no-one
+        prereq: [ DataStore ] 
+    DataStore_Reputations:
+        include:
+            - no-one
+        prereq: [ DataStore ] 
+    DataStore_Spells:
+        include:
+            - no-one
+        prereq: [ DataStore ] 
+    DataStore_Stats:
+        include:
+            - no-one
+        prereq: [ DataStore ] 
+    DataStore_Talents:
+        include:
+            - no-one
+        prereq: [ DataStore ] 
     Altoholic:
         exclude:
             - machine:type:secondary
             - machine:type:basic
         group: Basic
+        alsoadd: [ Altoholic_Agenda, Altoholic_Characters, Altoholic_Search, Altoholic_Summary ]
+        prereq: [ DataStore, DataStore_Characters ]
     Altoholic_Achievements:
         include:
             - no-one
+        prereq: [ Altoholic, DataStore, DataStore_Achievements, DataStore_Characters ]
     Altoholic_Guild:
         include:
             - no-one
+        prereq: [ Altoholic, DataStore_Characters ]
     Altoholic_Agenda:
         include:
             - no-one
+        prereq: [ Altoholic, DataStore, DataStore_Agenda, DataStore_Characters ]
+    Altoholic_Grids:
+        include:
+            - no-one
+        prereq: [ Altoholic, DataStore, DataStore_Characters ]
     Altoholic_Characters:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Basic
+        include:
+            - no-one
+        prereq: [ Altoholic, DataStore, DataStore_Characters ]
     Altoholic_Search:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-        group: Basic
-    AdiBags_PT3Filter:
-        group: Basic
+        include:
+            - no-one
+        prereq: [ Altoholic, DataStore, DataStore_Characters ]
+    Altoholic_Summary:
+        include:
+            - no-one
+        prereq: [ Altoholic, DataStore, DataStore_Characters ]
     Broker_AltGuild:
         include:
             - all(unguilded;watchguild)
@@ -380,8 +433,10 @@ addons:
             - no-one
     ChocolateBar:
         group: Basic
+        prereqs: [ ChocolateBar_Options ]
     ChocolateBar_Options:
-        group: Basic
+        include:
+            - no-one
     Clique:
         level: 10
         exclude:
@@ -399,25 +454,23 @@ addons:
             - banker
             - mule
         group: Standard
+        prereq: [ Dominos_Config ]
     Dominos_Cast:
         include:
             - no-one
+        prereq: [ Dominos ]
     Dominos_Config:
-        exclude:
-            - banker
-            - mule
-        group: Standard
+        include:
+            - no-one
+        prereq: [ Dominos ]
     Dominos_Roll:
         include:
             - no-one
-    Dominos_Totems:
-        level: 30
-        include:
-            - class:Shaman
-        group: Standard
+        prereq: [ Dominos ]
     Dominos_XP:
         include:
             - no-one
+        prereq: [ Dominos ]
     FishermansFriend:
         include:
             - prof:Fishing
@@ -438,15 +491,11 @@ addons:
             - mule
             - machine:type:basic
         group: Gathering
+        prereq: [ GatherMate2_Data ]
     GatherMate2_Data:
         include:
-            - prof:Herbalism
-            - prof:Mining
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Gathering
+            - no-one
+        prereq: [ GatherMate2 ]
     GoGoMount:
         group: Standard
     GreenRange:
@@ -459,6 +508,7 @@ addons:
             - all(dualbox;machine:type:primary)
             - all(dualbox;machine:type:secondary)
         group: Dualbox
+        prereq: [ NADTTrustList ]
     NADTTrustList:
         include:
             - dualbox
@@ -467,10 +517,12 @@ addons:
         include:
             - dualbox
         group: Dualbox
+        prereq: [ NADTTrustList ]
     NADTParty:
         include:
             - dualbox
         group: Dualbox
+        prereq: [ NADTTrustList ]
     LightHeaded:
         include:
             - goal:Loremaster
@@ -482,95 +534,50 @@ addons:
         group:
             - Leveling
             - Loremaster
+        alsoadd: [ LightHeaded_Data_A, LightHeaded_Data_B, LightHeaded_Data_C, LightHeaded_Data_D, LightHeaded_Data_E, LightHeaded_Data_NPC, LightHeaded_Data_QIDNames, LightHeaded_Data_QIDDesc ]
     LightHeaded_Data_A:
         include:
-            - goal:Loremaster
-            - leveling
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group:
-            - Leveling
-            - Loremaster
+            - no-one
+        prereq: [ LightHeaded ]
     LightHeaded_Data_B:
         include:
-            - goal:Loremaster
-            - leveling
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group:
-            - Leveling
-            - Loremaster
+            - no-one
+        prereq: [ LightHeaded ]
     LightHeaded_Data_C:
         include:
-            - goal:Loremaster
-            - leveling
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group:
-            - Leveling
-            - Loremaster
+            - no-one
+        prereq: [ LightHeaded ]
     LightHeaded_Data_D:
         include:
-            - goal:Loremaster
-            - leveling
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group:
-            - Leveling
-            - Loremaster
+            - no-one
+        prereq: [ LightHeaded ]
     LightHeaded_Data_E:
         include:
-            - goal:Loremaster
-            - leveling
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group:
-            - Leveling
-            - Loremaster
+            - no-one
+        prereq: [ LightHeaded ]
     LightHeaded_Data_NPC:
         include:
-            - goal:Loremaster
-            - leveling
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group:
-            - Leveling
-            - Loremaster
+            - no-one
+        prereq: [ LightHeaded ]
     LightHeaded_Data_QIDNames:
         include:
-            - goal:Loremaster
-            - leveling
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group:
-            - Leveling
-            - Loremaster
+            - no-one
+        prereq: [ LightHeaded ]
+    LightHeaded_Data_QIDDesc:
+        include:
+            - no-one
+        prereq: [ LightHeaded ]
     LushGearSwap:
         exclude:
             - banker
             - mule
             - machine:type:basic
         group: Standard
+        preqreq: [ LushGearSwapOptions ]
     LushGearSwapOptions:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
+        include:
+            - no-one
+        preqreq: [ LushGearSwap ]
     Macaroon:
         include:
             - all(dualbox;machine:type:secondary)
@@ -596,11 +603,12 @@ addons:
             - banker
             - mule
         group: Standard
+        prereq: [ OmniCC_Config ]
     OmniCC_Config:
-        exclude:
-            - banker
-            - mule
+        include:
+            - no-one
         group: Standard
+        prereq: [ OmniCC ]
     Panda:
         include:
             - prof:Jewelcrafting
@@ -611,11 +619,14 @@ addons:
         group: Basic
     Prat-3.0:
         group: Basic
+        alsoadd: [ Prat-3.0_Libraries ]
     Prat-3.0_HighCPUUsageModules:
         include:
             - no-one
+        prereq: [ Prat-3.0 ]
     Prat-3.0_Libraries:
         group: Basic
+        prereq: [ Prat-3.0 ]
     RepairBroker:
         exclude:
             - banker
@@ -647,86 +658,63 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Standard
+        alsoadd: [ SkadaHealAbsorbs, SkadaCC, SkadaDamage, SkadaDamageTaken, SkadaDispels, SkadaHealing, SkadaThreat ]
     SkadaAbsorbs:
         include:
             - no-one
+        prereq: [ Skada ]
     SkadaHealAbsorbs:
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
-            - machine:type:basic
-        group: Standard
+        include:
+            - no-one
+        prereq: [ Skada ]
     SkadaCC:
         include:
-            - dungeontype:raids
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
-            - machine:type:basic
-        group: Standard
+            - no-one
+        prereq: [ Skada ]
     SkadaDamage:
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
-            - machine:type:basic
-        group: Standard
+        include:
+            - no-one
+        prereq: [ Skada ]
     SkadaDamageTaken:
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
-            - machine:type:basic
-        group: Standard
+        include:
+            - no-one
+        prereq: [ Skada ]
     SkadaDeaths:
         include:
             - no-one
+        prereq: [ Skada ]
     SkadaDebuffs:
         include:
             - no-one
+        prereq: [ Skada ]
     SkadaDispels:
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
-            - machine:type:basic
-        group: Standard
+        include:
+            - no-one
+        prereq: [ Skada ]
     SkadaEnemies:
         include:
             - no-one
+        prereq: [ Skada ]
     SkadaFailbot:
         include:
             - no-one
+        prereq: [ Skada ]
     SkadaHealing:
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
-            - machine:type:basic
-        group: Standard
+        include:
+            - no-one
+        prereq: [ Skada ]
     SkadaPower:
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
-            - machine:type:basic
-        group: Standard
+        include:
+            - no-one
+        prereq: [ Skada ]
     SkadaThreat:
-        exclude:
-            - banker
-            - mule
-            - machine:type:secondary
-            - machine:type:basic
-        group: Standard
+        include:
+            - no-one
+        prereq: [ Skada ]
     SkadaAvoidanceMitigation:
-        exclude:
-            - machine:type:secondary
-            - machine:type:basic
-            - banker
-            - mule
-        group: Standard
+        include:
+            - no-one
+        prereq: [ Skada ]
     TellMeWhen:
         level: 15
         exclude:
@@ -734,12 +722,11 @@ addons:
             - mule
             - machine:type:basic
         group: Standard
+        prereq: [ TellMeWhen_Options ]
     TellMeWhen_Options:
-        exclude:
-            - banker
-            - mule
-            - machine:type:basic
-        group: Standard
+        include:
+            - no-one
+        prereq: [ TellMeWhen ]
     Quartz:
         exclude:
             - banker
@@ -761,6 +748,7 @@ addons:
             - levelcap
             - trinketmenu
         group: Standard
+        prereq: [ TrinketMenu ]
     NADTTurnIn:
         exclude:
             - banker
@@ -778,6 +766,7 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Achievements
+        prereq: [ _NPCScan ]
     picoEXP:
         include:
             - leveling
