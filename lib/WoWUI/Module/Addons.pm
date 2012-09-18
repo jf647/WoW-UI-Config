@@ -119,7 +119,6 @@ sub augment_perchar
       for my $addon( $prereqs->members ) {
           $self->enable_addon( $addon, $char, $enabled, $prereqs, $alsoadd );
       }
-      $DB::single = 1;
       if( ( $prereqs + $alsoadd ) < $enabled ) {
           $done = 1;
       }
@@ -160,6 +159,8 @@ sub enable_addon
           }
           $prereqs->insert( $addon_name );
       }
+  }
+  if( exists $config->{addons}->{$addon}->{alsoadd} ) {
       for my $addon_name( @{ $config->{addons}->{$addon}->{alsoadd} } ) {
           unless( exists $config->{addons}->{$addon_name} ) {
               croak "non-existent also-add '$addon_name' for $addon";

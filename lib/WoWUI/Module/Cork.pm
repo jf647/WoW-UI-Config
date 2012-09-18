@@ -108,6 +108,7 @@ sub get_settings_and_values
     my %profile;
  
     for my $setting( $candidates->members ) {
+        $DB::single = 1 if( $setting eq 'Flask of Enhancement-enabled' && $f->char->name eq 'Alacritas' );
         $log->debug("considering $setting");
         my $filter = $config->{settings}->{$setting}->{filter};
         if( exists $mo->{filters} && exists $mo->{filters}->{$setting} ) {

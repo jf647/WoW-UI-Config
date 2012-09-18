@@ -155,6 +155,20 @@ conditions:
     Operator: '>='
     Name: Arcane Charge
     Level: 4
+  combopoints_eq_5:
+    Type: COMBO
+    Unit: target
+    Operator: '=='
+    Level: 5
+  energy_ge_40:
+    Type: ENERGY
+    Operator: '>='
+    Level: 40
+  combopoints_ge_3:
+    Type: COMBO
+    Unit: target
+    Operator: '>='
+    Level: 3
   demonicfury_ge_800:
     Type: DEMONIC_FURY
     Operator: '>='
@@ -165,6 +179,7 @@ filtergroups:
     members:
     - Lifeblood
     - Well Fed
+    - UsableTrinket
   monk:
     members:
     - Leg Sweep
@@ -409,6 +424,7 @@ filtergroups:
     - Recuperate OC
     - Kick
     - Slice and Dice
+    - Revealing Strike
     - Vanish
     - Cloak of Shadows
     - Evasion
@@ -517,6 +533,35 @@ filtergroups:
       include:
       - class:Warrior
 icons:
+  UsableTrinket:
+    type: Meta
+    Icons:
+      - Trinket1
+      - Trinket2
+    filter:
+      level: 60
+    combat: in
+  Trinket1:
+    no_filter_group_ok: 1
+    type: Item::LongCD
+    item: 13
+    OnlyEquipped: 1
+  Trinket2:
+    no_filter_group_ok: 1
+    type: Item::LongCD
+    item: 14
+    OnlyEquipped: 1
+  Combat Rogue Rotation:
+    no_filter_group_ok: 1
+    type: Meta
+    Icons:
+      - Slice and Dice
+      - Revealing Strike
+      - Recuperate IC
+      - Eviscerate 5CP
+      - Adrenaline Rush
+      - Killing Spree
+      - Sinister Strike
   Fury Warrior Rotation:
     no_filter_group_ok: 1
     type: Meta
@@ -2118,6 +2163,8 @@ icons:
     - icon:Recuperate Missing
     - AND
     - hp_le_75_pct
+    - AND
+    - combopoints_ge_3
     filter:
       level: 16
     type: Cooldown::Spell::Def::ShortCD
@@ -2228,6 +2275,8 @@ icons:
     combat: in
     filter:
       level: 46
+      include:
+        - spec:Assassination
     missing: 1
     spell: Rupture
     type: Debuff
@@ -2354,7 +2403,6 @@ icons:
       include:
       - spec:Marksmanship
       level: 29
-    CooldownCheck: 0
     type: Cooldown::Spell::Off::ShortCD
   Skull Bash Bear:
     combat: in
@@ -2376,8 +2424,40 @@ icons:
     combat: in
     filter:
       level: 14
+    conditions:
+      - combopoints_ge_3
     missing: 1
     type: Buff
+  Revealing Strike:
+    combat: in
+    spellid: 84617
+    Unit: target
+    conditions:
+      - energy_ge_40
+    filter:
+      level: 20
+      include:
+        - spec:Combat
+    missing: 1
+    type: Debuff
+  Eviscerate 5CP:
+    no_filter_group_ok: 1
+    spellid: 2098
+    combat: in
+    ManaCheck: 1
+    conditions:
+      - combopoints_eq_5
+    filter:
+      level: 3
+    type: Cooldown::Spell::Off::ShortCD
+  Sinister Strike:
+    no_filter_group_ok: 1
+    spellid: 1752
+    combat: in
+    ManaCheck: 1
+    filter:
+      level: 1
+    type: Cooldown::Spell::Off::ShortCD
   Solar Beam:
     combat: in
     filter:

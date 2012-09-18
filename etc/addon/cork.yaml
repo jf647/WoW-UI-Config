@@ -248,7 +248,7 @@ settings:
     filter:
     - value: 0
     - value: 1
-      filter:
+      include:
         - prof:Alchemy:300+
     type: boolean
   Focus Magic-enabled:
@@ -533,11 +533,11 @@ settings:
       - level: 30
         value: Mind-numbing Poison
       - include:
-          - talent:Leeching Poison
-        value: Leeching Poison
-      - include:
           - talent:Paralytic Poison
         value: Paralytic Poison
+      - include:
+          - talent:Leeching Poison
+        value: Leeching Poison
     type: string
   Temp Enchant Main Hand-enabled:
     filter:

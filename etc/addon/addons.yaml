@@ -24,7 +24,7 @@ addons:
     DBM-Core: 
         include:
             - no-one
-        alsoadd: [ DBM-DefaultSkin, DB_GUI ]
+        alsoadd: [ DBM-DefaultSkin, DBM-GUI ]
     DBM-DefaultSkin:
         level: 85
         exclude:

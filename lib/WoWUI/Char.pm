@@ -193,7 +193,7 @@ sub set_prof_brackets
   my $self = shift;
   my $prof = shift;
   my $skill = shift;
-  
+
   if( $skill >= 75 ) {
       $self->flags_get(0)->insert("prof:$prof:Apprentice");
   }
@@ -254,6 +254,9 @@ sub set_prof_brackets
     }
   }
   elsif( 'Alchemy' eq $prof ) {
+    if( $skill >= 300 ) {
+      $self->flags_get(0)->insert('prof:Alchemy:300+');
+    }
     if( $skill >= 500 ) {
       $self->flags_get(0)->insert('prof:Alchemy:500+');
     }

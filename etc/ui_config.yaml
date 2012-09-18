@@ -21,6 +21,7 @@ pretty_print:
     lua: /usr/bin/lua
 modules:
     - WoWUI::Module::Addons
+    - WoWUI::Module::Cork
     - WoWUI::Module::TellMeWhen
     - WoWUI::Module::CombatLogTrigger
     - WoWUI::Module::Quartz
@@ -42,7 +43,6 @@ modules:
     - WoWUI::Module::AutoReFollow
     - WoWUI::Module::NADTTurnIn
     - WoWUI::Module::Clique
-    - WoWUI::Module::Cork
     - WoWUI::Module::TrinketMenu
     - WoWUI::Module::NPCScan
     - WoWUI::Module::Postal

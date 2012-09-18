@@ -29,7 +29,6 @@ sub lua
     for my $a( $self->meta->get_all_attributes ) {
         next unless( $a->does('WoWUI::Meta::Attribute::Trait::Relevant') && $a->relevant );
         $log->trace("dumping attribute ", $a->name);
-        $DB::single = 1 if( $a->name eq 'SortPriorities' );
         my $snippet = WoWUI::LuaDumper->dumplua($self, $a);
         if( $snippet ) {
             $lua .= $snippet;
