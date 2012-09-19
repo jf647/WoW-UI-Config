@@ -265,8 +265,12 @@ addons:
             - banker
             - mule
         group: Standard
-    Ara_Broker_Tradeskills:
+    Broker_ProfessionsMenu:
         exclude:
+            - banker
+            - mule
+            - machine:type:secondary
+            - machine:type:basic
         group: Standard
     Auctionator:
         include:
@@ -299,6 +303,7 @@ addons:
             - machine:type:secondary
             - machine:type:basic
         group: Basic
+        alsoadd: [ DataStore_Characters, DataStore_Containers, DataStore_Inventory, DataStore_Crafts ]
     DataStore_Achievements:
         include:
             - no-one
@@ -385,15 +390,15 @@ addons:
     Altoholic_Characters:
         include:
             - no-one
-        prereq: [ Altoholic, DataStore, DataStore_Characters ]
+        prereq: [ Altoholic, DataStore, DataStore_Characters, DataStore_Containers, DataStore_Inventory ]
     Altoholic_Search:
         include:
             - no-one
-        prereq: [ Altoholic, DataStore, DataStore_Characters ]
+        prereq: [ Altoholic, DataStore, DataStore_Characters, DataStore_Containers, DataStore_Inventory ]
     Altoholic_Summary:
         include:
             - no-one
-        prereq: [ Altoholic, DataStore, DataStore_Characters ]
+        prereq: [ Altoholic, DataStore, DataStore_Characters, DataStore_Containers, DataStore_Inventory ]
     Broker_AltGuild:
         include:
             - all(unguilded;watchguild)

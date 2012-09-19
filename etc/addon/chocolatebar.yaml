@@ -91,13 +91,12 @@ plugins:
         filter:
             addons:
                 - Broker_AllXP
-    Ara_Broker_Tradeskills:
+    Broker_ProfessionsMenu:
         align: right
         priority: 50
-        altname: '|cFFFFB366Ara|r Tradeskills'
         filter:
             addons:
-                - Ara_Broker_Tradeskills
+                - Broker_ProfessionsMenu
     AutoBar:
         filter:
             include:
