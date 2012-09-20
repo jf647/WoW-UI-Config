@@ -85,9 +85,33 @@ nadtautobuy:
                 - Smoked Talbuk Venison
                 - Mag'har Grainbread
                 - Skethyl Berries
-                - Garadar Sharp
-                - Zangar Caps
-                - Diamond Berries
+                - Sour Goat Cheese
+                - Crusty Flatbread
+                - Fillet of Icefin
+                - Honey-Spiced Lichen
+                - Salted Venison
+                - Tundra Berries
+                - Savory Snowplum
+                - Sweet Potato Bread
+                - Poached Emperor Salmon
+                - Briny Hardcheese
+                - Mead Basted Caribou
+                - Sparkling Frostcap
+                - Hardtack
+                - Violet Morel
+                - Pine Nut Bread
+                - Sliced Raw Billfish
+                - Sour Green Apple
+                - Smoked String Cheese
+                - Roasted Beef
+                - Chilton Stilton
+                - Frybread
+                - Barnacle Bouillabaisse
+                - Plump Fig
+                - Red Raspberry
+                - Pickled Pig's Snout
+                - Humongous Fungus
+                - Smoked Squid Belly
         MP Restore:
             filter:
                 - include: [ 'all(classusesmana;role:healer)' ]
@@ -98,12 +122,25 @@ nadtautobuy:
             members:
                 - Lifegiving Seed
                 - Highland Spring Water
+                - Carbonated Water
                 - Invigorating Pineapple Punch
                 - Sweet Nectar
                 - Moonberry Juice
                 - Morning Glory Dew
                 - Filtered Draenic Water
                 - Silverwine
+                - Black Coffee
+                - Purified Draenic Water
+                - Ethermead
+                - Sweetened Goat's Milk
+                - Pungent Seal Whey
+                - Honeymint Tea
+                - Yeti Milk
+                - Fresh Water
+                - Sparkling Oasis Water
+                - Greasy Whale Milk
+                - Fungus Squeezings
+                - Cobo Cola
     items:
         Vanishing Powder:
             itemid: 64670
@@ -141,38 +178,6 @@ nadtautobuy:
             itemid: 63122
             filter:
                 - include: [ 'prof:Herbalism' ]
-        Highland Pomegranate:
-            itemid: 58265
-            filter:
-                - level: 85
-        Highland Sheep Cheese:
-            itemid: 58259
-            filter:
-                - level: 85
-        Buttery Wheat Roll:
-            itemid: 58261
-            filter:
-                - level: 85
-        Massive Turkey Leg:
-            itemid: 57269
-            filter:
-                - level: 85
-        Grilled Shark:
-            itemid: 58263
-            filter:
-                - level: 85
-        Scarlet Polypore:
-            itemid: 58267
-            filter:
-                - level: 85
-        Highland Spring Water:
-            itemid: 58257
-            filter:
-                - level: 85
-        Invigorating Pineapple Punch:
-            itemid: 68140
-            filter:
-                - level: 85
         Stormwind Brie:
             itemid: 1707
             filter:
@@ -305,3 +310,195 @@ nadtautobuy:
             itemid: 29454
             filter:
                 - level: 60:64
+        Black Coffee:
+            itemid: 
+            filter:
+                - level: 65:69
+        Purified Draenic Water:
+            itemid: 27860
+            filter:
+                - level: 65:69
+        Ethermead:
+            itemid: 29395
+            filter:
+                - level: 65:69
+        Sweetened Goat's Milk:
+            itemid: 35954
+            filter:
+                - level: 65:74
+        Sour Goat Cheese:
+            itemid: 33443
+            filter:
+                - level: 65:74
+        Crusty Flatbread:
+            itemid: 33449
+            filter:
+                - level: 65:74
+        Fillet of Icefin:
+            itemid: 33451
+            filter:
+                - level: 65:74
+        Honey-Spiced Lichen:
+            itemid: 33452
+            filter:
+                - level: 65:74
+        Salted Venison:
+            itemid: 33454
+            filter:
+                - level: 65:74
+        Tundra Berries:
+            itemid: 35949
+            filter:
+                - level: 65:74
+        Pungent Seal Whey:
+            itemid: 33444
+            filter:
+                - level: 70:74
+        Savory Snowplum:
+            itemid: 35948
+            filter:
+                - level: 75:79
+        Sweet Potato Bread:
+            itemid: 35950
+            filter:
+                - level: 75:79
+        Poached Emperor Salmon:
+            itemid: 35951
+            filter:
+                - level: 75:79
+        Briny Hardcheese:
+            itemid: 35952
+            filter:
+                - level: 75:79
+        Mead Basted Caribou:
+            itemid: 35953
+            filter:
+                - level: 75:79
+        Sparkling Frostcap:
+            itemid: 35947
+            filter:
+                - level: 75:79
+        Hardtack:
+            itemid: 58275
+            filter:
+                - level: 75:79
+        Honeymint Tea:
+            itemid: 33445
+            filter:
+                - level: 75:79
+        Yeti Milk:
+            itemid: 41731
+            filter:
+                - level: 75:79
+        Fresh Water:
+            itemid: 58274
+            filter:
+                - level: 75:79
+        Violet Morel:
+            itemid: 58266
+            filter:
+                - level: 80:84
+        Pine Nut Bread:
+            itemid: 58260
+            filter:
+                - level: 80:84
+        Sliced Raw Billfish:
+            itemid: 58262
+            filter:
+                - level: 80:84
+        Sour Green Apple:
+            itemid: 58264
+            filter:
+                - level: 80:84
+        Smoked String Cheese:
+            itemid: 58258
+            filter:
+                - level: 80:84
+        Roasted Beef:
+            itemid: 58268
+            filter:
+                - level: 80:84
+        Sparkling Oasis Water:
+            itemid: 58256
+            filter:
+                - level: 80:84
+        Greasy Whale Milk:
+            itemid: 59029
+            filter:
+                - level: 80:84
+        Fungus Squeezings:
+            itemid: 59230
+            filter:
+                - level: 80:84
+        Highland Pomegranate:
+            itemid: 58265
+            filter:
+                - level: 85:89
+        Red Raspberry:
+            itemid: 81919
+            filter:
+                - level: 85:89
+        Highland Sheep Cheese:
+            itemid: 58259
+            filter:
+                - level: 85:89
+        Buttery Wheat Roll:
+            itemid: 58261
+            filter:
+                - level: 85:89
+        Massive Turkey Leg:
+            itemid: 57269
+            filter:
+                - level: 85:89
+        Grilled Shark:
+            itemid: 58263
+            filter:
+                - level: 85:89
+        Smoked Squid Belly:
+            itemid: 82448
+            filter:
+                - level: 85:89
+        Scarlet Polypore:
+            itemid: 58267
+            filter:
+                - level: 85:89
+        Highland Spring Water:
+            itemid: 58257
+            filter:
+                - level: 85:89
+        Carbonated Water:
+            itemid: 81924
+            filter:
+                - level: 85:89
+        Invigorating Pineapple Punch:
+            itemid: 68140
+            filter:
+                - level: 85:89
+        Chilton Stilton:
+            itemid: 81921
+            filter:
+                - level: 90
+        Frybread:
+            itemid: 82451
+            filter:
+                - level: 90
+        Barnacle Bouillabaisse:
+            itemid: 82449
+            filter:
+                - level: 90
+        Plump Fig:
+            itemid: 81920
+            filter:
+                - level: 90
+        Pickled Pig's Snout:
+            itemid: 81918
+            filter:
+                - level: 90
+        Humongous Fungus:
+            itemid: 81916
+            filter:
+                - level: 90
+        Cobo Cola:
+            itemid: 81923
+            filter:
+                - level: 90
