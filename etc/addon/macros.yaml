@@ -271,3 +271,6 @@ macros:
     filter:
       include:
         - all(class:Rogue;spec:Assassination)
+  Shock:
+    macro: |+
+      /castsequence reset=combat Flame Shock, Earth Shock, Earth Shock, Earth Shock
