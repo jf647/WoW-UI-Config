@@ -482,7 +482,7 @@ addons:
         exclude:
             - prof:InactiveFishing
         group: Gathering
-    FreeRefills:
+    NADTAutoBuy:
         exclude:
             - banker
             - mule

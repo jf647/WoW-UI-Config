@@ -1,0 +1,307 @@
+---
+templates:
+    perchar:
+        nadtautobuy:
+            input: $TEMPLATEDIR/nadtautobuy/NADTAutoBuy.lua.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/SavedVariables/NADTAutoBuy.lua
+perchar_filter:
+    addons:
+        - NADTAutoBuy
+nadtautobuy:
+    itemclasses:
+        Talent and Glyph Clear:
+            filter:
+                - value: 5
+            members:
+                - Vanishing Powder
+                - Dust of Dissapearance
+                - Tome of the Clear Mind
+        Vials:
+            filter:
+                - include: [ 'prof:Alchemy' ]
+                  value: 20
+            members:
+                - Crystal Vial
+        Thread:
+            filter:
+                - include: [ 'prof:Tailoring', 'prof:Leatherworking' ]
+                  value: 20
+            members:
+                - Eternium Thread
+        Flux:
+            filter:
+                - include: [ 'prof:Blacksmithing' ]
+                  value: 8
+            members:
+                - Strong Flux
+        Parchment:
+            filter:
+                - include: [ 'prof:Inscription' ]
+                  value: 20
+            members:
+                - Light Parchment
+            filter:
+                - value: 20
+        Vellum:
+            filter:
+                - include: [ 'prof:Enchanting' ]
+                  value: 20
+            members:
+                - Enchanting Vellum
+        HP Restore:
+            filter:
+                - include: [ classusesfood ]
+                  value: 20
+            members:
+                - Lifegiving Seed
+                - Highland Pomegranate
+                - Highland Sheep Cheese
+                - Buttery Wheat Roll
+                - Massive Turkey Leg
+                - Grilled Shark
+                - Scarlet Polypore
+                - Stormwind Brie
+                - Wild Hog Shank
+                - Goldenbark Apple
+                - Mulgore Spice Bread
+                - Rockscale Cod
+                - Delicious Cave Mold
+                - Wild Ricecake
+                - Heaven Peach
+                - Cured Ham Steak
+                - Soft Banana Bread
+                - Moon Harvest Pumpkin
+                - Raw Black Truffle
+                - Fine Aged Cheddar
+                - Darnassus Kimchi Pie
+                - Striped Yellowtail
+                - Dried King Bolete
+                - Homemade Cherry Pie
+                - Roasted Quail
+                - Deep Fried Plantains
+                - Spinefin Halibut
+                - Sunspring Carp
+                - March Lichen
+                - Smoked Talbuk Venison
+                - Mag'har Grainbread
+                - Skethyl Berries
+                - Garadar Sharp
+                - Zangar Caps
+                - Diamond Berries
+        MP Restore:
+            filter:
+                - include: [ 'all(classusesmana;role:healer)' ]
+                  value: 40
+                  final: 1
+                - include: [ classusesmana ]
+                  value: 20
+            members:
+                - Lifegiving Seed
+                - Highland Spring Water
+                - Invigorating Pineapple Punch
+                - Sweet Nectar
+                - Moonberry Juice
+                - Morning Glory Dew
+                - Filtered Draenic Water
+                - Silverwine
+    items:
+        Vanishing Powder:
+            itemid: 64670
+            filter:
+                - level: 15:80
+        Dust of Dissapearance:
+            itemid: 63388
+            filter:
+                - level: 81:85
+        Tome of the Clear Mind:
+            itemid: 79249
+            filter:
+                - level: 86:90
+        Crystal Vial:
+            itemid: 3371
+            filter:
+                - include: [ 'prof:Alchemy' ]
+        Eternium Thread:
+            itemid: 38426
+            filter:
+                - include: [ 'prof:Tailoring:350+', 'prof:Leatherworking:425+' ]
+        Strong Flux:
+            itemid: 3466
+            filter:
+                - include: [ 'prof:Blacksmithing:400+' ]
+        Light Parchment:
+            itemid: 39354
+            filter:
+                - include: [ 'prof:Inscription' ]
+        Enchanting Vellum:
+            itemid: 38682
+            filter:
+                - include: [ 'prof:Enchanting:50+' ]
+        Lifegiving Seed:
+            itemid: 63122
+            filter:
+                - include: [ 'prof:Herbalism' ]
+        Highland Pomegranate:
+            itemid: 58265
+            filter:
+                - level: 85
+        Highland Sheep Cheese:
+            itemid: 58259
+            filter:
+                - level: 85
+        Buttery Wheat Roll:
+            itemid: 58261
+            filter:
+                - level: 85
+        Massive Turkey Leg:
+            itemid: 57269
+            filter:
+                - level: 85
+        Grilled Shark:
+            itemid: 58263
+            filter:
+                - level: 85
+        Scarlet Polypore:
+            itemid: 58267
+            filter:
+                - level: 85
+        Highland Spring Water:
+            itemid: 58257
+            filter:
+                - level: 85
+        Invigorating Pineapple Punch:
+            itemid: 68140
+            filter:
+                - level: 85
+        Stormwind Brie:
+            itemid: 1707
+            filter:
+                - level: 25:34
+        Wild Hog Shank:
+            itemid: 3771
+            filter:
+                - level: 25:34
+        Goldenbark Apple:
+            itemid: 4539
+            filter:
+                - level: 25:34
+        Mulgore Spice Bread:
+            itemid: 4544
+            filter:
+                - level: 25:34
+        Rockscale Cod:
+            itemid: 4594
+            filter:
+                - level: 25:34
+        Delicious Cave Mold:
+            itemid: 4607
+            filter:
+                - level: 25:34
+        Wild Ricecake:
+            itemid: 16169
+            filter:
+                - level: 25:34
+        Sweet Nectar:
+            itemid: 1707
+            filter:
+                - level: 25:34
+        Heaven Peach:
+            itemid: 16168
+            filter:
+                - level: 35:44
+        Cured Ham Steak:
+            itemid: 4599
+            filter:
+                - level: 35:44
+        Soft Banana Bread:
+            itemid: 4601
+            filter:
+                - level: 35:44
+        Moon Harvest Pumpkin:
+            itemid: 4602
+            filter:
+                - level: 35:44
+        Raw Black Truffle:
+            itemid: 4608
+            filter:
+                - level: 35:44
+        Fine Aged Cheddar:
+            itemid: 3927
+            filter:
+                - level: 35:44
+        Darnassus Kimchi Pie:
+            itemid: 21030
+            filter:
+                - level: 35:44
+        Striped Yellowtail:
+            itemid: 21552
+            filter:
+                - level: 35:44
+        Moonberry Juice:
+            itemid: 1645
+            filter:
+                - level: 35:44
+        Dried King Bolete:
+            itemid: 8948
+            filter:
+                - level: 45:54
+        Homemade Cherry Pie:
+            itemid: 8950
+            filter:
+                - level: 45:54
+        Roasted Quail:
+            itemid: 8952
+            filter:
+                - level: 45:54
+        Deep Fried Plantains:
+            itemid: 8953
+            filter:
+                - level: 45:54
+        Spinefin Halibut:
+            itemid: 8957
+            filter:
+                - level: 45:54
+        Morning Glory Dew:
+            itemid: 8766
+            filter:
+                - level: 45:54
+        Sunspring Carp:
+            itemid: 27858
+            filter:
+                - level: 55:64
+        March Lichen:
+            itemid: 24539
+            filter:
+                - level: 55:64
+        Smoked Talbuk Venison:
+            itemid: 27854
+            filter:
+                - level: 55:64
+        Mag'har Grainbread:
+            itemid: 27855
+            filter:
+                - level: 55:64
+        Skethyl Berries:
+            itemid: 27856
+            filter:
+                - level: 55:64
+        Garadar Sharp:
+            itemid: 27857
+            filter:
+                - level: 55:64
+        Zangar Caps:
+            itemid: 27859
+            filter:
+                - level: 55:64
+        Diamond Berries:
+            itemid: 29393
+            filter:
+                - level: 55:64
+        Filtered Draenic Water:
+            itemid: 28399
+            filter:
+                - level: 60:64
+        Silverwine:
+            itemid: 29454
+            filter:
+                - level: 60:64

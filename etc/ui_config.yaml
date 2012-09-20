@@ -21,6 +21,7 @@ pretty_print:
     lua: /usr/bin/lua
 modules:
     - WoWUI::Module::Addons
+    - WoWUI::Module::NADTAutoBuy
     - WoWUI::Module::Cork
     - WoWUI::Module::TellMeWhen
     - WoWUI::Module::CombatLogTrigger
@@ -51,5 +52,4 @@ modules:
     - WoWUI::Module::DeadlyBossMods
     - WoWUI::Module::SexyMap
     - WoWUI::Module::SellJunk
-    - WoWUI::Module::FreeRefills
     - WoWUI::Module::ChocolateBar

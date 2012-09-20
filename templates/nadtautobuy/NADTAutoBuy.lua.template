@@ -1,0 +1,13 @@
+
+NAB_DB = {
+
+    ["itemclasses"] = {
+[% FOR ic IN autobuy.keys -%]
+        ["[% ic %]"] = {
+            ["quantity"] = [% autobuy.$ic.quantity %],
+            ["items"] = { [% autobuy.$ic.items.join(', ') %] },
+        },
+[% END -%]
+    }
+
+}
