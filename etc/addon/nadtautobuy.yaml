@@ -51,8 +51,25 @@ nadtautobuy:
         HP Restore:
             filter:
                 - include: [ classusesfood ]
+                  exclude: [ 'class:Mage' ]
                   value: 20
             members:
+                - Harvest Bread
+                - Harvest Boar
+                - Harvest Fish
+                - Winter Veil Roast
+                - Teldrassil Tenderloin
+                - Stormwind Surprise
+                - Beer-Basted Short Ribs
+                - Gnomregan Gnuggets
+                - Draenic Dumplings
+                - Mulgore Meat Pie
+                - 'Green Ham & Eggs'
+                - Forsaken Foie Gras
+                - Troll Tartare
+                - Silvermoon Steak
+                - Graccu's Mince Meat Fruitcake
+                - Festival Dumplings
                 - Lifegiving Seed
                 - Highland Pomegranate
                 - Highland Sheep Cheese
@@ -114,12 +131,14 @@ nadtautobuy:
                 - Smoked Squid Belly
         MP Restore:
             filter:
-                - include: [ 'all(classusesmana;role:healer)' ]
-                  value: 40
-                  final: 1
                 - include: [ classusesmana ]
+                  exclude: [ 'class:Mage' ]
                   value: 20
+                - include: [ 'all(classusesmana;role:Healer)' ]
+                  value: 40
             members:
+                - Graccu's Mince Meat Fruitcake
+                - Festival Dumplings
                 - Lifegiving Seed
                 - Highland Spring Water
                 - Carbonated Water
@@ -502,3 +521,65 @@ nadtautobuy:
             itemid: 81923
             filter:
                 - level: 90
+        Harvest Bread:
+            itemid: 19696
+        Harvest Boar:
+            itemid: 19995
+        Harvest Fish:
+            itemid: 19996
+        Winter Veil Roast:
+            itemid: 21235
+        Teldrassil Tenderloin:
+            itemid: 75027
+            filter:
+                - include:
+                    - faction:Alliance
+        Stormwind Surprise:
+            itemid: 75028
+            filter:
+                - include:
+                    - faction:Alliance
+        Beer-Basted Short Ribs:
+            itemid: 75029
+            filter:
+                - include:
+                    - faction:Alliance
+        Gnomregan Gnuggets:
+            itemid: 75030
+            filter:
+                - include:
+                    - faction:Alliance
+        Draenic Dumplings:
+            itemid: 75031
+            filter:
+                - include:
+                    - faction:Alliance
+        Mulgore Meat Pie:
+            itemid: 75032
+            filter:
+                - include:
+                    - faction:Horde
+        'Green Ham & Eggs':
+            itemid: 75033
+            filter:
+                - include:
+                    - faction:Horde
+        Forsaken Foie Gras:
+            itemid: 75034
+            filter:
+                - include:
+                    - faction:Horde
+        Troll Tartare:
+            itemid: 75035
+            filter:
+                - include:
+                    - faction:Horde
+        Silvermoon Steak:
+            itemid: 75036
+            filter:
+                - include:
+                    - faction:Horde
+        Graccu's Mince Meat Fruitcake:
+            itemid: 21215
+        Festival Dumplings:
+            itemid: 21537
