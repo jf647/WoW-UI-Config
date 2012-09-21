@@ -274,3 +274,6 @@ macros:
   Shock:
     macro: |+
       /castsequence reset=combat Flame Shock, Earth Shock, Earth Shock, Earth Shock
+    filter:
+        include:
+            - all(class:Shaman;spec:Enhancement)
