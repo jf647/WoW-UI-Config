@@ -133,6 +133,12 @@ conditions:
     Operator: '=='
     Name: Maelstrom Weapon
     Level: 5
+  scent_of_blood_ge_4:
+    Type: BUFFSTACKS
+    Checked: 1
+    Operator: '>='
+    Name: Scent of Blood
+    Level: 4
   elusive_brew_ge_10_stacks:
     Type: BUFFSTACKS
     Checked: 1
@@ -246,6 +252,8 @@ filtergroups:
     - Death's Advance
     - Blood Plague Missing
     - Frost Fever Missing
+    - Scent of Blood Death Strike
+    - Crimson Scourge Meta
     filter:
       include:
       - class:Death Knight
@@ -448,9 +456,8 @@ filtergroups:
     - Mana Tide Totem
     - Spiritwalker's Grace
     - Riptide
-    - Nature's Swiftness
-    - Focused Insight
     - Shamanistic Rage
+    - MW3 Healing Wave
     - Feral Spirit
     - Shock Usable
     - Lava Burst
@@ -460,9 +467,16 @@ filtergroups:
     - Elemental Mastery
     - Unleash Elements
     - Healing Rains
-    - MW3 Healing Wave
     - Wind Shear
     - Purify Spirit
+    - Hex
+    - Stone Bulwark Totem
+    - Earthgrab Totem
+    - Ancestral Swiftness
+    - Astral Shift
+    - Windwalk Totem
+    - Call of the Elements
+    - Healing Tide Totem
     filter:
       include:
       - class:Shaman
@@ -662,6 +676,9 @@ icons:
         Operator: '>='
         Name: Maelstrom Weapon
         Level: 3
+    filter:
+      include:
+        - spec:Enhancement
     type: Cooldown::Spell
     spell: Healing Wave
   MW5 Lightning Bolt:
@@ -1266,15 +1283,6 @@ icons:
       - spec:Beast Mastery
       level: 29
     type: Cooldown::Spell::Off::ShortCD
-  Focused Insight:
-    combat: in
-    filter:
-      include:
-      - spec:Restoration
-      level: 19
-    ShowTimer: 1
-    ShowTimerText: 1
-    type: Buff
   Force of Nature:
     combat: in
     filter:
@@ -1914,12 +1922,41 @@ icons:
       include:
         - talent:Unholy Blight
     type: Cooldown::Spell::Off::LongCD
+  Death and Decay:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell::Off::ShortCD
+  Scent of Blood Death Strike:
+    combat: in
+    spell: Death Strike
+    filter:
+      include:
+        - spec:Blood
+    conditions:
+      - scent_of_blood_ge_4
+    type: Cooldown::Spell::ShortCD
+  Crimson Scourge Meta:
+    combat: in
+    Icons:
+      - Death and Decay
+      - Blood Boil
+    conditions:
+      - icon:Crimson Scourge
+    filter:
+      include:
+        - spec:Blood
+    type: Meta
+  Blood Boil:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell::Off::ShortCD
   Death's Advance:
     combat: in
     filter:
       include:
         - talent:Death's Advance
     type: Cooldown::Spell::ShortCD
+  Crimson Scourge:
+    no_filter_group_ok: 1
+    type: Buff
   Empower Rune Weapon:
     IgnoreRunes: 1
     combat: in
@@ -2257,6 +2294,8 @@ icons:
     filter:
       include:
       - spec:Restoration
+      exclude:
+      - glyph:Riptide
       level: 69
     type: Cooldown::Spell::Def::ShortCD
   Rune Tap:
@@ -2504,6 +2543,48 @@ icons:
       include:
       - all(level;85)
     type: Cooldown::Spell::LongCD
+  Stone Bulwark Totem:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      include:
+        - talent:Stone Bulwark Totem
+    combat: in
+  Earthgrab Totem:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      include:
+        - talent:Earthgrab Totem
+    combat: in
+  Ancestral Swiftness:
+    type: Cooldown::Spell::LongCD
+    filter:
+      include:
+        - talent:Ancestral Swiftness
+    combat: in
+  Astral Shift:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+      include:
+        - talent:Astral Shift
+    combat: in
+  Windwalk Totem:
+    type: Cooldown::Spell::Def::ShortCD
+    filter:
+      include:
+        - talent:Windwalk Totem
+    combat: in
+  Call of the Elements:
+    type: Cooldown::Spell::LongCD
+    filter:
+      include:
+        - talent:Call of the Elements
+    combat: in
+  Healing Tide Totem:
+    type: Cooldown::Spell::Def::LongCD
+    filter:
+      include:
+        - talent:Healing Tide Totem
+    combat: in
   Starfall:
     combat: in
     filter:
@@ -3004,6 +3085,11 @@ icons:
       level: 18
       include:
         - spec:Restoration
+    combat: in
+  Hex:
+    type: Cooldown::Spell::Off::ShortCD
+    filter:
+      level: 80
     combat: in
   Purify:
     type: Cooldown::Spell::Def::ShortCD
