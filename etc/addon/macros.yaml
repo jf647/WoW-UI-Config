@@ -1,4 +1,7 @@
 ---
+moduleorder:
+    before: [ keybindings ]
+    after: [ dualboxmacro ]
 templates:
   global:
     macros:

@@ -1,5 +1,7 @@
 ---
 buttontemplate: $TEMPLATEDIR/dualbox/button.template
+moduleorder:
+    before: [ macros, keybindings ]
 filtergroups:
   any:
     members:

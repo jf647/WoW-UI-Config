@@ -4,6 +4,8 @@ templates:
     keybindings:
       input: $TEMPLATEDIR/keybindings/bindings-cache-global.wtf.template
       output: $TEMPDIR/WTF/Account/$ACCOUNT/bindings-cache.wtf
+moduleorder:
+    after: [ dualboxmacro, macros ]
 bindingmode: global
 aliases:
   TOGGLECHARACTER: TOGGLECHARACTER0

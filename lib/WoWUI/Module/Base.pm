@@ -130,6 +130,33 @@ sub process
     my $config = $self->modconfig;
     my $log = WoWUI::Util->logger( callingobj => $self );
 
+    # ensure that we haven't violated any order constraints
+    my $modules = WoWUI::Modules->instance;
+    if( exists $config->{moduleorder} ) {
+        unshift @{ $config->{moduleorder}->{after} }, 'addons';
+    }
+    else {
+        unless( 'addons' eq $self->name ) {
+            $config->{moduleorder} = { after => 'addons' };
+        }
+    }
+    if( exists $config->{moduleorder}->{before} ) {
+        for my $before( @{ $config->{moduleorder}->{before} } ) {
+            if( $modules->processed_exists($before) ) {
+                croak $self->name . " must be processed before $before";
+            }
+        }
+    }
+    if( exists $config->{moduleorder}->{after} ) {
+        for my $after( @{ $config->{moduleorder}->{after} } ) {
+            unless( $modules->processed_exists($after) ) {
+                croak $self->name . " must be processed after $after";
+            }
+        }
+    }
+    $modules->processed_set( $self->name, 1 );
+    
+
     # clear out old data
     $self->globaldata_clear;
 

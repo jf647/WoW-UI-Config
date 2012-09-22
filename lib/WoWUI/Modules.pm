@@ -12,7 +12,7 @@ use namespace::autoclean;
 # set up class
 has modules => (
   is => 'bare',
-      isa => 'HashRef[WoWUI::Module::Base]',
+  isa => 'HashRef[WoWUI::Module::Base]',
   default => sub { {} },
   traits => ['Hash'],
   handles => {
@@ -21,6 +21,16 @@ has modules => (
       module_names => 'keys',
       module_exists => 'exists',
       modules => 'values',
+  },
+);
+has processed => (
+  is => 'bare',
+  isa => 'HashRef[Str]',
+  default => sub { {} },
+  traits => ['Hash'],
+  handles => {
+      processed_set => 'set',
+      processed_exists => 'exists',
   },
 );
 
