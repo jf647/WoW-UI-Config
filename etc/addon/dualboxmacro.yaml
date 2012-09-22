@@ -1,7 +1,33 @@
 ---
-buttontemplate: $TEMPLATEDIR/dualbox/button.template
 moduleorder:
     before: [ macros, keybindings ]
+macros:
+    setfocus:
+        binding: CTRL-SHIFT-C
+    followfocus:
+        binding: CTRL-SHIFT-B
+    normalheal:
+        binding: CTRL-SHIFT-Q
+    bigheal:
+        binding: CTRL-SHIFT-W
+    hot:
+        binding: CTRL-SHIFT-E
+    shield:
+        binding: CTRL-SHIFT-R
+    panic:
+        binding: CTRL-SHIFT-T
+    cleanse:
+        binding: CTRL-SHIFT-Y
+    battlerez:
+        binding: CTRL-SHIFT-U
+    special1:
+        binding: CTRL-SHIFT-I
+    special2:
+        binding: CTRL-SHIFT-O
+    special3:
+        binding: CTRL-SHIFT-P
+    damagefocustarget:
+        binding: CTRL-SHIFT-'
 filtergroups:
   any:
     members:

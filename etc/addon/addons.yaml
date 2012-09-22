@@ -583,13 +583,6 @@ addons:
         include:
             - no-one
         preqreq: [ LushGearSwap ]
-    Macaroon:
-        include:
-            - all(dualbox;machine:type:secondary)
-        group: Dualbox
-    MacaroonProfiles:
-        include:
-            - no-one
     Mapster:
         exclude:
             - banker

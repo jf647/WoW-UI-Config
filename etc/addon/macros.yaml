@@ -1,7 +1,4 @@
 ---
-moduleorder:
-    before: [ keybindings ]
-    after: [ dualboxmacro ]
 templates:
   global:
     macros:
@@ -11,272 +8,671 @@ templates:
     macros:
       input: $TEMPLATEDIR/macros/macros-cache.txt.template
       output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/macros-cache.txt
+moduleorder:
+    after: [ nadttrustlist ]
 global_macros:
   AutoHP:
     filter:
-      addons:
-        - Buffet
+      - addons:
+          - Buffet
+        value:
+          macro: |+
+            #showtooltip
+            %MACRO%
   AutoMP:
     filter:
-      addons:
-        - Buffet
+      - addons:
+          - Buffet
+        value: 
+          macro: |+
+            #showtooltip
+            %MACRO%
   Trink:
-    macro: |+
-      #showtooltip 13
-      /script UIErrorsFrame:Hide()
-      /use 13
-      /use 14
-      /use 10
-      /script UIErrorsFrame:Clear() ; UIErrorsFrame:Show()
+    filter:
+      - value:
+          macro: |+
+            #showtooltip 13
+            /script UIErrorsFrame:Hide()
+            /use 13
+            /use 14
+            /script UIErrorsFrame:Clear() ; UIErrorsFrame:Show()
   Trink1:
-    macro: |+
-      #showtooltip
-      /use 13
+    filter:
+      - value:
+          macro: |+
+            #showtooltip
+            /use 13
   Trink2:
-    macro: |+
-      #showtooltip
-      /use 14
+    filter:
+      - value:
+          macro: |+
+            #showtooltip
+            /use 14
 macros:
-  DruidCharge:
-    name: Charge
+  LSB:
+    num: 16777217
     filter:
-      include:
-        - all(class:Druid;spec:Feral)
-        - all(class:Druid;spec:Guardian)
-    macro: |+
-      #showtooltip
-      /cast [stance:1] Feral Charge(Bear Form); [stance:3] Feral Charge(Cat Form)
-  ETGH:
-    icon: Ability_Creature_Cursed_02
-    filter:
-      include:
-        - all(faction:Horde;prof:Cooking)
-      exclude:
-        - prof:Cooking:Zen Master
-    macro: |+
-      /target Orgrimmar Thief
-      /script if UnitName("target") and not UnitIsDead("target") and not GetRaidTargetIndex("target") then SetRaidTargetIcon("target",1); end
-      /cleartarget [dead]
-  LGS:
-    filter:
-      include:
-        - prof:Herbalism:475+
-    icon: Ability_Creature_Poison_06
-    macro: |+
-      #showtooltip Lifegiving Seed
-      /cancelaura Herbouflage
-      /use Lifegiving Seed
-  AtoneHF:
-    filter:
-      include:
-        - all(class:Priest;spec:Discipline)
-    macro: |+
-      #showtooltip Holy Fire
-      /cast [@target,harm,exists] [@focustarget,harm,exists] [@focus,harm,exists] [@mouseover,harm,exists] Holy Fire
-  AtoneS:
-    filter:
-      include:
-        - all(class:Priest;spec:Discipline)
-    macro: |+
-      #showtooltip Smite
-      /cast [@target,harm,exists] [@focustarget,harm,exists] [@focus,harm,exists] [@mouseover,harm,exists] Smite
-  LSB-Priest:
-    name: LSB
-    macro: |+
-      /cast Fade
-    filter:
-      include:
-        - class:Priest
-  RSB-Priest:
-    name: RSB
-    macro: |+
-      /cast Psychic Scream
-    filter:
-      include:
-        - class:Priest
-  LSB-Rogue:
-    name: LSB
-    macro: |+
-      /cast Vanish
-    filter:
-      include:
-        - class:Rogue
-  RSB-Rogue:
-    name: RSB
-    macro: |+
-      /cast Cloak of Shadows
-    filter:
-      include:
-        - class:Rogue
-  LSB-Mage:
-    name: LSB
-    macro: |+
-      /cast Blink
-    filter:
-      include:
-        - class:Mage
-  RSB-Mage:
-    name: RSB
-    macro: |+
-      /cancelaura Ice Block
-      /cast Ice Block    
-    filter:
-      include:
-        - class:Mage
-  RSB-Warlock:
-    name: RSB
-    macro: |+
-      /cast Soulshatter
-    filter:
-      include:
-        - class:Warlock
-      level: 66
-  LSB-Paladin:
-    name: LSB
-    macro: |+
-      /cancelaura Divine Shield
-      /cast Divine Shield
-    filter:
-      include:
-        - class:Paladin
-  Interrupt-Mage:
-    name: Int
-    filter:
-      include:
-        - class:Mage
-    macro: |+
-      #showtooltip Counterspell
-      /stopcasting
-      /cast [mod:shift] Counterspell;[@focustarget,harm,exists] Counterspell;[@focus,harm,exists] Counterspell; [@mouseover,harm,exists] Counterspell; Counterspell
-  Interrupt-Warrior:
-    name: Int
-    filter:
-      include:
-        - class:Warrior
-    macro: |+
-      #showtooltip Pummel
-      /stopattack
-      /cast [mod:shift] Pummel;[@focustarget,harm,exists] Pummel;[@focus,harm,exists] Pummel; [@mouseover,harm,exists] Pummel; Pummel
-      /startattack
-  Interrupt-Paladin:
-    name: Int
-    filter:
-      include:
-        - class:Paladin
-    macro: |+
-      #showtooltip Rebuke
-      /stopattack
-      /cast [mod:shift] Rebuke;[@focustarget,harm,exists] Rebuke;[@focus,harm,exists] Rebuke; [@mouseover,harm,exists] Rebuke; Rebuke
-      /startattack
-  Interrupt-Shaman:
-    name: Int
-    filter:
-      include:
-        - class:Shaman
-    macro: |+
-      #showtooltip Wind Shear
-      /stopcasting
-      /cast [mod:shift] Wind Shear;[@focustarget,harm,exists] Wind Shear;[@focus,harm,exists] Wind Shear; [@mouseover,harm,exists] Wind Shear; Wind Shear
-  Interrupt-Warlock:
-    name: Int
-    filter:
-      include:
-        - all(class:Warlock;spec:Affliction)
-    macro: |+
-      #showtooltip Spell Lock
-      /stopcasting
-      /cast [mod:shift] Spell Lock;[@focustarget,harm,exists] Spell Lock;[@focus,harm,exists] Spell Lock; [@mouseover,harm,exists] Spell Lock; Spell Lock
-  IFPoH:
-    name: PoH
-    filter:
-      include:
-        - all(class:Priest;spec:Discipline)
-    macro: |+
-      #showtooltip Prayer of Healing
-      /cast Inner Focus
-      /cast Prayer of Healing
-  MD:
-    filter:
-      level: 76
-      include:
-        - class:Hunter
-    macro: |+
-      #showtooltip
-      /cast [target=focus,exists,help] Misdirection; [target=focustarget,exists,help] Misdirection; [target=pet,exists,help] Misdirection
-  HoG:
-    filter:
-      include:
-        - all(class:Warlock;spec:Demonology)
-    macro: |+
-      #showtooltip Hand of Gul'dan
-      /petattack
-      /cast Hand of Gul'dan
-  PA:
-    filter:
-      include:
-        - class:Hunter
-    icon: Ability_Creature_Cursed_02
-    macro: |+
-      /script UIErrorsFrame:Hide()
-      /use 13
-      /use 14
-      /script UIErrorsFrame:Clear(); UIErrorsFrame:Show()
-      /cast Hunter's Mark
-      /petattack
-  Bloodthirst:
-    filter:
-      include:
-        - all(class:Warrior;spec:Fury)
-    macro: |+
-      #showtooltip Bloodthirst
-      /startattack
-      /cast Bloodthirst
-  PS/OB:
-    filter:
-      include:
-        - class:Death Knight
-    macro: |+
-      /startattack
-      /cast [mod:shift] Plague Strike; Outbreak
-  SoC:
-    filter:
-      include:
-        - all(class:Warlock;spec:Affliction)
-    macro: |+
-      #showtooltip Seed of Corruption
-      /cast Soulburn
-      /cast Seed of Corruption
-  Freeze:
-    macro: |+
-      /cast Freeze
-    filter:
-      include:
-        - all(class:Mage;spec:Frost)
-  Howling Blast:
-    macro: |+
-      #showtooltip Howling Blast
-      /startattack
-      /cast Howling Blast
-    filter:
-      include:
-        - all(class:Death Knight;spec:Frost)
-  Outbreak:
-    macro: |+
-      #showtooltip Outbreak
-      /startattack
-      /cast Outbreak
-    filter:
-      include:
-        - class:Death Knight
-  5CPAss:
-    macro: |+
-      /cast [mod:shift] Dispatch; Envenom
-    filter:
-      include:
-        - all(class:Rogue;spec:Assassination)
-  Shock:
-    macro: |+
-      /castsequence reset=combat Flame Shock, Earth Shock, Earth Shock, Earth Shock
-    filter:
+      - level: 24
         include:
-            - all(class:Shaman;spec:Enhancement)
+          - class:Priest
+        value:
+          macro: |+
+            /cast Fade
+      - level: 34
+        include:
+          - class:Rogue
+        value:
+          macro: |+
+            /cast Vanish
+      - level: 7
+        include:
+          - class:Mage
+        value:
+          macro: |+
+            /cast Blink
+      - level: 18
+        include:
+          - class:Paladin
+        value:
+          macro: |+
+            /cancelaura Divine Shield
+            /cast Divine Shield
+  RSB:
+    num: 16777218
+    filter:
+      - level: 12
+        include:
+          - class:Priest
+        value:
+          macro: |+
+            /cast Psychic Scream
+      - level: 58
+        include:
+          - class:Rogue
+        value:
+          macro: |+
+            /cast Cloak of Shadows
+      - level: 66
+        include:
+          - class:Warlock
+        value:
+          macro: |+
+            /cast Soulshatter
+      - level: 30
+        include:
+          - class:Mage
+        value:
+          macro: |+
+           /cancelaura Ice Block
+           /cast Ice Block    
+  Interrupt:
+    num: 16777219
+    filter:
+      - level: 9
+        include:
+          - class:Mage
+        value:
+          macro: |+
+            #showtooltip Counterspell
+            /stopcasting
+            /cast [mod:shift] Counterspell;[@focustarget,harm,exists] Counterspell;[@focus,harm,exists] Counterspell; [@mouseover,harm,exists] Counterspell; Counterspell
+      - level: 16
+        include:
+          - all(class:Shaman;spec:Restoration)
+          - all(class:Shaman;spec:Elemental)
+        value:
+          macro: |+
+            #showtooltip Wind Shear
+            /stopcasting
+            /cast [mod:shift] Wind Shear;[@focustarget,harm,exists] Wind Shear;[@focus,harm,exists] Wind Shear; [@mouseover,harm,exists] Wind Shear; Wind Shear
+      - level: 16
+        include:
+          - all(class:Shaman;spec:Enhancement)
+        value:
+          macro: |+
+            #showtooltip Wind Shear
+            /stopattack
+            /cast [mod:shift] Wind Shear;[@focustarget,harm,exists] Wind Shear;[@focus,harm,exists] Wind Shear; [@mouseover,harm,exists] Wind Shear; Wind Shear
+            /startattack
+      - level: 24
+        include:
+          - class:Warrior
+        value:
+          macro: |+
+            #showtooltip Pummel
+            /stopattack
+            /cast [mod:shift] Pummel;[@focustarget,harm,exists] Pummel;[@focus,harm,exists] Pummel; [@mouseover,harm,exists] Pummel; Pummel
+            /startattack
+      - level: 36
+        include:
+          - class:Paladin
+        value:
+          macro: |+
+            #showtooltip Rebuke
+            /stopattack
+            /cast [mod:shift] Rebuke;[@focustarget,harm,exists] Rebuke;[@focus,harm,exists] Rebuke; [@mouseover,harm,exists] Rebuke; Rebuke
+            /startattack
+      - level: 50
+        include:
+          - all(class:Warlock;spec:Affliction)
+        value:
+          macro: |+
+            /cast Spell Lock
+  LGS:
+    num: 16777220
+    filter:
+      - include:
+          - prof:Herbalism:475+
+        value:
+          icon: Ability_Creature_Poison_06
+          macro: |+
+            #showtooltip Lifegiving Seed
+            /cancelaura Herbouflage
+            /use Lifegiving Seed
+  AtoneHF:
+    num: 16777221
+    filter:
+      - level: 60
+        include:
+          - all(class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            #showtooltip Holy Fire
+            /cast [@target,harm,exists] [@focustarget,harm,exists] [@focus,harm,exists] [@mouseover,harm,exists] Holy Fire
+  AtoneS:
+    num: 16777222
+    filter:
+      - level: 60
+        include:
+          - all(class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            #showtooltip Smite
+            /cast [@target,harm,exists] [@focustarget,harm,exists] [@focus,harm,exists] [@mouseover,harm,exists] Smite
+  PoH:
+    num: 16777223
+    filter:
+      - level: 36
+        include:
+          - all(class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            #showtooltip Prayer of Healing
+            /cast Inner Focus
+            /cast Prayer of Healing
+  MD:
+    num: 16777224
+    filter:
+      - level: 76
+        include:
+          - class:Hunter
+        value:
+          macro: |+
+            #showtooltip
+            /cast [target=focus,exists,help] Misdirection; [target=focustarget,exists,help] Misdirection; [target=pet,exists,help] Misdirection
+  PS/OB:
+    num: 16777225
+    filter:
+      - level: 81
+        include:
+          - class:Death Knight
+        value:
+          macro: |+
+            /startattack
+            /cast [mod:shift] Plague Strike; Outbreak
+  SoC:
+    num: 16777226
+    filter:
+      -  level: 62
+         include:
+           - all(class:Warlock;spec:Affliction)
+         value:
+           macro: |+
+             #showtooltip Seed of Corruption
+             /cast Soulburn
+             /cast Seed of Corruption
+  Freeze:
+    num: 16777227
+    filter:
+      - include:
+          - all(class:Mage;spec:Frost)
+        value:
+          macro: |+
+            /cast Freeze
+  HB:
+    num: 16777228
+    filter:
+      - include:
+          - all(class:Death Knight;spec:Frost)
+        value:
+          macro: |+
+            #showtooltip Howling Blast
+            /startattack
+            /cast Howling Blast
+  Outbreak:
+    num: 16777229
+    filter:
+      - level: 81
+        include:
+          - class:Death Knight
+        value:
+          macro: |+
+            #showtooltip Outbreak
+            /startattack
+            /cast Outbreak
+  Shock:
+    num: 16777230
+    filter:
+      - include:
+          - all(class:Shaman;spec:Enhancement)
+        value:
+          macro: |+
+            /castsequence reset=combat Flame Shock, Earth Shock, Earth Shock, Earth Shock
+  SetFocus:
+    num: 16777231
+    filter:
+      - include:
+          - dualbox
+        value:
+          macro: |+
+            /cleartarget
+            [% FOR master IN masters -%]
+            /target [% master %]
+            [% END -%]
+            /focus
+            /cleartarget
+          ttprocess: 1
+  FlwFocus:
+    num: 16777232
+    filter:
+      - include:
+          - dualbox
+        value:
+          macro: |+
+            /follow focus
+  NormHeal:
+    num: 16777233
+    filter:
+      - level: 28
+        include:
+          - all(dualbox;class:Priest;spec:Holy)
+          - all(dualbox;class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            /cast [@focus] Heal
+      - level: 20
+        include:
+          - all(dualbox;class:Shaman;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Healing Wave
+      - level: 34
+        include:
+          - all(dualbox;class:Paladin;spec:Holy)
+        value:
+          macro: |+
+            /cast [@focus] Holy Light
+      - level: 8
+        include:
+          - all(dualbox;class:Druid;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Nourish
+      - level: 10
+        include:
+          - all(dualbox;class:Monk;spec:Mistweaver)
+        value:
+          macro: |+
+            /cast [@focus] Soothing Mist
+  BigHeal:
+    num: 16777234
+    filter:
+      - level: 38
+        include:
+          - all(dualbox;class:Priest;spec:Holy)
+        value:
+          macro: |+
+            /cast [@focus] Greater Heal
+      - level: 10
+        include:
+          - all(dualbox;class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            /cast [@focus] Penance
+      - level: 60
+        include:
+          - all(dualbox;class:Shaman;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Greater Healing Wave
+      - level: 54
+        include:
+          - all(dualbox;class:Paladin;spec:Holy)
+        value:
+          macro: |+
+            /cast [@focus] Divine Light
+      - level: 26
+        include:
+          - all(dualbox;class:Druid;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Healing Touch
+      - level: 32
+        include:
+          - all(dualbox;class:Monk;spec:Mistweaver)
+        value:
+          macro: |+
+            /cast [@focus] Surging Mist
+  HoT:
+    num: 16777235
+    filter:
+      - level: 26
+        include:
+          - all(dualbox;class:Priest;spec:Holy)
+          - all(dualbox;class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            /cast [@focus] Renew
+      - level: 10
+        include:
+          - all(dualbox;class:Shaman;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Riptide
+      - include:
+          - all(dualbox;class:Paladin;talent:Eternal Flame)
+        value:
+          macro: |+
+            /cast [@focus] Eternal Flame
+      - level: 3
+        include:
+          - all(dualbox;class:Druid;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Rejuvenation
+      - level: 42
+        include:
+          - all(dualbox;class:Monk;spec:Mistweaver)
+        value:
+          macro: |+
+            /cast [@focus] Renewing Mist
+  Shield:
+    num: 16777236
+    filter:
+      - level: 5
+        include:
+          - all(dualbox;class:Priest;spec:Holy)
+          - all(dualbox;class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            /cast [@focus] Power Word: Shield
+      - level: 26
+        include:
+          - all(dualbox;class:Shaman;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Earth Shield
+      - include:
+          - all(dualbox;class:Paladin;talent:Sacred Shield)
+        value:
+          macro: |+
+            /cast [@focus] Sacred Shield
+      - include:
+          - all(dualbox;class:Druid;talent:Cenarion Ward)
+        value:
+          macro: |+
+            /cast [@focus] Cenarion Ward
+  Panic:
+    num: 16777237
+    filter:
+      - level: 70
+        include:
+          - all(dualbox;class:Priest;spec:Holy)
+        value:
+          macro: |+
+            /cast [@focus] Guardian Spirit
+      - level: 58
+        include:
+          - all(dualbox;class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            /cast [@focus] Pain Suppression
+      - level: 70
+        include:
+          - all(dualbox;class:Shaman;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Spirit Link Totem
+      - level: 16
+        include:
+          - all(dualbox;class:Paladin)
+        value:
+          macro: |+
+            /cast [@focus] Lay on Hands
+      - level: 10
+        include:
+          - all(dualbox;class:Druid;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Swiftmend
+      - level: 50
+        include:
+          - all(dualbox;class:Monk;spec:Mistweaver)
+        value:
+          macro: |+
+            /cast [@focus] Life Cocoon
+  Cleanse:
+    num: 16777238
+    filter:
+      - level: 26
+        include:
+          - all(dualbox;class:Priest;spec:Holy)
+          - all(dualbox;class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            /cast [@focus] Purify
+      - level: 18
+        include:
+          - all(dualbox;class:Shaman;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Purify Spirit
+      - level: 20
+        include:
+          - all(dualbox;class:Paladin;spec:Holy)
+        value:
+          macro: |+
+            /cast [@focus] Cleanse
+      - level: 22
+        include:
+          - all(dualbox;class:Druid;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Nature's Cure
+      - level: 20
+        include:
+          - all(dualbox;class:Monk;spec:Mistweaver)
+        value:
+          macro: |+
+            /cast [@focus] Detox
+  BattleRez:
+    num: 16777239
+    filter:
+      - level: 56
+        include:
+          - all(dualbox;class:Druid)
+        value:
+          macro: |+
+            /cast Rebirth
+      - level: 72
+        include:
+          - all(dualbox;class:Death Knight)
+        value:
+          macro: |+
+            /cast Raise Ally
+      - level: 18
+        include:
+          - all(dualbox;class:Warlock)
+        value:
+          macro: |+
+            /cast Soulstone
+  Special1:
+    num: 16777240
+    filter:
+      - level: 70
+        include:
+          - all(class:Shaman;faction:Alliance)
+        value:
+          macro: |+
+            /cast Heroism
+      - level: 70
+        include:
+          - all(class:Shaman;faction:Horde)
+        value:
+          macro: |+
+            /cast Bloodlust
+      - level: 85
+        include:
+          - class:Mage
+        value:
+          macro: |+
+            /cast Time Warp
+  Special2:
+    num: 16777241
+    filter:
+      - level: 78
+        include:
+          - all(class:Priest;spec:Holy)
+        value:
+          macro: |+
+            /cast Divine Hymn
+      - include:
+          - all(class:Shaman;talent:Healing Tide Totem)
+        value:
+          macro: |+
+            /cast Healing Tide Totem
+      - level: 78
+        include:
+          - all(class:Priest;spec:Holy)
+        value:
+          macro: |+
+            /cast Divine Hymn
+      - level: 74
+        include:
+          - class:Druid
+        value:
+          macro: |+
+            /cast Tranquility
+  Special3:
+    num: 16777242
+    filter: 
+      - level: 66
+        include:
+          - class:Shaman
+        value:
+          macro: |+
+            /cast Fire Elemental Totem
+      - level: 50
+        include:
+          - class:Mage
+        value:
+          macro: |+
+            /cast Mirror Image
+      - include:
+          - all(class:Priest;talent:Power Infusion)
+        value:
+          macro: |+
+            /cast Power Infusion
+  GroupHeal:
+    num: 16777242
+    filter:
+      - level: 50
+        include:
+          - all(dualbox;class:Priest;spec:Holy)
+        value:
+          macro: |+
+            /cast [@focus] Circle of Healing
+      - level: 44
+        include:
+          - all(dualbox;class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            /cast [@player] Prayer of Healing
+      - level: 40
+        include:
+          - all(dualbox;class:Shaman;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@player] Chain Heal
+      - level: 28
+        include:
+          - all(dualbox;class:Paladin;spec:Holy)
+        value:
+          macro: |+
+            /cast [@focus] Holy Radiance
+      - level: 76
+        include:
+          - all(dualbox;class:Druid;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@focus] Wild Growth
+      - level: 62
+        include:
+          - all(dualbox;class:Monk;spec:Mistweaver)
+        value:
+          macro: |+
+            /cast Uplift
+  BounceHeal:
+    num: 16777242
+    filter:
+      - level: 68
+        include:
+          - all(dualbox;class:Priest;spec:Holy)
+          - all(dualbox;class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            /cast [@focus] Prayer of Mending
+      - include:
+          - all(dualbox;class:Monk;talent:Chi Wave)
+        value:
+          macro: |+
+            /cast Chi Wave
+  SelfHeal:
+    num: 16777242
+    filter:
+      - level: 38
+        include:
+          - all(dualbox;class:Priest;spec:Holy)
+        value:
+          macro: |+
+            /cast [@player] Greater Heal
+      - level: 10
+        include:
+          - all(dualbox;class:Priest;spec:Discipline)
+        value:
+          macro: |+
+            /cast [@player] Penance
+      - level: 60
+        include:
+          - all(dualbox;class:Shaman;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@player] Greater Healing Wave
+      - level: 54
+        include:
+          - all(dualbox;class:Paladin;spec:Holy)
+        value:
+          macro: |+
+            /cast [@player] Divine Light
+      - level: 26
+        include:
+          - all(dualbox;class:Druid;spec:Restoration)
+        value:
+          macro: |+
+            /cast [@player] Healing Touch
+      - level: 32
+        include:
+          - all(dualbox;class:Monk;spec:Mistweaver)
+        value:
+          macro: |+
+            /cast [@player] Surging Mist

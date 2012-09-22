@@ -113,6 +113,7 @@ sub modoptions
         @things = ( $self, $self->machine, $self->player );
     }
     for my $thing( @things ) {
+        next unless( defined $thing );
         if( $thing->modoption_exists( $self->name ) ) {
             $options = merge( $options, $thing->modoption_get( $self->name ) );
         }
@@ -137,7 +138,7 @@ sub process
     }
     else {
         unless( 'addons' eq $self->name ) {
-            $config->{moduleorder} = { after => 'addons' };
+            $config->{moduleorder} = { after => [ qw|addons| ] };
         }
     }
     if( exists $config->{moduleorder}->{before} ) {
