@@ -21,6 +21,10 @@ pretty_print:
     lua: /usr/bin/lua
 modules:
     - WoWUI::Module::Addons
+    - WoWUI::Module::DualBoxMacro
+    - WoWUI::Module::Macros
+    - WoWUI::Module::KeyBindings
+    - WoWUI::Module::ChatCache
     - WoWUI::Module::NADTAutoBuy
     - WoWUI::Module::Cork
     - WoWUI::Module::TellMeWhen
@@ -29,16 +33,13 @@ modules:
     - WoWUI::Module::LayoutLocal
     - WoWUI::Module::Bagnon
     - WoWUI::Module::Dominos
-    - WoWUI::Module::Macros
     - WoWUI::Module::AdiBags
     - WoWUI::Module::kgPanels
     - WoWUI::Module::Mapster
     - WoWUI::Module::OmniCC
     - WoWUI::Module::Broker_uClock
     - WoWUI::Module::Prat
-    - WoWUI::Module::KeyBindings
     - WoWUI::Module::NADTTrustList
-    - WoWUI::Module::DualBoxMacro
     - WoWUI::Module::NADTQuestShare
     - WoWUI::Module::NADTParty
     - WoWUI::Module::AutoReFollow
