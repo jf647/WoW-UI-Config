@@ -101,7 +101,6 @@ filtergroups:
     members:
     - Word of Glory
     - Eternal Flame
-    - Righteous Defense
     - Hammer of Justice
     - Flash of Light
     - Divine Light
@@ -828,12 +827,6 @@ actions:
       include:
       - cliqueaction:resurrect
     icon: ability_hunter_beastsoothe
-  Righteous Defense:
-    filter:
-      include:
-      - all(spec:Protection;cliqueaction:multitaunt)
-      level: 36
-    icon: INV_Shoulder_37
   Ring of Frost:
     filter:
       include:
