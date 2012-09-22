@@ -1,0 +1,27 @@
+templates:
+    perchar:
+        layoutlocal:
+            input: $TEMPLATEDIR/chatcache/chat-cache.txt.template
+            output: $TEMPDIR/WTF/Account/$ACCOUNT/$REALM/$CHAR/chat-cache.txt
+window:
+    filter:
+        - exclude:
+            - banker
+            - mule
+          value:
+            anchor:
+              point: BOTTOMLEFT
+              x: 0
+              y: 0.001418
+            w: 800
+            h: 155
+        - include:
+            - banker
+            - mule
+          value:
+            anchor:
+              point: BOTTOMLEFT
+              x: 0
+              y: 0.072900
+            w: 800
+            h: 600
