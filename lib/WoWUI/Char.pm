@@ -510,8 +510,8 @@ sub set_dungeontypes
 my %abilities = (
   Paladin => {
     Retribution => [ 'cleanse', 'interrupt', 'cc', 'stun', 'resurrect' ],
-    Holy => [ 'cleanse', 'stun', 'resurrect' ],
-    Protection => [ 'cleanse', 'stun', 'resurrect' ],
+    Holy => [ 'cleanse', 'stun', 'resurrect', 'cc' ],
+    Protection => [ 'cleanse', 'stun', 'resurrect', 'cc' ],
   },
   Shaman => {
     Enhancement => [ 'cleanse', 'interrupt', 'cc', 'resurrect' ],

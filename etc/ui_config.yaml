@@ -44,7 +44,6 @@ modules:
     - WoWUI::Module::AutoReFollow
     - WoWUI::Module::NADTTurnIn
     - WoWUI::Module::Clique
-    - WoWUI::Module::TrinketMenu
     - WoWUI::Module::NPCScan
     - WoWUI::Module::Postal
     - WoWUI::Module::BrokerCurrency

@@ -382,7 +382,6 @@ actions:
     filter:
       include:
       - all(cliqueaction:cc2;talent:Blood Fear)
-      level: 60
     icon: spell_shadow_possession
   Flamestrike:
     filter:
@@ -704,7 +703,6 @@ actions:
     filter:
       include:
       - all(talent:Repentance;cliqueaction:cc)
-      level: 30
     icon: spell_holy_prayerofhealing
   Power Infusion:
     filter:
@@ -728,7 +726,6 @@ actions:
     filter:
       include:
       - all(talent:Cenarion Ward;cliqueaction:shield)
-      level: 30
     icon: ability_druid_naturalperfection
   Prayer of Mending:
     filter:
@@ -969,7 +966,6 @@ actions:
     icon: inv_helmet_96
   Eternal Flame:
     filter:
-      level: 45
       include:
       - all(talent:Eternal Flame;cliqueaction:freeheal)
     icon: inv_torch_thrown

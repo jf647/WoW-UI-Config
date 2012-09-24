@@ -44,7 +44,7 @@ conditions:
     Level: 2
   holy_power_3:
     Level:  3
-    Operator: ==
+    Operator: '>='
     Type: HOLY_POWER
     Unit: player
   hp_gt_85_pct:
@@ -381,7 +381,6 @@ filtergroups:
     - Avenging Wrath
     - Lay on Hands
     - Divine Favor
-    - Aura Mastery
     - Holy Shock
     - Hand of Protection
     - Hand of Sacrifice
@@ -394,6 +393,9 @@ filtergroups:
     - Holy Prism
     - Light's Hammer
     - Execution Sentence
+    - Word of Glory
+    - Eternal Flame
+    - Devotion Aura
     filter:
       include:
       - class:Paladin
@@ -922,13 +924,11 @@ icons:
     filter:
       level: 56
     type: Buff
-  Aura Mastery:
+  Devotion Aura:
+    type: Cooldown::Spell::Def::LongCD
     combat: in
     filter:
-      include:
-      - spec:Holy
-      level: 49
-    type: Cooldown::Spell::Def::LongCD
+      level: 60
   Aura of the Blue Dragon:
     Alpha: 1
     combat: in
@@ -1412,7 +1412,7 @@ icons:
       level: 80
       include:
       - spec:Holy
-    type: Cooldown::Spell::Def::ShortCD
+    type: Cooldown::Spell::Def::LongCD
   Vigilance:
     combat: in
     talent: 1
@@ -1434,7 +1434,7 @@ icons:
       level: 66
       include:
       - spec:Holy
-    type: Cooldown::Spell::Def::ShortCD
+    type: Cooldown::Spell::Def::LongCD
   'Holy Word: Serenity':
     combat: in
     filter:
@@ -2697,6 +2697,23 @@ icons:
     spell: 90806
     stacks:
       min: 3
+  Word of Glory:
+    type: Cooldown::Spell::Def::ShortCD
+    combat: in
+    filter:
+      level: 9
+      exclude:
+        - talent:Eternal Flame
+    conditions:
+      - holy_power_3
+  Eternal Flame:
+    type: Cooldown::Spell::Def::ShortCD
+    combat: in
+    filter:
+      include:
+        - talent:Eternal Flame
+    conditions:
+      - holy_power_3
   Heroic Strike over 60 Rage:
     no_filter_group_ok: 1
     type: Cooldown::Spell

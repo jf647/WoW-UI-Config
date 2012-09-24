@@ -343,9 +343,8 @@ triggers:
         spellid: 20066
         reportrefresh: 1
         filter:
-            level: 49
             include:
-                - all(class:Paladin;spec:Retribution)
+                - all(class:Paladin;talent:Repentance)
     Blind:
         type: debuff
         spellid: 2094
@@ -386,7 +385,6 @@ triggers:
         spellid: 116888
         message: '*slink saved me!  Heal me before I die!'
         filter:
-            level: 57
             include:
                 - all(class:Death Knight;talent:Purgatory)
     Fear:
