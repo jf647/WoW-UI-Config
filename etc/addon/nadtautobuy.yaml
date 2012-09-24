@@ -132,7 +132,7 @@ nadtautobuy:
         MP Restore:
             filter:
                 - include: [ classusesmana ]
-                  exclude: [ 'class:Mage' ]
+                  exclude: [ 'class:Mage', 'class:Warlock' ]
                   value: 20
                 - include: [ 'all(classusesmana;role:Healer)' ]
                   value: 40
