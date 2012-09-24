@@ -621,7 +621,7 @@ actions:
   Lifebloom:
     filter:
       include:
-      - cliqueaction:hot2
+      - all(spec:Restoration;cliqueaction:hot2)
       level: 64
     icon: INV_Misc_Herb_Felblossom
   Lightning Shield:

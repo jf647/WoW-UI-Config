@@ -21,13 +21,13 @@ pretty_print:
     lua: /usr/bin/lua
 modules:
     - WoWUI::Module::Addons
+    - WoWUI::Module::TellMeWhen
     - WoWUI::Module::NADTTrustList
     - WoWUI::Module::Macros
     - WoWUI::Module::KeyBindings
     - WoWUI::Module::ChatCache
     - WoWUI::Module::NADTAutoBuy
     - WoWUI::Module::Cork
-    - WoWUI::Module::TellMeWhen
     - WoWUI::Module::CombatLogTrigger
     - WoWUI::Module::Quartz
     - WoWUI::Module::LayoutLocal

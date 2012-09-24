@@ -180,6 +180,14 @@ conditions:
     Operator: '>='
     Level: 800
     Unit: player
+  eclipse_direction_moon:
+    Type: ECLIPSE_DIRECTION
+    Operator: '=='
+    Level: 0
+  eclipse_direction_sun:
+    Type: ECLIPSE_DIRECTION
+    Operator: '=='
+    Level: 1
 filtergroups:
   any:
     members:
@@ -275,7 +283,6 @@ filtergroups:
     - Innervate
     - Rebirth
     - Tranquility
-    - Insect Swarm Missing
     - Barkskin
     - Cenarion Ward
     - Incarnation
@@ -290,6 +297,10 @@ filtergroups:
     - Renewal
     - Savage Defense
     - Nature's Cure
+    - Celestial Alignment
+    - Starsurge
+    - Sunfire Moonfire Meta
+    - Wrath Starfire Meta
     filter:
       include:
       - class:Druid
@@ -1286,8 +1297,7 @@ icons:
     combat: in
     filter:
       include:
-      - spec:Balance
-      level: 49
+      - talent:Force of Nature
     type: Cooldown::Spell::Off::LongCD
   Free Mangle:
     combat: in
@@ -1495,16 +1505,6 @@ icons:
     conditions:
     - icon:Sacred Duty
     type: Cooldown::Spell
-  Insect Swarm Missing:
-    Unit: target
-    combat: in
-    filter:
-      include:
-      - spec:Balance
-      level: 20
-    missing: 1
-    spell: Insect Swarm
-    type: Debuff
   Intervene:
     filter:
       include:
@@ -2114,7 +2114,7 @@ icons:
     filter:
       level: 75
       include:
-        - talent:Ursols Vortex
+        - talent:Ursol's Vortex
     type: Cooldown::Spell::Def::ShortCD
   Bear Hug:
     combat: in
@@ -2591,6 +2591,8 @@ icons:
       - spec:Balance
       level: 69
     type: Cooldown::Spell::Off::ShortCD
+    conditions:
+      - icon:Lunar Eclipse
   Sting Missing:
     Unit: target
     combat: in
@@ -3112,9 +3114,87 @@ icons:
       include:
         - spec:Restoration
     combat: in
+  Celestial Alignment:
+    type: Cooldown::Spell::Off::LongCD
+    filter:
+      level: 68
+      include:
+        - spec:Balance
+    combat: in
   Desperate Prayer:
     type: Cooldown::Spell::Def::LongCD
     filter:
       include:
         - talent:Desperate Prayer
     combat: in
+  Starsurge:
+    type: Cooldown::Spell::Off::ShortCD
+    combat: in
+    Alpha: 1
+    filter:
+      include:
+        - spec:Balance
+    conditions:
+      - icon:Shooting Stars
+  Sunfire Moonfire Meta:
+    type: Meta
+    Icons:
+      - Sunfire Missing
+      - Moonfire Missing
+    combat: in
+    filter:
+      include:
+        - spec:Balance
+  Wrath Starfire Meta:
+    type: Meta
+    Icons:
+      - Wrath
+      - Starfire
+    combat: in
+    filter:
+      include:
+        - spec:Balance
+  Sunfire Missing:
+    no_filter_group_ok: 1
+    type: Debuff
+    Unit: target
+    spell: Sunfire
+    conditions:
+      - icon:Solar Eclipse
+      - OR
+      - eclipse_direction_moon
+  Moonfire Missing:
+    no_filter_group_ok: 1
+    type: Debuff
+    Unit: target
+    spell: Moonfire
+    conditions:
+      - icon:Lunar Eclipse
+      - OR
+      - eclipse_direction_sun
+  Wrath:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell::Off::ShortCD
+    conditions:
+      - icon:Solar Eclipse
+      - OR
+      - eclipse_direction_moon
+  Starfire:
+    no_filter_group_ok: 1
+    type: Cooldown::Spell::Off::ShortCD
+    conditions:
+      - icon:Lunar Eclipse
+      - OR
+      - eclipse_direction_sun
+  Shooting Stars:
+    no_filter_group_ok: 1
+    type: Buff
+  Solar Eclipse:
+    no_filter_group_ok: 1
+    type: Buff
+    spellid: 48517
+  Lunar Eclipse:
+    no_filter_group_ok: 1
+    type: Buff
+    spellid: 48518
+    

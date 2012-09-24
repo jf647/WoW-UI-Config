@@ -141,14 +141,16 @@ sub BUILD
             croak "even number of conditions in icon ", $self->Name;
         }
         my $needs_join = 0;
+        my $next_and_or;
         while( @{ $self->conditions } ) {
             my $condition = shift @{ $self->conditions };
             if( $needs_join ) {
                 if( 'OR' eq $condition ) {
-                    $conditions[$#conditions]->{AndOr} = 'OR';
+                    $DB::single = 1;
+                    $next_and_or = 'OR';
                 }
                 elsif( 'AND' eq $condition ) {
-                    $conditions[$#conditions]->{AndOr} = 'AND';
+                    $next_and_or = 'AND';
                 }
                 else {
                     croak "invalid condition conjunction '$condition'";
@@ -174,6 +176,10 @@ sub BUILD
                     $c = WoWUI::Module::TellMeWhen::Conditions->instance->get( $condition );
                 }
                 die "invalid condition '$condition'" unless $c;
+                if( $next_and_or ) {
+                    $c->AndOr( $next_and_or );
+                    undef $next_and_or;
+                }
                 push @conditions, $c;
                 $needs_join = 1;
             }

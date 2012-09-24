@@ -503,19 +503,19 @@ macros:
           - all(dualbox;class:Druid)
         value:
           macro: |+
-            /cast Rebirth
+            /cast [@focus] Rebirth
       - level: 72
         include:
           - all(dualbox;class:Death Knight)
         value:
           macro: |+
-            /cast Raise Ally
+            /cast [@focus] Raise Ally
       - level: 18
         include:
           - all(dualbox;class:Warlock)
         value:
           macro: |+
-            /cast Soulstone
+            /cast [@focus] Soulstone
   Special1:
     num: 16777240
     filter:
