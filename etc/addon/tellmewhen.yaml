@@ -262,6 +262,9 @@ filtergroups:
     - Frost Fever Missing
     - Scent of Blood Death Strike
     - Crimson Scourge Meta
+    - Gorefiend's Grasp
+    - Remorseless Winter
+    - Desecrated Ground
     filter:
       include:
       - class:Death Knight
@@ -301,6 +304,8 @@ filtergroups:
     - Starsurge
     - Sunfire Moonfire Meta
     - Wrath Starfire Meta
+    - Heart of the Wild
+    - Nature's Vigil
     filter:
       include:
       - class:Druid
@@ -328,6 +333,9 @@ filtergroups:
     - Sting Missing
     - Hunter's Mark Missing
     - Aspect of the Pack
+    - Glaive Toss
+    - Powershot
+    - Barrage
     filter:
       include:
       - class:Hunter
@@ -359,6 +367,7 @@ filtergroups:
     - Frostfire Bolt
     - Ice Lance
     - Arcane Charge
+    - Incanter's Ward
     filter:
       include:
       - class:Mage
@@ -382,6 +391,9 @@ filtergroups:
     - Devotion Aura
     - Divine Purpose
     - Cleanse
+    - Holy Prism
+    - Light's Hammer
+    - Execution Sentence
     filter:
       include:
       - class:Paladin
@@ -421,6 +433,10 @@ filtergroups:
     - Spirit Shell
     - Purify
     - Desperate Prayer
+    - Psyfiend
+    - Cascade
+    - Divine Star
+    - Halo
     filter:
       include:
       - class:Priest
@@ -488,6 +504,7 @@ filtergroups:
     - Windwalk Totem
     - Call of the Elements
     - Healing Tide Totem
+    - Elemental Blast
     filter:
       include:
       - class:Shaman
@@ -514,6 +531,8 @@ filtergroups:
     - Dark Bargain
     - Soul Link Missing
     - Imp Swarm
+    - Archimonde's Vengeance
+    - Kil'jaeden's Cunning
     filter:
       include:
       - class:Warlock
@@ -554,6 +573,9 @@ filtergroups:
     - Die by the Sword
     - Disarm
     - Shattering Throw
+    - Avatar
+    - Bloodbath
+    - Storm Bolt
     filter:
       include:
       - class:Warrior
@@ -745,9 +767,7 @@ icons:
     type: Buff
   Divine Purpose:
     spellid: 90174
-    filter:
-      include:
-        - talent:Divine Purpose
+    talent: 1
     type: Buff
   Lightning Shield Missing:
     no_filter_group_ok: 1
@@ -861,10 +881,7 @@ icons:
   Anti-Magic Zone:
     IgnoreRunes: 1
     combat: in
-    filter:
-      include:
-      - talent:Anti-Magic Zone
-      level: 57
+    talent: 1
     type: Cooldown::Spell::Def::LongCD
   Arcane Power:
     combat: in
@@ -983,17 +1000,11 @@ icons:
     type: Debuff
   Bladestorm:
     combat: in
-    filter:
-      include:
-      - talent:Bladestorm
-      level: 60
+    talent: 1
     type: Cooldown::Spell::Off::LongCD
   Dragon Roar:
     combat: in
-    filter:
-      include:
-      - talent:Dragon Roar
-      level: 60
+    talent: 1
     type: Cooldown::Spell::Off::ShortCD
   Berserking:
     combat: in
@@ -1054,10 +1065,7 @@ icons:
     type: Cooldown::Spell::Def::ShortCD
   Cold Snap:
     combat: in
-    filter:
-      include:
-      - talent:Cold Snap
-      level: 60
+    talent: 1
     type: Cooldown::Spell::Off::LongCD
   Colossus Smash:
     combat: in
@@ -1098,10 +1106,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Frostjaw:
     combat: in
-    filter:
-      level: 45
-      include:
-        - talent:Frostjaw
+    talent: 1
     type: Cooldown::Spell::Off::ShortCD
   Dancing Rune Weapon:
     IgnoreRunes: 1
@@ -1125,9 +1130,11 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Desperate Prayer:
     combat: in
-    filter:
-      include:
-        - talent:Desperate Prayer
+    talent: 1
+    type: Cooldown::Spell::Def::ShortCD
+  Psyfiend:
+    combat: in
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Dispersion:
     combat: in
@@ -1212,10 +1219,7 @@ icons:
     Alpha: 1
     conditions:
     - hp_le_75_pct
-    filter:
-      level: 76
-      include:
-        - talent:Enraged Regeneration
+    talent: 1
     CooldownCheck: 1
     type: Reactive::Def
   Evasion:
@@ -1236,10 +1240,7 @@ icons:
     combat: in
     conditions:
     - mp_lt_100_pct
-    filter:
-      level: 90
-      include:
-        - talent:Rune of Power
+    talent: 1
     type: Cooldown::Spell::Def::LongCD
   Execute:
     combat: in
@@ -1295,9 +1296,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Force of Nature:
     combat: in
-    filter:
-      include:
-      - talent:Force of Nature
+    talent: 1
     type: Cooldown::Spell::Off::LongCD
   Free Mangle:
     combat: in
@@ -1416,17 +1415,11 @@ icons:
     type: Cooldown::Spell::Def::ShortCD
   Vigilance:
     combat: in
-    filter:
-      level: 75
-      include:
-      - talent:Vigilance
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Safeguard:
     combat: in
-    filter:
-      level: 75
-      include:
-      - talent:Safeguard
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Hand of Freedom:
     combat: in
@@ -1526,10 +1519,7 @@ icons:
     type: Cooldown::Spell::Def::LongCD
   Greater Invisibility:
     combat: in
-    filter:
-      level: 60
-      include:
-        - talent:Greater Invisibility
+    talent: 1
     type: Cooldown::Spell::Def::LongCD
   Kick:
     combat: in
@@ -1558,10 +1548,7 @@ icons:
     type: Cooldown::Spell::Off::LongCD
   Shadowstep:
     combat: in
-    filter:
-      include:
-      - talent:Shadowstep
-      level: 60
+    talent: 1
     type: Cooldown::Spell::Off::ShortCD
   Blind:
     combat: in
@@ -1641,24 +1628,15 @@ icons:
     type: Cooldown::Spell::Def::LongCD
   Angelic Feather:
     combat: either
-    filter:
-      include:
-        - talent:Angelic Feather
-      level: 30
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Spectral Guise:
     combat: in
-    filter:
-      include:
-        - talent:Spectral Guise
-      level: 60
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Void Tendrils:
     combat: in
-    filter:
-      include:
-        - talent:Void Tendrils
-      level: 15
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Spirit Shell:
     combat: in
@@ -1694,10 +1672,7 @@ icons:
   Living Bomb Missing:
     Unit: target
     combat: in
-    filter:
-      include:
-      - talent:Living Bomb
-      level: 75
+    talent: 1
     missing: 1
     spell: Living Bomb
     type: Debuff
@@ -1749,10 +1724,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Frost Bomb:
     combat: in
-    filter:
-      level: 75
-      include:
-        - talent:Frost Bomb
+    talent: 1
     type: Cooldown::Spell::Off::ShortCD
   Mana Gem:
     combat: in
@@ -1765,10 +1737,7 @@ icons:
     type: Item::ShortCD
   Temporal Shield:
     combat: in
-    filter:
-      level: 30
-      include:
-        - talent:Temporal Shield
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Mana Tide Totem:
     combat: in
@@ -1826,10 +1795,7 @@ icons:
     type: Cooldown::Spell::Def::LongCD
   Sacrificial Pact:
     combat: in
-    filter:
-      include:
-        - talent:Sacrificial Pact
-      level: 45
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Mind Freeze:
     combat: in
@@ -1864,10 +1830,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Nature's Swiftness:
     combat: in
-    filter:
-      include:
-      - talent:Nature's Swiftness
-      level: 30
+    talent: 1
     type: Cooldown::Spell::LongCD
   Overpower:
     Alpha: 1
@@ -1903,23 +1866,15 @@ icons:
   Blood Tap:
     IgnoreRunes: 1
     combat: in
-    filter:
-      level: 64
-      include:
-        - talent:Blood Tap
+    talent: 1
     type: Cooldown::Spell::Off::ShortCD
   Conversion:
     combat: in
-    filter:
-      level: 60
-      include:
-        - talent:Conversion
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Unholy Blight:
     combat: in
-    filter:
-      include:
-        - talent:Unholy Blight
+    talent: 1
     type: Cooldown::Spell::Off::LongCD
   Death and Decay:
     no_filter_group_ok: 1
@@ -1949,9 +1904,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Death's Advance:
     combat: in
-    filter:
-      include:
-        - talent:Death's Advance
+    talent: 1
     type: Cooldown::Spell::ShortCD
   Crimson Scourge:
     no_filter_group_ok: 1
@@ -1964,10 +1917,7 @@ icons:
     type: Cooldown::Spell::Off::LongCD
   Power Infusion:
     combat: in
-    filter:
-      include:
-      - talent:Power Infusion
-      level: 29
+    talent: 1
     type: Cooldown::Spell::Def::LongCD
   'Power Word: Barrier':
     combat: in
@@ -1978,10 +1928,7 @@ icons:
     type: Cooldown::Spell::Def::LongCD
   Mass Spell Reflection:
     combat: in
-    filter:
-      include:
-      - talent:Mass Spell Reflection
-      level: 75
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Die by the Sword:
     combat: in
@@ -1998,10 +1945,7 @@ icons:
     type: Cooldown::Spell::Def::ShortCD
   Presence of Mind:
     combat: in
-    filter:
-      include:
-      - talent:Presence of Mind
-      level: 15
+    talent: 1
     type: Cooldown::Spell::Off::ShortCD
   Pummel:
     combat: in
@@ -2033,17 +1977,11 @@ icons:
     type: Cooldown::Spell::Def::LongCD
   Staggering Shout:
     combat: in
-    filter:
-      level: 45
-      include:
-        - talent:Staggering Shout
+    talent: 1
     type: Cooldown::Spell::Off::ShortCD
   Disrupting Shout:
     combat: in
-    filter:
-      level: 45
-      include:
-        - talent:Disrupting Shout
+    talent: 1
     type: Cooldown::Spell::Off::ShortCD
   Rapid Fire:
     combat: in
@@ -2085,10 +2023,7 @@ icons:
     type: Cooldown::Spell::Def::ShortCD
   Cenarion Ward:
     combat: in
-    filter:
-      include:
-        - talent:Cenarion Ward
-      level: 30
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Ironbark:
     combat: in
@@ -2099,10 +2034,7 @@ icons:
     type: Cooldown::Spell::Def::LongCD
   Mass Entanglement:
     combat: in
-    filter:
-      level: 45
-      include:
-        - talent:Mass Entanglement
+    talent: 1
     type: Cooldown::Spell::Def::LongCD
   Stampeding Roar:
     combat: in
@@ -2111,10 +2043,7 @@ icons:
     type: Cooldown::Spell::Def::LongCD
   Ursol's Vortex:
     combat: in
-    filter:
-      level: 75
-      include:
-        - talent:Ursol's Vortex
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Bear Hug:
     combat: in
@@ -2132,10 +2061,7 @@ icons:
     type: Cooldown::Spell::Off::LongCD
   Disorienting Roar:
     combat: in
-    filter:
-      level: 75
-      include:
-        - talent:Disorienting Roar
+    talent: 1
     type: Cooldown::Spell::Def::LongCD
   Might of Ursoc:
     combat: in
@@ -2146,10 +2072,7 @@ icons:
     type: Cooldown::Spell::Def::LongCD
   Renewal:
     combat: in
-    filter:
-      level: 30
-      include:
-        - talent:Renewal
+    talent: 1
     type: Cooldown::Spell::Def::LongCD
   Savage Defense:
     combat: in
@@ -2160,10 +2083,7 @@ icons:
     type: Cooldown::Spell::Def::LongCD
   Incarnation:
     combat: in
-    filter:
-      include:
-        - talent:Incarnation
-      level: 60
+    talent: 1
     type: Cooldown::Spell::Off::LongCD
   Soulstone:
     combat: in
@@ -2172,18 +2092,12 @@ icons:
     type: Cooldown::Spell::Def::LongCD
   Grimoire of Sacrifice:
     combat: in
-    filter:
-      include:
-        - talent:Grimoire of Sacrifice
-      level: 75
+    talent: 1
     missing: 1
     type: Buff
   Dark Bargain:
     combat: in
-    filter:
-      include:
-        - talent:Dark Bargain
-      level: 45
+    talent: 1
     type: Cooldown::Spell::Def::LongCD
   Rebuke:
     combat: in
@@ -2246,10 +2160,7 @@ icons:
     type: Reactive::Off
   Ring of Frost:
     combat: in
-    filter:
-      level: 45
-      include:
-        - talent:Ring of Frost
+    talent: 1
     type: Cooldown::Spell::Off::ShortCD
   Freeze:
     combat: in
@@ -2262,10 +2173,7 @@ icons:
     combat: in
     conditions:
       - icon:Ice Barrier Missing
-    filter:
-      level: 30
-      include:
-        - talent:Ice Barrier
+    talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Ice Barrier Missing:
     no_filter_group_ok: 1
@@ -2374,10 +2282,7 @@ icons:
     combat: in
     conditions:
     - mp_le_75_pct
-    filter:
-      level: 45
-      include:
-        - talent:Mindbender
+    talent: 1
     type: Cooldown::Spell::Def::LongCD
   Shamanistic Rage:
     combat: in
@@ -2414,10 +2319,7 @@ icons:
     type: Cooldown::Spell::Off::ShortCD
   Shockwave:
     combat: in
-    filter:
-      include:
-      - talent:Shockwave
-      level: 69
+    talent: 1
     type: Cooldown::Spell::Off::ShortCD
   Thunderstruck:
     combat: in
@@ -2544,45 +2446,31 @@ icons:
     type: Cooldown::Spell::LongCD
   Stone Bulwark Totem:
     type: Cooldown::Spell::Def::ShortCD
-    filter:
-      include:
-        - talent:Stone Bulwark Totem
+    talent: 1
     combat: in
   Earthgrab Totem:
     type: Cooldown::Spell::Def::ShortCD
-    filter:
-      include:
-        - talent:Earthgrab Totem
+    talent: 1
     combat: in
   Ancestral Swiftness:
     type: Cooldown::Spell::LongCD
-    filter:
-      include:
-        - talent:Ancestral Swiftness
+    talent: 1
     combat: in
   Astral Shift:
     type: Cooldown::Spell::Def::LongCD
-    filter:
-      include:
-        - talent:Astral Shift
+    talent: 1
     combat: in
   Windwalk Totem:
     type: Cooldown::Spell::Def::ShortCD
-    filter:
-      include:
-        - talent:Windwalk Totem
+    talent: 1
     combat: in
   Call of the Elements:
     type: Cooldown::Spell::LongCD
-    filter:
-      include:
-        - talent:Call of the Elements
+    talent: 1
     combat: in
   Healing Tide Totem:
     type: Cooldown::Spell::Def::LongCD
-    filter:
-      include:
-        - talent:Healing Tide Totem
+    talent: 1
     combat: in
   Starfall:
     combat: in
@@ -2830,57 +2718,39 @@ icons:
     combat: in
   Leg Sweep:
     type: Cooldown::Spell::Off::ShortCD
-    filter:
-      include:
-        - talent:Leg Sweep
+    talent: 1
     combat: in
   Tiger's Lust:
     type: Cooldown::Spell::ShortCD
-    filter:
-      include:
-        - talent:Tiger's Lust
+    talent: 1
     combat: in
   Chi Wave:
     type: Cooldown::Spell::Def::ShortCD
-    filter:
-      include:
-        - talent:Chi Wave
+    talent: 1
     combat: in
   Chi Brew:
     type: Cooldown::Spell::LongCD
-    filter:
-      include:
-        - talent:Chi Brew
+    talent: 1
     combat: in
   Charging Ox Wave:
     type: Cooldown::Spell::Off::ShortCD
-    filter:
-      include:
-       - talent:Charging Ox Wave
+    talent: 1
     combat: in
   Dampen Harm:
     type: Cooldown::Spell::Def::LongCD
-    filter:
-      include:
-        - talent:Dampen Harm
+    talent: 1
     combat: in
   Diffuse Magic:
     type: Cooldown::Spell::Def::LongCD
-    filter:
-      include:
-        - talent:Diffuse Magic
+    talent: 1
     combat: in
   Rushing Jade Wind:
     type: Cooldown::Spell::Off::ShortCD
-    filter:
-      include:
-        - talent:Rushing Jade Wind
+    talent: 1
     combat: in
   Invoke Xuen, the White Tiger:
     type: Cooldown::Spell::Off::LongCD
-    filter:
-      include:
-        - talent:Invoke Xuen, the White Tiger
+    talent: 1
     combat: in
   Leer of the Ox:
     type: Cooldown::Spell::Def::ShortCD
@@ -3123,9 +2993,7 @@ icons:
     combat: in
   Desperate Prayer:
     type: Cooldown::Spell::Def::LongCD
-    filter:
-      include:
-        - talent:Desperate Prayer
+    talent: 1
     combat: in
   Starsurge:
     type: Cooldown::Spell::Off::ShortCD
@@ -3197,4 +3065,87 @@ icons:
     no_filter_group_ok: 1
     type: Buff
     spellid: 48518
-    
+  Gorefiend's Grasp:
+    type: Cooldown::Spell::Off::LongCD
+    combat: in
+    talent: 1
+  Remorseless Winter:
+    type: Cooldown::Spell::Def::LongCD
+    combat: in
+    talent: 1
+  Desecrated Ground:
+    type: Cooldown::Spell::Def::LongCD
+    combat: in
+    talent: 1
+  Heart of the Wild:
+    type: Cooldown::Spell::LongCD
+    combat: in
+    talent: 1
+  Nature's Vigil:
+    type: Cooldown::Spell::LongCD
+    combat: in
+    talent: 1
+  Glaive Toss:
+    type: Cooldown::Spell::Off::ShortCD
+    combat: in
+    talent: 1
+  Powershot:
+    type: Cooldown::Spell::Off::LongCD
+    combat: in
+    talent: 1
+  Barrage:
+    type: Cooldown::Spell::Off::ShortCD
+    combat: in
+    talent: 1
+  Incanter's Ward:
+    type: Cooldown::Spell::Def::ShortCD
+    combat: in
+    talent: 1
+  Holy Prism:
+    type: Cooldown::Spell::ShortCD
+    combat: in
+    talent: 1
+  Light's Hammer:
+    type: Cooldown::Spell::LongCD
+    combat: in
+    talent: 1
+  Execution Sentence:
+    type: Cooldown::Spell::LongCD
+    combat: in
+    talent: 1
+  Cascade:
+    type: Cooldown::Spell::ShortCD
+    combat: in
+    talent: 1
+  Divine Star:
+    type: Cooldown::Spell::ShortCD
+    combat: in
+    talent: 1
+  Halo:
+    type: Cooldown::Spell::ShortCD
+    combat: in
+    talent: 1
+  Elemental Blast:
+    type: Cooldown::Spell::Off::ShortCD
+    combat: in
+    talent: 1
+  Archimonde's Vengeance:
+    type: Cooldown::Spell::Off::LongCD
+    combat: in
+    talent: 1
+  Kil'jaeden's Cunning:
+    type: Cooldown::Spell::LongCD
+    combat: in
+    talent: 1
+  Avatar:
+    type: Cooldown::Spell::Off::LongCD
+    combat: in
+    talent: 1
+  Bloodbath:
+    type: Cooldown::Spell::Off::LongCD
+    combat: in
+    talent: 1
+  Storm Bolt:
+    type: Cooldown::Spell::Off::ShortCD
+    combat: in
+    talent: 1

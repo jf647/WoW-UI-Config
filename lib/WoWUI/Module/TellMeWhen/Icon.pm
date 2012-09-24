@@ -12,15 +12,24 @@ use namespace::autoclean;
 # set up class
 use WoWUI::Meta::Attribute::Trait::Relevant;
 with 'WoWUI::Module::TellMeWhen::Dumpable';
-# internal
+
 has priority => ( is => 'rw', isa => 'Int', required => 1 );
 has tag => ( is => 'rw', isa => 'Str' );
 has combat => ( is => 'rw', isa => 'Str' );
-has filter => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
+has filter => (
+    is => 'rw',
+    isa => 'HashRef',
+    default => sub { {} },
+    traits => ['Hash'],
+    handles => {
+        filter_empty => 'is_empty',
+    },
+);
 has no_filter_group_ok => ( is => 'ro', isa => 'Bool' );
 has type => ( is => 'ro', isa => 'Str' );
 has conditions => ( is => 'ro', isa => 'ArrayRef' );
 has showstacks => ( is => 'rw', isa => 'Bool', default => 0 );
+has talent => ( is => 'rw', isa => 'Bool', default => 0 );
 has ShowWhen => ( is => 'rw', isa => 'Num', default => 0x2, traits => ['Relevant'] );
 has Enabled => ( is => 'rw', isa => 'Bool', default => 1, traits => ['Relevant'], relevant => 1 );
 has Name => ( is => 'rw', isa => 'Str', required => 1, lazy_build => 1, traits => ['Relevant'], relevant => 1 );
@@ -134,7 +143,16 @@ sub BUILD
             ) );
         }
     }
+    
+    # add filter if this is a talent
+    if( $self->talent ) {
+        unless( $self->filter_empty ) {
+            croak "can't have a talent and filter defined for '", $self->Name;
+        }
+        $self->filter( { include => [ 'talent:' . $self->Name ] } );
+    }
 
+    # add conditions
     if( $self->conditions ) {
         my @conditions;
         unless( @{ $self->conditions } % 2 ) {
