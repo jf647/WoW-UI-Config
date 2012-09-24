@@ -157,7 +157,8 @@ macros:
           - all(class:Warlock;spec:Affliction)
         value:
           macro: |+
-            /cast Spell Lock
+            #showtooltip
+            /cast Command Demon
   LGS:
     num: 16777220
     filter:
