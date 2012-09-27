@@ -20,12 +20,12 @@ sub BUILD
 {
 
     my $self = shift;
-    
-    $self->global( 1 );
-    $self->globalpc( 1 );
-    
+
+    $self->global(1);
+    $self->globalpc(1);
+
     return $self;
-    
+
 }
 
 sub augment_global
@@ -36,6 +36,8 @@ sub augment_global
     my $config = $self->modconfig;
     $self->globaldata_set( bindings => $config->{bankstack} );
 
+    return;
+
 }
 
 sub augment_globalpc
@@ -43,7 +45,7 @@ sub augment_globalpc
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
+    my $f    = shift;
 
     return 1;
 

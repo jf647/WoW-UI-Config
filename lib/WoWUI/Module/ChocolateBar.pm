@@ -11,7 +11,7 @@ use namespace::autoclean;
 
 # set up class
 extends 'WoWUI::Module::Base';
-has 'plugins' => ( is => 'rw', isa => 'HashRef' );
+has 'plugins'     => ( is => 'rw', isa => 'HashRef' );
 has 'all_plugins' => ( is => 'rw', isa => 'Object' );
 CLASS->meta->make_immutable;
 
@@ -23,12 +23,13 @@ use WoWUI::Config;
 use WoWUI::Util 'log';
 
 # constructor
-sub BUILD {
+sub BUILD
+{
 
     my $self = shift;
-    
-    $self->global( 1 );
-    $self->globalpc( 1 );
+
+    $self->global(1);
+    $self->globalpc(1);
 
     $self->augment_config;
     $self->build_plugin_list();
@@ -45,10 +46,12 @@ sub augment_global
     my $o = $self->modoptions;
 
     $self->globaldata_set(
-        font => $o->{font},
+        font     => $o->{font},
         fontsize => $o->{fontsize},
         fontname => $o->{fontname},
     );
+
+    return;
 
 }
 
@@ -57,72 +60,81 @@ sub augment_globalpc
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
+    my $f    = shift;
 
-    my $config = $self->modconfig( $char );
-    my $log = WoWUI::Util->logger;
+    my $config = $self->modconfig($char);
+    my $log    = WoWUI::Util->logger;
 
     my $plugins = Set::Scalar->new;
-    for my $plugin( keys %{ $config->{plugins} } ) {
-        if( exists $config->{plugins}->{$plugin}->{filter} ) {
-            if( $f->match( $config->{plugins}->{$plugin}->{filter} ) ) {
-                $plugins->insert( $plugin );
+    for my $plugin ( keys %{ $config->{plugins} } ) {
+        if ( exists $config->{plugins}->{$plugin}->{filter} ) {
+            if ( $f->match( $config->{plugins}->{$plugin}->{filter} ) ) {
+                $plugins->insert($plugin);
             }
         }
     }
     my @plugins;
-    my $max_index = $self->add_sorted(\@plugins, $plugins, 'left') || 1;
-    $self->add_sorted(\@plugins, $plugins, 'center');
-    $self->add_sorted(\@plugins, $plugins, 'right', 1);
+    my $max_index = $self->add_sorted( \@plugins, $plugins, 'left' ) || 1;
+    $self->add_sorted( \@plugins, $plugins, 'center' );
+    $self->add_sorted( \@plugins, $plugins, 'right', 1 );
     my $disabled = $self->all_plugins - $plugins;
-    for my $plugin( $disabled->members ) {
-        if( exists $config->{plugins}->{$plugin}->{altname} ) {
-            push @plugins, {
-                name => $config->{plugins}->{$plugin}->{altname},
-                align => 'left',
+    for my $plugin ( $disabled->members ) {
+        if ( exists $config->{plugins}->{$plugin}->{altname} ) {
+            push @plugins,
+              {
+                name    => $config->{plugins}->{$plugin}->{altname},
+                align   => 'left',
                 enabled => 0,
-                notext => 1,
-                index => ++$max_index
-            };
+                notext  => 1,
+                index   => ++$max_index
+              };
         }
         else {
-            push @plugins, {
-                name => $plugin,
-                align => 'left',
+            push @plugins,
+              {
+                name    => $plugin,
+                align   => 'left',
                 enabled => 0,
-                notext => 1,
-                index => ++$max_index
-            };
+                notext  => 1,
+                index   => ++$max_index
+              };
         }
     }
 
-    if( $log->is_debug ) {
-        for my $align( qw|left center right| ) {
+    if ( $log->is_debug ) {
+        for my $align (qw|left center right|) {
             my @temp;
-            for my $plugin( @plugins ) {
-                next unless( $align eq $plugin->{align} );
-                next if( exists $plugin->{enabled} && 0 ==  $plugin->{enabled} );
+            for my $plugin (@plugins) {
+                next unless ( $align eq $plugin->{align} );
+                next
+                  if ( exists $plugin->{enabled} && 0 == $plugin->{enabled} );
                 push @temp, $plugin;
             }
-            for my $plugin( sort { $a->{index} <=> $b->{index} } @temp ) {
-                $log->debug($char->realm, " - $char - $align/$plugin->{index}: $plugin->{name}");
+            for my $plugin ( sort { $a->{index} <=> $b->{index} } @temp ) {
+                $log->debug( $char->realm,
+                    " - $char - $align/$plugin->{index}: $plugin->{name}" );
             }
         }
     }
 
-    $self->globaldata->{realms}->{$char->realm->name}->{$char->name}->{plugins} = \@plugins;
+    $self->globaldata->{realms}->{ $char->realm->name }->{ $char->name }
+      ->{plugins} = \@plugins;
+
+    return;
 
 }
 
 sub augment_config
 {
 
-    my $self = shift;
+    my $self   = shift;
     my $config = $self->config;
-  
-    for my $plugin( keys %{ $config->{plugins} } ) {
+
+    for my $plugin ( keys %{ $config->{plugins} } ) {
         $config->{plugins}->{$plugin}->{name} = $plugin;
     }
+
+    return;
 
 }
 
@@ -136,48 +148,50 @@ sub build_plugin_list
     my %plugins;
     my $all_plugins = Set::Scalar->new;
 
-    for my $plugin( keys %{ $config->{plugins} } ) {
+    for my $plugin ( keys %{ $config->{plugins} } ) {
         $plugins{$plugin} = $config->{plugins}->{$plugin};
-        $all_plugins->insert( $plugin );
+        $all_plugins->insert($plugin);
     }
-  
+
     $self->plugins( \%plugins );
-    $self->all_plugins( $all_plugins );
+    $self->all_plugins($all_plugins);
+
+    return;
 
 }
 
 sub add_sorted
 {
 
-    my $self = shift;
-    my $data = shift;
+    my $self    = shift;
+    my $data    = shift;
     my $plugins = shift;
-    my $align = shift;
+    my $align   = shift;
     my $reverse = 1;
-  
+
     my $config = $self->modconfig;
-  
+
     my @data;
-    for my $plugin( $plugins->members ) {
-        unless( exists $config->{plugins}->{$plugin} ) {
+    for my $plugin ( $plugins->members ) {
+        unless ( exists $config->{plugins}->{$plugin} ) {
             croak "unknown plugin '$plugin'";
         }
-        next unless( $config->{plugins}->{$plugin}->{align} eq $align );
+        next unless ( $config->{plugins}->{$plugin}->{align} eq $align );
         push @data, clone $config->{plugins}->{$plugin};
     }
-    if( $reverse ) {
+    if ($reverse) {
         @data = sort { $b->{priority} <=> $a->{priority} } @data;
         my $i = scalar @data;
-        for( @data ) { $_->{index} = $i-- };
+        for (@data) { $_->{index} = $i-- }
         push @$data, @data;
     }
     else {
         @data = sort { $a->{priority} <=> $b->{priority} } @data;
         my $i = 1;
-        for( @data ) { $_->{index} = $i++ };
+        for (@data) { $_->{index} = $i++ }
         push @$data, @data;
     }
-  
+
     return scalar @data;
 
 }

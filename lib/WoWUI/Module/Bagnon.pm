@@ -20,9 +20,9 @@ sub BUILD
 {
 
     my $self = shift;
-    
-    $self->perchar( 1 );
-    
+
+    $self->perchar(1);
+
     return $self;
 
 }
@@ -30,16 +30,18 @@ sub BUILD
 sub augment_perchar
 {
 
-  my $self = shift;
-  my $char = shift;
-  my $f = shift;
+    my $self = shift;
+    my $char = shift;
+    my $f    = shift;
 
-  my $config = $self->modconfig( $char );
-  my $o = $self->modoptions( $char );
-  
-  my $mf = $f->match( $config->{moneyframe}->{filter}, F_MACH );
+    my $config = $self->modconfig($char);
+    my $o      = $self->modoptions($char);
 
-  $self->perchardata_set( scale => $o->{scale}, moneyframe => $mf->value );
+    my $mf = $f->match( $config->{moneyframe}->{filter}, F_MACH );
+
+    $self->perchardata_set( scale => $o->{scale}, moneyframe => $mf->value );
+
+    return;
 
 }
 

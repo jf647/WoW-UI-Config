@@ -21,9 +21,9 @@ sub BUILD
 {
 
     my $self = shift;
-    
-    $self->perchar( 1 );
-    
+
+    $self->perchar(1);
+
     return $self;
 
 }
@@ -33,23 +33,25 @@ sub augment_perchar
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
-      
-    my $config = $self->modconfig( $char );
+    my $f    = shift;
+
+    my $config = $self->modconfig($char);
 
     my $log = WoWUI::Util->logger;
 
     # Broker_Currency
     my @options;
-    for my $gname( keys %{ $config->{groups} } ) {
-        if( $f->match( $config->{groups}->{$gname}->{filter} ) ) {
+    for my $gname ( keys %{ $config->{groups} } ) {
+        if ( $f->match( $config->{groups}->{$gname}->{filter} ) ) {
             $log->trace("including group $gname");
             push @options, @{ $config->{groups}->{$gname}->{options} };
         }
     }
 
     $self->perchardata_set( options => \@options );
-      
+
+    return;
+
 }
 
 # keep require happy

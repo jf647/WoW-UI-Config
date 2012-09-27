@@ -21,11 +21,11 @@ sub BUILD
 {
 
     my $self = shift;
-    
-    $self->perchar( 1 );
-    
+
+    $self->perchar(1);
+
     return $self;
-    
+
 }
 
 sub augment_perchar
@@ -33,17 +33,31 @@ sub augment_perchar
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
+    my $f    = shift;
 
-    my $o = $self->modoptions( $char );
-    
+    my $o = $self->modoptions($char);
+
     $self->perchardata_set( enabled => 0, mode => "master" );
-    if( $f->match( { include => [ 'all(machine:type:primary;dualbox)' ] }, F_C0|F_MACH ) ) {
+    if (
+        $f->match(
+            { include => ['all(machine:type:primary;dualbox)'] },
+            F_C0 | F_MACH
+        )
+      )
+    {
         $self->perchardata_set( enabled => 1 );
     }
-    elsif( $f->match( { include => [ 'all(machine:type:secondary;dualbox)' ] }, F_C0|F_MACH ) ) {
+    elsif (
+        $f->match(
+            { include => ['all(machine:type:secondary;dualbox)'] },
+            F_C0 | F_MACH
+        )
+      )
+    {
         $self->perchardata_set( enabled => 1, mode => "slave" );
     }
+
+    return;
 
 }
 

@@ -14,9 +14,9 @@ sub BUILD
 {
 
     my $self = shift;
-    
-    $self->global( 1 );
-    
+
+    $self->global(1);
+
     return $self;
 
 }
@@ -27,7 +27,11 @@ sub augment_global
     my $self = shift;
 
     my $config = $self->modconfig;
-    
+
     $self->globaldata_set( butsu => $config->{anchor} );
 
+    return;
+
 }
+
+1;
