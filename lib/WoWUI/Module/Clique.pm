@@ -77,6 +77,8 @@ sub augment_global
 
     my $self = shift;
     $self->globaldata->{pset} = $self->profileset;
+    
+    return;
 
 }
 
@@ -96,6 +98,8 @@ sub augment_globalpc
     else {
         $log->warn($char->rname, " has Clique enabled but produced an empty profile");
     }
+    
+    return;
        
 }
 
@@ -129,23 +133,23 @@ sub build_clique
 
         # find each of the binding types we need to populate
         my @actions;
-        for my $set( keys %{ $config->{bindings} } ) {
-            $log->trace("processing binding set $set");
-            for my $binding( keys %{ $config->{bindings}->{$set} } ) {
-                if( exists $config->{bindings}->{$set}->{$binding}->{filter} ) {
-                    unless( $f->match( $config->{bindings}->{$set}->{$binding}->{filter}, $using ) ) {
+        for my $bindingset( keys %{ $config->{bindings} } ) {
+            $log->trace("processing binding set $bindingset");
+            for my $binding( keys %{ $config->{bindings}->{$bindingset} } ) {
+                if( exists $config->{bindings}->{$bindingset}->{$binding}->{filter} ) {
+                    unless( $f->match( $config->{bindings}->{$bindingset}->{$binding}->{filter}, $using ) ) {
                         $log->debug("not trying to match anything to binding $binding");
                         next;
                     }
                 }
-                my $click = $config->{bindings}->{$set}->{$binding}->{click};
+                my $click = $config->{bindings}->{$bindingset}->{$binding}->{click};
                 $log->trace("deciding whether to include binding $binding");
                 my $foundactiontype = 0;
                 my $matchedactiontype;
-                for my $actiontype( keys %{ $config->{bindings}->{$set}->{$binding}->{types} } ) {
+                for my $actiontype( keys %{ $config->{bindings}->{$bindingset}->{$binding}->{types} } ) {
                     my $matches = 0;
-                    if( exists $config->{bindings}->{$set}->{$binding}->{types}->{$actiontype}->{filter} ) {
-                        if( $f->match( $config->{bindings}->{$set}->{$binding}->{types}->{$actiontype}->{filter}, $using ) ) {
+                    if( exists $config->{bindings}->{$bindingset}->{$binding}->{types}->{$actiontype}->{filter} ) {
+                        if( $f->match( $config->{bindings}->{$bindingset}->{$binding}->{types}->{$actiontype}->{filter}, $using ) ) {
                             $matches = 1;
                         }
                     }
@@ -167,7 +171,7 @@ sub build_clique
                 if( 1 == $foundactiontype ) {
                     my $foundaction = 0;
                     my $matchedaction;
-                    $log->debug("finding a '$matchedactiontype' action to tie to $binding in set $set");
+                    $log->debug("finding a '$matchedactiontype' action to tie to $binding in set $bindingset");
                     for my $action( @$candidates ) {
                         if( $f->match( $config->{actions}->{$action}->{filter}, $using, "cliqueaction:$matchedactiontype" ) ) {
                             if( 1 == $foundaction ) {
@@ -182,12 +186,12 @@ sub build_clique
                         }
                     }
                     if( 1 == $foundaction ) {
-                        $log->debug("picking up action $matchedaction to add to $set bound to $binding");
+                        $log->debug("picking up action $matchedaction to add to $bindingset bound to $binding");
                         my $thisaction = clone $config->{actions}->{$matchedaction};
-                        $thisaction->{set} = $set;
+                        $thisaction->{set} = $bindingset;
                         $thisaction->{binding} = $binding;
                         $thisaction->{click} = $click;
-                        $thisaction->{humanclick} = $self->make_readable_click($click),
+                        $thisaction->{humanclick} = $self->make_readable_click($click);
                         push @actions, $thisaction;
                     }
                 }

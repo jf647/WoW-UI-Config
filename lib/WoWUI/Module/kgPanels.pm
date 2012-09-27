@@ -11,29 +11,29 @@ use WoWUI::Filter::Constants;
 # set up class
 extends 'WoWUI::Module::Base';
 has panels => (
-    is => 'bare',
-    isa => 'HashRef[HashRef]',
-    traits => ['Hash'],
+    is      => 'bare',
+    isa     => 'HashRef[HashRef]',
+    traits  => ['Hash'],
     handles => {
-        panel_get => 'get',
-        panel_set => 'set',
+        panel_get    => 'get',
+        panel_set    => 'set',
         panel_exists => 'exists',
     },
 );
 has layouts => (
-    is => 'bare',
-    isa => 'HashRef[HashRef]',
-    traits => ['Hash'],
+    is      => 'bare',
+    isa     => 'HashRef[HashRef]',
+    traits  => ['Hash'],
     handles => {
-        layout_get => 'get',
-        layout_set => 'set',
+        layout_get    => 'get',
+        layout_set    => 'set',
         layout_exists => 'exists',
-        layout_names => 'keys',
+        layout_names  => 'keys',
     },
 );
 has profileset => (
-    is => 'rw',
-    isa => 'WoWUI::ProfileSet',
+    is      => 'rw',
+    isa     => 'WoWUI::ProfileSet',
     default => sub { WoWUI::ProfileSet->new },
 );
 after 'globaldata_clear' => sub {
@@ -50,15 +50,15 @@ use WoWUI::Util 'log';
 # constructor
 sub BUILD
 {
-    
+
     my $self = shift;
-    
-    $self->global( 1 );
-    $self->globalpc( 1 );
+
+    $self->global(1);
+    $self->globalpc(1);
     $self->globaldata_clear;
-    
+
     return $self;
-    
+
 }
 
 sub augment_global
@@ -68,6 +68,8 @@ sub augment_global
 
     $self->globaldata_set( kgp => $self );
 
+    return;
+
 }
 
 sub augment_globalpc
@@ -75,12 +77,14 @@ sub augment_globalpc
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
+    my $f    = shift;
 
     my $profile = $self->build_profile( $char, $f );
-    
+
     my $pname = $self->profileset->store( $profile, 'KGPLayout' );
-    $self->globaldata_get( 'chars' )->{$char->dname} = $pname;
+    $self->globaldata_get('chars')->{ $char->dname } = $pname;
+
+    return;
 
 }
 
@@ -89,26 +93,27 @@ sub build_profile
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
-    
-    my $config = $self->modconfig( $char );
-    my $o = $self->modoptions( $char );
-    
+    my $f    = shift;
+
+    my $config = $self->modconfig($char);
+    my $o      = $self->modoptions($char);
+
     # find the layout for this char
     my $layout;
-    for my $lname( keys %{ $config->{layouts} } ) {
+    for my $lname ( keys %{ $config->{layouts} } ) {
         my $ldata = $config->{layouts}->{$lname};
-        if( $f->match( $ldata->{filter} ) ) {
-            if( $layout ) {
-                croak $char->name, "matched layout '$lname' after matching '$layout'";
+        if ( $f->match( $ldata->{filter} ) ) {
+            if ($layout) {
+                croak $char->name,
+                  "matched layout '$lname' after matching '$layout'";
             }
             $layout = $lname;
-            
+
         }
     }
-    
+
     # build the layout if it doens't already exist
-    unless( $self->layout_exists( $layout ) ) {
+    unless ( $self->layout_exists($layout) ) {
         $self->build_layout( $layout, $char );
     }
 
@@ -119,36 +124,45 @@ sub build_profile
 sub build_layout
 {
 
-    my $self = shift;
+    my $self  = shift;
     my $lname = shift;
-    my $char = shift;
-    
-    my $config = $self->modconfig( $char );
+    my $char  = shift;
+
+    my $config = $self->modconfig($char);
 
     # build any panels that don't already exist
-    for my $pname( @{ $config->{layouts}->{$lname}->{panels} } ) {
-        unless( $self->panel_exists( $pname ) ) {
+    for my $pname ( @{ $config->{layouts}->{$lname}->{panels} } ) {
+        unless ( $self->panel_exists($pname) ) {
             $self->build_panel( $pname, $char );
         }
     }
-    
-    $self->layout_set( $lname, {
-        name => $lname,
-        panels => $config->{layouts}->{$lname}->{panels},
-    } );
+
+    $self->layout_set(
+        $lname,
+        {
+            name   => $lname,
+            panels => $config->{layouts}->{$lname}->{panels},
+        }
+    );
+
+    return;
 
 }
 
 sub build_panel
 {
 
-    my $self = shift;
+    my $self  = shift;
     my $pname = shift;
-    my $char = shift;
-    
-    my $panel = $self->modconfig( $char )->{panels}->{$pname};
+    my $char  = shift;
+
+    my $panel = $self->modconfig($char)->{panels}->{$pname};
     $panel->{name} = $pname;
 
     $self->panel_set( $pname, $panel );
 
+    return;
+
 }
+
+1;

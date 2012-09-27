@@ -24,8 +24,8 @@ sub BUILD
     my $self = shift;
 
     my $config = $self->config;
-  
-    $self->global( 1 );
+
+    $self->global(1);
 
     return $self;
 
@@ -38,44 +38,50 @@ sub augment_global
 
     $self->augment_global_global;
 
+    return;
+
 }
 
 sub augment_global_global
 {
-    my $self = shift;
+    my $self   = shift;
     my $config = $self->modconfig;
 
     my %data;
     $self->build_all( \%data, $config );
     $self->globaldata_set( bindingmode => 'global', %data );
 
+    return;
+
 }
 
 sub build_all
 {
 
-    my $self = shift;
-    my $data = shift;
+    my $self   = shift;
+    my $data   = shift;
     my $config = shift;
 
-    $self->build_bindings($data, $config);
-    $self->unbind_keys($data, $config);
-    $self->build_modifiedclicks($data, $config);
+    $self->build_bindings( $data, $config );
+    $self->unbind_keys( $data, $config );
+    $self->build_modifiedclicks( $data, $config );
+
+    return;
 
 }
 
 sub build_bindings
 {
 
-    my $self = shift;
-    my $data = shift;
+    my $self   = shift;
+    my $data   = shift;
     my $config = shift;
 
     my %bindings;
 
-    for my $key( keys %{ $config->{bind} } ) {
+    for my $key ( keys %{ $config->{bind} } ) {
         my $bind = $config->{bind}->{$key};
-        if( exists $config->{aliases}->{$bind} ) {
+        if ( exists $config->{aliases}->{$bind} ) {
             $bind = $config->{aliases}->{$bind};
         }
         $bindings{$key} = $bind;
@@ -83,38 +89,43 @@ sub build_bindings
 
     $data->{bindings} = \%bindings;
 
+    return;
+
 }
 
 sub unbind_keys
 {
 
-    my $self = shift;
-    my $data = shift;
+    my $self   = shift;
+    my $data   = shift;
     my $config = shift;
 
-    for my $unbind( @{ $config->{unbind} } ) {
+    for my $unbind ( @{ $config->{unbind} } ) {
         $data->{bindings}->{$unbind} = 'NONE';
     }
+
+    return;
 
 }
 
 sub build_modifiedclicks
 {
 
-    my $self = shift;
-    my $data = shift;
+    my $self   = shift;
+    my $data   = shift;
     my $config = shift;
-    
+
     my %modifiedclicks;
-    
-    for my $mod( keys %{ $config->{modifiedclick} } ) {
+
+    for my $mod ( keys %{ $config->{modifiedclick} } ) {
         my $key = $config->{modifiedclick}->{$mod};
         $modifiedclicks{$key} = $mod;
     }
-    
+
     $data->{modifiedclicks} = \%modifiedclicks;
+
+    return;
 
 }
 
-#
-# EOF
+1;

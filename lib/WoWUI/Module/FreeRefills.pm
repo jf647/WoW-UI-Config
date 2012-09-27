@@ -24,11 +24,11 @@ sub BUILD
 {
 
     my $self = shift;
-    
-    $self->globalpc( 1 );
-    
+
+    $self->globalpc(1);
+
     return $self;
-    
+
 }
 
 sub augment_globalpc
@@ -36,27 +36,31 @@ sub augment_globalpc
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
+    my $f    = shift;
 
-    my $log = WoWUI::Util->logger;
-    my $config = $self->modconfig( $char );
+    my $log    = WoWUI::Util->logger;
+    my $config = $self->modconfig($char);
 
     my %items;
-    for my $fr( keys %{ $config->{freerefills} } ) {
+    for my $fr ( keys %{ $config->{freerefills} } ) {
         my $frdata = $config->{freerefills}->{$fr};
-        if( $f->match( $frdata->{filter} ) ) {
-            if( exists $items{$frdata->{itemid}} ) {
-                croak "$fr has been picked twice for ", $char->realm->name, "/", $char->name;
+        if ( $f->match( $frdata->{filter} ) ) {
+            if ( exists $items{ $frdata->{itemid} } ) {
+                croak "$fr has been picked twice for ", $char->realm->name,
+                  "/", $char->name;
             }
-            $items{$frdata->{itemid}} = clone $frdata;
-            unless( exists $frdata->{name} ) {
-                $items{$frdata->{itemid}}->{name} = $fr;
+            $items{ $frdata->{itemid} } = clone $frdata;
+            unless ( exists $frdata->{name} ) {
+                $items{ $frdata->{itemid} }->{name} = $fr;
             }
         }
     }
-    if( %items ) {
-        $self->globaldata->{freerefills}->{$char->realm->name}->{$char->name} = [ values %items ];
+    if (%items) {
+        $self->globaldata->{freerefills}->{ $char->realm->name }
+          ->{ $char->name } = [ values %items ];
     }
+
+    return;
 
 }
 

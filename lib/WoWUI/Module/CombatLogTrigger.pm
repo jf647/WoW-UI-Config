@@ -87,6 +87,8 @@ sub augment_perchar
     }
 
     $self->perchardata( $chardata );
+    
+    return;
 
 }
 
@@ -126,7 +128,6 @@ sub make_trigger
     }
     
     # combat
-    my $incombat;
     if( exists $trigger->{combateither} ) {
         # noop
     }

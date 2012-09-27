@@ -14,10 +14,10 @@ sub BUILD
 {
 
     my $self = shift;
-    
-    $self->global( 1 );
-    $self->globalpc( 1 );
-    
+
+    $self->global(1);
+    $self->globalpc(1);
+
     return $self;
 
 }
@@ -28,9 +28,13 @@ sub augment_global
     my $self = shift;
 
     my $config = $self->modconfig;
-    
+
     $self->globaldata_set( mapster => $config->{mapster} );
+
+    return;
 
 }
 
 sub augment_globalpc { return 1 }
+
+1;

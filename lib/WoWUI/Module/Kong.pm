@@ -26,9 +26,9 @@ sub BUILD
 
     my $self = shift;
 
-    $self->globalpc( 1 );
-    $self->perchar( 1 );
-    
+    $self->globalpc(1);
+    $self->perchar(1);
+
     return $self;
 
 }
@@ -38,45 +38,51 @@ sub augment_globalpc
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
+    my $f    = shift;
 
-    my $log = WoWUI::Util->logger;
-    my $config = $self->modconfig( $char );
+    my $log    = WoWUI::Util->logger;
+    my $config = $self->modconfig($char);
 
     # build list of frames
     my @frames;
     my %groups;
-    for my $frame( keys %{ $config->{frames} } ) {
-        if( exists $config->{frames}->{$frame}->{filter} ) {
-            if( $f->match( $config->{frames}->{$frame}->{filter}, F_ALL ) ) {
+    for my $frame ( keys %{ $config->{frames} } ) {
+        if ( exists $config->{frames}->{$frame}->{filter} ) {
+            if ( $f->match( $config->{frames}->{$frame}->{filter}, F_ALL ) ) {
                 push @frames, $config->{frames}->{$frame};
-                if( my $group = $config->{frames}->{$frame}->{group} ) {
-                    push @{ $groups{$group} }, $config->{frames}->{$frame}->{name};
+                if ( my $group = $config->{frames}->{$frame}->{group} ) {
+                    push @{ $groups{$group} },
+                      $config->{frames}->{$frame}->{name};
                 }
             }
         }
     }
-    $self->globaldata->{kong}->{$char->realm->name}->{$char->name} = {
-        profilename => $self->profilename( $char ),
-        frames => \@frames,
+    $self->globaldata->{kong}->{ $char->realm->name }->{ $char->name } = {
+        profilename => $self->profilename($char),
+        frames      => \@frames,
     };
-    if( %groups ) {
-        for my $group( keys %groups ) {
-            push @{ $self->globaldata->{kong}->{$char->realm->name}->{$char->name}->{groups} },
-                { name => $group, frames => $groups{$group} };
+    if (%groups) {
+        for my $group ( keys %groups ) {
+            push @{ $self->globaldata->{kong}->{ $char->realm->name }
+                  ->{ $char->name }->{groups} },
+              { name => $group, frames => $groups{$group} };
         }
     }
+
+    return;
 
 }
 
 sub augment_perchar
 {
 
-  my $self = shift;
-  my $char = shift;
-  my $f = shift;
+    my $self = shift;
+    my $char = shift;
+    my $f    = shift;
 
-  $self->perchardata_set( profilename => $self->profilename( $char ) );
+    $self->perchardata_set( profilename => $self->profilename($char) );
+
+    return;
 
 }
 
@@ -85,11 +91,11 @@ sub profilename
 
     my $self = shift;
     my $char = shift;
-    
+
     my $profilename = $char->rname;
     $profilename =~ tr/A-Z/a-z/;
-    $profilename =~ s/\s/_/g;
-    
+    $profilename =~ s/\s/_/gx;
+
     return $profilename;
 
 }

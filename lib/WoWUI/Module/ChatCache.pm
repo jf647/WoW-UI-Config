@@ -19,13 +19,13 @@ use WoWUI::Util 'log';
 # constructor
 sub BUILD
 {
-    
+
     my $self = shift;
-    
-    $self->perchar( 1 );
-    
+
+    $self->perchar(1);
+
     return $self;
-    
+
 }
 
 sub augment_perchar
@@ -33,20 +33,22 @@ sub augment_perchar
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
+    my $f    = shift;
 
-    my $cfg = $self->modconfig( $char );
+    my $cfg = $self->modconfig($char);
 
     my $window;
-    
-    if( my $r = $f->match( $cfg->{window}->{filter} ) ) {
+
+    if ( my $r = $f->match( $cfg->{window}->{filter} ) ) {
         $window = $r->value;
     }
     else {
         croak "no value match for window for ", $char->dname;
     }
-    
+
     $self->perchardata_set( window => $window );
+
+    return;
 
 }
 
