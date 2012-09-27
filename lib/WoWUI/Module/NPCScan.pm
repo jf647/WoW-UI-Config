@@ -42,12 +42,12 @@ sub BUILD
 
     for my $npc( keys %{ $config->{npcs} } ) {
         for my $setname( @{ $config->{npcs}->{$npc}->{sets} } ) {
-            if( my $set = $self->set_get($setname) ) {
-                $set->insert( $npc );
+            if( my $npcset = $self->set_get($npcsetname) ) {
+                $npcset->insert( $npc );
             }
             else {
-                my $set = Set::Scalar->new( $npc );
-                $self->set_set( $setname, $set );
+                my $npcset = Set::Scalar->new( $npc );
+                $self->set_set( $setname, $npcset );
             }
         }
     }    
@@ -82,34 +82,35 @@ sub augment_perchar
   # sets / npcs
   my $npcset = Set::Scalar->new;
   for my $setname( @{ $o->{sets} } ) {
-      $setname =~ m/^([-\+])?(@)?(.+)$/;
-      my( $op, $isgroup, $name ) = ( $1, $2, $3 );
-      if( $isgroup ) {
-          my $set;
-          unless( $set = $self->set_get($name) ) {
-              croak "bad NPC set '$name'";
-          }
-          for my $npcname( $set->members ) {
-              if( '+' eq $op ) {
-                  $npcset->insert( $npcname );
+      if( $setname =~ m/^([-\+])?(@)?(.+)$/x ) {
+          my( $op, $isgroup, $name ) = ( $1, $2, $3 );
+          if( $isgroup ) {
+              my $npcnames;
+              unless( $npcnames = $self->set_get($name) ) {
+                  croak "bad NPC set '$name'";
               }
-              else {
-                  $npcset->delete( $npcname )
+              for my $npcname( $npcnames->members ) {
+                  if( '+' eq $op ) {
+                      $npcset->insert( $npcname );
+                  }
+                  else {
+                      $npcset->delete( $npcname )
+                  }
               }
-          }
-      }
-      else {
-          unless( exists $config->{npcs}->{$name} ) {
-              croak "bad NPC name '$name'";
-          }
-          if( '+' eq $op ) {
-              $npcset->insert( $name );
           }
           else {
-              $npcset->delete( $name );
+              unless( exists $config->{npcs}->{$name} ) {
+                  croak "bad NPC name '$name'";
+              }
+              if( '+' eq $op ) {
+                  $npcset->insert( $name );
+              }
+              else {
+                  $npcset->delete( $name );
+              }
           }
       }
-  }
+     }
   
   for my $npcname( $npcset->members ) {
       if( 'ARRAY' eq ref $config->{npcs}->{$npcname}->{id} ) {
@@ -117,7 +118,7 @@ sub augment_perchar
               my $npc = { name => $npcname, id => $id };
               if( exists $config->{npcs}->{$npcname}->{world} ) {
                   $npc->{world} = $config->{npcs}->{$npcname}->{world};
-                  if( $npc->{world} !~ m/^\d+/ ) {
+                  if( $npc->{world} !~ m/^\d+/x ) {
                       $npc->{world} = qq{"$npc->{world}"};
                   }
               }
@@ -131,7 +132,7 @@ sub augment_perchar
           };
           if( exists $config->{npcs}->{$npcname}->{world} ) {
               $npc->{world} = $config->{npcs}->{$npcname}->{world};
-              if( $npc->{world} !~ m/^\d+/ ) {
+              if( $npc->{world} !~ m/^\d+/x ) {
                   $npc->{world} = qq{"$npc->{world}"};
               }
           }
@@ -140,6 +141,8 @@ sub augment_perchar
   }
 
   $self->perchardata_set( npcs => $npcs, achievements => $achievements );
+  
+  return;
 
 }
 

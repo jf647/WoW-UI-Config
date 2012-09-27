@@ -53,11 +53,9 @@ sub augment_perchar
     }
 
     $self->perchardata_set( npcs => $self->modconfig->{npcs} );
+    
+    return;
 
 }
 
-# keep require happy
 1;
-
-#
-# EOF

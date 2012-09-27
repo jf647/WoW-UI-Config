@@ -21,11 +21,11 @@ sub BUILD
 {
 
     my $self = shift;
-    
-    $self->perchar( 1 );
-    
+
+    $self->perchar(1);
+
     return $self;
-    
+
 }
 
 sub augment_perchar
@@ -33,44 +33,43 @@ sub augment_perchar
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
+    my $f    = shift;
 
-    my $config = $self->modconfig( $char )->{nadtautobuy};
-    my $o = $self->modoptions( $char );
-    
+    my $config = $self->modconfig($char)->{nadtautobuy};
+    my $o      = $self->modoptions($char);
+
     my %profile;
-    for my $ic( keys %{ $config->{itemclasses} } ) {
+    for my $ic ( keys %{ $config->{itemclasses} } ) {
         my $filter = $config->{itemclasses}->{$ic}->{filter};
-        if( my $r = $f->match( $filter ) ) {
+        if ( my $r = $f->match($filter) ) {
             my $quantity = 0;
-            if( defined $r->value ) {
+            if ( defined $r->value ) {
                 $quantity = $r->value;
             }
             else {
-                croak "match but not value for ", $f->char->name, "; itemclass $ic";
+                croak "match but not value for ", $f->char->name,
+                  "; itemclass $ic";
             }
             my @itemids;
-            for my $item( @{ $config->{itemclasses}->{$ic}->{members} } ) {
-                unless( exists $config->{items}->{$item} ) {
+            for my $item ( @{ $config->{itemclasses}->{$ic}->{members} } ) {
+                unless ( exists $config->{items}->{$item} ) {
                     croak "undefined item '$item' in itemclass $ic";
                 }
-                my $filter = $config->{items}->{$item}->{filter};
-                if( my $r = $f->match( $filter ) ) {
+                my $ifilter = $config->{items}->{$item}->{filter};
+                if ( my $r = $f->match($ifilter) ) {
                     push @itemids, $config->{items}->{$item}->{itemid};
                 }
             }
-            if( @itemids ) {
+            if (@itemids) {
                 $profile{$ic} = { quantity => $quantity, items => \@itemids };
             }
         }
     }
-    
+
     $self->perchardata_set( autobuy => \%profile );
+
+    return;
 
 }
 
-# keep require happy
 1;
-
-#
-# EOF

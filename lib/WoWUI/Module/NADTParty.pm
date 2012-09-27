@@ -21,11 +21,11 @@ sub BUILD
 {
 
     my $self = shift;
-    
-    $self->perchar( 1 );
-    
+
+    $self->perchar(1);
+
     return $self;
-    
+
 }
 
 sub augment_perchar
@@ -33,28 +33,38 @@ sub augment_perchar
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
+    my $f    = shift;
 
     my $acceptinvite = 0;
-    my $setffaloot = 0;
-    
-    if( $f->match( { include => [ 'all(dualbox;machine:type:primary)'] }, F_C0|F_MACH ) ) {
+    my $setffaloot   = 0;
+
+    if (
+        $f->match(
+            { include => ['all(dualbox;machine:type:primary)'] },
+            F_C0 | F_MACH
+        )
+      )
+    {
         $setffaloot = 1;
     }
 
-    if( $f->match( { include => [ 'all(dualbox;machine:type:secondary)'] }, F_C0|F_MACH ) ) {
+    if (
+        $f->match(
+            { include => ['all(dualbox;machine:type:secondary)'] },
+            F_C0 | F_MACH
+        )
+      )
+    {
         $acceptinvite = 1;
     }
 
     $self->perchardata_set(
         acceptinvite => $acceptinvite,
-        setffaloot => $setffaloot,
+        setffaloot   => $setffaloot,
     );
+
+    return;
 
 }
 
-# keep require happy
 1;
-
-#
-# EOF

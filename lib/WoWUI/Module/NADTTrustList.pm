@@ -21,11 +21,11 @@ sub BUILD
 {
 
     my $self = shift;
-    
-    $self->perchar( 1 );
-    
+
+    $self->perchar(1);
+
     return $self;
-    
+
 }
 
 sub augment_perchar
@@ -33,18 +33,16 @@ sub augment_perchar
 
     my $self = shift;
     my $char = shift;
-    my $f = shift;
+    my $f    = shift;
 
-    my $o = $self->modoptions( $char );
-    
+    my $o = $self->modoptions($char);
+
     my $trust = $o->{trust} || [];
 
     $self->perchardata_set( trust => $trust );
 
+    return;
+
 }
 
-# keep require happy
 1;
-
-#
-# EOF
