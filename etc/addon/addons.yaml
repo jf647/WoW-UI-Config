@@ -377,7 +377,7 @@ addons:
         prereq: [ Altoholic, DataStore, DataStore_Achievements, DataStore_Characters ]
     Altoholic_Guild:
         include:
-            - no-one
+            - guided
         prereq: [ Altoholic, DataStore_Characters ]
     Altoholic_Agenda:
         include:

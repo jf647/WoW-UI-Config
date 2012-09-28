@@ -226,7 +226,7 @@ nadtautobuy:
             filter:
                 - level: 25:34
         Sweet Nectar:
-            itemid: 1707
+            itemid: 1708
             filter:
                 - level: 25:34
         Heaven Peach:
@@ -330,7 +330,7 @@ nadtautobuy:
             filter:
                 - level: 60:64
         Black Coffee:
-            itemid: 
+            itemid: 33042
             filter:
                 - level: 65:69
         Purified Draenic Water:

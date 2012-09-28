@@ -42,7 +42,7 @@ sub BUILD
 
     for my $npc( keys %{ $config->{npcs} } ) {
         for my $setname( @{ $config->{npcs}->{$npc}->{sets} } ) {
-            if( my $npcset = $self->set_get($npcsetname) ) {
+            if( my $npcset = $self->set_get($setname) ) {
                 $npcset->insert( $npc );
             }
             else {

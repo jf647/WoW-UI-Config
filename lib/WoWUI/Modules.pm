@@ -43,9 +43,9 @@ before module_get => sub {
     my $modname = shift;
 
     unless ( $self->module_exists($modname) ) {
-        my $e = eval { require $modname };
-        if ($e) {
-            croak "can't load $modname: $e";
+        eval "require $modname";
+        if ($@) {
+            croak "can't load $modname: $@";
         }
         my $module = $modname->new;
         $self->module_set( $modname, $module );

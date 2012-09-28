@@ -130,7 +130,7 @@ sub augment_perchar
     }
 
     my $all_addons = Set::Scalar->new( keys %{ $config->{addons} } );
-    my $sets{disabled} = $all_addons - $sets{enabled};
+    $sets{disabled} = $all_addons - $sets{enabled};
 
     my @addons;
     push @addons, map { { name => $_, enabled => 1 } } $sets{enabled}->members;

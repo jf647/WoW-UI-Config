@@ -31,6 +31,7 @@ filtergroups:
     - Thunder Focus Tea
     - Uplift
     - Paralysis
+    - Dizzying Haze
     filter:
       include:
       - class:Monk
@@ -321,6 +322,11 @@ actions:
       - cliqueaction:grounddmg
       level: 60
     icon: Spell_Shadow_DeathAndDecay
+  Dizzying Haze:
+    filter:
+      include:
+      - all(spec:Brewmaster;cliqueaction:grounddmg)
+    icon: ability_monk_drunkenhaze
   Devour Magic:
     filter:
       include:
@@ -1399,6 +1405,7 @@ bindings:
             - class:Hunter
             - class:Mage
             - class:Warlock
+            - all(class:Monk;spec:Brewmaster)
             - all(class:Druid;spec:Balance)
         groundheal:
           filter:

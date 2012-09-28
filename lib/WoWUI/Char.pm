@@ -301,7 +301,11 @@ my %consumabletypes = (
     Hunter => [ 1, 0 ],
     Mage => [ 0, 1 ],
     Warlock => [ 1, 1 ],
-    Monk => [ 1, 1 ],
+    Monk => {
+        Brewmaster => [ 1, 0 ],
+        Mistweaver => [ 0, 1 ],
+        Windwalker => [ 1, 0 ],
+    },
 );
 sub set_consumable_type
 {
@@ -351,8 +355,21 @@ sub set_faction
 {
 
   my $self = shift;
-  
-  if( my $faction = $faction{$self->cfg->{race}} ) {
+
+  if( 'Pandaren' eq $self->cfg->{race} ) {
+      $self->race( $self->cfg->{race} );
+      $self->flags_get(0)->insert('race:'.$self->cfg->{race});
+      if( $self->level > 11 ) {
+          unless( exists $self->cfg->{faction} ) {
+              croak "Pandaren above level 11 must have a faction";
+          }
+          $self->faction( lc $self->cfg->{faction} );
+          $self->flags_get(0)->insert("faction:".$self->faction);
+          $self->alliance( 'Alliance' eq $self->faction );
+          $self->horde( 'Horde' eq $self->faction );
+      }
+  }
+  elsif( my $faction = $faction{$self->cfg->{race}} ) {
     $self->race($self->cfg->{race});
     $self->flags_get(0)->insert('race:'.$self->cfg->{race});
     $self->faction( lc $faction );

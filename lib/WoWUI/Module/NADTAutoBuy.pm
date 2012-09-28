@@ -57,7 +57,12 @@ sub augment_perchar
                 }
                 my $ifilter = $config->{items}->{$item}->{filter};
                 if ( my $r = $f->match($ifilter) ) {
-                    push @itemids, $config->{items}->{$item}->{itemid};
+                    if( defined $config->{items}->{$item}->{itemid} ) {
+                        push @itemids, $config->{items}->{$item}->{itemid};
+                    }
+                    else {
+                        croak "no/undefined itemid for $item";
+                    }
                 }
             }
             if (@itemids) {
@@ -65,7 +70,7 @@ sub augment_perchar
             }
         }
     }
-
+    
     $self->perchardata_set( autobuy => \%profile );
 
     return;

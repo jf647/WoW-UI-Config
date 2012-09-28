@@ -164,7 +164,6 @@ sub BUILD
             my $condition = shift @{ $self->conditions };
             if( $needs_join ) {
                 if( 'OR' eq $condition ) {
-                    $DB::single = 1;
                     $next_and_or = 'OR';
                 }
                 elsif( 'AND' eq $condition ) {

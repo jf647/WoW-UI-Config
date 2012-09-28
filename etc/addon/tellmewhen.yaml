@@ -233,6 +233,8 @@ filtergroups:
     - Fists of Fury
     - Tigereye Brew
     - Detox
+    - Roll
+    - Chi Torpedo
     filter:
       include:
       - class:Monk
@@ -2778,6 +2780,8 @@ icons:
     combat: in
   Avert Harm:
     type: Cooldown::Spell::Def::LongCD
+    conditions:
+      - instance
     filter:
       level: 48
       include:
@@ -2788,6 +2792,7 @@ icons:
     duration:
       max: 4
     always: 1
+    UnAlpha: 1
     filter:
       level: 34
       include:
@@ -2811,6 +2816,7 @@ icons:
     ShowTimerText: 1
   Clash:
     type: Cooldown::Spell::Off::ShortCD
+    spellid: 122057
     filter:
       level: 18
       include:
@@ -2967,6 +2973,17 @@ icons:
       include:
         - spec:Mistweaver
     combat: in
+  Roll:
+    type: Cooldown::Spell::ShortCD
+    filter:
+      level: 3
+      exclude:
+        - talent:Chi Torpedo
+    combat: either
+  Chi Torpedo:
+    type: Cooldown::Spell::ShortCD
+    talent: 1
+    combat: either
   Purify Spirit:
     type: Cooldown::Spell::Def::ShortCD
     filter:
