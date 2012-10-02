@@ -188,6 +188,24 @@ conditions:
     Type: ECLIPSE_DIRECTION
     Operator: '=='
     Level: 1
+  mana_tea_stacks_ge_10:
+    Type: BUFFSTACKS
+    Name: 115867
+    Checked: 1
+    Operator: '>='
+    Level: 10
+  mana_tea_stacks_ge_1:
+    Type: BUFFSTACKS
+    Name: 115867
+    Checked: 1
+    Operator: '>='
+    Level: 1
+  mana_tea_time:
+    Type: BUFFDUR
+    Name: 115867
+    Checked: 1
+    Operator: '<='
+    Level: 20
 filtergroups:
   any:
     members:
@@ -701,7 +719,6 @@ icons:
       - hp_gt_85_pct
       - AND
       - mp_lt_85_pct
-    combat: either
   MW3 Healing Wave:
     combat: out
     conditions:
@@ -1629,7 +1646,6 @@ icons:
       level: 85
     type: Cooldown::Spell::Def::LongCD
   Angelic Feather:
-    combat: either
     talent: 1
     type: Cooldown::Spell::Def::ShortCD
   Spectral Guise:
@@ -2883,14 +2899,12 @@ icons:
       level: 70
       include:
         - spec:Brewmaster
-    combat: either
   Summon Jade Serpent Statue:
     type: Cooldown::Spell::Def::ShortCD
     filter:
       level: 70
       include:
         - spec:Mistweaver
-    combat: either
   Touch of Death:
     type: Cooldown::Spell::Off::LongCD
     filter:
@@ -2930,14 +2944,18 @@ icons:
         - spec:Mistweaver
     combat: in
   Mana Tea:
-    type: Buff
+    type: Cooldown::Spell::Def
+    ShowTimer: 1
     filter:
       level: 56
       include:
         - spec:Mistweaver
-    combat: either
-    stacks:
-      min: 10
+    conditions:
+      - mana_tea_stacks_ge_10
+      - OR
+      - mana_tea_time
+      - AND
+      - mana_tea_stacks_ge_1
   Tigereye Brew:
     type: Buff
     filter:
@@ -2979,11 +2997,9 @@ icons:
       level: 3
       exclude:
         - talent:Chi Torpedo
-    combat: either
   Chi Torpedo:
     type: Cooldown::Spell::ShortCD
     talent: 1
-    combat: either
   Purify Spirit:
     type: Cooldown::Spell::Def::ShortCD
     filter:
