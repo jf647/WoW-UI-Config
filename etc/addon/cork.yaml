@@ -44,6 +44,14 @@ filtergroups:
     - Bone Shield-enabled
     - Presence-enabled
     - Presence-spell
+  monk:
+    filter:
+      include:
+      - class:Monk
+    members:
+    - Legacy of the Emperor-enabled
+    - Stance-enabled
+    - Stance-spell
   druid:
     filter:
       include:
@@ -211,7 +219,12 @@ settings:
     - level: 22
       value: 1
     type: boolean
-
+  Legacy of the Emperor-enabled:
+    filter:
+    - value: 0
+    - level: 22
+      value: 1
+    type: boolean
   Bone Shield-enabled:
     filter:
     - value: 0
@@ -400,6 +413,20 @@ settings:
       - spec:Protection
       level: 44
       value: Seal of Truth
+    type: string
+  Stance-enabled:
+    filter:
+    - value: 1
+    type: boolean
+  Stance-spell:
+    filter:
+    - value: Stance of the Fierce Tiger
+    - include:
+      - spec:Brewmaster
+      value: Stance of the Sturdy Ox
+    - include:
+      - spec:Mistweaver
+      value: Stance of the Wise Serpent
     type: string
   Shadow Protection-enabled:
     filter:

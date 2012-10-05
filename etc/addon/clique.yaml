@@ -32,6 +32,8 @@ filtergroups:
     - Uplift
     - Paralysis
     - Dizzying Haze
+    - Summon Jade Serpent Statue
+    - Summon Black Ox Statue
     filter:
       include:
       - class:Monk
@@ -119,6 +121,7 @@ filtergroups:
     - Light of Dawn
     - Divine Plea
     - Repentance
+    - Consecration
     filter:
       include:
       - class:Paladin
@@ -327,6 +330,23 @@ actions:
       include:
       - all(spec:Brewmaster;cliqueaction:grounddmg)
     icon: ability_monk_drunkenhaze
+  Summon Jade Serpent Statue:
+    filter:
+      level: 70
+      include:
+      - all(spec:Mistweaver;cliqueaction:placestatue)
+    icon: ability_monk_summonserpentstatue
+  Summon Black Ox Statue:
+    filter:
+      level: 70
+      include:
+      - all(spec:Brewmaster;cliqueaction:placestatue)
+    icon: monk_ability_summonoxstatue
+  Consecration:
+    filter:
+      include:
+      - all(spec:Protection;glyph:Consecration;cliqueaction:grounddmg)
+    icon: spell_holy_innerfire
   Devour Magic:
     filter:
       include:
@@ -356,7 +376,7 @@ actions:
   Divine Light:
     filter:
       include:
-      - cliqueaction:bigheal
+      - all(spec:Holy;cliqueaction:bigheal)
       level: 62
     icon: Spell_Holy_SurgeOfLight
   Earth Shield:
@@ -404,7 +424,9 @@ actions:
   Flash of Light:
     filter:
       include:
-      - cliqueaction:fastheal
+      - all(spec:Holy;cliqueaction:fastheal)
+      - all(spec:Protection;cliqueaction:standardheal)
+      - all(spec:Retribution;cliqueaction:standardheal)
       level: 16
     icon: Spell_Holy_FlashHeal
   Gift of the Naaru:
@@ -548,7 +570,7 @@ actions:
   Holy Light:
     filter:
       include:
-      - cliqueaction:standardheal
+      - all(spec:Holy;cliqueaction:standardheal)
       level: 7
     icon: spell_holy_holybolt
   Holy Radiance:
@@ -1384,6 +1406,10 @@ bindings:
           filter:
             include:
             - class:Death Knight
+        placestatue:
+          filter:
+            include:
+            - class:Monk
     control-middle:
       click: CONTROL-BUTTON3
       types:
