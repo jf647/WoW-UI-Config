@@ -1,0 +1,2 @@
+#!/bin/sh
+exec mono lib/armory_update.exe "$@"
